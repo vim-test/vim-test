@@ -1,0 +1,30 @@
+#!/usr/bin/osascript
+
+on run argv
+  set command to argv
+
+  tell application "Terminal"
+    if (count of windows) is 0 then
+      do script command
+    else
+      if window 1 is busy then
+        activate
+        tell application "System Events" to keystroke "t" using {command down}
+        repeat while contents of selected tab of window 1 starts with linefeed
+          delay 0.01
+        end repeat
+        do script command in selected tab of window 1
+      else
+        do script command in window 1
+      end if
+    end if
+
+    activate
+  end tell
+
+  delay 0.02
+
+  tell application "MacVim"
+    activate
+  end tell
+end run

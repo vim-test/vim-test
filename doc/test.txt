@@ -1,0 +1,133 @@
+*test.txt*  A test wrapper which enables you to run tests at speed of thought
+
+Author: Janko Marohnić <https://github.com/janko-m>
+License: Same terms as Vim itself (see |license|)
+
+INTRODUCTION                                    *test*
+
+This plugin allows you to:
+
+  * run nearest test (to the cursor)
+  * run (current) test file
+  * run test suite
+  * run last test
+
+It comes with most common test runners already built in, so it knows which
+test runner it has to use for the file you're looking at.
+
+Add your preferred mappings to your `.vimrc` file:
+>
+  nmap <silent> <leader>t :TestNearest<CR>
+  nmap <silent> <leader>T :TestFile<CR>
+  nmap <silent> <leader>a :TestSuite<CR>
+  nmap <silent> <leader>l :TestLast<CR>
+<
+GENERIC COMMANDS                                *test-generic_commands*
+
+In all commands [args] are forwarded to the underlying test runner.
+
+                                                *test-:TestNearest*
+:TestNearest [args]          Run a test nearest to the cursor (some test
+                             runners may not support this). If the current
+                             file is not a test file, it reruns a previous
+                             "nearest test" (if present).
+
+                                                *test-:TestFile*
+:TestFile [args]             Run tests for the current file. If the current
+                             file is not a test file, it runs tests for a
+                             previously "touched" test file (if present).
+
+                                                *test-:TestSuite*
+:TestSuite [args]            Run test suite of the current file. If the current
+                             file is not a test file, it runs the suite for
+                             the last "touched" test file (if present).
+
+                                                *test-:TestLast*
+:TestLast [args]             Run the last test.
+
+RUNNER COMMANDS                                 *test-runner_commands*
+
+In all commands [args] are forwarded to the underlying test runner.
+
+                                                *test-:RSpec*
+:RSpec [args]                Uses the `rspec` command.
+
+                                                *test-:Cucumber*
+:Cucumber [args]             Uses the `cucumber` command.
+
+                                                *test-:Minitest*
+:Minitest [args]             Uses the `rake` `test` command.
+
+                                                *test-:Mocha*
+:Mocha [args]                Uses the `mocha` command.
+
+                                                *test-:Jasmine*
+:Jasmine [args]              Uses the `jasmine-node` command.
+
+                                                *test-:Nose*
+:Nose [args]                 Uses the `nosetests` command.
+
+                                                *test-:ExUnit*
+:ExUnit [args]               Uses the `mix` `test` command.
+
+                                                *test-:Bats*
+:Bats [args]                 Uses the `bats` command.
+
+                                                *test-:VSpec*
+:VSpec [args]                Uses the `vim-flavor` `test` command.
+
+STRATEGIES                                      *test-strategies*
+
+Multiple strategies are supported for running tests. If you're using MacVim GUI,
+you can tell test.vim to send commands to Terminal.app/iTerm.
+
+Dispatch ~
+>
+  let g:test#strategy = 'dispatch'
+<
+Vimux ~
+>
+  let g:test#strategy = 'vimux'
+<
+Tslime ~
+>
+  let g:test#strategy = 'tslime'
+<
+Terminal.app ~
+>
+  let g:test#strategy = 'terminal'
+<
+iTerm ~
+>
+  let g:test#strategy = 'iterm'
+<
+CONFIGURATION                                   *test-configuration*
+
+You may find yourself specifying certain options for your test runners in
+certain situations. You can configure your prefered options with
+>
+  let g:test#minitest#options = '--verbose'
+<
+Or, if you prefer more granular approach, you can do
+>
+  let g:test#rspec#options = {
+    \ 'nearest': '--format documentation',
+    \ 'file':    '--format documentation',
+    \ 'suite':   '--tag ~slow',
+  \}
+<
+If you want to manually configure a test runner's executable, you can do
+>
+  let g:test#rspec#executable = 'script/my_rspec'
+<
+ABOUT                                           *test-about*
+
+You can get the latest version, see the changelog, or report a bug on GitHub:
+
+https://github.com/janko-m/vim-test
+
+CREDITS                                         *test-credits*
+
+Thanks to Gary Bernhardt, the person who invented this kind of testing.
+I also want to thank vim-rspec (https://github.com/thoughtbot/vim-rspec), from
+which I borrowed GUI support for OS X, and Windows support.

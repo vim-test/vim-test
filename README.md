@@ -57,9 +57,10 @@ be sure to keep reading.
 
 #### `:TestNearest`
 
-When in a test file, runs the test nearest to the cursor (even for Minitest and
-Mocha). If not in a test file, it remembers where your cursor was *before* you
-switched to production code, and runs test nearest to that position.
+When in a test file, runs the test nearest to the cursor (some frameworks may
+not support this). If not in a test file, it remembers where your cursor was
+*before* you switched to production code, and runs test nearest to that
+position.
 
 #### `:TestFile`
 

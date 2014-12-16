@@ -1,5 +1,5 @@
 function! test#jasmine#test_file(file) abort
-  return a:file =~? '\v^spec/.*spec\.(js|coffee|litcoffee)$'
+  return a:file =~? '\vspec\.(js|coffee|litcoffee)$'
 endfunction
 
 function! test#jasmine#build_position(type, position) abort
@@ -11,17 +11,18 @@ function! test#jasmine#build_position(type, position) abort
 endfunction
 
 function! test#jasmine#build_args(args) abort
-  if empty(filter(copy(a:args), 'v:val =~# "spec/"'))
-    call add(a:args, 'spec/')
+  let args = a:args
+
+  if empty(filter(copy(a:args), 'test#file_exists(v:val)'))
+    let args = args + ['spec/']
+  endif
+  if !empty(glob('**/*coffee'))
+    let args = ['--coffee'] + args
   endif
 
-  return a:args
+  return args
 endfunction
 
 function! test#jasmine#executable() abort
-  if !empty(glob('spec*/**/*coffee'))
-    return 'jasmine-node --coffee'
-  else
-    return 'jasmine-node'
-  endif
+  return 'jasmine-node'
 endfunction

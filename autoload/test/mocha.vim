@@ -15,21 +15,23 @@ function! test#mocha#build_position(type, position) abort
 endfunction
 
 function! test#mocha#build_args(args) abort
-  return a:args
+  let args = a:args
+
+  if !empty(glob('**/*coffee'))
+    let args = ['--compilers coffee:coffee-script,litcoffee:coffee-script'] + args
+  endif
+
+  return args
 endfunction
 
 function! test#mocha#executable() abort
-  if !empty(glob('test*/**/*coffee'))
-    return 'mocha --compilers coffee:coffee-script,litcoffee:coffee-script'
-  else
-    return 'mocha'
-  endif
+  return "mocha"
 endfunction
 
 function! test#mocha#nearest_test(position)
-  for line in reverse(getbufline(a:position['file'], 1, a:position['line']))
-    let regex = '\v^\s*%(describe|it)%(\(| )("|'')\zs.+\ze\1'
+  let regex = '\v^\s*%(describe|it)%(\(| )("|'')\zs.+\ze\1'
 
+  for line in reverse(getbufline(a:position['file'], 1, a:position['line']))
     if !empty(matchstr(line, regex))
       return matchstr(line, regex)
     endif

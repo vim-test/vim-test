@@ -18,7 +18,7 @@ endfunction
 
 function! test#minitest#build_args(args) abort
   for idx in range(0, len(a:args) - 1)
-    if a:args[idx] =~ 'test/'
+    if test#file_exists(a:args[idx])
       let path = remove(a:args, idx) | break
     endif
   endfor
@@ -48,18 +48,12 @@ endfunction
 
 function! test#minitest#nearest_test(position) abort
   if system('cat ' . a:position['file']) =~# '\v^\s*(describe|context)'
-    let syntax = 'spec'
+    let regex = '\v^\s*%(describe|context|it|should) (%("|'')?)\zs.+\ze\1'
   else
-    let syntax = 'unit'
+    let regex = '\v^\s*%(def \zstest_\w+|test ("|'')\zs.+\ze\1|class \zs\S+)'
   endif
 
   for line in reverse(getbufline(a:position['file'], 1, a:position['line']))
-    if syntax ==# 'unit'
-      let regex = '\v^\s*%(def \zstest_\w+|test ("|'')\zs.+\ze\1 do|class \zs\S+)'
-    else
-      let regex = '\v^\s*%(describe|context|it|should) (%("|'')?)\zs.+\ze\1 do'
-    endif
-
     if !empty(matchstr(line, regex))
       return matchstr(line, regex)
     endif

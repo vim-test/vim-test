@@ -103,3 +103,7 @@ function! test#echo_failure(type) abort
   \}[a:type]
   echohl None
 endfunction
+
+function! test#file_exists(file) abort
+  return !empty(glob(a:file)) || bufexists(a:file)
+endfunction

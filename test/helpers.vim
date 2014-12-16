@@ -1,7 +1,8 @@
 source plugin/test.vim
 
 function! Teardown() abort
-  unlet! g:test#last_position g:test#last_command
+  bufdo! bdelete!
+  unlet! g:test#last_command g:test#last_position
 endfunction
 
 function! test#shell(cmd, ...) abort

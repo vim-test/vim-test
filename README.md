@@ -98,8 +98,9 @@ I found these commands to be really useful when you have multiple test suites.
 
 ### Strategies
 
-`vim-test` supports multiple ways ("strategies") of running your tests, just
-pick the one that suits you the most.
+The default way `vim-test` runs your tests is by shelling out (`:!<command>`).
+However, `vim-test` supports multiple ways ("strategies") of running your
+tests, just pick the one that suits you the most.
 
 #### Dispatch.vim
 

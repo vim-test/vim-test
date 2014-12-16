@@ -16,6 +16,7 @@ Currently the following testing frameworks are supported:
 | **JavaScript** | Mocha<br>Jasmine              |
 | **Python**     | Nose                          |
 | **Elixir**     | ExUnit                        |
+| **Go**         | GoTest                        |
 | **Shell**      | Bats                          |
 | **VimScript**  | VSpec                         |
 

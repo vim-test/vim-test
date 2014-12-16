@@ -14,6 +14,8 @@ let test#runners += ['Mocha', 'Jasmine']
 let test#runners += ['Nose']
 " Elixir
 let test#runners += ['ExUnit']
+" Go
+let test#runners += ['GoTest']
 " Shell
 let test#runners += ['Bats']
 " VimScript

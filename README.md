@@ -57,8 +57,8 @@ be sure to keep reading.
 #### `:TestNearest`
 
 When in a test file, runs the test nearest to the cursor (even for Minitest and
-Mocha :smiley:). If not in a test file, it remembers where your cursor was
-*before* you switched to production code, and runs test nearest to that position.
+Mocha). If not in a test file, it remembers where your cursor was *before* you
+switched to production code, and runs test nearest to that position.
 
 #### `:TestFile`
 
@@ -97,15 +97,24 @@ I found these commands to be really useful when you have multiple test suites.
 
 ### Strategies
 
-`vim-test` supports multiple strategies for running tests.
+`vim-test` supports multiple ways ("strategies") of running your tests, just
+pick the one that suits you the most.
 
-#### Dispatch/Vimux/Tslime
+#### Dispatch.vim
 
 ```vim
 let g:test#strategy = 'dispatch'
-" or
+```
+
+#### Vimux
+
+```vim
 let g:test#strategy = 'vimux'
-" or
+```
+
+#### Tslime.vim
+
+```vim
 let g:test#strategy = 'tslime'
 ```
 
@@ -169,7 +178,7 @@ That being said, if you want to do this for yourself, you need to do 2 things.
 First, add your runner to the list in your `.vimrc`:
 
 ```vim
-let g:test#runners = ['MyRunner']
+let g:test#runners = ['MyRunner'] " First letter *must* be uppercase
 ```
 
 Second, create `~/.vim/autoload/test/myrunner.vim`, and define the following
@@ -187,6 +196,13 @@ function! test#myrunner#build_args(args)
 
 " Returns the executable of your test runner
 function! test#myrunner#executable()
+```
+
+If you're using dispatch.vim, and the compiler for your runner isn't called
+the same (in this case "myrunner"), you can also define
+
+```vim
+let g:test#myrunner#compiler = "<compiler>"
 ```
 
 See [`autoload/test/`](/autoload/test) for examples.

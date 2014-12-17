@@ -14,8 +14,7 @@ for s:runner in g:test#runners
   execute 'command! -bar -nargs=* -complete=file'
         \ s:runner
         \ 'call test#execute("'.tolower(s:runner).'", split(<q-args>))'
-endfor
-unlet! s:runner
+endfor | unlet! s:runner
 
 augroup test
   autocmd!

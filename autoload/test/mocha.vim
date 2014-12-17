@@ -25,7 +25,11 @@ function! test#mocha#build_args(args) abort
 endfunction
 
 function! test#mocha#executable() abort
-  return "mocha"
+  if filereadable('node_modules/.bin/mocha')
+    return 'node_modules/.bin/mocha'
+  else
+    return 'mocha'
+  endif
 endfunction
 
 function! test#mocha#nearest_test(position)

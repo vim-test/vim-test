@@ -14,7 +14,7 @@ function! test#strategy#dispatch(cmd, compiler) abort
   endif
 
   try | execute 'compiler '.compiler | catch 'E666' | endtry
-  let &l:makeprg = a:cmd
+  let &l:makeprg = s:pretty_command(a:cmd)
 
   Make
 

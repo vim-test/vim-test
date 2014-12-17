@@ -11,7 +11,7 @@ function! test#bats#build_position(type, position) abort
 endfunction
 
 function! test#bats#build_args(args) abort
-  if empty(filter(copy(a:args), '!empty(glob(v:val))'))
+  if empty(filter(copy(a:args), 'test#file_exists(v:val)'))
     call add(a:args, 'test/')
   endif
 

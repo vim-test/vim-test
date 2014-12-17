@@ -11,7 +11,7 @@ function! test#vspec#build_position(type, position) abort
 endfunction
 
 function! test#vspec#build_args(args) abort
-  if empty(filter(copy(a:args), 'v:val =~ ''\v(t(est)?|spec)/'''))
+  if empty(filter(copy(a:args), 'test#file_exists(v:val)'))
     let test_dir = get(filter(['t/', 'test/', 'spec/'], 'isdirectory(v:val)'), 0)
     call add(a:args, test_dir)
   endif

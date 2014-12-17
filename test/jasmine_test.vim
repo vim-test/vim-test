@@ -12,35 +12,35 @@ describe "Jasmine"
   end
 
   it "runs file tests instead of nearest tests"
-    view +1 normal_spec.js
+    view +1 spec/normal_spec.js
     TestNearest
 
-    Expect g:test#last_command == 'jasmine-node normal_spec.js'
+    Expect g:test#last_command == 'jasmine-node spec/normal_spec.js'
   end
 
   it "runs file tests"
-    view normal_spec.js
+    view spec/normal_spec.js
     TestFile
 
-    Expect g:test#last_command == 'jasmine-node normal_spec.js'
+    Expect g:test#last_command == 'jasmine-node spec/normal_spec.js'
   end
 
   it "runs test suites"
-    view normal_spec.js
+    view spec/normal_spec.js
     TestSuite
 
     Expect g:test#last_command == 'jasmine-node spec/'
   end
 
   it "is case insensitive about the filename"
-    view normalSpec.js
+    view spec/normalSpec.js
     TestFile
 
-    Expect g:test#last_command == 'jasmine-node normalSpec.js'
+    Expect g:test#last_command == 'jasmine-node spec/normalSpec.js'
   end
 
   it "doesn't recognize files that don't end with 'spec'"
-    view normal.js
+    view spec/normal.js
     TestFile
 
     Expect exists('g:test#last_command') == 0
@@ -48,16 +48,16 @@ describe "Jasmine"
 
   it "detects CoffeeScript"
     try
-      edit normal_spec.coffee | write
+      edit spec/normal_spec.coffee | write
       TestFile
 
-      Expect g:test#last_command == 'jasmine-node --coffee normal_spec.coffee'
+      Expect g:test#last_command == 'jasmine-node --coffee spec/normal_spec.coffee'
 
       Jasmine .
 
       Expect g:test#last_command == 'jasmine-node --coffee .'
     finally
-      !rm normal_spec.coffee
+      !rm spec/normal_spec.coffee
     endtry
   end
 

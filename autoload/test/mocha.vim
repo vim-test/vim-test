@@ -1,5 +1,5 @@
 function! test#mocha#test_file(file) abort
-  return a:file =~# '\v^test/.*\.(js|coffee|litcoffee)$'
+  return a:file =~# '\v^test/.*\.(js|coffee)$'
 endfunction
 
 function! test#mocha#build_position(type, position) abort
@@ -17,8 +17,8 @@ endfunction
 function! test#mocha#build_args(args) abort
   let args = a:args
 
-  if !empty(glob('**/*coffee'))
-    let args = ['--compilers '.s:coffee_compiler().',litcoffee:coffee-script'] + args
+  if !empty(glob('test/**/*.coffee'))
+    let args = ['--compilers coffee:'.s:coffee_compiler()] + args
   endif
 
   return args
@@ -49,12 +49,12 @@ function! s:coffee_compiler() abort
     else
       let cmd = 'coffee'
     endif
-    let s:coffee_minor_version = matchstr(system(cmd.' -v'), '\d\+\.\zs\d\+\ze')
+    let s:coffee_minor_version = matchlist(system(cmd.' -v'), '\v\d+\.(\d+)\.\d+')[1]
   endif
 
   if s:coffee_minor_version >= 7
-    return 'coffee:coffee-script/register'
+    return 'coffee-script/register'
   else
-    return 'coffee:coffee-script'
+    return 'coffee-script'
   endif
 endfunction

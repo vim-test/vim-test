@@ -18,7 +18,7 @@ function! test#mocha#build_args(args) abort
   let args = a:args
 
   if !empty(glob('**/*coffee'))
-    let args = ['--compilers coffee:coffee-script,litcoffee:coffee-script'] + args
+    let args = ['--compilers '.s:coffee_compiler().',litcoffee:coffee-script'] + args
   endif
 
   return args
@@ -40,4 +40,21 @@ function! test#mocha#nearest_test(position)
       return matchstr(line, regex)
     endif
   endfor
+endfunction
+
+function! s:coffee_compiler() abort
+  if !exists('s:coffee_minor_version')
+    if filereadable('node_modules/.bin/coffee')
+      let cmd = 'node_modules/.bin/coffee'
+    else
+      let cmd = 'coffee'
+    endif
+    let s:coffee_minor_version = matchstr(system(cmd.' -v'), '\d\+\.\zs\d\+\ze')
+  endif
+
+  if s:coffee_minor_version >= 7
+    return 'coffee:coffee-script/register'
+  else
+    return 'coffee:coffee-script'
+  endif
 endfunction

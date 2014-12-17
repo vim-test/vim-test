@@ -21,6 +21,8 @@ function! test#cucumber#executable() abort
     return 'zeus cucumber'
   elseif filereadable('bin/cucumber')
     return './bin/cucumber'
+  elseif executable('foreman')
+    return 'foreman run cucumber'
   elseif filereadable('Gemfile')
     return 'bundle exec cucumber'
   else

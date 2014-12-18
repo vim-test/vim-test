@@ -4,23 +4,6 @@
 " WebPage: https://github.com/janko-m/vim-test
 " ============================================================================
 
-let test#runners  = get(g:, 'test#runners', [])
-
-" Ruby
-let test#runners += ['RSpec', 'Minitest', 'Cucumber']
-" JavaScript
-let test#runners += ['Mocha', 'Jasmine']
-" Python
-let test#runners += ['Nose']
-" Elixir
-let test#runners += ['ExUnit']
-" Go
-let test#runners += ['GoTest']
-" Shell
-let test#runners += ['Bats']
-" VimScript
-let test#runners += ['VSpec']
-
 function! test#run(type, options) abort
   if test#test_file()
     let position = s:get_position()

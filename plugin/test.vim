@@ -10,11 +10,11 @@ command! -nargs=* -bar TestFile    call test#run('file', <q-args>)
 command! -nargs=* -bar TestSuite   call test#run('suite', <q-args>)
 command!          -bar TestLast    call test#run_last()
 
-for runner in g:test#runners
+for s:runner in g:test#runners
   execute 'command! -bar -nargs=* -complete=file'
-        \ runner
-        \ 'call test#execute("'.tolower(runner).'", split(<q-args>))'
-endfor
+        \ s:runner
+        \ 'call test#execute("'.tolower(s:runner).'", split(<q-args>))'
+endfor | unlet! s:runner
 
 augroup test
   autocmd!

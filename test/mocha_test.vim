@@ -63,6 +63,18 @@ describe "Mocha"
     Expect g:test#last_command == 'mocha'
   end
 
+  it "also recognizes tests/ directory"
+    try
+      !mv test tests
+      view tests/normal.js
+      TestFile
+
+      Expect g:test#last_command == 'mocha tests/normal.js'
+    finally
+      !mv tests test
+    endtry
+  end
+
   it "doesn't detect JavaScripts which are not in the test/ folder"
     view outside.js
     TestSuite

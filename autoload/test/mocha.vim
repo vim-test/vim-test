@@ -1,5 +1,5 @@
 function! test#mocha#test_file(file) abort
-  return a:file =~# '\v^test/.*\.(js|coffee)$'
+  return a:file =~# '\v^tests?/.*\.(js|coffee)$'
 endfunction
 
 function! test#mocha#build_position(type, position) abort
@@ -17,7 +17,7 @@ endfunction
 function! test#mocha#build_args(args) abort
   let args = a:args
 
-  if !empty(glob('test/**/*.coffee'))
+  if !empty(glob('test*/**/*.coffee'))
     let args = ['--compilers coffee:'.s:coffee_compiler()] + args
   endif
 

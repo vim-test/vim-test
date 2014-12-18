@@ -1,5 +1,9 @@
 function! test#strategy#basic(cmd, ...) abort
-  execute '!'.s:pretty_command(a:cmd)
+  if s:norestorescreen()
+    execute '!'.a:cmd
+  else
+    execute '!'.s:pretty_command(a:cmd)
+  endif
 endfunction
 
 function! test#strategy#dispatch(cmd, compiler) abort
@@ -59,4 +63,12 @@ endfunction
 
 function! s:Windows() abort
   return has('win32') && fnamemodify(&shell, ':t') ==? 'cmd.exe'
+endfunction
+
+function! s:norestorescreen() abort
+  if s:Windows()
+    return !&restorescreen
+  else
+    return empty(&t_ti) && empty(&t_te)
+  endif
 endfunction

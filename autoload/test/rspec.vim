@@ -21,6 +21,8 @@ function! test#rspec#executable() abort
     return 'zeus rspec'
   elseif filereadable('bin/rspec')
     return './bin/rspec'
+  elseif executable('foreman')
+    return 'foreman run rspec'
   elseif filereadable('Gemfile')
     return 'bundle exec rspec'
   else

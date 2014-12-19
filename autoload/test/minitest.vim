@@ -39,6 +39,8 @@ function! test#minitest#executable() abort
     return 'zeus rake test'
   elseif filereadable('bin/rake')
     return './bin/rake test'
+  elseif executable('foreman')
+    return 'foreman run rake test'
   elseif filereadable('Gemfile')
     return 'bundle exec rake test'
   else

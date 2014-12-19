@@ -1,9 +1,3 @@
-" ============================================================================
-" File:    test.vim
-" Author:  Janko Marohnić
-" WebPage: https://github.com/janko-m/vim-test
-" ============================================================================
-
 function! test#run(type, options) abort
   if test#test_file()
     let position = s:get_position()

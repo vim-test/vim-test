@@ -5,28 +5,20 @@ let g:loaded_test = 1
 
 let g:test#plugin_path = expand('<sfile>:p:h:h')
 
+let g:test#runners  = get(g:, 'test#runners', [])
+let g:test#runners += ['RSpec', 'Minitest', 'Cucumber'] " Ruby
+let g:test#runners += ['Mocha', 'Jasmine']              " JavaScript
+let g:test#runners += ['Nose']                          " Python
+let g:test#runners += ['ExUnit']                        " Elixir
+let g:test#runners += ['GoTest']                        " Go
+let g:test#runners += ['Bats']                          " Shell
+let g:test#runners += ['VSpec']                         " VimScript
+let g:test#runners += ['Busted']                        " Lua
+
 command! -nargs=* -bar TestNearest call test#run('nearest', <q-args>)
 command! -nargs=* -bar TestFile    call test#run('file', <q-args>)
 command! -nargs=* -bar TestSuite   call test#run('suite', <q-args>)
 command!          -bar TestLast    call test#run_last()
-
-let g:test#runners  = get(g:, 'test#runners', [])
-" Ruby
-let g:test#runners += ['RSpec', 'Minitest', 'Cucumber']
-" JavaScript
-let g:test#runners += ['Mocha', 'Jasmine']
-" Python
-let g:test#runners += ['Nose']
-" Elixir
-let g:test#runners += ['ExUnit']
-" Go
-let g:test#runners += ['GoTest']
-" Shell
-let g:test#runners += ['Bats']
-" VimScript
-let g:test#runners += ['VSpec']
-" Lua
-let g:test#runners += ['Busted']
 
 for s:runner in g:test#runners
   execute 'command! -bar -nargs=* -complete=file'

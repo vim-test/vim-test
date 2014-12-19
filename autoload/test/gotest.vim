@@ -1,3 +1,5 @@
+let test#gotest#compiler = 'go'
+
 function! test#gotest#test_file(file) abort
   return a:file =~# '\v[^_].*_test\.go$'
 endfunction
@@ -31,4 +33,3 @@ function! test#gotest#nearest_test(position)
     endif
   endfor
 endfunction
-

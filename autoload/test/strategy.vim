@@ -56,7 +56,7 @@ endfunction
 
 function! s:pretty_command(cmd) abort
   let clear = !s:Windows() ? 'clear' : 'cls'
-  let echo  = !s:Windows() ? 'echo -e '.shellescape(a:cmd).'\\n' : 'Echo '.shellescape(a:cmd)
+  let echo  = !s:Windows() ? 'echo -e '.shellescape(a:cmd) : 'Echo '.shellescape(a:cmd)
 
   return join([l:clear, l:echo, a:cmd], ' && ')
 endfunction

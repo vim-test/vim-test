@@ -19,6 +19,7 @@ Currently the following testing frameworks are supported:
 | **Go**         | GoTest                        |
 | **Shell**      | Bats                          |
 | **VimScript**  | VSpec                         |
+| **Lua**        | Busted                        |
 
 ## Introduction
 

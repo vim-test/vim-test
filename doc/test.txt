@@ -79,6 +79,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:VSpec*
 :VSpec [args]                Uses the `vim-flavor` `test` command.
 
+                                                *test-:Busted*
+:Busted [args]               Uses the `busted` command.
+
 STRATEGIES                                      *test-strategies*
 
 Multiple strategies are supported for running tests. If you're using MacVim GUI,

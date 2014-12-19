@@ -25,6 +25,8 @@ let g:test#runners += ['GoTest']
 let g:test#runners += ['Bats']
 " VimScript
 let g:test#runners += ['VSpec']
+" Lua
+let g:test#runners += ['Busted']
 
 for s:runner in g:test#runners
   execute 'command! -bar -nargs=* -complete=file'

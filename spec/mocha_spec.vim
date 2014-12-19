@@ -1,4 +1,4 @@
-source test/helpers.vim
+source spec/helpers.vim
 
 function! test#shell(cmd, ...) abort
   let g:test#last_command = substitute(a:cmd, ' --compilers \S\+', '', '')
@@ -7,7 +7,7 @@ endfunction
 describe "Mocha"
 
   before
-    cd test/fixtures/mocha
+    cd spec/fixtures/mocha
   end
 
   after

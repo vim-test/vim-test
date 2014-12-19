@@ -1,9 +1,9 @@
-source test/helpers.vim
+source spec/helpers.vim
 
 describe "RSpec"
 
   before
-    cd test/fixtures/rspec
+    cd spec/fixtures/rspec
   end
 
   after

@@ -1,9 +1,9 @@
-source test/helpers.vim
+source spec/helpers.vim
 
 describe "Bats"
 
   before
-    cd test/fixtures/bats
+    cd spec/fixtures/bats
   end
 
   after

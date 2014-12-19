@@ -1,9 +1,9 @@
-source test/helpers.vim
+source spec/helpers.vim
 
 describe "Cucumber"
 
   before
-    cd test/fixtures/cucumber
+    cd spec/fixtures/cucumber
   end
 
   after

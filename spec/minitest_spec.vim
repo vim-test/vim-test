@@ -1,9 +1,9 @@
-source test/helpers.vim
+source spec/helpers.vim
 
 describe "Minitest"
 
   before
-    cd test/fixtures/minitest
+    cd spec/fixtures/minitest
   end
 
   after

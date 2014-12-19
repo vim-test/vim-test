@@ -1,4 +1,4 @@
-source test/helpers.vim
+source spec/helpers.vim
 
 function! test#shell(cmd, ...) abort
   let g:test#last_command = substitute(a:cmd, ' --doctest-tests', '', '')
@@ -7,7 +7,7 @@ endfunction
 describe "Nose"
 
   before
-    cd test/fixtures/nose
+    cd spec/fixtures/nose
   end
 
   after

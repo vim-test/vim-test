@@ -1,9 +1,9 @@
-source test/helpers.vim
+source spec/helpers.vim
 
 describe "ExUnit"
 
   before
-    cd test/fixtures/exunit
+    cd spec/fixtures/exunit
   end
 
   after

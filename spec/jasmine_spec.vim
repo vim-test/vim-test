@@ -1,9 +1,9 @@
-source test/helpers.vim
+source spec/helpers.vim
 
 describe "Jasmine"
 
   before
-    cd test/fixtures/jasmine
+    cd spec/fixtures/jasmine
   end
 
   after

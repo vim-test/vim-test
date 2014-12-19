@@ -1,9 +1,9 @@
-source test/helpers.vim
+source spec/helpers.vim
 
 describe "GoTest"
 
   before
-    cd test/fixtures/gotest
+    cd spec/fixtures/gotest
   end
 
   after

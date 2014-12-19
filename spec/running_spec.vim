@@ -1,4 +1,4 @@
-source test/helpers.vim
+source spec/helpers.vim
 
 describe 'Running'
 

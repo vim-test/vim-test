@@ -47,13 +47,13 @@ function! test#minitest#executable() abort
 endfunction
 
 function! test#minitest#nearest_test(position) abort
-  if system('cat ' . a:position['file']) =~# '\v^\s*(describe|context)'
-    let regex = '\v^\s*%(describe|context|it|should) (%("|'')?)\zs.+\ze\1'
-  else
-    let regex = '\v^\s*%(def \zstest_\w+|test ("|'')\zs.+\ze\1|class \zs\S+)'
-  endif
-
   for line in reverse(getbufline(a:position['file'], 1, a:position['line']))
+    if line =~# '\v^\s*(describe|context|it|should)'
+      let regex = '\v^\s*%(describe|context|it|should) (%("|'')?)\zs.+\ze\1'
+    else
+      let regex = '\v^\s*%(def \zstest_\w+|test ("|'')\zs.+\ze\1|class \zs\S+)'
+    endif
+
     if !empty(matchstr(line, regex))
       return matchstr(line, regex)
     endif

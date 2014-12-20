@@ -37,7 +37,7 @@ endfunction
 function! test#minitest#executable() abort
   if filereadable('.zeus.sock')
     return 'zeus rake test'
-  elseif filereadable('bin/rake')
+  elseif filereadable('./bin/rake')
     return './bin/rake test'
   elseif filereadable('Gemfile')
     return 'bundle exec rake test'

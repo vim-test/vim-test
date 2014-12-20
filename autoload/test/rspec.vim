@@ -19,7 +19,7 @@ endfunction
 function! test#rspec#executable() abort
   if filereadable('.zeus.sock')
     return 'zeus rspec'
-  elseif filereadable('bin/rspec')
+  elseif filereadable('./bin/rspec')
     return './bin/rspec'
   elseif filereadable('Gemfile')
     return 'bundle exec rspec'

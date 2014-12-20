@@ -27,22 +27,44 @@ function! test#minitest#build_args(args) abort
     let path = fnamemodify(path, ':p:.') . '**/*_test.rb'
   endif
 
+  let kind = matchstr(test#minitest#executable(), 'ruby\|rake')
+  return test#minitest#build_{kind}_args(get(l:, 'path'), a:args)
+endfunction
+
+function! test#minitest#build_rake_args(path, args) abort
   let cmd = []
-  if exists('path') | call add(cmd, 'TEST="'.escape(path, '"').'"') | endif
+  if !empty(a:path) | call add(cmd, 'TEST="'.escape(a:path, '"').'"') | endif
   if !empty(a:args) | call add(cmd, 'TESTOPTS="'.escape(join(a:args), '"').'"') | endif
 
   return cmd
 endfunction
 
-function! test#minitest#executable() abort
-  if filereadable('.zeus.sock')
-    return 'zeus rake test'
-  elseif filereadable('./bin/rake')
-    return './bin/rake test'
-  elseif filereadable('Gemfile')
-    return 'bundle exec rake test'
+function! test#minitest#build_ruby_args(path, args) abort
+  if a:path =~# '*'
+    return ['-e '.shellescape('Dir["./'.a:path.'"].each &method(:require)')] + a:args
   else
-    return 'rake test'
+    return [a:path] + a:args
+  endif
+endfunction
+
+function! test#minitest#executable() abort
+  if system('cat Rakefile') =~# 'Rake::TestTask' ||
+   \ (exists('b:rails_root') || filereadable('./bin/rails'))
+    if filereadable('.zeus.sock')
+      return 'zeus rake test'
+    elseif filereadable('./bin/rake')
+      return './bin/rake test'
+    elseif filereadable('Gemfile')
+      return 'bundle exec rake test'
+    else
+      return 'rake test'
+    endif
+  else
+    if filereadable('Gemfile')
+      return 'bundle exec ruby -I test'
+    else
+      return 'ruby -I test'
+    endif
   endif
 endfunction
 

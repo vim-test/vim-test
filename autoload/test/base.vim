@@ -24,7 +24,7 @@ function! test#base#build_args(runner, args) abort
 endfunction
 
 function! test#base#compiler(runner) abort
-  return get(g:, 'test#'.a:runner.'#compiler', matchstr(a:runner, '\w+$'))
+  return get(g:, 'test#'.a:runner.'#compiler', matchstr(a:runner, '\w\+$'))
 endfunction
 
 function! test#base#file_exists(file) abort

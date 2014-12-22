@@ -1,8 +1,8 @@
-function! test#rspec#test_file(file) abort
+function! test#ruby#rspec#test_file(file) abort
   return a:file =~# '_spec\.rb$'
 endfunction
 
-function! test#rspec#build_position(type, position) abort
+function! test#ruby#rspec#build_position(type, position) abort
   if a:type == 'nearest'
     return [a:position['file'].':'.a:position['line']]
   elseif a:type == 'file'
@@ -12,11 +12,11 @@ function! test#rspec#build_position(type, position) abort
   endif
 endfunction
 
-function! test#rspec#build_args(args) abort
+function! test#ruby#rspec#build_args(args) abort
   return a:args
 endfunction
 
-function! test#rspec#executable() abort
+function! test#ruby#rspec#executable() abort
   if filereadable('.zeus.sock')
     return 'zeus rspec'
   elseif filereadable('./bin/rspec')

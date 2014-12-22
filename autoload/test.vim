@@ -9,11 +9,9 @@ function! test#run(type, options) abort
 
   let runner = test#determine_runner(position['file'])
 
-  let args = test#{runner}#build_position(a:type, position)
+  let args = test#base#build_position(runner, a:type, position)
   let args = [a:options] + args
-  if type(get(g:, 'test#'.runner.'#options')) == type({})
-    let args = [get(g:test#{runner}#options, a:type)] + args
-  endif
+  let args = [test#base#options(runner, a:type)] + args
 
   call test#execute(runner, args)
 endfunction
@@ -28,15 +26,13 @@ endfunction
 
 function! test#execute(runner, args) abort
   let args = a:args
-  if type(get(g:, 'test#'.a:runner.'#options')) == type('')
-    let args = [g:test#{a:runner}#options] + args
-  endif
+  let args = [test#base#options(a:runner)] + args
   call filter(args, '!empty(v:val)')
 
-  let executable = get(g:, 'test#'.a:runner.'#executable', test#{a:runner}#executable())
-  let args = test#{a:runner}#build_args(args)
+  let executable = test#base#executable(a:runner)
+  let args = test#base#build_args(a:runner, args)
   let cmd = [executable] + args
-  let compiler = get(g:, 'test#'.a:runner.'#compiler', a:runner)
+  let compiler = test#base#compiler(a:runner)
 
   call test#shell(join(cmd), compiler)
 endfunction
@@ -48,16 +44,18 @@ function! test#shell(cmd, ...) abort
 endfunction
 
 function! test#determine_runner(file) abort
-  let file = fnamemodify(a:file, ':.')
-  for runner in map(g:test#runners, 'tolower(v:val)')
-    if test#{runner}#test_file(file)
-      return runner
-    endif
+  for [language, runners] in items(g:test#runners)
+    for runner in runners
+      let runner = tolower(language).'#'.tolower(runner)
+      if test#base#test_file(runner, a:file)
+        return runner
+      endif
+    endfor
   endfor
 endfunction
 
 function! test#test_file() abort
-  return !empty(test#determine_runner(expand('%')))
+  return !empty(test#determine_runner(expand('%:.')))
 endfunction
 
 function! test#save_position() abort
@@ -81,8 +79,4 @@ function! test#echo_failure(type) abort
     \ 'last':    'No tests were run so far',
   \}[a:type]
   echohl None
-endfunction
-
-function! test#file_exists(file) abort
-  return !empty(glob(a:file)) || bufexists(a:file)
 endfunction

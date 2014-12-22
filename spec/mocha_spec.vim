@@ -20,24 +20,34 @@ describe "Mocha"
       view +1 test/normal.js
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.js --grep ''Addition'''
+      Expect g:test#last_command == 'mocha test/normal.js --grep ''Math'''
 
       view +2 test/normal.js
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.js --grep ''adds two numbers'''
+      Expect g:test#last_command == 'mocha test/normal.js --grep ''Math Addition'''
+
+      view +3 test/normal.js
+      TestNearest
+
+      Expect g:test#last_command == 'mocha test/normal.js --grep ''Math Addition adds two numbers'''
     end
 
     it "runs CoffeeScript"
       view +1 test/normal.coffee
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''Addition'''
+      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''Math'''
 
       view +2 test/normal.coffee
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''adds two numbers'''
+      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''Math Addition'''
+
+      view +3 test/normal.coffee
+      TestNearest
+
+      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''Math Addition adds two numbers'''
     end
   end
 

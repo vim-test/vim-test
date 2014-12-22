@@ -147,13 +147,13 @@ If you want some options to stick around, you can assign them globally to a
 variable:
 
 ```vim
-let g:test#minitest#options = '--verbose'
+let g:test#ruby#minitest#options = '--verbose'
 ```
 
 Or you can choose a more granular approach:
 
 ```vim
-let g:test#rspec#options = {
+let g:test#ruby#rspec#options = {
   \ 'nearest': '--format documentation',
   \ 'file':    '--format documentation',
   \ 'suite':   '--tag ~slow',
@@ -166,7 +166,7 @@ If you're using a custom executable for test runner which `vim-test` already
 has, you can tell `vim-test` to use your executable:
 
 ```vim
-let g:test#rspec#executable = 'script/my_rspec'
+let g:test#ruby#rspec#executable = 'script/my_rspec'
 ```
 
 If you have a custom test runner that you wish to integrate with `vim-test`,
@@ -182,7 +182,8 @@ That being said, if you want to do this for yourself, you need to do 2 things.
 First, add your runner to the list in your `.vimrc`:
 
 ```vim
-let g:test#runners = ['MyRunner'] " First letter *must* be uppercase
+" First letter of runner's name must be uppercase
+let g:test#runners = {'MyLanguage': 'MyRunner'}
 ```
 
 Second, create `~/.vim/autoload/test/myrunner.vim`, and define the following
@@ -190,23 +191,23 @@ methods:
 
 ```vim
 " Returns true if the given file belongs to your test runner
-function! test#myrunner#test_file(file)
+function! test#mylanguage#myrunner#test_file(file)
 
 " Returns test runner's arguments which will run the current file and/or line
-function! test#myrunner#build_position(type, position)
+function! test#mylanguage#myrunner#build_position(type, position)
 
 " Returns processed args (if you need to do any processing)
-function! test#myrunner#build_args(args)
+function! test#mylanguage#myrunner#build_args(args)
 
 " Returns the executable of your test runner
-function! test#myrunner#executable()
+function! test#mylanguage#myrunner#executable()
 ```
 
 If you're using dispatch.vim, and the compiler for your runner isn't called
 the same (in this case "myrunner"), you can also define
 
 ```vim
-let g:test#myrunner#compiler = "<compiler>"
+let g:test#mylanguage#myrunner#compiler = "<compiler>"
 ```
 
 See [`autoload/test/`](/autoload/test) for examples.

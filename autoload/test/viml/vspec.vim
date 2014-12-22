@@ -1,8 +1,8 @@
-function! test#vspec#test_file(file) abort
+function! test#viml#vspec#test_file(file) abort
   return a:file =~# '\v^(t(est)?|spec)/.*\.vim$'
 endfunction
 
-function! test#vspec#build_position(type, position) abort
+function! test#viml#vspec#build_position(type, position) abort
   if a:type == 'nearest' || a:type == 'file'
     return [a:position['file']]
   else
@@ -10,8 +10,8 @@ function! test#vspec#build_position(type, position) abort
   endif
 endfunction
 
-function! test#vspec#build_args(args) abort
-  if empty(filter(copy(a:args), 'test#file_exists(v:val)'))
+function! test#viml#vspec#build_args(args) abort
+  if empty(filter(copy(a:args), 'test#base#file_exists(v:val)'))
     let test_dir = get(filter(['t/', 'test/', 'spec/'], 'isdirectory(v:val)'), 0)
     call add(a:args, test_dir)
   endif
@@ -19,7 +19,7 @@ function! test#vspec#build_args(args) abort
   return a:args
 endfunction
 
-function! test#vspec#executable() abort
+function! test#viml#vspec#executable() abort
   if !executable('vim-flavor')
     throw '"vim-flavor" executable not found, get it with `gem install vim-flavor`'
   endif

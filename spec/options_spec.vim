@@ -28,11 +28,11 @@ describe 'Options'
 
   describe "g:test#{runner}#options"
     after
-      unlet g:test#rspec#options
+      unlet g:test#ruby#rspec#options
     end
 
     it "goes through each run as a string"
-      let g:test#rspec#options = '--foo bar --baz'
+      let g:test#ruby#rspec#options = '--foo bar --baz'
       new foo_spec.rb
 
       TestNearest
@@ -46,7 +46,7 @@ describe 'Options'
     end
 
     it "goes through specific granularities as a dictionary"
-      let g:test#rspec#options = {
+      let g:test#ruby#rspec#options = {
         \ 'nearest': '--nearest',
         \ 'file':    '--file',
       \}

@@ -1,10 +1,10 @@
-function! test#mocha#test_file(file) abort
+function! test#javascript#mocha#test_file(file) abort
   return a:file =~# '\v^tests?/.*\.(js|coffee)$'
 endfunction
 
-function! test#mocha#build_position(type, position) abort
+function! test#javascript#mocha#build_position(type, position) abort
   if a:type == 'nearest'
-    let name = test#mocha#nearest_test(a:position)
+    let name = s:nearest_test(a:position)
     if !empty(name) | let name = '--grep '.shellescape(name, 1) | endif
     return [a:position['file'], name]
   elseif a:type == 'file'
@@ -14,7 +14,7 @@ function! test#mocha#build_position(type, position) abort
   endif
 endfunction
 
-function! test#mocha#build_args(args) abort
+function! test#javascript#mocha#build_args(args) abort
   let args = a:args
 
   if !empty(glob('test*/**/*.coffee'))
@@ -24,7 +24,7 @@ function! test#mocha#build_args(args) abort
   return args
 endfunction
 
-function! test#mocha#executable() abort
+function! test#javascript#mocha#executable() abort
   if filereadable('node_modules/.bin/mocha')
     return 'node_modules/.bin/mocha'
   else
@@ -32,14 +32,9 @@ function! test#mocha#executable() abort
   endif
 endfunction
 
-function! test#mocha#nearest_test(position)
-  let regex = '\v^\s*%(describe|it)%(\(| )("|'')\zs.+\ze\1'
-
-  for line in reverse(getbufline(a:position['file'], 1, a:position['line']))
-    if !empty(matchstr(line, regex))
-      return matchstr(line, regex)
-    endif
-  endfor
+function! s:nearest_test(position)
+  let name = test#base#nearest_test(a:position, g:test#javascript#levels)
+  return join(name[0] + name[1])
 endfunction
 
 function! s:coffee_compiler() abort

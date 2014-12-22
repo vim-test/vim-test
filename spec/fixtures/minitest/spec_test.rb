@@ -1,19 +1,26 @@
-describe TestNumbers do
-  it "has double quotes" do
-    assert 1 == 1
-  end
+require "minitest/autorun"
 
-  it 'has single quotes' do
-    assert 1 == 1
-  end
+class TestNumbers
+end
 
-  it "contains a '" do
-    assert 1 == 1
-  end
+describe "Math" do
+  describe TestNumbers do
+    it "has double quotes" do
+      assert 1 == 1
+    end
 
-  it 'contains a "' do
-    assert 1 == 1
-  end
+    it 'has single quotes' do
+      assert 1 == 1
+    end
 
-  it "is pending"
+    it "contains a '" do
+      assert 1 == 1
+    end
+
+    it 'contains a "' do
+      assert 1 == 1
+    end
+
+    it "is pending"
+  end
 end

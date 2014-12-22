@@ -1,8 +1,8 @@
-function! test#busted#test_file(file) abort
+function! test#lua#busted#test_file(file) abort
   return a:file =~# '_spec.lua$'
 endfunction
 
-function! test#busted#build_position(type, position) abort
+function! test#lua#busted#build_position(type, position) abort
   if a:type == 'nearest' || a:type == 'file'
     return [a:position['file']]
   else
@@ -10,10 +10,10 @@ function! test#busted#build_position(type, position) abort
   endif
 endfunction
 
-function! test#busted#build_args(args) abort
+function! test#lua#busted#build_args(args) abort
   return a:args
 endfunction
 
-function! test#busted#executable() abort
+function! test#lua#busted#executable() abort
   return "busted"
 endfunction

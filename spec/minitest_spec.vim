@@ -12,73 +12,83 @@ describe "Minitest"
   end
 
   context "on nearest tests"
-    it "works with unit syntax"
-      view +1 unit_test.rb
+    it "builds the correct regex in unit syntax"
+      view +3 unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/TestNumbers/''"'
+      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/Math/''"'
 
-      view +2 unit_test.rb
+      view +4 unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/test_method/''"'
+      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/Math::TestNumbers/''"'
 
-      view +6 unit_test.rb
+      view +12 unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/double quotes/''"'
+      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_method/''"'
 
-      view +10 unit_test.rb
+      view +16 unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/single quotes/''"'
+      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_double_quotes/''"'
 
-      view +14 unit_test.rb
+      view +20 unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/single quote ''\'''' inside/''"'
+      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_single_quotes/''"'
 
-      view +18 unit_test.rb
+      view +24 unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/double quote \" inside/''"'
+      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_single_quote_''\''''_inside/''"'
 
-      view +22 unit_test.rb
+      view +28 unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/pending test/''"'
+      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_double_quote_\"_inside/''"'
+
+      view +32 unit_test.rb
+      TestNearest
+
+      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_pending_test/''"'
     end
 
-    it "works with spec syntax"
-      view +1 unit_test.rb
-      TestNearest
-
-      Expect g:test#last_command == 'rake test TEST="unit_test.rb" TESTOPTS="--name=''/TestNumbers/''"'
-
-      view +2 spec_test.rb
-      TestNearest
-
-      Expect g:test#last_command == 'rake test TEST="spec_test.rb" TESTOPTS="--name=''/has double quotes/''"'
-
+    it "builds the correct regex in spec syntax"
       view +6 spec_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="spec_test.rb" TESTOPTS="--name=''/has single quotes/''"'
+      Expect g:test#last_command == 'rake test TEST="spec_test.rb" TESTOPTS="--name=''/Math/''"'
 
-      view +10 spec_test.rb
+      view +7 spec_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="spec_test.rb" TESTOPTS="--name=''/contains a ''\''''/''"'
+      Expect g:test#last_command == 'rake test TEST="spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers/''"'
 
-      view +14 spec_test.rb
+      view +8 spec_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="spec_test.rb" TESTOPTS="--name=''/contains a \"/''"'
+      Expect g:test#last_command == 'rake test TEST="spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_has double quotes/''"'
 
-      view +18 spec_test.rb
+      view +12 spec_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="spec_test.rb" TESTOPTS="--name=''/is pending/''"'
+      Expect g:test#last_command == 'rake test TEST="spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_has single quotes/''"'
+
+      view +16 spec_test.rb
+      TestNearest
+
+      Expect g:test#last_command == 'rake test TEST="spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_contains a ''\''''/''"'
+
+      view +20 spec_test.rb
+      TestNearest
+
+      Expect g:test#last_command == 'rake test TEST="spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_contains a \"/''"'
+
+      view +24 spec_test.rb
+      TestNearest
+
+      Expect g:test#last_command == 'rake test TEST="spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_is pending/''"'
     end
   end
 
@@ -101,7 +111,7 @@ describe "Minitest"
     view unit_test.rb
     TestSuite
 
-    Expect g:test#last_command == 'rake test'
+    Expect g:test#last_command == 'rake test TEST="test/**/*_test.rb"'
   end
 
   it "runs folders recursively"

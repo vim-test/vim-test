@@ -36,14 +36,14 @@ describe 'Running'
   end
 
   it "picks a user defined test#{runner}#executable"
-    let g:test#rspec#executable = 'foo'
+    let g:test#ruby#rspec#executable = 'foo'
 
     edit foo_spec.rb
     TestFile
 
     Expect g:test#last_command == 'foo foo_spec.rb'
 
-    unlet g:test#rspec#executable
+    unlet g:test#ruby#rspec#executable
   end
 
 end

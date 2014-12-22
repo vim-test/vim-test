@@ -112,11 +112,11 @@ CONFIGURATION                                   *test-configuration*
 You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your prefered options with
 >
-  let g:test#minitest#options = '--verbose'
+  let g:test#ruby#minitest#options = '--verbose'
 <
 Or, if you prefer more granular approach, you can do
 >
-  let g:test#rspec#options = {
+  let g:test#ruby#rspec#options = {
     \ 'nearest': '--format documentation',
     \ 'file':    '--format documentation',
     \ 'suite':   '--tag ~slow',
@@ -124,7 +124,7 @@ Or, if you prefer more granular approach, you can do
 <
 If you want to manually configure a test runner's executable, you can do
 >
-  let g:test#rspec#executable = 'script/my_rspec'
+  let g:test#ruby#rspec#executable = 'foreman run rspec'
 <
 ABOUT                                           *test-about*
 

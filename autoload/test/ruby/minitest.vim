@@ -74,7 +74,7 @@ function! s:nearest_test(position) abort
   let syntax = s:syntax(a:position['file'])
   let name = test#base#nearest_test(a:position, g:test#ruby#levels[syntax])
 
-  let namespace = [join(name[0], '::')]
+  let namespace = filter([join(name[0], '::')], '!empty(v:val)')
   if empty(name[1])
     let test = []
   elseif syntax == 'spec'
@@ -90,7 +90,7 @@ function! s:nearest_test(position) abort
 endfunction
 
 function! s:syntax(file) abort
-  if system('cat '.a:file) =~# '\v\A\s*(describe|context)'
+  if system('cat '.a:file) =~# '\v\A\s*(it)'
     return 'spec'
   else
     return 'unit'

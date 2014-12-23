@@ -6,7 +6,7 @@ function! test#python#pytest#build_position(type, position) abort
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return [a:position['file'].':'.name]
+      return [a:position['file'].' -k '.name]
     else
       return [a:position['file']]
     endif
@@ -18,7 +18,7 @@ function! test#python#pytest#build_position(type, position) abort
 endfunction
 
 function! test#python#pytest#build_args(args) abort
-  return ['--exitfirst'] + a:args
+  return a:args
 endfunction
 
 function! test#python#pytest#executable() abort
@@ -27,5 +27,5 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#python#levels)
-  return join(name[0] + name[1], '.')
+  return name[1][0]
 endfunction

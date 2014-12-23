@@ -7,7 +7,7 @@ let g:test#plugin_path = expand('<sfile>:p:h:h')
 
 function! s:extend(source, dict) abort
   for [key, value] in items(a:dict)
-    let a:source[key] = value + get(a:source, key, [])
+    let a:source[key] = get(a:source, key, []) + value
   endfor
 endfunction
 

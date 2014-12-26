@@ -1,13 +1,13 @@
-function! test#python#nose#test_file(file) abort
+function! test#python#pytest#test_file(file) abort
   return fnamemodify(a:file, ':t') =~# '^test_.*\.py$' &&
-        \ (executable('nosetests') || g:test#python#runner == 'nose')
+        \ (executable('py.test') || g:test#python#runner == 'pytest')
 endfunction
 
-function! test#python#nose#build_position(type, position) abort
+function! test#python#pytest#build_position(type, position) abort
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return [a:position['file'].':'.name]
+      return [a:position['file'].' -k '.name]
     else
       return [a:position['file']]
     endif
@@ -18,15 +18,15 @@ function! test#python#nose#build_position(type, position) abort
   endif
 endfunction
 
-function! test#python#nose#build_args(args) abort
-  return ['--doctest-tests'] + a:args
+function! test#python#pytest#build_args(args) abort
+  return a:args
 endfunction
 
-function! test#python#nose#executable() abort
-  return 'nosetests'
+function! test#python#pytest#executable() abort
+  return 'py.test'
 endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#python#levels)
-  return join(name[0] + name[1], '.')
+  return get(name[1], 0, '')
 endfunction

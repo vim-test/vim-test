@@ -51,11 +51,11 @@ endfunction
 
 function! test#ruby#minitest#executable() abort
   if system('cat Rakefile') =~# 'Rake::TestTask' ||
-   \ (exists('b:rails_root') || filereadable('./bin/rails'))
+   \ (exists('b:rails_root') || filereadable('bin/rails'))
     if filereadable('.zeus.sock')
       return 'zeus rake test'
-    elseif filereadable('./bin/rake')
-      return './bin/rake test'
+    elseif filereadable('bin/rake')
+      return 'bin/rake test'
     elseif filereadable('Gemfile')
       return 'bundle exec rake test'
     else

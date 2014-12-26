@@ -138,9 +138,9 @@ If you're in MacVim GUI, `vim-test` also supports sending test commands to the
 terminal.
 
 ```vim
-let g:test#strategy = 'terminal' " bin/osx_terminal
+let g:test#strategy = 'terminal'
 " or
-let g:test#strategy = 'iterm'    " bin/osx_iterm
+let g:test#strategy = 'iterm'
 ```
 
 ### Options
@@ -182,7 +182,7 @@ let g:test#ruby#rspec#executable = 'script/my_rspec'
 If you have a custom test runner that you wish to integrate with `vim-test`,
 see the next section.
 
-### Specific
+### Language-specific
 
 #### Python
 

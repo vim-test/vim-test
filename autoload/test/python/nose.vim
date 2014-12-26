@@ -1,5 +1,6 @@
 function! test#python#nose#test_file(file) abort
-  return fnamemodify(a:file, ':t') =~# '^test_.*\.py$'
+  return fnamemodify(a:file, ':t') =~# '^test_.*\.py$' &&
+        \ (executable('nosetests') || g:test#python#runner == 'nose')
 endfunction
 
 function! test#python#nose#build_position(type, position) abort

@@ -1,5 +1,6 @@
 function! test#python#pytest#test_file(file) abort
-  return fnamemodify(a:file, ':t') =~# '^test_.*\.py$'
+  return fnamemodify(a:file, ':t') =~# '^test_.*\.py$' &&
+        \ (executable('py.test') || g:test#python#runner == 'pytest')
 endfunction
 
 function! test#python#pytest#build_position(type, position) abort

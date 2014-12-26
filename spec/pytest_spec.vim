@@ -1,13 +1,9 @@
 source spec/helpers.vim
 
-function! test#shell(cmd, ...) abort
-  let g:test#last_command = substitute(a:cmd, ' --doctest-tests', '', '')
-endfunction
-
 describe "PyTest"
 
   before
-    " Use the nose test fixtures as they are set up already
+    let g:test#python#runner = 'pytest'
     cd spec/fixtures/nose
   end
 

@@ -1,6 +1,11 @@
 function! test#python#nose#test_file(file) abort
-  return fnamemodify(a:file, ':t') =~# '^test_.*\.py$' &&
-        \ (executable('nosetests') || g:test#python#runner == 'nose')
+  if fnamemodify(a:file, ':t') =~# '^test_.*\.py$'
+    if exists('g:test#python#runner')
+      return g:test#python#runner == 'nose'
+    else
+      return executable('nosetests')
+    endif
+  endif
 endfunction
 
 function! test#python#nose#build_position(type, position) abort

@@ -104,17 +104,6 @@ The default way `vim-test` runs your tests is by shelling out (`:!<command>`).
 However, `vim-test` supports multiple ways ("strategies") of running your
 tests, just pick the one that suits you the most.
 
-### Specific
-
-#### Python
-
-`vim-test` includes two Python test runners (`nose` and `py.test`) which both operate on the same type of files. To distinguish between the two, set the `g:test#python#runner` variable to either `'pytest'` or `'nose'` to distinguish between the two, e.g.:
-
-``` vim
-let g:test#python#runner = 'pytest'   " for py.test
-let g:test#python#runner = 'nose'     " for nose
-```
-
 #### Dispatch.vim
 
 ```vim
@@ -182,6 +171,20 @@ let g:test#ruby#rspec#executable = 'script/my_rspec'
 
 If you have a custom test runner that you wish to integrate with `vim-test`,
 see the next section.
+
+### Specific
+
+#### Python
+
+Since there are multiple Python test runners for the same type of tests,
+`vim-test` has no way of detecting which one did you intend to use. By default
+the first available will be chosen, but you can force a specific one:
+
+``` vim
+let g:test#python#runner = 'pytest'
+" or
+let g:test#python#runner = 'nose'
+```
 
 ## Extending
 

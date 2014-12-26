@@ -7,6 +7,7 @@ endfunction
 describe "Nose"
 
   before
+    let g:test#python#runner = 'nose'
     cd spec/fixtures/nose
   end
 

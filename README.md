@@ -100,26 +100,36 @@ I found these commands to be really useful when you have multiple test suites.
 
 ### Strategies
 
-The default way `vim-test` runs your tests is by shelling out (`:!<command>`).
-However, `vim-test` supports multiple ways ("strategies") of running your
-tests, just pick the one that suits you the most.
+`vim-test` can run your tests in multiple ways.
+
+#### Basic (default)
+
+```vim
+let g:test#strategy = 'basic'    " :!<test command>
+```
+
+#### Make
+
+```vim
+let g:test#strategy = 'make'     " :make
+```
 
 #### Dispatch.vim
 
 ```vim
-let g:test#strategy = 'dispatch'
+let g:test#strategy = 'dispatch' " :Make
 ```
 
 #### Vimux
 
 ```vim
-let g:test#strategy = 'vimux'
+let g:test#strategy = 'vimux'    " VimuxRunCommand(<test commmand>)
 ```
 
 #### Tslime.vim
 
 ```vim
-let g:test#strategy = 'tslime'
+let g:test#strategy = 'tslime'   " Send_to_Tmux(<test command>)
 ```
 
 #### GUI
@@ -128,9 +138,9 @@ If you're in MacVim GUI, `vim-test` also supports sending test commands to the
 terminal.
 
 ```vim
-let g:test#strategy = 'terminal'
+let g:test#strategy = 'terminal' " bin/osx_terminal
 " or
-let g:test#strategy = 'iterm'
+let g:test#strategy = 'iterm'    " bin/osx_iterm
 ```
 
 ### Options

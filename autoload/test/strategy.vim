@@ -1,35 +1,17 @@
 function! test#strategy#basic(cmd, ...) abort
-  if s:norestorescreen()
-    execute '!'.a:cmd
-  else
+  if s:restorescreen()
     execute '!'.s:pretty_command(a:cmd)
+  else
+    execute '!'.a:cmd
   endif
 endfunction
 
+function! test#strategy#make(cmd, compiler) abort
+  call s:execute_with_compiler_and_makeprg(a:compiler, s:pretty_command(a:cmd), ':make')
+endfunction
+
 function! test#strategy#dispatch(cmd, compiler) abort
-  let old_compiler    = get(b:, 'current_compiler', '')
-  let old_makeprg     = &l:makeprg
-  let old_errorformat = &l:errorformat
-
-  if !empty(a:compiler)
-    let compiler = a:compiler
-  else
-    let compiler = s:last_compiler
-  endif
-
-  try | execute 'compiler '.compiler | catch 'E666' | endtry
-  let &l:makeprg = a:cmd
-
-  Make
-
-  let &l:errorformat     = old_errorformat
-  let &l:makeprg         = old_makeprg
-  let b:current_compiler = old_compiler
-  if empty(old_compiler)
-    unlet b:current_compiler
-  endif
-
-  let s:last_compiler = compiler
+  call s:execute_with_compiler_and_makeprg(a:compiler, a:cmd, ':Make')
 endfunction
 
 function! test#strategy#vimux(cmd, ...) abort
@@ -61,14 +43,39 @@ function! s:pretty_command(cmd) abort
   return join([l:clear, l:echo, a:cmd], ' && ')
 endfunction
 
+function! s:execute_with_compiler_and_makeprg(compiler, makeprg, cmd) abort
+  let old_compiler    = get(b:, 'current_compiler', '')
+  let old_makeprg     = &l:makeprg
+  let old_errorformat = &l:errorformat
+
+  if !empty(a:compiler)
+    let compiler = a:compiler
+  else
+    let compiler = s:last_compiler
+  endif
+  try | execute 'compiler '.compiler | catch 'E666' | endtry
+  let &l:makeprg = a:makeprg
+
+  execute a:cmd
+
+  let &l:errorformat     = old_errorformat
+  let &l:makeprg         = old_makeprg
+  let b:current_compiler = old_compiler
+  if empty(old_compiler)
+    unlet b:current_compiler
+  endif
+
+  let s:last_compiler = compiler
+endfunction
+
 function! s:Windows() abort
   return has('win32') && fnamemodify(&shell, ':t') ==? 'cmd.exe'
 endfunction
 
-function! s:norestorescreen() abort
+function! s:restorescreen() abort
   if s:Windows()
-    return !&restorescreen
+    return &restorescreen
   else
-    return empty(&t_ti) && empty(&t_te)
+    return !empty(&t_ti) || !empty(&t_te)
   endif
 endfunction

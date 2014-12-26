@@ -87,25 +87,33 @@ STRATEGIES                                      *test-strategies*
 Multiple strategies are supported for running tests. If you're using MacVim GUI,
 you can tell test.vim to send commands to Terminal.app/iTerm.
 
+Basic (default) ~
+>
+  let g:test#strategy = 'basic'    " :!<command>
+<
+Make ~
+>
+  let g:test#strategy = 'make'     " :make
+<
 Dispatch ~
 >
-  let g:test#strategy = 'dispatch'
+  let g:test#strategy = 'dispatch' " :Make
 <
 Vimux ~
 >
-  let g:test#strategy = 'vimux'
+  let g:test#strategy = 'vimux'    " VimuxRunCommand(<test command>)
 <
 Tslime ~
 >
-  let g:test#strategy = 'tslime'
+  let g:test#strategy = 'tslime'   " Send_to_Tmux(<test command>)
 <
 Terminal.app ~
 >
-  let g:test#strategy = 'terminal'
+  let g:test#strategy = 'terminal' " bin/osx_terminal
 <
 iTerm ~
 >
-  let g:test#strategy = 'iterm'
+  let g:test#strategy = 'iterm'    " bin/osx_iterm
 <
 CONFIGURATION                                   *test-configuration*
 

@@ -19,8 +19,8 @@ endfunction
 function! test#ruby#cucumber#executable() abort
   if filereadable('.zeus.sock')
     return 'zeus cucumber'
-  elseif filereadable('./bin/cucumber')
-    return './bin/cucumber'
+  elseif filereadable('bin/cucumber')
+    return 'bin/cucumber'
   elseif filereadable('Gemfile')
     return 'bundle exec cucumber'
   else

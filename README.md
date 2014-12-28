@@ -14,7 +14,7 @@ Currently the following testing frameworks are supported:
 | :------------: | ----------------------------- |
 | **Ruby**       | RSpec<br>Minitest<br>Cucumber |
 | **JavaScript** | Mocha<br>Jasmine              |
-| **Python**     | Nose                          |
+| **Python**     | Nose<br>PyTest                |
 | **Elixir**     | ExUnit                        |
 | **Go**         | GoTest                        |
 | **Shell**      | Bats                          |

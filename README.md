@@ -207,10 +207,10 @@ First, add your runner to the list in your `.vimrc`:
 
 ```vim
 " First letter of runner's name must be uppercase
-let g:test#runners = {'MyLanguage': 'MyRunner'}
+let g:test#runners = {'MyLanguage': ['MyRunner']}
 ```
 
-Second, create `~/.vim/autoload/test/myrunner.vim`, and define the following
+Second, create `~/.vim/autoload/test/mylanguage/myrunner.vim`, and define the following
 methods:
 
 ```vim

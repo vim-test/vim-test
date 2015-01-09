@@ -17,7 +17,7 @@ function! test#ruby#rspec#build_args(args) abort
 endfunction
 
 function! test#ruby#rspec#executable() abort
-  if filereadable('.zeus.sock')
+  if !empty(glob('.zeus.sock'))
     return 'zeus rspec'
   elseif filereadable('./bin/rspec')
     return './bin/rspec'

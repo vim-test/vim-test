@@ -17,7 +17,7 @@ function! test#ruby#cucumber#build_args(args) abort
 endfunction
 
 function! test#ruby#cucumber#executable() abort
-  if filereadable('.zeus.sock')
+  if !empty(glob('.zeus.sock'))
     return 'zeus cucumber'
   elseif filereadable('./bin/cucumber')
     return './bin/cucumber'

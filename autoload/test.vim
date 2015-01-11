@@ -1,4 +1,8 @@
 function! test#run(type, options) abort
+  if &autowrite || &autowriteall
+    silent! wall
+  endif
+
   if test#test_file()
     let position = s:get_position()
   elseif exists("g:test#last_position")

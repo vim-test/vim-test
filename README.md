@@ -100,7 +100,7 @@ I found these commands to be really useful when you have multiple test suites.
 
 ### Strategies
 
-`vim-test` can run your tests in multiple ways.
+`vim-test` can run your tests in various ways.
 
 #### Basic (default)
 
@@ -178,9 +178,6 @@ has, you can tell `vim-test` to use your executable:
 ```vim
 let g:test#ruby#rspec#executable = 'script/my_rspec'
 ```
-
-If you have a custom test runner that you wish to integrate with `vim-test`,
-see the next section.
 
 ### Language-specific
 

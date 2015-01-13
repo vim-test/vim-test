@@ -5,10 +5,10 @@ function! test#run(type, options) abort
 
   if test#test_file()
     let position = s:get_position()
-  elseif exists("g:test#last_position")
+  elseif exists('g:test#last_position')
     let position = g:test#last_position
   else
-    call test#echo_failure(a:type) | return
+    call s:echo_failure('Not a test file') | return
   endif
 
   let runner = test#determine_runner(position['file'])
@@ -24,7 +24,7 @@ function! test#run_last() abort
   if exists('g:test#last_command')
     call test#shell(g:test#last_command)
   else
-    call test#echo_failure('last')
+    call s:echo_failure('No tests were run so far')
   endif
 endfunction
 
@@ -74,13 +74,8 @@ function! s:get_position() abort
   \}
 endfunction
 
-function! test#echo_failure(type) abort
+function! s:echo_failure(message) abort
   echohl WarningMsg
-  echo {
-    \ 'nearest': 'Unable to find nearest test',
-    \ 'file':    'Unable to find test file',
-    \ 'suite':   'Unable to determine test runner',
-    \ 'last':    'No tests were run so far',
-  \}[a:type]
+  echo a:message
   echohl None
 endfunction

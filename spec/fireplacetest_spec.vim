@@ -78,11 +78,11 @@ describe "FireplaceTest"
       Expect g:test#last_command =~# '(clojure.test/run-all-tests #\\"foo\\")'
     end
 
-    it "accepts list of namespaces"
+    it "accepts list of filenames, which it translates to namespaces"
       view math_test.clj
-      FireplaceTest foo bar
+      FireplaceTest math_test.clj
 
-      Expect g:test#last_command =~# '(clojure.test/run-tests ''foo ''bar)'
+      Expect g:test#last_command =~# '(clojure.test/run-tests ''math-test)'
     end
 
   end

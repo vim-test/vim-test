@@ -1,5 +1,3 @@
-let test#clojure#fireplacetest#complete = "customlist,fireplace#ns_complete"
-
 function! test#clojure#fireplacetest#test_file(file) abort
   return a:file =~# '\v_test\.cljs?$' || a:file =~# '\v^test/.+\.cljs?$'
 endfunction
@@ -34,7 +32,7 @@ function! test#clojure#fireplacetest#build_args(args) abort
       let regex = matchlist(a:args[0], '\v^/(.+)/$')[1]
       let args = ['(clojure.test/run-all-tests #"'.regex.'")']
     else
-      let reqs = map(copy(a:args), '"''".v:val')
+      let reqs = map(copy(a:args), '"''".fireplace#ns(v:val)')
       let args = [join(['(clojure.test/run-tests'] + reqs).')', s:reload(reqs)]
     end
   endif

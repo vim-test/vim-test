@@ -85,8 +85,8 @@ In all commands [args] are forwarded to the underlying test runner.
                              * Without arguments runs all tests.
                              * With argument /foo/ runs all tests matching
                                "foo".
-                             * Otherwise each argument is interpreted as a
-                               namespace you want to run tests for.
+                             * Otherwise accepts a list of filenames (which it
+                               translates to namespaces).
 
                                                 *test-:Bats*
 :Bats [args]                 Uses the `bats` command.

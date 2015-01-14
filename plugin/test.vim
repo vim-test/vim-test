@@ -32,7 +32,7 @@ command!          -bar TestLast    call test#run_last()
 for [s:language, s:runners] in items(g:test#runners)
   for s:runner in s:runners
     let s:runner_id = tolower(s:language).'#'.tolower(s:runner)
-    execute 'command! -bar -nargs=* -complete='.test#base#complete(s:runner_id)
+    execute 'command! -bar -nargs=* -complete=file'
           \ s:runner
           \ 'call test#execute("'.s:runner_id.'", split(<q-args>))'
   endfor

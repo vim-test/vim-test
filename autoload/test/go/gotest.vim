@@ -24,7 +24,7 @@ function! test#go#gotest#executable() abort
   return "go test"
 endfunction
 
-function! s:nearest_test(position)
+function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#go#levels)
   return join(name[1])
 endfunction

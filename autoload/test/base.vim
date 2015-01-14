@@ -27,6 +27,10 @@ function! test#base#compiler(runner) abort
   return get(g:, 'test#'.a:runner.'#compiler', matchstr(a:runner, '\w\+$'))
 endfunction
 
+function! test#base#complete(runner) abort
+  return get(g:, 'test#'.a:runner.'#complete', 'file')
+endfunction
+
 function! test#base#file_exists(file) abort
   return !empty(glob(a:file)) || bufexists(a:file)
 endfunction

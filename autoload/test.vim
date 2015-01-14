@@ -36,14 +36,21 @@ function! test#execute(runner, args) abort
   let executable = test#base#executable(a:runner)
   let args = test#base#build_args(a:runner, args)
   let cmd = [executable] + args
+  call filter(cmd, '!empty(v:val)')
+
   let compiler = test#base#compiler(a:runner)
 
   call test#shell(join(cmd), compiler)
 endfunction
 
 function! test#shell(cmd, ...) abort
-  let strategy = get(g:, 'test#strategy', 'basic')
-  call test#strategy#{strategy}(a:cmd, get(a:000, 0))
+  if a:cmd[0] != ':'
+    let strategy = get(g:, 'test#strategy', 'basic')
+    call test#strategy#{strategy}(a:cmd, get(a:000, 0))
+  else
+    execute a:cmd
+  end
+
   let g:test#last_command = a:cmd
 endfunction
 

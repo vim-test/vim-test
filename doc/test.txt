@@ -56,7 +56,9 @@ In all commands [args] are forwarded to the underlying test runner.
 :Cucumber [args]             Uses the `cucumber` command.
 
                                                 *test-:Minitest*
-:Minitest [args]             Uses the `rake` `test` command.
+:Minitest [args]             Uses the `rake` `test` command. All passed options for
+                             Minitest will be properly translated into the
+                             Rake world, so you needen't worry.
 
                                                 *test-:Mocha*
 :Mocha [args]                Uses the `mocha` command.
@@ -75,6 +77,16 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:GoTest*
 :GoTest [args]               Uses the `go` `test` command.
+
+                                                *test-:FireplaceTest*
+:FireplaceTest [args]        Uses `Fireplace.vim` to run test commands, and
+                             automatically reloads code.
+
+                             * Without arguments runs all tests.
+                             * With argument /foo/ runs all tests matching
+                               "foo".
+                             * Otherwise each argument is interpreted as a
+                               namespace you want to run tests for.
 
                                                 *test-:Bats*
 :Bats [args]                 Uses the `bats` command.

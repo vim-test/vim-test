@@ -20,7 +20,7 @@ call s:extend(g:test#runners, {
   \ 'Go':         ['GoTest'],
   \ 'Clojure':    ['FireplaceTest'],
   \ 'Shell':      ['Bats'],
-  \ 'VimL':       ['VSpec'],
+  \ 'VimL':       ['VSpec', 'Vader'],
   \ 'Lua':        ['Busted'],
 \})
 
@@ -31,6 +31,7 @@ command!          -bar TestLast    call test#run_last()
 
 for [s:language, s:runners] in items(g:test#runners)
   for s:runner in s:runners
+    if exists(':'.s:runner) | continue | endif
     let s:runner_id = tolower(s:language).'#'.tolower(s:runner)
     execute 'command! -bar -nargs=* -complete=file'
           \ s:runner

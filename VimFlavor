@@ -1,1 +1,2 @@
 flavor 'tpope/vim-fireplace'
+flavor 'junegunn/vader.vim'

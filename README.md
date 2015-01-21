@@ -10,17 +10,17 @@ run tests on different granularities:
 
 Currently the following testing frameworks are supported:
 
-| Language       | Frameworks                    |
-| :------------: | ----------------------------- |
-| **Ruby**       | RSpec<br>Minitest<br>Cucumber |
-| **JavaScript** | Mocha<br>Jasmine              |
-| **Python**     | Nose<br>PyTest                |
-| **Elixir**     | ExUnit                        |
-| **Go**         | Go                            |
-| **Clojure**    | Fireplace.vim                 |
-| **Shell**      | Bats                          |
-| **VimScript**  | VSpec                         |
-| **Lua**        | Busted                        |
+| Language       | Frameworks                |
+| :------------: | ------------------------- |
+| **Ruby**       | RSpec, Minitest, Cucumber |
+| **JavaScript** | Mocha, Jasmine            |
+| **Python**     | Nose, PyTest              |
+| **Elixir**     | ExUnit                    |
+| **Go**         | Go                        |
+| **Clojure**    | Fireplace.vim             |
+| **Shell**      | Bats                      |
+| **VimScript**  | VSpec, Vader.vim          |
+| **Lua**        | Busted                    |
 
 ## Introduction
 

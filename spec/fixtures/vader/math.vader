@@ -1,0 +1,8 @@
+Before:
+  Log "Setup"
+
+Execute (Addition):
+  AssertEqual 1 + 1, 2
+
+Execute (Subtraction):
+  AssertEqual 1 - 1, 0

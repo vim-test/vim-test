@@ -52,6 +52,66 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 ```
 
+## Strategies
+
+You can instruct `vim-test` to run your tests with different strategies,
+with synchronous or asynchronous execution.
+
+#### Basic (default)
+
+Runs test commands with `:!`, which switches your Vim to the Terminal.
+
+```vim
+let g:test#strategy = 'basic'
+```
+
+#### Make
+
+Runs test commands with `:make`, which acts in the same way as `:!`, but
+loads the errors into a quickfix list (if the compiler is available).
+
+```vim
+let g:test#strategy = 'make'
+```
+
+#### Dispatch.vim
+
+Runs test commands with `:Make`, which is an asynchronous `:make`. It
+requires the [Dispatch.vim](https://github.com/janko-m/vim-test) plugin.
+
+```vim
+let g:test#strategy = 'dispatch'
+```
+
+#### Vimux
+
+Runs test commands in a small Tmux pane at the bottom of your Terminal.
+Requires the [Vimux](https://github.com/benmills/vimux) plugin (and Tmux).
+
+```vim
+let g:test#strategy = 'vimux'
+```
+
+#### Tslime.vim
+
+Runs test commands in a Tmux pane you specify. Requires the
+[Tslime.vim](https://github.com/kikijump/tslime.vim) plugin (and Tmux).
+
+```vim
+let g:test#strategy = 'tslime'
+```
+
+#### Terminal/iTerm
+
+If you're in MacVim GUI, you can use this strategy to send the test commands
+to your Terminal/iTerm (since executing shell commands inside Vim GUIs sucks).
+
+```vim
+let g:test#strategy = 'terminal'
+" or
+let g:test#strategy = 'iterm'
+```
+
 ## Commands
 
 The testing commands act a bit "smarter" than what you might be used to, so
@@ -98,51 +158,6 @@ options. For example:
 I found these commands to be really useful when you have multiple test suites.
 
 ## Configuring
-
-### Strategies
-
-`vim-test` can run your tests in various ways.
-
-#### Basic (default)
-
-```vim
-let g:test#strategy = 'basic'    " :!<test command>
-```
-
-#### Make
-
-```vim
-let g:test#strategy = 'make'     " :make
-```
-
-#### Dispatch.vim
-
-```vim
-let g:test#strategy = 'dispatch' " :Make
-```
-
-#### Vimux
-
-```vim
-let g:test#strategy = 'vimux'    " VimuxRunCommand(<test commmand>)
-```
-
-#### Tslime.vim
-
-```vim
-let g:test#strategy = 'tslime'   " Send_to_Tmux(<test command>)
-```
-
-#### GUI
-
-If you're in MacVim GUI, `vim-test` also supports sending test commands to the
-terminal.
-
-```vim
-let g:test#strategy = 'terminal'
-" or
-let g:test#strategy = 'iterm'
-```
 
 ### Options
 

@@ -38,11 +38,3 @@ for [s:language, s:runners] in items(g:test#runners)
           \ 'call test#execute("'.s:runner_id.'", split(<q-args>))'
   endfor
 endfor
-
-augroup test
-  autocmd!
-  autocmd BufLeave *
-    \ if test#test_file() |
-    \   call test#save_position() |
-    \ endif
-augroup END

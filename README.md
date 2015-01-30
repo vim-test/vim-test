@@ -112,32 +112,10 @@ let g:test#strategy = 'terminal'
 let g:test#strategy = 'iterm'
 ```
 
-## Commands
+## Additional commands
 
-The testing commands act a bit "smarter" than what you might be used to, so
-be sure to keep reading.
-
-#### `:TestNearest`
-
-When in a test file, runs the test nearest to the cursor (some frameworks may
-not support this). If not in a test file, it remembers where your cursor was
-*before* you switched to production code, and runs test nearest to that
-position.
-
-#### `:TestFile`
-
-When in a test file, runs all tests in that file. If not in a test file, it
-remembers the last visited test file, and runs tests for it.
-
-#### `:TestSuite`
-
-When in a test file, runs the test suite this file belongs to. If not in test
-file, it runs the test suite last visited test file belongs to.
-
-### Test runner commands
-
-Aside from the above commands, each supported test runner also gets a
-corresponding Vim command:
+Aside from `:TestNearest`, `:TestFile`, `:TestSuite` and `:TestLast`, each
+supported test runner also has a corresponding Vim command:
 
 ```
 :RSpec

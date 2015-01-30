@@ -6,9 +6,8 @@ describe 'Running'
     call Teardown()
   end
 
-  it "remembers the last test file position"
+  it "runs tests on different granularities"
     edit foo_spec.rb
-    edit foo.txt
 
     TestNearest
     Expect g:test#last_command == 'rspec foo_spec.rb:1'
@@ -18,6 +17,16 @@ describe 'Running'
 
     TestSuite
     Expect g:test#last_command == 'rspec'
+  end
+
+  it "remembers the last test-run position"
+    edit foo_spec.rb
+    TestFile
+
+    edit foo.txt
+    TestFile
+
+    Expect g:test#last_command == 'rspec foo_spec.rb'
   end
 
   it "runs last test"

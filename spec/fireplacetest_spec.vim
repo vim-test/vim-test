@@ -13,19 +13,19 @@ describe "FireplaceTest"
   end
 
   it "recognizes test files"
-    view math_test.clj | doau BufLeave
+    view math_test.clj | TestSuite
     Expect g:test#last_position['file'] == 'math_test.clj'
 
-    view math_test.cljs | doau BufLeave
+    view math_test.cljs | TestSuite
     Expect g:test#last_position['file'] == 'math_test.cljs'
 
-    view test/math.clj | doau BufLeave
+    view test/math.clj | TestSuite
     Expect g:test#last_position['file'] == 'test/math.clj'
 
-    view test/math.cljs | doau BufLeave
+    view test/math.cljs | TestSuite
     Expect g:test#last_position['file'] == 'test/math.cljs'
 
-    view math.clj | doau BufLeave
+    view math.clj | TestSuite
     Expect g:test#last_position['file'] != 'math.clj'
   end
 

@@ -5,6 +5,7 @@ function! test#run(type, options) abort
 
   if test#test_file()
     let position = s:get_position()
+    let g:test#last_position = position
   elseif exists('g:test#last_position')
     let position = g:test#last_position
   else
@@ -67,10 +68,6 @@ endfunction
 
 function! test#test_file() abort
   return !empty(test#determine_runner(expand('%:.')))
-endfunction
-
-function! test#save_position() abort
-  let g:test#last_position = s:get_position()
 endfunction
 
 function! s:get_position() abort

@@ -8,6 +8,8 @@ run tests on different granularities:
 * Run test suite
 * Run last test
 
+![usage overview](/screenshots/granularity.gif)
+
 Currently the following testing frameworks are supported:
 
 | Language       | Frameworks                |
@@ -31,8 +33,8 @@ solutions to be good enough. Thus test.vim was born, featuring:
 * zero dependencies
 * zero configuration required (it Does the Right Thing™)
 * abstraction for testing frameworks (and easily extendable)
-* automatic detection of the correct test runner
-* polyfill for nearest tests (by constructing regexes)
+* automatic detection of correct test runner
+* **polyfill** for nearest tests (by constructing regexes)
 * fully customized CLI options configuration
 
 ## Setup
@@ -103,6 +105,8 @@ let g:test#strategy = 'iterm'
 ```
 
 ## Commands
+
+![nearest polyfill](/screenshots/nearest.gif)
 
 Test.vim gives you `:TestNearest`, `:TestFile`, `:TestSuite` and `:TestLast`
 commands, which you can run directly (and pass them options).

@@ -1,5 +1,3 @@
-let test#ruby#minitest#compiler = 'rubyunit'
-
 function! test#ruby#minitest#test_file(file) abort
   return a:file =~# '_test\.rb$'
 endfunction

@@ -15,21 +15,21 @@ describe "Cucumber"
     view +1 normal.feature
     TestNearest
 
-    Expect g:test#last_command == 'cucumber normal.feature:1'
+    Expect LastCommand() == 'cucumber normal.feature:1'
   end
 
   it "runs file tests"
     view normal.feature
     TestFile
 
-    Expect g:test#last_command == 'cucumber normal.feature'
+    Expect LastCommand() == 'cucumber normal.feature'
   end
 
   it "runs test suites"
     view normal.feature
     TestSuite
 
-    Expect g:test#last_command == 'cucumber'
+    Expect LastCommand() == 'cucumber'
   end
 
 end

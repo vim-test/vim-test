@@ -1,5 +1,3 @@
-let test#go#gotest#compiler = 'go'
-
 function! test#go#gotest#test_file(file) abort
   return a:file =~# '\v[^_].*_test\.go$'
 endfunction

@@ -15,21 +15,21 @@ describe "GoTest"
     view normal_spec.lua
     TestNearest
 
-    Expect g:test#last_command == 'busted normal_spec.lua'
+    Expect LastCommand() == 'busted normal_spec.lua'
   end
 
   it "runs file tests"
     view normal_spec.lua
     TestFile
 
-    Expect g:test#last_command == 'busted normal_spec.lua'
+    Expect LastCommand() == 'busted normal_spec.lua'
   end
 
   it "runs test suites"
     view normal_spec.lua
     TestSuite
 
-    Expect g:test#last_command == 'busted'
+    Expect LastCommand() == 'busted'
   end
 
 end

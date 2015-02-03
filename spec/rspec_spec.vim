@@ -15,21 +15,21 @@ describe "RSpec"
     view +1 normal_spec.rb
     TestNearest
 
-    Expect g:test#last_command == 'rspec normal_spec.rb:1'
+    Expect LastCommand() == 'rspec normal_spec.rb:1'
   end
 
   it "runs file tests"
     view normal_spec.rb
     TestFile
 
-    Expect g:test#last_command == 'rspec normal_spec.rb'
+    Expect LastCommand() == 'rspec normal_spec.rb'
   end
 
   it "runs test suites"
     view normal_spec.rb
     TestSuite
 
-    Expect g:test#last_command == 'rspec'
+    Expect LastCommand() == 'rspec'
   end
 
 end

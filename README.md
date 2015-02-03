@@ -65,15 +65,6 @@ Runs test commands with `:!`, which switches your Vim to the Terminal.
 let g:test#strategy = 'basic'
 ```
 
-#### Make
-
-Runs test commands with `:make`, which acts in the same way as `:!`, but
-loads the errors into a quickfix list (if the compiler is available).
-
-```vim
-let g:test#strategy = 'make'
-```
-
 #### Dispatch.vim
 
 Runs test commands with `:Make`, which is an asynchronous `:make`. It

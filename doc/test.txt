@@ -106,10 +106,6 @@ Basic (default) ~
 >
   let g:test#strategy = 'basic'    " :!<command>
 <
-Make ~
->
-  let g:test#strategy = 'make'     " :make
-<
 Dispatch ~
 >
   let g:test#strategy = 'dispatch' " :Make
@@ -126,7 +122,7 @@ Terminal.app ~
 >
   let g:test#strategy = 'terminal' " bin/osx_terminal
 <
-iTerm ~
+iTerm.app ~
 >
   let g:test#strategy = 'iterm'    " bin/osx_iterm
 <

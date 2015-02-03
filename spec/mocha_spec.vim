@@ -1,7 +1,7 @@
 source spec/helpers.vim
 
-function! test#shell(cmd, ...) abort
-  let g:test#last_command = substitute(a:cmd, ' --compilers \S\+', '', '')
+function! LastCommand() abort
+  return substitute(g:test#last_command.value, ' --compilers \S\+', '', '')
 endfunction
 
 describe "Mocha"
@@ -20,34 +20,34 @@ describe "Mocha"
       view +1 test/normal.js
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.js --grep ''Math'''
+      Expect LastCommand() == 'mocha test/normal.js --grep ''Math'''
 
       view +2 test/normal.js
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.js --grep ''Math Addition'''
+      Expect LastCommand() == 'mocha test/normal.js --grep ''Math Addition'''
 
       view +3 test/normal.js
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.js --grep ''Math Addition adds two numbers'''
+      Expect LastCommand() == 'mocha test/normal.js --grep ''Math Addition adds two numbers'''
     end
 
     it "runs CoffeeScript"
       view +1 test/normal.coffee
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''Math'''
+      Expect LastCommand() == 'mocha test/normal.coffee --grep ''Math'''
 
       view +2 test/normal.coffee
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''Math Addition'''
+      Expect LastCommand() == 'mocha test/normal.coffee --grep ''Math Addition'''
 
       view +3 test/normal.coffee
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''Math Addition adds two numbers'''
+      Expect LastCommand() == 'mocha test/normal.coffee --grep ''Math Addition adds two numbers'''
     end
   end
 
@@ -56,21 +56,21 @@ describe "Mocha"
     normal O
     TestNearest
 
-    Expect g:test#last_command == 'mocha test/normal.js'
+    Expect LastCommand() == 'mocha test/normal.js'
   end
 
   it "runs file tests"
     view test/normal.js
     TestFile
 
-    Expect g:test#last_command == 'mocha test/normal.js'
+    Expect LastCommand() == 'mocha test/normal.js'
   end
 
   it "runs test suites"
     view test/normal.js
     TestSuite
 
-    Expect g:test#last_command == 'mocha'
+    Expect LastCommand() == 'mocha'
   end
 
   it "also recognizes tests/ directory"
@@ -79,7 +79,7 @@ describe "Mocha"
       view tests/normal.js
       TestFile
 
-      Expect g:test#last_command == 'mocha tests/normal.js'
+      Expect LastCommand() == 'mocha tests/normal.js'
     finally
       !mv tests test
     endtry

@@ -5,6 +5,12 @@ function! Teardown() abort
   unlet! g:test#last_command g:test#last_position
 endfunction
 
-function! test#shell(cmd, ...) abort
-  let g:test#last_command = a:cmd
+function! LastCommand() abort
+  return g:test#last_command.value
+endfunction
+
+function! test#strategy#basic(cmd, ...) abort
+endfunction
+
+function! test#strategy#vimscript(cmd, ...) abort
 endfunction

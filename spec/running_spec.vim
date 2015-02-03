@@ -10,13 +10,13 @@ describe 'Running'
     edit foo_spec.rb
 
     TestNearest
-    Expect g:test#last_command == 'rspec foo_spec.rb:1'
+    Expect LastCommand() == 'rspec foo_spec.rb:1'
 
     TestFile
-    Expect g:test#last_command == 'rspec foo_spec.rb'
+    Expect LastCommand() == 'rspec foo_spec.rb'
 
     TestSuite
-    Expect g:test#last_command == 'rspec'
+    Expect LastCommand() == 'rspec'
   end
 
   it "remembers the last test-run position"
@@ -26,7 +26,7 @@ describe 'Running'
     edit foo.txt
     TestFile
 
-    Expect g:test#last_command == 'rspec foo_spec.rb'
+    Expect LastCommand() == 'rspec foo_spec.rb'
   end
 
   it "runs last test"
@@ -36,7 +36,7 @@ describe 'Running'
     edit bar_spec.rb
     TestLast
 
-    Expect g:test#last_command == 'rspec foo_spec.rb:1'
+    Expect LastCommand() == 'rspec foo_spec.rb:1'
   end
 
   it "doesn't raise an error when unable to run tests"
@@ -50,7 +50,7 @@ describe 'Running'
     edit foo_spec.rb
     TestFile
 
-    Expect g:test#last_command == 'foo foo_spec.rb'
+    Expect LastCommand() == 'foo foo_spec.rb'
 
     unlet g:test#ruby#rspec#executable
   end

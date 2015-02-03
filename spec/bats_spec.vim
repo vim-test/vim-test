@@ -15,21 +15,21 @@ describe "Bats"
     view normal.bats
     TestNearest
 
-    Expect g:test#last_command == 'bats normal.bats'
+    Expect LastCommand() == 'bats normal.bats'
   end
 
   it "runs file tests"
     view normal.bats
     TestFile
 
-    Expect g:test#last_command == 'bats normal.bats'
+    Expect LastCommand() == 'bats normal.bats'
   end
 
   it "runs test suites"
     view normal.bats
     TestSuite
 
-    Expect g:test#last_command == 'bats test/'
+    Expect LastCommand() == 'bats test/'
   end
 
 end

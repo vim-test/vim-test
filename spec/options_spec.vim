@@ -10,20 +10,20 @@ describe 'Options'
     edit foo_spec.rb
 
     TestNearest --foo bar --baz
-    Expect g:test#last_command == 'rspec --foo bar --baz foo_spec.rb:1'
+    Expect LastCommand() == 'rspec --foo bar --baz foo_spec.rb:1'
 
     TestFile --foo bar --baz
-    Expect g:test#last_command == 'rspec --foo bar --baz foo_spec.rb'
+    Expect LastCommand() == 'rspec --foo bar --baz foo_spec.rb'
 
     TestSuite --foo bar --baz
-    Expect g:test#last_command == 'rspec --foo bar --baz'
+    Expect LastCommand() == 'rspec --foo bar --baz'
   end
 
   it "goes through specific testing commands"
     edit foo_spec.rb
 
     RSpec --foo bar --baz
-    Expect g:test#last_command == 'rspec --foo bar --baz'
+    Expect LastCommand() == 'rspec --foo bar --baz'
   end
 
   describe "g:test#{runner}#options"
@@ -36,13 +36,13 @@ describe 'Options'
       new foo_spec.rb
 
       TestNearest
-      Expect g:test#last_command == 'rspec --foo bar --baz foo_spec.rb:1'
+      Expect LastCommand() == 'rspec --foo bar --baz foo_spec.rb:1'
 
       TestFile
-      Expect g:test#last_command == 'rspec --foo bar --baz foo_spec.rb'
+      Expect LastCommand() == 'rspec --foo bar --baz foo_spec.rb'
 
       TestSuite
-      Expect g:test#last_command == 'rspec --foo bar --baz'
+      Expect LastCommand() == 'rspec --foo bar --baz'
     end
 
     it "goes through specific granularities as a dictionary"
@@ -53,13 +53,13 @@ describe 'Options'
       new foo_spec.rb
 
       TestNearest
-      Expect g:test#last_command == 'rspec --nearest foo_spec.rb:1'
+      Expect LastCommand() == 'rspec --nearest foo_spec.rb:1'
 
       TestFile
-      Expect g:test#last_command == 'rspec --file foo_spec.rb'
+      Expect LastCommand() == 'rspec --file foo_spec.rb'
 
       TestSuite
-      Expect g:test#last_command == 'rspec'
+      Expect LastCommand() == 'rspec'
     end
   end
 

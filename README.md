@@ -26,16 +26,14 @@ Currently the following testing frameworks are supported:
 
 Since Gary Bernhardt invented testing from Vim, there have been multiple
 plugins implementing this functionality. However, I found none of the current
-solutions to be good enough. I wanted a testing plugin which:
+solutions to be good enough. Thus test.vim was born, featuring:
 
-* doesn't require any dependencies in order to work
-* requires zero configuration (it "does the right thing")
-* automatically chooses the correct test runner
-* allows more customized configuration of CLI options
-* supports testing frameworks for languages other than Ruby
-* is easily extendable with new test runners
-
-I believe `vim-test` achieved all of the above, and more.
+* zero dependencies
+* zero configuration required (it Does the Right Thing™)
+* abstraction for testing frameworks (and easily extendable)
+* automatic detection of the correct test runner
+* polyfill for nearest tests (by constructing regexes)
+* fully customized CLI options configuration
 
 ## Setup
 
@@ -54,8 +52,8 @@ nmap <silent> <leader>l :TestLast<CR>
 
 ## Strategies
 
-You can instruct `vim-test` to run your tests with different strategies,
-with synchronous or asynchronous execution.
+You can instruct test.vim to run your tests with different strategies (with
+synchronous or **asynchronous** execution).
 
 ### Basic (default)
 
@@ -104,62 +102,56 @@ let g:test#strategy = 'terminal'
 let g:test#strategy = 'iterm'
 ```
 
-## Additional commands
+## Commands
 
-Aside from `:TestNearest`, `:TestFile`, `:TestSuite` and `:TestLast`, each
-supported test runner also has a corresponding Vim command:
+Test.vim gives you `:TestNearest`, `:TestFile`, `:TestSuite` and `:TestLast`
+commands, which you can run directly (and pass them options).
 
 ```
-:RSpec
-:Cucumber
-:Mocha
-:Jasmine
-...
+:TestNearest --verbose
+:TestFile --format documentation
+:TestSuite --fail-fast
 ```
 
-These wrappers run the underlying test runners with proper executables and
-options. For example:
+If you want some options to stick around, see [Configuring](#configuring).
 
-* `:RSpec` will use the first available from the following: `bin/rspec`,
-  `bundle exec rspec` or `rspec`.
-* `:Mocha` will automatically include `--compilers coffee:coffee-script` if it
-  detects CoffeeScript files in your test directory.
+### Runner commands
 
-I found these commands to be really useful when you have multiple test suites.
+Aside from the above commands, you get a corresponding Vim command for each
+test runner (which also accept options):
+
+```
+:RSpec --tag ~slow
+:Mocha --grep 'API'
+:ExUnit --trace
+:Nose --failed
+```
+
+I found these commands to be really useful when having multiple test suites.
 
 ## Configuring
 
-### Options
+### CLI options
 
-All of the commands above accept optional arguments which are forwarded to the
-underlying test runner.
-
-```
-:TestFile --seed 1425
-:Minitest --verbose
-```
-
-If you want some options to stick around, you can assign them globally to a
-variable:
+If you want some CLI options to stick around, you can configure them in your
+`.vimrc`:
 
 ```vim
 let g:test#ruby#minitest#options = '--verbose'
 ```
 
-Or you can choose a more granular approach:
+You can also choose a more granular approach:
 
 ```vim
 let g:test#ruby#rspec#options = {
-  \ 'nearest': '--format documentation',
+  \ 'nearest': '--backtrace',
   \ 'file':    '--format documentation',
   \ 'suite':   '--tag ~slow',
 \}
 ```
-
 ### Executable
 
-If you're using a custom executable for test runner which `vim-test` already
-has, you can tell `vim-test` to use your executable:
+You can instruct test.vim to use a custom executable for a test runner.
 
 ```vim
 let g:test#ruby#rspec#executable = 'script/my_rspec'
@@ -170,7 +162,7 @@ let g:test#ruby#rspec#executable = 'script/my_rspec'
 #### Python
 
 Since there are multiple Python test runners for the same type of tests,
-`vim-test` has no way of detecting which one did you intend to use. By default
+test.vim has no way of detecting which one did you intend to use. By default
 the first available will be chosen, but you can force a specific one:
 
 ``` vim
@@ -183,7 +175,7 @@ let g:test#python#runner = 'nose'
 
 If you wish to extend this plugin with your own test runners, first of all,
 if the runner is well-known, I would encourage to help me merge it into
-`vim-test`.
+test.vim.
 
 That being said, if you want to do this for yourself, you need to do 2 things.
 First, add your runner to the list in your `.vimrc`:
@@ -210,20 +202,21 @@ function! test#mylanguage#myrunner#build_args(args)
 function! test#mylanguage#myrunner#executable()
 ```
 
-If you're using dispatch.vim, and the compiler for your runner isn't called
-the same (in this case "myrunner"), you can also define
+If you're using dispatch.vim, and it can't find the appropriate compiler, you
+can explicitly tell it which compiler it should use:
 
 ```vim
-let g:test#mylanguage#myrunner#compiler = "<compiler>"
+let g:test#mylanguage#myrunner#compiler = "<mycompiler>"
 ```
 
-See [`autoload/test/`](/autoload/test) for examples.
+See [`autoload/test`](/autoload/test) for examples.
 
 ## Credits
 
 This plugin was strongly influenced by Gary Bernhardt's Destroy All Software.
-I also want to thank [vim-rspec](https://github.com/thoughtbot/vim-rspec), from
-which I borrowed GUI support for OS X, and Windows support.
+I also want to thank [rspec.vim](https://github.com/thoughtbot/vim-rspec), from
+which I borrowed GUI support for OS X, and Windows support. And also thanks to
+[vroom.vim](https://github.com/skalnik/vim-vroom).
 
 ## License
 

@@ -99,32 +99,44 @@ In all commands [args] are forwarded to the underlying test runner.
 
 STRATEGIES                                      *test-strategies*
 
-Multiple strategies are supported for running tests. If you're using MacVim GUI,
-you can tell test.vim to send commands to Terminal.app/iTerm.
+Multiple strategies are supported for running tests.
 
 Basic (default) ~
+
+Runs test commands with `:!`, which switches your Vim to the Terminal.
 >
-  let g:test#strategy = 'basic'    " :!<command>
+  let g:test#strategy = 'basic'
 <
-Dispatch ~
+Dispatch.vim ~
+
+Runs test commands with `:Dispatch`. Requires the
+[Dispatch.vim](https://github.com/tpope/vim-dispatch) plugin.
 >
-  let g:test#strategy = 'dispatch' " :Make
+  let g:test#strategy = 'dispatch'
 <
 Vimux ~
+
+Runs test commands in a small Tmux pane at the bottom of your Terminal.
+Requires the [Vimux](https://github.com/benmills/vimux) plugin (and Tmux).
 >
-  let g:test#strategy = 'vimux'    " VimuxRunCommand(<test command>)
+  let g:test#strategy = 'vimux'
 <
-Tslime ~
+Tslime.vim ~
+
+Runs test commands in a Tmux pane you specify. Requires the
+[Tslime.vim](https://github.com/kikijump/tslime.vim) plugin (and Tmux).
 >
-  let g:test#strategy = 'tslime'   " Send_to_Tmux(<test command>)
+  let g:test#strategy = 'tslime'
 <
-Terminal.app ~
+Terminal.app / iTerm.app ~
+
+If you're in MacVim GUI, you can use this strategy to send the test commands
+to your Terminal.app/iTerm.app (since executing shell commands inside Vim GUIs
+isn't that nice).
 >
-  let g:test#strategy = 'terminal' " bin/osx_terminal
-<
-iTerm.app ~
->
-  let g:test#strategy = 'iterm'    " bin/osx_iterm
+  let g:test#strategy = 'terminal'
+  " or
+  let g:test#strategy = 'iterm'
 <
 CONFIGURATION                                   *test-configuration*
 

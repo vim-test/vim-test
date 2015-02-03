@@ -57,7 +57,7 @@ nmap <silent> <leader>l :TestLast<CR>
 You can instruct `vim-test` to run your tests with different strategies,
 with synchronous or asynchronous execution.
 
-#### Basic (default)
+### Basic (default)
 
 Runs test commands with `:!`, which switches your Vim to the Terminal.
 
@@ -65,16 +65,16 @@ Runs test commands with `:!`, which switches your Vim to the Terminal.
 let g:test#strategy = 'basic'
 ```
 
-#### Dispatch.vim
+### Dispatch.vim
 
-Runs test commands with `:Make`, which is an asynchronous `:make`. It
-requires the [Dispatch.vim](https://github.com/janko-m/vim-test) plugin.
+Runs test commands with `:Dispatch`. Requires the
+[Dispatch.vim](https://github.com/tpope/vim-dispatch) plugin.
 
 ```vim
 let g:test#strategy = 'dispatch'
 ```
 
-#### Vimux
+### Vimux
 
 Runs test commands in a small Tmux pane at the bottom of your Terminal.
 Requires the [Vimux](https://github.com/benmills/vimux) plugin (and Tmux).
@@ -83,7 +83,7 @@ Requires the [Vimux](https://github.com/benmills/vimux) plugin (and Tmux).
 let g:test#strategy = 'vimux'
 ```
 
-#### Tslime.vim
+### Tslime.vim
 
 Runs test commands in a Tmux pane you specify. Requires the
 [Tslime.vim](https://github.com/kikijump/tslime.vim) plugin (and Tmux).
@@ -92,10 +92,11 @@ Runs test commands in a Tmux pane you specify. Requires the
 let g:test#strategy = 'tslime'
 ```
 
-#### Terminal/iTerm
+### Terminal.app / iTerm.app
 
 If you're in MacVim GUI, you can use this strategy to send the test commands
-to your Terminal/iTerm (since executing shell commands inside Vim GUIs sucks).
+to your Terminal.app/iTerm.app (since executing shell commands inside Vim GUIs
+isn't that nice).
 
 ```vim
 let g:test#strategy = 'terminal'

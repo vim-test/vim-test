@@ -1,36 +1,33 @@
 function! test#strategy#vimscript(cmd) abort
-  execute a:cmd.value
+  execute a:cmd
 endfunction
 
 function! test#strategy#basic(cmd) abort
   if s:restorescreen()
-    execute '!'.s:pretty_command(a:cmd.value)
+    execute '!'.s:pretty_command(a:cmd)
   else
-    execute '!'.a:cmd.value
+    execute '!'.a:cmd
   endif
 endfunction
 
 function! test#strategy#dispatch(cmd) abort
-  if !empty(a:cmd.compiler)
-    call extend(g:dispatch_compilers, {a:cmd.executable: a:cmd.compiler})
-  endif
-  execute 'Dispatch '.a:cmd.value
+  execute 'Dispatch '.a:cmd
 endfunction
 
 function! test#strategy#vimux(cmd) abort
-  call VimuxRunCommand(s:pretty_command(a:cmd.value))
+  call VimuxRunCommand(s:pretty_command(a:cmd))
 endfunction
 
 function! test#strategy#tslime(cmd) abort
-  call Send_to_Tmux(s:pretty_command(a:cmd.value)."\n")
+  call Send_to_Tmux(s:pretty_command(a:cmd)."\n")
 endfunction
 
 function! test#strategy#terminal(cmd) abort
-  call s:execute_script('osx_terminal', s:pretty_command(a:cmd.value))
+  call s:execute_script('osx_terminal', s:pretty_command(a:cmd))
 endfunction
 
 function! test#strategy#iterm(cmd) abort
-  call s:execute_script('osx_iterm', s:pretty_command(a:cmd.value))
+  call s:execute_script('osx_iterm', s:pretty_command(a:cmd))
 endfunction
 
 function! s:execute_script(name, cmd) abort

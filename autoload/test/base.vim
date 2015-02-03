@@ -23,10 +23,6 @@ function! test#base#build_args(runner, args) abort
   return test#{a:runner}#build_args(a:args)
 endfunction
 
-function! test#base#compiler(runner) abort
-  return get(g:, 'test#'.a:runner.'#compiler')
-endfunction
-
 function! test#base#file_exists(file) abort
   return !empty(glob(a:file)) || bufexists(a:file)
 endfunction

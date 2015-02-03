@@ -33,24 +33,21 @@ function! test#execute(runner, args) abort
   let args = a:args
   let args = [test#base#options(a:runner)] + args
   call filter(args, '!empty(v:val)')
+
+  let executable = test#base#executable(a:runner)
   let args = test#base#build_args(a:runner, args)
+  let cmd = [executable] + args
+  call filter(cmd, '!empty(v:val)')
 
-  let cmd = {
-    \ 'executable': test#base#executable(a:runner),
-    \ 'args':       join(args),
-    \ 'compiler':   test#base#compiler(a:runner),
-  \}
-
-  call test#shell(cmd)
+  call test#shell(join(cmd))
 endfunction
 
 function! test#shell(cmd) abort
-  if !empty(a:cmd.executable)
-    let strategy = get(g:, 'test#strategy', 'basic')
-  else
+  if a:cmd =~# '^:'
     let strategy = 'vimscript'
+  else
+    let strategy = get(g:, 'test#strategy', 'basic')
   end
-  let a:cmd.value = join(filter([a:cmd.executable, a:cmd.args], '!empty(v:val)'))
 
   call test#strategy#{strategy}(a:cmd)
 

@@ -33,33 +33,33 @@ describe "FireplaceTest"
     view +5 math_test.clj
     TestNearest
 
-    Expect LastCommand() =~# '\V(clojure.test/test-vars [#''math-test/a-test])'
+    Expect g:test#last_command =~# '\V(clojure.test/test-vars [#''math-test/a-test])'
 
     view +9 math_test.clj
     TestNearest
 
-    Expect LastCommand() =~# '\V(clojure.test/test-vars [#''math-test/another-test])'
+    Expect g:test#last_command =~# '\V(clojure.test/test-vars [#''math-test/another-test])'
   end
 
   it "falls back to file test if nearest test wasn't found"
     view +1 math_test.clj
     TestNearest
 
-    Expect LastCommand() =~# '(clojure.test/run-tests ''math-test)'
+    Expect g:test#last_command =~# '(clojure.test/run-tests ''math-test)'
   end
 
   it "runs file tests"
     view math_test.clj
     TestFile
 
-    Expect LastCommand() =~# '(clojure.test/run-tests ''math-test)'
+    Expect g:test#last_command =~# '(clojure.test/run-tests ''math-test)'
   end
 
   it "runs test suites"
     view math_test.clj
     TestSuite
 
-    Expect LastCommand() =~# '(clojure.test/run-all-tests)'
+    Expect g:test#last_command =~# '(clojure.test/run-all-tests)'
   end
 
   describe "command"
@@ -68,21 +68,21 @@ describe "FireplaceTest"
       view math_test.clj
       FireplaceTest
 
-      Expect LastCommand() =~# '(clojure.test/run-all-tests)'
+      Expect g:test#last_command =~# '(clojure.test/run-all-tests)'
     end
 
     it "accepts regular expressions"
       view math_test.clj
       FireplaceTest /foo/
 
-      Expect LastCommand() =~# '(clojure.test/run-all-tests #\\"foo\\")'
+      Expect g:test#last_command =~# '(clojure.test/run-all-tests #\\"foo\\")'
     end
 
     it "accepts list of filenames, which it translates to namespaces"
       view math_test.clj
       FireplaceTest math_test.clj
 
-      Expect LastCommand() =~# '(clojure.test/run-tests ''math-test)'
+      Expect g:test#last_command =~# '(clojure.test/run-tests ''math-test)'
     end
 
   end

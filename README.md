@@ -202,13 +202,6 @@ function! test#mylanguage#myrunner#build_args(args)
 function! test#mylanguage#myrunner#executable()
 ```
 
-If you're using dispatch.vim, and it can't find the appropriate compiler, you
-can explicitly tell it which compiler it should use:
-
-```vim
-let g:test#mylanguage#myrunner#compiler = "<mycompiler>"
-```
-
 See [`autoload/test`](/autoload/test) for examples.
 
 ## Credits

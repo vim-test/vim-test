@@ -15,21 +15,21 @@ describe "VSpec"
     view +1 test/normal.vim
     TestNearest
 
-    Expect LastCommand() == 'vim-flavor test test/normal.vim'
+    Expect g:test#last_command == 'vim-flavor test test/normal.vim'
   end
 
   it "runs file tests"
     view test/normal.vim
     TestFile
 
-    Expect LastCommand() == 'vim-flavor test test/normal.vim'
+    Expect g:test#last_command == 'vim-flavor test test/normal.vim'
   end
 
   it "runs test suites"
     view test/normal.vim
     TestSuite
 
-    Expect LastCommand() == 'vim-flavor test test/'
+    Expect g:test#last_command == 'vim-flavor test test/'
   end
 
   it "doesn't recognize vim files outside of test foder"
@@ -44,19 +44,19 @@ describe "VSpec"
       view test/normal.vim
       TestSuite
 
-      Expect LastCommand() == 'vim-flavor test test/'
+      Expect g:test#last_command == 'vim-flavor test test/'
 
       !mv test t
       view t/normal.vim
       TestSuite
 
-      Expect LastCommand() == 'vim-flavor test t/'
+      Expect g:test#last_command == 'vim-flavor test t/'
 
       !mv t spec
       view spec/normal.vim
       TestSuite
 
-      Expect LastCommand() == 'vim-flavor test spec/'
+      Expect g:test#last_command == 'vim-flavor test spec/'
     finally
       !mv spec test
     endtry

@@ -16,33 +16,33 @@ describe "Vader"
     view +4 math.vader
     TestNearest
 
-    Expect LastCommand() == ':4,6call vader#run(0, "math.vader")'
+    Expect g:test#last_command == ':4,6call vader#run(0, "math.vader")'
 
     view +8 math.vader
     TestNearest
 
-    Expect LastCommand() == ':7,8call vader#run(0, "math.vader")'
+    Expect g:test#last_command == ':7,8call vader#run(0, "math.vader")'
   end
 
   it "runs file test when it cannot find the nearest test"
     view +2 math.vader
     TestNearest
 
-    Expect LastCommand() == ':call vader#run(0, "math.vader")'
+    Expect g:test#last_command == ':call vader#run(0, "math.vader")'
   end
 
   it "runs file tests"
     view math.vader
     TestFile
 
-    Expect LastCommand() == ':call vader#run(0, "math.vader")'
+    Expect g:test#last_command == ':call vader#run(0, "math.vader")'
   end
 
   it "runs test suite"
     view math.vader
     TestSuite
 
-    Expect LastCommand() == ':call vader#run(0, "**/*.vader")'
+    Expect g:test#last_command == ':call vader#run(0, "**/*.vader")'
   end
 
 end

@@ -5,8 +5,11 @@ endfunction
 function! test#ruby#minitest#build_position(type, position) abort
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
-    if !empty(name) | let name = '--name='.shellescape('/'.name.'/', 1) | endif
-    return [a:position['file'], name]
+    if !empty(name)
+      return [a:position['file'], '--name', '/'.name.'/']
+    else
+      return [a:position['file']]
+    endif
   elseif a:type == 'file'
     return [a:position['file']]
   else
@@ -26,6 +29,14 @@ function! test#ruby#minitest#build_args(args) abort
   elseif !exists('path')
     let path = 'test/**/*_test.rb'
   endif
+
+  for option in ['--name', '--seed']
+    let idx = index(a:args, option)
+    if idx != -1
+      let value = remove(a:args, idx + 1)
+      let a:args[idx] = option.'='.shellescape(value, 1)
+    endif
+  endfor
 
   let kind = matchstr(test#ruby#minitest#executable(), 'ruby\|rake')
   return s:build_{kind}_args(get(l:, 'path'), a:args)

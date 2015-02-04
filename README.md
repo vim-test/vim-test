@@ -12,17 +12,17 @@ run tests on different granularities:
 
 Currently the following testing frameworks are supported:
 
-| Language       | Frameworks                |
-| :------------: | ------------------------- |
-| **Ruby**       | RSpec, Minitest, Cucumber |
-| **JavaScript** | Mocha, Jasmine            |
-| **Python**     | Nose, PyTest              |
-| **Elixir**     | ExUnit                    |
-| **Go**         | Go                        |
-| **Clojure**    | Fireplace.vim             |
-| **Shell**      | Bats                      |
-| **VimScript**  | VSpec, Vader.vim          |
-| **Lua**        | Busted                    |
+| Language       | Frameworks                            |
+| :------------: | ------------------------------------- |
+| **Ruby**       | RSpec, [Minitest][minitest], Cucumber |
+| **JavaScript** | Mocha, Jasmine                        |
+| **Python**     | Nose, PyTest                          |
+| **Elixir**     | ExUnit                                |
+| **Go**         | Go                                    |
+| **Clojure**    | Fireplace.vim                         |
+| **Shell**      | Bats                                  |
+| **VimScript**  | VSpec, Vader.vim                      |
+| **Lua**        | Busted                                |
 
 ## Introduction
 
@@ -219,3 +219,5 @@ which I borrowed GUI support for OS X, and Windows support. And also thanks to
 
 Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. See
 `:help license`.
+
+[minitest]: https://github.com/janko-m/vim-test/wiki/Minitest

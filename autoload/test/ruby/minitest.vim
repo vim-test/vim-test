@@ -79,6 +79,7 @@ function! test#ruby#minitest#executable() abort
   endif
 endfunction
 
+" http://chriskottom.com/blog/2014/12/command-line-flags-for-minitest-in-the-raw/
 function! s:nearest_test(position) abort
   let syntax = s:syntax(a:position['file'])
   let name = test#base#nearest_test(a:position, g:test#ruby#levels[syntax])

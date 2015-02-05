@@ -87,13 +87,16 @@ function! s:nearest_test(position) abort
   let namespace = filter([join(name[0], '::')], '!empty(v:val)')
   if empty(name[1])
     let test = []
-  elseif syntax == 'spec'
-    let test = ['test_\d+_'.name[1][0]]
   else
-    if name[1][0] !~# '^test_'
-      let name[1][0] = 'test_'.substitute(name[1][0], '\s\+', '_', 'g')
+    let test_name = name[1][0]
+    if syntax == 'spec'
+      let test = ['test_\d+_'.test_name]
+    else
+      if test_name !~# '^test_'
+        let test_name = 'test_'.substitute(test_name, '\s\+', '_', 'g')
+      endif
+      let test = [test_name]
     endif
-    let test = name[1]
   endif
 
   return join(namespace + test, '#')

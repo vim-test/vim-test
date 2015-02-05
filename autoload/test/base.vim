@@ -50,5 +50,12 @@ function! test#base#nearest_test(position, levels) abort
     endif
   endfor
 
-  return [reverse(namespace), test]
+  let namespace = map(reverse(namespace), 's:escape_regex(v:val)')
+  let test      = map(test, 's:escape_regex(v:val)')
+
+  return [namespace, test]
+endfunction
+
+function! s:escape_regex(string) abort
+  return escape(a:string, '?+*\^$.|{}[]()')
 endfunction

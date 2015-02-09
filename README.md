@@ -34,7 +34,7 @@ solutions to be good enough. Thus test.vim was born, featuring:
 * zero configuration required (it Does the Right Thing™)
 * abstraction for testing frameworks (and easily extendable)
 * automatic detection of correct test runner
-* **polyfill** for nearest tests (by constructing regexes)
+* [polyfill](#commands) for nearest tests (by constructing regexes)
 * fully customized CLI options configuration
 
 ## Setup

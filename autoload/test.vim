@@ -29,6 +29,14 @@ function! test#run_last() abort
   endif
 endfunction
 
+function! test#visit() abort
+  if exists('g:test#last_position')
+    execute 'edit' '+'.g:test#last_position['line'] g:test#last_position['file']
+  else
+    call s:echo_failure('No tests were run so far')
+  end
+endfunction
+
 function! test#execute(runner, args) abort
   let args = a:args
   let args = [test#base#options(a:runner)] + args

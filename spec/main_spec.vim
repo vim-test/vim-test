@@ -1,6 +1,6 @@
 source spec/helpers.vim
 
-describe 'Running'
+describe 'Main'
 
   after
     call Teardown()
@@ -53,6 +53,17 @@ describe 'Running'
     Expect g:test#last_command == 'foo foo_spec.rb'
 
     unlet g:test#ruby#rspec#executable
+  end
+
+  it "can go to the last run test"
+    edit +3 spec/main_spec.vim
+    TestNearest
+
+    edit foo.txt
+    TestVisit
+
+    Expect expand('%') == 'spec/main_spec.vim'
+    Expect line('.') == 3
   end
 
 end

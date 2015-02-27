@@ -28,6 +28,7 @@ command! -nargs=* -bar TestNearest call test#run('nearest', <q-args>)
 command! -nargs=* -bar TestFile    call test#run('file', <q-args>)
 command! -nargs=* -bar TestSuite   call test#run('suite', <q-args>)
 command!          -bar TestLast    call test#run_last()
+command!          -bar TestVisit   call test#visit()
 
 for [s:language, s:runners] in items(g:test#runners)
   for s:runner in s:runners

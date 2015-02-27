@@ -34,7 +34,7 @@ solutions to be good enough. Thus test.vim was born, featuring:
 * zero configuration required (it Does the Right Thing™)
 * abstraction for testing frameworks (and easily extendable)
 * automatic detection of correct test runner
-* [polyfill](#commands) for nearest tests (by constructing regexes)
+* **polyfill** for nearest tests (by [constructing regexes](#command))
 * fully customized CLI options configuration
 
 ## Setup
@@ -50,7 +50,16 @@ nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 ```
+
+| Command        | Description                                                                                                                                               |
+| :-------       | :-----------                                                                                                                                              |
+| `:TestNearest` | Runs the test nearest to the cursor. In test frameworks that don't support line numbers it will **polyfill** this functionality with [regexes](#command). |
+| `:TestFile`    | Runs all tests in the current file.                                                                                                                       |
+| `:TestSuite`   | Runs the whole test suite (determines which one from the last run test).                                                                                  |
+| `:TestLast`    | Runs the last test. All of the commands above will automatically run the last test when you're not in a test file.                                        |
+| `:TestVisit`   | Brings you to the last run test (useful when you get lost debugging application code).                                                                    |
 
 ## Strategies
 

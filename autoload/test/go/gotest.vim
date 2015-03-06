@@ -6,9 +6,9 @@ function! test#go#gotest#build_position(type, position) abort
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name) | let name = '-run '.shellescape(name, 1) | endif
-    return [a:position['file'], name]
+    return [name]
   elseif a:type == 'file'
-    return [a:position['file']]
+    return ['-run', a:position['file']]
   else
     return []
   endif

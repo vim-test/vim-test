@@ -8,9 +8,9 @@ function! test#go#gotest#build_position(type, position) abort
     if !empty(name) | let name = '-run '.shellescape(name, 1) | endif
     return [name]
   elseif a:type == 'file'
-    return ['-run', a:position['file']]
-  else
     return []
+  else
+    return ['./...']
   endif
 endfunction
 

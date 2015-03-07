@@ -31,7 +31,7 @@ plugins implementing this functionality. However, I found none of the current
 solutions to be good enough. Thus test.vim was born, featuring:
 
 * zero dependencies
-* zero configuration required (it Does the Right Thing™)
+* zero configuration required (it Does the Right Thing™, see [**Philosophy**](https://github.com/janko-m/vim-test/wiki))
 * abstraction for testing frameworks (and easily extendable)
 * automatic detection of correct test runner
 * **polyfill** for nearest tests (by [constructing regexes](#command))

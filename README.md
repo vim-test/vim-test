@@ -1,12 +1,6 @@
 # test.vim
 
-This plugin provides Vim commands that wrap test runners allowing you to easily
-run tests on different granularities:
-
-* Run nearest test (to the cursor)
-* Run (current) test file
-* Run test suite
-* Run last test
+A Vim wrapper for running tests on different granularities.
 
 ![usage overview](/screenshots/granularity.gif)
 
@@ -35,6 +29,7 @@ solutions to be good enough. Thus test.vim was born, featuring:
 * abstraction for testing frameworks (and easily extendable)
 * automatic detection of correct test runner
 * **polyfill** for nearest tests (by [constructing regexes](#command))
+* built-in integration with Dispatch.vim/Vimux/Tslime.vim
 * fully customized CLI options configuration
 
 ## Setup

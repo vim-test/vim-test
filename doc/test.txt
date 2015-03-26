@@ -110,6 +110,12 @@ Runs test commands with `:!`, which switches your Vim to the Terminal.
 >
   let test#strategy = 'basic'
 <
+Neovim ~
+
+Runs test commands with `:terminal`, which spawns a terminal inside your Neovim.
+>
+  let test#strategy = 'neovim'
+<
 Dispatch.vim ~
 
 Runs test commands with `:Dispatch`. Requires the

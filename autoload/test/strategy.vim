@@ -30,6 +30,10 @@ function! test#strategy#iterm(cmd) abort
   call s:execute_script('osx_iterm', s:pretty_command(a:cmd))
 endfunction
 
+function! test#strategy#neovim(cmd) abort
+  execute 'terminal '.s:pretty_command(a:cmd)
+endfunction
+
 function! s:execute_script(name, cmd) abort
   let script_path = g:test#plugin_path . '/bin/' . a:name
   let cmd = join([script_path, shellescape(a:cmd)])

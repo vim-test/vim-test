@@ -31,7 +31,7 @@ function! test#strategy#iterm(cmd) abort
 endfunction
 
 function! test#strategy#neovim(cmd) abort
-  execute 'terminal'.s:pretty_command(a:cmd)
+  execute 'terminal '.s:pretty_command(a:cmd)
 endfunction
 
 function! s:execute_script(name, cmd) abort

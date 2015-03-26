@@ -69,6 +69,15 @@ Runs test commands with `:!`, which switches your Vim to the Terminal.
 let g:test#strategy = 'basic'
 ```
 
+### Neovim terminal
+
+Runs test commands with `:terminal`, which is awesome built-in neovim terminal.
+Requires neovim with terminal patch (https://github.com/neovim/neovim/pull/2076)
+
+```vim
+let g:test#strategy = 'neovim'
+```
+
 ### Dispatch.vim
 
 Runs test commands with `:Dispatch`. Requires the

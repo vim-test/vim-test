@@ -59,30 +59,29 @@ nmap <silent> <leader>g :TestVisit<CR>
 ## Strategies
 
 You can instruct test.vim to run your tests with different strategies (with
-synchronous or **asynchronous** execution). To use a specific strategy, assign
+synchronous or asynchronous execution). To use a specific strategy, assign
 it like this:
 
 ```vim
-" make test commands execute using Dispatch.vim
+" make test commands execute using dispatch.vim
 let test#strategy = "dispatch"
 ```
 
-| Strategy                      | Identifier | Description
-| :-----:                       | :-----:    | :----------
-| **Basic**&nbsp;(default)      | `basic`    | Runs test commands with `:!`, which switches your Vim to the Terminal.                                                                             |
-| **Dispatch.vim**              | `dispatch` | Runs test commands with `:Dispatch`. Requires the [Dispatch.vim](https://github.com/tpope/vim-dispatch) plugin.                                    |
-| **Vimux**                     | `vimux`    | Runs test commands in a small Tmux pane at the bottom of your Terminal. Requires the [Vimux](https://github.com/benmills/vimux) plugin (and Tmux). |
-| **Tslime.vim**                | `tslime`   | Runs test commands in a Tmux pane you specify. Requires the [Tslime.vim](https://github.com/kikijump/tslime.vim) plugin (and Tmux).                |
-| **Vim&nbsp;Tmux&nbsp;Runner** | `vtr`      | Runs test commands in a small Tmux pane. Requires the [Vim Timux Runner](https://github.com/christoomey/vim-tmux-runner) plugin (and Tmux).        |
-| **Terminal.app**              | `terminal` | Sends test commands to Terminal.app (useful when you're in MacVim GUI).                                                                            |
-| **iTerm.app**                 | `iterm`    | Sends test commands to iTerm.app (useful when you're in MacVim GUI).                                                                               |
+| Strategy                                                                        | Identifier | Description                                                             |
+| :-----:                                                                         | :-----:    | :----------                                                             |
+| **Basic**&nbsp;(default)                                                        | `basic`    | Runs test commands with `:!`, which switches your Vim to the terminal.  |
+| [**Dispatch.vim**](https://github.com/tpope/vim-dispatch)                       | `dispatch` | Runs test commands with `:Dispatch`.                                    |
+| [**Vimux**](https://github.com/benmills/vimux)                                  | `vimux`    | Runs test commands in a small tmux pane at the bottom of your terminal. |
+| [**Tslime.vim**](https://github.com/kikijump/tslime.vim)                        | `tslime`   | Runs test commands in a tmux pane you specify.                          |
+| [**Vim&nbsp;Tmux&nbsp;Runner**](https://github.com/christoomey/vim-tmux-runner) | `vtr`      | Runs test commands in a small tmux pane.                                |
+| **Terminal.app**                                                                | `terminal` | Sends test commands to Terminal.app (useful in MacVim GUI).             |
+| **iTerm.app**                                                                   | `iterm`    | Sends test commands to iTerm.app (useful in MacVim GUI).                |
 
 ## Commands
 
 ![nearest polyfill](/screenshots/nearest.gif)
 
-Test.vim gives you `:TestNearest`, `:TestFile`, `:TestSuite` and `:TestLast`
-commands, which you can run directly (and pass them options).
+You can execute Test.vim commands directly, and pass them CLI options:
 
 ```
 :TestNearest --verbose
@@ -94,7 +93,7 @@ If you want some options to stick around, see [Configuring](#configuring).
 
 ### Runner commands
 
-Aside from the above commands, you get a corresponding Vim command for each
+Aside from the main commands, you get a corresponding Vim command for each
 test runner (which also accept options):
 
 ```
@@ -104,7 +103,8 @@ test runner (which also accept options):
 :Nose --failed
 ```
 
-I found these commands to be really useful when having multiple test suites.
+I found these commands to be really useful when using multiple testing
+frameworks in the same project.
 
 ## Configuring
 

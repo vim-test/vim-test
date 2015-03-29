@@ -96,6 +96,15 @@ Runs test commands in a Tmux pane you specify. Requires the
 let g:test#strategy = 'tslime'
 ```
 
+### Vim Tmux Runner
+
+Runs test commands in a small Tmux pane. Requires the
+[Vim Timux Runner](https://github.com/christoomey/vim-tmux-runner) plugin (and Tmux)
+
+```vim
+let g:test#strategy = 'vtr'
+```
+
 ### Terminal.app / iTerm.app
 
 If you're in MacVim GUI, you can use this strategy to send the test commands

@@ -59,63 +59,23 @@ nmap <silent> <leader>g :TestVisit<CR>
 ## Strategies
 
 You can instruct test.vim to run your tests with different strategies (with
-synchronous or **asynchronous** execution).
-
-### Basic (default)
-
-Runs test commands with `:!`, which switches your Vim to the Terminal.
+synchronous or **asynchronous** execution). To use a specific strategy, assign
+it like this:
 
 ```vim
-let g:test#strategy = 'basic'
+" make test commands execute using Dispatch.vim
+let test#strategy = "dispatch"
 ```
 
-### Dispatch.vim
-
-Runs test commands with `:Dispatch`. Requires the
-[Dispatch.vim](https://github.com/tpope/vim-dispatch) plugin.
-
-```vim
-let g:test#strategy = 'dispatch'
-```
-
-### Vimux
-
-Runs test commands in a small Tmux pane at the bottom of your Terminal.
-Requires the [Vimux](https://github.com/benmills/vimux) plugin (and Tmux).
-
-```vim
-let g:test#strategy = 'vimux'
-```
-
-### Tslime.vim
-
-Runs test commands in a Tmux pane you specify. Requires the
-[Tslime.vim](https://github.com/kikijump/tslime.vim) plugin (and Tmux).
-
-```vim
-let g:test#strategy = 'tslime'
-```
-
-### Vim Tmux Runner
-
-Runs test commands in a small Tmux pane. Requires the
-[Vim Timux Runner](https://github.com/christoomey/vim-tmux-runner) plugin (and Tmux)
-
-```vim
-let g:test#strategy = 'vtr'
-```
-
-### Terminal.app / iTerm.app
-
-If you're in MacVim GUI, you can use this strategy to send the test commands
-to your Terminal.app/iTerm.app (since executing shell commands inside Vim GUIs
-isn't that nice).
-
-```vim
-let g:test#strategy = 'terminal'
-" or
-let g:test#strategy = 'iterm'
-```
+| Strategy                      | Identifier | Description
+| :-----:                       | :-----:    | :----------
+| **Basic**&nbsp;(default)      | `basic`    | Runs test commands with `:!`, which switches your Vim to the Terminal.                                                                             |
+| **Dispatch.vim**              | `dispatch` | Runs test commands with `:Dispatch`. Requires the [Dispatch.vim](https://github.com/tpope/vim-dispatch) plugin.                                    |
+| **Vimux**                     | `vimux`    | Runs test commands in a small Tmux pane at the bottom of your Terminal. Requires the [Vimux](https://github.com/benmills/vimux) plugin (and Tmux). |
+| **Tslime.vim**                | `tslime`   | Runs test commands in a Tmux pane you specify. Requires the [Tslime.vim](https://github.com/kikijump/tslime.vim) plugin (and Tmux).                |
+| **Vim&nbsp;Tmux&nbsp;Runner** | `vtr`      | Runs test commands in a small Tmux pane. Requires the [Vim Timux Runner](https://github.com/christoomey/vim-tmux-runner) plugin (and Tmux).        |
+| **Terminal.app**              | `terminal` | Sends test commands to Terminal.app (useful when you're in MacVim GUI).                                                                            |
+| **iTerm.app**                 | `iterm`    | Sends test commands to iTerm.app (useful when you're in MacVim GUI).                                                                               |
 
 ## Commands
 
@@ -154,13 +114,13 @@ If you want some CLI options to stick around, you can configure them in your
 `.vimrc`:
 
 ```vim
-let g:test#ruby#minitest#options = '--verbose'
+let test#ruby#minitest#options = '--verbose'
 ```
 
 You can also choose a more granular approach:
 
 ```vim
-let g:test#ruby#rspec#options = {
+let test#ruby#rspec#options = {
   \ 'nearest': '--backtrace',
   \ 'file':    '--format documentation',
   \ 'suite':   '--tag ~slow',
@@ -171,7 +131,7 @@ let g:test#ruby#rspec#options = {
 You can instruct test.vim to use a custom executable for a test runner.
 
 ```vim
-let g:test#ruby#rspec#executable = 'script/my_rspec'
+let test#ruby#rspec#executable = 'foreman run rspec'
 ```
 
 ### Language-specific
@@ -183,9 +143,9 @@ test.vim has no way of detecting which one did you intend to use. By default
 the first available will be chosen, but you can force a specific one:
 
 ``` vim
-let g:test#python#runner = 'pytest'
+let test#python#runner = 'pytest'
 " or
-let g:test#python#runner = 'nose'
+let test#python#runner = 'nose'
 ```
 
 ## Extending
@@ -199,7 +159,7 @@ First, add your runner to the list in your `.vimrc`:
 
 ```vim
 " First letter of runner's name must be uppercase
-let g:test#runners = {'MyLanguage': ['MyRunner']}
+let test#runners = {'MyLanguage': ['MyRunner']}
 ```
 
 Second, create `~/.vim/autoload/test/mylanguage/myrunner.vim`, and define the following

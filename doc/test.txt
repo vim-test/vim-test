@@ -108,35 +108,35 @@ Basic (default) ~
 
 Runs test commands with `:!`, which switches your Vim to the Terminal.
 >
-  let g:test#strategy = 'basic'
+  let test#strategy = 'basic'
 <
 Dispatch.vim ~
 
 Runs test commands with `:Dispatch`. Requires the
 [Dispatch.vim](https://github.com/tpope/vim-dispatch) plugin.
 >
-  let g:test#strategy = 'dispatch'
+  let test#strategy = 'dispatch'
 <
 Vimux ~
 
 Runs test commands in a small Tmux pane at the bottom of your Terminal.
 Requires the [Vimux](https://github.com/benmills/vimux) plugin (and Tmux).
 >
-  let g:test#strategy = 'vimux'
+  let test#strategy = 'vimux'
 <
 Tslime.vim ~
 
 Runs test commands in a Tmux pane you specify. Requires the
 [Tslime.vim](https://github.com/kikijump/tslime.vim) plugin (and Tmux).
 >
-  let g:test#strategy = 'tslime'
+  let test#strategy = 'tslime'
 <
 Vim Tmux Runner ~
 
 Runs test commands in a small Tmux pane. Requires the
 [Vim Timux Runner](https://github.com/christoomey/vim-tmux-runner) plugin (and Tmux)
 <
-let g:test#strategy = 'vtr'
+  let test#strategy = 'vtr'
 >
 Terminal.app / iTerm.app ~
 
@@ -144,20 +144,20 @@ If you're in MacVim GUI, you can use this strategy to send the test commands
 to your Terminal.app/iTerm.app (since executing shell commands inside Vim GUIs
 isn't that nice).
 >
-  let g:test#strategy = 'terminal'
+  let test#strategy = 'terminal'
   " or
-  let g:test#strategy = 'iterm'
+  let test#strategy = 'iterm'
 <
 CONFIGURATION                                   *test-configuration*
 
 You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your prefered options with
 >
-  let g:test#ruby#minitest#options = '--verbose'
+  let test#ruby#minitest#options = '--verbose'
 <
 Or, if you prefer more granular approach, you can do
 >
-  let g:test#ruby#rspec#options = {
+  let test#ruby#rspec#options = {
     \ 'nearest': '--format documentation',
     \ 'file':    '--format documentation',
     \ 'suite':   '--tag ~slow',
@@ -165,7 +165,7 @@ Or, if you prefer more granular approach, you can do
 <
 If you want to manually configure a test runner's executable, you can do
 >
-  let g:test#ruby#rspec#executable = 'foreman run rspec'
+  let test#ruby#rspec#executable = 'foreman run rspec'
 <
 ABOUT                                           *test-about*
 

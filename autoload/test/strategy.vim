@@ -10,6 +10,10 @@ function! test#strategy#basic(cmd) abort
   endif
 endfunction
 
+function! test#strategy#vtr(cmd) abort
+  call VtrSendCommand(s:pretty_command(a:cmd), 1)
+endfunction
+
 function! test#strategy#dispatch(cmd) abort
   execute 'Dispatch '.a:cmd
 endfunction

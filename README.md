@@ -70,7 +70,7 @@ let test#strategy = "dispatch"
 | Strategy                                                                        | Identifier | Description                                                                      |
 | :-----:                                                                         | :-----:    | :----------                                                                      |
 | **Basic**&nbsp;(default)                                                        | `basic`    | Runs test commands with `:!`, which switches your Vim to the terminal.           |
-| **Neovim**&nbsp;(default)                                                       | `neovim`   | Runs test commands with `:terminal`, which spawns a terminal inside your Neovim. |
+| **Neovim**                                                                      | `neovim`   | Runs test commands with `:terminal`, which spawns a terminal inside your Neovim. |
 | [**Dispatch.vim**](https://github.com/tpope/vim-dispatch)                       | `dispatch` | Runs test commands with `:Dispatch`.                                             |
 | [**Vimux**](https://github.com/benmills/vimux)                                  | `vimux`    | Runs test commands in a small tmux pane at the bottom of your terminal.          |
 | [**Tslime.vim**](https://github.com/kikijump/tslime.vim)                        | `tslime`   | Runs test commands in a tmux pane you specify.                                   |

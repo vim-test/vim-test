@@ -1,5 +1,5 @@
 function! test#ruby#minitest#test_file(file) abort
-  return a:file =~# '_test\.rb$'
+  return fnamemodify(a:file, ':t') =~# '\v^(test_.+|.+_test)\.rb$'
 endfunction
 
 function! test#ruby#minitest#build_position(type, position) abort

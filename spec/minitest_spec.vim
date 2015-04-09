@@ -133,4 +133,11 @@ describe "Minitest"
     Expect g:test#last_command == 'rake test TEST="test/**/*_test.rb" TESTOPTS="--seed=''1234''"'
   end
 
+  it "recognizes the test_*.rb file naming"
+    view test_unit.rb
+    TestFile
+
+    Expect g:test#last_command == 'rake test TEST="test_unit.rb"'
+  end
+
 end

@@ -14,6 +14,10 @@ function! test#strategy#neovim(cmd) abort
   enew | call termopen(a:cmd) | startinsert
 endfunction
 
+function! test#strategy#neoterm(cmd) abort
+  execute 'T '.a:cmd
+endfunction
+
 function! test#strategy#vtr(cmd) abort
   call VtrSendCommand(s:pretty_command(a:cmd), 1)
 endfunction

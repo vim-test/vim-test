@@ -71,7 +71,7 @@ let test#strategy = "dispatch"
 | :-----:                                                                         | :-----:    | :----------                                                                      |
 | **Basic**&nbsp;(default)                                                        | `basic`    | Runs test commands with `:!`, which switches your Vim to the terminal.           |
 | **Neovim**                                                                      | `neovim`   | Runs test commands with `:terminal`, which spawns a terminal inside your Neovim. |
-| [**Neoterm**](https://github.com/kassio/neoterm)                                | `neoterm`  | Runs test commands with `:T`, see neoterm docs for deisplay customization.       |
+| [**Neoterm**](https://github.com/kassio/neoterm)                                | `neoterm`  | Runs test commands with `:T`, see neoterm docs for display customization.        |
 | [**Dispatch.vim**](https://github.com/tpope/vim-dispatch)                       | `dispatch` | Runs test commands with `:Dispatch`.                                             |
 | [**Vimux**](https://github.com/benmills/vimux)                                  | `vimux`    | Runs test commands in a small tmux pane at the bottom of your terminal.          |
 | [**Tslime.vim**](https://github.com/kikijump/tslime.vim)                        | `tslime`   | Runs test commands in a tmux pane you specify.                                   |

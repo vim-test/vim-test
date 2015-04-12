@@ -21,6 +21,7 @@ Add your preferred mappings to your `.vimrc` file:
   nmap <silent> <leader>T :TestFile<CR>
   nmap <silent> <leader>a :TestSuite<CR>
   nmap <silent> <leader>l :TestLast<CR>
+  nmap <silent> <leader>g :TestVisit<CR>
 <
 GENERIC COMMANDS                                *test-generic_commands*
 
@@ -46,7 +47,7 @@ In all commands [args] are forwarded to the underlying test runner.
 :TestLast                    Run the last test.
 
                                                 *test-:TestVisit*
-:TestVisit                   Visit the last run test.
+:TestVisit                   Open the last run test in the current buffer.
 
 RUNNER COMMANDS                                 *test-runner_commands*
 
@@ -59,10 +60,12 @@ In all commands [args] are forwarded to the underlying test runner.
 :Cucumber [args]             Uses the `cucumber` command.
 
                                                 *test-:Minitest*
-:Minitest [args]             Uses the `rake` `test` command. All passed options for
-                             Minitest will be properly translated into the
-                             Rake world, so you needen't worry.
-
+:Minitest [args]             Uses the `rake` `test` or `ruby` `-I` `test` command.
+                             It properly translates CLI options:
+>
+                             :Minitest --seed 1234
+                             => rake test TEST="test/**/*_test.rb" TESTOPTS='--seed=1234'
+<
                                                 *test-:Mocha*
 :Mocha [args]                Uses the `mocha` command.
 
@@ -116,6 +119,13 @@ Runs test commands with `:terminal`, which spawns a terminal inside your Neovim.
 >
   let test#strategy = 'neovim'
 <
+Neoterm ~
+
+Runs test commands with `:T`, see [Neoterm](https://github.com/kassio/neoterm)
+docs for display customization.
+>
+  let test#strategy = 'neoterm'
+<
 Dispatch.vim ~
 
 Runs test commands with `:Dispatch`. Requires the
@@ -141,9 +151,9 @@ Vim Tmux Runner ~
 
 Runs test commands in a small Tmux pane. Requires the
 [Vim Timux Runner](https://github.com/christoomey/vim-tmux-runner) plugin (and Tmux)
-<
-  let test#strategy = 'vtr'
 >
+  let test#strategy = 'vtr'
+<
 Terminal.app / iTerm.app ~
 
 If you're in MacVim GUI, you can use this strategy to send the test commands
@@ -183,4 +193,5 @@ CREDITS                                         *test-credits*
 
 Thanks to Gary Bernhardt, the person who invented this kind of testing.
 I also want to thank vim-rspec (https://github.com/thoughtbot/vim-rspec), from
-which I borrowed GUI support for OS X, and Windows support.
+which I borrowed GUI support for OS X, and Windows support. Also thanks to
+vim-vroom (https://github.com/skalnik/vim-vroom).

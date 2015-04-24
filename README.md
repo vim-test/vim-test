@@ -37,8 +37,8 @@ Internally test.vim consists of a thoughtfully designed core, and testing
 frameworks are simply plugged in, so that they all work in the same unified
 way.
 
-Ruby users, you get **all** of the features of rspec.vim + vroom.vim, but
-without any of the tedious configuration (test.vim *knows* how you want to
+Ruby users, you get all of the features of rspec.vim + vroom.vim, but
+without any of the tedious configuration (test.vim knows how you want to
 run your test command).
 
 ## Setup

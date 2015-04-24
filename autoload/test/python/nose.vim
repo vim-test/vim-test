@@ -1,5 +1,5 @@
 function! test#python#nose#test_file(file) abort
-  if fnamemodify(a:file, ':t') =~# '^test_.*\.py$'
+  if fnamemodify(a:file, ':t') =~# '\v^[Tt]est.*\.py$'
     if exists('g:test#python#runner')
       return g:test#python#runner == 'nose'
     else

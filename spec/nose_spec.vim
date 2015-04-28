@@ -22,6 +22,11 @@ describe "Nose"
 
     Expect g:test#last_command == 'nosetests test_class.py:TestNumbers.test_numbers'
 
+    view +5 test_class.py
+    TestNearest
+
+    Expect g:test#last_command == 'nosetests test_class.py:TestSubclass'
+
     view +1 test_class.py
     TestNearest
 

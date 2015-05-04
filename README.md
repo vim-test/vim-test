@@ -192,6 +192,23 @@ function! test#mylanguage#myrunner#executable()
 
 See [`autoload/test`](/autoload/test) for examples.
 
+## Running tests
+
+Tests are run using a Ruby test runner, so you'll have to have Ruby installed.
+Then run
+
+```sh
+$ gem install vim-flavor
+```
+
+Now you can run tests with
+
+```sh
+$ vim-flavor test spec/
+```
+
+Or if you're inside of Vim, you can simply run `:VSpec` provided by test.vim.
+
 ## Credits
 
 This plugin was strongly influenced by Gary Bernhardt's Destroy All Software.

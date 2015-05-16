@@ -1,5 +1,5 @@
 function! test#lua#busted#test_file(file) abort
-  return a:file =~# '_spec.lua$'
+  return a:file =~# '_spec.lua$' || a:file =~# '_spec.moon$'
 endfunction
 
 function! test#lua#busted#build_position(type, position) abort

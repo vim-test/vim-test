@@ -17,6 +17,7 @@ Currently the following testing frameworks are supported:
 | **Shell**      | Bats                                  |
 | **VimScript**  | VSpec, Vader.vim                      |
 | **Lua**        | Busted                                |
+| **MoonScript** | Busted                                |
 
 ## Idea
 

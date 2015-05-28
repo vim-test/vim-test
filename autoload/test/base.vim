@@ -37,8 +37,16 @@ function! test#base#nearest_test(position, levels) abort
   let last_indent = -1
 
   for line in reverse(getbufline(a:position['file'], 1, a:position['line']))
-    let test_match      = matchlist(line, test_regex)
-    let namespace_match = matchlist(line, namespace_regex)
+    if !empty(test_regex)
+      let test_match = matchlist(line, test_regex)
+    else
+      let test_match = []
+    end
+    if !empty(namespace_regex)
+      let namespace_match = matchlist(line, namespace_regex)
+    else
+      let namespace_match = []
+    end
 
     let indent = len(matchstr(line, '^\s*'))
     if !empty(test_match) && last_indent == -1

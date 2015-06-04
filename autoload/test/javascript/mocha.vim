@@ -1,5 +1,5 @@
 function! test#javascript#mocha#test_file(file) abort
-  return a:file =~# '\v^tests?/.*\.(js|coffee)$'
+  return a:file =~# '\vtests?/.*\.(js|coffee)$'
 endfunction
 
 function! test#javascript#mocha#build_position(type, position) abort

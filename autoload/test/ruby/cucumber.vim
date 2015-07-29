@@ -1,5 +1,7 @@
 function! test#ruby#cucumber#test_file(file) abort
-  return a:file =~# '\.feature$'
+  if a:file =~# '\.feature$'
+    return empty(glob('features/**/*.php'))
+  endif
 endfunction
 
 function! test#ruby#cucumber#build_position(type, position) abort

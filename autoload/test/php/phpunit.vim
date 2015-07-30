@@ -15,8 +15,10 @@ function! test#php#phpunit#build_args(args) abort
 endfunction
 
 function! test#php#phpunit#executable() abort
-  if filereadable('vendor/bin/phpunit')
-    return 'vendor/bin/phpunit'
+  if filereadable('./vendor/bin/phpunit')
+    return './vendor/bin/phpunit'
+  elseif filereadable('./bin/phpunit')
+    return './bin/phpunit'
   else
     return 'phpunit'
   endif

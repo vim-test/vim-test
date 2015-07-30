@@ -22,7 +22,7 @@ call s:extend(g:test#runners, {
   \ 'Shell':      ['Bats'],
   \ 'VimL':       ['VSpec', 'Vader'],
   \ 'Lua':        ['Busted'],
-  \ 'PHP':        ['PHPUnit'],
+  \ 'PHP':        ['PHPUnit', 'Behat'],
 \})
 
 command! -nargs=* -bar TestNearest call test#run('nearest', <q-args>)

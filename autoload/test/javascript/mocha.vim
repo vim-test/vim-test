@@ -1,5 +1,5 @@
 function! test#javascript#mocha#test_file(file) abort
-  return a:file =~# '\vtests?/.*\.(js|coffee)$'
+  return a:file =~# '\vtests?/.*\.(js|jsx|coffee)$'
 endfunction
 
 function! test#javascript#mocha#build_position(type, position) abort
@@ -17,8 +17,16 @@ endfunction
 function! test#javascript#mocha#build_args(args) abort
   let args = a:args
 
-  if !empty(glob('test*/**/*.coffee'))
-    let args = ['--compilers coffee:'.s:coffee_compiler()] + args
+  let compilers = []
+  if !empty(glob('**/*.coffee'))
+    let compilers += ['coffee:'.s:coffee_compiler()]
+  endif
+  if !empty(glob('**/*.jsx'))
+    let compilers += ['jsx:'.s:jsx_compiler()]
+  endif
+
+  if !empty(compilers)
+    let args = ['--compilers '.join(compilers, ',')] + args
   endif
 
   return args
@@ -52,4 +60,8 @@ function! s:coffee_compiler() abort
   else
     return 'coffee-script'
   endif
+endfunction
+
+function! s:jsx_compiler() abort
+  return 'babel-core/register'
 endfunction

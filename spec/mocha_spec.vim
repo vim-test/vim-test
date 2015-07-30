@@ -49,6 +49,23 @@ describe "Mocha"
 
       Expect g:test#last_command == 'mocha test/normal.coffee --grep ''Math Addition adds two numbers'''
     end
+
+    it "runs React"
+      view +1 test/normal.jsx
+      TestNearest
+
+      Expect g:test#last_command == 'mocha test/normal.jsx --grep ''Math'''
+
+      view +2 test/normal.jsx
+      TestNearest
+
+      Expect g:test#last_command == 'mocha test/normal.jsx --grep ''Math Addition'''
+
+      view +3 test/normal.jsx
+      TestNearest
+
+      Expect g:test#last_command == 'mocha test/normal.jsx --grep ''Math Addition adds two numbers'''
+    end
   end
 
   it "runs file test if nearest test couldn't be found"

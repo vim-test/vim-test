@@ -26,37 +26,37 @@ describe "Minitest"
       view +6 classic_unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="classic_unit_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_method/''"'
+      Expect g:test#last_command == 'rake test TEST="classic_unit_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_method$/''"'
 
       view +11 rails_unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=''/MathTest\#test_double_quotes/''"'
+      Expect g:test#last_command == 'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=''/MathTest\#test_double_quotes$/''"'
 
       view +15 rails_unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=''/MathTest\#test_single_quotes/''"'
+      Expect g:test#last_command == 'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=''/MathTest\#test_single_quotes$/''"'
 
       view +19 rails_unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=''/MathTest\#test_single_quote_''\''''_inside/''"'
+      Expect g:test#last_command == 'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=''/MathTest\#test_single_quote_''\''''_inside$/''"'
 
       view +23 rails_unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=''/MathTest\#test_double_quote_\"_inside/''"'
+      Expect g:test#last_command == 'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=''/MathTest\#test_double_quote_\"_inside$/''"'
 
       view +27 rails_unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=''/MathTest\#test_pending_test/''"'
+      Expect g:test#last_command == 'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=''/MathTest\#test_pending_test$/''"'
 
       view +29 rails_unit_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=''/MathTest\#test_parentheses/''"'
+      Expect g:test#last_command == 'rake test TEST="rails_unit_test.rb" TESTOPTS="--name=''/MathTest\#test_parentheses$/''"'
     end
 
     it "builds the correct regex in spec syntax"
@@ -73,32 +73,32 @@ describe "Minitest"
       view +8 classic_spec_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_has double quotes/''"'
+      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_has double quotes$/''"'
 
       view +12 classic_spec_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_has single quotes/''"'
+      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_has single quotes$/''"'
 
       view +16 classic_spec_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_contains a ''\''''/''"'
+      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_contains a ''\''''$/''"'
 
       view +20 classic_spec_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_contains a \"/''"'
+      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_contains a \"$/''"'
 
       view +24 classic_spec_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_is pending/''"'
+      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_is pending$/''"'
 
       view +26 classic_spec_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_has parentheses/''"'
+      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_has parentheses$/''"'
 
       view +28 classic_spec_test.rb
       TestNearest
@@ -113,7 +113,7 @@ describe "Minitest"
       view +5 explicit_spec_test.rb
       TestNearest
 
-      Expect g:test#last_command == 'rake test TEST="explicit_spec_test.rb" TESTOPTS="--name=''/MathSpec\#test_\d+_is/''"'
+      Expect g:test#last_command == 'rake test TEST="explicit_spec_test.rb" TESTOPTS="--name=''/MathSpec\#test_\d+_is$/''"'
     end
   end
 

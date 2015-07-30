@@ -92,7 +92,7 @@ function! s:nearest_test(position) abort
   if empty(name['test'])
     let test = []
   else
-    let test_name = test#base#escape_regex(name['test'][0])
+    let test_name = test#base#escape_regex(name['test'][0]).'$'
     if syntax == 'rails'    " test('foo') { ... }
       let test = ['test_'.substitute(test_name, '\s\+', '_', 'g')]
     elseif syntax == 'spec' " it('foo') { ... }

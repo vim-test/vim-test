@@ -7,6 +7,7 @@ function! test#clojure#fireplacetest#build_position(type, position) abort
 
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
+    let name = test#base#escape_regex(name)
     let ns = "'".fireplace#ns(a:position['file'])
     if !empty(name)
       return ['(clojure.test/test-vars [#'.ns.'/'.name.'])', s:reload([ns])]

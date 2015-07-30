@@ -84,11 +84,11 @@ function! s:nearest_test(position) abort
   let syntax = s:syntax(a:position['file'])
   let name = test#base#nearest_test(a:position, g:test#ruby#patterns)
 
-  let namespace = filter([join(name['namespace'], '::')], '!empty(v:val)')
+  let namespace = filter([test#base#escape_regex(join(name['namespace'], '::'))], '!empty(v:val)')
   if empty(name['test'])
     let test = []
   else
-    let test_name = name['test'][0]
+    let test_name = test#base#escape_regex(name['test'][0])
     if syntax == 'rails'    " test('foo') { ... }
       let test = ['test_'.substitute(test_name, '\s\+', '_', 'g')]
     elseif syntax == 'spec' " it('foo') { ... }

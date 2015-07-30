@@ -1,5 +1,9 @@
+if !exists('g:test#ruby#cucumber#file_pattern')
+  let g:test#ruby#cucumber#file_pattern = '\.feature$'
+endif
+
 function! test#ruby#cucumber#test_file(file) abort
-  if a:file =~# '\.feature$'
+  if a:file =~# g:test#ruby#cucumber#file_pattern
     return empty(glob('features/**/*.php'))
   endif
 endfunction

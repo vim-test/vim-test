@@ -1,5 +1,9 @@
+if !exists('g:test#clojure#fireplacetest#file_pattern')
+  let g:test#clojure#fireplacetest#file_pattern = '\v(_test|^test/.+)\.cljs?$'
+end
+
 function! test#clojure#fireplacetest#test_file(file) abort
-  return a:file =~# '\v_test\.cljs?$' || a:file =~# '\v^test/.+\.cljs?$'
+  return a:file =~# g:test#clojure#fireplacetest#file_pattern
 endfunction
 
 function! test#clojure#fireplacetest#build_position(type, position) abort

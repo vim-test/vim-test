@@ -1,5 +1,9 @@
+if !exists('g:test#python#nose#file_pattern')
+  let g:test#python#nose#file_pattern = '\v(^|[\b_\.-])[Tt]est.*\.py$'
+endif
+
 function! test#python#nose#test_file(file) abort
-  if fnamemodify(a:file, ':t') =~# '\v(^|[\b_\.-])[Tt]est.*\.py$'
+  if fnamemodify(a:file, ':t') =~# g:test#python#nose#file_pattern
     if exists('g:test#python#runner')
       return g:test#python#runner == 'nose'
     else

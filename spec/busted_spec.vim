@@ -23,6 +23,11 @@ describe "GoTest"
     TestFile
 
     Expect g:test#last_command == 'busted normal_spec.lua'
+
+    view normal_spec.moon
+    TestFile
+
+    Expect g:test#last_command == 'busted normal_spec.moon'
   end
 
   it "runs test suites"

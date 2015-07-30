@@ -1,5 +1,9 @@
+if !exists('g:test#elixir#exunit#file_pattern')
+  let g:test#elixir#exunit#file_pattern = '_test\.exs$'
+endif
+
 function! test#elixir#exunit#test_file(file) abort
-  return a:file =~# '_test\.exs$'
+  return a:file =~# g:test#elixir#exunit#file_pattern
 endfunction
 
 function! test#elixir#exunit#build_position(type, position) abort

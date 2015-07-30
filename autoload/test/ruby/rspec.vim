@@ -1,5 +1,9 @@
+if !exists('g:test#ruby#rspec#file_pattern')
+  let g:test#ruby#rspec#file_pattern = '_spec\.rb$'
+endif
+
 function! test#ruby#rspec#test_file(file) abort
-  return a:file =~# '_spec\.rb$'
+  return a:file =~# g:test#ruby#rspec#file_pattern
 endfunction
 
 function! test#ruby#rspec#build_position(type, position) abort

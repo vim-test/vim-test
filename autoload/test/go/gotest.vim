@@ -1,5 +1,9 @@
+if !exists('g:test#go#gotest#file_pattern')
+  let g:test#go#gotest#file_pattern = '\v[^_].*_test\.go$'
+endif
+
 function! test#go#gotest#test_file(file) abort
-  return a:file =~# '\v[^_].*_test\.go$'
+  return a:file =~# g:test#go#gotest#file_pattern
 endfunction
 
 function! test#go#gotest#build_position(type, position) abort

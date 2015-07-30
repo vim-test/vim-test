@@ -1,5 +1,9 @@
+if !exists('g:test#php#behat#file_pattern')
+  let g:test#php#behat#file_pattern = '\.feature$'
+endif
+
 function! test#php#behat#test_file(file) abort
-  if a:file =~# '\.feature$'
+  if a:file =~# g:test#php#behat#file_pattern
     return !empty(glob('features/bootstrap/**/*.php'))
   endif
 endfunction

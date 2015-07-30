@@ -1,5 +1,9 @@
+if !exists('g:test#viml#vspec#file_pattern')
+  let g:test#viml#vspec#file_pattern = '\v^(t(est)?|spec)/.*\.vim$'
+endif
+
 function! test#viml#vspec#test_file(file) abort
-  return a:file =~# '\v^(t(est)?|spec)/.*\.vim$'
+  return a:file =~# g:test#viml#vspec#file_pattern
 endfunction
 
 function! test#viml#vspec#build_position(type, position) abort

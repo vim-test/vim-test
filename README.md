@@ -146,6 +146,16 @@ You can instruct test.vim to use a custom executable for a test runner.
 let test#ruby#rspec#executable = 'foreman run rspec'
 ```
 
+### File pattern
+
+Test.vim has file pattern it uses to determine whether a file belongs to
+certain testing framework. You can override that pattern by overriding the
+`file_pattern` variable:
+
+```vim
+let test#ruby#minitest#file_pattern = '_spec\.rb' " the default is '_test\.rb'
+```
+
 ### Language-specific
 
 #### Python

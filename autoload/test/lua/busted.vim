@@ -1,5 +1,9 @@
+if !exists('g:test#lua#busted#file_pattern')
+  let g:test#lua#busted#file_pattern = '\v_spec\.(lua|moon)$'
+endif
+
 function! test#lua#busted#test_file(file) abort
-  return a:file =~# '_spec.lua$' || a:file =~# '_spec.moon$'
+  return a:file =~# g:test#lua#busted#file_pattern
 endfunction
 
 function! test#lua#busted#build_position(type, position) abort

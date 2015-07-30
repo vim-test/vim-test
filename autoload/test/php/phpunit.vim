@@ -1,5 +1,9 @@
+if !exists('g:test#php#phpunit#file_pattern')
+  let g:test#php#phpunit#file_pattern = '\v(t|T)est\.php$'
+endif
+
 function! test#php#phpunit#test_file(file) abort
-  return a:file =~# '\v(t|T)est\.php$'
+  return a:file =~# g:test#php#phpunit#file_pattern
 endfunction
 
 function! test#php#phpunit#build_position(type, position) abort

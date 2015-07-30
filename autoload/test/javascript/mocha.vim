@@ -1,5 +1,9 @@
+if !exists('g:test#javascript#mocha#file_pattern')
+  let g:test#javascript#mocha#file_pattern = '\vtests?/.*\.(js|jsx|coffee)$'
+endif
+
 function! test#javascript#mocha#test_file(file) abort
-  return a:file =~# '\vtests?/.*\.(js|jsx|coffee)$'
+  return a:file =~# g:test#javascript#mocha#file_pattern
 endfunction
 
 function! test#javascript#mocha#build_position(type, position) abort

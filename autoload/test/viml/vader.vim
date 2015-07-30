@@ -1,5 +1,9 @@
+if !exists('g:test#viml#vader#file_pattern')
+  let g:test#viml#vader#file_pattern = '\.vader$'
+endif
+
 function! test#viml#vader#test_file(file) abort
-  return a:file =~# '\.vader$'
+  return a:file =~# g:test#viml#vader#file_pattern
 endfunction
 
 function! test#viml#vader#build_position(type, position) abort

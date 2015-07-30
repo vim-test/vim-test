@@ -1,5 +1,9 @@
+if !exists('g:test#ruby#minitest#file_pattern')
+  let g:test#ruby#minitest#file_pattern = '_test\.rb$'
+endif
+
 function! test#ruby#minitest#test_file(file) abort
-  return a:file =~# '_test\.rb$'
+  return a:file =~# g:test#ruby#minitest#file_pattern
 endfunction
 
 function! test#ruby#minitest#build_position(type, position) abort

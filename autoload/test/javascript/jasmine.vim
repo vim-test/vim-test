@@ -1,5 +1,9 @@
+if !exists('g:test#javascript#jasmine#file_pattern')
+  let g:test#javascript#jasmine#file_pattern = '\v^spec/.*spec\.(js|coffee)$'
+endif
+
 function! test#javascript#jasmine#test_file(file) abort
-  return a:file =~? '\v^spec/.*spec\.(js|coffee)$'
+  return a:file =~? g:test#javascript#jasmine#file_pattern
 endfunction
 
 function! test#javascript#jasmine#build_position(type, position) abort

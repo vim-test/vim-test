@@ -1,5 +1,9 @@
+if !exists('g:test#python#pytest#file_pattern')
+  let g:test#python#pytest#file_pattern = '^test_.*\.py$'
+endif
+
 function! test#python#pytest#test_file(file) abort
-  if fnamemodify(a:file, ':t') =~# '^test_.*\.py$'
+  if fnamemodify(a:file, ':t') =~# g:test#python#pytest#file_pattern
     if exists('g:test#python#runner')
       return g:test#python#runner == 'pytest'
     else

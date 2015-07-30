@@ -1,5 +1,9 @@
+if !exists('g:test#shell#bats#file_pattern')
+  let g:test#shell#bats#file_pattern = '\.bats$'
+endif
+
 function! test#shell#bats#test_file(file) abort
-  return a:file =~# '\.bats$'
+  return a:file =~# g:test#shell#bats#file_pattern
 endfunction
 
 function! test#shell#bats#build_position(type, position) abort

@@ -27,26 +27,14 @@ function! test#base#file_exists(file) abort
   return !empty(glob(a:file)) || bufexists(a:file)
 endfunction
 
-function! test#base#nearest_test(position, levels) abort
-  let test_regex = get(a:levels, 0)
-  let test = []
-
-  let namespace_regex = get(a:levels, 1)
-  let namespace = []
-
+function! test#base#nearest_test(position, patterns) abort
+  let test        = []
+  let namespace   = []
   let last_indent = -1
 
   for line in reverse(getbufline(a:position['file'], 1, a:position['line']))
-    if !empty(test_regex)
-      let test_match = matchlist(line, test_regex)
-    else
-      let test_match = []
-    end
-    if !empty(namespace_regex)
-      let namespace_match = matchlist(line, namespace_regex)
-    else
-      let namespace_match = []
-    end
+    let test_match      = s:find_match(line, a:patterns['test'])
+    let namespace_match = s:find_match(line, a:patterns['namespace'])
 
     let indent = len(matchstr(line, '^\s*'))
     if !empty(test_match) && last_indent == -1
@@ -58,12 +46,17 @@ function! test#base#nearest_test(position, levels) abort
     endif
   endfor
 
-  let namespace = map(reverse(namespace), 's:escape_regex(v:val)')
-  let test      = map(test, 's:escape_regex(v:val)')
+  let namespace = map(reverse(namespace), 's:escape_pattern(v:val)')
+  let test      = map(test, 's:escape_pattern(v:val)')
 
-  return [namespace, test]
+  return {'test': test, 'namespace': namespace}
 endfunction
 
-function! s:escape_regex(string) abort
+function! s:find_match(line, patterns) abort
+  let matches = map(copy(a:patterns), 'matchlist(a:line, v:val)')
+  return get(filter(matches, '!empty(v:val)'), 0, [])
+endfunction
+
+function! s:escape_pattern(string) abort
   return escape(a:string, '?+*\^$.|{}[]()')
 endfunction

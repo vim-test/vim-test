@@ -23,6 +23,6 @@ function! test#go#gotest#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#go#levels)
-  return join(name[1])
+  let name = test#base#nearest_test(a:position, g:test#go#patterns)
+  return join(name['test'])
 endfunction

@@ -51,8 +51,8 @@ function! test#clojure#fireplacetest#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#clojure#levels)
-  return join(name[1])
+  let name = test#base#nearest_test(a:position, g:test#clojure#patterns)
+  return join(name['test'])
 endfunction
 
 function! s:require_fireplace() abort

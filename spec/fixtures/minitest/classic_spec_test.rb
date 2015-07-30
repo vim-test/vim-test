@@ -1,7 +1,7 @@
 require "minitest/autorun"
+require "minitest/spec"
 
-class TestNumbers
-end
+TestNumbers = Class.new
 
 describe "Math" do
   describe TestNumbers do
@@ -22,5 +22,25 @@ describe "Math" do
     end
 
     it "is pending"
+
+    it("has parentheses") {}
+
+    describe("Parentheses") {}
+  end
+end
+
+module Math
+  Numbers = Class.new
+
+  describe Numbers do
+    it "is" do
+      assert 1 == 1
+    end
+  end
+
+  describe "Numbers" do
+    it "is" do
+      assert 1 == 1
+    end
   end
 end

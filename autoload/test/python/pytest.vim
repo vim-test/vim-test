@@ -32,6 +32,6 @@ function! test#python#pytest#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#python#levels)
-  return get(name[1], 0, '')
+  let name = test#base#nearest_test(a:position, g:test#python#patterns)
+  return get(name['test'], 0, '')
 endfunction

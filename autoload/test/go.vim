@@ -1,3 +1,4 @@
-let test#go#levels = [
-  \ '\v^\s*func (\w+)',
-\]
+let test#go#patterns = {
+  \ 'test':      ['\v^\s*func (\w+)'],
+  \ 'namespace': [],
+\}

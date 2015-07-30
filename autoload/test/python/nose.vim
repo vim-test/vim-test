@@ -32,6 +32,6 @@ function! test#python#nose#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#python#levels)
-  return join(name[0] + name[1], '.')
+  let name = test#base#nearest_test(a:position, g:test#python#patterns)
+  return join(name['namespace'] + name['test'], '.')
 endfunction

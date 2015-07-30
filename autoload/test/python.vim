@@ -1,4 +1,4 @@
-let test#python#levels = [
-  \ '\v^\s*def (test_\w+)',
-  \ '\v^\s*class (\w+)',
-\]
+let test#python#patterns = {
+  \ 'test':      ['\v^\s*def (test_\w+)'],
+  \ 'namespace': ['\v^\s*class (\w+)'],
+\}

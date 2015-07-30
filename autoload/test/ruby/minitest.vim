@@ -82,19 +82,18 @@ endfunction
 " http://chriskottom.com/blog/2014/12/command-line-flags-for-minitest-in-the-raw/
 function! s:nearest_test(position) abort
   let syntax = s:syntax(a:position['file'])
-  let name = test#base#nearest_test(a:position, g:test#ruby#levels[syntax])
+  let name = test#base#nearest_test(a:position, g:test#ruby#patterns)
 
-  let namespace = filter([join(name[0], '::')], '!empty(v:val)')
-  if empty(name[1])
+  let namespace = filter([join(name['namespace'], '::')], '!empty(v:val)')
+  if empty(name['test'])
     let test = []
   else
-    let test_name = name[1][0]
-    if syntax == 'spec'
+    let test_name = name['test'][0]
+    if syntax == 'rails'    " test('foo') { ... }
+      let test = ['test_'.substitute(test_name, '\s\+', '_', 'g')]
+    elseif syntax == 'spec' " it('foo') { ... }
       let test = ['test_\d+_'.test_name]
     else
-      if test_name !~# '^test_'
-        let test_name = 'test_'.substitute(test_name, '\s\+', '_', 'g')
-      endif
       let test = [test_name]
     endif
   endif
@@ -103,9 +102,13 @@ function! s:nearest_test(position) abort
 endfunction
 
 function! s:syntax(file) abort
-  if system('cat '.a:file) =~# '\v\A\s*(it)'
+  let lines = split(system('cat '.a:file), '\n')
+
+  if !empty(filter(copy(lines), 'v:val =~# g:test#ruby#patterns["test"][1]'))
+    return 'rails'
+  elseif !empty(filter(copy(lines), 'v:val =~# g:test#ruby#patterns["test"][2]'))
     return 'spec'
   else
-    return 'unit'
+    return 'test'
   endif
 endfunction

@@ -1,4 +1,4 @@
-let test#javascript#levels = [
-  \ '\v^\s*it[( ]%("|'')(.*)%("|''),',
-  \ '\v^\s*describe[( ]%("|'')(.*)%("|''),',
-\]
+let test#javascript#patterns = {
+  \ 'test':      ['\v^\s*it[( ]%("|'')(.*)%("|''),'],
+  \ 'namespace': ['\v^\s*describe[( ]%("|'')(.*)%("|''),'],
+\}

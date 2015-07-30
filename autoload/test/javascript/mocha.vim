@@ -41,8 +41,8 @@ function! test#javascript#mocha#executable() abort
 endfunction
 
 function! s:nearest_test(position)
-  let name = test#base#nearest_test(a:position, g:test#javascript#levels)
-  return join(name[0] + name[1])
+  let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
+  return join(name['namespace'] + name['test'])
 endfunction
 
 function! s:coffee_compiler() abort

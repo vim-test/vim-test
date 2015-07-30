@@ -1,10 +1,12 @@
-let test#ruby#levels = {
-  \ 'spec': [
-    \ '\v^\s*it %("|'')(.*)%("|'')',
-    \ '\v^\s*describe %(%("|'')(.*)%("|'')|(\S+))',
+let test#ruby#patterns = {
+  \ 'test': [
+    \ '\v^\s*def (test_\w+)',
+    \ '\v^\s*test%(\(| )%("|'')(.*)%("|'')',
+    \ '\v^\s*it%(\(| )%("|'')(.*)%("|'')',
   \],
-  \ 'unit': [
-    \ '\v^\s*%(def (test_\w+)|test %("|'')(.*)%("|''))',
+  \ 'namespace': [
     \ '\v^\s*%(class|module) (\S+)',
+    \ '\v^\s*describe%(\(| )%("|'')(.*)%("|'')',
+    \ '\v^\s*describe%(\(| )(\S+)',
   \],
 \}

@@ -1,3 +1,4 @@
-let test#clojure#levels = [
-  \ '\v\(deftest (\S+)',
-\]
+let test#clojure#patterns = {
+  \ 'test':      ['\v\(deftest (\S+)'],
+  \ 'namespace': [],
+\}

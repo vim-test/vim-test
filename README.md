@@ -89,19 +89,19 @@ let test#strategy = "dispatch"
 | **Terminal.app**                                                                | `terminal` | Sends test commands to Terminal.app (useful in MacVim GUI).                      |
 | **iTerm.app**                                                                   | `iterm`    | Sends test commands to iTerm.app (useful in MacVim GUI).                         |
 
-## Custom Strategies
+### Custom Strategies
 
-Strategy is a function with command for running tests as argument. You can
-define your own custom strategy like this:
+Strategy is a function which takes one argument – the shell command for the
+test being run – and it is expected to run that command in some way. Test.vim
+comes with many predefined strategies (see above), but if none of them suit
+your needs, you can define your own custom strategy like this:
 
 ```vim
 function! MyStrategy(cmd)
   echo 'It works! Command for running tests: ' . a:cmd
 endfunction
 
-let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})
-let g:test#custom_strategies['my_strategy'] = function('MyStrategy')
-
+let g:test#custom_strategies = {'my_strategy': function('MyStrategy')}
 let g:test#strategy = 'my_strategy'
 ```
 

@@ -189,8 +189,7 @@ If you want to define your own strategy - simple define new function, like this:
 <
 Then add this function to vim-test custom strategies |dict|:
 >
-  let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})
-  let g:test#custom_strategies['my_strategy'] = function('MyStrategy')
+  let g:test#custom_strategies = {'my_strategy': function('MyStrategy')}
 <
 Key in this dict is a name of the strategy, value is a |Funcref|.
 Choose your custom strategy:

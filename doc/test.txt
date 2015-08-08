@@ -3,6 +3,14 @@
 Author: Janko Marohnić <https://github.com/janko-m>
 License: Same terms as Vim itself (see |license|)
 
+|test|                            INTRODUCTION
+|test-generic_commands|           GENERIC COMMANDS
+|test-strategies|                 STRATEGIES
+|test-custom-strategies|          CUSTOM STRATEGIES
+|test-configuration|              CONFIGURATION
+|test-about|                      ABOUT
+|test-credits|                    CREDITS
+
 INTRODUCTION                                    *test*
 
 This plugin allows you to:
@@ -170,6 +178,27 @@ isn't that nice).
   " or
   let test#strategy = 'iterm'
 <
+CUSTOM STRATEGIES                               *test-custom-strategies*
+
+Strategy is a function with command for running tests as argument.
+If you want to define your own strategy - simple define new function, like this:
+>
+  function! MyStrategy(cmd)
+    echo 'It works! Command for running tests: ' . a:cmd
+  endfunction
+<
+Then add this function to vim-test custom strategies |dict|:
+>
+  let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})
+  let g:test#custom_strategies['my_strategy'] = function('MyStrategy')
+<
+Key in this dict is a name of the strategy, value is a |Funcref|.
+Choose your custom strategy:
+>
+  let g:test#strategy = 'my_strategy'
+<
+Refer to vim-test/autoload/test/strategy.vim for examples of default strategies.
+
 CONFIGURATION                                   *test-configuration*
 
 You may find yourself specifying certain options for your test runners in

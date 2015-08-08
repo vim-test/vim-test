@@ -57,7 +57,11 @@ function! test#shell(cmd) abort
     let strategy = get(g:, 'test#strategy', 'basic')
   end
 
-  call test#strategy#{strategy}(a:cmd)
+  if has_key(g:test#custom_strategies, strategy)
+    call g:test#custom_strategies[strategy](a:cmd)
+  else
+    call test#strategy#{strategy}(a:cmd)
+  endif
 
   let g:test#last_command = a:cmd
 endfunction

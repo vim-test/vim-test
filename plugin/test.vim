@@ -25,6 +25,8 @@ call s:extend(g:test#runners, {
   \ 'PHP':        ['PHPUnit', 'Behat'],
 \})
 
+let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})
+
 command! -nargs=* -bar TestNearest call test#run('nearest', <q-args>)
 command! -nargs=* -bar TestFile    call test#run('file', <q-args>)
 command! -nargs=* -bar TestSuite   call test#run('suite', <q-args>)

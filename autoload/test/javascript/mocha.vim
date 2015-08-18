@@ -21,21 +21,7 @@ function! test#javascript#mocha#build_position(type, position) abort
 endfunction
 
 function! test#javascript#mocha#build_args(args) abort
-  let args = a:args
-
-  let compilers = []
-  if !empty(glob('**/*.coffee'))
-    let compilers += ['coffee:'.s:coffee_compiler()]
-  endif
-  if !empty(glob('**/*.jsx'))
-    let compilers += ['jsx:'.s:jsx_compiler()]
-  endif
-
-  if !empty(compilers)
-    let args = ['--compilers '.join(compilers, ',')] + args
-  endif
-
-  return args
+  return a:args
 endfunction
 
 function! test#javascript#mocha#executable() abort
@@ -49,25 +35,4 @@ endfunction
 function! s:nearest_test(position)
   let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
   return join(name['namespace'] + name['test'])
-endfunction
-
-function! s:coffee_compiler() abort
-  if !exists('s:coffee_minor_version')
-    if filereadable('node_modules/.bin/coffee')
-      let cmd = 'node_modules/.bin/coffee'
-    else
-      let cmd = 'coffee'
-    endif
-    let s:coffee_minor_version = matchlist(system(cmd.' -v'), '\v\d+\.(\d+)\.\d+')[1]
-  endif
-
-  if s:coffee_minor_version >= 7
-    return 'coffee-script/register'
-  else
-    return 'coffee-script'
-  endif
-endfunction
-
-function! s:jsx_compiler() abort
-  return 'babel-core/register'
 endfunction

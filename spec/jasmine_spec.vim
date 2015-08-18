@@ -46,19 +46,18 @@ describe "Jasmine"
     Expect exists('g:test#last_command') == 0
   end
 
-  it "detects CoffeeScript"
-    try
-      edit spec/normal_spec.coffee | write
-      TestFile
+  it "runs CoffeeScript"
+    view spec/normal_spec.coffee
+    TestFile
 
-      Expect g:test#last_command == 'jasmine-node --coffee spec/normal_spec.coffee'
+    Expect g:test#last_command == 'jasmine-node spec/normal_spec.coffee'
+  end
 
-      Jasmine .
+  it "runs React"
+    view spec/normal_spec.jsx
+    TestFile
 
-      Expect g:test#last_command == 'jasmine-node --coffee .'
-    finally
-      !rm spec/normal_spec.coffee
-    endtry
+    Expect g:test#last_command == 'jasmine-node spec/normal_spec.jsx'
   end
 
 end

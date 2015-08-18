@@ -1,5 +1,5 @@
 if !exists('g:test#javascript#jasmine#file_pattern')
-  let g:test#javascript#jasmine#file_pattern = '\v^spec/.*spec\.(js|coffee)$'
+  let g:test#javascript#jasmine#file_pattern = '\v^spec/.*spec\.(js|jsx|coffee)$'
 endif
 
 function! test#javascript#jasmine#test_file(file) abort
@@ -19,9 +19,6 @@ function! test#javascript#jasmine#build_args(args) abort
 
   if empty(filter(copy(a:args), 'test#base#file_exists(v:val)'))
     let args = args + ['spec/']
-  endif
-  if !empty(glob('spec/**/*.coffee'))
-    let args = ['--coffee'] + args
   endif
 
   return args

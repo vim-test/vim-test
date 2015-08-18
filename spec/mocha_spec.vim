@@ -1,9 +1,5 @@
 source spec/helpers.vim
 
-function! test#shell(cmd) abort
-  let g:test#last_command = substitute(a:cmd, ' --compilers \S\+', '', '')
-endfunction
-
 describe "Mocha"
 
   before

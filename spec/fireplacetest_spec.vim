@@ -30,61 +30,35 @@ describe "FireplaceTest"
   end
 
   it "runs nearest tests"
-    view +5 math_test.clj
-    TestNearest
-
-    Expect g:test#last_command =~# '\V(clojure.test/test-vars [#''math-test/a-test])'
-
-    view +9 math_test.clj
-    TestNearest
-
-    Expect g:test#last_command =~# '\V(clojure.test/test-vars [#''math-test/another-test])'
-  end
-
-  it "falls back to file test if nearest test wasn't found"
     view +1 math_test.clj
     TestNearest
 
-    Expect g:test#last_command =~# '(clojure.test/run-tests ''math-test)'
+    Expect g:test#last_command =~# ':.RunTests'
+
+    view foo.clj
+    TestNearest
+
+    Expect g:test#last_command =~# ':edit +1 math_test.clj | :.RunTests'
   end
 
   it "runs file tests"
     view math_test.clj
     TestFile
 
-    Expect g:test#last_command =~# '(clojure.test/run-tests ''math-test)'
+    Expect g:test#last_command =~# ':RunTests math-test'
   end
 
   it "runs test suites"
     view math_test.clj
     TestSuite
 
-    Expect g:test#last_command =~# '(clojure.test/run-all-tests)'
+    Expect g:test#last_command =~# ':0RunTests'
   end
 
-  describe "command"
+  it "passes arguments of raw command to :RunTests"
+    FireplaceTest foo bar
 
-    it "runs all tests without arguments"
-      view math_test.clj
-      FireplaceTest
-
-      Expect g:test#last_command =~# '(clojure.test/run-all-tests)'
-    end
-
-    it "accepts regular expressions"
-      view math_test.clj
-      FireplaceTest /foo/
-
-      Expect g:test#last_command =~# '(clojure.test/run-all-tests #\\"foo\\")'
-    end
-
-    it "accepts list of filenames, which it translates to namespaces"
-      view math_test.clj
-      FireplaceTest math_test.clj
-
-      Expect g:test#last_command =~# '(clojure.test/run-tests ''math-test)'
-    end
-
+    Expect g:test#last_command =~# ':RunTests foo bar'
   end
 
 end

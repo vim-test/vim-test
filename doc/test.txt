@@ -86,6 +86,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:PyTest*
 :PyTest [args]               Uses the `py.test` command.
 
+                                                *test-:DjangoTest*
+:DjangoTest [args]           Uses the `django` `test` command.
+
                                                 *test-:ExUnit*
 :ExUnit [args]               Uses the `mix` `test` command.
 

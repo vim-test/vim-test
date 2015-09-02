@@ -6,7 +6,7 @@ function! test#shell(cmd) abort
   let g:test#last_command = substitute(a:cmd, fixture_path, '', '')
 endfunction
 
-describe "Django"
+describe "DjangoTest"
 
   before
     " We start off in the module directory so we can test locating and running

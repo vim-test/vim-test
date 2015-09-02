@@ -55,7 +55,7 @@ function! test#shell(cmd) abort
     let strategy = 'vimscript'
   else
     let strategy = get(g:, 'test#strategy', 'basic')
-  end
+  endif
 
   if has_key(g:test#custom_strategies, strategy)
     call g:test#custom_strategies[strategy](a:cmd)

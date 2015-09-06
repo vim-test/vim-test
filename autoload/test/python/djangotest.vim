@@ -4,7 +4,11 @@ endif
 
 function! test#python#djangotest#test_file(file) abort
   if fnamemodify(a:file, ':t') =~# g:test#python#djangotest#file_pattern
-    return !empty(findfile('manage.py', '.;'))
+    if exists('g:test#python#runner')
+      return g:test#python#runner == 'djangotest'
+    else
+      return filereadable('./manage.py') && executable('django-admin') 
+    endif
   endif
 endfunction
 
@@ -29,27 +33,16 @@ function! test#python#djangotest#build_args(args) abort
 endfunction
 
 function! test#python#djangotest#executable() abort
-  return s:manage_py_path() . '/manage.py test'
+  return './manage.py test'
 endfunction
 
 function! s:get_import_path(filepath) abort
-  " Get the full path to the file on disk (without extension).
-  let path = fnamemodify(a:filepath, ':p:r')
-  " Remove everything up to the folder with the manage.py.
-  let path = substitute(path, s:manage_py_path() . '/', '', 'g')
-  " Convert the slashes to periods.
+  " Get path to file from cwd and without extension.
+  let path = fnamemodify(a:filepath, ':.:r')
+  " Replace the /'s in the file path with .'s
   let path = substitute(path, '\/', '.', 'g')
   return path
 endfunction!
-
-function! s:manage_py_path() abort
-  " Go up the tree looking for the manage.py file and return its path.
-  let path = findfile('manage.py', '.;')
-  " Get the full path, even if we're in the current directory.
-  let path = fnamemodify(path, ':p')
-  " Strip the /manage.py from the end.
-  return substitute(path, '/manage.py', '', '')
-endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#python#patterns)

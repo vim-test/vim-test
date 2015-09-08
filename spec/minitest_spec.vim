@@ -93,14 +93,19 @@ describe "Minitest"
       view +24 classic_spec_test.rb
       TestNearest
 
+      Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_contains \`backticks\`$/''"'
+
+      view +28 classic_spec_test.rb
+      TestNearest
+
       Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_is pending$/''"'
 
-      view +26 classic_spec_test.rb
+      view +30 classic_spec_test.rb
       TestNearest
 
       Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers\#test_\d+_has parentheses$/''"'
 
-      view +28 classic_spec_test.rb
+      view +32 classic_spec_test.rb
       TestNearest
 
       Expect g:test#last_command == 'rake test TEST="classic_spec_test.rb" TESTOPTS="--name=''/Math::TestNumbers::Parentheses/''"'

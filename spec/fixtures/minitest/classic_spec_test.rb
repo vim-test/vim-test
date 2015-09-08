@@ -21,6 +21,10 @@ describe "Math" do
       assert 1 == 1
     end
 
+    it "contains `backticks`" do
+      assert 1 == 1
+    end
+
     it "is pending"
 
     it("has parentheses") {}

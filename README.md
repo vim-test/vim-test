@@ -6,18 +6,18 @@ A Vim wrapper for running tests on different granularities.
 
 Currently the following testing frameworks are supported:
 
-| Language       | Frameworks                            |
-| :------------: | ------------------------------------- |
-| **Ruby**       | RSpec, [Minitest][minitest], Cucumber |
-| **JavaScript** | Mocha, Jasmine                        |
-| **Python**     | Nose, PyTest, Django                  |
-| **Elixir**     | ExUnit                                |
-| **Go**         | Go                                    |
-| **Clojure**    | Fireplace.vim                         |
-| **Shell**      | Bats                                  |
-| **VimScript**  | VSpec, Vader.vim                      |
-| **Lua**        | Busted                                |
-| **PHP**        | PHPUnit, Behat                        |
+| Language       | Frameworks                            | Identifiers                     |
+| :------------: | ------------------------------------- | ------------------------------- |
+| **Ruby**       | RSpec, [Minitest][minitest], Cucumber | `rspec`, `minitest`, `cucumber` |
+| **JavaScript** | Mocha, Jasmine                        | `mocha`, `jasmine`              |
+| **Python**     | Nose, PyTest, Django                  | `nose`, `pytest`, `djangotest`  |
+| **Elixir**     | ExUnit                                | `exunit`                        |
+| **Go**         | Go                                    | `gotest`                        |
+| **Clojure**    | Fireplace.vim                         | `fireplacetest`                 |
+| **Shell**      | Bats                                  | `bats`                          |
+| **VimScript**  | VSpec, Vader.vim                      | `vspec`, `vader`                |
+| **Lua**        | Busted                                | `busted`                        |
+| **PHP**        | PHPUnit, Behat                        | `phpunit`, `behat`              |
 
 ## Idea
 

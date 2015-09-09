@@ -185,6 +185,8 @@ the first available will be chosen, but you can force a specific one:
 let test#python#runner = 'pytest'
 " or
 let test#python#runner = 'nose'
+" or
+let test#python#runner = 'djangotest'
 ```
 
 ## Extending

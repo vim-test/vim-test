@@ -25,6 +25,7 @@ function! test#javascript#mocha#build_args(args) abort
 
   if test#base#no_colors()
     let args = ['--no-colors'] + args
+    let args = args + ['|', 'sed -e "s///g"']
   endif
 
   return args

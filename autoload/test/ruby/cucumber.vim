@@ -19,7 +19,13 @@ function! test#ruby#cucumber#build_position(type, position) abort
 endfunction
 
 function! test#ruby#cucumber#build_args(args) abort
-  return a:args
+  let args = a:args
+
+  if test#base#no_colors()
+    let args = ['--no-color'] + args
+  endif
+
+  return args
 endfunction
 
 function! test#ruby#cucumber#executable() abort

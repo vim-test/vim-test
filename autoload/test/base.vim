@@ -31,6 +31,11 @@ function! test#base#escape_regex(string) abort
   return escape(a:string, '?+*\^$.|{}[]()')
 endfunction
 
+function! test#base#no_colors() abort
+  let strategy = get(g:, 'test#strategy', 'basic')
+  return has('gui_running') && strategy == 'basic'
+endfunction
+
 function! test#base#nearest_test(position, patterns) abort
   let test        = []
   let namespace   = []

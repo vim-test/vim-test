@@ -15,7 +15,13 @@ function! test#php#phpunit#build_position(type, position) abort
 endfunction
 
 function! test#php#phpunit#build_args(args) abort
-  return a:args
+  let args = a:args
+
+  if !test#base#no_colors()
+    let args = ['--colors'] + args
+  endif
+
+  return args
 endfunction
 
 function! test#php#phpunit#executable() abort

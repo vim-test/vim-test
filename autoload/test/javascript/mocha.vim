@@ -21,7 +21,13 @@ function! test#javascript#mocha#build_position(type, position) abort
 endfunction
 
 function! test#javascript#mocha#build_args(args) abort
-  return a:args
+  let args = a:args
+
+  if test#base#no_colors()
+    let args = ['--no-colors'] + args
+  endif
+
+  return args
 endfunction
 
 function! test#javascript#mocha#executable() abort

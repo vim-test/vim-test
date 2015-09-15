@@ -17,7 +17,13 @@ function! test#ruby#rspec#build_position(type, position) abort
 endfunction
 
 function! test#ruby#rspec#build_args(args) abort
-  return a:args
+  let args = a:args
+
+  if test#base#no_colors()
+    let args = ['--no-color'] + args
+  endif
+
+  return args
 endfunction
 
 function! test#ruby#rspec#executable() abort

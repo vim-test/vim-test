@@ -21,7 +21,13 @@ function! test#php#behat#build_position(type, position) abort
 endfunction
 
 function! test#php#behat#build_args(args) abort
-  return a:args
+  let args = a:args
+
+  if test#base#no_colors()
+    let args = ['--no-ansi'] + args
+  endif
+
+  return args
 endfunction
 
 function! test#php#behat#executable() abort

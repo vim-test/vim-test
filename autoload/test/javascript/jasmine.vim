@@ -21,6 +21,10 @@ function! test#javascript#jasmine#build_args(args) abort
     let args = args + ['spec/']
   endif
 
+  if test#base#no_colors()
+    let args = ['--noColor'] + args
+  endif
+
   return args
 endfunction
 

@@ -15,14 +15,14 @@ describe "PHPUnit"
     view NormalTest.php
     TestFile
 
-    Expect g:test#last_command == 'phpunit NormalTest.php'
+    Expect g:test#last_command == 'phpunit --colors NormalTest.php'
   end
 
   it "runs test suites"
     view NormalTest.php
     TestSuite
 
-    Expect g:test#last_command == 'phpunit'
+    Expect g:test#last_command == 'phpunit --colors'
   end
 
   it "doesn't recognize files that don't end with 'Test'"

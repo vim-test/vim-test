@@ -28,7 +28,7 @@ So I decided to create test.vim, featuring:
 
 * zero dependencies
 * zero configuration required (it Does the Right Thing™, see [**Philosophy**](https://github.com/janko-m/vim-test/wiki))
-* inteface for adding new testing frameworks
+* interface for adding new testing frameworks
 * automatic detection of correct test runner
 * **polyfill** for nearest tests (by [constructing regexes](#commands))
 * built-in integration with Dispatch/Vimux/Tslime

@@ -87,7 +87,7 @@ let test#strategy = "dispatch"
 | [**Tslime.vim**](https://github.com/kikijump/tslime.vim)                        | `tslime`   | Runs test commands in a tmux pane you specify.                                   |
 | [**Vim&nbsp;Tmux&nbsp;Runner**](https://github.com/christoomey/vim-tmux-runner) | `vtr`      | Runs test commands in a small tmux pane.                                         |
 | **Terminal.app**                                                                | `terminal` | Sends test commands to Terminal.app (useful in MacVim GUI).                      |
-| **iTerm.app**                                                                   | `iterm`    | Sends test commands to iTerm.app (useful in MacVim GUI).                         |
+| **iTerm2.app**                                                                  | `iterm`    | Sends test commands to iTerm2.app (useful in MacVim GUI).                        |
 | **Vagrant**                                                                     | `vagrant`  | Runs test commands with `vagrant ssh`.                                           |
 
 ### Custom Strategies

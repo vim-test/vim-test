@@ -1,23 +1,17 @@
 #!/usr/bin/osascript
 
 on run argv
-  tell application "iTerm"
-    if (count of terminals) = 0 then
-      set _terminal to (make new terminal)
-    else
-      set _terminal to current terminal
+  tell application "iTerm2"
+    set _window to (current window)
+    if _window is equal to missing value then
+      create window with default profile
     end if
-
-    activate
-
-    tell _terminal
-      tell the current session
+    tell current window
+      tell current session
         write text (item 1 of argv)
       end tell
     end tell
   end tell
-
-  delay 0.02
 
   tell application "MacVim"
     activate

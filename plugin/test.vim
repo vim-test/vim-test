@@ -22,7 +22,7 @@ call s:extend(g:test#runners, {
   \ 'Shell':      ['Bats'],
   \ 'VimL':       ['VSpec', 'Vader'],
   \ 'Lua':        ['Busted'],
-  \ 'PHP':        ['PHPUnit', 'Behat'],
+  \ 'PHP':        ['PHPUnit', 'Behat', 'PHPSpec'],
 \})
 
 let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})

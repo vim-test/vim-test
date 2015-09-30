@@ -29,6 +29,23 @@ describe "Mocha"
       Expect g:test#last_command == 'mocha test/normal.js --grep ''Math Addition adds two numbers'''
     end
 
+    it "aliases context to describe"
+      view +1 test/context.js
+      TestNearest
+
+      Expect g:test#last_command == 'mocha test/context.js --grep ''Math'''
+
+      view +2 test/context.js
+      TestNearest
+
+      Expect g:test#last_command == 'mocha test/context.js --grep ''Math Addition'''
+
+      view +3 test/context.js
+      TestNearest
+
+      Expect g:test#last_command == 'mocha test/context.js --grep ''Math Addition adds two numbers'''
+    end
+
     it "runs CoffeeScript"
       view +1 test/normal.coffee
       TestNearest

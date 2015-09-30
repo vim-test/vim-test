@@ -27,12 +27,12 @@ describe "PHPUnit"
     view +9 NormalTest.php
     TestNearest
 
-    Expect g:test#last_command == "phpunit --colors NormalTest.php --filter 'testShouldAddTwoNumbers'"
+    Expect g:test#last_command == "phpunit --colors --filter 'testShouldAddTwoNumbers' NormalTest.php"
 
     view +14 NormalTest.php
     TestNearest
 
-    Expect g:test#last_command == "phpunit --colors NormalTest.php --filter 'testShouldSubtractTwoNumbers'"
+    Expect g:test#last_command == "phpunit --colors --filter 'testShouldSubtractTwoNumbers' NormalTest.php"
   end
 
   it "runs test suites"

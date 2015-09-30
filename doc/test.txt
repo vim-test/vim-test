@@ -118,7 +118,7 @@ In all commands [args] are forwarded to the underlying test runner.
 :PHPUnit [args]              Uses the `phpunit` command.
 
                                                 *test-:Behat*
-:Behat [args]              Uses the `behat` command.
+:Behat [args]                Uses the `behat` command.
 
                                                 *test-:PHPSpec*
 :PHPSpec [args]              Uses the `phpspec` command.

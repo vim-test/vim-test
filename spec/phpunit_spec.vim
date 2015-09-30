@@ -18,6 +18,23 @@ describe "PHPUnit"
     Expect g:test#last_command == 'phpunit --colors NormalTest.php'
   end
 
+  it "runs nearest tests"
+    view +1 NormalTest.php
+    TestNearest
+
+    Expect g:test#last_command == "phpunit --colors NormalTest.php"
+
+	view +9 NormalTest.php
+    TestNearest
+
+    Expect g:test#last_command == "phpunit --colors NormalTest.php --filter 'testShouldAddTwoNumbers'"
+
+    view +14 NormalTest.php
+    TestNearest
+
+    Expect g:test#last_command == "phpunit --colors NormalTest.php --filter 'testShouldSubtractTwoNumbers'"
+  end
+
   it "runs test suites"
     view NormalTest.php
     TestSuite

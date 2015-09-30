@@ -10,4 +10,9 @@ class NormalTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(2, 1+1);
     }
+
+    public function testShouldSubtractTwoNumbers()
+    {
+        $this->assertEquals(2, 4-2);
+    }
 }

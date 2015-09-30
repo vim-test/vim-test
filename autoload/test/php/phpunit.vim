@@ -7,7 +7,11 @@ function! test#php#phpunit#test_file(file) abort
 endfunction
 
 function! test#php#phpunit#build_position(type, position) abort
-  if a:type == 'nearest' || a:type == 'file'
+  if a:type == 'nearest'
+    let name = s:nearest_test(a:position)
+    if !empty(name) | let name = '--filter '.shellescape(name, 1) | endif
+    return [a:position['file'], name]
+  elseif a:type == 'file'
     return [a:position['file']]
   else
     return []
@@ -32,4 +36,10 @@ function! test#php#phpunit#executable() abort
   else
     return 'phpunit'
   endif
+endfunction
+
+function! s:nearest_test(position)
+  let patterns = {'test': ['\vpublic function (test\w*)\(\)'], 'namespace': []}
+  let name = test#base#nearest_test(a:position, patterns)
+  return join(name['test'])
 endfunction

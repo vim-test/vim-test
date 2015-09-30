@@ -120,6 +120,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Behat*
 :Behat [args]              Uses the `behat` command.
 
+                                                *test-:PHPSpec*
+:PHPSpec [args]              Uses the `phpspec` command.
+
 STRATEGIES                                      *test-strategies*
 
 Multiple strategies are supported for running tests.

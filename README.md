@@ -17,7 +17,7 @@ Currently the following testing frameworks are supported:
 | **Shell**      | Bats                                  | `bats`                          |
 | **VimScript**  | VSpec, Vader.vim                      | `vspec`, `vader`                |
 | **Lua**        | Busted                                | `busted`                        |
-| **PHP**        | PHPUnit, Behat                        | `phpunit`, `behat`              |
+| **PHP**        | PHPUnit, Behat, PHPSpec               | `phpunit`, `behat`, `phpspec`   |
 
 ## Idea
 

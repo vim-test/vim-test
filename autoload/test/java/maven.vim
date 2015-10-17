@@ -7,6 +7,8 @@ function! test#java#maven#test_file(file) abort
 endfunction
 
 function! test#java#maven#build_position(type, position) abort
+  let filename = fnamemodify(a:position['file'], ':t:r')
+
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
@@ -15,8 +17,6 @@ function! test#java#maven#build_position(type, position) abort
       return [filename]
     endif
   elseif a:type == 'file'
-    let strip_extension = split(a:position['file'], "\.java")[1]
-    let filename = split(strip_extension, "/")[-1]
     return [filename]
   else
     return []

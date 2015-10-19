@@ -9,7 +9,6 @@ Currently the following testing frameworks are supported:
 | Language       | Frameworks                            | Identifiers                     |
 | :------------: | ------------------------------------- | ------------------------------- |
 | **Ruby**       | RSpec, [Minitest][minitest], Cucumber | `rspec`, `minitest`, `cucumber` |
-| **Java**       | Maven                                 | `maven`                         |
 | **JavaScript** | Mocha, Jasmine                        | `mocha`, `jasmine`              |
 | **Python**     | Nose, PyTest, Django                  | `nose`, `pytest`, `djangotest`  |
 | **Elixir**     | ExUnit                                | `exunit`                        |
@@ -19,6 +18,7 @@ Currently the following testing frameworks are supported:
 | **VimScript**  | VSpec, Vader.vim                      | `vspec`, `vader`                |
 | **Lua**        | Busted                                | `busted`                        |
 | **PHP**        | PHPUnit, Behat, PHPSpec               | `phpunit`, `behat`, `phpspec`   |
+| **Java**       | Maven                                 | `maventest`                     |
 
 ## Idea
 

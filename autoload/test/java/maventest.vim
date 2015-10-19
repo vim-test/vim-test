@@ -1,12 +1,12 @@
-if !exists('g:test#java#maven#file_pattern')
-  let g:test#java#maven#file_pattern = '\v^.*[Tt]est\.java$'
+if !exists('g:test#java#maventest#file_pattern')
+  let g:test#java#maventest#file_pattern = '\v^.*[Tt]est\.java$'
 endif
 
-function! test#java#maven#test_file(file) abort
-  return a:file =~? g:test#java#maven#file_pattern
+function! test#java#maventest#test_file(file) abort
+  return a:file =~? g:test#java#maventest#file_pattern
 endfunction
 
-function! test#java#maven#build_position(type, position) abort
+function! test#java#maventest#build_position(type, position) abort
   let filename = fnamemodify(a:position['file'], ':t:r')
 
   if a:type == 'nearest'
@@ -23,13 +23,13 @@ function! test#java#maven#build_position(type, position) abort
   endif
 endfunction
 
-function! test#java#maven#build_args(args) abort
+function! test#java#maventest#build_args(args) abort
   let args = ['-Dtest='] + a:args
   return [join(args, "")]
 
 endfunction
 
-function! test#java#maven#executable() abort
+function! test#java#maventest#executable() abort
   return 'mvn test'
 endfunction
 

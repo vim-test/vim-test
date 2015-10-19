@@ -11,7 +11,7 @@ Currently the following testing frameworks are supported:
 | **Ruby**       | RSpec, [Minitest][minitest], Cucumber | `rspec`, `minitest`, `cucumber` |
 | **JavaScript** | Mocha, Jasmine                        | `mocha`, `jasmine`              |
 | **Python**     | Nose, PyTest, Django                  | `nose`, `pytest`, `djangotest`  |
-| **Elixir**     | ExUnit                                | `exunit`                        |
+| **Elixir**     | ExUnit, ESpec                         | `exunit`, `espec`               |
 | **Go**         | Go                                    | `gotest`                        |
 | **Clojure**    | Fireplace.vim                         | `fireplacetest`                 |
 | **Shell**      | Bats                                  | `bats`                          |

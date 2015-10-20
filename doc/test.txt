@@ -92,6 +92,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:ExUnit*
 :ExUnit [args]               Uses the `mix` `test` command.
 
+                                                *test-:ESpec*
+:ESpec [args]                Uses the `mix` `espec` command.
+
                                                 *test-:GoTest*
 :GoTest [args]               Uses the `go` `test` command.
 

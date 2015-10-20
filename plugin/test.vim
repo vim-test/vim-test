@@ -16,7 +16,7 @@ call s:extend(g:test#runners, {
   \ 'Ruby':       ['Minitest', 'RSpec', 'Cucumber'],
   \ 'JavaScript': ['Mocha', 'Jasmine'],
   \ 'Python':     ['DjangoTest', 'PyTest', 'Nose'],
-  \ 'Elixir':     ['ExUnit'],
+  \ 'Elixir':     ['ExUnit', 'ESpec'],
   \ 'Go':         ['GoTest'],
   \ 'Clojure':    ['FireplaceTest'],
   \ 'Shell':      ['Bats'],

@@ -12,7 +12,8 @@ function! test#go#gotest#build_position(type, position) abort
     if !empty(name) | let name = '-run '.shellescape(name, 1) | endif
     return [name]
   elseif a:type == 'file'
-    return []
+    let path = fnamemodify(a:position['file'], ':h')
+    return path != '.' ? ['./' . path . '/...'] : []
   else
     return ['./...']
   endif

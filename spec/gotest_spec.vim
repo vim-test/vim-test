@@ -32,6 +32,13 @@ describe "GoTest"
     Expect g:test#last_command == 'go test'
   end
 
+  it "runs tests in subdirectory"
+    view mypackage/normal_test.go
+    TestFile
+
+    Expect g:test#last_command == 'go test ./mypackage/...'
+  end
+
   it "runs test suites"
     view normal_test.go
     TestSuite

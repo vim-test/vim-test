@@ -39,7 +39,12 @@ function! test#php#phpunit#executable() abort
 endfunction
 
 function! s:nearest_test(position)
-  let patterns = {'test': ['\vpublic function (test\w*)\('], 'namespace': []}
+  let patterns = {
+    \ 'test': [
+    \    '\vpublic function (test\w*)\(',
+    \    '\vpublic function (\w*)\('],
+    \ 'namespace': []
+    \}
   let name = test#base#nearest_test(a:position, patterns)
   return join(name['test'])
 endfunction

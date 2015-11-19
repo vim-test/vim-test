@@ -41,7 +41,6 @@ endfunction
 function! s:nearest_test(position)
   let patterns = {
     \ 'test': [
-    \    '\vpublic function (test\w*)\(',
     \    '\vpublic function (\w*)\('],
     \ 'namespace': []
     \}

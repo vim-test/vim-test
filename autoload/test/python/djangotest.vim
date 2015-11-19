@@ -7,7 +7,7 @@ function! test#python#djangotest#test_file(file) abort
     if exists('g:test#python#runner')
       return g:test#python#runner == 'djangotest'
     else
-      return filereadable('./manage.py') && executable('django-admin') 
+      return filereadable('python manage.py') && executable('django-admin') 
     endif
   endif
 endfunction
@@ -33,7 +33,7 @@ function! test#python#djangotest#build_args(args) abort
 endfunction
 
 function! test#python#djangotest#executable() abort
-  return './manage.py test'
+  return 'python manage.py test'
 endfunction
 
 function! s:get_import_path(filepath) abort

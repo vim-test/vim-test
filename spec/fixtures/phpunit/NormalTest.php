@@ -31,4 +31,24 @@ class NormalTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals($expected, $a + $b);
     }
+
+    /**
+     * @test
+     */
+    public function aTestMarkedWithTestAnnotation()
+    {
+        $this->assertEquals(2, 4-21);
+    }
+
+    /**
+     * Possible comments
+     *
+     * @someOtherAnnotation
+     * @test
+     * @param foo bar
+     */
+    public function aTestMarkedWithTestAnnotationAndCrazyDocblock()
+    {
+        $this->assertEquals(2, 4-21);
+    }
 }

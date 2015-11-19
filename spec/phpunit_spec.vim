@@ -40,6 +40,18 @@ describe "PHPUnit"
     Expect g:test#last_command == "phpunit --colors --filter 'testShouldAddToExpectedValue' NormalTest.php"
   end
 
+  it  "runs nearest test marked with @test annotation"
+    view +40 NormalTest.php
+    TestNearest
+
+    Expect g:test#last_command == "phpunit --colors --filter 'aTestMarkedWithTestAnnotation' NormalTest.php"
+
+    view +50 NormalTest.php
+    TestNearest
+
+    Expect g:test#last_command == "phpunit --colors --filter 'aTestMarkedWithTestAnnotationAndCrazyDocblock' NormalTest.php"
+  end
+
   it "runs test suites"
     view NormalTest.php
     TestSuite

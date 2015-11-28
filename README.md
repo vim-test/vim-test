@@ -6,19 +6,19 @@ A Vim wrapper for running tests on different granularities.
 
 Currently the following testing frameworks are supported:
 
-| Language       | Frameworks                            | Identifiers                     |
-| :------------: | ------------------------------------- | ------------------------------- |
-| **Ruby**       | RSpec, [Minitest][minitest], Cucumber | `rspec`, `minitest`, `cucumber` |
-| **JavaScript** | Mocha, Jasmine                        | `mocha`, `jasmine`              |
-| **Python**     | Nose, PyTest, Django                  | `nose`, `pytest`, `djangotest`  |
-| **Elixir**     | ExUnit, ESpec                         | `exunit`, `espec`               |
-| **Go**         | Go                                    | `gotest`                        |
-| **Clojure**    | Fireplace.vim                         | `fireplacetest`                 |
-| **Shell**      | Bats                                  | `bats`                          |
-| **VimScript**  | VSpec, Vader.vim                      | `vspec`, `vader`                |
-| **Lua**        | Busted                                | `busted`                        |
-| **PHP**        | PHPUnit, Behat, PHPSpec               | `phpunit`, `behat`, `phpspec`   |
-| **Java**       | Maven                                 | `maventest`                     |
+| Language       | Frameworks                            | Identifiers                                  |
+| :------------: | ------------------------------------- | -------------------------------              |
+| **Ruby**       | RSpec, [Minitest][minitest], Cucumber | `rspec`, `minitest`, `cucumber`              |
+| **JavaScript** | Mocha, Jasmine                        | `mocha`, `jasmine`                           |
+| **Python**     | Nose, PyTest, Django                  | `nose`, `pytest`, `djangotest`, `djangonose` |
+| **Elixir**     | ExUnit, ESpec                         | `exunit`, `espec`                            |
+| **Go**         | Go                                    | `gotest`                                     |
+| **Clojure**    | Fireplace.vim                         | `fireplacetest`                              |
+| **Shell**      | Bats                                  | `bats`                                       |
+| **VimScript**  | VSpec, Vader.vim                      | `vspec`, `vader`                             |
+| **Lua**        | Busted                                | `busted`                                     |
+| **PHP**        | PHPUnit, Behat, PHPSpec               | `phpunit`, `behat`, `phpspec`                |
+| **Java**       | Maven                                 | `maventest`                                  |
 
 ## Idea
 
@@ -184,10 +184,7 @@ the first available will be chosen, but you can force a specific one:
 
 ``` vim
 let test#python#runner = 'pytest'
-" or
-let test#python#runner = 'nose'
-" or
-let test#python#runner = 'djangotest'
+" Runners available are 'pytest', 'nose', 'djangotest' and 'djangonose'
 ```
 
 ## Extending

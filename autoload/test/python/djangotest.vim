@@ -5,7 +5,7 @@ endif
 function! test#python#djangotest#test_file(file) abort
   if fnamemodify(a:file, ':t') =~# g:test#python#djangotest#file_pattern
     if exists('g:test#python#runner')
-      return g:test#python#runner == 'djangotest'
+      return index(['djangotest', 'djangonose'], g:test#python#runner) != -1
     else
       return filereadable('python manage.py') && executable('django-admin') 
     endif
@@ -17,7 +17,7 @@ function! test#python#djangotest#build_position(type, position) abort
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return [path . '.' . name]
+      return [path . s:separator() . name]
     else
       return [path]
     endif
@@ -47,4 +47,9 @@ endfunction!
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#python#patterns)
   return join(name['namespace'] + name['test'], '.')
+endfunction
+
+function! s:separator() abort
+  let python_runner = get(g:, 'test#python#runner', 'djangotest')
+  return {'djangotest': '.', 'djangonose': ':'}[python_runner]
 endfunction

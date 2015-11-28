@@ -56,4 +56,12 @@ describe "DjangoTest"
     Expect g:test#last_command == 'python manage.py test'
   end
 
+  it "runs django nose runner"
+    let g:test#python#runner = 'djangonose'
+    view +2 module/test_class.py
+    TestNearest
+
+    Expect g:test#last_command == 'python manage.py test module.test_class:TestNumbers.test_numbers'
+  end
+
 end

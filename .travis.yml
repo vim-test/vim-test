@@ -1,0 +1,12 @@
+language: ruby
+
+sudo: false
+
+rvm:
+  - 2.2
+
+before_script:
+  - "gem install vim-flavor"
+  - "vim-flavor install"
+
+script: "vim-flavor test spec/"

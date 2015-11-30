@@ -11,7 +11,7 @@ function! test#strategy#basic(cmd) abort
 endfunction
 
 function! test#strategy#neovim(cmd) abort
-  enew | call termopen(a:cmd) | startinsert
+  botright new | call termopen(a:cmd) | startinsert
 endfunction
 
 function! test#strategy#neoterm(cmd) abort

@@ -223,11 +223,11 @@ CONFIGURATION                                   *test-configuration*
 You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your prefered options with
 >
-  let test#ruby#minitest#options = '--verbose'
+  let g:test#ruby#minitest#options = '--verbose'
 <
 Or, if you prefer more granular approach, you can do
 >
-  let test#ruby#rspec#options = {
+  let g:test#ruby#rspec#options = {
     \ 'nearest': '--format documentation',
     \ 'file':    '--format documentation',
     \ 'suite':   '--tag ~slow',
@@ -235,7 +235,11 @@ Or, if you prefer more granular approach, you can do
 <
 If you want to manually configure a test runner's executable, you can do
 >
-  let test#ruby#rspec#executable = 'foreman run rspec'
+  let g:test#ruby#rspec#executable = 'foreman run rspec'
+<
+If you want to disable clearing the screen for some strategies, you can do
+>
+  let g:test#preserve_screen = 1
 <
 ABOUT                                           *test-about*
 

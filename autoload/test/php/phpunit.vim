@@ -29,6 +29,9 @@ function! test#php#phpunit#build_args(args) abort
 endfunction
 
 function! test#php#phpunit#executable() abort
+  if exists('g:test#php#phpunit#executable')
+    return g:test#php#phpunit#executable
+  endif
   if filereadable('./vendor/bin/phpunit')
     return './vendor/bin/phpunit'
   elseif filereadable('./bin/phpunit')

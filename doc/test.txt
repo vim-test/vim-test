@@ -180,6 +180,14 @@ Runs test commands in a small Tmux pane. Requires the
 >
   let test#strategy = 'vtr'
 <
+<
+VimShell ~
+
+Runs test commands in a shell written in VimScript. Requires the
+[VimShell](https://github.com/Shougo/vimshell.vim) plugin.
+>
+  let test#strategy = 'vimshell'
+<
 Terminal.app / iTerm.app ~
 
 If you're in MacVim GUI, you can use this strategy to send the test commands

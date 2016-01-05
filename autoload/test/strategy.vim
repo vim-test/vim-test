@@ -34,6 +34,10 @@ function! test#strategy#tslime(cmd) abort
   call Send_to_Tmux(s:pretty_command(a:cmd)."\n")
 endfunction
 
+function! test#strategy#vimshell(cmd) abort
+  execute 'VimShellExecute '.a:cmd
+endfunction
+
 function! test#strategy#terminal(cmd) abort
   call s:execute_script('osx_terminal', s:pretty_command(a:cmd))
 endfunction

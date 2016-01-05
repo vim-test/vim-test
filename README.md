@@ -86,6 +86,7 @@ let test#strategy = "dispatch"
 | **[Dispatch]**                  | `dispatch` | Runs test commands with `:Dispatch`.                                             |
 | **[Vimux]**                     | `vimux`    | Runs test commands in a small tmux pane at the bottom of your terminal.          |
 | **[Tslime]**                    | `tslime`   | Runs test commands in a tmux pane you specify.                                   |
+| **[VimShell]**                  | `vimshell` | Runs test commands in a shell written in VimScript.                              |
 | **[Vim&nbsp;Tmux&nbsp;Runner]** | `vtr`      | Runs test commands in a small tmux pane.                                         |
 | **Terminal.app**                | `terminal` | Sends test commands to Terminal (useful in MacVim GUI).                          |
 | **iTerm2.app**                  | `iterm`    | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                     |
@@ -267,3 +268,4 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 [Vimux]: https://github.com/benmills/vimux
 [Tslime]: https://github.com/kikijump/tslime.vim
 [Vim&nbsp;Tmux&nbsp;Runner]: https://github.com/christoomey/vim-tmux-runner
+[VimShell]: https://github.com/Shougo/vimshell.vim

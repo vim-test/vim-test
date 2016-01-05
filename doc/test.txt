@@ -152,7 +152,7 @@ docs for display customization.
 >
   let test#strategy = 'neoterm'
 <
-Dispatch.vim ~
+Dispatch ~
 
 Runs test commands with `:Dispatch`. Requires the
 [Dispatch.vim](https://github.com/tpope/vim-dispatch) plugin.
@@ -166,7 +166,7 @@ Requires the [Vimux](https://github.com/benmills/vimux) plugin (and Tmux).
 >
   let test#strategy = 'vimux'
 <
-Tslime.vim ~
+Tslime ~
 
 Runs test commands in a Tmux pane you specify. Requires the
 [Tslime.vim](https://github.com/kikijump/tslime.vim) plugin (and Tmux).

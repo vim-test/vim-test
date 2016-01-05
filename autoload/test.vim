@@ -51,6 +51,8 @@ function! test#execute(runner, args) abort
 endfunction
 
 function! test#shell(cmd) abort
+  let g:test#last_command = a:cmd
+
   if a:cmd =~# '^:'
     let strategy = 'vimscript'
   else
@@ -62,8 +64,6 @@ function! test#shell(cmd) abort
   else
     call test#strategy#{strategy}(a:cmd)
   endif
-
-  let g:test#last_command = a:cmd
 endfunction
 
 function! test#determine_runner(file) abort

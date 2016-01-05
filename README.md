@@ -140,8 +140,13 @@ test runner (which also accept options):
 :Nose --failed
 ```
 
-I found these commands to be really useful when using multiple testing
-frameworks in the same project.
+These commands are useful when using multiple testing frameworks in the same
+project, or as a wrapper around your executable. To avoid pollution they are
+not defined by default, instead you can choose the ones you want:
+
+```vim
+let g:test#runner_commands = ['Minitest', 'Mocha']
+```
 
 ## Configuring
 

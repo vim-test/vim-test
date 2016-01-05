@@ -27,6 +27,7 @@ call s:extend(g:test#runners, {
 \})
 
 let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})
+let g:test#runner_commands = get(g:, 'test#runner_commands', [])
 
 command! -nargs=* -bar TestNearest call test#run('nearest', <q-args>)
 command! -nargs=* -bar TestFile    call test#run('file', <q-args>)
@@ -36,10 +37,12 @@ command!          -bar TestVisit   call test#visit()
 
 for [s:language, s:runners] in items(g:test#runners)
   for s:runner in s:runners
-    if exists(':'.s:runner) | continue | endif
-    let s:runner_id = tolower(s:language).'#'.tolower(s:runner)
-    execute 'command! -bar -nargs=* -complete=file'
-          \ s:runner
-          \ 'call test#execute("'.s:runner_id.'", split(<q-args>))'
+    if index(g:test#runner_commands, s:runner) != -1
+      if exists(':'.s:runner) | continue | endif
+      let s:runner_id = tolower(s:language).'#'.tolower(s:runner)
+      execute 'command! -bar -nargs=* -complete=file'
+            \ s:runner
+            \ 'call test#execute("'.s:runner_id.'", split(<q-args>))'
+    endif
   endfor
 endfor

@@ -198,14 +198,6 @@ isn't that nice).
   " or
   let test#strategy = 'iterm'
 <
-
-Vagrant ~
-
-Runs test commands with `vagrant` `ssh`. It finds the project root by extracting
-the "config.vm.synced_folder" configuration from Vagrantfile.
->
-  let test#strategy = 'vagrant'
-<
 CUSTOM STRATEGIES                               *test-custom-strategies*
 
 Strategy is a function with command for running tests as argument.

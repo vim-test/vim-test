@@ -46,23 +46,6 @@ function! test#strategy#iterm(cmd) abort
   call s:execute_script('osx_iterm', s:pretty_command(a:cmd))
 endfunction
 
-function! test#strategy#vagrant(cmd) abort
-  let vagrant_project = get(matchlist(s:cat('Vagrantfile'), '\vconfig\.vm.synced_folder ["''].+[''"], ["''](.+)[''"]'), 1)
-
-  if empty(vagrant_project)
-    if empty(glob('Vagrantfile'))
-      echoerr "Vagrantfile wasn't found"
-    else
-      echoerr "Cannot find Vagrant project root"
-    endif
-    return
-  endif
-
-  let cmd = "vagrant ssh --command ".shellescape('cd '.vagrant_project.'; '.a:cmd)
-
-  call test#strategy#basic(cmd)
-endfunction
-
 function! s:execute_script(name, cmd) abort
   let script_path = g:test#plugin_path . '/bin/' . a:name
   let cmd = join([script_path, shellescape(a:cmd)])

@@ -90,7 +90,6 @@ let test#strategy = "dispatch"
 | **[Vim&nbsp;Tmux&nbsp;Runner]** | `vtr`      | Runs test commands in a small tmux pane.                                         |
 | **Terminal.app**                | `terminal` | Sends test commands to Terminal (useful in MacVim GUI).                          |
 | **iTerm2.app**                  | `iterm`    | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                     |
-| **Vagrant**                     | `vagrant`  | Runs test commands with `vagrant ssh`.                                           |
 
 Some strategies clear the screen before executing the test command, but you can
 disable that by setting `g:test#preserve_screen`:

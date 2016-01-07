@@ -27,6 +27,7 @@ call s:extend(g:test#runners, {
 \})
 
 let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})
+let g:test#custom_transformations = get(g:, 'test#custom_transformations', {})
 let g:test#runner_commands = get(g:, 'test#runner_commands', [])
 
 command! -nargs=* -bar TestNearest call test#run('nearest', <q-args>)

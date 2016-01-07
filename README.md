@@ -107,12 +107,28 @@ comes with many predefined strategies (see above), but if none of them suit
 your needs, you can define your own custom strategy like this:
 
 ```vim
-function! MyStrategy(cmd)
+function! EchoStrategy(cmd)
   echo 'It works! Command for running tests: ' . a:cmd
 endfunction
 
-let g:test#custom_strategies = {'my_strategy': function('MyStrategy')}
-let g:test#strategy = 'my_strategy'
+let g:test#custom_strategies = {'echo': function('EchoStrategy')}
+let g:test#strategy = 'echo'
+```
+
+## Transformations
+
+You can automatically apply transformations of your test commands by
+registering a "transformation" function. The following example demonstrates how
+you could set up a transformation for Vagrant:
+
+```vim
+function! VagrantTransform(cmd) abort
+  let vagrant_project = get(matchlist(s:cat('Vagrantfile'), '\vconfig\.vm.synced_folder ["''].+[''"], ["''](.+)[''"]'), 1)
+  return 'vagrant ssh --command '.shellescape('cd '.vagrant_project.'; '.a:cmd)
+endfunction
+
+let g:test#custom_transformations = {'vagrant': function('VagrantTransform')}
+let g:test#transformation = 'vagrant'
 ```
 
 ## Commands

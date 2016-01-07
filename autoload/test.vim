@@ -52,17 +52,22 @@ endfunction
 
 function! test#shell(cmd) abort
   let g:test#last_command = a:cmd
+  let cmd = a:cmd
 
-  if a:cmd =~# '^:'
+  if has_key(g:, 'test#transformation')
+    let cmd = g:test#custom_transformations[g:test#transformation](cmd)
+  endif
+
+  if cmd =~# '^:'
     let strategy = 'vimscript'
   else
     let strategy = get(g:, 'test#strategy', 'basic')
   endif
 
   if has_key(g:test#custom_strategies, strategy)
-    call g:test#custom_strategies[strategy](a:cmd)
+    call g:test#custom_strategies[strategy](cmd)
   else
-    call test#strategy#{strategy}(a:cmd)
+    call test#strategy#{strategy}(cmd)
   endif
 endfunction
 

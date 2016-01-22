@@ -29,6 +29,7 @@ call s:extend(g:test#runners, {
 let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})
 let g:test#custom_transformations = get(g:, 'test#custom_transformations', {})
 let g:test#runner_commands = get(g:, 'test#runner_commands', [])
+let g:test#filename_modifier = get(g:, 'test#filename_modifier', ':.')
 
 command! -nargs=* -bar TestNearest call test#run('nearest', <q-args>)
 command! -nargs=* -bar TestFile    call test#run('file', <q-args>)

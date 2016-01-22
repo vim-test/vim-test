@@ -75,7 +75,7 @@ function! test#determine_runner(file) abort
   for [language, runners] in items(g:test#runners)
     for runner in runners
       let runner = tolower(language).'#'.tolower(runner)
-      if test#base#test_file(runner, a:file)
+      if test#base#test_file(runner, fnamemodify(a:file, ':.'))
         return runner
       endif
     endfor
@@ -83,12 +83,12 @@ function! test#determine_runner(file) abort
 endfunction
 
 function! test#test_file() abort
-  return !empty(test#determine_runner(expand('%:.')))
+  return !empty(test#determine_runner(expand('%')))
 endfunction
 
 function! s:get_position() abort
   return {
-    \ 'file': expand('%:.'),
+    \ 'file': expand('%'.g:test#filename_modifier),
     \ 'line': line('.'),
     \ 'col':  col('.'),
   \}

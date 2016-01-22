@@ -134,7 +134,7 @@ let g:test#transformation = 'vagrant'
 
 ![nearest polyfill](/screenshots/nearest.gif)
 
-You can execute Test.vim commands directly, and pass them CLI options:
+You can execute test.vim commands directly, and pass them CLI options:
 
 ```
 :TestNearest --verbose
@@ -200,6 +200,19 @@ certain testing framework. You can override that pattern by overriding the
 
 ```vim
 let test#ruby#minitest#file_pattern = '_spec\.rb' " the default is '_test\.rb'
+```
+
+### Filename modifier
+
+By default test.vim generates file paths relative to the working directory. If
+you're using a strategy which sends commands to a shell which is `cd`-ed into
+another directory, you might want to change the filename modifier to generate
+absolute paths:
+
+```vim
+let test#filename_modifier = ':.' " produces "test/models/user_test.rb"
+let test#filename_modifier = ':p' " produces "/User/janko/Code/my_project/test/models/user_test.rb"
+let test#filename_modifier = ':~' " produces "~/Code/my_project/test/models/user_test.rb"
 ```
 
 ### Language-specific

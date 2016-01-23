@@ -32,4 +32,11 @@ describe "RSpec"
     Expect g:test#last_command == 'rspec'
   end
 
+  it "runs Turnip test files"
+    view spec/math.feature
+    TestFile
+
+    Expect g:test#last_command == 'rspec spec/math.feature'
+  end
+
 end

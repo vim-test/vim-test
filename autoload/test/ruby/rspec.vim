@@ -1,5 +1,5 @@
 if !exists('g:test#ruby#rspec#file_pattern')
-  let g:test#ruby#rspec#file_pattern = '_spec\.rb$'
+  let g:test#ruby#rspec#file_pattern = '\v(_spec\.rb|spec/.*\.feature)$'
 endif
 
 function! test#ruby#rspec#test_file(file) abort

@@ -36,6 +36,35 @@ function! test#base#no_colors() abort
   return has('gui_running') && strategy == 'basic'
 endfunction
 
+" Takes a position and a dictionary of patterns, and returns list of strings
+" that were matched in the file by the patterns from the given position
+" upwards. It can be used when a runner doesn't support running nearest tests
+" with line numbers, but supports regexes.
+"
+" The "position" argument is a dictionary created by this plugin:
+"
+"   {
+"     'file': 'test/foo_test.rb',
+"     'line': 11,
+"     'col': 2,
+"   }
+"
+" The "patterns" argument is a dictionary where keys are either "test" or
+" "namespace", and values are lists of regexes:
+"
+"   {
+"     'test': ['\v^\s*def (test_\w+)'],
+"     'namespace': ['\v^\s*%(class|module) (\S+)'],
+"   }
+"
+" If a line is matched, the substring corresponding to the 1st match group will
+" be returned. So for the above patterns this function might return something
+" like this:
+"
+"   {
+"     'test': ['test_calculates_time'],
+"     'namespace': ['CalculatorTest'],
+"   }
 function! test#base#nearest_test(position, patterns) abort
   let test        = []
   let namespace   = []

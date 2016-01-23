@@ -23,6 +23,7 @@ call s:extend(g:test#runners, {
   \ 'VimL':       ['VSpec', 'Vader'],
   \ 'Lua':        ['Busted'],
   \ 'PHP':        ['PHPUnit', 'Behat', 'PHPSpec'],
+  \ 'Perl':       ['Prove'],
   \ 'Java':       ['MavenTest'],
 \})
 

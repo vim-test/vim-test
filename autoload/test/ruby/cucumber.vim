@@ -33,7 +33,7 @@ function! test#ruby#cucumber#executable() abort
     return 'zeus cucumber'
   elseif filereadable('./bin/cucumber')
     return './bin/cucumber'
-  elseif filereadable('Gemfile')
+  elseif filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
     return 'bundle exec cucumber'
   else
     return 'cucumber'

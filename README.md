@@ -228,6 +228,15 @@ let test#python#runner = 'pytest'
 " Runners available are 'pytest', 'nose', 'djangotest' and 'djangonose'
 ```
 
+#### Ruby
+
+By default test commands will be prepended with `bundle exec` if a Gemfile is
+detected, but you can turn it off with
+
+```vim
+let test#ruby#bundle_exec = 0
+```
+
 ## Extending
 
 If you wish to extend this plugin with your own test runners, first of all,

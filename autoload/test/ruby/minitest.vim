@@ -69,13 +69,13 @@ function! test#ruby#minitest#executable() abort
       return 'zeus rake test'
     elseif filereadable('./bin/rake')
       return './bin/rake test'
-    elseif filereadable('Gemfile')
+    elseif filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
       return 'bundle exec rake test'
     else
       return 'rake test'
     endif
   else
-    if filereadable('Gemfile')
+    if filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
       return 'bundle exec ruby -I test'
     else
       return 'ruby -I test'

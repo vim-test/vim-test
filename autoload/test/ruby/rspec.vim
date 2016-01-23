@@ -31,7 +31,7 @@ function! test#ruby#rspec#executable() abort
     return 'zeus rspec'
   elseif filereadable('./bin/rspec')
     return './bin/rspec'
-  elseif filereadable('Gemfile')
+  elseif filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
     return 'bundle exec rspec'
   else
     return 'rspec'

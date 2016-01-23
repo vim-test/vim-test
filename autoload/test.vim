@@ -88,7 +88,7 @@ endfunction
 
 function! s:get_position() abort
   return {
-    \ 'file': expand('%'.g:test#filename_modifier),
+    \ 'file': expand('%'.get(g:, 'test#filename_modifier', ':.')),
     \ 'line': line('.'),
     \ 'col':  col('.'),
   \}

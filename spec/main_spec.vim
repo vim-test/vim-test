@@ -66,4 +66,15 @@ describe 'Main'
     Expect line('.') == 3
   end
 
+  it "generates paths according to the filename modifier"
+    let g:test#filename_modifier = ':p'
+
+    view foo_spec.rb
+    TestFile
+
+    Expect g:test#last_command == 'rspec '.getcwd().'/foo_spec.rb'
+
+    unlet g:test#filename_modifier
+  end
+
 end

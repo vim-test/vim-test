@@ -210,7 +210,7 @@ another directory, you might want to change the filename modifier to generate
 absolute paths:
 
 ```vim
-let test#filename_modifier = ':.' " test/models/user_test.rb
+let test#filename_modifier = ':.' " test/models/user_test.rb (default)
 let test#filename_modifier = ':p' " /User/janko/Code/my_project/test/models/user_test.rb
 let test#filename_modifier = ':~' " ~/Code/my_project/test/models/user_test.rb
 ```

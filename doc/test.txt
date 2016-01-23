@@ -243,9 +243,9 @@ If you want to disable clearing the screen for some strategies, you can do
 <
 You can instruct test.vim to generate absolute file paths:
 >
-  let test#filename_modifier = ':.' " produces "test/models/user_test.rb"
-  let test#filename_modifier = ':p' " produces "/User/janko/Code/my_project/test/models/user_test.rb"
-  let test#filename_modifier = ':~' " produces "~/Code/my_project/test/models/user_test.rb"
+  let test#filename_modifier = ':.' " test/models/user_test.rb
+  let test#filename_modifier = ':p' " /User/janko/Code/my_project/test/models/user_test.rb
+  let test#filename_modifier = ':~' " ~/Code/my_project/test/models/user_test.rb
 <
 ABOUT                                           *test-about*
 

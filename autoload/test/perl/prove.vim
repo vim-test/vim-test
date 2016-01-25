@@ -1,5 +1,5 @@
 if !exists('g:test#perl#prove#file_pattern')
-      let g:test#perl#prove#file_pattern = '\vt?/.*\.(t|pl)$'
+      let g:test#perl#prove#file_pattern = '\vt/.*\.(t)$'
 endif
 
 " Returns true if the given file belongs to your test runner

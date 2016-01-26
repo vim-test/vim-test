@@ -18,6 +18,7 @@ Currently the following testing frameworks are supported:
 | **VimScript**  | VSpec, Vader.vim                      | `vspec`, `vader`                             |
 | **Lua**        | Busted                                | `busted`                                     |
 | **PHP**        | PHPUnit, Behat, PHPSpec               | `phpunit`, `behat`, `phpspec`                |
+| **Perl**       | Prove                                 | `prove`                                      |
 | **Java**       | Maven                                 | `maventest`                                  |
 
 ## Idea

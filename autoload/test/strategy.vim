@@ -15,7 +15,7 @@ function! test#strategy#neovim(cmd) abort
 endfunction
 
 function! test#strategy#neoterm(cmd) abort
-  execute 'T '.a:cmd
+  call neoterm#do(a:cmd)
 endfunction
 
 function! test#strategy#vtr(cmd) abort

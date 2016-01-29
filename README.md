@@ -231,9 +231,9 @@ let test#python#runner = 'pytest'
 
 #### Ruby
 
-By default test commands will be run from a binstub (e.g., `./bin/rspec`)
-if one is present. Else test commands will be prepended with `bundle exec`
-if a Gemfile is detected, but you can turn it off with:
+Unless binstubs are detected (e.g. `bin/rspec`), test commands will
+automatically be prepended with `bundle exec` if a Gemfile is detected, but you
+can turn it off:
 
 ```vim
 let test#ruby#bundle_exec = 0

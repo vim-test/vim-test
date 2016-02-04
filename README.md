@@ -21,29 +21,18 @@ Currently the following testing frameworks are supported:
 | **Perl**       | Prove                                 | `prove`                                      |
 | **Java**       | Maven                                 | `maventest`                                  |
 
-## Idea
+## Features
 
-There are many different plug-ins that allow running tests from Vim (rspec.vim,
-vroom.vim, etc). test.vim differs from these in that it ships with support for a
-wide range of languages, runners, and execution environments (see:
-[strategies](#strategies)) and is easily extended when you need to add more.
-test.vim features:
+* Zero dependencies
+* Zero configuration required (it Does the Right Thing™, see [**Philosophy**](https://github.com/janko-m/vim-test/wiki))
+* Wide range of test runners which are automagically detected
+* **Polyfills** for nearest tests (by [constructing regexes](#commands))
+* Wide range of execution environments ("[strategies](#strategies)")
+* Fully customized CLI options configuration
+* Extendable with new runners and strategies
 
-* zero dependencies
-* zero configuration required (it Does the Right Thing™, see [**Philosophy**](https://github.com/janko-m/vim-test/wiki))
-* interface for adding new testing frameworks
-* automatic detection of correct test runner
-* **polyfill** for nearest tests (by [constructing regexes](#commands))
-* built-in integration with Dispatch/Vimux/Tslime
-* fully customized CLI options configuration
-
-Internally test.vim consists of a thoughtfully designed core, and testing
-frameworks are simply plugged in, so that they all work in the same unified
-way.
-
-Ruby users, you get all of the features of rspec.vim + vroom.vim, but
-without any of the tedious configuration (test.vim knows how you want to
-run your test command).
+Internally test.vim consists of a thoughtfully designed core, and test runners
+are simply plugged in, so that they all work in the same unified way.
 
 ## Setup
 

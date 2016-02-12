@@ -18,7 +18,17 @@ endfunction
 
 " Returns processed args (if you need to do any processing)
 function! test#perl#prove#build_args(args)
-    return a:args
+    let args = split(a:args[0], "::")
+
+    if test#base#no_colors()
+        let args[0] = ['--nocolor'] + args[0]
+    endif
+
+    if test#base#verbose()
+        let args[0] = ['--verbose']  + args[0]
+    endif
+
+    return [args[0], a:args[1], '::', args[1]]
 endfunction
 
 " Returns the executable of your test runner

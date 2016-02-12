@@ -18,30 +18,21 @@ Currently the following testing frameworks are supported:
 | **VimScript**  | VSpec, Vader.vim                      | `vspec`, `vader`                             |
 | **Lua**        | Busted                                | `busted`                                     |
 | **PHP**        | PHPUnit, Behat, PHPSpec               | `phpunit`, `behat`, `phpspec`                |
+| **Perl**       | Prove                                 | `prove`                                      |
 | **Java**       | Maven                                 | `maventest`                                  |
 
-## Idea
+## Features
 
-Since Gary Bernhardt invented testing from Vim, there have been multiple
-plugins implementing this functionality (rspec.vim, vroom.vim etc). However,
-all of these solutions have bad designs, unclear ideas and aren't extendable.
-So I decided to create test.vim, featuring:
+* Zero dependencies
+* Zero configuration required (it Does the Right Thing™, see [**Philosophy**](https://github.com/janko-m/vim-test/wiki))
+* Wide range of test runners which are automagically detected
+* **Polyfills** for nearest tests (by [constructing regexes](#commands))
+* Wide range of execution environments ("[strategies](#strategies)")
+* Fully customized CLI options configuration
+* Extendable with new runners and strategies
 
-* zero dependencies
-* zero configuration required (it Does the Right Thing™, see [**Philosophy**](https://github.com/janko-m/vim-test/wiki))
-* interface for adding new testing frameworks
-* automatic detection of correct test runner
-* **polyfill** for nearest tests (by [constructing regexes](#commands))
-* built-in integration with Dispatch/Vimux/Tslime
-* fully customized CLI options configuration
-
-Internally test.vim consists of a thoughtfully designed core, and testing
-frameworks are simply plugged in, so that they all work in the same unified
-way.
-
-Ruby users, you get all of the features of rspec.vim + vroom.vim, but
-without any of the tedious configuration (test.vim knows how you want to
-run your test command).
+Internally test.vim consists of a thoughtfully designed core, and test runners
+are simply plugged in, so that they all work in the same unified way.
 
 ## Setup
 
@@ -230,8 +221,9 @@ let test#python#runner = 'pytest'
 
 #### Ruby
 
-By default test commands will be prepended with `bundle exec` if a Gemfile is
-detected, but you can turn it off with
+Unless binstubs are detected (e.g. `bin/rspec`), test commands will
+automatically be prepended with `bundle exec` if a Gemfile is detected, but you
+can turn it off:
 
 ```vim
 let test#ruby#bundle_exec = 0

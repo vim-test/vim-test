@@ -126,6 +126,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:PHPSpec*
 :PHPSpec [args]              Uses the `phpspec` command.
 
+                                                *test-:Prove*
+:Prove [args]                Uses the `prove` command.
+
                                                 *test-:MavenTest*
 :MavenTest [args]            Uses the `mvn` `test` command.
 

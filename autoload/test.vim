@@ -1,4 +1,4 @@
-function! test#run(type, options) abort
+function! test#run(type, arguments) abort
   if &autowrite || &autowriteall
     silent! wall
   endif
@@ -15,7 +15,7 @@ function! test#run(type, options) abort
   let runner = test#determine_runner(position['file'])
 
   let args = test#base#build_position(runner, a:type, position)
-  let args = [a:options] + args
+  let args = a:arguments + args
   let args = [test#base#options(runner, a:type)] + args
 
   call test#execute(runner, args)

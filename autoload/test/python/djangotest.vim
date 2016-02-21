@@ -1,5 +1,5 @@
 if !exists('g:test#python#djangotest#file_pattern')
-  let g:test#python#djangotest#file_pattern = '^test_.*\.py$'
+  let g:test#python#djangotest#file_pattern = '^test.*\.py$'
 endif
 
 function! test#python#djangotest#test_file(file) abort
@@ -7,7 +7,7 @@ function! test#python#djangotest#test_file(file) abort
     if exists('g:test#python#runner')
       return index(['djangotest', 'djangonose'], g:test#python#runner) != -1
     else
-      return filereadable('python manage.py') && executable('django-admin') 
+      return filereadable('manage.py') && executable('django-admin')
     endif
   endif
 endfunction

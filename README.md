@@ -131,6 +131,7 @@ You can execute test.vim commands directly, and pass them CLI options:
 :TestNearest --verbose
 :TestFile --format documentation
 :TestSuite --fail-fast
+:TestLast --backtrace
 ```
 
 If you want some options to stick around, see [Configuring](#configuring).

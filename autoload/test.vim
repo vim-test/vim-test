@@ -21,9 +21,11 @@ function! test#run(type, arguments) abort
   call test#execute(runner, args)
 endfunction
 
-function! test#run_last() abort
+function! test#run_last(...) abort
   if exists('g:test#last_command')
-    call test#shell(g:test#last_command)
+    let cmd = [g:test#last_command]
+    let cmd = cmd + get(a:000, 0, [])
+    call test#shell(join(cmd))
   else
     call s:echo_failure('No tests were run so far')
   endif

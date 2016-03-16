@@ -15,29 +15,28 @@ function! test#perl#prove#build_position(type, position) abort
 endfunction
 
 function! test#perl#prove#build_args(args)
-  let out_args = a:args
-  if len(a:args) == 2 
-    let args = split(a:args[0], '::')
-        
-    if test#base#no_colors()
-      let args[0] = ['--nocolor'] + args[0]
+  let args = []
+  let test_args = []
+
+  for idx in range(0, len(a:args) - 1)
+    if a:args[idx] == '::' || !empty(test_args) && !test#base#file_exists(a:args[idx])
+      call add(test_args, a:args[idx])
+    else
+      call add(args, a:args[idx])
     endif
-        
-    if test#base#verbose()
-      let args[0] = ['--verbose']  + args[0]
-    endif
-        
-    let out_args = [args[0], a:args[1]]
-    if len(args[1])
-      let out_args = out_args + ['::', args[1]]
-    endif
-  endif
+  endfor
+
+  let args = args + test_args
 
   if !empty(filter(copy(args), 'isdirectory(v:val)'))
-    let out_args = ['--recurse'] + args
+    let args = ['--recurse'] + args
   endif
 
-  return out_args
+  if test#base#no_colors()
+    let args = ['--nocolor'] + args
+  endif
+
+  return args
 endfunction
 
 function! test#perl#prove#executable()

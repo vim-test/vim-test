@@ -27,6 +27,10 @@ call s:extend(g:test#runners, {
   \ 'Java':       ['MavenTest'],
 \})
 
+" Maximum upwards search depth constraint while searching for the test runner
+" executable.
+let g:test#executable_search_depth = 5
+
 let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})
 let g:test#custom_transformations = get(g:, 'test#custom_transformations', {})
 let g:test#runner_commands = get(g:, 'test#runner_commands', [])

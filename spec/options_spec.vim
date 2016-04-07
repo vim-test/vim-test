@@ -9,13 +9,19 @@ describe 'Options'
   it "is forwarded through generic testing commands"
     edit foo_spec.rb
 
-    TestNearest --foo bar --baz
-    Expect g:test#last_command == 'rspec --foo bar --baz foo_spec.rb:1'
+    TestNearest --foo bar
+    Expect g:test#last_command == 'rspec --foo bar foo_spec.rb:1'
 
-    TestFile --foo bar --baz
-    Expect g:test#last_command == 'rspec --foo bar --baz foo_spec.rb'
+    TestFile --foo bar
+    Expect g:test#last_command == 'rspec --foo bar foo_spec.rb'
 
-    TestSuite --foo bar --baz
+    TestSuite --foo bar
+    Expect g:test#last_command == 'rspec --foo bar'
+
+    TestLast --baz
+    Expect g:test#last_command == 'rspec --foo bar --baz'
+
+    TestLast
     Expect g:test#last_command == 'rspec --foo bar --baz'
   end
 

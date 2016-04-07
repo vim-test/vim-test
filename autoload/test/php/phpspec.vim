@@ -15,8 +15,13 @@ function! test#php#phpspec#build_position(type, position) abort
 endfunction
 
 function! test#php#phpspec#build_args(args) abort
-  let args = ['run'] + a:args
-  return args
+  let args = a:args
+
+  if test#base#no_colors()
+    let args = ['--no-ansi'] + args
+  endif
+
+  return ['run'] + args
 endfunction
 
 function! test#php#phpspec#executable() abort

@@ -1,5 +1,9 @@
+if !exists('g:test#perl#prove#test_dir')
+  let g:test#perl#prove#test_dir = 't'
+endif
+
 if !exists('g:test#perl#prove#file_pattern')
-  let g:test#perl#prove#file_pattern = '\v^t/.*\.t$'
+  let g:test#perl#prove#file_pattern = '\v^' . g:test#perl#prove#test_dir . '/.*\.t$'
 endif
 
 function! test#perl#prove#test_file(file) abort
@@ -15,29 +19,40 @@ function! test#perl#prove#build_position(type, position) abort
 endfunction
 
 function! test#perl#prove#build_args(args)
-  let out_args = a:args
-  if len(a:args) == 2 
-    let args = split(a:args[0], '::')
-        
+    let options = ''
+    let filename = ''
+    let prove_args = []
+    let test_args = []
+
+    if len(a:args) == 2
+        let options = a:args[0]
+        let filename = a:args[1]
+    elseif len(a:args) == 1
+        if filereadable(a:args[0])
+            let filename = a:args[0]
+        else
+            let options = a:args[0]
+        endif
+    endif
+
+    if !empty(options)
+        let parts = split(options, '::', 1)
+        call add(prove_args, parts[0])
+        if len(parts) == 2
+            call extend(test_args, ['::', parts[1]])
+        endif
+    endif
+
+    if empty(filename)
+        let filename = g:test#perl#prove#test_dir
+    endif
+
     if test#base#no_colors()
-      let args[0] = ['--nocolor'] + args[0]
+        let prove_args = ['--nocolor'] + prove_args
     endif
-        
-    if test#base#verbose()
-      let args[0] = ['--verbose']  + args[0]
-    endif
-        
-    let out_args = [args[0], a:args[1]]
-    if len(args[1])
-      let out_args = out_args + ['::', args[1]]
-    endif
-  endif
 
-  if !empty(filter(copy(args), 'isdirectory(v:val)'))
-    let out_args = ['--recurse'] + args
-  endif
-
-  return out_args
+    let combined = extend(extend(prove_args, [filename]), test_args)
+    return combined
 endfunction
 
 function! test#perl#prove#executable()

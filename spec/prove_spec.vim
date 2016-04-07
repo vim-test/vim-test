@@ -29,10 +29,20 @@ describe "Prove"
   end
 
   it "recurses into directories"
-    view normal.php
+    view t/math_test.t
     Prove t/
 
     Expect g:test#last_command == 'prove -l --recurse t/'
+  end
+
+  it "handles test arguments"
+    view t/math_test.t
+
+    TestFile :: --foo bar
+    Expect g:test#last_command == 'prove -l t/math_test.t :: --foo bar'
+
+    TestFile --verbose :: --foo bar
+    Expect g:test#last_command == 'prove -l --verbose t/math_test.t :: --foo bar'
   end
 
 end

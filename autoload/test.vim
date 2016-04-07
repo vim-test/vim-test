@@ -1,4 +1,4 @@
-function! test#run(type, options) abort
+function! test#run(type, arguments) abort
   if &autowrite || &autowriteall
     silent! wall
   endif
@@ -15,15 +15,17 @@ function! test#run(type, options) abort
   let runner = test#determine_runner(position['file'])
 
   let args = test#base#build_position(runner, a:type, position)
-  let args = [a:options] + args
+  let args = a:arguments + args
   let args = [test#base#options(runner, a:type)] + args
 
   call test#execute(runner, args)
 endfunction
 
-function! test#run_last() abort
+function! test#run_last(arguments) abort
   if exists('g:test#last_command')
-    call test#shell(g:test#last_command)
+    let cmd = [g:test#last_command]
+    let cmd = cmd + a:arguments
+    call test#shell(join(cmd))
   else
     call s:echo_failure('No tests were run so far')
   endif

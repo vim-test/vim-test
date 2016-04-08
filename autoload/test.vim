@@ -18,7 +18,7 @@ function! test#run(type, arguments) abort
 
   let args = test#base#build_position(runner, a:type, position)
   let args = a:arguments + args
-  let args = [test#base#options(runner, a:type)] + args
+  let args = test#base#options(runner, a:type) + args
 
   call test#execute(runner, args)
 endfunction
@@ -46,7 +46,7 @@ endfunction
 
 function! test#execute(runner, args) abort
   let args = a:args
-  let args = [test#base#options(a:runner)] + args
+  let args = test#base#options(a:runner) + args
   call filter(args, '!empty(v:val)')
 
   let executable = test#base#executable(a:runner)

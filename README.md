@@ -31,8 +31,9 @@ Currently the following testing frameworks are supported:
 * Fully customized CLI options configuration
 * Extendable with new runners and strategies
 
-Internally test.vim consists of a thoughtfully designed core, and test runners
-are simply plugged in, so that they all work in the same unified way.
+Test.vim consists of a core which provides an abstraction over running any kind
+of tests from the command-line. Concrete test runners are then simply plugged
+in, so they all work in the same unified way.
 
 ## Setup
 
@@ -60,9 +61,8 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 ## Strategies
 
-You can instruct test.vim to run your tests with different strategies (with
-synchronous or asynchronous execution). To use a specific strategy, assign
-it like this:
+Test.vim can run tests using different execution environments called
+"strategies". To use a specific strategy, assign it to a variable:
 
 ```vim
 " make test commands execute using dispatch.vim
@@ -89,7 +89,7 @@ In addition to setting a strategy globally, you can also set one per command:
 ```
 
 Some strategies clear the screen before executing the test command, but you can
-disable that by setting `g:test#preserve_screen`:
+disable this:
 
 ```vim
 let g:test#preserve_screen = 1
@@ -100,7 +100,7 @@ let g:test#preserve_screen = 1
 Strategy is a function which takes one argument – the shell command for the
 test being run – and it is expected to run that command in some way. Test.vim
 comes with many predefined strategies (see above), but if none of them suit
-your needs, you can define your own custom strategy like this:
+your needs, you can define your own custom strategy:
 
 ```vim
 function! EchoStrategy(cmd)

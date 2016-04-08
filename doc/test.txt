@@ -206,16 +206,26 @@ CUSTOM STRATEGIES                               *test-custom-strategies*
 Strategy is a function which takes a test command and executes it in some way.
 If none of the built-in strategies suit your needs, you can define your own:
 >
-  function! MyStrategy(cmd)
+  function! EchoStrategy(cmd)
     echo 'It works! Command for running tests: ' . a:cmd
   endfunction
 
-  let g:test#custom_strategies = {'my_strategy': function('MyStrategy')}
+  let g:test#custom_strategies = {'echo': function('EchoStrategy')}
+  let g:test#strategy = 'echo'
 <
-Key in this dictionary is a name of the strategy, value is a |Funcref|.
-Then you can choose your custom strategy just like any other:
+
+TRANSFORMATIONS                                 *test-transformations*
+
+You can automatically apply transformations of your test commands by
+registering a "transformation" function:
 >
-  let g:test#strategy = 'my_strategy'
+  function! VagrantTransform(cmd) abort
+    let vagrant_project = get(matchlist(s:cat('Vagrantfile'), '\vconfig\.vm.synced_folder ["''].+[''"], ["''](.+)[''"]'), 1)
+    return 'vagrant ssh --command '.shellescape('cd '.vagrant_project.'; '.a:cmd)
+  endfunction
+
+  let g:test#custom_transformations = {'vagrant': function('VagrantTransform')}
+  let g:test#transformation = 'vagrant'
 <
 
 CONFIGURATION                                   *test-configuration*

@@ -42,7 +42,7 @@ function! test#ruby#minitest#build_args(args) abort
     endif
   endfor
 
-  let kind = matchstr(test#ruby#minitest#executable(), 'ruby\|rake')
+  let kind = matchstr(test#base#executable('ruby#minitest'), 'ruby\|rake')
   return s:build_{kind}_args(get(l:, 'path'), a:args)
 endfunction
 

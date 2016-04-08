@@ -1,4 +1,4 @@
 let test#php#patterns = {
-  \ 'test':      ['\v^\s*function (test\w+)'],
-  \ 'namespace': ['\v^\s*class (\w+)'],
+  \ 'test':      ['\v^\s*public function (\w*)\('],
+  \ 'namespace': [],
 \}

@@ -203,26 +203,31 @@ isn't that nice).
 <
 CUSTOM STRATEGIES                               *test-custom-strategies*
 
-Strategy is a function with command for running tests as argument.
-If you want to define your own strategy - simple define new function, like this:
+Strategy is a function which takes a test command and executes it in some way.
+If none of the built-in strategies suit your needs, you can define your own:
 >
   function! MyStrategy(cmd)
     echo 'It works! Command for running tests: ' . a:cmd
   endfunction
-<
-Then add this function to vim-test custom strategies |dict|:
->
+
   let g:test#custom_strategies = {'my_strategy': function('MyStrategy')}
 <
-Key in this dict is a name of the strategy, value is a |Funcref|.
-Choose your custom strategy:
+Key in this dictionary is a name of the strategy, value is a |Funcref|.
+Then you can choose your custom strategy just like any other:
 >
   let g:test#strategy = 'my_strategy'
 <
-Refer to vim-test/autoload/test/strategy.vim for examples of default strategies.
 
 CONFIGURATION                                   *test-configuration*
 
+In addition to setting a strategy globally, you can also set one per command:
+>
+  :TestFile -strategy=neovim
+<
+If you want to disable clearing the screen for strategies, you can do
+>
+  let g:test#preserve_screen = 1
+<
 You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your prefered options with
 >
@@ -239,10 +244,6 @@ Or, if you prefer more granular approach, you can do
 If you want to manually configure a test runner's executable, you can do
 >
   let g:test#ruby#rspec#executable = 'foreman run rspec'
-<
-If you want to disable clearing the screen for some strategies, you can do
->
-  let g:test#preserve_screen = 1
 <
 You can instruct test.vim to generate absolute file paths:
 >

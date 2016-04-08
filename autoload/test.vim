@@ -12,6 +12,8 @@ function! test#run(type, arguments) abort
     call s:echo_failure('Not a test file') | return
   endif
 
+  call s:detect_command_strategy(a:arguments)
+
   let runner = test#determine_runner(position['file'])
 
   let args = test#base#build_position(runner, a:type, position)
@@ -23,8 +25,11 @@ endfunction
 
 function! test#run_last(arguments) abort
   if exists('g:test#last_command')
+    call s:detect_command_strategy(a:arguments)
+
     let cmd = [g:test#last_command]
     let cmd = cmd + a:arguments
+
     call test#shell(join(cmd))
   else
     call s:echo_failure('No tests were run so far')
@@ -60,7 +65,10 @@ function! test#shell(cmd) abort
     let cmd = g:test#custom_transformations[g:test#transformation](cmd)
   endif
 
-  if cmd =~# '^:'
+  if exists('s:strategy')
+    let strategy = s:strategy
+    unlet s:strategy
+  elseif cmd =~# '^:'
     let strategy = 'vimscript'
   else
     let strategy = get(g:, 'test#strategy', 'basic')
@@ -94,6 +102,16 @@ function! s:get_position() abort
     \ 'line': line('.'),
     \ 'col':  col('.'),
   \}
+endfunction
+
+function! s:detect_command_strategy(arguments) abort
+  for idx in range(0, len(a:arguments) - 1)
+    if a:arguments[idx] =~# '^-strategy='
+      let option = remove(a:arguments, idx)
+      let s:strategy = substitute(option, '-strategy=', '', '')
+      break
+    endif
+  endfor
 endfunction
 
 function! s:echo_failure(message) abort

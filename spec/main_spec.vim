@@ -76,5 +76,4 @@ describe 'Main'
 
     unlet g:test#filename_modifier
   end
-
 end

@@ -26,7 +26,6 @@ endfunction
 function! test#java#maventest#build_args(args) abort
   let args = ['-Dtest='] + a:args
   return [join(args, "")]
-
 endfunction
 
 function! test#java#maventest#executable() abort

@@ -9,9 +9,11 @@ endfunction
 function! test#base#options(runner, ...) abort
   let options = get(g:, 'test#'.a:runner.'#options')
   if empty(a:000) && type(options) == type('')
-    return options
+    return split(options)
   elseif !empty(a:000) && type(options) == type({})
-    return get(options, a:000[0])
+    return split(get(options, a:000[0], ''))
+  else
+    return []
   endif
 endfunction
 

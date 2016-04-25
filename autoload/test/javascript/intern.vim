@@ -50,6 +50,21 @@ function! test#javascript#intern#executable() abort
 endfunction
 
 function! s:nearest_test(position)
-  let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
-  return join(name['namespace'] + name['test'], ' - ')
+  let patterns = {
+    \ 'test': [
+      \ '\v^\s*%(%(bdd\.)?it|%(tdd\.|QUnit\.)?test)\s*[( ]\s*%("|'')(.*)%("|'')',
+      \ '\v^\s*%("|'')(.*)%("|'')\s*:\s*function\s*[(]'
+    \] + g:test#javascript#patterns['test'],
+    \ 'namespace': [
+      \'\v^\s*%(%(bdd\.)?describe|%(tdd\.)?suite|%(QUnit\.)?module)\s*[( ]\s*%("|'')(.*)%("|'')',
+      \ '\v^\s*registerSuite\s*[(]\s*[{]\s*name\s*:\s*%("|'')(.*)%("|'')',
+      \ '\v^\s*%("|'')(.*)%("|'')\s*:\s*[{]'
+    \] + g:test#javascript#patterns['namespace'],
+  \}
+
+  let name = test#base#nearest_test(a:position, l:patterns)
+
+  return (len(name['namespace']) ? '^' : '') . 
+       \ test#base#escape_regex(join(name['namespace'] + name['test'], ' - ')) .
+       \ (len(name['test']) ? '$' : ' - ')
 endfunction

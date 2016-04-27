@@ -9,7 +9,7 @@ endfunction
 function! test#go#gotest#build_position(type, position) abort
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
-    if !empty(name) | let name = '-run '.shellescape(name, 1) | endif
+    if !empty(name) | let name = '-run '.shellescape(name, 1).' ./'.expand('%:h') | endif
     return [name]
   elseif a:type == 'file'
     let path = fnamemodify(a:position['file'], ':h')

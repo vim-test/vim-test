@@ -10,10 +10,10 @@ function! test#go#gotest#build_position(type, position) abort
   if a:type == 'suite'
     return ['./...']
   else
-    let path = './'.fnamemodify(a:position['file'], ':h')
+    let path = fnamemodify(a:position['file'], '.')
 
     if a:type == 'file'
-      return path == './.' ? [] : [path . '/...']
+      return [path]
     elseif a:type == 'nearest'
       let name = s:nearest_test(a:position)
       return empty(name) ? [] : ['-run '.shellescape(name.'$', 1), path]

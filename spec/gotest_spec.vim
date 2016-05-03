@@ -15,14 +15,14 @@ describe "GoTest"
     view +5 normal_test.go
     TestNearest
 
-    Expect g:test#last_command == 'go test -run ''TestNumbers$'' ./.'
+    Expect g:test#last_command == 'go test -run ''TestNumbers$'' normal_test.go'
   end
 
   it "runs nearest tests in subdirectory"
     view +5 mypackage/normal_test.go
     TestNearest
 
-    Expect g:test#last_command == 'go test -run ''TestNumbers$'' ./mypackage'
+    Expect g:test#last_command == 'go test -run ''TestNumbers$'' mypackage/normal_test.go'
   end
 
   it "runs file test if nearest test couldn't be found"
@@ -36,14 +36,14 @@ describe "GoTest"
     view normal_test.go
     TestFile
 
-    Expect g:test#last_command == 'go test'
+    Expect g:test#last_command == 'go test normal_test.go'
   end
 
-  it "runs tests in subdirectory"
+  it "runs file tests in subdirectory"
     view mypackage/normal_test.go
     TestFile
 
-    Expect g:test#last_command == 'go test ./mypackage/...'
+    Expect g:test#last_command == 'go test mypackage/normal_test.go'
   end
 
   it "runs test suites"
@@ -52,5 +52,4 @@ describe "GoTest"
 
     Expect g:test#last_command == 'go test ./...'
   end
-
 end

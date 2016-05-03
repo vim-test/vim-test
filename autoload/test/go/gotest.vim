@@ -15,7 +15,8 @@ function! test#go#gotest#build_position(type, position) abort
     if a:type == 'file'
       return path == './.' ? [] : [path . '/...']
     elseif a:type == 'nearest'
-      return s:build_nearest_args(a:position, path)
+      let name = s:nearest_test(a:position)
+      return empty(name) ? [] : ['-run '.shellescape(name.'$', 1), path]
     endif
   endif
 endfunction
@@ -31,14 +32,4 @@ endfunction
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#go#patterns)
   return join(name['test'])
-endfunction
-
-function! s:build_nearest_args(position, path) abort
-  let name = s:nearest_test(a:position)
-
-  if empty(name)
-    return [name]
-  else
-    return ['-run '.shellescape(name.'$', 1).' '.a:path]
-  endif
 endfunction

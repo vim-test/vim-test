@@ -10,7 +10,7 @@ function! test#javascript#mocha#build_position(type, position) abort
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      let name = '--grep '.shellescape(test#base#escape_regex(name), 1)
+      let name = '--grep '.shellescape(name, 1)
     endif
     return [a:position['file'], name]
   elseif a:type == 'file'
@@ -41,5 +41,7 @@ endfunction
 
 function! s:nearest_test(position)
   let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
-  return join(name['namespace'] + name['test'])
+  return (len(name['namespace']) ? '^' : '') . 
+       \ test#base#escape_regex(join(name['namespace'] + name['test'])) .
+       \ (len(name['test']) ? '$' : '')
 endfunction

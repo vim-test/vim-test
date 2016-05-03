@@ -16,68 +16,68 @@ describe "Mocha"
       view +1 test/normal.js
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.js --grep ''Math'''
+      Expect g:test#last_command == 'mocha test/normal.js --grep ''^Math'''
 
       view +2 test/normal.js
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.js --grep ''Math Addition'''
+      Expect g:test#last_command == 'mocha test/normal.js --grep ''^Math Addition'''
 
       view +3 test/normal.js
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.js --grep ''Math Addition adds two numbers'''
+      Expect g:test#last_command == 'mocha test/normal.js --grep ''^Math Addition adds two numbers$'''
     end
 
     it "aliases context to describe"
       view +1 test/context.js
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/context.js --grep ''Math'''
+      Expect g:test#last_command == 'mocha test/context.js --grep ''^Math'''
 
       view +2 test/context.js
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/context.js --grep ''Math Addition'''
+      Expect g:test#last_command == 'mocha test/context.js --grep ''^Math Addition'''
 
       view +3 test/context.js
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/context.js --grep ''Math Addition adds two numbers'''
+      Expect g:test#last_command == 'mocha test/context.js --grep ''^Math Addition adds two numbers$'''
     end
 
     it "runs CoffeeScript"
       view +1 test/normal.coffee
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''Math'''
+      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''^Math'''
 
       view +2 test/normal.coffee
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''Math Addition'''
+      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''^Math Addition'''
 
       view +3 test/normal.coffee
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''Math Addition adds two numbers'''
+      Expect g:test#last_command == 'mocha test/normal.coffee --grep ''^Math Addition adds two numbers$'''
     end
 
     it "runs React"
       view +1 test/normal.jsx
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.jsx --grep ''Math'''
+      Expect g:test#last_command == 'mocha test/normal.jsx --grep ''^Math'''
 
       view +2 test/normal.jsx
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.jsx --grep ''Math Addition'''
+      Expect g:test#last_command == 'mocha test/normal.jsx --grep ''^Math Addition'''
 
       view +3 test/normal.jsx
       TestNearest
 
-      Expect g:test#last_command == 'mocha test/normal.jsx --grep ''Math Addition adds two numbers'''
+      Expect g:test#last_command == 'mocha test/normal.jsx --grep ''^Math Addition adds two numbers$'''
     end
   end
 

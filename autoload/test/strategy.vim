@@ -11,7 +11,24 @@ function! test#strategy#basic(cmd) abort
 endfunction
 
 function! test#strategy#neovim(cmd) abort
-  botright new | call termopen(a:cmd) | startinsert
+  let opts = {'suffix': ' # vim-test'}
+  function! opts.on_exit(job_id, exit_code)
+    if a:exit_code == 0
+      call self.close_terminal()
+    endif
+  endfunction
+  function! opts.close_terminal()
+    if bufnr(self.suffix) != -1
+      execute 'bdelete!' bufnr(self.suffix)
+    end
+  endfunction
+
+  call opts.close_terminal()
+
+  botright new
+  call termopen(a:cmd . opts.suffix, opts)
+
+  wincmd p
 endfunction
 
 function! test#strategy#neoterm(cmd) abort

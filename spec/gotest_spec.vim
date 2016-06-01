@@ -1,4 +1,4 @@
-source spec/helpers.vim
+source spec/support/helpers.vim
 
 describe "GoTest"
 

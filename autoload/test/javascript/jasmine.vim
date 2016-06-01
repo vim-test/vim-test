@@ -7,7 +7,13 @@ function! test#javascript#jasmine#test_file(file) abort
 endfunction
 
 function! test#javascript#jasmine#build_position(type, position) abort
-  if a:type == 'nearest' || a:type == 'file'
+  if a:type == 'nearest'
+    let name = s:nearest_test(a:position)
+    if !empty(name)
+      let name = '--filter='.shellescape(name, 1)
+    endif
+    return [a:position['file'], name]
+  elseif a:type == 'file'
     return [a:position['file']]
   else
     return []
@@ -17,21 +23,22 @@ endfunction
 function! test#javascript#jasmine#build_args(args) abort
   let args = a:args
 
-  if empty(filter(copy(a:args), 'test#base#file_exists(v:val)'))
-    let args = args + ['spec/']
-  endif
-
   if test#base#no_colors()
-    let args = ['--noColor'] + args
+    let args = ['--no-color'] + args
   endif
 
   return args
 endfunction
 
 function! test#javascript#jasmine#executable() abort
-  if filereadable('node_modules/.bin/jasmine-node')
-    return 'node_modules/.bin/jasmine-node'
+  if filereadable('node_modules/.bin/jasmine')
+    return 'node_modules/.bin/jasmine'
   else
-    return 'jasmine-node'
+    return 'jasmine'
   endif
+endfunction
+
+function! s:nearest_test(position)
+  let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
+  return join(name['namespace'] + name['test'])
 endfunction

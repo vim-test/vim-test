@@ -41,7 +41,7 @@ endfunction
 
 function! s:nearest_test(position)
   let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
-  return (len(name['namespace']) ? '^' : '') . 
+  return (len(name['namespace']) ? '^' : '') .
        \ test#base#escape_regex(join(name['namespace'] + name['test'])) .
        \ (len(name['test']) ? '$' : '')
 endfunction

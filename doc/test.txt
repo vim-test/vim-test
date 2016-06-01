@@ -81,7 +81,7 @@ In all commands [args] are forwarded to the underlying test runner.
 :Mocha [args]                Uses the `mocha` command.
 
                                                 *test-:Jasmine*
-:Jasmine [args]              Uses the `jasmine-node` command.
+:Jasmine [args]              Uses the `jasmine` command.
 
                                                 *test-:Nose*
 :Nose [args]                 Uses the `nosetests` command.

@@ -13,6 +13,7 @@ Currently the following testing frameworks are supported:
 | **Python**     | Nose, PyTest, Django                  | `nose`, `pytest`, `djangotest`, `djangonose` |
 | **Elixir**     | ExUnit, ESpec                         | `exunit`, `espec`                            |
 | **Go**         | Go                                    | `gotest`                                     |
+| **Rust**       | Cargo                                 | `cargotest`                                  |
 | **Clojure**    | Fireplace.vim                         | `fireplacetest`                              |
 | **Shell**      | Bats                                  | `bats`                                       |
 | **VimScript**  | VSpec, Vader.vim                      | `vspec`, `vader`                             |

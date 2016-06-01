@@ -101,6 +101,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:GoTest*
 :GoTest [args]               Uses the `go` `test` command.
 
+                                                *test-:CargoTest*
+:CargoTest [args]            Uses the `cargo` `test` command.
+
                                                 *test-:FireplaceTest*
 :FireplaceTest [args]        Uses `Fireplace.vim` to run test commands, and
                              automatically reloads code.

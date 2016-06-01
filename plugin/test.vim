@@ -18,6 +18,7 @@ call s:extend(g:test#runners, {
   \ 'Python':     ['DjangoTest', 'PyTest', 'Nose'],
   \ 'Elixir':     ['ExUnit', 'ESpec'],
   \ 'Go':         ['GoTest'],
+  \ 'Rust':       ['CargoTest'],
   \ 'Clojure':    ['FireplaceTest'],
   \ 'Shell':      ['Bats'],
   \ 'VimL':       ['VSpec', 'Vader'],

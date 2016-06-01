@@ -145,6 +145,18 @@ Runs test commands with `:!`, which switches your Vim to the Terminal.
 >
   let test#strategy = 'basic'
 <
+Make ~
+
+Runs test commands with `:make`. Requires the Dispatch.vim plugin.
+>
+  let test#strategy = 'make'
+<
+Dispatch ~
+
+Runs test commands with `:Dispatch`. Requires the Dispatch.vim plugin.
+>
+  let test#strategy = 'dispatch'
+<
 Neovim ~
 
 Runs test commands with `:terminal`, which spawns a terminal inside your Neovim.
@@ -153,44 +165,36 @@ Runs test commands with `:terminal`, which spawns a terminal inside your Neovim.
 <
 Neoterm ~
 
-Runs test commands with `:T`, see [Neoterm](https://github.com/kassio/neoterm)
-docs for display customization.
+Runs test commands with `:T`. Requires the Neoterm plugin.
 >
   let test#strategy = 'neoterm'
-<
-Dispatch ~
-
-Runs test commands with `:Dispatch`. Requires the
-[Dispatch.vim](https://github.com/tpope/vim-dispatch) plugin.
->
-  let test#strategy = 'dispatch'
 <
 Vimux ~
 
 Runs test commands in a small Tmux pane at the bottom of your Terminal.
-Requires the [Vimux](https://github.com/benmills/vimux) plugin (and Tmux).
+Requires the Vimux plugin and Tmux.
 >
   let test#strategy = 'vimux'
 <
 Tslime ~
 
-Runs test commands in a Tmux pane you specify. Requires the
-[Tslime.vim](https://github.com/kikijump/tslime.vim) plugin (and Tmux).
+Runs test commands in a Tmux pane you specify. Requires the Tslime.vim plugin
+and Tmux.
 >
   let test#strategy = 'tslime'
 <
 Vim Tmux Runner ~
 
-Runs test commands in a small Tmux pane. Requires the
-[Vim Timux Runner](https://github.com/christoomey/vim-tmux-runner) plugin (and Tmux)
+Runs test commands in a small Tmux pane. Requires the Vim Timux Runner plugin
+and Tmux
 >
   let test#strategy = 'vtr'
 <
 <
 VimShell ~
 
-Runs test commands in a shell written in VimScript. Requires the
-[VimShell](https://github.com/Shougo/vimshell.vim) plugin.
+Runs test commands in a shell written in VimScript. Requires the VimShell
+plugin.
 >
   let test#strategy = 'vimshell'
 <

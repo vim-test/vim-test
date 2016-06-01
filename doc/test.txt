@@ -233,7 +233,15 @@ registering a "transformation" function:
 
 CONFIGURATION                                   *test-configuration*
 
-In addition to setting a strategy globally, you can also set one per command:
+You can set up strategies per granularity:
+>
+  let test#strategy = {
+    \ 'nearest': 'neovim',
+    \ 'file':    'dispatch',
+    \ 'suite':   'basic',
+  \}
+<
+of even per command:
 >
   :TestFile -strategy=neovim
 <

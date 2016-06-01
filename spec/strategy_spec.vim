@@ -61,6 +61,24 @@ describe "strategy"
 
     Expect g:strategy == 'vimscript'
   end
+
+  it "can be set for different granularities"
+    function! test#strategy#basic(cmd)
+      let g:strategy = 'basic'
+    endfunction
+    function! test#strategy#neovim(cmd)
+      let g:strategy = 'neovim'
+    endfunction
+
+    let g:test#strategy = {'nearest': 'neovim', 'file': 'basic'}
+    edit foo_spec.rb
+
+    TestNearest
+    Expect g:strategy == 'neovim'
+
+    TestFile
+    Expect g:strategy == 'basic'
+  end
 end
 
 describe "transformation"

@@ -82,7 +82,17 @@ let test#strategy = "dispatch"
 | **Terminal.app**                | `terminal` | Sends test commands to Terminal (useful in MacVim GUI).                          |
 | **iTerm2.app**                  | `iterm`    | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                     |
 
-In addition to setting a strategy globally, you can also set one per command:
+You can also set up strategies per granularity:
+
+```vim
+let test#strategy = {
+  \ 'nearest': 'neovim',
+  \ 'file':    'dispatch',
+  \ 'suite':   'basic',
+\}
+```
+
+or even per command:
 
 ```
 :TestFile -strategy=neovim

@@ -12,6 +12,11 @@ function! test#run(type, arguments) abort
     call s:echo_failure('Not a test file') | return
   endif
 
+  if type(get(g:, 'test#strategy')) == type({})
+    let strategy = g:test#strategy[a:type]
+    call add(a:arguments, '-strategy='.strategy)
+  endif
+
   call s:detect_command_strategy(a:arguments)
 
   let runner = test#determine_runner(position['file'])
@@ -107,11 +112,11 @@ endfunction
 function! s:detect_command_strategy(arguments) abort
   for idx in range(0, len(a:arguments) - 1)
     if a:arguments[idx] =~# '^-strategy='
-      let option = remove(a:arguments, idx)
-      let s:strategy = substitute(option, '-strategy=', '', '')
+      let s:strategy = substitute(a:arguments[idx], '-strategy=', '', '')
       break
     endif
   endfor
+  call filter(a:arguments, 'v:val !~# "^strategy="')
 endfunction
 
 function! s:echo_failure(message) abort

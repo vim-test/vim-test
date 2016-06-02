@@ -3,6 +3,10 @@ function! test#run(type, arguments) abort
     silent! wall
   endif
 
+  if exists('g:test#project_root')
+    execute 'cd' g:test#project_root
+  end
+
   if test#test_file()
     let position = s:get_position()
     let g:test#last_position = position
@@ -26,6 +30,10 @@ function! test#run(type, arguments) abort
   let args = test#base#options(runner, a:type) + args
 
   call test#execute(runner, args)
+
+  if exists('g:test#project_root')
+    execute 'cd -'
+  endif
 endfunction
 
 function! test#run_last(arguments) abort

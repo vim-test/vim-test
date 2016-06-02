@@ -225,6 +225,18 @@ let test#filename_modifier = ':p' " /User/janko/Code/my_project/test/models/user
 let test#filename_modifier = ':~' " ~/Code/my_project/test/models/user_test.rb
 ```
 
+### Working directory
+
+Test.vim relies on you being `cd`-ed into the project root. However, sometimes
+you may want to execute tests from a different directory than Vim's current
+working directory. You might have a bigger project with many subprojects, or
+you might be using [`autochdir`]. In any case, you can tell test.vim to use a
+different working directory for running tests:
+
+```vim
+let test#project_root = "/path/to/your/project"
+```
+
 ### Language-specific
 
 #### Python
@@ -301,9 +313,8 @@ Or if you're inside of Vim, you can simply run `:VSpec` provided by test.vim.
 ## Credits
 
 This plugin was strongly influenced by Gary Bernhardt's Destroy All Software.
-I also want to thank [rspec.vim](https://github.com/thoughtbot/vim-rspec), from
-which I borrowed GUI support for OS X, and Windows support. And also thanks to
-[vroom.vim](https://github.com/skalnik/vim-vroom).
+I also want to thank [rspec.vim], from which I borrowed GUI support for OS X,
+and Windows support. And also thanks to [vroom.vim].
 
 ## License
 
@@ -317,3 +328,6 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 [Tslime]: https://github.com/kikijump/tslime.vim
 [Vim&nbsp;Tmux&nbsp;Runner]: https://github.com/christoomey/vim-tmux-runner
 [VimShell]: https://github.com/Shougo/vimshell.vim
+[`autochdir`]: http://vimdoc.sourceforge.net/htmldoc/options.html#'autochdir'
+[rspec.vim]: https://github.com/thoughtbot/vim-rspec
+[vroom.vim]: https://github.com/skalnik/vim-vroom

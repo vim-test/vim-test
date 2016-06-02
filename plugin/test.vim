@@ -49,3 +49,7 @@ for [s:language, s:runners] in items(g:test#runners)
     endif
   endfor
 endfor
+
+if &autochdir
+  let g:test#project_root = getcwd()
+endif

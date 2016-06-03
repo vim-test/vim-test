@@ -7,9 +7,9 @@ A Vim wrapper for running tests on different granularities.
 Currently the following testing frameworks are supported:
 
 | Language       | Frameworks                            | Identifiers                                  |
-| :------------: | ------------------------------------- | -------------------------------              |
+| :------------: | ------------------------------------- | -------------------------------------------- |
 | **Ruby**       | RSpec, [Minitest][minitest], Cucumber | `rspec`, `minitest`, `cucumber`              |
-| **JavaScript** | Intern, Mocha, Jasmine                | `intern`, `mocha`, `jasmine`                 |
+| **JavaScript** | Intern, TAP, Mocha, Jasmine           | `intern`, `tap`, `mocha`, `jasmine`          |
 | **Python**     | Nose, PyTest, Django                  | `nose`, `pytest`, `djangotest`, `djangonose` |
 | **Elixir**     | ExUnit, ESpec                         | `exunit`, `espec`                            |
 | **Go**         | Go                                    | `gotest`                                     |

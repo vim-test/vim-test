@@ -325,7 +325,7 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 [Neoterm]: https://github.com/kassio/neoterm
 [Dispatch]: https://github.com/tpope/vim-dispatch
 [Vimux]: https://github.com/benmills/vimux
-[Tslime]: https://github.com/kikijump/tslime.vim
+[Tslime]: https://github.com/jgdavey/tslime.vim
 [Vim&nbsp;Tmux&nbsp;Runner]: https://github.com/christoomey/vim-tmux-runner
 [VimShell]: https://github.com/Shougo/vimshell.vim
 [`autochdir`]: http://vimdoc.sourceforge.net/htmldoc/options.html#'autochdir'

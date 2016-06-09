@@ -18,7 +18,7 @@ function! test#javascript#tap#build_position(type, position) abort
   if a:type == 'nearest' || a:type == 'file'
     return [a:position['file']]
   else
-    return isdirectory('tests/') ? ['tests/*.js'] : ['test/*.js']
+    return isdirectory('tests/') ? ['"tests/**/*.js"'] : ['"test/**/*.js"']
   endif
 endfunction
 

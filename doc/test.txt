@@ -86,6 +86,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Jasmine*
 :Jasmine [args]              Uses the `jasmine` command.
 
+                                                *test-:Karma*
+:Karma [args]                Uses the `karma` command.
+
                                                 *test-:Nose*
 :Nose [args]                 Uses the `nosetests` command.
 

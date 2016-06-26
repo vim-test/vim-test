@@ -1,9 +1,13 @@
 if !exists('g:test#javascript#karma#file_pattern')
-  let g:test#javascript#karma#file_pattern = '\v^spec/.*spec\.(js|jsx|coffee)$'
+  let g:test#javascript#karma#file_pattern = '\v(test|spec)\.(js|jsx|coffee)$'
 endif
 
 function! test#javascript#karma#test_file(file) abort
-  return a:file =~? g:test#javascript#karma#file_pattern
+  if empty(test#javascript#karma#executable())
+    return 0
+  endif
+
+  return  a:file =~? g:test#javascript#karma#file_pattern
 endfunction
 
 function! test#javascript#karma#build_position(type, position) abort
@@ -13,7 +17,7 @@ function! test#javascript#karma#build_position(type, position) abort
 endfunction
 
 function! test#javascript#karma#build_args(args) abort
-  let args = a:args
+  let args = ['start'] + a:args + ['--single-run']
 
   if test#base#no_colors()
     let args = ['--no-color'] + args
@@ -24,11 +28,9 @@ endfunction
 
 function! test#javascript#karma#executable() abort
   if filereadable('node_modules/.bin/karma')
-    let karma_exec = 'node_modules/.bin/karma'
-  else
-    let karma_exec = 'karma'
+    return 'node_modules/.bin/karma'
   endif
-	return karma_exec . ' start --single-run'
+  return ''
 endfunction
 
 function! s:nearest_test(position)

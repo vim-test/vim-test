@@ -4,11 +4,13 @@ describe "M"
 
   before
     cd spec/fixtures/minitest
+    let g:test#ruby#minitest#executable = 'm'
   end
 
   after
     call Teardown()
     cd -
+    unlet g:test#ruby#minitest#executable
   end
 
   it "runs nearest tests"

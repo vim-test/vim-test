@@ -124,7 +124,7 @@ function! s:detect_command_strategy(arguments) abort
       break
     endif
   endfor
-  call filter(a:arguments, 'v:val !~# "^strategy="')
+  call filter(a:arguments, 'v:val !~# "^-strategy="')
 endfunction
 
 function! s:echo_failure(message) abort

@@ -2,6 +2,8 @@ if !exists('g:test#javascript#karma#file_pattern')
   let g:test#javascript#karma#file_pattern = '\v^spec/.*spec\.(js|jsx|coffee)$'
 endif
 
+let s:karma_file = expand('<sfile>:p:h', 1) . '/karma-args'
+
 function! test#javascript#karma#test_file(file) abort
   return a:file =~? g:test#javascript#karma#file_pattern
 endfunction
@@ -23,12 +25,7 @@ function! test#javascript#karma#build_args(args) abort
 endfunction
 
 function! test#javascript#karma#executable() abort
-  if filereadable('node_modules/.bin/karma')
-    let karma_exec = 'node_modules/.bin/karma'
-  else
-    let karma_exec = 'karma'
-  endif
-	return karma_exec . ' start --single-run'
+  return 'node ' . s:karma_file
 endfunction
 
 function! s:nearest_test(position)

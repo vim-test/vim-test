@@ -21,9 +21,6 @@ var karmaArgs = {
   // NOTE: This value is a constant given directly by karma, but I do not know
   // of a way to programmatically get at it, so we are hard-coding it.
   logLevel: 'OFF',
-
-  // use the karma configuration file in the current folder by default
-  configFile: path.resolve('karma.conf'),
 };
 
 argv.forEach(function(karmaArg, karmaArgIndex) {
@@ -91,7 +88,28 @@ argv.forEach(function(karmaArg, karmaArgIndex) {
   }
 });
 
-var server = new Server(karmaArgs).start();
+// if there is no config-file option, add karma.conf.js in the current folder,
+// because karma does this for the CLI, but not its node API
+// only do this if this file exists, though, because or else karma shows no
+// output
+if(!karmaArgs.configFile) {
+  var fs = require('fs');
+  var configFile = path.resolve('karma.conf.js');
+
+  try {
+    var isExe = fs.accessSync(configFile, fs.R_OK);
+    karmaArgs.configFile = configFile;
+  } catch(e) {
+    // do nothing if the accessibility checks fail
+  }
+}
+
+var server = new Server(karmaArgs, function(code) {
+  console.log('Server exit code: ', code);
+  process.exit(code);
+});
+
+server.start();
 
 function toCamelCase(str) {
   // make extra-sure we are dealing with a string

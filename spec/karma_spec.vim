@@ -13,34 +13,35 @@ describe "Karma"
   end
 
   it "runs nearest tests"
-    SKIP "Disabled until functionality is implemented"
+    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
     view +2 spec/normal_spec.js
     TestNearest
 
-    Expect g:test#last_command == 'karma start --single-run -- spec/normal_spec.js --filter=''Addition adds two numbers'''
+    Expect g:test#last_command == 'node ' . arg_file . ' spec/normal_spec.js --filter=''Addition adds two numbers'''
   end
 
   it "runs file tests"
-    SKIP "Disabled until functionality is implemented"
+    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
     view spec/normal_spec.js
     TestFile
 
-    Expect g:test#last_command == 'karma start --single-run -- spec/normal_spec.js'
+    Expect g:test#last_command == 'node ' . arg_file . ' spec/normal_spec.js'
   end
 
   it "runs test suites"
+    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
     view spec/normal_spec.js
     TestSuite
 
-    Expect g:test#last_command == 'karma start --single-run'
+    Expect g:test#last_command == 'node ' . arg_file
   end
 
   it "is case insensitive about the filename"
-    SKIP "Disabled until functionality is implemented"
+    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
     view spec/normalSpec.js
     TestFile
 
-    Expect g:test#last_command == 'karma start --single-run -- spec/normalSpec.js'
+    Expect g:test#last_command == 'node ' . arg_file . ' spec/normalSpec.js'
   end
 
   it "doesn't recognize files that don't end with 'spec'"
@@ -51,19 +52,19 @@ describe "Karma"
   end
 
   it "runs CoffeeScript"
-    SKIP "Disabled until functionality is implemented"
+    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
     view spec/normal_spec.coffee
     TestFile
 
-    Expect g:test#last_command == 'karma start --single-run -- spec/normal_spec.coffee'
+    Expect g:test#last_command == 'node ' . arg_file . ' spec/normal_spec.coffee'
   end
 
   it "runs React"
-    SKIP "Disabled until functionality is implemented"
+    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
     view spec/normal_spec.jsx
     TestFile
 
-    Expect g:test#last_command == 'karma start --single-run -- spec/normal_spec.jsx'
+    Expect g:test#last_command == 'node ' . arg_file . ' spec/normal_spec.jsx'
   end
 
 end

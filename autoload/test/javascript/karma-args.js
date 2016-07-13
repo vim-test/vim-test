@@ -75,7 +75,7 @@ argv.forEach(function(karmaArg, karmaArgIndex) {
     if(karmaArgIndex === argv.length - 1 || argv[karmaArgIndex + 1].charAt(0) === '-') {
       // if the argument is negative (starts with no), set the normal option
       // (without the no) to false
-      if(currentArg.match('no')) {
+      if(currentArg.match('/^no/')) {
         currentArg = currentArg.replace(/^no/, '');
         currentArg = currentArg.charAt(0).toLocaleLowerCase() + currentArg.slice(1);
         karmaArgs[currentArg] = false;
@@ -105,7 +105,9 @@ if(!karmaArgs.configFile) {
 }
 
 var server = new Server(karmaArgs, function(code) {
-  console.log('Server exit code: ', code);
+  if(code) {
+    console.log('Encountered errors while running karma. The error code was: ' + code);
+  }
   process.exit(code);
 });
 

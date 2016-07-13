@@ -9,9 +9,18 @@ function! test#javascript#karma#test_file(file) abort
 endfunction
 
 function! test#javascript#karma#build_position(type, position) abort
-  " There is no easy way to restrict the test files with karma.  Until a way
-  " is found to easily accomplish this, we'll get an empty list here
-  return []
+  if a:type ==# 'nearest'
+    let specname = s:nearest_test(a:position)
+    if !empty(specname)
+      let specname = '--filter ' . shellescape(specname, 1)
+    endif
+    let filename = '--files ' . expand(a:position['file'])
+    return [filename, specname]
+  elseif a:type ==# 'file'
+    return [a:position['file']]
+  else
+    return []
+  endif
 endfunction
 
 function! test#javascript#karma#build_args(args) abort

@@ -1,23 +1,28 @@
 if !exists('g:test#javascript#karma#file_pattern')
-  let g:test#javascript#karma#file_pattern = '\v^spec/.*spec\.(js|jsx|coffee)$'
+  let g:test#javascript#karma#file_pattern = '\v(test|spec)\.(js|jsx|coffee)$'
 endif
 
 let s:karma_file = expand('<sfile>:p:h', 1) . '/karma-args'
 
 function! test#javascript#karma#test_file(file) abort
-  return a:file =~? g:test#javascript#karma#file_pattern
+  if empty(test#javascript#karma#executable())
+    return 0
+  endif
+
+  return  a:file =~? g:test#javascript#karma#file_pattern
 endfunction
 
 function! test#javascript#karma#build_position(type, position) abort
   if a:type ==# 'nearest'
     let specname = s:nearest_test(a:position)
-    if !empty(specname)
-      let specname = '--filter ' . shellescape(specname, 1)
-    endif
     let filename = '--files ' . expand(a:position['file'])
+    if empty(specname)
+      return [filename]
+    endif
+    let specname = '--filter ' . shellescape(specname, 1)
     return [filename, specname]
   elseif a:type ==# 'file'
-    return [a:position['file']]
+    return ['--files ' . expand(a:position['file'])]
   else
     return []
   endif

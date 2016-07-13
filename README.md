@@ -9,7 +9,7 @@ Currently the following testing frameworks are supported:
 | Language       | Frameworks                                 | Identifiers                                  |
 | :------------: | -------------------------------------      | -------------------------------------------- |
 | **Ruby**       | RSpec, [Minitest][minitest], [M], Cucumber | `rspec`, `minitest`, `m`, `cucumber`         |
-| **JavaScript** | Intern, TAP, Mocha, Jasmine, Karma         | `intern`, `tap`, `mocha`, `jasmine`, `karma` |
+| **JavaScript** | Intern, TAP, Karma, Mocha, Jasmine         | `intern`, `tap`, `karma`, `mocha`, `jasmine` |
 | **Python**     | Nose, PyTest, Django                       | `nose`, `pytest`, `djangotest`, `djangonose` |
 | **Elixir**     | ExUnit, ESpec                              | `exunit`, `espec`                            |
 | **Go**         | Go                                         | `gotest`                                     |

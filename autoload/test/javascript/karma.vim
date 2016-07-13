@@ -39,7 +39,9 @@ function! test#javascript#karma#build_args(args) abort
 endfunction
 
 function! test#javascript#karma#executable() abort
-  return 'node ' . s:karma_file
+  if filereadable('node_modules/.bin/karma')
+    return 'node ' . s:karma_file
+  endif
 endfunction
 
 function! s:nearest_test(position)

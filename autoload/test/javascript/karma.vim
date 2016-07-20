@@ -2,7 +2,7 @@ if !exists('g:test#javascript#karma#file_pattern')
   let g:test#javascript#karma#file_pattern = '\v(test|spec)\.(js|jsx|coffee)$'
 endif
 
-let s:karma_file = expand('<sfile>:p:h', 1) . '/karma-args'
+" let s:karma_file = expand('<sfile>:p:h', 1) . '/karma-args'
 
 function! test#javascript#karma#test_file(file) abort
   if empty(test#javascript#karma#executable())
@@ -39,8 +39,10 @@ function! test#javascript#karma#build_args(args) abort
 endfunction
 
 function! test#javascript#karma#executable() abort
-  if filereadable('node_modules/.bin/karma')
-    return 'node ' . s:karma_file
+  if filereadable('node_modules/karma-cli-runner/karma-args.js')
+    return 'node node_modules/karma-cli-runner/karma-args'
+  elseif filereadable('node_modules/.bin/karma')
+    return 'node_modules/.bin/karma start --single-run'
   endif
 endfunction
 

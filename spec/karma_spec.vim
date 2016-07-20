@@ -12,7 +12,7 @@ describe "Karma"
   end
 
   it "runs nearest tests"
-    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
+    let arg_file = 'node_modules/karma-cli-runner/karma-args'
     view +2 normal_spec.js
     TestNearest
 
@@ -20,7 +20,7 @@ describe "Karma"
   end
 
   it "runs file tests"
-    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
+    let arg_file = 'node_modules/karma-cli-runner/karma-args'
     view normal_spec.js
     TestFile
 
@@ -28,7 +28,7 @@ describe "Karma"
   end
 
   it "runs test suites"
-    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
+    let arg_file = 'node_modules/karma-cli-runner/karma-args'
     view spec/normal_spec.js
     TestSuite
 
@@ -36,7 +36,7 @@ describe "Karma"
   end
 
   it "is case insensitive about the filename"
-    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
+    let arg_file = 'node_modules/karma-cli-runner/karma-args'
     view normalSpec.js
     TestFile
 
@@ -44,7 +44,7 @@ describe "Karma"
   end
 
   it "detects tests in files ending with 'test'"
-    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
+    let arg_file = 'node_modules/karma-cli-runner/karma-args'
     view normal_test.js
     TestSuite
 
@@ -52,7 +52,7 @@ describe "Karma"
   end
 
   it "runs CoffeeScript"
-    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
+    let arg_file = 'node_modules/karma-cli-runner/karma-args'
     view spec/normal_spec.coffee
     TestSuite
 
@@ -60,7 +60,7 @@ describe "Karma"
   end
 
   it "runs React"
-    let arg_file = expand('<sfile>:p:h:h:h:h') . '/autoload/test/javascript/karma-args'
+    let arg_file = 'node_modules/karma-cli-runner/karma-args'
     view spec/normal_spec.jsx
     TestSuite
 

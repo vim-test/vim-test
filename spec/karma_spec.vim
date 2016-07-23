@@ -16,7 +16,7 @@ describe "Karma"
     view +2 normal_spec.js
     TestNearest
 
-    Expect g:test#last_command == 'node ' . arg_file . ' --files normal_spec.js --filter ''Addition adds two numbers'''
+    Expect g:test#last_command == 'node ' . arg_file . ' --files normal_spec.js --filter ''Addition adds two numbers'' --single-run --no-auto-watch --log-level=OFF'
   end
 
   it "runs file tests"
@@ -24,7 +24,7 @@ describe "Karma"
     view normal_spec.js
     TestFile
 
-    Expect g:test#last_command == 'node ' . arg_file . ' --files normal_spec.js'
+    Expect g:test#last_command == 'node ' . arg_file . ' --files normal_spec.js --single-run --no-auto-watch --log-level=OFF'
   end
 
   it "runs test suites"
@@ -32,7 +32,7 @@ describe "Karma"
     view spec/normal_spec.js
     TestSuite
 
-    Expect g:test#last_command == 'node ' . arg_file
+    Expect g:test#last_command == 'node ' . arg_file . ' --single-run --no-auto-watch --log-level=OFF'
   end
 
   it "is case insensitive about the filename"
@@ -40,7 +40,7 @@ describe "Karma"
     view normalSpec.js
     TestFile
 
-    Expect g:test#last_command == 'node ' . arg_file . ' --files normalSpec.js'
+    Expect g:test#last_command == 'node ' . arg_file . ' --files normalSpec.js --single-run --no-auto-watch --log-level=OFF'
   end
 
   it "detects tests in files ending with 'test'"
@@ -48,7 +48,7 @@ describe "Karma"
     view normal_test.js
     TestSuite
 
-    Expect g:test#last_command == 'node ' . arg_file
+    Expect g:test#last_command == 'node ' . arg_file . ' --single-run --no-auto-watch --log-level=OFF'
   end
 
   it "runs CoffeeScript"
@@ -56,7 +56,7 @@ describe "Karma"
     view spec/normal_spec.coffee
     TestSuite
 
-    Expect g:test#last_command == 'node ' . arg_file
+    Expect g:test#last_command == 'node ' . arg_file . ' --single-run --no-auto-watch --log-level=OFF'
   end
 
   it "runs React"
@@ -64,7 +64,7 @@ describe "Karma"
     view spec/normal_spec.jsx
     TestSuite
 
-    Expect g:test#last_command == 'node ' . arg_file
+    Expect g:test#last_command == 'node ' . arg_file . ' --single-run --no-auto-watch --log-level=OFF'
   end
 
   it "doesn't recognize files that don't end with 'spec' or 'test'"

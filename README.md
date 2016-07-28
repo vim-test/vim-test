@@ -38,9 +38,11 @@ in, so they all work in the same unified way.
 
 ## Setup
 
+Using [vim-plug](https://github.com/junegunn/vim-plug), add 
 ```vim
-Plug[in] 'janko-m/vim-test'
+Plug 'janko-m/vim-test'
 ```
+to your `.vimrc` file (see vim-plug documentation for where), and run `:PlugInstall`.
 
 Add your preferred mappings to your `.vimrc` file:
 

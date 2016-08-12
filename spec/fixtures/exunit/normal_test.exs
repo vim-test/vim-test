@@ -1,3 +1,5 @@
+ExUnit.start
+
 defmodule NumbersTest do
   use ExUnit.Case
 

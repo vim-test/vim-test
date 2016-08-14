@@ -2,35 +2,39 @@ if !exists('g:test#javascript#karma#file_pattern')
   let g:test#javascript#karma#file_pattern = '\v(test|spec)\.(js|jsx|coffee)$'
 endif
 
-" let s:karma_file = expand('<sfile>:p:h', 1) . '/karma-args'
-
 function! test#javascript#karma#test_file(file) abort
   if empty(test#javascript#karma#executable())
     return 0
   endif
 
-  return  a:file =~? g:test#javascript#karma#file_pattern
+  return a:file =~? g:test#javascript#karma#file_pattern
 endfunction
 
 function! test#javascript#karma#build_position(type, position) abort
-  if a:type ==# 'nearest'
-    let specname = s:nearest_test(a:position)
-    let filename = '--files ' . expand(a:position['file'])
-    if empty(specname)
-      return [filename]
+  if test#javascript#karma#executable() =~ 'karma-cli-runner'
+    if a:type ==# 'nearest'
+      let specname = s:nearest_test(a:position)
+      let filename = '--files ' . expand(a:position['file'])
+      if empty(specname)
+        return [filename]
+      endif
+      let specname = '--filter ' . shellescape(specname, 1)
+      return [filename, specname]
+    elseif a:type ==# 'file'
+      return ['--files ' . expand(a:position['file'])]
+    else
+      return []
     endif
-    let specname = '--filter ' . shellescape(specname, 1)
-    return [filename, specname]
-  elseif a:type ==# 'file'
-    return ['--files ' . expand(a:position['file'])]
   else
+    " There is no easy way to restrict the test files with karma.  Until a way
+    " is found to easily accomplish this, we'll get an empty list here
     return []
   endif
 endfunction
 
 function! test#javascript#karma#build_args(args) abort
   let args = a:args
-  
+
   " reduce clutter in the output by only reporting tests and only run once so
   " we take less time & therefore annoy the user less
   call extend(args, ['--single-run', '--no-auto-watch', '--log-level=OFF'])

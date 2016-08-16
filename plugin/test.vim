@@ -15,7 +15,7 @@ let g:test#runners = get(g:, 'test#runners', {})
 call s:extend(g:test#runners, {
   \ 'Ruby':       ['M', 'Minitest', 'RSpec', 'Cucumber'],
   \ 'JavaScript': ['Intern', 'TAP', 'Karma', 'Mocha', 'Jasmine'],
-  \ 'Python':     ['DjangoTest', 'PyTest', 'Nose'],
+  \ 'Python':     ['DjangoTest', 'PyTest', 'Nose', 'Nose2'],
   \ 'Elixir':     ['ExUnit', 'ESpec'],
   \ 'Go':         ['GoTest'],
   \ 'Rust':       ['CargoTest'],

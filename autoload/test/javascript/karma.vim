@@ -37,7 +37,7 @@ function! test#javascript#karma#build_args(args) abort
 
   " reduce clutter in the output by only reporting tests and only run once so
   " we take less time & therefore annoy the user less
-  call extend(args, ['--single-run', '--no-auto-watch', '--log-level=OFF'])
+  call extend(args, ['--single-run', '--no-auto-watch', '--log-level=disable'])
 
   if test#base#no_colors()
     let args = ['--no-color'] + args

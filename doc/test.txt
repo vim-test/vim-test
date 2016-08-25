@@ -169,6 +169,12 @@ Runs test commands with `:Dispatch`. Requires the Dispatch.vim plugin.
 >
   let test#strategy = 'dispatch'
 <
+VimProc ~
+
+Runs test commands with `:VimProcBang`. Requires the Vimproc.vim plugin.
+>
+  let test#strategy = 'vimproc'
+<
 Neovim ~
 
 Runs test commands with `:terminal`, which spawns a terminal inside your Neovim.

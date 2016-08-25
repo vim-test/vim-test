@@ -42,6 +42,10 @@ function! test#strategy#dispatch(cmd) abort
   execute 'Dispatch '.a:cmd
 endfunction
 
+function! test#strategy#vimproc(cmd) abort
+  execute 'VimProcBang '.a:cmd
+endfunction
+
 function! test#strategy#neovim(cmd) abort
   let opts = {'suffix': ' # vim-test'}
   function! opts.close_terminal()

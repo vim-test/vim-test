@@ -97,9 +97,9 @@ function! s:pretty_command(cmd) abort
   let echo  = !s:Windows() ? 'echo -e '.shellescape(a:cmd) : 'Echo '.shellescape(a:cmd)
 
   if !exists('g:test#preserve_screen') || !g:test#preserve_screen
-    return join([l:clear, l:cd, l:echo, a:cmd], '; ')
+    return join([l:clear, l:cd, l:echo, a:cmd], has('win32') ? ' & ' : '; ')
   else
-    return join([l:cd, l:echo, a:cmd], '; ')
+    return join([l:cd, l:echo, a:cmd], has('win32') ? ' & ' : '; ')
   endif
 endfunction
 

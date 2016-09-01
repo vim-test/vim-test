@@ -95,11 +95,12 @@ function! s:pretty_command(cmd) abort
   let clear = !s:Windows() ? 'clear' : 'cls'
   let cd = 'cd ' . shellescape(getcwd())
   let echo  = !s:Windows() ? 'echo -e '.shellescape(a:cmd) : 'Echo '.shellescape(a:cmd)
+  let separator = !s:Windows() ? '; ' : ' & '
 
   if !exists('g:test#preserve_screen') || !g:test#preserve_screen
-    return join([l:clear, l:cd, l:echo, a:cmd], has('win32') ? ' & ' : '; ')
+    return join([l:clear, l:cd, l:echo, a:cmd], l:separator)
   else
-    return join([l:cd, l:echo, a:cmd], has('win32') ? ' & ' : '; ')
+    return join([l:cd, l:echo, a:cmd], l:separator)
   endif
 endfunction
 

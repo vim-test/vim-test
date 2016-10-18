@@ -3,6 +3,7 @@ source spec/support/helpers.vim
 describe "Mocha"
 
   before
+    let g:test#javascript#runner = 'mocha'
     cd spec/fixtures/mocha
   end
 

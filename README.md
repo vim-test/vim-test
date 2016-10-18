@@ -6,21 +6,21 @@ A Vim wrapper for running tests on different granularities.
 
 Currently the following testing frameworks are supported:
 
-| Language       | Frameworks                                 | Identifiers                                  |
-| :------------: | -------------------------------------      | -------------------------------------------- |
-| **Ruby**       | RSpec, [Minitest][minitest], [M], Cucumber | `rspec`, `minitest`, `m`, `cucumber`         |
-| **JavaScript** | Intern, TAP, Karma, Mocha, Jasmine         | `intern`, `tap`, `karma`, `mocha`, `jasmine` |
-| **Python**     | Nose, PyTest, Django                       | `nose`, `pytest`, `djangotest`, `djangonose` |
-| **Elixir**     | ExUnit, ESpec                              | `exunit`, `espec`                            |
-| **Go**         | Go                                         | `gotest`                                     |
-| **Rust**       | Cargo                                      | `cargotest`                                  |
-| **Clojure**    | Fireplace.vim                              | `fireplacetest`                              |
-| **Shell**      | Bats                                       | `bats`                                       |
-| **VimScript**  | VSpec, Vader.vim                           | `vspec`, `vader`                             |
-| **Lua**        | Busted                                     | `busted`                                     |
-| **PHP**        | PHPUnit, Behat, PHPSpec                    | `phpunit`, `behat`, `phpspec`                |
-| **Perl**       | Prove                                      | `prove`                                      |
-| **Java**       | Maven                                      | `maventest`                                  |
+| Language       | Frameworks                                 | Identifiers                                         |
+| :------------: | -------------------------------------      | --------------------------------------------------- |
+| **Ruby**       | RSpec, [Minitest][minitest], [M], Cucumber | `rspec`, `minitest`, `m`, `cucumber`                |
+| **JavaScript** | Intern, TAP, Karma, Mocha, Jasmine, Ava    | `intern`, `tap`, `karma`, `mocha`, `jasmine`, `ava` |
+| **Python**     | Nose, PyTest, Django                       | `nose`, `pytest`, `djangotest`, `djangonose`        |
+| **Elixir**     | ExUnit, ESpec                              | `exunit`, `espec`                                   |
+| **Go**         | Go                                         | `gotest`                                            |
+| **Rust**       | Cargo                                      | `cargotest`                                         |
+| **Clojure**    | Fireplace.vim                              | `fireplacetest`                                     |
+| **Shell**      | Bats                                       | `bats`                                              |
+| **VimScript**  | VSpec, Vader.vim                           | `vspec`, `vader`                                    |
+| **Lua**        | Busted                                     | `busted`                                            |
+| **PHP**        | PHPUnit, Behat, PHPSpec                    | `phpunit`, `behat`, `phpspec`                       |
+| **Perl**       | Prove                                      | `prove`                                             |
+| **Java**       | Maven                                      | `maventest`                                         |
 
 ## Features
 
@@ -38,7 +38,7 @@ in, so they all work in the same unified way.
 
 ## Setup
 
-Using [vim-plug](https://github.com/junegunn/vim-plug), add 
+Using [vim-plug](https://github.com/junegunn/vim-plug), add
 ```vim
 Plug 'janko-m/vim-test'
 ```
@@ -251,6 +251,17 @@ the first available will be chosen, but you can force a specific one:
 ``` vim
 let test#python#runner = 'pytest'
 " Runners available are 'pytest', 'nose', 'djangotest' and 'djangonose'
+```
+
+#### Javascript
+
+Since there are multiple Javascript test runners for the same type of tests,
+test.vim has no way of detecting which one did you intend to use. By default
+the first available will be chosen, but you can force a specific one:
+
+``` vim
+let test#javascript#runner = 'mocha'
+" Runners available are 'mocha', 'ava'
 ```
 
 #### Ruby

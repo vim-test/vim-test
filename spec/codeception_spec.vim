@@ -3,6 +3,7 @@ source spec/support/helpers.vim
 describe "Codeception"
 
   before
+    let g:test#php#runner = 'codeception'
     cd spec/fixtures/codeception
   end
 
@@ -32,6 +33,13 @@ describe "Codeception"
     Expect g:test#last_command == 'codecept run tests/functional/Normal.feature'
   end
 
+  it "runs unit test file"
+    view tests/functional/NormalTest.php
+    TestFile
+
+    Expect g:test#last_command == 'codecept run tests/functional/NormalTest.php'
+  end
+
   it "runs cest nearest tests"
     view +1 tests/functional/NormalCest.php
     TestNearest
@@ -53,6 +61,13 @@ describe "Codeception"
     Expect g:test#last_command == 'codecept run tests/functional/Normal.feature'
   end
 
+  it "runs nearest unit tests"
+    view +1 tests/functional/NormalTest.php
+    TestNearest
+
+    Expect g:test#last_command == 'codecept run tests/functional/NormalTest.php'
+  end
+
   it "runs test suites"
     view tests/functional/NormalCest.php
     TestSuite
@@ -60,7 +75,7 @@ describe "Codeception"
     Expect g:test#last_command == 'codecept run'
   end
 
-  it "doesn't recognize files that don't end with 'Cest' or 'Cept'"
+  it "doesn't recognize files that don't end with 'Cest', 'Cept' or 'Test'"
     view tests/functional/normal.php
     TestFile
 

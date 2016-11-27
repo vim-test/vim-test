@@ -3,6 +3,7 @@ source spec/support/helpers.vim
 describe "PHPUnit"
 
   before
+    let g:test#php#runner = 'phpunit'
     cd spec/fixtures/phpunit
   end
 

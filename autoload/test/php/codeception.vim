@@ -1,10 +1,15 @@
 if !exists('g:test#php#codeception#file_pattern')
-  let g:test#php#codeception#file_pattern = '\v((c|C)e(p|s)t\.php$|\.feature$)'
+  let g:test#php#codeception#file_pattern =
+        \ '\v((c|C)e(p|s)t\.php$|\.feature$|(t|T)est\.php$)'
 endif
 
 function! test#php#codeception#test_file(file) abort
   if a:file =~# g:test#php#codeception#file_pattern
-    return !empty(glob('tests/**/_bootstrap.php'))
+    if exists('g:test#php#runner')
+      return g:test#php#runner == 'codeception'
+    else
+      return executable(test#php#codeception#executable())
+    endif
   endif
 endfunction
 

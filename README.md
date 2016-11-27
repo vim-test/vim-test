@@ -18,7 +18,7 @@ Currently the following testing frameworks are supported:
 | **Shell**      | Bats                                            | `bats`                                       |
 | **VimScript**  | VSpec, Vader.vim                                | `vspec`, `vader`                             |
 | **Lua**        | Busted                                          | `busted`                                     |
-| **PHP**        | PHPUnit, Behat, PHPSpec                         | `phpunit`, `behat`, `phpspec`                |
+| **PHP**        | PHPUnit, Behat, PHPSpec, Codeception            | `phpunit`, `behat`, `phpspec`, `codeception` |
 | **Perl**       | Prove                                           | `prove`                                      |
 | **Java**       | Maven                                           | `maventest`                                  |
 
@@ -38,7 +38,7 @@ in, so they all work in the same unified way.
 
 ## Setup
 
-Using [vim-plug](https://github.com/junegunn/vim-plug), add 
+Using [vim-plug](https://github.com/junegunn/vim-plug), add
 ```vim
 Plug 'janko-m/vim-test'
 ```

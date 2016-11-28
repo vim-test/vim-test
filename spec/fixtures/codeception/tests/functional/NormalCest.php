@@ -16,4 +16,9 @@ class NormalCest
     {
         $I->wantTo('perform actions and see result');
     }
+
+    public function tryToTestSomethingElse(FunctionalTester $I)
+    {
+        $I->wantTo('perform another actions and see result');
+    }
 }

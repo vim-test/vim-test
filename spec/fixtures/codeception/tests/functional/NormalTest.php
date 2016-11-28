@@ -21,4 +21,9 @@ class NormalTest extends \Codeception\Test\Unit
     {
 
     }
+
+    public function testSomethingElse()
+    {
+
+    }
 }

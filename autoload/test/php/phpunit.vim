@@ -3,13 +3,7 @@ if !exists('g:test#php#phpunit#file_pattern')
 endif
 
 function! test#php#phpunit#test_file(file) abort
-  if a:file =~# g:test#php#phpunit#file_pattern
-    if exists('g:test#php#runner')
-      return g:test#php#runner == 'phpunit'
-    else
-      return executable(test#php#phpunit#executable())
-    endif
-  endif
+  return a:file =~# g:test#php#phpunit#file_pattern
 endfunction
 
 function! test#php#phpunit#build_position(type, position) abort

@@ -3,7 +3,6 @@ source spec/support/helpers.vim
 describe "Codeception"
 
   before
-    let g:test#php#runner = 'codeception'
     cd spec/fixtures/codeception
   end
 

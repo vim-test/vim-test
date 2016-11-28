@@ -263,17 +263,6 @@ can turn it off:
 let test#ruby#bundle_exec = 0
 ```
 
-#### PHP
-
-Codeception can run PHPUnit tests, in fact it is build on top of the PHPUnit.
-Test.vim has no way of detecting which one did you intend to use. By default
-the first available will be chosen, but you can force a specific one:
-
-``` vim
-let test#php#runner = 'codeception'
-" Runners available are 'phpunit', 'codeception'
-```
-
 ## Extending
 
 If you wish to extend this plugin with your own test runners, first of all,

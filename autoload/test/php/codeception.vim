@@ -5,11 +5,7 @@ endif
 
 function! test#php#codeception#test_file(file) abort
   if a:file =~# g:test#php#codeception#file_pattern
-    if exists('g:test#php#runner')
-      return g:test#php#runner == 'codeception'
-    else
-      return executable(test#php#codeception#executable())
-    endif
+    return filereadable('./codeception.yml')
   endif
 endfunction
 

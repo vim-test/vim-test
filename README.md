@@ -6,21 +6,21 @@ A Vim wrapper for running tests on different granularities.
 
 Currently the following testing frameworks are supported:
 
-| Language       | Frameworks                                 | Identifiers                                  |
-| :------------: | -------------------------------------      | -------------------------------------------- |
-| **Ruby**       | RSpec, [Minitest][minitest], [M], Cucumber | `rspec`, `minitest`, `m`, `cucumber`         |
-| **JavaScript** | Intern, TAP, Karma, Mocha, Jasmine         | `intern`, `tap`, `karma`, `mocha`, `jasmine` |
-| **Python**     | Nose, PyTest, Django                       | `nose`, `pytest`, `djangotest`, `djangonose` |
-| **Elixir**     | ExUnit, ESpec                              | `exunit`, `espec`                            |
-| **Go**         | Go                                         | `gotest`                                     |
-| **Rust**       | Cargo                                      | `cargotest`                                  |
-| **Clojure**    | Fireplace.vim                              | `fireplacetest`                              |
-| **Shell**      | Bats                                       | `bats`                                       |
-| **VimScript**  | VSpec, Vader.vim                           | `vspec`, `vader`                             |
-| **Lua**        | Busted                                     | `busted`                                     |
-| **PHP**        | PHPUnit, Behat, PHPSpec                    | `phpunit`, `behat`, `phpspec`                |
-| **Perl**       | Prove                                      | `prove`                                      |
-| **Java**       | Maven                                      | `maventest`                                  |
+| Language       | Frameworks                                      | Identifiers                                  |
+| :------------: | -------------------------------------           | -------------------------------------------- |
+| **Ruby**       | RSpec, [Minitest][minitest]/Rails/[M], Cucumber | `rspec`, `minitest`/`rails`/`m`, `cucumber`  |
+| **JavaScript** | Intern, TAP, Karma, Mocha, Jasmine              | `intern`, `tap`, `karma`, `mocha`, `jasmine` |
+| **Python**     | Nose, PyTest, Django                            | `nose`, `pytest`, `djangotest`, `djangonose` |
+| **Elixir**     | ExUnit, ESpec                                   | `exunit`, `espec`                            |
+| **Go**         | Go                                              | `gotest`                                     |
+| **Rust**       | Cargo                                           | `cargotest`                                  |
+| **Clojure**    | Fireplace.vim                                   | `fireplacetest`                              |
+| **Shell**      | Bats                                            | `bats`                                       |
+| **VimScript**  | VSpec, Vader.vim                                | `vspec`, `vader`                             |
+| **Lua**        | Busted                                          | `busted`                                     |
+| **PHP**        | PHPUnit, Behat, PHPSpec                         | `phpunit`, `behat`, `phpspec`                |
+| **Perl**       | Prove                                           | `prove`                                      |
+| **Java**       | Maven                                           | `maventest`                                  |
 
 ## Features
 

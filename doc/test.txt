@@ -74,6 +74,9 @@ In all commands [args] are forwarded to the underlying test runner.
                              :Minitest --seed 1234
                              => rake test TEST="test/**/*_test.rb" TESTOPTS='--seed=1234'
 <
+                                                *test-:Rails*
+:Rails [args]                Uses the `rails` `test` command.
+
                                                 *test-:M*
 :M [args]                    Uses the `m` command.
 

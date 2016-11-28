@@ -16,7 +16,7 @@ function! test#python#pytest#build_position(type, position) abort
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return [a:position['file'].' -k '.name]
+      return [a:position['file'].'::'.name]
     else
       return [a:position['file']]
     endif

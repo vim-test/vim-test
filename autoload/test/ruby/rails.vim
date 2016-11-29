@@ -39,7 +39,7 @@ endfunction
 function! s:rails_version()
   if filereadable('Gemfile.lock')
     let gemfile_lock = system('cat Gemfile.lock')
-    let version_string = matchstr(gemfile_lock, '\vrails \(\zs.+\ze\)')
+    let version_string = matchstr(gemfile_lock, '\v^rails \(\zs.+\ze\)')
 
     if !empty(version_string)
       let rails_version = matchlist(version_string, '\v(\d+)\.(\d+)\.(\d+)%(\.(\d+))?')[1:-1]

@@ -157,6 +157,12 @@ STRATEGIES                                      *test-strategies*
 
 Multiple strategies are supported for running tests.
 
+AsyncRun ~
+
+Runs test commands asynchronously using new APIs in Vim 8 and NeoVim.
+>
+  let test#strategy = 'asyncrun'
+<
 Basic (default) ~
 
 Runs test commands with `:!`, which switches your Vim to the Terminal.

@@ -38,6 +38,10 @@ function! test#strategy#make(cmd) abort
   endtry
 endfunction
 
+function! test#strategy#asyncrun(cmd) abort
+  execute 'AsyncRun '.a:cmd
+endfunction
+
 function! test#strategy#dispatch(cmd) abort
   execute 'Dispatch '.a:cmd
 endfunction

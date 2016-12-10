@@ -42,6 +42,5 @@ function! test#cs#dotnet#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#cs#patterns)
-  return get(name['test'], 0, '')
+  return
 endfunction

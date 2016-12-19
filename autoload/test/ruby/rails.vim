@@ -38,10 +38,14 @@ endfunction
 
 function! s:rails_version()
   if filereadable('Gemfile.lock')
-    let gemfile_lock = system('cat Gemfile.lock')
-    let version_string = matchstr(gemfile_lock, '\v^rails \(\zs.+\ze\)')
+    for line in readfile('Gemfile.lock')
+      let version_string = matchstr(line, '\v^ *rails \(\zs\d+\.\d+\..+\ze\)')
+      if version_string
+        break
+      endif
+    endfor
 
-    if !empty(version_string)
+    if version_string
       let rails_version = matchlist(version_string, '\v(\d+)\.(\d+)\.(\d+)%(\.(\d+))?')[1:-1]
       call filter(rails_version, '!empty(v:val)')
       call map(rails_version, 'str2nr(v:val)')

@@ -16,7 +16,7 @@ function! test#python#pytest#build_position(type, position) abort
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return [a:position['file'].' -k '.name]
+      return [a:position['file'].'::'.name]
     else
       return [a:position['file']]
     endif
@@ -43,5 +43,9 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#python#patterns)
-  return get(name['test'], 0, '')
+  let path = get(name['test'], 0, '')
+  if len(name['namespace'])
+      let path = name['namespace'][0] . '::' . path
+  endif
+  return path
 endfunction

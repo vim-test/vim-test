@@ -16,17 +16,17 @@ describe "PyTest"
     view +2 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'py.test test_class.py -k test_numbers'
+    Expect g:test#last_command == 'py.test test_class.py::TestNumbers::test_numbers'
 
     view +1 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'py.test test_class.py'
+    Expect g:test#last_command == 'py.test test_class.py::TestNumbers'
 
     view +1 test_method.py
     TestNearest
 
-    Expect g:test#last_command == 'py.test test_method.py -k test_numbers'
+    Expect g:test#last_command == 'py.test test_method.py::test_numbers'
   end
 
   it "runs file test if nearest test couldn't be found"

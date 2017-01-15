@@ -336,4 +336,5 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 [`autochdir`]: http://vimdoc.sourceforge.net/htmldoc/options.html#'autochdir'
 [rspec.vim]: https://github.com/thoughtbot/vim-rspec
 [vroom.vim]: https://github.com/skalnik/vim-vroom
+[AsyncRun]: https://github.com/skywind3000/asyncrun.vim
 [M]: http://github.com/qrush/m

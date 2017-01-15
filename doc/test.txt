@@ -160,6 +160,7 @@ Multiple strategies are supported for running tests.
 AsyncRun ~
 
 Runs test commands asynchronously using new APIs in Vim 8 and NeoVim.
+Requires AsyncRun plugin.
 >
   let test#strategy = 'asyncrun'
 <

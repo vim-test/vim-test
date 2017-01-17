@@ -13,34 +13,13 @@ function! test#cs#dotnet#test_file(file) abort
 endfunction
 
 function! test#cs#dotnet#build_position(type, position) abort
-  if a:type == 'nearest'
-    let name = s:nearest_test(a:position)
-    if !empty(name)
-      return [a:position['file'].' -k '.name]
-    else
-      return [a:position['file']]
-    endif
-  elseif a:type == 'file'
-    return [a:position['file']]
-  else
-    return []
-  endif
+  return []
 endfunction
 
 function! test#cs#dotnet#build_args(args) abort
-  let args = a:args
-
-  if test#base#no_colors()
-    let args = ['--color=no'] + args
-  endif
-
   return ['test']
 endfunction
 
 function! test#cs#dotnet#executable() abort
   return 'dotnet'
-endfunction
-
-function! s:nearest_test(position) abort
-  return
 endfunction

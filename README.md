@@ -21,6 +21,7 @@ Currently the following testing frameworks are supported:
 | **PHP**        | PHPUnit, Behat, PHPSpec, Codeception            | `phpunit`, `behat`, `phpspec`, `codeception` |
 | **Perl**       | Prove                                           | `prove`                                      |
 | **Java**       | Maven                                           | `maventest`                                  |
+| **Crystal**    | Crystal                                         | `crystalspec`                                |
 
 ## Features
 

@@ -1,5 +1,5 @@
 if !exists('g:test#crystal#crystalspec#file_pattern')
-  let g:test#crystal#crystalspec#file_pattern = '\v(_spec\.cr)$'
+  let g:test#crystal#crystalspec#file_pattern = '\v_spec\.cr$'
 endif
 
 function! test#crystal#crystalspec#test_file(file) abort

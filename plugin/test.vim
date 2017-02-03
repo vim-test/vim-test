@@ -26,6 +26,7 @@ call s:extend(g:test#runners, {
   \ 'PHP':        ['Codeception', 'PHPUnit', 'Behat', 'PHPSpec'],
   \ 'Perl':       ['Prove'],
   \ 'Java':       ['MavenTest'],
+  \ 'Crystal':    ['CrystalSpec'],
 \})
 
 let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})

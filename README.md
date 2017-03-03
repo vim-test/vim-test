@@ -12,6 +12,7 @@ Currently the following testing frameworks are supported:
 | **JavaScript** | Intern, TAP, Karma, Mocha, Jasmine              | `intern`, `tap`, `karma`, `mocha`, `jasmine` |
 | **Python**     | Nose, PyTest, Django                            | `nose`, `pytest`, `djangotest`, `djangonose` |
 | **Elixir**     | ExUnit, ESpec                                   | `exunit`, `espec`                            |
+| **Erlang**     | CommonTest                                      | `ct`                                         |
 | **Go**         | Go                                              | `gotest`                                     |
 | **Rust**       | Cargo                                           | `cargotest`                                  |
 | **Clojure**    | Fireplace.vim                                   | `fireplacetest`                              |

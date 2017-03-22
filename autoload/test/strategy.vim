@@ -21,11 +21,13 @@ function! test#strategy#make(cmd) abort
     if !empty(compiler)
       execute 'compiler ' . compiler
     endif
+
     if s:restorescreen()
       let &l:makeprg = s:pretty_command(a:cmd)
     else
       let &l:makeprg = a:cmd
     endif
+
     make
   finally
     let &l:makeprg = default_makeprg

@@ -20,6 +20,7 @@ call s:extend(g:test#runners, {
   \ 'Go':         ['GoTest'],
   \ 'Rust':       ['CargoTest'],
   \ 'Clojure':    ['FireplaceTest'],
+  \ 'cs':         ['dotnettest'],
   \ 'Shell':      ['Bats'],
   \ 'VimL':       ['VSpec', 'Vader'],
   \ 'Lua':        ['Busted'],

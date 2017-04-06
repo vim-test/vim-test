@@ -1,5 +1,5 @@
 if !exists('g:test#cs#dotnettest#file_pattern')
-  let g:test#cs#dotnettest#file_pattern = '\v^.*[Tt]ests\.cs$'
+  let g:test#cs#dotnettest#file_pattern = '\v^.*\.cs$'
 endif
 
 function! test#cs#dotnettest#test_file(file) abort

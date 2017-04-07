@@ -40,6 +40,39 @@ function! test#strategy#make(cmd) abort
   endtry
 endfunction
 
+function! test#strategy#neomake(cmd) abort
+
+  try
+    let compiler = dispatch#compiler_for_program(a:cmd)
+  catch
+    let compiler = ''
+  endtry
+
+  try
+    if !empty(compiler)
+      let default_makeprg = &l:makeprg
+      let default_errorformat = &l:errorformat
+      let default_compiler = get(b:, 'current_compiler', '')
+      execute 'compiler ' . compiler
+    endif
+    let cmd_parts = split(a:cmd, ' ')
+    let executable = cmd_parts[0]
+    let args = join(cmd_parts[1:], ' ')
+    let maker = {'exe': executable, 'name': executable, 'args': args,  'errorformat': &l:errorformat}
+    call neomake#Make(0, [maker])
+  finally
+    if !empty(compiler)
+      let &l:makeprg = default_makeprg
+      let &l:errorformat = default_errorformat
+      if empty(default_compiler)
+        unlet! b:current_compiler
+      else
+        let b:current_compiler = default_compiler
+      endif
+    endif
+  endtry
+endfunction
+
 function! test#strategy#asyncrun(cmd) abort
   execute 'AsyncRun '.a:cmd
 endfunction

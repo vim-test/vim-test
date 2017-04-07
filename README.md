@@ -83,6 +83,7 @@ let test#strategy = "dispatch"
 | **[Vimux]**                     | `vimux`    | Runs test commands in a small tmux pane at the bottom of your terminal.          |
 | **[Tslime]**                    | `tslime`   | Runs test commands in a tmux pane you specify.                                   |
 | **[Neoterm]**                   | `neoterm`  | Runs test commands with `:T`, see neoterm docs for display customization.        |
+| **[Neomake]**                   | `neomake`  | Runs test commands asynchronously with `:Neomake`                                 |
 | **[VimShell]**                  | `vimshell` | Runs test commands in a shell written in VimScript.                              |
 | **[Vim&nbsp;Tmux&nbsp;Runner]** | `vtr`      | Runs test commands in a small tmux pane.                                         |
 | **[VimProc]**                   | `vimproc`  | Runs test commands asynchronously.                                               |
@@ -329,6 +330,7 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 
 [minitest]: https://github.com/janko-m/vim-test/wiki/Minitest
 [Neoterm]: https://github.com/kassio/neoterm
+[Neomake]: https://github.com/neomake/neomake
 [Dispatch]: https://github.com/tpope/vim-dispatch
 [Vimux]: https://github.com/benmills/vimux
 [Tslime]: https://github.com/jgdavey/tslime.vim

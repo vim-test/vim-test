@@ -203,6 +203,14 @@ Runs test commands with `:T`. Requires the Neoterm plugin.
 >
   let test#strategy = 'neoterm'
 <
+Neomake ~
+
+Runs test commands with `:Neomake`. Requires the Neomake plugin. This strategy will also use the Dispatch
+plugin to figure out what errorformat to use when calling Neomake, if Dispatch is not installed then the current
+errorformat will be used, this may mean you need to remember to set the compiler correctly when running tests.
+>
+  let test#strategy = 'neomake'
+<
 Vimux ~
 
 Runs test commands in a small Tmux pane at the bottom of your Terminal.

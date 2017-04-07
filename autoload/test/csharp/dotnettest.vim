@@ -1,12 +1,12 @@
-if !exists('g:test#cs#dotnettest#file_pattern')
-  let g:test#cs#dotnettest#file_pattern = '\v^.*\.cs$'
+if !exists('g:test#csharp#dotnettest#file_pattern')
+  let g:test#csharp#dotnettest#file_pattern = '\.cs$'
 endif
 
-function! test#cs#dotnettest#test_file(file) abort
-  return a:file =~? g:test#cs#dotnettest#file_pattern
+function! test#csharp#dotnettest#test_file(file) abort
+  return a:file =~? g:test#csharp#dotnettest#file_pattern
 endfunction
 
-function! test#cs#dotnettest#build_position(type, position) abort
+function! test#csharp#dotnettest#build_position(type, position) abort
   let file = a:position['file']
   let filename = fnamemodify(file, ':t:r')
   let filepath = fnamemodify(file, ':p:h')
@@ -40,7 +40,7 @@ function! test#cs#dotnettest#build_position(type, position) abort
   endif
 endfunction
 
-function! test#cs#dotnettest#build_args(args) abort
+function! test#csharp#dotnettest#build_args(args) abort
   let filter = ''
   if a:args[0] != '*'
     let filter = ' --filter FullyQualifiedName\~'.a:args[0]
@@ -49,11 +49,11 @@ function! test#cs#dotnettest#build_args(args) abort
   return [join(args, "")]
 endfunction
 
-function! test#cs#dotnettest#executable() abort
+function! test#csharp#dotnettest#executable() abort
   return 'dotnet test'
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#cs#patterns)
+  let name = test#base#nearest_test(a:position, g:test#csharp#patterns)
   return join(name['namespace'] + name['test'], '.')
 endfunction

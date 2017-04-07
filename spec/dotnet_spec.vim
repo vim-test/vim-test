@@ -4,10 +4,9 @@ function! s:remove_path(cmd)
   return substitute(a:cmd, '\/.*\/spec\/fixtures\/dotnet\/', '', '')
 endfunction
 
-describe "dotnet"
+describe "DotnetTest"
 
   before
-    let g:test#cs#runner = 'dotnet'
     cd spec/fixtures/dotnet
   end
 
@@ -20,19 +19,19 @@ describe "dotnet"
     view +2 Tests.cs
     TestNearest
 
-    let actual = s:remove_path(g:test#last_command) 
+    let actual = s:remove_path(g:test#last_command)
     Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Tests'
 
     view +8 Tests.cs
     TestNearest
 
-    let actual = s:remove_path(g:test#last_command) 
+    let actual = s:remove_path(g:test#last_command)
     Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Tests.TestAsync'
 
     view +14 Tests.cs
     TestNearest
 
-    let actual = s:remove_path(g:test#last_command) 
+    let actual = s:remove_path(g:test#last_command)
     Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Tests.Test'
 
   end
@@ -42,7 +41,7 @@ describe "dotnet"
     normal O
     TestNearest
 
-    let actual = s:remove_path(g:test#last_command) 
+    let actual = s:remove_path(g:test#last_command)
     Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Tests'
   end
 
@@ -50,7 +49,7 @@ describe "dotnet"
     view Tests.cs
     TestFile
 
-    let actual = s:remove_path(g:test#last_command) 
+    let actual = s:remove_path(g:test#last_command)
     Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Tests'
   end
 
@@ -58,7 +57,7 @@ describe "dotnet"
     view Tests.cs
     TestSuite
 
-    let actual = s:remove_path(g:test#last_command) 
+    let actual = s:remove_path(g:test#last_command)
     Expect actual == 'dotnet test Tests.csproj'
   end
 

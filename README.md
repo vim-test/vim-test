@@ -22,6 +22,7 @@ Currently the following testing frameworks are supported:
 | **Perl**       | Prove                                           | `prove`                                      |
 | **Java**       | Maven                                           | `maventest`                                  |
 | **Crystal**    | Crystal                                         | `crystalspec`                                |
+| **C#**         | .NET                                            | `dotnettest`                                 |
 
 ## Features
 

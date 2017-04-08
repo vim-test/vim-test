@@ -24,7 +24,7 @@ call s:extend(g:test#runners, {
   \ 'Shell':      ['Bats'],
   \ 'VimL':       ['VSpec', 'Vader'],
   \ 'Lua':        ['Busted'],
-  \ 'PHP':        ['Codeception', 'PHPUnit', 'Behat', 'PHPSpec'],
+  \ 'PHP':        ['Codeception', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
   \ 'Perl':       ['Prove'],
   \ 'Java':       ['MavenTest'],
   \ 'Crystal':    ['CrystalSpec'],

@@ -3,7 +3,9 @@ if !exists('g:test#php#phpspec#file_pattern')
 endif
 
 function! test#php#phpspec#test_file(file) abort
-  return a:file =~# g:test#php#phpspec#file_pattern
+  if a:file =~# g:test#php#phpspec#file_pattern
+    return search("PhpSpec") > 0
+  endif
 endfunction
 
 function! test#php#phpspec#build_position(type, position) abort

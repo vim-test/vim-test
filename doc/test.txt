@@ -147,6 +147,12 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Codeception*
 :Codeception [args]          Uses the `codecept` command.
 
+                                                *test-:Peridot*
+:Peridot [args]              Uses the `peridot` command.
+
+                                                *test-:Kahlan*
+:Kahlan [args]               Uses the `kahlan` command.
+
                                                 *test-:Prove*
 :Prove [args]                Uses the `prove` command.
 

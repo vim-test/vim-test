@@ -6,23 +6,23 @@ A Vim wrapper for running tests on different granularities.
 
 Currently the following testing frameworks are supported:
 
-| Language       | Frameworks                                      | Identifiers                                  |
-| :------------: | -------------------------------------           | -------------------------------------------- |
-| **Ruby**       | RSpec, [Minitest][minitest]/Rails/[M], Cucumber             | `rspec`, `minitest`/`rails`/`m`, `cucumber`  |
-| **JavaScript** | Intern, TAP, Karma, Mocha, Jasmine, Jest        | `intern`, `tap`, `karma`, `mocha`, `jasmine`, `jest` |
-| **Python**     | Nose, PyTest, Django                            | `nose`, `pytest`, `djangotest`, `djangonose` |
-| **Elixir**     | ExUnit, ESpec                                   | `exunit`, `espec`                            |
-| **Go**         | Go                                              | `gotest`                                     |
-| **Rust**       | Cargo                                           | `cargotest`                                  |
-| **Clojure**    | Fireplace.vim                                   | `fireplacetest`                              |
-| **Shell**      | Bats                                            | `bats`                                       |
-| **VimScript**  | VSpec, Vader.vim                                | `vspec`, `vader`                             |
-| **Lua**        | Busted                                          | `busted`                                     |
-| **PHP**        | PHPUnit, Behat, PHPSpec, Codeception            | `phpunit`, `behat`, `phpspec`, `codeception` |
-| **Perl**       | Prove                                           | `prove`                                      |
-| **Java**       | Maven                                           | `maventest`                                  |
-| **Crystal**    | Crystal                                         | `crystalspec`                                |
-| **C#**         | .NET                                            | `dotnettest`                                 |
+| Language         | Frameworks                                              | Identifiers                                                         |
+| :--------------: | ------------------------------------------------------- | ------------------------------------------------------------------- |
+| **Ruby**         | RSpec, [Minitest][minitest]/Rails/[M], Cucumber         | `rspec`, `minitest`/`rails`/`m`, `cucumber`                         |
+| **JavaScript**   | Intern, TAP, Karma, Mocha, Jasmine, Jest                | `intern`, `tap`, `karma`, `mocha`, `jasmine`, `jest`                |
+| **Python**       | Nose, PyTest, Django                                    | `nose`, `pytest`, `djangotest`, `djangonose`                        |
+| **Elixir**       | ExUnit, ESpec                                           | `exunit`, `espec`                                                   |
+| **Go**           | Go                                                      | `gotest`                                                            |
+| **Rust**         | Cargo                                                   | `cargotest`                                                         |
+| **Clojure**      | Fireplace.vim                                           | `fireplacetest`                                                     |
+| **Shell**        | Bats                                                    | `bats`                                                              |
+| **VimScript**    | VSpec, Vader.vim                                        | `vspec`, `vader`                                                    |
+| **Lua**          | Busted                                                  | `busted`                                                            |
+| **PHP**          | PHPUnit, Behat, PHPSpec, Codeception, Kahlan, Peridot   | `phpunit`, `behat`, `phpspec`, `codeception`, `kahlan`, `peridot`   |
+| **Perl**         | Prove                                                   | `prove`                                                             |
+| **Java**         | Maven                                                   | `maventest`                                                         |
+| **Crystal**      | Crystal                                                 | `crystalspec`                                                       |
+| **C#**           | .NET                                                    | `dotnettest`                                                        |
 
 ## Features
 

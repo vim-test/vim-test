@@ -41,7 +41,6 @@ function! test#strategy#make(cmd) abort
 endfunction
 
 function! test#strategy#neomake(cmd) abort
-
   try
     let compiler = dispatch#compiler_for_program(a:cmd)
   catch

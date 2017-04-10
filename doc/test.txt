@@ -74,6 +74,9 @@ In all commands [args] are forwarded to the underlying test runner.
                              :Minitest --seed 1234
                              => rake test TEST="test/**/*_test.rb" TESTOPTS='--seed=1234'
 <
+                                                *test-:Rails*
+:Rails [args]                Uses the `rails` `test` command.
+
                                                 *test-:M*
 :M [args]                    Uses the `m` command.
 
@@ -141,16 +144,35 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:PHPSpec*
 :PHPSpec [args]              Uses the `phpspec` command.
 
+                                                *test-:Codeception*
+:Codeception [args]          Uses the `codecept` command.
+
+                                                *test-:Peridot*
+:Peridot [args]              Uses the `peridot` command.
+
+                                                *test-:Kahlan*
+:Kahlan [args]               Uses the `kahlan` command.
+
                                                 *test-:Prove*
 :Prove [args]                Uses the `prove` command.
 
                                                 *test-:MavenTest*
 :MavenTest [args]            Uses the `mvn` `test` command.
 
+                                                *test-:CrystalSpec*
+:CrystalSpec [args]          Uses the `crystal` `spec` command.
+
 STRATEGIES                                      *test-strategies*
 
 Multiple strategies are supported for running tests.
 
+AsyncRun ~
+
+Runs test commands asynchronously using new APIs in Vim 8 and NeoVim.
+Requires AsyncRun plugin.
+>
+  let test#strategy = 'asyncrun'
+<
 Basic (default) ~
 
 Runs test commands with `:!`, which switches your Vim to the Terminal.
@@ -169,6 +191,12 @@ Runs test commands with `:Dispatch`. Requires the Dispatch.vim plugin.
 >
   let test#strategy = 'dispatch'
 <
+VimProc ~
+
+Runs test commands with `:VimProcBang`. Requires the Vimproc.vim plugin.
+>
+  let test#strategy = 'vimproc'
+<
 Neovim ~
 
 Runs test commands with `:terminal`, which spawns a terminal inside your Neovim.
@@ -180,6 +208,14 @@ Neoterm ~
 Runs test commands with `:T`. Requires the Neoterm plugin.
 >
   let test#strategy = 'neoterm'
+<
+Neomake ~
+
+Runs test commands with `:Neomake`. Requires the Neomake plugin. This strategy will also use the Dispatch
+plugin to figure out what errorformat to use when calling Neomake, if Dispatch is not installed then the current
+errorformat will be used, this may mean you need to remember to set the compiler correctly when running tests.
+>
+  let test#strategy = 'neomake'
 <
 Vimux ~
 

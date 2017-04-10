@@ -21,11 +21,13 @@ function! test#strategy#make(cmd) abort
     if !empty(compiler)
       execute 'compiler ' . compiler
     endif
+
     if s:restorescreen()
       let &l:makeprg = s:pretty_command(a:cmd)
     else
       let &l:makeprg = a:cmd
     endif
+
     make
   finally
     let &l:makeprg = default_makeprg
@@ -38,8 +40,48 @@ function! test#strategy#make(cmd) abort
   endtry
 endfunction
 
+function! test#strategy#neomake(cmd) abort
+  try
+    let compiler = dispatch#compiler_for_program(a:cmd)
+  catch
+    let compiler = ''
+  endtry
+
+  try
+    if !empty(compiler)
+      let default_makeprg = &l:makeprg
+      let default_errorformat = &l:errorformat
+      let default_compiler = get(b:, 'current_compiler', '')
+      execute 'compiler ' . compiler
+    endif
+    let cmd_parts = split(a:cmd, ' ')
+    let executable = cmd_parts[0]
+    let args = join(cmd_parts[1:], ' ')
+    let maker = {'exe': executable, 'name': executable, 'args': args,  'errorformat': &l:errorformat}
+    call neomake#Make(0, [maker])
+  finally
+    if !empty(compiler)
+      let &l:makeprg = default_makeprg
+      let &l:errorformat = default_errorformat
+      if empty(default_compiler)
+        unlet! b:current_compiler
+      else
+        let b:current_compiler = default_compiler
+      endif
+    endif
+  endtry
+endfunction
+
+function! test#strategy#asyncrun(cmd) abort
+  execute 'AsyncRun '.a:cmd
+endfunction
+
 function! test#strategy#dispatch(cmd) abort
   execute 'Dispatch '.a:cmd
+endfunction
+
+function! test#strategy#vimproc(cmd) abort
+  execute 'VimProcBang '.a:cmd
 endfunction
 
 function! test#strategy#neovim(cmd) abort
@@ -66,7 +108,15 @@ function! test#strategy#vtr(cmd) abort
 endfunction
 
 function! test#strategy#vimux(cmd) abort
-  call VimuxRunCommand(s:pretty_command(a:cmd))
+  if exists('g:test#preserve_screen') && !g:test#preserve_screen
+    if exists("g:VimuxRunnerIndex") && _VimuxHasRunner(g:VimuxRunnerIndex) != -1
+      call VimuxRunCommand(!s:Windows() ? 'clear' : 'cls')
+      call VimuxClearRunnerHistory()
+    endif
+    call VimuxRunCommand(s:command(a:cmd))
+  else
+    call VimuxRunCommand(s:pretty_command(a:cmd))
+  endif
 endfunction
 
 function! test#strategy#tslime(cmd) abort
@@ -95,12 +145,20 @@ function! s:pretty_command(cmd) abort
   let clear = !s:Windows() ? 'clear' : 'cls'
   let cd = 'cd ' . shellescape(getcwd())
   let echo  = !s:Windows() ? 'echo -e '.shellescape(a:cmd) : 'Echo '.shellescape(a:cmd)
+  let separator = !s:Windows() ? '; ' : ' & '
 
-  if !exists('g:test#preserve_screen') || !g:test#preserve_screen
-    return join([l:clear, l:cd, l:echo, a:cmd], '; ')
+  if !get(g:, 'test#preserve_screen')
+    return join([l:clear, l:cd, l:echo, a:cmd], l:separator)
   else
-    return join([l:cd, l:echo, a:cmd], '; ')
+    return join([l:cd, l:echo, a:cmd], l:separator)
   endif
+endfunction
+
+function! s:command(cmd) abort
+  let cd = 'cd ' . shellescape(getcwd())
+  let separator = !s:Windows() ? '; ' : ' & '
+
+  return join([l:cd, a:cmd], l:separator)
 endfunction
 
 function! s:Windows() abort

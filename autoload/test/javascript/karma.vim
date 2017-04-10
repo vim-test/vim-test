@@ -37,7 +37,7 @@ function! test#javascript#karma#build_args(args) abort
 
   " reduce clutter in the output by only reporting tests and only run once so
   " we take less time & therefore annoy the user less
-  call extend(args, ['--single-run', '--no-auto-watch', '--log-level=OFF'])
+  call extend(args, ['--single-run', '--no-auto-watch', '--log-level=disable'])
 
   if test#base#no_colors()
     let args = ['--no-color'] + args
@@ -47,7 +47,9 @@ function! test#javascript#karma#build_args(args) abort
 endfunction
 
 function! test#javascript#karma#executable() abort
-  if filereadable('node_modules/karma-cli-runner/karma-args.js')
+  if filereadable('nwb.config.js')
+    return 'nwb test'
+  elseif filereadable('node_modules/karma-cli-runner/karma-args.js')
     return 'node node_modules/karma-cli-runner/karma-args'
   elseif filereadable('node_modules/.bin/karma')
     return 'node_modules/.bin/karma start --single-run'

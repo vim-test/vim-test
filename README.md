@@ -6,21 +6,23 @@ A Vim wrapper for running tests on different granularities.
 
 Currently the following testing frameworks are supported:
 
-| Language       | Frameworks                                 | Identifiers                                  |
-| :------------: | -------------------------------------      | -------------------------------------------- |
-| **Ruby**       | RSpec, [Minitest][minitest], [M], Cucumber | `rspec`, `minitest`, `m`, `cucumber`         |
-| **JavaScript** | Intern, TAP, Karma, Mocha, Jasmine         | `intern`, `tap`, `karma`, `mocha`, `jasmine` |
-| **Python**     | Nose, PyTest, Django                       | `nose`, `pytest`, `djangotest`, `djangonose` |
-| **Elixir**     | ExUnit, ESpec                              | `exunit`, `espec`                            |
-| **Go**         | Go                                         | `gotest`                                     |
-| **Rust**       | Cargo                                      | `cargotest`                                  |
-| **Clojure**    | Fireplace.vim                              | `fireplacetest`                              |
-| **Shell**      | Bats                                       | `bats`                                       |
-| **VimScript**  | VSpec, Vader.vim                           | `vspec`, `vader`                             |
-| **Lua**        | Busted                                     | `busted`                                     |
-| **PHP**        | PHPUnit, Behat, PHPSpec                    | `phpunit`, `behat`, `phpspec`                |
-| **Perl**       | Prove                                      | `prove`                                      |
-| **Java**       | Maven                                      | `maventest`                                  |
+| Language         | Frameworks                                              | Identifiers                                                         |
+| :--------------: | ------------------------------------------------------- | ------------------------------------------------------------------- |
+| **Ruby**         | RSpec, [Minitest][minitest]/Rails/[M], Cucumber         | `rspec`, `minitest`/`rails`/`m`, `cucumber`                         |
+| **JavaScript**   | Intern, TAP, Karma, Mocha, Jasmine, Jest                | `intern`, `tap`, `karma`, `mocha`, `jasmine`, `jest`                |
+| **Python**       | Nose, PyTest, Django                                    | `nose`, `pytest`, `djangotest`, `djangonose`                        |
+| **Elixir**       | ExUnit, ESpec                                           | `exunit`, `espec`                                                   |
+| **Go**           | Go                                                      | `gotest`                                                            |
+| **Rust**         | Cargo                                                   | `cargotest`                                                         |
+| **Clojure**      | Fireplace.vim                                           | `fireplacetest`                                                     |
+| **Shell**        | Bats                                                    | `bats`                                                              |
+| **VimScript**    | VSpec, Vader.vim                                        | `vspec`, `vader`                                                    |
+| **Lua**          | Busted                                                  | `busted`                                                            |
+| **PHP**          | PHPUnit, Behat, PHPSpec, Codeception, Kahlan, Peridot   | `phpunit`, `behat`, `phpspec`, `codeception`, `kahlan`, `peridot`   |
+| **Perl**         | Prove                                                   | `prove`                                                             |
+| **Java**         | Maven                                                   | `maventest`                                                         |
+| **Crystal**      | Crystal                                                 | `crystalspec`                                                       |
+| **C#**           | .NET                                                    | `dotnettest`                                                        |
 
 ## Features
 
@@ -38,7 +40,7 @@ in, so they all work in the same unified way.
 
 ## Setup
 
-Using [vim-plug](https://github.com/junegunn/vim-plug), add 
+Using [vim-plug](https://github.com/junegunn/vim-plug), add
 ```vim
 Plug 'janko-m/vim-test'
 ```
@@ -81,8 +83,11 @@ let test#strategy = "dispatch"
 | **[Vimux]**                     | `vimux`    | Runs test commands in a small tmux pane at the bottom of your terminal.          |
 | **[Tslime]**                    | `tslime`   | Runs test commands in a tmux pane you specify.                                   |
 | **[Neoterm]**                   | `neoterm`  | Runs test commands with `:T`, see neoterm docs for display customization.        |
+| **[Neomake]**                   | `neomake`  | Runs test commands asynchronously with `:Neomake`                                 |
 | **[VimShell]**                  | `vimshell` | Runs test commands in a shell written in VimScript.                              |
 | **[Vim&nbsp;Tmux&nbsp;Runner]** | `vtr`      | Runs test commands in a small tmux pane.                                         |
+| **[VimProc]**                   | `vimproc`  | Runs test commands asynchronously.                                               |
+| **[AsyncRun]**                  | `asyncrun` | Runs test commands asynchronosuly using new APIs in Vim 8 and NeoVim.            |
 | **Terminal.app**                | `terminal` | Sends test commands to Terminal (useful in MacVim GUI).                          |
 | **iTerm2.app**                  | `iterm`    | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                     |
 
@@ -325,12 +330,15 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 
 [minitest]: https://github.com/janko-m/vim-test/wiki/Minitest
 [Neoterm]: https://github.com/kassio/neoterm
+[Neomake]: https://github.com/neomake/neomake
 [Dispatch]: https://github.com/tpope/vim-dispatch
 [Vimux]: https://github.com/benmills/vimux
 [Tslime]: https://github.com/jgdavey/tslime.vim
 [Vim&nbsp;Tmux&nbsp;Runner]: https://github.com/christoomey/vim-tmux-runner
 [VimShell]: https://github.com/Shougo/vimshell.vim
+[VimProc]: https://github.com/Shougo/vimproc.vim
 [`autochdir`]: http://vimdoc.sourceforge.net/htmldoc/options.html#'autochdir'
 [rspec.vim]: https://github.com/thoughtbot/vim-rspec
 [vroom.vim]: https://github.com/skalnik/vim-vroom
+[AsyncRun]: https://github.com/skywind3000/asyncrun.vim
 [M]: http://github.com/qrush/m

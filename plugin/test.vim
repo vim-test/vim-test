@@ -13,19 +13,21 @@ endfunction
 
 let g:test#runners = get(g:, 'test#runners', {})
 call s:extend(g:test#runners, {
-  \ 'Ruby':       ['M', 'Minitest', 'RSpec', 'Cucumber'],
-  \ 'JavaScript': ['Intern', 'TAP', 'Karma', 'Mocha', 'Jasmine'],
+  \ 'Ruby':       ['Rails', 'M', 'Minitest', 'RSpec', 'Cucumber'],
+  \ 'JavaScript': ['Intern', 'TAP', 'Karma', 'Mocha', 'Jasmine', 'Jest'],
   \ 'Python':     ['DjangoTest', 'PyTest', 'Nose', 'Nose2'],
   \ 'Elixir':     ['ExUnit', 'ESpec'],
   \ 'Go':         ['GoTest'],
   \ 'Rust':       ['CargoTest'],
   \ 'Clojure':    ['FireplaceTest'],
+  \ 'CSharp':     ['DotnetTest'],
   \ 'Shell':      ['Bats'],
   \ 'VimL':       ['VSpec', 'Vader'],
   \ 'Lua':        ['Busted'],
-  \ 'PHP':        ['PHPUnit', 'Behat', 'PHPSpec'],
+  \ 'PHP':        ['Codeception', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
   \ 'Perl':       ['Prove'],
   \ 'Java':       ['MavenTest'],
+  \ 'Crystal':    ['CrystalSpec'],
 \})
 
 let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})

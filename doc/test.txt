@@ -98,6 +98,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Nose*
 :Nose [args]                 Uses the `nosetests` command.
 
+                                                *test-:Nose2*
+:Nose2 [args]                Uses the `nose2` command.
+
                                                 *test-:PyTest*
 :PyTest [args]               Uses the `py.test` command.
 

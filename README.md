@@ -10,7 +10,7 @@ Currently the following testing frameworks are supported:
 | :------------: | ----------------------------------------------------- | ----------------------------------------------------------------- |
 | **Ruby**       | RSpec, [Minitest][minitest]/Rails/[M], Cucumber       | `rspec`, `minitest`/`rails`/`m`, `cucumber`                       |
 | **JavaScript** | Intern, TAP, Karma, Mocha, Jasmine, Jest              | `intern`, `tap`, `karma`, `mocha`, `jasmine`, `jest`              |
-| **Python**     | Nose, PyTest, Django, unittest (PyUnit)               | `nose`, `pytest`, `djangotest`, `djangonose`, `pyunit`            |
+| **Python**     | Nose, Nose2, PyTest, Django, unittest (PyUnit)        | `nose`, `nose2 , `pytest`, `djangotest`, `djangonose`, `pyunit`   |
 | **Elixir**     | ExUnit, ESpec                                         | `exunit`, `espec`                                                 |
 | **Go**         | Go                                                    | `gotest`                                                          |
 | **Rust**       | Cargo                                                 | `cargotest`                                                       |

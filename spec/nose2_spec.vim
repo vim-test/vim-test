@@ -20,22 +20,22 @@ describe "Nose2"
     view +2 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'nose2 test_class.py:TestNumbers.test_numbers'
+    Expect g:test#last_command == 'nose2 test_class.TestNumbers.test_numbers'
 
     view +5 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'nose2 test_class.py:TestSubclass'
+    Expect g:test#last_command == 'nose2 test_class.TestSubclass'
 
     view +1 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'nose2 test_class.py:TestNumbers'
+    Expect g:test#last_command == 'nose2 test_class.TestNumbers'
 
     view +1 test_method.py
     TestNearest
 
-    Expect g:test#last_command == 'nose2 test_method.py:test_numbers'
+    Expect g:test#last_command == 'nose2 test_method.test_numbers'
   end
 
   it "runs file test if nearest test couldn't be found"
@@ -43,14 +43,14 @@ describe "Nose2"
     normal O
     TestNearest
 
-    Expect g:test#last_command == 'nose2 test_method.py'
+    Expect g:test#last_command == 'nose2 test_method'
   end
 
   it "runs file tests"
     view test_class.py
     TestFile
 
-    Expect g:test#last_command == 'nose2 test_class.py'
+    Expect g:test#last_command == 'nose2 test_class'
   end
 
   it "runs test suites"

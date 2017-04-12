@@ -10,7 +10,7 @@ Currently the following testing frameworks are supported:
 | :------------: | ----------------------------------------------------- | ----------------------------------------------------------------- |
 | **Ruby**       | RSpec, [Minitest][minitest]/Rails/[M], Cucumber       | `rspec`, `minitest`/`rails`/`m`, `cucumber`                       |
 | **JavaScript** | Intern, TAP, Karma, Mocha, Jasmine, Jest              | `intern`, `tap`, `karma`, `mocha`, `jasmine`, `jest`              |
-| **Python**     | Nose, Nose2, PyTest, Django, unittest (PyUnit)        | `nose`, `nose2 , `pytest`, `djangotest`, `djangonose`, `pyunit`   |
+| **Python**     | Nose, Nose2, PyTest, Django, unittest (PyUnit)        | `nose`, `nose2`, `pytest`, `djangotest`, `djangonose`, `pyunit`   |
 | **Elixir**     | ExUnit, ESpec                                         | `exunit`, `espec`                                                 |
 | **Go**         | Go                                                    | `gotest`                                                          |
 | **Rust**       | Cargo                                                 | `cargotest`                                                       |
@@ -56,13 +56,13 @@ nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 ```
 
-| Command        | Description                                                                                                                                                                                                                                                                            |
-| :-------       | :-----------                                                                                                                                                                                                                                                                           |
-| `:TestNearest` | In a test file runs the test nearest to the cursor, otherwise runs the last nearest test. In test frameworks that don't support line numbers it will **polyfill** this functionality with [regexes](#commands).                                                                        |
-| `:TestFile`    | In a test file runs all tests in the current file, otherwise runs the last file tests.                                                                                                                                                                                                 |
-| `:TestSuite`   | Runs the whole test suite (if the current file is a test file, runs that framework's test suite, otherwise determines the test framework from the last run test).                                                                                                                      |
-| `:TestLast`    | Runs the last test.                                                                                                                                                                                                                                                                    |
-| `:TestVisit`   | Visits the test file from which you last run your tests (useful when you're trying to make a test pass, and you dive deep into application code and close your test buffer to make more space, and once you've made it pass you want to go back to the test file to write more tests). |
+| Command          | Description                                                                                                                                                                                                                                                                            |
+| :--------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| `:TestNearest`   | In a test file runs the test nearest to the cursor, otherwise runs the last nearest test. In test frameworks that don't support line numbers it will **polyfill** this functionality with [regexes](#commands).                                                                        |
+| `:TestFile`      | In a test file runs all tests in the current file, otherwise runs the last file tests.                                                                                                                                                                                                 |
+| `:TestSuite`     | Runs the whole test suite (if the current file is a test file, runs that framework's test suite, otherwise determines the test framework from the last run test).                                                                                                                      |
+| `:TestLast`      | Runs the last test.                                                                                                                                                                                                                                                                    |
+| `:TestVisit`     | Visits the test file from which you last run your tests (useful when you're trying to make a test pass, and you dive deep into application code and close your test buffer to make more space, and once you've made it pass you want to go back to the test file to write more tests). |
 
 ## Strategies
 
@@ -83,7 +83,7 @@ let test#strategy = "dispatch"
 | **[Vimux]**                     | `vimux`    | Runs test commands in a small tmux pane at the bottom of your terminal.          |
 | **[Tslime]**                    | `tslime`   | Runs test commands in a tmux pane you specify.                                   |
 | **[Neoterm]**                   | `neoterm`  | Runs test commands with `:T`, see neoterm docs for display customization.        |
-| **[Neomake]**                   | `neomake`  | Runs test commands asynchronously with `:Neomake`                                 |
+| **[Neomake]**                   | `neomake`  | Runs test commands asynchronously with `:Neomake`                                |
 | **[VimShell]**                  | `vimshell` | Runs test commands in a shell written in VimScript.                              |
 | **[Vim&nbsp;Tmux&nbsp;Runner]** | `vtr`      | Runs test commands in a small tmux pane.                                         |
 | **[VimProc]**                   | `vimproc`  | Runs test commands asynchronously.                                               |
@@ -254,7 +254,7 @@ the first available will be chosen, but you can force a specific one:
 
 ``` vim
 let test#python#runner = 'pytest'
-" Runners available are 'pytest', 'nose', 'djangotest', 'djangonose' and python's built-in 'unittest'
+" Runners available are 'pytest', 'nose', 'nose2', 'djangotest', 'djangonose' and Python's built-in 'unittest'
 ```
 
 #### Ruby

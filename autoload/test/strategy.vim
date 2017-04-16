@@ -148,7 +148,7 @@ function! s:pretty_command(cmd) abort
   let separator = !s:Windows() ? '; ' : ' & '
   let commands = get(g:, 'test#preserve_screen') ? [] : [l:clear]
 
-  if !exists('g:test#cd_before_run') || g:test#cd_before_run
+  if s:cd_before_run()
     call add(l:commands, l:cd)
   endif
 
@@ -161,7 +161,7 @@ function! s:command(cmd) abort
   let cd = 'cd ' . shellescape(getcwd())
   let separator = !s:Windows() ? '; ' : ' & '
 
-  if !exists('g:test#cd_before_run') || g:test#cd_before_run
+  if s:cd_before_run()
     let commands = [l:cd, a:cmd]
   else
     let commands = [a:cmd]
@@ -188,4 +188,8 @@ function! s:cat(filename) abort
   else
     return system('cat '.a:filename)
   endif
+endfunction
+
+function! s:cd_before_run() abort
+  return !exists('g:test#strategy#cd_before_run') || g:test#strategy#cd_before_run
 endfunction

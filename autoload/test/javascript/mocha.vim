@@ -3,7 +3,13 @@ if !exists('g:test#javascript#mocha#file_pattern')
 endif
 
 function! test#javascript#mocha#test_file(file) abort
-  return a:file =~# g:test#javascript#mocha#file_pattern
+  if a:file =~# g:test#javascript#mocha#file_pattern
+    if exists('g:test#javascript#runner')
+      return g:test#javascript#runner == 'mocha'
+    else
+      return executable('mocha')
+    endif
+  endif
 endfunction
 
 function! test#javascript#mocha#build_position(type, position) abort

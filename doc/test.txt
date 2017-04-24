@@ -86,6 +86,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:TAP*
 :TAP [args]                  Uses the `tap` or `tape` command.
 
+                                                *test-:Lab*
+:Lab [args]                  Uses the `lab` command.
+
                                                 *test-:Mocha*
 :Mocha [args]                Uses the `mocha` command.
 

@@ -3,7 +3,6 @@ source spec/support/helpers.vim
 describe "Lab"
 
   before
-    let g:test#javascript#runner = 'lab'
     cd spec/fixtures/lab
   end
 
@@ -14,17 +13,17 @@ describe "Lab"
 
   context "on nearest tests"
     it "runs JavaScript"
-      view +1 test/normal.js
+      view +6 test/normal.js
       TestNearest
 
       Expect g:test#last_command == 'lab test/normal.js --grep ''^Math'''
 
-      view +2 test/normal.js
+      view +7 test/normal.js
       TestNearest
 
       Expect g:test#last_command == 'lab test/normal.js --grep ''^Math Addition'''
 
-      view +3 test/normal.js
+      view +8 test/normal.js
       TestNearest
 
       Expect g:test#last_command == 'lab test/normal.js --grep ''^Math Addition adds two numbers$'''
@@ -32,7 +31,7 @@ describe "Lab"
   end
 
   it "runs file test if nearest test couldn't be found"
-    view +1 test/normal.js
+    view +6 test/normal.js
     normal O
     TestNearest
 

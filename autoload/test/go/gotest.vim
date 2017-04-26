@@ -7,7 +7,7 @@ function! test#go#gotest#test_file(file) abort
     if exists('g:test#go#runner')
       return g:test#go#runner == 'gotest'
     else
-      return executable('go')
+      return search("github.com/onsi/ginkgo") <= 0
     endif
   endif
 endfunction

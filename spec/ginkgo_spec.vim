@@ -46,7 +46,6 @@ describe "Ginkgo"
   it "runs file test if nearest test couldn't be found"
     view +1 mypackage/normal_test.go
     TestNearest
-    echo(g:test#last_command)
     Expect g:test#last_command == "ginkgo --regexScansFilePath=true --focus=mypackage/normal_test.go"
   end
 

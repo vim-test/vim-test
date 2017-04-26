@@ -3,7 +3,13 @@ if !exists('g:test#go#gotest#file_pattern')
 endif
 
 function! test#go#gotest#test_file(file) abort
-  return a:file =~# g:test#go#gotest#file_pattern
+  if fnamemodify(a:file, ':t') =~# g:test#go#gotest#file_pattern
+    if exists('g:test#go#runner')
+      return g:test#go#runner == 'gotest'
+    else
+      return executable('go')
+    endif
+  endif
 endfunction
 
 function! test#go#gotest#build_position(type, position) abort

@@ -12,7 +12,7 @@ Currently the following testing frameworks are supported:
 | **JavaScript** | Intern, TAP, Karma, Lab, Mocha, Jasmine, Jest         | `intern`, `tap`, `karma`, `lab`, `mocha`, `jasmine`, `jest`       |
 | **Python**     | Nose, Nose2, PyTest, Django, unittest (PyUnit)        | `nose`, `nose2`, `pytest`, `djangotest`, `djangonose`, `pyunit`   |
 | **Elixir**     | ExUnit, ESpec                                         | `exunit`, `espec`                                                 |
-| **Go**         | Go                                                    | `gotest`                                                          |
+| **Go**         | Go, Ginkgo                                                    | `gotest`, `ginkgo`                                                          |
 | **Rust**       | Cargo                                                 | `cargotest`                                                       |
 | **Clojure**    | Fireplace.vim                                         | `fireplacetest`                                                   |
 | **Shell**      | Bats                                                  | `bats`                                                            |
@@ -256,6 +256,15 @@ the first available will be chosen, but you can force a specific one:
 let test#python#runner = 'pytest'
 " Runners available are 'pytest', 'nose', 'nose2', 'djangotest', 'djangonose' and Python's built-in 'unittest'
 ```
+
+#### Go
+
+For the same reason as Python, runner detection works the same for Go. To
+force a specific runner:
+
+``` vim
+let test#go#runner = 'ginkgo'
+" Runners available are 'gotest', 'ginkgo'
 
 #### Ruby
 

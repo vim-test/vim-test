@@ -3,13 +3,7 @@ if !exists('g:test#go#gotest#file_pattern')
 endif
 
 function! test#go#gotest#test_file(file) abort
-  if fnamemodify(a:file, ':t') =~# g:test#go#gotest#file_pattern
-    if exists('g:test#go#runner')
-      return g:test#go#runner == 'gotest'
-    else
-      return search("github.com/onsi/ginkgo") <= 0
-    endif
-  endif
+  return test#go#test_file('gotest', g:test#go#gotest#file_pattern, a:file)
 endfunction
 
 function! test#go#gotest#build_position(type, position) abort

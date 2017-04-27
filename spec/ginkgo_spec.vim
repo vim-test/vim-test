@@ -3,7 +3,6 @@ source spec/support/helpers.vim
 describe "Ginkgo"
 
   before
-    let g:test#go#runner = 'ginkgo'
     cd spec/fixtures/ginkgo
   end
 
@@ -12,22 +11,22 @@ describe "Ginkgo"
     cd -
   end
 
-  describe "runs nearest tests"
-    it "runs test identified by 'It'"
+  describe "TestNearest"
+    it "runs nearest test identified by 'It'"
       view +17 normal_test.go
       TestNearest
 
       Expect g:test#last_command == "ginkgo --focus='should paginate the result' ./."
     end
 
-    it "runs tests identified by 'Context'"
+    it "runs nearest tests identified by 'Context'"
       view +11 normal_test.go
       TestNearest
 
       Expect g:test#last_command == "ginkgo --focus='when the request is authenticated' ./."
     end
 
-    it "runs tests identified by 'Describe'"
+    it "runs nearest tests identified by 'Describe'"
       view +9 normal_test.go
       TestNearest
 
@@ -68,6 +67,17 @@ describe "Ginkgo"
     TestSuite
 
     Expect g:test#last_command == "ginkgo ./..."
+  end
+
+  describe "when test#go#runner is set"
+    " make sure test#go#test_file doesn't have side-effect on cursor position
+    it "runs nearest test"
+      let g:test#go#runner = 'ginkgo'
+      view +17 normal_test.go
+      TestNearest
+
+      Expect g:test#last_command == "ginkgo --focus='should paginate the result' ./."
+    end
   end
 
 end

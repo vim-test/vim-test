@@ -7,13 +7,7 @@ let test#go#ginkgo#patterns = {
 \}
 
 function! test#go#ginkgo#test_file(file) abort
-  if fnamemodify(a:file, ':t') =~# g:test#go#ginkgo#file_pattern
-    if exists('g:test#go#runner')
-      return g:test#go#runner == 'ginkgo'
-    else
-      return search("github.com/onsi/ginkgo") > 0
-    endif
-  endif
+  return test#go#test_file('ginkgo', g:test#go#ginkgo#file_pattern, a:file)
 endfunction
 
 function! test#go#ginkgo#build_position(type, position) abort

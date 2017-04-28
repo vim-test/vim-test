@@ -3,7 +3,7 @@ if !exists('g:test#go#gotest#file_pattern')
 endif
 
 function! test#go#gotest#test_file(file) abort
-  return a:file =~# g:test#go#gotest#file_pattern
+  return test#go#test_file('gotest', g:test#go#gotest#file_pattern, a:file)
 endfunction
 
 function! test#go#gotest#build_position(type, position) abort

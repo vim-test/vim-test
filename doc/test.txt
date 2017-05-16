@@ -119,6 +119,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:ESpec*
 :ESpec [args]                Uses the `mix` `espec` command.
 
+                                                *test-:CommonTest*
+:CommonTest [args]           Uses the `rebar3` `ct` command.
+
                                                 *test-:GoTest*
 :GoTest [args]               Uses the `go` `test` command.
 

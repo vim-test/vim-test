@@ -4,7 +4,7 @@ let test#javascript#patterns = {
 \}
 
 function! test#javascript#has_package(package) abort
-  exec 'silent grep! 'a:package .' package.json'
+  exec "silent grep! '\b".a:package."\b' package.json"
 
   return len(getqflist()) > 0
 endfunction

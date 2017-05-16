@@ -17,7 +17,6 @@ call s:extend(g:test#runners, {
   \ 'JavaScript': ['Intern', 'TAP', 'Karma', 'Lab', 'Mocha', 'Jasmine', 'Jest'],
   \ 'Python':     ['DjangoTest', 'PyTest', 'PyUnit', 'Nose', 'Nose2'],
   \ 'Elixir':     ['ExUnit', 'ESpec'],
-  \ 'Go':         ['GoTest'],
   \ 'Erlang':     ['CommonTest'],
   \ 'Go':         ['GoTest', 'Ginkgo'],
   \ 'Rust':       ['CargoTest'],

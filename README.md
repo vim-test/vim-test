@@ -278,6 +278,10 @@ can turn it off:
 let test#ruby#bundle_exec = 0
 ```
 
+#### JavaScript
+
+Test runner detection for JavaScript works by checking which runner is listed in the package.json dependencies. If you have globally installed the runner make sure it's also listed in the dependencies.
+
 ## Extending
 
 If you wish to extend this plugin with your own test runners, first of all,

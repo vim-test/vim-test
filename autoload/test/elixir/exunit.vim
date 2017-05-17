@@ -7,17 +7,19 @@ function! test#elixir#exunit#test_file(file) abort
 endfunction
 
 function! test#elixir#exunit#build_position(type, position) abort
+  let file = fnamemodify(a:position['file'], ':p')
+
   if test#elixir#exunit#executable() == 'mix test'
     if a:type == 'nearest'
-      return [a:position['file'].':'.a:position['line']]
+      return [file.':'.a:position['line']]
     elseif a:type == 'file'
-      return [a:position['file']]
+      return [file]
     else
       return []
     endif
   else
     if a:type == 'nearest' || a:type == 'file'
-      return [a:position['file']]
+      return [file]
     else
       return ['*.exs']
     end

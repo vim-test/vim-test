@@ -16,14 +16,14 @@ describe "ExUnit"
       view +1 normal_test.exs
       TestNearest
 
-      Expect g:test#last_command == 'mix test normal_test.exs:1'
+      Expect g:test#last_command == 'mix test ' . getcwd() . '/normal_test.exs:1'
     end
 
     it "runs file tests"
       view normal_test.exs
       TestFile
 
-      Expect g:test#last_command == 'mix test normal_test.exs'
+      Expect g:test#last_command == 'mix test ' . getcwd() . '/normal_test.exs'
     end
 
     it "runs test suites"
@@ -43,14 +43,14 @@ describe "ExUnit"
       view +1 normal_test.exs
       TestNearest
 
-      Expect g:test#last_command == 'elixir normal_test.exs'
+      Expect g:test#last_command == 'elixir ' . getcwd() . '/normal_test.exs'
     end
 
     it "runs file tests"
       view normal_test.exs
       TestFile
 
-      Expect g:test#last_command == 'elixir normal_test.exs'
+      Expect g:test#last_command == 'elixir ' . getcwd() . '/normal_test.exs'
     end
 
     it "runs test suites"

@@ -25,6 +25,17 @@ describe 'Options'
     Expect g:test#last_command == 'rspec --foo bar --baz'
   end
 
+  it "remembers options passed when running last test"
+    edit foo_spec.rb
+    TestNearest
+
+    TestLast --foo
+    Expect g:test#last_command == 'rspec foo_spec.rb:1 --foo'
+
+    TestLast
+    Expect g:test#last_command == 'rspec foo_spec.rb:1 --foo'
+  end
+
   it "goes through specific testing commands"
     edit foo_spec.rb
 

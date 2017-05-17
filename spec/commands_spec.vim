@@ -19,7 +19,7 @@ describe 'Main'
     Expect g:test#last_command == 'rspec'
   end
 
-  it "remembers the last test-run position"
+  it "remembers the last test-run position when not on test file"
     edit foo_spec.rb
     TestFile
 
@@ -56,13 +56,13 @@ describe 'Main'
   end
 
   it "can go to the last run test"
-    edit +3 spec/main_spec.vim
+    edit +3 spec/commands_spec.vim
     TestNearest
 
     edit foo.txt
     TestVisit
 
-    Expect expand('%') == 'spec/main_spec.vim'
+    Expect expand('%') == 'spec/commands_spec.vim'
     Expect line('.') == 3
   end
 
@@ -75,5 +75,29 @@ describe 'Main'
     Expect g:test#last_command == 'rspec '.getcwd().'/foo_spec.rb'
 
     unlet g:test#filename_modifier
+  end
+end
+
+describe "transformation"
+  after
+    call Teardown()
+    unlet! g:transformation g:test#transformation
+    let g:test#custom_transformations = {}
+  end
+
+  it "can be set via test#transformation"
+    function! EchoTransformation(cmd)
+      return 'echo'
+    endfunction
+
+    function! test#strategy#basic(cmd)
+      let g:transformation = a:cmd
+    endfunction
+
+    let g:test#custom_transformations = {'echo': function('EchoTransformation')}
+    let g:test#transformation = 'echo'
+    RSpec
+
+    Expect g:transformation == 'echo'
   end
 end

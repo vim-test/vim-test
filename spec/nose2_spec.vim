@@ -1,9 +1,5 @@
 source spec/support/helpers.vim
 
-function! test#shell(cmd) abort
-  let g:test#last_command = a:cmd
-endfunction
-
 describe "Nose2"
 
   before

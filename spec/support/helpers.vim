@@ -6,11 +6,19 @@ source plugin/test.vim
 function! test#strategy#basic(cmd)
 endfunction
 
+" don't execute any shell commands
+function! test#strategy#dispatch(cmd)
+endfunction
+
+" don't execute any shell commands
+function! test#strategy#neovim(cmd)
+endfunction
+
 " don't execute any VimScript commands
 function! test#strategy#vimscript(cmd)
 endfunction
 
 function! Teardown() abort
   bufdo! bdelete!
-  unlet! g:test#last_command g:test#last_position
+  unlet! g:test#last_command g:test#last_position g:test#last_strategy
 endfunction

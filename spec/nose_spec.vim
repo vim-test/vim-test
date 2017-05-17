@@ -1,6 +1,6 @@
 source spec/support/helpers.vim
 
-function! test#shell(cmd) abort
+function! test#shell(cmd, strategy) abort
   let g:test#last_command = substitute(a:cmd, ' --doctest-tests', '', '')
 endfunction
 

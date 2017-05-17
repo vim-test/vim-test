@@ -8,22 +8,22 @@ Currently the following testing frameworks are supported:
 
 | Language       | Frameworks                                            | Identifiers                                                       |
 | :------------: | ----------------------------------------------------- | ----------------------------------------------------------------- |
-| **Ruby**       | RSpec, [Minitest][minitest]/Rails/[M], Cucumber       | `rspec`, `minitest`/`rails`/`m`, `cucumber`                       |
-| **JavaScript** | Intern, TAP, Karma, Lab, Mocha, Jasmine, Jest         | `intern`, `tap`, `karma`, `lab`, `mocha`, `jasmine`, `jest`       |
-| **Python**     | Nose, Nose2, PyTest, Django, unittest (PyUnit)        | `nose`, `nose2`, `pytest`, `djangotest`, `djangonose`, `pyunit`   |
-| **Elixir**     | ExUnit, ESpec                                         | `exunit`, `espec`                                                 |
-| **Erlang**     | CommonTest                                            | `commontest`                                                      |
-| **Go**         | Go, Ginkgo                                            | `gotest`, `ginkgo`                                                |
-| **Rust**       | Cargo                                                 | `cargotest`                                                       |
-| **Clojure**    | Fireplace.vim                                         | `fireplacetest`                                                   |
-| **Shell**      | Bats                                                  | `bats`                                                            |
-| **VimScript**  | VSpec, Vader.vim                                      | `vspec`, `vader`                                                  |
-| **Lua**        | Busted                                                | `busted`                                                          |
-| **PHP**        | PHPUnit, Behat, PHPSpec, Codeception, Kahlan, Peridot | `phpunit`, `behat`, `phpspec`, `codeception`, `kahlan`, `peridot` |
-| **Perl**       | Prove                                                 | `prove`                                                           |
-| **Java**       | Maven                                                 | `maventest`                                                       |
-| **Crystal**    | Crystal                                               | `crystalspec`                                                     |
 | **C#**         | .NET                                                  | `dotnettest`                                                      |
+| **Clojure**    | Fireplace.vim                                         | `fireplacetest`                                                   |
+| **Crystal**    | Crystal                                               | `crystalspec`                                                     |
+| **Elixir**     | ESpec, ExUnit                                         | `espec`, `exunit`                                                 |
+| **Erlang**     | CommonTest                                            | `commontest`                                                      |
+| **Go**         | Ginkgo, Go                                            | `ginkgo`, `gotest`                                                |
+| **Java**       | Maven                                                 | `maventest`                                                       |
+| **JavaScript** | Intern, Jasmine, Jest, Karma, Lab, Mocha, TAP,        | `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `tap`       |
+| **Lua**        | Busted                                                | `busted`                                                          |
+| **PHP**        | Behat, Codeception, Kahlan, Peridot, PHPUnit, PHPSpec | `behat`, `codeception`, `kahlan`, `peridot`, `phpunit`, `phpspec` |
+| **Perl**       | Prove                                                 | `prove`                                                           |
+| **Python**     | Django, Nose, Nose2, PyTest, PyUnit                   | `djangotest`, `djangonose` `nose`, `nose2`, `pytest`, `pyunit`    |
+| **Ruby**       | Cucumber, [M], [Minitest][minitest], Rails, RSpec     | `cucumber`, `m`, `minitest`, `rails`, `rspec`                     |
+| **Rust**       | Cargo                                                 | `cargotest`                                                       |
+| **Shell**      | Bats                                                  | `bats`                                                            |
+| **VimScript**  | Vader.vim, VSpec                                      | `vader`, `vspec`                                                  |
 
 ## Features
 

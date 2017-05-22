@@ -3,7 +3,7 @@ if !exists('g:test#racket#rackunit#file_pattern')
 endif
 
 function! test#racket#rackunit#test_file(file) abort
-  return a:file =~# g:test#php#phpunit#file_pattern
+  return a:file =~# g:test#racket#rackunit#file_pattern
 endfunction
 
 function! test#php#phpunit#build_position(type, position) abort

@@ -2,7 +2,7 @@ if !exists('g:test#racket#rackunit#file_pattern')
   let g:test#racket#rackunit#file_pattern = '\v(t|T)est\.rkt$'
 endif
 
-function! test#php#phpunit#test_file(file) abort
+function! test#racket#rackunit#test_file(file) abort
   return a:file =~# g:test#php#phpunit#file_pattern
 endfunction
 
@@ -28,7 +28,7 @@ function! test#php#phpunit#build_args(args) abort
   return args
 endfunction
 
-function! test#php#phpunit#executable() abort
+function! test#racket#rackunit#executable() abort
   if filereadable('./bin/racket')
     return './bin/racket'
   else

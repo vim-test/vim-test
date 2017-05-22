@@ -1,5 +1,5 @@
 if !exists('g:test#racket#rackunit#file_pattern')
-  let g:test#racket#rackunit#file_pattern = '\v(t|T)est\.rkt$'
+  let g:test#racket#rackunit#file_pattern = '^test.*\.rkt$'
 endif
 
 function! test#racket#rackunit#test_file(file) abort

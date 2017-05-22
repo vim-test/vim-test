@@ -6,7 +6,7 @@ function! test#racket#rackunit#test_file(file) abort
   return a:file =~# g:test#racket#rackunit#file_pattern
 endfunction
 
-function! test#php#phpunit#build_position(type, position) abort
+function! test#racket#rackunit#build_position(type, position) abort
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name) | let name = '--filter '.shellescape(name, 1) | endif
@@ -18,22 +18,12 @@ function! test#php#phpunit#build_position(type, position) abort
   endif
 endfunction
 
-function! test#php#phpunit#build_args(args) abort
-  let args = a:args
-
-  if !test#base#no_colors()
-    let args = ['--colors'] + args
-  endif
-
-  return args
+function! test#racket#rackunit#build_args(args) abort
+  return a:args
 endfunction
 
 function! test#racket#rackunit#executable() abort
-  if filereadable('./bin/racket')
-    return './bin/racket'
-  else
-    return 'racket'
-  endif
+  return 'racket'
 endfunction
 
 function! s:nearest_test(position)

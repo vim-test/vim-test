@@ -17,7 +17,3 @@ endfunction
 function! test#racket#rackunit#executable() abort
   return 'racket'
 endfunction
-
-function! s:nearest_test(position)
-  return 'This functionality is not available in rackunit'
-endfunction

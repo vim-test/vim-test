@@ -20,6 +20,7 @@ Currently the following testing frameworks are supported:
 | **PHP**        | Behat, Codeception, Kahlan, Peridot, PHPUnit, PHPSpec | `behat`, `codeception`, `kahlan`, `peridot`, `phpunit`, `phpspec` |
 | **Perl**       | Prove                                                 | `prove`                                                           |
 | **Python**     | Django, Nose, Nose2, PyTest, PyUnit                   | `djangotest`, `djangonose` `nose`, `nose2`, `pytest`, `pyunit`    |
+| **Racket**     | RackUnit                                              | `rackunit`                                                        |
 | **Ruby**       | Cucumber, [M], [Minitest][minitest], Rails, RSpec     | `cucumber`, `m`, `minitest`, `rails`, `rspec`                     |
 | **Rust**       | Cargo                                                 | `cargotest`                                                       |
 | **Shell**      | Bats                                                  | `bats`                                                            |

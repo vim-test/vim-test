@@ -12,20 +12,19 @@ function! test#java#maventest#build_position(type, position) abort
   if a:type == 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return [name]
+      return ['-Dtest=' . name]
     else
-      return [filename]
+      return ['-Dtest=' . filename]
     endif
   elseif a:type == 'file'
-    return [filename]
+    return ['-Dtest=' . filename]
   else
     return []
   endif
 endfunction
 
 function! test#java#maventest#build_args(args) abort
-  let args = ['-Dtest='] + a:args
-  return [join(args, "")]
+  return a:args
 endfunction
 
 function! test#java#maventest#executable() abort

@@ -4,7 +4,11 @@ let test#javascript#patterns = {
 \}
 
 function! test#javascript#has_package(package) abort
-  exec "silent grep! '\b".a:package."\b' package.json"
+  for line in readfile("package.json")
+    if line =~ '"'.a:package.'"'
+      return 1
+    endif
+  endfor
 
-  return len(getqflist()) > 0
+  return 0
 endfunction

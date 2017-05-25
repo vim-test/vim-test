@@ -24,7 +24,7 @@ function! test#java#maventest#build_position(type, position) abort
 endfunction
 
 function! test#java#maventest#build_args(args) abort
-    return a:args
+  return a:args
 endfunction
 
 function! test#java#maventest#executable() abort

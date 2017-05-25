@@ -3,12 +3,8 @@ if !exists('g:test#javascript#karma#file_pattern')
 endif
 
 function! test#javascript#karma#test_file(file) abort
-  if empty(test#javascript#karma#executable())
-    return 0
-  endif
-
   return a:file =~? g:test#javascript#karma#file_pattern
-    && test#javascript#has_package('karma')
+	  \ && (test#javascript#has_package('karma') || !empty(test#javascript#karma#executable()))
 endfunction
 
 function! test#javascript#karma#build_position(type, position) abort

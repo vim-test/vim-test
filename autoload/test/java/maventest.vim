@@ -6,7 +6,6 @@ function! test#java#maventest#test_file(file) abort
   return a:file =~? g:test#java#maventest#file_pattern
 endfunction
 
-
 function! test#java#maventest#build_position(type, position) abort
   let filename = fnamemodify(a:position['file'], ':t:r')
 

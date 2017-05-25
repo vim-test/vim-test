@@ -7,7 +7,6 @@ describe "Maven"
   end
 
   after
-    unlet! g:test#java#maventest#options
     call Teardown()
     cd -
   end
@@ -21,8 +20,7 @@ describe "Maven"
 
   it "runs file tests with user provided options"
     view MathTest.java
-    let g:test#java#maventest#options = '-f pom.xml'
-    TestFile
+    TestFile -f pom.xml
 
     Expect g:test#last_command == 'mvn test -f pom.xml -Dtest=MathTest'
   end
@@ -43,8 +41,7 @@ describe "Maven"
 
   it "runs a test suite with user provided options"
     view MathTest.java
-    let g:test#java#maventest#options = '-X -f pom.xml -DcustomProperty=5'
-    TestSuite
+    TestSuite -X -f pom.xml -DcustomProperty=5
 
     Expect g:test#last_command == 'mvn test -X -f pom.xml -DcustomProperty=5'
   end

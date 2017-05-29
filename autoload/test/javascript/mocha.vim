@@ -4,6 +4,7 @@ endif
 
 function! test#javascript#mocha#test_file(file) abort
   return a:file =~# g:test#javascript#mocha#file_pattern
+	  \ && (test#javascript#has_package('mocha') || !empty(test#javascript#mocha#executable()))
 endfunction
 
 function! test#javascript#mocha#build_position(type, position) abort

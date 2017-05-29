@@ -12,7 +12,8 @@ endif
 
 function! test#javascript#intern#test_file(file) abort
   return a:file =~# g:test#javascript#intern#file_pattern
-       \ && filereadable(g:test#javascript#intern#config_module . '.js')
+    \ && filereadable(g:test#javascript#intern#config_module . '.js')
+    \ && (test#javascript#has_package('intern') || !empty(test#javascript#intern#executable()))
 endfunction
 
 function! test#javascript#intern#build_position(type, position) abort

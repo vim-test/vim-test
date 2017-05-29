@@ -4,6 +4,7 @@ endif
 
 function! test#javascript#jasmine#test_file(file) abort
   return a:file =~? g:test#javascript#jasmine#file_pattern
+	  \ && (test#javascript#has_package('jasmine') || !empty(test#javascript#jasmine#executable()))
 endfunction
 
 function! test#javascript#jasmine#build_position(type, position) abort

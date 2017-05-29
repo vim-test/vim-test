@@ -1,0 +1,8 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {
+    "jasmine": "^2.6.0"
+  }
+}

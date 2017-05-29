@@ -103,11 +103,11 @@ describe "Jest"
     Expect g:test#last_command == 'jest'
   end
 
-  it "doesn't detect JavaScripts which are not in the __tests__/ folder"
+  it "runs tests outside of __tests__"
     view outside-test.js
-    TestSuite
+    TestFile
 
-    Expect exists('g:test#last_command') == 0
+    Expect g:test#last_command == 'jest outside-test.js'
   end
 
 end

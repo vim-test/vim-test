@@ -337,6 +337,11 @@ You can instruct test.vim to generate absolute file paths:
   let test#filename_modifier = ':p' " /User/janko/Code/my_project/test/models/user_test.rb
   let test#filename_modifier = ':~' " ~/Code/my_project/test/models/user_test.rb
 <
+By default, many strategies will first `cd` into vim's working directory before
+running a test command. You can disable this behavior using:
+>
+  let g:test#strategy#cd_before_run = 0
+<
 ABOUT                                           *test-about*
 
 You can get the latest version, see the changelog, or report a bug on GitHub:

@@ -246,6 +246,17 @@ different working directory for running tests:
 let test#project_root = "/path/to/your/project"
 ```
 
+Similarly, some strategies will first issue a `cd` into vim's working directory
+before running. You can tell test.vim to disable this behavior:
+
+```vim
+let test#strategy#cd_before_run = 0
+```
+
+Note that if `test#project_root` is set, test.vim will still issue a `cd` into
+that directory before running, even if `test#strategy#cd_before_run` is
+disabled. It just won't perform any additional strategy-specific `cd`s.
+
 ### Language-specific
 
 #### Python

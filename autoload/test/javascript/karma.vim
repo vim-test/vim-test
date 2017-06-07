@@ -44,9 +44,7 @@ function! test#javascript#karma#build_args(args) abort
 endfunction
 
 function! test#javascript#karma#executable() abort
-  if filereadable('nwb.config.js')
-    return 'nwb test'
-  elseif filereadable('node_modules/karma-cli-runner/karma-args.js')
+  if filereadable('node_modules/karma-cli-runner/karma-args.js')
     return 'node node_modules/karma-cli-runner/karma-args'
   elseif filereadable('node_modules/.bin/karma')
     return 'node_modules/.bin/karma start --single-run'

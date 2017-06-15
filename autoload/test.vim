@@ -5,7 +5,7 @@ function! test#run(type, arguments) abort
 
   if exists('g:test#project_root')
     execute 'cd' g:test#project_root
-  end
+  endif
 
   if test#test_file()
     let position = s:get_position()
@@ -56,7 +56,7 @@ function! test#visit() abort
     execute 'edit' '+'.g:test#last_position['line'] g:test#last_position['file']
   else
     call s:echo_failure('No tests were run so far')
-  end
+  endif
 endfunction
 
 function! test#execute(runner, args, ...) abort

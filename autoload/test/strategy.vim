@@ -11,65 +11,11 @@ function! test#strategy#basic(cmd) abort
 endfunction
 
 function! test#strategy#make(cmd) abort
-  let compiler = dispatch#compiler_for_program(a:cmd)
-
-  try
-    let default_makeprg = &l:makeprg
-    let default_errorformat = &l:errorformat
-    let default_compiler = get(b:, 'current_compiler', '')
-
-    if !empty(compiler)
-      execute 'compiler ' . compiler
-    endif
-
-    if s:restorescreen()
-      let &l:makeprg = s:pretty_command(a:cmd)
-    else
-      let &l:makeprg = a:cmd
-    endif
-
-    make
-  finally
-    let &l:makeprg = default_makeprg
-    let &l:errorformat = default_errorformat
-    if empty(default_compiler)
-      unlet! b:current_compiler
-    else
-      let b:current_compiler = default_compiler
-    endif
-  endtry
+  call s:execute_with_compiler(a:cmd, 'make')
 endfunction
 
 function! test#strategy#neomake(cmd) abort
-  try
-    let compiler = dispatch#compiler_for_program(a:cmd)
-  catch
-    let compiler = ''
-  endtry
-
-  try
-    if !empty(compiler)
-      let default_makeprg = &l:makeprg
-      let default_errorformat = &l:errorformat
-      let default_compiler = get(b:, 'current_compiler', '')
-      execute 'compiler ' . compiler
-    endif
-    let cmd_parts = split(a:cmd, ' ')
-    let executable = cmd_parts[0]
-    let args = join(cmd_parts[1:], ' ')
-    let maker = {'exe': executable, 'name': executable, 'args': args,  'errorformat': &l:errorformat}
-    call neomake#Make(0, [maker])
-  finally
-    if !empty(compiler)
-      let &l:makeprg = default_makeprg
-      let &l:errorformat = default_errorformat
-      if empty(default_compiler)
-        unlet! b:current_compiler
-      else
-        let b:current_compiler = default_compiler
-      endif
-    endif
-  endtry
+  call s:execute_with_compiler(a:cmd, 'NeomakeProject')
 endfunction
 
 function! test#strategy#asyncrun(cmd) abort
@@ -133,6 +79,36 @@ endfunction
 
 function! test#strategy#iterm(cmd) abort
   call s:execute_script('osx_iterm', s:pretty_command(a:cmd))
+endfunction
+
+
+function! s:execute_with_compiler(cmd, script)
+  try
+    let default_makeprg = &l:makeprg
+    let default_errorformat = &l:errorformat
+    let default_compiler = get(b:, 'current_compiler', '')
+
+    if exists(':Dispatch')
+      let compiler = dispatch#compiler_for_program(a:cmd)
+      if !empty(compiler)
+        execute 'compiler ' . compiler
+      else
+        echoerr 'Could not find compiler for command: '.a:cmd
+      endif
+    endif
+
+    let &l:makeprg = a:cmd
+
+    execute a:script
+  finally
+    let &l:makeprg = default_makeprg
+    let &l:errorformat = default_errorformat
+    if empty(default_compiler)
+      unlet! b:current_compiler
+    else
+      let b:current_compiler = default_compiler
+    endif
+  endtry
 endfunction
 
 function! s:execute_script(name, cmd) abort

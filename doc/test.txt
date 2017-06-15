@@ -194,7 +194,8 @@ Runs test commands with `:!`, which switches your Vim to the Terminal.
 <
 Make ~
 
-Runs test commands with `:make`. Requires the Dispatch.vim plugin.
+Runs test commands with `:make`. If Dispatch.vim plugin is available, it will
+be used to automatically find the correct compiler for the command.
 >
   let test#strategy = 'make'
 <
@@ -224,9 +225,9 @@ Runs test commands with `:T`. Requires the Neoterm plugin.
 <
 Neomake ~
 
-Runs test commands with `:Neomake`. Requires the Neomake plugin. This strategy will also use the Dispatch
-plugin to figure out what errorformat to use when calling Neomake, if Dispatch is not installed then the current
-errorformat will be used, this may mean you need to remember to set the compiler correctly when running tests.
+Runs test commands with `:NeomakeProject`. Requires the Neomake plugin. If
+Dispatch.vim plugin is available, it will be used to automatically find the
+correct compiler for the command.
 >
   let test#strategy = 'neomake'
 <

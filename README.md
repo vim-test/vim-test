@@ -85,7 +85,7 @@ let test#strategy = "dispatch"
 | **[Vimux]**                     | `vimux`    | Runs test commands in a small tmux pane at the bottom of your terminal.          |
 | **[Tslime]**                    | `tslime`   | Runs test commands in a tmux pane you specify.                                   |
 | **[Neoterm]**                   | `neoterm`  | Runs test commands with `:T`, see neoterm docs for display customization.        |
-| **[Neomake]**                   | `neomake`  | Runs test commands asynchronously with `:Neomake`                                |
+| **[Neomake]**                   | `neomake`  | Runs test commands asynchronously with `:NeomakeProject`.                        |
 | **[VimShell]**                  | `vimshell` | Runs test commands in a shell written in VimScript.                              |
 | **[Vim&nbsp;Tmux&nbsp;Runner]** | `vtr`      | Runs test commands in a small tmux pane.                                         |
 | **[VimProc]**                   | `vimproc`  | Runs test commands asynchronously.                                               |

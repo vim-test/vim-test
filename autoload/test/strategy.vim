@@ -18,6 +18,10 @@ function! test#strategy#neomake(cmd) abort
   call s:execute_with_compiler(a:cmd, 'NeomakeProject')
 endfunction
 
+function! test#strategy#makegreen(cmd) abort
+  call s:execute_with_compiler(a:cmd, 'MakeGreen')
+endfunction
+
 function! test#strategy#asyncrun(cmd) abort
   execute 'AsyncRun '.a:cmd
 endfunction

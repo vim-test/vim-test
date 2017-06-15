@@ -231,6 +231,14 @@ correct compiler for the command.
 >
   let test#strategy = 'neomake'
 <
+MakeGreen ~
+
+Runs test commands with `:MakeGreen`. Requires the MakeGreen.vim plugin. If
+Dispatch.vim plugin is available, it will be used to automatically find the
+correct compiler for the command.
+>
+  let test#strategy = 'makegreen'
+<
 Vimux ~
 
 Runs test commands in a small Tmux pane at the bottom of your Terminal.

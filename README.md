@@ -117,6 +117,18 @@ disable this:
 let g:test#preserve_screen = 1
 ```
 
+### Quickfix Strategies
+If you want your test results to appear in the quickfix window, use one of the 
+following strategies:
+
+ * Make
+ * Neomake
+ * MakeGreen
+ * Dispatch.vim
+
+When Dispatch.vim is installed, it will be used to determine the compiler and 
+errorformat settings for the test runner.
+
 ### Custom Strategies
 
 Strategy is a function which takes one argument – the shell command for the

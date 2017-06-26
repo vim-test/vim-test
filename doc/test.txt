@@ -6,6 +6,7 @@ License: Same terms as Vim itself (see |license|)
 |test|                            INTRODUCTION
 |test-generic_commands|           GENERIC COMMANDS
 |test-strategies|                 STRATEGIES
+|test-quickfix-strategies|        QUICKFIX STRATEGIES
 |test-custom-strategies|          CUSTOM STRATEGIES
 |test-configuration|              CONFIGURATION
 |test-about|                      ABOUT
@@ -278,6 +279,21 @@ isn't that nice).
   " or
   let test#strategy = 'iterm'
 <
+
+
+QUICKFIX STRATEGIES                               *test-quickfix-strategies*
+If you want your test results to appear in the |quickfix| window, use one of the 
+following strategies:
+
+  * Make
+  * Neomake
+  * MakeGreen
+  * Dispatch.vim
+
+When Dispatch.vim is installed, it will be used to determine the |compiler| and 
+|errorformat| settings for the test runner.
+
+
 CUSTOM STRATEGIES                               *test-custom-strategies*
 
 Strategy is a function which takes a test command and executes it in some way.

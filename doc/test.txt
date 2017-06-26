@@ -282,6 +282,7 @@ isn't that nice).
 
 
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
+
 If you want your test results to appear in the |quickfix| window, use one of the 
 following strategies:
 
@@ -290,9 +291,9 @@ following strategies:
   * MakeGreen
   * Dispatch.vim
 
-When Dispatch.vim is installed, it will be used to determine the |compiler| and 
-|errorformat| settings for the test runner.
-
+Even if you're using a strategy other than Dispatch.vim, it's recommended you have 
+Dispatch.vim installed, as the strategies will automatically use to determine the 
+correct |compiler|, ensuring the test output is correctly parsed for the quickfix window.
 
 CUSTOM STRATEGIES                               *test-custom-strategies*
 

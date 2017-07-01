@@ -7,9 +7,15 @@ function! test#run(type, arguments) abort
     execute 'cd' g:test#project_root
   endif
 
-  if test#test_file()
-    let position = s:get_position()
+  if exists('g:projectionist_heuristics')
+    let alternate_file = get(filter(projectionist#query_file('alternate'), 'filereadable(v:val)'), 0)
+  endif
+
+  if test#test_file(expand('%'))
+    let position = s:get_position(expand('%'))
     let g:test#last_position = position
+  elseif exists('alternate_file') && !empty(alternate_file) && test#test_file(alternate_file)
+    let position = s:get_position(alternate_file)
   elseif exists('g:test#last_position')
     let position = g:test#last_position
   else
@@ -119,16 +125,19 @@ function! test#determine_runner(file) abort
   endfor
 endfunction
 
-function! test#test_file() abort
-  return !empty(test#determine_runner(expand('%')))
+function! test#test_file(file) abort
+  return !empty(test#determine_runner(a:file))
 endfunction
 
-function! s:get_position() abort
-  return {
-    \ 'file': expand('%'.get(g:, 'test#filename_modifier', ':.')),
-    \ 'line': line('.'),
-    \ 'col':  col('.'),
-  \}
+function! s:get_position(path) abort
+  let filename_modifier = get(g:, 'test#filename_modifier', ':.')
+
+  let position = {}
+  let position['file'] = fnamemodify(a:path, filename_modifier)
+  let position['line'] = a:path == expand('%') ? line('.') : 1
+  let position['col']  = a:path == expand('%') ? col('.') : 1
+
+  return position
 endfunction
 
 function! s:extract_strategy_from_command(arguments) abort

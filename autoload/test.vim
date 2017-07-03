@@ -73,8 +73,11 @@ function! test#execute(runner, args, ...) abort
     else
       let strategy = get(g:, 'test#strategy')
     endif
-
-    if empty(strategy)
+  endif
+  if empty(strategy)
+    if has('nvim')
+      let strategy = 'neovim'
+    else
       let strategy = 'basic'
     endif
   endif

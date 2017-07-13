@@ -131,6 +131,16 @@ Even if you're using a strategy other than Dispatch.vim, it's recommended you ha
 Dispatch.vim installed, as the strategies will automatically use to determine the 
 correct compiler, ensuring the test output is correctly parsed for the quickfix window.
 
+If the test command prefix doesn't match compiler's `makeprg` then use the 
+`g:dispatch_compilers` variable. For example if your test command was `./vendor/bin/phpunit` 
+but you wanted to use the phpunit2 compiler you could do.
+
+```vim
+let g:dispatch_compilers = {}
+let g:dispatch_compilers['./vendor/bin/'] = ''
+let g:dispatch_compilers['phpunit'] = 'phpunit2'
+```
+
 ### Custom Strategies
 
 Strategy is a function which takes one argument – the shell command for the

@@ -296,6 +296,7 @@ force a specific runner:
 ``` vim
 let test#go#runner = 'ginkgo'
 " Runners available are 'gotest', 'ginkgo'
+```
 
 #### Ruby
 

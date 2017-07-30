@@ -176,6 +176,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:CrystalSpec*
 :CrystalSpec [args]          Uses the `crystal` `spec` command.
 
+                                                *test-:SwiftPM*
+:SwiftPM [args]              Uses the `swift test` command.
+
 STRATEGIES                                      *test-strategies*
 
 Multiple strategies are supported for running tests.

@@ -24,6 +24,7 @@ Currently the following testing frameworks are supported:
 | **Ruby**       | Cucumber, [M], [Minitest][minitest], Rails, RSpec     | `cucumber`, `m`, `minitest`, `rails`, `rspec`                     |
 | **Rust**       | Cargo                                                 | `cargotest`                                                       |
 | **Shell**      | Bats                                                  | `bats`                                                            |
+| **Swift**      | Swift Package Manager                                 | `swiftpm`                                                         |
 | **VimScript**  | Vader.vim, VSpec                                      | `vader`, `vspec`                                                  |
 
 ## Features

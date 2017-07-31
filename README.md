@@ -12,6 +12,7 @@ Currently the following testing frameworks are supported:
 | **Clojure**    | Fireplace.vim                                         | `fireplacetest`                                                   |
 | **Crystal**    | Crystal                                               | `crystalspec`                                                     |
 | **Elixir**     | ESpec, ExUnit                                         | `espec`, `exunit`                                                 |
+| **Elm**        | elm-test                                              | `elmtest`                                                         |
 | **Erlang**     | CommonTest                                            | `commontest`                                                      |
 | **Go**         | Ginkgo, Go                                            | `ginkgo`, `gotest`                                                |
 | **Java**       | Maven                                                 | `maventest`                                                       |

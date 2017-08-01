@@ -1,5 +1,5 @@
 if !exists('g:test#java#maventest#file_pattern')
-  let g:test#java#maventest#file_pattern = '\v^.*[Tt]est\.java$'
+  let g:test#java#maventest#file_pattern = '\v^([Tt]est.*|.*[Tt]est(s|Case)?)\.java$'
 endif
 
 function! test#java#maventest#test_file(file) abort

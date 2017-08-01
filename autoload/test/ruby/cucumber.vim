@@ -31,7 +31,7 @@ endfunction
 function! test#ruby#cucumber#executable() abort
   if !empty(glob('.zeus.sock'))
     return 'zeus cucumber'
-  elseif filereadable('./bin/cucumber')
+  elseif filereadable('./bin/cucumber') && get(g:, 'test#ruby#use_binstubs', 1)
     return './bin/cucumber'
   elseif filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
     return 'bundle exec cucumber'

@@ -27,7 +27,7 @@ endfunction
 function! test#ruby#rails#executable() abort
   if !empty(glob('.zeus.sock'))
     return 'zeus rails test'
-  elseif filereadable('./bin/rails')
+  elseif filereadable('./bin/rails') && get(g:, 'test#ruby#use_binstubs', 1)
     return './bin/rails test'
   elseif filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
     return 'bundle exec rails test'

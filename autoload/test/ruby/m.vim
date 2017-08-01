@@ -23,7 +23,7 @@ endfunction
 function! test#ruby#m#executable() abort
   if !empty(glob('.zeus.sock'))
     return 'zeus m'
-  elseif filereadable('./bin/m')
+  elseif filereadable('./bin/m') && get(g:, 'test#ruby#use_binstubs', 1)
     return './bin/m'
   elseif filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
     return 'bundle exec m'

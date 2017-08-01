@@ -67,7 +67,7 @@ function! test#ruby#minitest#executable() abort
    \ (exists('b:rails_root') || filereadable('./bin/rails'))
     if !empty(glob('.zeus.sock'))
       return 'zeus rake test'
-    elseif filereadable('./bin/rake')
+    elseif filereadable('./bin/rake') && get(g:, 'test#ruby#use_binstubs', 1)
       return './bin/rake test'
     elseif filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
       return 'bundle exec rake test'

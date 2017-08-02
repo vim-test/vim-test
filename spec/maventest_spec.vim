@@ -11,11 +11,32 @@ describe "Maven"
     cd -
   end
 
-  it "runs file tests"
+  it "runs file tests (filename matches Test*.java"
+    view TestMath.java
+    TestFile
+
+    Expect g:test#last_command == 'mvn test -Dtest=TestMath'
+  end
+
+  it "runs file tests (filename matches *Test.java)"
     view MathTest.java
     TestFile
 
     Expect g:test#last_command == 'mvn test -Dtest=MathTest'
+  end
+
+  it "runs file tests (filename matches *Tests.java)"
+    view MathTests.java
+    TestFile
+
+    Expect g:test#last_command == 'mvn test -Dtest=MathTests'
+  end
+
+  it "runs file tests (filename matches *TestCase.java)"
+    view MathTestCase.java
+    TestFile
+
+    Expect g:test#last_command == 'mvn test -Dtest=MathTestCase'
   end
 
   it "runs file tests with user provided options"

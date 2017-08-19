@@ -17,7 +17,8 @@ function! test#javascript#mocha#build_position(type, position) abort
   elseif a:type == 'file'
     return [a:position['file']]
   else
-    return []
+    let test_dir = get(filter(['test/', 'tests/'], 'isdirectory(v:val)'), 0)
+    return ['--recursive', test_dir]
   endif
 endfunction
 

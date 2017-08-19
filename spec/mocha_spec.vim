@@ -100,7 +100,7 @@ describe "Mocha"
     view test/normal.js
     TestSuite
 
-    Expect g:test#last_command == 'mocha'
+    Expect g:test#last_command == 'mocha --recursive test/'
   end
 
   it "also recognizes tests/ directory"

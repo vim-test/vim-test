@@ -34,6 +34,8 @@ function! test#javascript#mocha#build_args(args) abort
 endfunction
 
 function! test#javascript#mocha#executable() abort
+  if filereadable('node_modules/.bin/mocha-webpack')
+    return 'node_modules/.bin/mocha-webpack'
   if filereadable('node_modules/.bin/mocha')
     return 'node_modules/.bin/mocha'
   else

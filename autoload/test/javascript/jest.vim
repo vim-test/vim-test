@@ -4,7 +4,7 @@ endif
 
 function! test#javascript#jest#test_file(file) abort
   return a:file =~# g:test#javascript#jest#file_pattern
-	  \ && test#javascript#has_package('jest')
+    \ && test#javascript#has_package('jest')
 endfunction
 
 function! test#javascript#jest#build_position(type, position) abort

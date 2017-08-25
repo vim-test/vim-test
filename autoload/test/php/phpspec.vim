@@ -4,7 +4,7 @@ endif
 
 function! test#php#phpspec#test_file(file) abort
   return a:file =~# g:test#php#phpspec#file_pattern
-    \ && !empty(filter(readfile(a:file), 'v:val =~# "PhpSpec"'))
+    \ && !empty(filter(readfile(a:file), 'v:val =~# ''PhpSpec\\ObjectBehavior'''))
 endfunction
 
 function! test#php#phpspec#build_position(type, position) abort

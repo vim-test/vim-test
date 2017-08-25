@@ -3,9 +3,8 @@ if !exists('g:test#php#phpspec#file_pattern')
 endif
 
 function! test#php#phpspec#test_file(file) abort
-  if a:file =~# g:test#php#phpspec#file_pattern
-    return search("PhpSpec") > 0
-  endif
+  return a:file =~# g:test#php#phpspec#file_pattern
+    \ && !empty(filter(readfile(a:file), 'v:val =~# "PhpSpec"'))
 endfunction
 
 function! test#php#phpspec#build_position(type, position) abort

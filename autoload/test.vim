@@ -70,11 +70,12 @@ function! test#execute(runner, args, ...) abort
   if empty(strategy)
     if !empty(a:000)
       let strategy = a:1
-    elseif has_key(g:, 'test#strategy')
-      let strategy = g:test#strategy
     else
-      let strategy = 'basic'
+      let strategy = get(g:, 'test#strategy')
     endif
+  endif
+  if empty(strategy)
+    let strategy = 'basic'
   endif
 
   let args = a:args

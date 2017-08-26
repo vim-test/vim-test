@@ -158,6 +158,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Behat*
 :Behat [args]                Uses the `behat` command.
 
+                                                *test-:Dusk*
+:Dusk [args]                 Uses the `dusk` command.
+
                                                 *test-:PHPSpec*
 :PHPSpec [args]              Uses the `phpspec` command.
 

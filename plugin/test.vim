@@ -27,7 +27,7 @@ call s:extend(g:test#runners, {
   \ 'Swift':      ['SwiftPM'],
   \ 'VimL':       ['VSpec', 'Vader'],
   \ 'Lua':        ['Busted'],
-  \ 'PHP':        ['Codeception', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
+  \ 'PHP':        ['Codeception', 'Dusk', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
   \ 'Perl':       ['Prove'],
   \ 'Racket':     ['RackUnit'],
   \ 'Java':       ['MavenTest'],

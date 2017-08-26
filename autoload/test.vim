@@ -70,13 +70,8 @@ function! test#execute(runner, args, ...) abort
   if empty(strategy)
     if !empty(a:000)
       let strategy = a:1
-    else
-      let strategy = get(g:, 'test#strategy')
-    endif
-  endif
-  if empty(strategy)
-    if has('nvim')
-      let strategy = 'neovim'
+    elseif has_key(g:, 'test#strategy')
+      let strategy = g:test#strategy
     else
       let strategy = 'basic'
     endif

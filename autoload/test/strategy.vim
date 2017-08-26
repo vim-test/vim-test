@@ -4,7 +4,16 @@ endfunction
 
 function! test#strategy#basic(cmd) abort
   if has('nvim')
-    execute "tab split term://" . a:cmd
+    let opts = {'suffix': ' # vim-test'}
+    function! opts.close_terminal()
+      if bufnr(self.suffix) != -1
+        execute 'bdelete!' bufnr(self.suffix)
+      end
+    endfunction
+    call opts.close_terminal()
+
+    tabnew
+    call termopen(a:cmd . opts.suffix, opts)
     startinsert
   else
     if s:restorescreen()
@@ -40,7 +49,16 @@ function! test#strategy#vimproc(cmd) abort
 endfunction
 
 function! test#strategy#neovim(cmd) abort
-  execute "botright new term://" . a:cmd
+  let opts = {'suffix': ' # vim-test'}
+  function! opts.close_terminal()
+    if bufnr(self.suffix) != -1
+      execute 'bdelete!' bufnr(self.suffix)
+    end
+  endfunction
+  call opts.close_terminal()
+
+  botright new
+  call termopen(a:cmd . opts.suffix, opts)
   au BufDelete <buffer> wincmd p
   startinsert
 endfunction

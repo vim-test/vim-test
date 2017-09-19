@@ -4,7 +4,7 @@ endfunction
 
 function! test#strategy#basic(cmd) abort
   if has('nvim')
-    tabnew
+    -tabnew
     call termopen(a:cmd)
     startinsert
   else

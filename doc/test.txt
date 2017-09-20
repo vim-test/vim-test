@@ -61,7 +61,8 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:TestExists
 :TestExists                   Are we in a test file? Can be used to run tests
-on save. For example, to run the test nearest to the cursor on save, use
+                              on save. For example, to run the test nearest to
+                              the cursor on save, use
 
     autocmd! BufWrite * TestNearest
 

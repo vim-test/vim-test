@@ -38,7 +38,6 @@ let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})
 let g:test#custom_transformations = get(g:, 'test#custom_transformations', {})
 let g:test#runner_commands = get(g:, 'test#runner_commands', [])
 
-command!          -bar TestExists  call test#exists()
 command! -nargs=* -bar TestNearest call test#run('nearest', split(<q-args>))
 command! -nargs=* -bar TestFile    call test#run('file', split(<q-args>))
 command! -nargs=* -bar TestSuite   call test#run('suite', split(<q-args>))

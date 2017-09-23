@@ -31,7 +31,6 @@ Add your preferred mappings to your `.vimrc` file:
   nmap <silent> <leader>a :TestSuite<CR>
   nmap <silent> <leader>l :TestLast<CR>
   nmap <silent> <leader>g :TestVisit<CR>
-  nmap <silent> <leader>e :TestExists<CR>
 <
 GENERIC COMMANDS                                *test-generic_commands*
 
@@ -58,13 +57,6 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:TestVisit*
 :TestVisit                   Open the last run test in the current buffer.
-
-                                                *test-:TestExists
-:TestExists                   Are we in a test file? Can be used to run tests
-                              on save. For example, to run the test nearest to
-                              the cursor on save, use
-
-    autocmd! BufWrite * TestNearest
 
 RUNNER COMMANDS                                 *test-runner_commands*
 

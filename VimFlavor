@@ -1,3 +1,2 @@
 flavor 'tpope/vim-fireplace'
 flavor 'junegunn/vader.vim'
-flavor 'tpope/vim-projectionist', branch: 'master'

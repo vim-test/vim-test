@@ -27,29 +27,29 @@ describe "PHPUnit"
     view +9 NormalTest.php
     TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter 'testShouldAddTwoNumbers$' NormalTest.php"
+    Expect g:test#last_command == "phpunit --colors --filter '::testShouldAddTwoNumbers$' NormalTest.php"
 
     view +14 NormalTest.php
     TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter 'testShouldSubtractTwoNumbers$' NormalTest.php"
+    Expect g:test#last_command == "phpunit --colors --filter '::testShouldSubtractTwoNumbers$' NormalTest.php"
 
     view +30 NormalTest.php
     TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter 'testShouldAddToExpectedValue$' NormalTest.php"
+    Expect g:test#last_command == "phpunit --colors --filter '::testShouldAddToExpectedValue$' NormalTest.php"
   end
 
   it  "runs nearest test marked with @test annotation"
     view +40 NormalTest.php
     TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter 'aTestMarkedWithTestAnnotation$' NormalTest.php"
+    Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAnnotation$' NormalTest.php"
 
     view +50 NormalTest.php
     TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter 'aTestMarkedWithTestAnnotationAndCrazyDocblock$' NormalTest.php"
+    Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAnnotationAndCrazyDocblock$' NormalTest.php"
   end
 
   it "runs test suites"

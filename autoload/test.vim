@@ -7,14 +7,12 @@ function! test#run(type, arguments) abort
     execute 'cd' g:test#project_root
   endif
 
-  if exists('g:projectionist_heuristics')
-    let alternate_file = get(filter(projectionist#query_file('alternate'), 'filereadable(v:val)'), 0)
-  endif
+  let alternate_file = test#base#alternate_file()
 
   if test#test_file(expand('%'))
     let position = s:get_position(expand('%'))
     let g:test#last_position = position
-  elseif exists('alternate_file') && !empty(alternate_file) && test#test_file(alternate_file)
+  elseif !empty(alternate_file) && test#test_file(alternate_file)
     let position = s:get_position(alternate_file)
   elseif exists('g:test#last_position')
     let position = g:test#last_position

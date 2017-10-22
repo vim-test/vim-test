@@ -1,11 +1,5 @@
 function! test#run(type, arguments) abort
-  if &autowrite || &autowriteall
-    silent! wall
-  endif
-
-  if exists('g:test#project_root')
-    execute 'cd' g:test#project_root
-  endif
+  call s:before_run()
 
   let alternate_file = test#base#alternate_file()
 
@@ -33,13 +27,13 @@ function! test#run(type, arguments) abort
     call test#execute(runner, args)
   endif
 
-  if exists('g:test#project_root')
-    execute 'cd -'
-  endif
+  call s:after_run()
 endfunction
 
 function! test#run_last(arguments) abort
   if exists('g:test#last_command')
+    call s:before_run()
+
     let strategy = s:extract_strategy_from_command(a:arguments)
 
     if empty(strategy)
@@ -50,6 +44,8 @@ function! test#run_last(arguments) abort
     let cmd = cmd + a:arguments
 
     call test#shell(join(cmd), strategy)
+
+    call s:after_run()
   else
     call s:echo_failure('No tests were run so far')
   endif
@@ -124,6 +120,22 @@ endfunction
 
 function! test#test_file(file) abort
   return !empty(test#determine_runner(a:file))
+endfunction
+
+function! s:before_run()
+  if &autowrite || &autowriteall
+    silent! wall
+  endif
+
+  if exists('g:test#project_root')
+    execute 'cd' g:test#project_root
+  endif
+endfunction
+
+function! s:after_run() abort
+  if exists('g:test#project_root')
+    execute 'cd -'
+  endif
 endfunction
 
 function! s:get_position(path) abort

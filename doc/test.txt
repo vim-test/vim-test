@@ -386,6 +386,15 @@ You can instruct test.vim to generate absolute file paths:
   let test#filename_modifier = ':p' " /User/janko/Code/my_project/test/models/user_test.rb
   let test#filename_modifier = ':~' " ~/Code/my_project/test/models/user_test.rb
 <
+
+Test.vim relies on you being cd-ed into the project root. However, sometimes
+you may want to execute tests from a different directory than the current
+working directory. You might have a bigger project with many sub-projects,
+or you might be using |autochdir|. In any case, you can use a different
+working directory for running tests:
+>
+  let test#project_root = "/path/to/your/project"
+<
 ABOUT                                           *test-about*
 
 You can get the latest version, see the changelog, or report a bug on GitHub:

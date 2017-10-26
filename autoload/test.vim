@@ -122,7 +122,7 @@ function! test#test_file(file) abort
   return !empty(test#determine_runner(a:file))
 endfunction
 
-function! s:before_run()
+function! s:before_run() abort
   if &autowrite || &autowriteall
     silent! wall
   endif

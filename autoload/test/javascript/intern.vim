@@ -24,17 +24,18 @@ function! test#javascript#intern#build_position(type, position) abort
     let suite = 'suites=' . filename
   endif
 
-  if a:type == 'nearest'
+  if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
       return [suite, 'grep=' . shellescape(name, 1)]
     else
       return [suite]
     endif
-  elseif a:type == 'file'
+  elseif a:type ==# 'file'
     return [suite]
   else
     return []
+  endif
 endfunction
 
 function! test#javascript#intern#build_args(args) abort
@@ -50,7 +51,7 @@ function! test#javascript#intern#executable() abort
   endif
 endfunction
 
-function! s:nearest_test(position)
+function! s:nearest_test(position) abort
   let patterns = {
     \ 'test': [
       \ '\v^\s*%(%(bdd\.)?it|%(tdd\.|QUnit\.)?test)\s*[( ]\s*%("|'')(.*)%("|'')',

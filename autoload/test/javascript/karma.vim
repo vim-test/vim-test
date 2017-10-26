@@ -8,7 +8,7 @@ function! test#javascript#karma#test_file(file) abort
 endfunction
 
 function! test#javascript#karma#build_position(type, position) abort
-  if test#javascript#karma#executable() =~ 'karma-cli-runner'
+  if test#javascript#karma#executable() =~# 'karma-cli-runner'
     if a:type ==# 'nearest'
       let specname = s:nearest_test(a:position)
       let filename = '--files ' . expand(a:position['file'])
@@ -51,7 +51,7 @@ function! test#javascript#karma#executable() abort
   endif
 endfunction
 
-function! s:nearest_test(position)
+function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
   return join(name['namespace'] + name['test'])
 endfunction

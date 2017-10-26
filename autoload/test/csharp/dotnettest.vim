@@ -26,14 +26,14 @@ function! test#csharp#dotnettest#build_position(type, position) abort
 
   let project_path = project_files[0]
 
-  if a:type == 'nearest'
+  if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
       return [name, project_path]
     else
       return [filename, project_path]
     endif
-  elseif a:type == 'file'
+  elseif a:type ==# 'file'
     return [filename, project_path]
   else
     return ['*', project_path]
@@ -42,11 +42,11 @@ endfunction
 
 function! test#csharp#dotnettest#build_args(args) abort
   let filter = ''
-  if a:args[0] != '*'
+  if a:args[0] !=# '*'
     let filter = ' --filter FullyQualifiedName\~'.a:args[0]
   endif
   let args = [a:args[1], filter]
-  return [join(args, "")]
+  return [join(args, '')]
 endfunction
 
 function! test#csharp#dotnettest#executable() abort

@@ -7,7 +7,7 @@ function! test#viml#vspec#test_file(file) abort
 endfunction
 
 function! test#viml#vspec#build_position(type, position) abort
-  if a:type == 'nearest' || a:type == 'file'
+  if a:type ==# 'nearest' || a:type ==# 'file'
     return [a:position['file']]
   else
     return []

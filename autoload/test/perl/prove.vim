@@ -7,19 +7,19 @@ function! test#perl#prove#test_file(file) abort
 endfunction
 
 function! test#perl#prove#build_position(type, position) abort
-  if a:type == 'file' || a:type == 'nearest'
+  if a:type ==# 'file' || a:type ==# 'nearest'
     return [a:position['file']]
   else
     return []
   endif
 endfunction
 
-function! test#perl#prove#build_args(args)
+function! test#perl#prove#build_args(args) abort
   let args = []
   let test_args = []
 
   for idx in range(0, len(a:args) - 1)
-    if a:args[idx] == '::' || !empty(test_args) && !test#base#file_exists(a:args[idx])
+    if a:args[idx] ==# '::' || !empty(test_args) && !test#base#file_exists(a:args[idx])
       call add(test_args, a:args[idx])
     else
       call add(args, a:args[idx])
@@ -39,6 +39,6 @@ function! test#perl#prove#build_args(args)
   return args
 endfunction
 
-function! test#perl#prove#executable()
+function! test#perl#prove#executable() abort
   return 'prove -l'
 endfunction

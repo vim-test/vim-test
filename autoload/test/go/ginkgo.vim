@@ -11,17 +11,19 @@ function! test#go#ginkgo#test_file(file) abort
 endfunction
 
 function! test#go#ginkgo#build_position(type, position) abort
-  if a:type == 'suite'
+  if a:type ==# 'suite'
     return ['./...']
   else
     let fileargs = ['--regexScansFilePath=true '.'--focus='.a:position['file']]
-    if a:type == 'file'
+    if a:type ==# 'file'
       return fileargs
-    elseif a:type == 'nearest'
+    elseif a:type ==# 'nearest'
       let path = './'.fnamemodify(a:position['file'], ':h')
       let name = s:nearest_test(a:position)
       " if no tests matched, run the test file
       return empty(name) ? fileargs : ['--focus='.shellescape(name, 1), path]
+    endif
+  endif
 endfunction
 
 function! test#go#ginkgo#build_args(args) abort
@@ -35,7 +37,7 @@ function! test#go#ginkgo#build_args(args) abort
 endfunction
 
 function! test#go#ginkgo#executable() abort
-  return "ginkgo"
+  return 'ginkgo'
 endfunction
 
 function! s:nearest_test(position) abort

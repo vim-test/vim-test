@@ -61,7 +61,7 @@ endfunction
 
 function! test#strategy#vimux(cmd) abort
   if exists('g:test#preserve_screen') && !g:test#preserve_screen
-    if exists("g:VimuxRunnerIndex") && _VimuxHasRunner(g:VimuxRunnerIndex) != -1
+    if exists('g:VimuxRunnerIndex') && _VimuxHasRunner(g:VimuxRunnerIndex) != -1
       call VimuxRunCommand(!s:Windows() ? 'clear' : 'cls')
       call VimuxClearRunnerHistory()
     endif
@@ -88,7 +88,7 @@ function! test#strategy#iterm(cmd) abort
 endfunction
 
 
-function! s:execute_with_compiler(cmd, script)
+function! s:execute_with_compiler(cmd, script) abort
   try
     let default_makeprg = &l:makeprg
     let default_errorformat = &l:errorformat

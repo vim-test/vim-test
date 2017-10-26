@@ -5,7 +5,7 @@ endif
 function! test#python#nose2#test_file(file) abort
   if fnamemodify(a:file, ':t') =~# g:test#python#nose2#file_pattern
     if exists('g:test#python#runner')
-      return g:test#python#runner == 'Nose2'
+      return g:test#python#runner ==# 'Nose2'
     else
       return executable('nose2')
     endif
@@ -13,14 +13,14 @@ function! test#python#nose2#test_file(file) abort
 endfunction
 
 function! test#python#nose2#build_position(type, position) abort
-  if a:type == 'nearest'
+  if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
       return [s:path_to_module(a:position['file']).'.'.name]
     else
       return [s:path_to_module(a:position['file'])]
     endif
-  elseif a:type == 'file'
+  elseif a:type ==# 'file'
     return [s:path_to_module(a:position['file'])]
   else
     return []

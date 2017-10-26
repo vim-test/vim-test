@@ -3,13 +3,13 @@ if !exists('g:test#ruby#m#file_pattern')
 endif
 
 function! test#ruby#m#test_file(file) abort
-  return a:file =~# g:test#ruby#m#file_pattern && test#base#executable('ruby#minitest') == 'm'
+  return a:file =~# g:test#ruby#m#file_pattern && test#base#executable('ruby#minitest') ==# 'm'
 endfunction
 
 function! test#ruby#m#build_position(type, position) abort
-  if a:type == 'nearest'
+  if a:type ==# 'nearest'
     return [a:position['file'].':'.a:position['line']]
-  elseif a:type == 'file'
+  elseif a:type ==# 'file'
     return [a:position['file']]
   else
     return []

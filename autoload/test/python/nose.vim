@@ -5,7 +5,7 @@ endif
 function! test#python#nose#test_file(file) abort
   if fnamemodify(a:file, ':t') =~# g:test#python#nose#file_pattern
     if exists('g:test#python#runner')
-      return g:test#python#runner == 'nose'
+      return g:test#python#runner ==# 'nose'
     else
       return executable('nosetests')
     endif
@@ -13,14 +13,14 @@ function! test#python#nose#test_file(file) abort
 endfunction
 
 function! test#python#nose#build_position(type, position) abort
-  if a:type == 'nearest'
+  if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
       return [a:position['file'].':'.name]
     else
       return [a:position['file']]
     endif
-  elseif a:type == 'file'
+  elseif a:type ==# 'file'
     return [a:position['file']]
   else
     return []

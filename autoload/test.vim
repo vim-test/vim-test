@@ -30,20 +30,6 @@ function! test#run(type, arguments) abort
   call s:after_run()
 endfunction
 
-function! test#exists() abort
-  if exists('g:projectionist_heuristics')
-    let alternate_file = get(filter(projectionist#query_file('alternate'), 'filereadable(v:val)'), 0)
-  endif
-
-  if test#test_file(expand('%'))
-    return 1
-  elseif exists('alternate_file') && !empty(alternate_file) && test#test_file(alternate_file)
-    return 1
-  else
-    return 0
-  endif
-endfunction
-
 function! test#run_last(arguments) abort
   if exists('g:test#last_command')
     call s:before_run()
@@ -63,6 +49,10 @@ function! test#run_last(arguments) abort
   else
     call s:echo_failure('No tests were run so far')
   endif
+endfunction
+
+function! test#exists() abort
+  return test#test_file(expand('%')) || test#test_file(s:alternate_file())
 endfunction
 
 function! test#visit() abort

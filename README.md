@@ -290,24 +290,6 @@ different working directory for running tests:
 let test#project_root = "/path/to/your/project"
 ```
 
-### Checking whether a file exists
-
-If you want to check whether a file exists, like if you want to run
-autocommands, you can use the `test#exists` function. For example, to test the
-whole file you are currently editing, using the default test runner(s)
-associated with it, whenever the file changes, but only if you are editing a
-test or there is a test file associated with the file you are editing, you can
-use:
-
-```vim
-augroup test
-  autocmd!
-  autocmd BufWrite * if test#exists() |
-    \   TestFile
-    \ endif
-augroup END
-```
-
 ### Language-specific
 
 #### Python
@@ -350,6 +332,23 @@ let test#ruby#use_binstubs = 0
 #### JavaScript
 
 Test runner detection for JavaScript works by checking which runner is listed in the package.json dependencies. If you have globally installed the runner make sure it's also listed in the dependencies.
+
+## Autocommands
+
+In addition to running tests manually, you can also configure autocommands
+which run tests automatically when files are saved.
+
+The following setup will automatically run tests when a test file or its
+alternate application file is saved:
+
+```vim
+augroup test
+  autocmd!
+  autocmd BufWrite * if test#exists() |
+    \   TestFile
+    \ endif
+augroup END
+```
 
 ## Extending
 

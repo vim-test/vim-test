@@ -6,17 +6,6 @@ describe 'Main'
     call Teardown()
   end
 
-  it "can tell whether a test exists or not"
-    edit foo_spec.rb
-    Expect g:test#exists() == 1
-
-    edit foo.rb
-    " Expect g:test#exists() == 1
-
-    edit foo.txt
-    Expect g:test#exists() == 0
-  end
-
   it "runs tests on different granularities"
     edit foo_spec.rb
 

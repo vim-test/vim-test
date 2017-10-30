@@ -1,7 +1,7 @@
 function! test#run(type, arguments) abort
   call s:before_run()
 
-  let alternate_file = test#base#alternate_file()
+  let alternate_file = s:alternate_file()
 
   if test#test_file(expand('%'))
     let position = s:get_position(expand('%'))
@@ -120,6 +120,20 @@ endfunction
 
 function! test#test_file(file) abort
   return !empty(test#determine_runner(a:file))
+endfunction
+
+function! s:alternate_file() abort
+  let alternate_file = ''
+
+  if empty(alternate_file) && exists('g:loaded_projectionist')
+    let alternate_file = get(filter(projectionist#query_file('alternate'), 'filereadable(v:val)'), 0, '')
+  endif
+
+  if empty(alternate_file) && exists('g:loaded_rails') && !empty(rails#app())
+    let alternate_file = rails#buffer().alternate()
+  endif
+
+  return alternate_file
 endfunction
 
 function! s:before_run() abort

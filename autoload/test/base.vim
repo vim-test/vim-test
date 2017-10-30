@@ -2,20 +2,6 @@ function! test#base#test_file(runner, file) abort
   return test#{a:runner}#test_file(a:file)
 endfunction
 
-function! test#base#alternate_file() abort
-  let alternate_file = ''
-
-  if empty(alternate_file) && exists('g:loaded_projectionist')
-    let alternate_file = get(filter(projectionist#query_file('alternate'), 'filereadable(v:val)'), 0, '')
-  endif
-
-  if empty(alternate_file) && exists('g:loaded_rails') && !empty(rails#app())
-    let alternate_file = rails#buffer().alternate()
-  endif
-
-  return alternate_file
-endfunction
-
 function! test#base#build_position(runner, type, position) abort
   return test#{a:runner}#build_position(a:type, a:position)
 endfunction

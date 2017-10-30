@@ -13,15 +13,30 @@ describe "PyTest"
   end
 
   it "runs nearest tests"
+    view +1 test_class.py
+    TestNearest
+
+    Expect g:test#last_command == 'py.test test_class.py::TestNumbers'
+
     view +2 test_class.py
     TestNearest
 
     Expect g:test#last_command == 'py.test test_class.py::TestNumbers::test_numbers'
 
-    view +1 test_class.py
+    view +7 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'py.test test_class.py::TestNumbers'
+    Expect g:test#last_command == 'py.test test_class.py::TestSubclass::test_subclass'
+
+    view +9 test_class.py
+    TestNearest
+
+    Expect g:test#last_command == 'py.test test_class.py::Test_underscores_and_123'
+
+    view +13 test_class.py
+    TestNearest
+
+    Expect g:test#last_command == 'py.test test_class.py::UnittestClass'
 
     view +1 test_method.py
     TestNearest

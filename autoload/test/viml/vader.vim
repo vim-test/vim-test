@@ -7,14 +7,14 @@ function! test#viml#vader#test_file(file) abort
 endfunction
 
 function! test#viml#vader#build_position(type, position) abort
-  if a:type == 'nearest'
+  if a:type ==# 'nearest'
     let lines = s:nearest_test(a:position)
     if !empty(lines)
       return [':'.join(lines, ',').'call vader#run(0, "'.a:position['file'].'")']
     else
       return [':call vader#run(0, "'.a:position['file'].'")']
     endif
-  elseif a:type == 'file'
+  elseif a:type ==# 'file'
     return [':call vader#run(0, "'.a:position['file'].'")']
   else
     return [':call vader#run(0, "**/*.vader")']

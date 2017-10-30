@@ -8,8 +8,8 @@ function! test#go#test_file(runner, file_pattern, file) abort
     if exists('g:test#go#runner')
       return a:runner == g:test#go#runner
     endif
-    let contains_ginkgo_import = (search("github.com/onsi/ginkgo", 'n') > 0)
-    if a:runner == 'ginkgo'
+    let contains_ginkgo_import = (search('github.com/onsi/ginkgo', 'n') > 0)
+    if a:runner ==# 'ginkgo'
       return contains_ginkgo_import
     else
       return !contains_ginkgo_import

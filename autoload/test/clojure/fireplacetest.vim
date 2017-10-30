@@ -9,13 +9,13 @@ endfunction
 function! test#clojure#fireplacetest#build_position(type, position) abort
   call s:require_fireplace()
 
-  if a:type == 'nearest'
+  if a:type ==# 'nearest'
     if expand('%:.') == a:position['file']
       return [':.RunTests']
     else
       return [':edit +'.a:position['line'].' '.a:position['file'].' | :.RunTests']
     endif
-  elseif a:type == 'file'
+  elseif a:type ==# 'file'
     return [':RunTests '.fireplace#ns(a:position['file'])]
   else
     return [':0RunTests']
@@ -35,6 +35,6 @@ endfunction
 
 function! s:require_fireplace() abort
   if !exists('g:loaded_fireplace')
-    throw "Test.vim requires Fireplace.vim to run Clojure tests"
+    throw 'Test.vim requires Fireplace.vim to run Clojure tests'
   endif
 endfunction

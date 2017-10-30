@@ -7,14 +7,14 @@ function! test#erlang#commontest#test_file(file) abort
 endfunction
 
 function! test#erlang#commontest#build_position(type, position) abort
-    if a:type == 'nearest'
+    if a:type ==# 'nearest'
         let name = s:nearest_test(a:position)
         if !empty(name)
             return ['--suite='.a:position['file'], '--case='.name]
         else
             return ['--suite='.a:position['file']]
         endif
-    elseif a:type == 'file'
+    elseif a:type ==# 'file'
         return ['--suite='.a:position['file']]
     else
         return []

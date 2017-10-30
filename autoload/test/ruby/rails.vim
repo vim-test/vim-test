@@ -11,9 +11,9 @@ function! test#ruby#rails#test_file(file) abort
 endfunction
 
 function! test#ruby#rails#build_position(type, position) abort
-  if a:type == 'nearest'
+  if a:type ==# 'nearest'
     return [a:position['file'].':'.a:position['line']]
-  elseif a:type == 'file'
+  elseif a:type ==# 'file'
     return [a:position['file']]
   else
     return []
@@ -36,7 +36,7 @@ function! test#ruby#rails#executable() abort
   endif
 endfunction
 
-function! s:rails_version()
+function! s:rails_version() abort
   if filereadable('Gemfile.lock')
     for line in readfile('Gemfile.lock')
       let version_string = matchstr(line, '\v^ *rails \(\zs\d+\.\d+\..+\ze\)')

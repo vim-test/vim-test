@@ -7,11 +7,11 @@ function! test#php#phpunit#test_file(file) abort
 endfunction
 
 function! test#php#phpunit#build_position(type, position) abort
-  if a:type == 'nearest'
+  if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name) | let name = '--filter '.shellescape('::'.name.'$', 1) | endif
     return [name, a:position['file']]
-  elseif a:type == 'file'
+  elseif a:type ==# 'file'
     return [a:position['file']]
   else
     return []
@@ -38,7 +38,7 @@ function! test#php#phpunit#executable() abort
   endif
 endfunction
 
-function! s:nearest_test(position)
+function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#php#patterns)
   return join(name['test'])
 endfunction

@@ -7,9 +7,9 @@ function! test#elixir#espec#test_file(file) abort
 endfunction
 
 function! test#elixir#espec#build_position(type, position) abort
-  if a:type == 'nearest'
+  if a:type ==# 'nearest'
     return [a:position['file'].':'.a:position['line']]
-  elseif a:type == 'file'
+  elseif a:type ==# 'file'
     return [a:position['file']]
   else
     return []

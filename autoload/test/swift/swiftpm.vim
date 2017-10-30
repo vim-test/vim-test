@@ -25,16 +25,16 @@ function! test#swift#swiftpm#build_args(args) abort
   return a:args
 endfunction
 
-function test#swift#swiftpm#executable() abort
+function! test#swift#swiftpm#executable() abort
   return 'swift test'
 endfunction
 
-function! s:parse_module_info(position)
+function! s:parse_module_info(position) abort
   return s:get_first_match(a:position['file'], g:test#swift#patterns['module'])
 endfunction
 
-function! s:parse_case_info(position)
-  let l:result = ""
+function! s:parse_case_info(position) abort
+  let l:result = ''
 
   for l:line in getbufline(a:position['file'], 1, '$')
     let l:match = s:get_first_match(l:line, g:test#swift#patterns['namespace'])
@@ -47,13 +47,13 @@ function! s:parse_case_info(position)
   return l:result
 endfunction
 
-function! s:parse_nearest_test_info(position)
+function! s:parse_nearest_test_info(position) abort
   let l:info = test#base#nearest_test(a:position, g:test#swift#patterns)
   return join(l:info['test'])
 endfunction
 
-function! s:get_first_match(source, patterns)
-  let l:result = ""
+function! s:get_first_match(source, patterns) abort
+  let l:result = ''
 
   for l:pattern in a:patterns
     let l:matches = matchlist(a:source, pattern)

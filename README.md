@@ -290,6 +290,24 @@ different working directory for running tests:
 let test#project_root = "/path/to/your/project"
 ```
 
+### Checking whether a file exists
+
+If you want to check whether a file exists, like if you want to run
+autocommands, you can use the `test#exists` function. For example, to test the
+whole file you are currently editing, using the default test runner(s)
+associated with it, whenever the file changes, but only if you are editing a
+test or there is a test file associated with the file you are editing, you can
+use:
+
+```vim
+augroup test
+  autocmd!
+  autocmd BufWrite * if test#exists() |
+    \   TestFile
+    \ endif
+augroup END
+```
+
 ### Language-specific
 
 #### Python

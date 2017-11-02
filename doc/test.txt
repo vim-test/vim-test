@@ -99,6 +99,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Karma*
 :Karma [args]                Uses the `karma` command.
 
+                                                *test-:WebdriverIo*
+:WebdriverIo [args]          Uses the `wdio` command.
+
                                                 *test-:Nose*
 :Nose [args]                 Uses the `nosetests` command.
 

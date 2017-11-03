@@ -1,5 +1,5 @@
 if !exists('g:test#javascript#webdriverio#file_pattern')
-  let g:test#javascript#webdriverio#file_pattern = '\vtest/specs/.*\.js$'
+  let g:test#javascript#webdriverio#file_pattern = '\vtests?/.*\.js$'
 endif
 
 function! test#javascript#webdriverio#test_file(file) abort

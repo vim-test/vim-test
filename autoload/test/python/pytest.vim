@@ -7,7 +7,7 @@ function! test#python#pytest#test_file(file) abort
     if exists('g:test#python#runner')
       return g:test#python#runner ==# 'pytest'
     else
-      return executable('py.test')
+      return executable('pytest') || executable('py.test')
     endif
   endif
 endfunction
@@ -38,7 +38,7 @@ function! test#python#pytest#build_args(args) abort
 endfunction
 
 function! test#python#pytest#executable() abort
-  return 'py.test'
+  return 'pytest'
 endfunction
 
 function! s:nearest_test(position) abort

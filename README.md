@@ -2,7 +2,7 @@
 
 A Vim wrapper for running tests on different granularities.
 
-![usage overview](/screenshots/granularity.gif)
+<img alt="usage overview" src="https://github.com/janko-m/vim-test/blob/master/screenshots/granularity.gif" width=770 height=503>
 
 Currently the following testing frameworks are supported:
 
@@ -194,7 +194,7 @@ let g:test#transformation = 'vagrant'
 
 ## Commands
 
-![nearest polyfill](/screenshots/nearest.gif)
+<img alt="nearest polyfill" src="https://github.com/janko-m/vim-test/blob/master/screenshots/nearest.gif" width=770 height=323>
 
 You can execute test.vim commands directly, and pass them CLI options:
 

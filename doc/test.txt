@@ -9,6 +9,7 @@ License: Same terms as Vim itself (see |license|)
 |test-quickfix-strategies|        QUICKFIX STRATEGIES
 |test-custom-strategies|          CUSTOM STRATEGIES
 |test-configuration|              CONFIGURATION
+|test-projectionist|              PROJECTIONIST INTEGRATION
 |test-about|                      ABOUT
 |test-credits|                    CREDITS
 
@@ -367,7 +368,7 @@ If you want to disable clearing the screen for strategies, you can do
   let g:test#preserve_screen = 1
 <
 You may find yourself specifying certain options for your test runners in
-certain situations. You can configure your prefered options with
+certain situations. You can configure your preferred options with
 >
   let g:test#ruby#minitest#options = '--verbose'
 <
@@ -398,6 +399,12 @@ working directory for running tests:
 >
   let test#project_root = "/path/to/your/project"
 <
+PROJECTIONIST INTEGRATION                       *test-projectionist*
+
+If |projectionist| is present, you can run a test command from an
+application file, and test.vim will automatically try to run the
+command on the "alternate" test file.
+
 ABOUT                                           *test-about*
 
 You can get the latest version, see the changelog, or report a bug on GitHub:

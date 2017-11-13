@@ -1,5 +1,5 @@
 if !exists('g:test#ruby#cucumber#file_pattern')
-  let g:test#ruby#cucumber#file_pattern = '\.feature$'
+  let g:test#ruby#cucumber#file_pattern = '\v\.feature$'
 endif
 
 function! test#ruby#cucumber#test_file(file) abort

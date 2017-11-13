@@ -1,5 +1,5 @@
 if !exists('g:test#python#djangotest#file_pattern')
-  let g:test#python#djangotest#file_pattern = '^test.*\.py$'
+  let g:test#python#djangotest#file_pattern = '\v^test.*\.py$'
 endif
 
 function! test#python#djangotest#test_file(file) abort

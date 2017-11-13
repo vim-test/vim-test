@@ -1,5 +1,5 @@
 if !exists('g:test#php#behat#file_pattern')
-  let g:test#php#behat#file_pattern = '\.feature$'
+  let g:test#php#behat#file_pattern = '\v\.feature$'
 endif
 
 function! test#php#behat#test_file(file) abort

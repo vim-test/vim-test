@@ -351,6 +351,7 @@ augroup END
 ```
 
 ## Projectionist integration
+
 If [Projectionist] is present, you can run a test command from an
 application file, and test.vim will automatically try to run the
 command on the "alternate" test file.

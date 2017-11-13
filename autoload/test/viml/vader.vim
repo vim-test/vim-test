@@ -1,5 +1,5 @@
 if !exists('g:test#viml#vader#file_pattern')
-  let g:test#viml#vader#file_pattern = '\.vader$'
+  let g:test#viml#vader#file_pattern = '\v\.vader$'
 endif
 
 function! test#viml#vader#test_file(file) abort

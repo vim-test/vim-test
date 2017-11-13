@@ -1,5 +1,5 @@
 if !exists('g:test#python#pyunit#file_pattern')
-  let g:test#python#pyunit#file_pattern = '^test.*\.py$'
+  let g:test#python#pyunit#file_pattern = '\v^test.*\.py$'
 endif
 
 function! test#python#pyunit#test_file(file) abort

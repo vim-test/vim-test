@@ -1,5 +1,5 @@
 if !exists('g:test#ruby#m#file_pattern')
-  let g:test#ruby#m#file_pattern = '_test\.rb$'
+  let g:test#ruby#m#file_pattern = '\v_test\.rb$'
 endif
 
 function! test#ruby#m#test_file(file) abort

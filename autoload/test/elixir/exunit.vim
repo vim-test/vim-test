@@ -1,5 +1,5 @@
 if !exists('g:test#elixir#exunit#file_pattern')
-  let g:test#elixir#exunit#file_pattern = '_test\.exs$'
+  let g:test#elixir#exunit#file_pattern = '\v_test\.exs$'
 endif
 
 function! test#elixir#exunit#test_file(file) abort

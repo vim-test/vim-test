@@ -1,5 +1,5 @@
 if !exists('g:test#csharp#dotnettest#file_pattern')
-  let g:test#csharp#dotnettest#file_pattern = '\.cs$'
+  let g:test#csharp#dotnettest#file_pattern = '\v\.cs$'
 endif
 
 function! test#csharp#dotnettest#test_file(file) abort

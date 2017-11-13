@@ -1,5 +1,5 @@
 if !exists('g:test#erlang#commontest#file_pattern')
-  let g:test#erlang#commontest#file_pattern = '_SUITE\.erl$'
+  let g:test#erlang#commontest#file_pattern = '\v_SUITE\.erl$'
 endif
 
 function! test#erlang#commontest#test_file(file) abort

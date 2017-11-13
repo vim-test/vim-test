@@ -352,7 +352,7 @@ augroup END
 
 ## Projectionist integration
 
-If [Projectionist] is present, you can run a test command from an
+If [projectionist.vim] is present, you can run a test command from an
 application file, and test.vim will automatically try to run the
 command on the "alternate" test file.
 
@@ -432,4 +432,4 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 [AsyncRun]: https://github.com/skywind3000/asyncrun.vim
 [MakeGreen]: https://github.com/reinh/vim-makegreen
 [M]: http://github.com/qrush/m
-[Projectionist]: https://github.com/tpope/vim-projectionist
+[projectionist.vim]: https://github.com/tpope/vim-projectionist

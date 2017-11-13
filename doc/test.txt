@@ -401,7 +401,7 @@ working directory for running tests:
 <
 PROJECTIONIST INTEGRATION                       *test-projectionist*
 
-If |projectionist| is present, you can run a test command from an
+If |projectionist.vim| is present, you can run a test command from an
 application file, and test.vim will automatically try to run the
 command on the "alternate" test file.
 

@@ -14,22 +14,7 @@ endfunction
 function! test#csharp#dotnettest#build_position(type, position) abort
   let file = a:position['file']
   let filename = fnamemodify(file, ':t:r')
-  let filepath = fnamemodify(file, ':p:h')
-  let project_files = split(glob(filepath . '/*.csproj'), '\n')
-  let search_for_csproj = 1
-
-  while len(project_files) == 0 && search_for_csproj
-    let filepath_parts = split(filepath, '/') 
-    let search_for_csproj = len(filepath_parts) > 1
-    let filepath = '/'.join(filepath_parts[0:-2], '/')
-    let project_files = split(glob(filepath . '/*.csproj'), '\n')
-  endwhile
-
-  if len(project_files) == 0
-    throw 'Unable to find .csproj file, a .csproj file is required to make use of the `dotnet test` command.'
-  endif
-
-  let project_path = project_files[0]
+  let project_path = test#csharp#get_project_path(file)
 
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)

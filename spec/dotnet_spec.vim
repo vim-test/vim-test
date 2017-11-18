@@ -7,7 +7,6 @@ endfunction
 describe "DotnetTest"
 
   before
-    let g:test#csharp#runner = 'dotnettest'
     cd spec/fixtures/dotnet
   end
 

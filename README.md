@@ -18,7 +18,7 @@ Currently the following testing frameworks are supported:
 | **Java**       | Maven                                                       | `maventest`                                                                |
 | **JavaScript** | Intern, Jasmine, Jest, Karma, Lab, Mocha, TAP, WebdriverIO  | `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `tap`, `webdriverio` |
 | **Lua**        | Busted                                                      | `busted`                                                                   |
-| **PHP**        | Behat, Codeception, Kahlan, Peridot, PHPUnit, PHPSpec, Dusk | `behat`, `codeception`, `kahlan`, `peridot`, `phpunit`, `phpspec`, `dusk`  |
+| **PHP**        | Behat, Codeception, Kahlan, Peridot, PHPUnit, PHPSpec, Dusk | `behat`, `codeception`, `dusk`, `kahlan`, `peridot`, `phpunit`, `phpspec`  |
 | **Perl**       | Prove                                                       | `prove`                                                                    |
 | **Python**     | Django, Nose, Nose2, PyTest, PyUnit                         | `djangotest`, `djangonose` `nose`, `nose2`, `pytest`, `pyunit`             |
 | **Racket**     | RackUnit                                                    | `rackunit`                                                                 |

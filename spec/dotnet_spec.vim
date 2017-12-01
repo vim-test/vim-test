@@ -16,23 +16,23 @@ describe "DotnetTest"
   end
 
   it "runs nearest tests"
-    view +2 Tests.cs
+    view +3 Tests.cs
     TestNearest
 
     let actual = s:remove_path(g:test#last_command)
-    Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Tests'
+    Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Namespace.Tests'
 
     view +8 Tests.cs
     TestNearest
 
     let actual = s:remove_path(g:test#last_command)
-    Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Tests.TestAsync'
+    Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Namespace.Tests.TestAsync'
 
     view +14 Tests.cs
     TestNearest
 
     let actual = s:remove_path(g:test#last_command)
-    Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Tests.Test'
+    Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Namespace.Tests.Test'
 
   end
 

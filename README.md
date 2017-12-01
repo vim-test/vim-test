@@ -8,7 +8,7 @@ Currently the following testing frameworks are supported:
 
 | Language       | Frameworks                                                  | Identifiers                                                                |
 | :------------: | ----------------------------------------------------------- | -------------------------------------------------------------------------- |
-| **C#**         | .NET                                                        | `dotnettest`                                                               |
+| **C#**         | .NET                                                        | `xunit`, `dotnettest`                                                      |
 | **Clojure**    | Fireplace.vim                                               | `fireplacetest`                                                            |
 | **Crystal**    | Crystal                                                     | `crystalspec`                                                              |
 | **Elixir**     | ESpec, ExUnit                                               | `espec`, `exunit`                                                          |

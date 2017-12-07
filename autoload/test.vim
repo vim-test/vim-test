@@ -6,7 +6,7 @@ function! test#run(type, arguments) abort
   if test#test_file(expand('%'))
     let position = s:get_position(expand('%'))
     let g:test#last_position = position
-  elseif !empty(alternate_file) && test#test_file(alternate_file)
+  elseif !empty(alternate_file) && test#test_file(alternate_file) && (!exists('g:test#last_position') || alternate_file !=# g:test#last_position['file'])
     let position = s:get_position(alternate_file)
   elseif exists('g:test#last_position')
     let position = g:test#last_position

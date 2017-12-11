@@ -11,7 +11,8 @@ if !exists('g:test#javascript#tap#reporters')
 endif
 
 function! test#javascript#tap#test_file(file) abort
-  return !empty(test#javascript#tap#executable()) && a:file =~# g:test#javascript#tap#file_pattern
+  return a:file =~# g:test#javascript#tap#file_pattern 
+        \ && test#javascript#has_package('tape')
 endfunction
 
 function! test#javascript#tap#build_position(type, position) abort

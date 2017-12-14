@@ -13,3 +13,7 @@ class Test_underscores_and_123(Subclass):
 class UnittestClass(unittest.TestCase):
     def test_unittest(self):
         assert 1 == 1
+
+class SomeTest(TestCase):
+    def test_foo(self):
+        foo = date(2017, 11, 16)

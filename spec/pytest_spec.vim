@@ -33,21 +33,33 @@ describe "PyTest"
 
     Expect g:test#last_command == 'pytest test_class.py::Test_underscores_and_123'
 
+    view +11 test_class.py
+    TestNearest
+
+    Expect g:test#last_command == 'pytest test_class.py::Test_underscores_and_123::test_underscores'
+
     view +13 test_class.py
     TestNearest
 
     Expect g:test#last_command == 'pytest test_class.py::UnittestClass'
 
+    view +19 test_class.py
+    TestNearest
+
+    Expect g:test#last_command == 'pytest test_class.py::SomeTest::test_foo'
+
     view +1 test_method.py
     TestNearest
 
     Expect g:test#last_command == 'pytest test_method.py::test_numbers'
-
-    view +6 test_method.py
-    TestNearest
-
-    Expect g:test#last_command == 'pytest test_method.py::test_foo'
   end
+
+  " it "runs nearest tests ignoring nested classes"
+  "   view +6 test_method.py
+  "   TestNearest
+  "
+  "   Expect g:test#last_command == 'pytest test_method.py::test_foo'
+  " end
 
   it "runs file test if nearest test couldn't be found"
     view +1 test_method.py

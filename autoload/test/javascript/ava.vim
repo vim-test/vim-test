@@ -3,13 +3,8 @@ if !exists('g:test#javascript#ava#file_pattern')
 endif
 
 function! test#javascript#ava#test_file(file) abort
-  if a:file =~# g:test#javascript#ava#file_pattern
-    if exists('g:test#javascript#runner')
-      return g:test#javascript#runner == 'ava'
-    else
-      return executable('nosetests')
-    endif
-  endif
+  return a:file =~# g:test#javascript#ava#file_pattern
+    \ && test#javascript#has_package('ava')
 endfunction
 
 function! test#javascript#ava#build_position(type, position) abort
@@ -47,9 +42,5 @@ endfunction
 
 function! s:nearest_test(position)
   let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
-  "return (len(name['namespace']) ? '^' : '') .
-  "     \ test#base#escape_regex(join(name['namespace'] + name['test'])) .
-  "     \ (len(name['test']) ? '$' : '')
-  "
   return test#base#escape_regex(join(name['namespace'] + name['test']))
 endfunction

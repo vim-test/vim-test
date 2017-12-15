@@ -25,8 +25,7 @@ function! test#javascript#ava#build_args(args) abort
   let args = a:args
 
   if test#base#no_colors()
-    let args = ['--no-colors'] + args
-    let args = args + ['|', 'sed -e "s///g"']
+    let args = ['--no-color'] + args
   endif
 
   return args

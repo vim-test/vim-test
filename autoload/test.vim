@@ -144,10 +144,6 @@ function! s:before_run() abort
   if &autowrite || &autowriteall
     silent! wall
   endif
-
-  if exists('g:test#project_root')
-    execute 'cd' g:test#project_root
-  endif
 endfunction
 
 function! s:after_run() abort

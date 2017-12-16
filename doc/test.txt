@@ -82,6 +82,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:M*
 :M [args]                    Uses the `m` command.
 
+                                                *test-:Ava*
+:Ava [args]                  Uses the `ava` command.
+
                                                 *test-:Intern*
 :Intern [args]               Uses the `intern-client` or `intern-runner` command.
 

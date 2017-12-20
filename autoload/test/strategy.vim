@@ -125,7 +125,7 @@ endfunction
 
 function! s:pretty_command(cmd) abort
   let clear = !s:Windows() ? 'clear' : 'cls'
-  let cd = 'cd ' . shellescape(getcwd())
+  let cd = s:cd_command()
   let echo  = !s:Windows() ? 'echo -e '.shellescape(a:cmd) : 'Echo '.shellescape(a:cmd)
   let separator = !s:Windows() ? '; ' : ' & '
 
@@ -136,8 +136,17 @@ function! s:pretty_command(cmd) abort
   endif
 endfunction
 
+function! s:cd_command() abort
+  if exists('g:test#secondary_project_root')
+    return 'cd ' . shellescape(get(g:, 'test#secondary_project_root'))
+  elseif exists('g:test#project_root')
+    return 'cd ' . shellescape(get(g:, 'test#project_root'))
+  else
+    return 'cd ' . shellescape(getcwd())
+endfunction
+
 function! s:command(cmd) abort
-  let cd = 'cd ' . shellescape(getcwd())
+  let cd = s:cd_command()
   let separator = !s:Windows() ? '; ' : ' & '
 
   return join([l:cd, a:cmd], l:separator)

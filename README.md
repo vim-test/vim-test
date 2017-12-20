@@ -291,6 +291,25 @@ different working directory for running tests:
 let test#project_root = "/path/to/your/project"
 ```
 
+#### Working with vim-tmux-runner and docker container
+
+If you are using vim-tmux-runner (vtr) dispatch strategy and targeting a tmux
+pane that runs a docker container, you might have an issue where your
+project in your container has different path from your host machine. In that
+case you coud use below to set the project root path used in your container.
+
+```vim
+let test#secondary_project_root = "/container-path/to/your/project"
+```
+
+If your target tmux pane is already open with your project root could just set
+as following. This will make your setup generic enough to work with various
+projects.
+
+```vim
+let test#secondary_project_root = "."
+```
+
 ### Language-specific
 
 #### Python

@@ -80,11 +80,13 @@ function! test#strategy#vimshell(cmd) abort
 endfunction
 
 function! test#strategy#terminal(cmd) abort
-  call s:execute_script('osx_terminal', s:pretty_command(a:cmd))
+  let cmd = join(['cd ' . shellescape(getcwd()), s:pretty_command(a:cmd)], '; ')
+  call s:execute_script('osx_terminal', cmd)
 endfunction
 
 function! test#strategy#iterm(cmd) abort
-  call s:execute_script('osx_iterm', s:pretty_command(a:cmd))
+  let cmd = join(['cd ' . shellescape(getcwd()), s:pretty_command(a:cmd)], '; ')
+  call s:execute_script('osx_iterm', cmd)
 endfunction
 
 

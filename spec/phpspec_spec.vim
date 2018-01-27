@@ -19,10 +19,10 @@ describe "PHPSpec"
   end
 
   it "runs nearest tests"
-    view +1 NormalSpec.php
+    view +11 NormalSpec.php
     TestNearest
 
-    Expect g:test#last_command == 'phpspec run NormalSpec.php'
+    Expect g:test#last_command == 'phpspec run NormalSpec.php:11'
   end
 
   it "runs test suites"

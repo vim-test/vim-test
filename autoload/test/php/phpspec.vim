@@ -8,7 +8,9 @@ function! test#php#phpspec#test_file(file) abort
 endfunction
 
 function! test#php#phpspec#build_position(type, position) abort
-  if a:type ==# 'nearest' || a:type ==# 'file'
+  if a:type ==# 'nearest'
+    return [a:position['file'].':'.a:position['line']]
+  elseif a:type ==# 'file'
     return [a:position['file']]
   else
     return []

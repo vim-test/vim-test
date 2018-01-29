@@ -26,7 +26,7 @@ Currently the following testing frameworks are supported:
 | **Rust**       | Cargo                                                            | `cargotest`                                                                       |
 | **Shell**      | Bats                                                             | `bats`                                                                            |
 | **Swift**      | Swift Package Manager                                            | `swiftpm`                                                                         |
-| **VimScript**  | Vader.vim, VSpec                                                 | `vader`, `vspec`                                                                  |
+| **VimScript**  | Vader.vim, VSpec, Themis                                         | `vader`, `vspec`, `themis`                                                        |
 
 ## Features
 

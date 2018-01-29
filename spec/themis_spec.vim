@@ -4,7 +4,6 @@ runtime! plugin/vim-themis
 describe "Themis"
 
   before
-    let g:test#viml#themis#executable = "/path/to/themis"
     cd spec/fixtures/themis
   end
 
@@ -18,28 +17,28 @@ describe "Themis"
     TestNearest
     messages
 
-    Expect g:test#last_command == "/path/to/themis math.vim"
+    Expect g:test#last_command == 'themis math.vim'
   end
 
   it "runs file tests"
     view +2 math.vim
     TestFile
 
-    Expect g:test#last_command == "/path/to/themis math.vim"
+    Expect g:test#last_command == 'themis math.vim'
   end
 
   it "runs test suite"
     view math.vim
     TestSuite
 
-    Expect g:test#last_command == "/path/to/themis"
+    Expect g:test#last_command == 'themis'
   end
 
   it "passes arguments before the file"
     view +2 math.vim
     TestFile --foo bar
 
-    Expect g:test#last_command == "/path/to/themis --foo bar math.vim"
+    Expect g:test#last_command == 'themis --foo bar math.vim'
   end
 
 end

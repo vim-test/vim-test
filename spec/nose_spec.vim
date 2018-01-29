@@ -1,9 +1,5 @@
 source spec/support/helpers.vim
 
-function! test#shell(cmd, strategy) abort
-  let g:test#last_command = substitute(a:cmd, ' --doctest-tests', '', '')
-endfunction
-
 describe "Nose"
 
   before
@@ -20,22 +16,22 @@ describe "Nose"
     view +2 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'nosetests test_class.py:TestNumbers.test_numbers'
+    Expect g:test#last_command == 'nosetests --doctest-tests test_class.py:TestNumbers.test_numbers'
 
     view +5 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'nosetests test_class.py:TestSubclass'
+    Expect g:test#last_command == 'nosetests --doctest-tests test_class.py:TestSubclass'
 
     view +1 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'nosetests test_class.py:TestNumbers'
+    Expect g:test#last_command == 'nosetests --doctest-tests test_class.py:TestNumbers'
 
     view +1 test_method.py
     TestNearest
 
-    Expect g:test#last_command == 'nosetests test_method.py:test_numbers'
+    Expect g:test#last_command == 'nosetests --doctest-tests test_method.py:test_numbers'
   end
 
   it "runs file test if nearest test couldn't be found"
@@ -43,21 +39,21 @@ describe "Nose"
     normal O
     TestNearest
 
-    Expect g:test#last_command == 'nosetests test_method.py'
+    Expect g:test#last_command == 'nosetests --doctest-tests test_method.py'
   end
 
   it "runs file tests"
     view test_class.py
     TestFile
 
-    Expect g:test#last_command == 'nosetests test_class.py'
+    Expect g:test#last_command == 'nosetests --doctest-tests test_class.py'
   end
 
   it "runs test suites"
     view test_class.py
     TestSuite
 
-    Expect g:test#last_command == 'nosetests'
+    Expect g:test#last_command == 'nosetests --doctest-tests'
   end
 
 end

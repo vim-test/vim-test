@@ -1,6 +1,10 @@
 source spec/support/helpers.vim
 
 describe "strategy"
+  before
+    source spec/support/test/strategy.vim
+  end
+
   after
     call Teardown()
     unlet! g:test#strategy

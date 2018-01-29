@@ -164,6 +164,12 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:VSpec*
 :VSpec [args]                Uses the `vim-flavor` `test` command.
 
+                                                *test-:Vader*
+:Vader [args]                Uses the `vader#run()` vim function.
+
+                                                *test-:Themis*
+:Themis [args]               Uses the `themis` command.
+
                                                 *test-:Busted*
 :Busted [args]               Uses the `busted` command.
 

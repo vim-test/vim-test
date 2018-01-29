@@ -25,7 +25,7 @@ call s:extend(g:test#runners, {
   \ 'CSharp':     ['Xunit', 'DotnetTest'],
   \ 'Shell':      ['Bats'],
   \ 'Swift':      ['SwiftPM'],
-  \ 'VimL':       ['VSpec', 'Vader', 'Themis'],
+  \ 'VimL':       ['Themis', 'VSpec', 'Vader'],
   \ 'Lua':        ['Busted'],
   \ 'PHP':        ['Codeception', 'Dusk', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
   \ 'Perl':       ['Prove'],

@@ -18,7 +18,11 @@ function! test#base#options(runner, ...) abort
 endfunction
 
 function! test#base#executable(runner) abort
-  return get(g:, 'test#'.a:runner.'#executable', test#{a:runner}#executable())
+  if exists('g:test#'.a:runner.'#executable')
+    return g:test#{a:runner}#executable
+  else
+    return test#{a:runner}#executable()
+  endif
 endfunction
 
 function! test#base#build_args(runner, args) abort

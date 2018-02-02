@@ -29,7 +29,7 @@ function! test#strategy#makegreen(cmd) abort
 endfunction
 
 function! test#strategy#asyncrun(cmd) abort
-  execute 'AsyncRun '.a:cmd
+  call s:execute_with_compiler(a:cmd, 'AsyncRun '.a:cmd)
 endfunction
 
 function! test#strategy#dispatch(cmd) abort

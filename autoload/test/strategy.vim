@@ -100,8 +100,6 @@ function! s:execute_with_compiler(cmd, script) abort
       let compiler = dispatch#compiler_for_program(a:cmd)
       if !empty(compiler)
         execute 'compiler ' . compiler
-      else
-        echoerr 'Could not find compiler for command: '.a:cmd
       endif
     endif
 

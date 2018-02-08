@@ -13,7 +13,7 @@ function! test#csharp#get_project_path(file) abort
   while len(l:project_files) == 0 && l:search_for_csproj
     let l:filepath_parts = split(l:filepath, s:slash)
     let l:search_for_csproj = len(l:filepath_parts) > 1
-    " dont want root dir to start with a forward slash in windows
+    " only want the forward slash at the root dir for non-windows machines
     let l:filepath = substitute(s:slash, '\', '').join(l:filepath_parts[0:-2], s:slash)
     let l:project_files = s:get_project_files(l:filepath)
   endwhile

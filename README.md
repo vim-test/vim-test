@@ -4,10 +4,23 @@ A Vim wrapper for running tests on different granularities.
 
 <img alt="usage overview" src="https://github.com/janko-m/vim-test/blob/master/screenshots/granularity.gif" width=770 height=503>
 
-Currently the following testing frameworks are supported:
+## Features
 
-| Language       | Frameworks                                                       | Identifiers                                                                       |
-| :------------: | ---------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+* Zero dependencies
+* Zero configuration required (it Does the Right Thing™, see [**Philosophy**](https://github.com/janko-m/vim-test/wiki))
+* Wide range of test runners which are automagically detected
+* **Polyfills** for nearest tests (by [constructing regexes](#commands))
+* Wide range of execution environments ("[strategies](#strategies)")
+* Fully customized CLI options configuration
+* Extendable with new runners and strategies
+
+Test.vim consists of a core which provides an abstraction over running any kind
+of tests from the command-line. Concrete test runners are then simply plugged
+in, so they all work in the same unified way. Currently the following test
+runners are supported:
+
+| Language       | Test Runners                                                     | Identifiers                                                                       |
+| -------------: | :--------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
 | **C#**         | .NET                                                             | `xunit`, `dotnettest`                                                             |
 | **Clojure**    | Fireplace.vim                                                    | `fireplacetest`                                                                   |
 | **Crystal**    | Crystal                                                          | `crystalspec`                                                                     |
@@ -27,20 +40,6 @@ Currently the following testing frameworks are supported:
 | **Shell**      | Bats                                                             | `bats`                                                                            |
 | **Swift**      | Swift Package Manager                                            | `swiftpm`                                                                         |
 | **VimScript**  | Vader.vim, VSpec, Themis                                         | `vader`, `vspec`, `themis`                                                        |
-
-## Features
-
-* Zero dependencies
-* Zero configuration required (it Does the Right Thing™, see [**Philosophy**](https://github.com/janko-m/vim-test/wiki))
-* Wide range of test runners which are automagically detected
-* **Polyfills** for nearest tests (by [constructing regexes](#commands))
-* Wide range of execution environments ("[strategies](#strategies)")
-* Fully customized CLI options configuration
-* Extendable with new runners and strategies
-
-Test.vim consists of a core which provides an abstraction over running any kind
-of tests from the command-line. Concrete test runners are then simply plugged
-in, so they all work in the same unified way.
 
 ## Setup
 

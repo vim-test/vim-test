@@ -1,5 +1,5 @@
 if !exists('g:test#javascript#karma#file_pattern')
-  let g:test#javascript#karma#file_pattern = '\v(test|spec)\.(js|jsx|coffee)$'
+  let g:test#javascript#karma#file_pattern = '\v(test|spec)\.(js|jsx|coffee|ts|tsx)$'
 endif
 
 function! test#javascript#karma#test_file(file) abort

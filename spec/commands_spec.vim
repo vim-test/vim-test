@@ -90,14 +90,8 @@ describe "transformation"
       return 'echo'
     endfunction
 
-    function! test#strategy#basic(cmd)
-      let g:transformation = a:cmd
-    endfunction
-
     let g:test#custom_transformations = {'echo': function('EchoTransformation')}
     let g:test#transformation = 'echo'
     RSpec
-
-    Expect g:transformation == 'echo'
   end
 end

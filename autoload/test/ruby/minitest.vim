@@ -64,7 +64,7 @@ endfunction
 
 function! test#ruby#minitest#executable() abort
   let rake_content = []
-  for rake_file in glob('Rakefile', 0, 1) + glob('**/*.rake', 0, 1)
+  for rake_file in glob('Rakefile', 0, 1) + glob('{lib/,}tasks/*.rake', 0, 1)
     let rake_content += readfile(rake_file)
   endfor
 

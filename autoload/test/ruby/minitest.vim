@@ -63,12 +63,7 @@ function! s:build_ruby_args(path, args) abort
 endfunction
 
 function! test#ruby#minitest#executable() abort
-  let rake_content = []
-  for rake_file in glob('Rakefile', 0, 1) + glob('{lib/,}tasks/*.rake', 0, 1)
-    let rake_content += readfile(rake_file)
-  endfor
-
-  if match(rake_content, 'Rake::TestTask') != -1 ||
+  if filereadable('Rakefile') && system('cat Rakefile') =~# 'Rake::TestTask' ||
    \ (exists('b:rails_root') || filereadable('./bin/rails'))
     if !empty(glob('.zeus.sock'))
       return 'zeus rake test'

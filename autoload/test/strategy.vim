@@ -52,7 +52,7 @@ function! test#strategy#neovim(cmd) abort
 endfunction
 
 function! test#strategy#neoterm(cmd) abort
-  call neoterm#do(a:cmd)
+  call neoterm#do({ 'cmd': a:cmd})
 endfunction
 
 function! test#strategy#vtr(cmd) abort

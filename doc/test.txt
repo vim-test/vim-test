@@ -248,6 +248,12 @@ Runs test commands with `:terminal`, which spawns a terminal inside your Neovim.
 >
   let test#strategy = 'neovim'
 <
+Vim8 Terminal ~
+
+Runs test commands with `:terminal`, which spawns a terminal inside you Vim.
+>
+  let test#strategy = 'vimterminal'
+<
 Neoterm ~
 
 Runs test commands with `:T`. Requires the Neoterm plugin.

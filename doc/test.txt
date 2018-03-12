@@ -244,13 +244,13 @@ Runs test commands with `:VimProcBang`. Requires the Vimproc.vim plugin.
 <
 Neovim ~
 
-Runs test commands with `:terminal`, which spawns a terminal inside your Neovim.
+Runs test commands with `:terminal`, which spawns a terminal inside Neovim.
 >
   let test#strategy = 'neovim'
 <
 Vim8 Terminal ~
 
-Runs test commands with `:terminal`, which spawns a terminal inside you Vim.
+Runs test commands with `term_start()`, which spawns a terminal inside Vim.
 >
   let test#strategy = 'vimterminal'
 <

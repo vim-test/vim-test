@@ -83,7 +83,7 @@ let test#strategy = "dispatch"
 | **Basic**&nbsp;(default)        | `basic`                          | Runs test commands with `:!` on Vim, and with `:terminal` on Neovim.             |
 | **Make**                        | `make`                           | Runs test commands with `:make`.                                                 |
 | **Neovim**                      | `neovim`                         | Runs test commands with `:terminal` in a split window.                           |
-| **Vim8 Terminal**               | `vimterminal`                    | Runs test commands with `:terminal` in a split window.                           |
+| **Vim8 Terminal**               | `vimterminal`                    | Runs test commands with `term_start()` in a split window.                        |
 | **[Dispatch]**                  | `dispatch` `dispatch_background` | Runs test commands with `:Dispatch` or `:Dispatch!`.                             |
 | **[Vimux]**                     | `vimux`                          | Runs test commands in a small tmux pane at the bottom of your terminal.          |
 | **[Tslime]**                    | `tslime`                         | Runs test commands in a tmux pane you specify.                                   |

@@ -40,7 +40,7 @@ describe "CucumberJS"
   end
 
   it "uses locally installed cucumber-js"
-  	try
+    try
       !mkdir -p node_modules/.bin
       !touch node_modules/.bin/cucumber-js
 

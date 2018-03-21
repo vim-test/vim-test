@@ -357,6 +357,11 @@ If [projectionist.vim] is present, you can run a test command from an
 application file, and test.vim will automatically try to run the
 command on the "alternate" test file.
 
+You can disable this integration by doing
+```vim
+let g:test_no_alternate = 1
+```
+
 ## Extending
 
 If you wish to extend this plugin with your own test runners, first of all,

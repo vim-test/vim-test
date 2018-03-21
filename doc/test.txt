@@ -428,6 +428,10 @@ If the |projectionist| plug-in is present, you can run a test command from an
 application file, and test.vim will automatically try to run the
 command on the "alternate" test file.
 
+You can disable this integration by doing
+>
+  let g:test_no_alternate = 1
+<
 ABOUT                                           *test-about*
 
 You can get the latest version, see the changelog, or report a bug on GitHub:

@@ -127,7 +127,7 @@ function! test#test_file(file) abort
 endfunction
 
 function! s:alternate_file() abort
-  if get(g:, 'test_no_alternate') | return '' | endif
+  if get(g:, 'test#no_alternate') | return '' | endif
   let alternate_file = ''
 
   if empty(alternate_file) && exists('g:loaded_projectionist')

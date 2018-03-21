@@ -359,7 +359,7 @@ command on the "alternate" test file.
 
 You can disable this integration by doing
 ```vim
-let g:test_no_alternate = 1
+let g:test#no_alternate = 1
 ```
 
 ## Extending

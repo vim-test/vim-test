@@ -19,27 +19,27 @@ of tests from the command-line. Concrete test runners are then simply plugged
 in, so they all work in the same unified way. Currently the following test
 runners are supported:
 
-| Language       | Test Runners                                                     | Identifiers                                                                       |
-| -------------: | :--------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
-| **C#**         | .NET                                                             | `xunit`, `dotnettest`                                                             |
-| **Clojure**    | Fireplace.vim                                                    | `fireplacetest`                                                                   |
-| **Crystal**    | Crystal                                                          | `crystalspec`                                                                     |
-| **Elixir**     | ESpec, ExUnit                                                    | `espec`, `exunit`                                                                 |
-| **Elm**        | elm-test                                                         | `elmtest`                                                                         |
-| **Erlang**     | CommonTest                                                       | `commontest`                                                                      |
-| **Go**         | Ginkgo, Go                                                       | `ginkgo`, `gotest`                                                                |
-| **Java**       | Maven                                                            | `maventest`                                                                       |
-| **JavaScript** | Ava, Intern, Jasmine, Jest, Karma, Lab, Mocha, TAP, WebdriverIO  | `ava`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `tap`, `webdriverio` |
-| **Lua**        | Busted                                                           | `busted`                                                                          |
-| **PHP**        | Behat, Codeception, Kahlan, Peridot, PHPUnit, PHPSpec, Dusk      | `behat`, `codeception`, `dusk`, `kahlan`, `peridot`, `phpunit`, `phpspec`         |
-| **Perl**       | Prove                                                            | `prove`                                                                           |
-| **Python**     | Django, Nose, Nose2, PyTest, PyUnit                              | `djangotest`, `djangonose` `nose`, `nose2`, `pytest`, `pyunit`                    |
-| **Racket**     | RackUnit                                                         | `rackunit`                                                                        |
-| **Ruby**       | Cucumber, [M], [Minitest][minitest], Rails, RSpec                | `cucumber`, `m`, `minitest`, `rails`, `rspec`                                     |
-| **Rust**       | Cargo                                                            | `cargotest`                                                                       |
-| **Shell**      | Bats                                                             | `bats`                                                                            |
-| **Swift**      | Swift Package Manager                                            | `swiftpm`                                                                         |
-| **VimScript**  | Vader.vim, VSpec, Themis                                         | `vader`, `vspec`, `themis`                                                        |
+| Language       | Test Runners                                                                  | Identifiers                                                                                     |
+| -------------: | :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
+| **C#**         | .NET                                                                          | `xunit`, `dotnettest`                                                                           |
+| **Clojure**    | Fireplace.vim                                                                 | `fireplacetest`                                                                                 |
+| **Crystal**    | Crystal                                                                       | `crystalspec`                                                                                   |
+| **Elixir**     | ESpec, ExUnit                                                                 | `espec`, `exunit`                                                                               |
+| **Elm**        | elm-test                                                                      | `elmtest`                                                                                       |
+| **Erlang**     | CommonTest                                                                    | `commontest`                                                                                    |
+| **Go**         | Ginkgo, Go                                                                    | `ginkgo`, `gotest`                                                                              |
+| **Java**       | Maven                                                                         | `maventest`                                                                                     |
+| **JavaScript** | Ava, Cucumber.js, Intern, Jasmine, Jest, Karma, Lab, Mocha, TAP, WebdriverIO  | `ava`, `cucumberjs`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `tap`, `webdriverio` |
+| **Lua**        | Busted                                                                        | `busted`                                                                                        |
+| **PHP**        | Behat, Codeception, Kahlan, Peridot, PHPUnit, PHPSpec, Dusk                   | `behat`, `codeception`, `dusk`, `kahlan`, `peridot`, `phpunit`, `phpspec`                       |
+| **Perl**       | Prove                                                                         | `prove`                                                                                         |
+| **Python**     | Django, Nose, Nose2, PyTest, PyUnit                                           | `djangotest`, `djangonose` `nose`, `nose2`, `pytest`, `pyunit`                                  |
+| **Racket**     | RackUnit                                                                      | `rackunit`                                                                                      |
+| **Ruby**       | Cucumber, [M], [Minitest][minitest], Rails, RSpec                             | `cucumber`, `m`, `minitest`, `rails`, `rspec`                                                   |
+| **Rust**       | Cargo                                                                         | `cargotest`                                                                                     |
+| **Shell**      | Bats                                                                          | `bats`                                                                                          |
+| **Swift**      | Swift Package Manager                                                         | `swiftpm`                                                                                       |
+| **VimScript**  | Vader.vim, VSpec, Themis                                                      | `vader`, `vspec`, `themis`                                                                      |
 
 ## Setup
 

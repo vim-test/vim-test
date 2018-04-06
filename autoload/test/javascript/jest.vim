@@ -11,7 +11,7 @@ function! test#javascript#jest#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      let name = '-t '.shellescape(name, 1)
+      let name = '--no-coverage -t '.shellescape(name, 1)
     endif
     return [name, '--', a:position['file']]
   elseif a:type ==# 'file'

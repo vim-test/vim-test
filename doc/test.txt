@@ -228,23 +228,18 @@ Runs test commands with `:!`, which switches your Vim to the Terminal.
 <
 Make ~
 
-Runs test commands with `:make`. If Dispatch.vim plugin is available, it will
-be used to automatically find the correct compiler for the command.
+Runs test commands with `:make` or `:make!`. If Dispatch.vim plugin is
+available, it will be used to automatically find the correct compiler for the
+command.
 >
-  let test#strategy = 'make'
-<
-Make! ~
-
-Runs test commands with `:make!`. If Dispatch.vim plugin is available, it will
-be used to automatically find the correct compiler for the command.
->
-  let test#strategy = 'make_bang'
+  let test#strategy = 'make' " or 'make_bang'
 <
 Dispatch ~
 
-Runs test commands with `:Dispatch`. Requires the Dispatch.vim plugin.
+Runs test commands with `:Dispatch` or `:Dispatch!`. Requires the Dispatch.vim
+plugin.
 >
-  let test#strategy = 'dispatch'
+  let test#strategy = 'dispatch' " or 'dispatch_background'
 <
 VimProc ~
 

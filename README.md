@@ -81,8 +81,7 @@ let test#strategy = "dispatch"
 | Strategy                        | Identifier                       | Description                                                                      |
 | :-----:                         | :-----:                          | :----------                                                                      |
 | **Basic**&nbsp;(default)        | `basic`                          | Runs test commands with `:!` on Vim, and with `:terminal` on Neovim.             |
-| **Make**                        | `make`                           | Runs test commands with `:make`.                                                 |
-| **Make!**                       | `make_bang`                      | Runs test commands with `:make!`.                                                 |
+| **Make**                        | `make` `make_bang`               | Runs test commands with `:make` or `:make!`.                                     |
 | **Neovim**                      | `neovim`                         | Runs test commands with `:terminal` in a split window.                           |
 | **Vim8 Terminal**               | `vimterminal`                    | Runs test commands with `term_start()` in a split window.                        |
 | **[Dispatch]**                  | `dispatch` `dispatch_background` | Runs test commands with `:Dispatch` or `:Dispatch!`.                             |

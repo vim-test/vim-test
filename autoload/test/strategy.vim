@@ -16,6 +16,10 @@ function! test#strategy#basic(cmd) abort
   end
 endfunction
 
+function! test#strategy#make_bang(cmd) abort
+  call s:execute_with_compiler(a:cmd, 'make!')
+endfunction
+
 function! test#strategy#make(cmd) abort
   call s:execute_with_compiler(a:cmd, 'make')
 endfunction

@@ -12,27 +12,29 @@ function! s:extend(source, dict) abort
 endfunction
 
 let g:test#runners = get(g:, 'test#runners', {})
-call s:extend(g:test#runners, {
-  \ 'Ruby':       ['Rails', 'M', 'Minitest', 'RSpec', 'Cucumber'],
-  \ 'JavaScript': ['Ava', 'CucumberJS', 'Intern', 'TAP', 'Karma', 'Lab', 'Mocha', 'Jasmine', 'Jest', 'WebdriverIO'],
-  \ 'Python':     ['DjangoTest', 'PyTest', 'PyUnit', 'Nose', 'Nose2'],
-  \ 'Elixir':     ['ExUnit', 'ESpec'],
-  \ 'Elm':        ['ElmTest'],
-  \ 'Erlang':     ['CommonTest'],
-  \ 'Go':         ['GoTest', 'Ginkgo'],
-  \ 'Rust':       ['CargoTest'],
-  \ 'Clojure':    ['FireplaceTest'],
-  \ 'CSharp':     ['Xunit', 'DotnetTest'],
-  \ 'Shell':      ['Bats'],
-  \ 'Swift':      ['SwiftPM'],
-  \ 'VimL':       ['Themis', 'VSpec', 'Vader'],
-  \ 'Lua':        ['Busted'],
-  \ 'PHP':        ['Codeception', 'Dusk', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
-  \ 'Perl':       ['Prove'],
-  \ 'Racket':     ['RackUnit'],
-  \ 'Java':       ['MavenTest'],
-  \ 'Crystal':    ['CrystalSpec'],
-\})
+if get(g:, 'test#merge_default_runners', 1)
+  call s:extend(g:test#runners, {
+    \ 'Ruby':       ['Rails', 'M', 'Minitest', 'RSpec', 'Cucumber'],
+    \ 'JavaScript': ['Ava', 'CucumberJS', 'Intern', 'TAP', 'Karma', 'Lab', 'Mocha', 'Jasmine', 'Jest', 'WebdriverIO'],
+    \ 'Python':     ['DjangoTest', 'PyTest', 'PyUnit', 'Nose', 'Nose2'],
+    \ 'Elixir':     ['ExUnit', 'ESpec'],
+    \ 'Elm':        ['ElmTest'],
+    \ 'Erlang':     ['CommonTest'],
+    \ 'Go':         ['GoTest', 'Ginkgo'],
+    \ 'Rust':       ['CargoTest'],
+    \ 'Clojure':    ['FireplaceTest'],
+    \ 'CSharp':     ['Xunit', 'DotnetTest'],
+    \ 'Shell':      ['Bats'],
+    \ 'Swift':      ['SwiftPM'],
+    \ 'VimL':       ['Themis', 'VSpec', 'Vader'],
+    \ 'Lua':        ['Busted'],
+    \ 'PHP':        ['Codeception', 'Dusk', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
+    \ 'Perl':       ['Prove'],
+    \ 'Racket':     ['RackUnit'],
+    \ 'Java':       ['MavenTest'],
+    \ 'Crystal':    ['CrystalSpec'],
+  \})
+endif
 
 let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})
 let g:test#custom_transformations = get(g:, 'test#custom_transformations', {})

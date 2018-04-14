@@ -330,6 +330,12 @@ If binstubs are detected, but you don't want to use them, you can turn them off:
 let test#ruby#use_binstubs = 0
 ```
 
+If your binstubs are not instrumented with spring, you can turn on using the `spring` bin (`bin/spring`) directly using:
+
+```vim
+let test#ruby#use_spring_binstub = 1
+```
+
 #### JavaScript
 
 Test runner detection for JavaScript works by checking which runner is listed in the package.json dependencies. If you have globally installed the runner make sure it's also listed in the dependencies.

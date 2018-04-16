@@ -11,9 +11,56 @@ function! s:extend(source, dict) abort
   endfor
 endfunction
 
+let g:runner_heuristics = {
+  \  "bin/rspec" : {
+  \    "spec/*_spec.rb" : {
+  \      "runner" : "bin/rspec"
+  \    },
+  \  },
+  \  ".zeus.sock" : {
+  \    "spec/*_spec.rb" : {
+  \      "runner" : "zeus rspec"
+  \    },
+  \  },
+  \  "Gemfile" : {
+  \    "spec/*_spec.rb" : {
+  \      "runner" : "bundle exec rspec"
+  \    },
+  \  },
+  \  "!bin/rspec&!.zeus.sock&!Gemfile" : {
+  \    "spec/*_spec.rb" : {
+  \      "runner" : "rspec"
+  \    },
+  \  }
+  \}
+
+function! s:has(root, file) abort
+  let file = matchstr(a:file, '[^!].*')
+  if file =~# '\*'
+    let found = !empty(glob(a:root . '/' . file))
+  elseif file =~# '/$'
+    let found = isdirectory(a:root . '/' . file)
+  else
+    let found = filereadable(a:root . '/' . file)
+  endif
+  return a:file =~# '^!' ? !found : found
+endfunction
+
+autocmd User ProjectionistDetect
+  \  let root = getcwd() |
+  \  for [key, value] in items(g:runner_heuristics) |
+  \    for test in split(key, '|') |
+  \      if empty(filter(split(test, '&'), '!s:has(root, v:val)')) |
+  \        call projectionist#append(root, value) |
+  \        break |
+  \      endif |
+  \    endfor |
+  \  endfor
+
 let g:test#runners = get(g:, 'test#runners', {})
 call s:extend(g:test#runners, {
-  \ 'Ruby':       ['Rails', 'M', 'Minitest', 'RSpec', 'Cucumber'],
+  \ 'Generic':    ['Projectionist'],
+  \ 'Ruby':       ['Rails', 'M', 'Minitest', 'Cucumber'],
   \ 'JavaScript': ['Ava', 'CucumberJS', 'Intern', 'TAP', 'Karma', 'Lab', 'Mocha', 'Jasmine', 'Jest', 'WebdriverIO'],
   \ 'Python':     ['DjangoTest', 'PyTest', 'PyUnit', 'Nose', 'Nose2'],
   \ 'Elixir':     ['ExUnit', 'ESpec'],

@@ -419,6 +419,12 @@ You can instruct test.vim to generate absolute file paths:
   let test#filename_modifier = ':~' " ~/Code/my_project/test/models/user_test.rb
 <
 
+You can disable all default runners using:
+
+>
+let test#merge_default_runners = 0
+<
+
 Test.vim relies on you being cd-ed into the project root. However, sometimes
 you may want to execute tests from a different directory than the current
 working directory. You might have a bigger project with many sub-projects,

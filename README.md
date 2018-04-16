@@ -382,6 +382,13 @@ First, add your runner to the list in your `.vimrc`:
 let test#runners = {'MyLanguage': ['MyRunner']}
 ```
 
+Your runner will then be included in the list of runners. To use only your
+runner (excluding all default runners), set this option:
+
+```vim
+let test#merge_default_runners = 0
+```
+
 Second, create `~/.vim/autoload/test/mylanguage/myrunner.vim`, and define the following
 methods:
 

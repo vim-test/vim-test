@@ -177,22 +177,6 @@ let g:test#custom_strategies = {'echo': function('EchoStrategy')}
 let g:test#strategy = 'echo'
 ```
 
-## Transformations
-
-You can automatically apply transformations of your test commands by
-registering a "transformation" function. The following example demonstrates how
-you could set up a transformation for Vagrant:
-
-```vim
-function! VagrantTransform(cmd) abort
-  let vagrant_project = get(matchlist(s:cat('Vagrantfile'), '\vconfig\.vm.synced_folder ["''].+[''"], ["''](.+)[''"]'), 1)
-  return 'vagrant ssh --command '.shellescape('cd '.vagrant_project.'; '.a:cmd)
-endfunction
-
-let g:test#custom_transformations = {'vagrant': function('VagrantTransform')}
-let g:test#transformation = 'vagrant'
-```
-
 ## Commands
 
 <img alt="nearest polyfill" src="https://github.com/janko-m/vim-test/blob/master/screenshots/nearest.gif" width=770 height=323>
@@ -207,26 +191,6 @@ You can execute test.vim commands directly, and pass them CLI options:
 ```
 
 If you want some options to stick around, see [Configuring](#configuring).
-
-### Runner commands
-
-Aside from the main commands, you get a corresponding Vim command for each
-test runner (which also accept options):
-
-```
-:RSpec --tag ~slow
-:Mocha --grep 'API'
-:ExUnit --trace
-:Nose --failed
-```
-
-These commands are useful when using multiple testing frameworks in the same
-project, or as a wrapper around your executable. To avoid pollution they are
-not defined by default, instead you can choose the ones you want:
-
-```vim
-let g:test#runner_commands = ['Minitest', 'Mocha']
-```
 
 ## Configuring
 

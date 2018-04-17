@@ -30,7 +30,7 @@ describe "Prove"
 
   it "recurses into directories"
     view t/math_test.t
-    Prove t/
+    TestSuite t/
 
     Expect g:test#last_command == 'prove -l --recurse t/'
   end

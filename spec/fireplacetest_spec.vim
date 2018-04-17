@@ -55,10 +55,4 @@ describe "FireplaceTest"
     Expect g:test#last_command =~# ':0RunTests'
   end
 
-  it "passes arguments of raw command to :RunTests"
-    FireplaceTest foo bar
-
-    Expect g:test#last_command =~# ':RunTests foo bar'
-  end
-
 end

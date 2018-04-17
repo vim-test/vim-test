@@ -146,19 +146,19 @@ describe "Minitest"
 
   it "runs folders recursively"
     view unit_test.rb
-    Minitest .
+    TestSuite .
 
     Expect g:test#last_command == 'rake test TEST="**/*_test.rb"'
   end
 
   it "switches to reliable option passing"
     view unit_test.rb
-    Minitest --name /some_regex/
+    TestSuite --name /some_regex/
 
     Expect g:test#last_command == 'rake test TEST="test/**/*_test.rb" TESTOPTS="--name=''/some_regex/''"'
 
     view unit_test.rb
-    Minitest --seed 1234
+    TestSuite --seed 1234
 
     Expect g:test#last_command == 'rake test TEST="test/**/*_test.rb" TESTOPTS="--seed=''1234''"'
   end

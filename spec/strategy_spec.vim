@@ -3,24 +3,29 @@ source spec/support/helpers.vim
 describe "strategy"
   before
     source spec/support/test/strategy.vim
+    cd spec/fixtures/rspec-other
   end
 
   after
     call Teardown()
+    cd -
     unlet! g:test#strategy
     let g:test#custom_strategies = {}
   end
 
   it "defaults to basic"
-    RSpec
+    view spec/normal_spec.rb
+
+    TestFile
 
     Expect g:test#last_strategy == 'basic'
   end
 
   it "can be set via test#strategy as built-in"
     let g:test#strategy = 'neovim'
+    view spec/normal_spec.rb
 
-    RSpec
+    TestFile
 
     Expect g:test#last_strategy == 'neovim'
   end
@@ -30,8 +35,9 @@ describe "strategy"
     endfunction
     let g:test#custom_strategies = {'custom': function('CustomStrategy')}
     let g:test#strategy = 'custom'
+    view spec/normal_spec.rb
 
-    RSpec
+    TestFile
 
     Expect g:test#last_strategy == 'custom'
   end
@@ -39,25 +45,26 @@ describe "strategy"
   it "can be set per command"
     let g:test#strategy = 'foo'
 
-    RSpec -strategy=neovim
+    view spec/normal_spec.rb
+    TestSuite -strategy=neovim
 
     Expect g:test#last_strategy == 'neovim'
     Expect g:test#last_command == 'rspec'
 
-    edit foo_spec.rb
+    view spec/normal_spec.rb
     TestFile -strategy=dispatch
 
     Expect g:test#last_strategy == 'dispatch'
-    Expect g:test#last_command == 'rspec foo_spec.rb'
+    Expect g:test#last_command == 'rspec spec/normal_spec.rb'
 
     TestLast -strategy=basic
 
     Expect g:test#last_strategy == 'basic'
-    Expect g:test#last_command == 'rspec foo_spec.rb'
+    Expect g:test#last_command == 'rspec spec/normal_spec.rb'
   end
 
   it "remembers strategy passed when running last test"
-    edit foo_spec.rb
+    view spec/normal_spec.rb
     TestNearest
 
     TestLast -strategy=neovim
@@ -73,7 +80,7 @@ describe "strategy"
   it "can be set for different granularities"
     let g:test#strategy = {'nearest': 'neovim', 'suite': 'dispatch'}
 
-    edit foo_spec.rb
+    view spec/normal_spec.rb
 
     TestNearest
     Expect g:test#last_strategy == 'neovim'
@@ -83,18 +90,5 @@ describe "strategy"
 
     TestSuite
     Expect g:test#last_strategy == 'dispatch'
-  end
-
-  it "switches to VimScript regardless of the value"
-    function! test#strategy#vimscript(cmd)
-      let g:vimscript_called = 1
-    endfunction
-    let g:test#strategy = 'neovim'
-
-    FireplaceTest
-
-    Expect g:vimscript_called == 1
-
-    unlet g:vimscript_called
   end
 end

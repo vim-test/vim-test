@@ -82,26 +82,12 @@ call s:extend(g:test#runners, {
 \})
 
 let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})
-let g:test#custom_transformations = get(g:, 'test#custom_transformations', {})
-let g:test#runner_commands = get(g:, 'test#runner_commands', [])
 
 command! -nargs=* -bar TestNearest call test#run('nearest', split(<q-args>))
 command! -nargs=* -bar TestFile    call test#run('file', split(<q-args>))
 command! -nargs=* -bar TestSuite   call test#run('suite', split(<q-args>))
 command! -nargs=* -bar TestLast    call test#run_last(split(<q-args>))
 command!          -bar TestVisit   call test#visit()
-
-for [s:language, s:runners] in items(g:test#runners)
-  for s:runner in s:runners
-    if index(g:test#runner_commands, s:runner) != -1
-      if exists(':'.s:runner) | continue | endif
-      let s:runner_id = tolower(s:language).'#'.tolower(s:runner)
-      execute 'command! -bar -nargs=* -complete=file'
-            \ s:runner
-            \ 'call test#execute("'.s:runner_id.'", split(<q-args>))'
-    endif
-  endfor
-endfor
 
 if &autochdir
   let g:test#project_root = getcwd()

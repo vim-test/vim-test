@@ -363,20 +363,6 @@ If none of the built-in strategies suit your needs, you can define your own:
   let g:test#strategy = 'echo'
 <
 
-TRANSFORMATIONS                                 *test-transformations*
-
-You can automatically apply transformations of your test commands by
-registering a "transformation" function:
->
-  function! VagrantTransform(cmd) abort
-    let vagrant_project = get(matchlist(s:cat('Vagrantfile'), '\vconfig\.vm.synced_folder ["''].+[''"], ["''](.+)[''"]'), 1)
-    return 'vagrant ssh --command '.shellescape('cd '.vagrant_project.'; '.a:cmd)
-  endfunction
-
-  let g:test#custom_transformations = {'vagrant': function('VagrantTransform')}
-  let g:test#transformation = 'vagrant'
-<
-
 CONFIGURATION                                   *test-configuration*
 
 You can set up strategies per granularity:

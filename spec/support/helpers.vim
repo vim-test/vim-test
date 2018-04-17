@@ -1,5 +1,3 @@
-let g:test#runner_commands = ['RSpec', 'Minitest', 'FireplaceTest', 'Prove']
-
 runtime! plugin/projectionist.vim
 source plugin/test.vim
 source spec/support/test/strategy.vim

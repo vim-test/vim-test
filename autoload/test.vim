@@ -94,10 +94,6 @@ function! test#shell(cmd, strategy) abort
 
   let cmd = a:cmd
 
-  if has_key(g:, 'test#transformation')
-    let cmd = g:test#custom_transformations[g:test#transformation](cmd)
-  endif
-
   if cmd =~# '^:'
     let strategy = 'vimscript'
   else

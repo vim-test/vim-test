@@ -401,6 +401,19 @@ function! test#mylanguage#myrunner#executable()
 
 See [`autoload/test`](/autoload/test) for examples.
 
+## Choosing which runners to load
+
+All runners are loaded by default. To select which runners to load, set this
+option:
+
+```vim
+let test#enabled_runners = ["mylanguage#myrunner", "ruby#rspec"]
+```
+
+All other runners will not be loaded.
+
+Note that for your own custom runners, you still need to set `test#runners`.
+
 ## Running tests
 
 Tests are run using a Ruby test runner, so you'll have to have Ruby installed.

@@ -56,8 +56,22 @@ function! test#strategy#neovim(cmd) abort
 endfunction
 
 function! test#strategy#vimterminal(cmd) abort
-  botright new
-  call term_start(['/bin/sh', '-c', a:cmd], {'curwin':1})
+  if exists("g:test#vimterminal_persist_session") && g:test#vimterminal_persist_session
+    if !exists("g:test#vimterminal_shell")
+      let g:test#vimterminal_shell = &shell
+    endif
+
+    if !exists("g:test#vimterminal_buffer") || !bufexists(g:test#vimterminal_buffer)
+      let g:test#vimterminal_buffer =
+            \ term_start(g:test#vimterminal_shell, {'term_finish': 'close'})
+      wincmd p
+    endif
+
+    call term_sendkeys(g:test#vimterminal_buffer, a:cmd . "\<cr>")
+  else
+    botright new
+    call term_start(['/bin/sh', '-c', a:cmd], {'curwin':1})
+  endif
 endfunction
 
 function! test#strategy#neoterm(cmd) abort

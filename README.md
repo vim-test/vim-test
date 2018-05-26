@@ -352,7 +352,7 @@ alternate application file is saved:
 augroup test
   autocmd!
   autocmd BufWrite * if test#exists() |
-    \   TestFile
+    \   TestFile |
     \ endif
 augroup END
 ```

@@ -427,7 +427,7 @@ let test#enabled_runners = ["mylanguage#myrunner", "ruby#rspec"]
 
 All other runners will not be loaded.
 
-Note that for your own custom runners, you still need to set `test#runners`.
+Note that for your own custom runners, you still need to set `test#custom_runners`.
 
 Test.vim relies on you being cd-ed into the project root. However, sometimes
 you may want to execute tests from a different directory than the current

@@ -5,14 +5,7 @@ let g:loaded_test = 1
 
 let g:test#plugin_path = expand('<sfile>:p:h:h')
 
-function! s:extend(source, dict) abort
-  for [key, value] in items(a:dict)
-    let a:source[key] = get(a:source, key, []) + value
-  endfor
-endfunction
-
-let g:test#runners = get(g:, 'test#runners', {})
-call s:extend(g:test#runners, {
+let g:test#default_runners = {
   \ 'Ruby':       ['Rails', 'M', 'Minitest', 'RSpec', 'Cucumber'],
   \ 'JavaScript': ['Ava', 'CucumberJS', 'Intern', 'TAP', 'Karma', 'Lab', 'Mocha', 'Jasmine', 'Jest', 'WebdriverIO'],
   \ 'Python':     ['DjangoTest', 'PyTest', 'PyUnit', 'Nose', 'Nose2'],
@@ -32,7 +25,7 @@ call s:extend(g:test#runners, {
   \ 'Racket':     ['RackUnit'],
   \ 'Java':       ['MavenTest'],
   \ 'Crystal':    ['CrystalSpec'],
-\})
+\}
 
 let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})
 let g:test#custom_transformations = get(g:, 'test#custom_transformations', {})
@@ -44,7 +37,7 @@ command! -nargs=* -bar TestSuite   call test#run('suite', split(<q-args>))
 command! -nargs=* -bar TestLast    call test#run_last(split(<q-args>))
 command!          -bar TestVisit   call test#visit()
 
-for [s:language, s:runners] in items(g:test#runners)
+for [s:language, s:runners] in items(test#get_runners())
   for s:runner in s:runners
     if index(g:test#runner_commands, s:runner) != -1
       if exists(':'.s:runner) | continue | endif

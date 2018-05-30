@@ -379,7 +379,7 @@ First, add your runner to the list in your `.vimrc`:
 
 ```vim
 " First letter of runner's name must be uppercase
-let test#runners = {'MyLanguage': ['MyRunner']}
+let test#custom_runners = {'MyLanguage': ['MyRunner']}
 ```
 
 Second, create `~/.vim/autoload/test/mylanguage/myrunner.vim`, and define the following
@@ -412,7 +412,7 @@ let test#enabled_runners = ["mylanguage#myrunner", "ruby#rspec"]
 
 All other runners will not be loaded.
 
-Note that for your own custom runners, you still need to set `test#runners`.
+Note that for your own custom runners, you still need to set `test#custom_runners`.
 
 ## Running tests
 

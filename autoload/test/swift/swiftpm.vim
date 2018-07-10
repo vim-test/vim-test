@@ -11,11 +11,11 @@ function! test#swift#swiftpm#build_position(type, position) abort
     let l:module = s:parse_module_info(a:position)
     let l:testcase = s:parse_case_info(a:position)
     let l:nearest = s:parse_nearest_test_info(a:position)
-    return ['--specifier', l:module . '.' . l:testcase . '/' . l:nearest]
+    return ['--filter', l:module . '.' . l:testcase . '/' . l:nearest]
   elseif a:type ==# 'file'
     let l:module = s:parse_module_info(a:position)
     let l:testcase = s:parse_case_info(a:position)
-    return ['--specifier', l:module . '.' . l:testcase]
+    return ['--filter', l:module . '.' . l:testcase]
   else
     return []
   endif

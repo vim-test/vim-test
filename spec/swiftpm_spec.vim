@@ -42,4 +42,11 @@ describe "SwiftPM"
     Expect g:test#last_command == 'swift test --filter VimTestTests.VimTestFinalTests'
   end
 
+  it "recognizes test cases in the root of the test directory"
+    view Tests/VimTestRootTests.swift
+    TestFile
+
+    Expect g:test#last_command == 'swift test --filter VimTestRootTests.VimTestRootTests'
+  end
+
 end

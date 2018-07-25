@@ -55,6 +55,13 @@ function! test#strategy#neovim(cmd) abort
   startinsert
 endfunction
 
+function! test#strategy#neovim_vertical(cmd) abort
+  vertical new
+  call termopen(a:cmd)
+  au BufDelete <buffer> wincmd p " switch back to last window
+  startinsert
+endfunction
+
 function! test#strategy#vimterminal(cmd) abort
   botright new
   call term_start(['/bin/sh', '-c', a:cmd], {'curwin':1})

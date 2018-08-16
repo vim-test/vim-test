@@ -120,6 +120,9 @@ disable this:
 let g:test#preserve_screen = 1
 ```
 
+The Vimux strategy will not clear the screen by default, but you can enable it
+by explicitly setting `test#preserve_screen` to `0`.
+
 On Neovim the "basic" and "neovim" strategies will run test commands using
 Neovim's terminal, and leave you in insert mode, so that you can just press
 "Enter" to close the terminal session and go back to editing. If you want to

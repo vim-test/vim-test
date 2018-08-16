@@ -14,14 +14,14 @@ function! test#scala#sbttest#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return ['"test:test-only *' . filename .' -- -z ' . name . '"']
+      return ['"testOnly *' . filename .' -- -z ' . name . '"']
     else
-      return ['"test:test-only *' . filename . '"']
+      return ['"testOnly *' . filename . '"']
     endif
   elseif a:type ==# 'file'
-    return ['"test:test-only *' . filename . '"']
+    return ['"testOnly *' . filename . '"']
   else
-    return []
+    return ['"test"']
   endif
 endfunction
 
@@ -35,5 +35,5 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#scala#patterns)
-  return escape(join(name['test'], ''), '"')
+  return escape(escape(join(name['test'], ""), '"'), "'")
 endfunction

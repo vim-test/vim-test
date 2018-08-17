@@ -57,14 +57,14 @@ describe "SBT"
     view +32 FixtureTestSuite.scala
     TestNearest
 
-    Expect g:test#last_command == "sbt \"testOnly *FixtureTestSuite \\\"Assert \'add\' works for Double and returns Double\\\""
+    Expect g:test#last_command == 'sbt "testOnly *FixtureTestSuite -- -z \"Assert '."\\'".'add'."\\'".' works for Double and returns Double\""'
   end
 
   it "runs a suite"
     view FixtureTestSuite.scala
     TestSuite
 
-    Expect g:test#last_command == 'sbt "test\"'
+    Expect g:test#last_command == 'sbt "test"'
   end
 
 end

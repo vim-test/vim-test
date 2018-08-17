@@ -37,6 +37,7 @@ runners are supported:
 | **Racket**     | RackUnit                                                                      | `rackunit`                                                                                      |
 | **Ruby**       | Cucumber, [M], [Minitest][minitest], Rails, RSpec                             | `cucumber`, `m`, `minitest`, `rails`, `rspec`                                                   |
 | **Rust**       | Cargo                                                                         | `cargotest`                                                                                     |
+| **Scala**      | SBT                                                                           | `sbttest`                                                                                       |
 | **Shell**      | Bats                                                                          | `bats`                                                                                          |
 | **Swift**      | Swift Package Manager                                                         | `swiftpm`                                                                                       |
 | **VimScript**  | Vader.vim, VSpec, Themis                                                      | `vader`, `vspec`, `themis`                                                                      |

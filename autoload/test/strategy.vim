@@ -49,7 +49,8 @@ function! test#strategy#vimproc(cmd) abort
 endfunction
 
 function! test#strategy#neovim(cmd) abort
-  botright new
+  let term_position = get(g:, 'test#neovim#term_position', 'botright')
+  execute term_position . ' new'
   call termopen(a:cmd)
   au BufDelete <buffer> wincmd p " switch back to last window
   startinsert

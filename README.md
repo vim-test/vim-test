@@ -252,6 +252,18 @@ let test#ruby#rspec#options = {
   \ 'suite':   '--tag ~slow',
 \}
 ```
+### Neovim terminal position
+
+You can easily configure position of Neovim's terminal split:
+
+```vim
+let test#neovim#term_position = "topleft"
+" or
+let test#neovim#term_position = "belowright"
+```
+
+For full list of variants see `:help opening-window`
+
 ### Executable
 
 You can instruct test.vim to use a custom executable for a test runner.

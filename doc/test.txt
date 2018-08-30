@@ -440,6 +440,12 @@ working directory for running tests:
 >
   let test#project_root = "/path/to/your/project"
 <
+
+You can easily configure position of Neovim's terminal split:
+>
+  let test#neovim#term_position = "topleft"
+<
+
 PROJECTIONIST INTEGRATION                       *test-projectionist*
 
 If the |projectionist| plug-in is present, you can run a test command from an

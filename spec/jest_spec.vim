@@ -86,14 +86,14 @@ describe "Jest"
     normal O
     TestNearest
 
-    Expect g:test#last_command == 'jest -- __tests__/normal-test.js'
+    Expect g:test#last_command == 'jest --no-coverage -- __tests__/normal-test.js'
   end
 
   it "runs file tests"
     view __tests__/normal-test.js
     TestFile
 
-    Expect g:test#last_command == 'jest -- __tests__/normal-test.js'
+    Expect g:test#last_command == 'jest --no-coverage -- __tests__/normal-test.js'
   end
 
   it "runs test suites"
@@ -107,7 +107,7 @@ describe "Jest"
     view outside-test.js
     TestFile
 
-    Expect g:test#last_command == 'jest -- outside-test.js'
+    Expect g:test#last_command == 'jest --no-coverage -- outside-test.js'
   end
 
 end

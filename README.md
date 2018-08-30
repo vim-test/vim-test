@@ -252,9 +252,11 @@ let test#ruby#rspec#options = {
   \ 'suite':   '--tag ~slow',
 \}
 ```
+
 ### Neovim terminal position
 
-You can easily configure position of Neovim's terminal split:
+The `neovim` strategy will open a split window on the bottom by default, but
+you can configure a different position:
 
 ```vim
 let test#neovim#term_position = "topleft"
@@ -262,7 +264,7 @@ let test#neovim#term_position = "topleft"
 let test#neovim#term_position = "belowright"
 ```
 
-For full list of variants see `:help opening-window`
+For full list of variants, see `:help opening-window`.
 
 ### Executable
 

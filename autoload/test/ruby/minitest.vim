@@ -56,7 +56,7 @@ endfunction
 
 function! s:build_ruby_args(path, args) abort
   if a:path =~# '*'
-    return ['-e '.shellescape('Dir["./'.a:path.'"].each &method(:require)')] + a:args
+    return ['-e', shellescape('Dir["./'.a:path.'"].each &method(:require)'), '--'] + a:args
   else
     return [a:path] + a:args
   endif

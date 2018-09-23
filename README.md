@@ -134,7 +134,7 @@ which is difficult to press, so I recommend mapping it to `CTRL-o`:
 ```vim
 if has('nvim')
   tmap <C-o> <C-\><C-n>
-end
+endif
 ```
 
 ### Quickfix Strategies

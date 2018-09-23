@@ -162,11 +162,3 @@ function! s:restorescreen() abort
     return !empty(&t_ti) || !empty(&t_te)
   endif
 endfunction
-
-function! s:cat(filename) abort
-  if s:Windows()
-    return system('type '.a:filename)
-  else
-    return system('cat '.a:filename)
-  endif
-endfunction

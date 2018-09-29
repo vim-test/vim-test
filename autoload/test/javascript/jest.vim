@@ -21,8 +21,14 @@ function! test#javascript#jest#build_position(type, position) abort
   endif
 endfunction
 
+let s:yarn_command = '\<yarn\>'
 function! test#javascript#jest#build_args(args) abort
-  return a:args
+  if exists('g:test#javascript#jest#executable')
+    \ && g:test#javascript#jest#executable =~# s:yarn_command
+    return filter(a:args, 'v:val != "--"')
+  else
+    return a:args
+  endif
 endfunction
 
 function! test#javascript#jest#executable() abort

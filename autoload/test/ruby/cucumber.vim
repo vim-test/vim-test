@@ -4,8 +4,17 @@ endif
 
 function! test#ruby#cucumber#test_file(file) abort
   if a:file =~# g:test#ruby#cucumber#file_pattern
-    return !empty(glob('features/**/*.rb'))
+    if <SID>has_ruby_children(expand('%:h'))
+      return 1
+    else
+      let l:featuresDir = finddir('features', getcwd() . '/**')
+      return <SID>has_ruby_children(l:featuresDir)
   endif
+  return 0
+endfunction
+
+function! s:has_ruby_children(dir) abort
+  return !empty(glob(a:dir . '/**/*.rb'))
 endfunction
 
 function! test#ruby#cucumber#build_position(type, position) abort

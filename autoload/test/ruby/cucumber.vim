@@ -9,6 +9,7 @@ function! test#ruby#cucumber#test_file(file) abort
     else
       let l:featuresDir = finddir('features', test#project_root() . '/**')
       return <SID>has_ruby_children(l:featuresDir)
+    endif
   endif
   return 0
 endfunction

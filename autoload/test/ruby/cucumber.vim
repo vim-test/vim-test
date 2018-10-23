@@ -7,7 +7,7 @@ function! test#ruby#cucumber#test_file(file) abort
     if <SID>has_ruby_children(expand('%:h'))
       return 1
     else
-      let l:featuresDir = finddir('features', getcwd() . '/**')
+      let l:featuresDir = finddir('features', test#project_root() . '/**')
       return <SID>has_ruby_children(l:featuresDir)
   endif
   return 0

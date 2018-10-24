@@ -41,6 +41,7 @@ function! s:get_import_path(filepath) abort
   let path = fnamemodify(a:filepath, ':.:r')
   " Replace the /'s in the file path with .'s
   let path = substitute(path, '\/', '.', 'g')
+  let path = substitute(path, '\\', '.', 'g')
   return path
 endfunction
 

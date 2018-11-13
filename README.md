@@ -28,7 +28,7 @@ runners are supported:
 | **Elm**        | elm-test                                                                      | `elmtest`                                                                                       |
 | **Erlang**     | CommonTest                                                                    | `commontest`                                                                                    |
 | **Go**         | Ginkgo, Go                                                                    | `ginkgo`, `gotest`                                                                              |
-| **Java**       | Maven                                                                         | `maventest`                                                                                     |
+| **Java**       | Maven, Gradle                                                                 | `maventest`, `gradletest`                                                                       |
 | **JavaScript** | Ava, Cucumber.js, Intern, Jasmine, Jest, Karma, Lab, Mocha, TAP, WebdriverIO  | `ava`, `cucumberjs`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `tap`, `webdriverio` |
 | **Lua**        | Busted                                                                        | `busted`                                                                                        |
 | **PHP**        | Behat, Codeception, Kahlan, Peridot, PHPUnit, PHPSpec, Dusk                   | `behat`, `codeception`, `dusk`, `kahlan`, `peridot`, `phpunit`, `phpspec`                       |
@@ -320,6 +320,14 @@ the first available will be chosen, but you can force a specific one:
 ``` vim
 let test#python#runner = 'pytest'
 " Runners available are 'pytest', 'nose', 'nose2', 'djangotest', 'djangonose' and Python's built-in 'unittest'
+```
+#### Java
+
+For the same reason as Python, runner detection works the same for Java. To
+force a specific runner:
+
+``` vim
+let test#java#runner = 'gradletest'
 ```
 
 #### Go

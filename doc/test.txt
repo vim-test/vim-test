@@ -203,6 +203,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:MavenTest*
 :MavenTest [args]            Uses the `mvn` `test` command.
 
+                                                *test-:GradleTest*
+:GradleTest [args]           Uses the `gradle` `test` command.
+
                                                 *test-:SbtTest*
 :SbtTest [args]            Uses the `sbt` `test/testOnly` command.
 

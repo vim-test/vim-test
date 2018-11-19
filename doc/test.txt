@@ -97,6 +97,12 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Lab*
 :Lab [args]                  Uses the `lab` command.
 
+                                                *test-:Jest*
+:Jest [args]                 Uses the `jest` command.
+
+                                                *test-:ReactScripts*
+:ReactScripts [args]         Uses the `react-scripts test` command.
+
                                                 *test-:Mocha*
 :Mocha [args]                Uses the `mocha` command.
 

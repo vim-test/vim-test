@@ -27,7 +27,7 @@ runners are supported:
 | **Elixir**     | ESpec, ExUnit                                                                               | `espec`, `exunit`                                                                                               |
 | **Elm**        | elm-test                                                                                    | `elmtest`                                                                                                       |
 | **Erlang**     | CommonTest                                                                                  | `commontest`                                                                                                    |
-| **Go**         | Ginkgo, Go                                                                                  | `ginkgo`, `gotest`                                                                                              |
+| **Go**         | Ginkgo, Go, Rich-Go                                                                         | `ginkgo`, `gotest`, `richgo`                                                                                    |
 | **Java**       | Maven, Gradle                                                                               | `maventest`, `gradletest`                                                                                       |
 | **JavaScript** | Ava, Cucumber.js, Intern, Jasmine, Jest, ReactScripts, Karma, Lab, Mocha, TAP, WebdriverIO  | `ava`, `cucumberjs`, `intern`, `jasmine`, `jest`, `reactscripts`, `karma`, `lab`, `mocha`, `tap`, `webdriverio` |
 | **Lua**        | Busted                                                                                      | `busted`                                                                                                        |
@@ -337,7 +337,7 @@ force a specific runner:
 
 ``` vim
 let test#go#runner = 'ginkgo'
-" Runners available are 'gotest', 'ginkgo'
+" Runners available are 'gotest', 'ginkgo', 'richgo'
 ```
 
 #### Ruby

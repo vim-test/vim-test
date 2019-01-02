@@ -57,7 +57,8 @@ function! test#strategy#neovim(cmd) abort
 endfunction
 
 function! test#strategy#vimterminal(cmd) abort
-  botright new
+  let term_position = get(g:, 'test#vim#term_position', 'botright')
+  execute term_position . ' new'
   call term_start(['/bin/sh', '-c', a:cmd], {'curwin': 1, 'term_name': a:cmd})
 endfunction
 

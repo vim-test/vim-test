@@ -452,11 +452,16 @@ working directory for running tests:
 >
   let test#project_root = "/path/to/your/project"
 <
-If you're using the neovim strategy, you can easily configure the position of
-the terminal split window (see `:help opening-window`):
+If you're using either the Vim8 Terminal or Neovim strategy, you can easily configure the position of
+the terminal split window (see `:help opening-window`) with:
+>
+  let test#vim#term_position = "topleft"
+<
+for vim and
 >
   let test#neovim#term_position = "topleft"
 <
+for neovim
 
 PROJECTIONIST INTEGRATION                       *test-projectionist*
 

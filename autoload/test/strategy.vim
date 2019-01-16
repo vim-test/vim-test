@@ -60,6 +60,7 @@ function! test#strategy#vimterminal(cmd) abort
   let term_position = get(g:, 'test#vim#term_position', 'botright')
   execute term_position . ' new'
   call term_start(['/bin/sh', '-c', a:cmd], {'curwin': 1, 'term_name': a:cmd})
+  au BufLeave <buffer> wincmd p
   nnoremap <buffer> <Enter> :q<CR>
   redraw
   echo "Press <Enter> to exit test runner terminal (<Ctrl-C> first if command is still running)"

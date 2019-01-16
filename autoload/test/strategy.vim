@@ -58,7 +58,7 @@ endfunction
 
 function! test#strategy#vimterminal(cmd) abort
   botright new
-  call term_start(['/bin/sh', '-c', a:cmd], {'curwin':1})
+  call term_start(['/bin/sh', '-c', a:cmd], {'curwin': 1, 'term_name': a:cmd})
 endfunction
 
 function! test#strategy#neoterm(cmd) abort

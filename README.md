@@ -253,15 +253,16 @@ let test#ruby#rspec#options = {
 \}
 ```
 
-### Neovim terminal position
+### Vim8 / Neovim terminal position
 
-The `neovim` strategy will open a split window on the bottom by default, but
+Both the `neovim` and `Vim8 Terminal` strategy will open a split window on the bottom by default, but
 you can configure a different position:
 
 ```vim
+" for neovim
 let test#neovim#term_position = "topleft"
-" or
-let test#neovim#term_position = "belowright"
+" or for Vim8
+let test#vim#term_position = "belowright"
 ```
 
 For full list of variants, see `:help opening-window`.

@@ -21,6 +21,16 @@ describe "Behat"
     TestNearest
 
     Expect g:test#last_command == 'behat normal.feature --name ''Addition'''
+
+    view +7 normal.feature
+    TestNearest
+
+    Expect g:test#last_command == 'behat normal.feature --name ''Substraction'''
+
+    view +11 normal.feature
+    TestNearest
+
+    Expect g:test#last_command == 'behat normal.feature --name ''Multiplication'''
   end
 
   it "runs file tests"

@@ -41,7 +41,7 @@ function! test#php#behat#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  let patterns = {'test': ['\vScenario: (.*)'], 'namespace': []}
+  let patterns = {'test': ['\vScenario%(\s*Outline)?: (.*)'], 'namespace': []}
   let name = test#base#nearest_test(a:position, patterns)
   return join(name['test'])
 endfunction

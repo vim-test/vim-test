@@ -69,6 +69,8 @@ function! test#strategy#vimterminal(cmd) abort
 
   nnoremap <buffer> <C-C> :q!<CR>
   tnoremap <buffer> <C-C> <C-W>N:q!<CR>
+
+  wincmd p
 endfunction
 
 function! test#strategy#vimterminal_close() abort

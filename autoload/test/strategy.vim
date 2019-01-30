@@ -57,13 +57,24 @@ function! test#strategy#neovim(cmd) abort
 endfunction
 
 function! test#strategy#vimterminal(cmd) abort
+  command! -bar TestClose call test#strategy#vimterminal_close()
+  call test#strategy#vimterminal_close()
+
   let term_position = get(g:, 'test#vim#term_position', 'botright')
   execute term_position . ' new'
-  call term_start(!s:Windows() ? ['/bin/sh', '-c', a:cmd] : ['cmd.exe', '/c', a:cmd], {'curwin': 1, 'term_name': a:cmd})
+
+  let g:test#vim#term_buffer = term_start(!s:Windows() ? ['/bin/sh', '-c', a:cmd] : ['cmd.exe', '/c', a:cmd], {'curwin': 1, 'term_name': a:cmd})
+
   au BufLeave <buffer> wincmd p
   nnoremap <buffer> <Enter> :q<CR>
   redraw
   echo "Press <Enter> to exit test runner terminal (<Ctrl-C> first if command is still running)"
+endfunction
+
+function! test#strategy#vimterminal_close() abort
+  if exists("g:test#vim#term_buffer") && bufwinnr(g:test#vim#term_buffer) != -1
+    execute g:test#vim#term_buffer . "bdelete!"
+  endif
 endfunction
 
 function! test#strategy#neoterm(cmd) abort

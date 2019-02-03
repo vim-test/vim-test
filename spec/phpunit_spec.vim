@@ -52,6 +52,18 @@ describe "PHPUnit"
     Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAnnotationAndCrazyDocblock' NormalTest.php"
   end
 
+  " it  "runs nearest test containing an anonymous class"
+  "   view +61 NormalTest.php
+  "   TestNearest
+
+  "   Expect g:test#last_command == "phpunit --colors --filter '::testWithAnAnonymousClass' NormalTest.php"
+
+  "   view +76 NormalTest.php
+  "   TestNearest
+
+  "   Expect g:test#last_command == "phpunit --colors --filter '::aTestMakedWithTestAnnotationAndWithAnAnonymousClass' NormalTest.php"
+  " end
+
   it "runs test suites"
     view NormalTest.php
     TestSuite

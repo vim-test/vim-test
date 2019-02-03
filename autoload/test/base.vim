@@ -97,7 +97,7 @@ function! test#base#nearest_test_in_lines(filename, from_line, to_line, patterns
   let current_line = a:from_line + 1
   let test_line    = -1
 
-  let is_reverse = '$' == a:from_line ? v:true : a:from_line > a:to_line
+  let is_reverse = '$' == a:from_line ? 1 : a:from_line > a:to_line
   let lines = is_reverse
     \ ? reverse(getbufline(a:filename, a:to_line, a:from_line))
     \ : getbufline(a:filename, a:from_line, a:to_line)

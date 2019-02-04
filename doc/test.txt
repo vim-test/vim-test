@@ -317,7 +317,6 @@ and Tmux
 >
   let test#strategy = 'vtr'
 <
-<
 VimShell ~
 
 Runs test commands in a shell written in VimScript. Requires the VimShell

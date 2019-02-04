@@ -435,9 +435,9 @@ You can instruct test.vim to generate absolute file paths:
 
 To select which runners to load, set this option:
 
-<
-  let test#enabled_runners = ["mylanguage#myrunner", "ruby#rspec"]
 >
+  let test#enabled_runners = ["mylanguage#myrunner", "ruby#rspec"]
+<
 
 All other runners will not be loaded.
 

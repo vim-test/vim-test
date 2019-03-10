@@ -59,7 +59,7 @@ endfunction
 function! test#strategy#vimterminal(cmd) abort
   let term_position = get(g:, 'test#vim#term_position', 'botright')
   execute term_position . ' new'
-  call term_start(['/bin/sh', '-c', a:cmd], {'curwin': 1, 'term_name': a:cmd})
+  call term_start(!s:Windows() ? ['/bin/sh', '-c', a:cmd] : ['cmd.exe', '/c', a:cmd], {'curwin': 1, 'term_name': a:cmd})
   au BufLeave <buffer> wincmd p
   nnoremap <buffer> <Enter> :q<CR>
   redraw

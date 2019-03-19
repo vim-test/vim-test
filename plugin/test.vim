@@ -7,12 +7,12 @@ let g:test#plugin_path = expand('<sfile>:p:h:h')
 
 let g:test#default_runners = {
   \ 'Ruby':       ['Rails', 'M', 'Minitest', 'RSpec', 'Cucumber'],
-  \ 'JavaScript': ['Ava', 'CucumberJS', 'Intern', 'TAP', 'Karma', 'Lab', 'Mocha', 'Jasmine', 'Jest', 'WebdriverIO'],
+  \ 'JavaScript': ['Ava', 'CucumberJS', 'Intern', 'TAP', 'Karma', 'Lab', 'Mocha', 'Jasmine', 'Jest', 'ReactScripts', 'WebdriverIO'],
   \ 'Python':     ['DjangoTest', 'PyTest', 'PyUnit', 'Nose', 'Nose2'],
   \ 'Elixir':     ['ExUnit', 'ESpec'],
   \ 'Elm':        ['ElmTest'],
   \ 'Erlang':     ['CommonTest'],
-  \ 'Go':         ['GoTest', 'Ginkgo'],
+  \ 'Go':         ['GoTest', 'Ginkgo', 'RichGo'],
   \ 'Rust':       ['CargoTest'],
   \ 'Clojure':    ['FireplaceTest'],
   \ 'CSharp':     ['Xunit', 'DotnetTest'],
@@ -23,7 +23,11 @@ let g:test#default_runners = {
   \ 'PHP':        ['Codeception', 'Dusk', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
   \ 'Perl':       ['Prove'],
   \ 'Racket':     ['RackUnit'],
+<<<<<<< HEAD
   \ 'Java':       ['MavenTest'],
+=======
+  \ 'Java':       ['MavenTest', 'GradleTest'],
+>>>>>>> d6ef5871ad7cbc73ee9b1bf1ff3a2b694aa3e3d4
   \ 'Scala':      ['SbtTest'],
   \ 'Crystal':    ['CrystalSpec'],
 \}

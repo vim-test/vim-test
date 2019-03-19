@@ -97,6 +97,12 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Lab*
 :Lab [args]                  Uses the `lab` command.
 
+                                                *test-:Jest*
+:Jest [args]                 Uses the `jest` command.
+
+                                                *test-:ReactScripts*
+:ReactScripts [args]         Uses the `react-scripts test` command.
+
                                                 *test-:Mocha*
 :Mocha [args]                Uses the `mocha` command.
 
@@ -147,6 +153,9 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:Ginkgo*
 :Ginkgo [args]               Uses the `ginkgo` command.
+
+                                                *test-:RichGo*
+:RichGo [args]               Uses the `richgo` `test` command.
 
                                                 *test-:CargoTest*
 :CargoTest [args]            Uses the `cargo` `test` command.
@@ -202,6 +211,9 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:MavenTest*
 :MavenTest [args]            Uses the `mvn` `test` command.
+
+                                                *test-:GradleTest*
+:GradleTest [args]           Uses the `gradle` `test` command.
 
                                                 *test-:SbtTest*
 :SbtTest [args]            Uses the `sbt` `test/testOnly` command.
@@ -305,7 +317,6 @@ and Tmux
 >
   let test#strategy = 'vtr'
 <
-<
 VimShell ~
 
 Runs test commands in a shell written in VimScript. Requires the VimShell
@@ -327,7 +338,7 @@ isn't that nice).
 
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 
-If you want your test results to appear in the |quickfix| window, use one of the 
+If you want your test results to appear in the |quickfix| window, use one of the
 following strategies:
 
   * Make
@@ -336,15 +347,15 @@ following strategies:
   * Dispatch.vim
 
 Regardless of which you pick, it's recommended you have Dispatch.vim installed as the
-strategies will automatically use it to determine the correct |compiler|, ensuring the 
+strategies will automatically use it to determine the correct |compiler|, ensuring the
 test output is correctly parsed for the quickfix window.
 
-As Dispatch.vim just determines the compiler, you need to make sure the Vim distribution 
-or a plugin has a corresponding compiler for your test runner, or you may need to 
+As Dispatch.vim just determines the compiler, you need to make sure the Vim distribution
+or a plugin has a corresponding compiler for your test runner, or you may need to
 |write-compiler-plugin|.
 
-If the test command prefix doesn't match the compiler's |makeprg| then use the 
-|g:dispatch_compilers| variable. For example if your test command was './vendor/bin/phpunit' 
+If the test command prefix doesn't match the compiler's |makeprg| then use the
+|g:dispatch_compilers| variable. For example if your test command was './vendor/bin/phpunit'
 but you wanted to use the phpunit2 compiler:
 
 >
@@ -424,9 +435,9 @@ You can instruct test.vim to generate absolute file paths:
 
 To select which runners to load, set this option:
 
-```vim
-let test#enabled_runners = ["mylanguage#myrunner", "ruby#rspec"]
-```
+>
+  let test#enabled_runners = ["mylanguage#myrunner", "ruby#rspec"]
+<
 
 All other runners will not be loaded.
 
@@ -440,6 +451,17 @@ working directory for running tests:
 >
   let test#project_root = "/path/to/your/project"
 <
+If you're using either the Vim8 Terminal or Neovim strategy, you can easily configure the position of
+the terminal split window (see `:help opening-window`) with:
+>
+  let test#vim#term_position = "topleft"
+<
+for vim and
+>
+  let test#neovim#term_position = "topleft"
+<
+for neovim
+
 PROJECTIONIST INTEGRATION                       *test-projectionist*
 
 If the |projectionist| plug-in is present, you can run a test command from an

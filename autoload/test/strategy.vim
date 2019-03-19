@@ -49,15 +49,21 @@ function! test#strategy#vimproc(cmd) abort
 endfunction
 
 function! test#strategy#neovim(cmd) abort
-  botright new
+  let term_position = get(g:, 'test#neovim#term_position', 'botright')
+  execute term_position . ' new'
   call termopen(a:cmd)
   au BufDelete <buffer> wincmd p " switch back to last window
   startinsert
 endfunction
 
 function! test#strategy#vimterminal(cmd) abort
-  botright new
-  call term_start(['/bin/sh', '-c', a:cmd], {'curwin':1})
+  let term_position = get(g:, 'test#vim#term_position', 'botright')
+  execute term_position . ' new'
+  call term_start(!s:Windows() ? ['/bin/sh', '-c', a:cmd] : ['cmd.exe', '/c', a:cmd], {'curwin': 1, 'term_name': a:cmd})
+  au BufLeave <buffer> wincmd p
+  nnoremap <buffer> <Enter> :q<CR>
+  redraw
+  echo "Press <Enter> to exit test runner terminal (<Ctrl-C> first if command is still running)"
 endfunction
 
 function! test#strategy#neoterm(cmd) abort
@@ -159,13 +165,5 @@ function! s:restorescreen() abort
     return &restorescreen
   else
     return !empty(&t_ti) || !empty(&t_te)
-  endif
-endfunction
-
-function! s:cat(filename) abort
-  if s:Windows()
-    return system('type '.a:filename)
-  else
-    return system('cat '.a:filename)
   endif
 endfunction

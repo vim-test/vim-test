@@ -1,0 +1,8 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "react-scripts": "^2.0.0"
+  }
+}

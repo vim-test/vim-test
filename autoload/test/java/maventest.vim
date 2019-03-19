@@ -4,7 +4,7 @@ endif
 
 function! test#java#maventest#test_file(file) abort
   return a:file =~? g:test#java#maventest#file_pattern
-    \ && !exists('g:test#java#runner')
+    \ && (!exists('g:test#java#runner') || g:test#java#runner ==# 'maventest')
 endfunction
 
 function! test#java#maventest#build_position(type, position) abort

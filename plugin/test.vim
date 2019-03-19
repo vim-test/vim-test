@@ -23,11 +23,7 @@ let g:test#default_runners = {
   \ 'PHP':        ['Codeception', 'Dusk', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
   \ 'Perl':       ['Prove'],
   \ 'Racket':     ['RackUnit'],
-<<<<<<< HEAD
-  \ 'Java':       ['MavenTest'],
-=======
   \ 'Java':       ['MavenTest', 'GradleTest'],
->>>>>>> d6ef5871ad7cbc73ee9b1bf1ff3a2b694aa3e3d4
   \ 'Scala':      ['SbtTest'],
   \ 'Crystal':    ['CrystalSpec'],
 \}

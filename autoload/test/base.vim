@@ -69,14 +69,41 @@ endfunction
 "
 "   {
 "     'test': ['test_calculates_time'],
+"     'test_line': 54, " Line where 'test_calculates_time' was found
 "     'namespace': ['CalculatorTest'],
 "   }
 function! test#base#nearest_test(position, patterns) abort
-  let test        = []
-  let namespace   = []
-  let last_indent = -1
+  return test#base#nearest_test_in_lines(a:position['file'], a:position['line'], 1, a:patterns)
+endfunction
 
-  for line in reverse(getbufline(a:position['file'], 1, a:position['line']))
+" This function is used internally by the test#base#nearest_test function
+" So it behaves exactly like describe for test#base#nearest_test except that
+" it can search forward or backward depending on the search range.
+"
+" Instead of taking a "position" argument, this function takes 3:
+"   - "filename" is the equivalent of "position['file']"
+"   - "from_line" the line number from where to start the search, is the
+"   equivalent fo "position['line']"
+"   - "to_line" the line number where to end the search (it would be 1 in
+"   test#base#nearest_test)
+"
+" If "from_line" is greater than "to_line" or equals '$' then the search will
+" be backward.
+" Otherwise it will be forward.
+function! test#base#nearest_test_in_lines(filename, from_line, to_line, patterns) abort
+  let test         = []
+  let namespace    = []
+  let last_indent  = -1
+  let current_line = a:from_line + 1
+  let test_line    = -1
+
+  let is_reverse = '$' == a:from_line ? 1 : a:from_line > a:to_line
+  let lines = is_reverse
+    \ ? reverse(getbufline(a:filename, a:to_line, a:from_line))
+    \ : getbufline(a:filename, a:from_line, a:to_line)
+
+  for line in lines
+    let current_line    = current_line + (is_reverse ? -1 : 1)
     let test_match      = s:find_match(line, a:patterns['test'])
     let namespace_match = s:find_match(line, a:patterns['namespace'])
 
@@ -84,13 +111,14 @@ function! test#base#nearest_test(position, patterns) abort
     if !empty(test_match) && last_indent == -1
       call add(test, filter(test_match[1:], '!empty(v:val)')[0])
       let last_indent = indent
+      let test_line   = current_line
     elseif !empty(namespace_match) && (indent < last_indent || last_indent == -1)
       call add(namespace, filter(namespace_match[1:], '!empty(v:val)')[0])
       let last_indent = indent
     endif
   endfor
 
-  return {'test': test, 'namespace': reverse(namespace)}
+  return {'test': test, 'test_line': test_line, 'namespace': reverse(namespace)}
 endfunction
 
 function! s:find_match(line, patterns) abort

@@ -51,4 +51,29 @@ class NormalTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(2, 4-21);
     }
+
+    public function testWithAnAnonymousClass()
+    {
+        $anonymousClass = new class() {
+            public function foo(): void
+            {
+            }
+        };
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @test
+     */
+    public function aTestMakedWithTestAnnotationAndWithAnAnonymousClass()
+    {
+        $anonymousClass = new class() {
+            public function foo(): void
+            {
+            }
+        };
+
+        $this->assertTrue(true);
+    }
 }

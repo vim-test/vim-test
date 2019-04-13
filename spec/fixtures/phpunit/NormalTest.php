@@ -76,4 +76,10 @@ class NormalTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(true);
     }
+
+    /** @test */
+    public function aTestMarkedWithTestAnnotationOnOneLine()
+    {
+        $this->assertEquals(2, 4-21);
+    }
 }

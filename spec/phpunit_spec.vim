@@ -52,17 +52,25 @@ describe "PHPUnit"
     Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAnnotationAndCrazyDocblock' NormalTest.php"
   end
 
-  " it  "runs nearest test containing an anonymous class"
-  "   view +61 NormalTest.php
-  "   TestNearest
+  it  "runs nearest test containing an anonymous class"
+    view +61 NormalTest.php
+    TestNearest
 
-  "   Expect g:test#last_command == "phpunit --colors --filter '::testWithAnAnonymousClass' NormalTest.php"
+    Expect g:test#last_command == "phpunit --colors --filter '::testWithAnAnonymousClass' NormalTest.php"
 
-  "   view +76 NormalTest.php
-  "   TestNearest
+    view +76 NormalTest.php
+    TestNearest
 
-  "   Expect g:test#last_command == "phpunit --colors --filter '::aTestMakedWithTestAnnotationAndWithAnAnonymousClass' NormalTest.php"
-  " end
+    Expect g:test#last_command == "phpunit --colors --filter '::aTestMakedWithTestAnnotationAndWithAnAnonymousClass' NormalTest.php"
+  end
+
+  " Fix for: https://github.com/janko/vim-test/issues/361
+  it "runs nearest test with a one line @test annotation"
+    view +83 NormalTest.php
+    TestNearest
+
+    Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAnnotationOnOneLine' NormalTest.php"
+  end
 
   it "runs test suites"
     view NormalTest.php

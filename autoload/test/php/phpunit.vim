@@ -3,10 +3,15 @@ if !exists('g:test#php#phpunit#file_pattern')
 endif
 
 if !exists('g:test#php#phpunit#test_patterns')
+  " Description for the tests:
+  " 1: Look for a public method which name starts with "test"
+  " 2: Look for a phpdoc tag "@test" (on a line by itself)
+  " 3: Look for a phpdoc block on one line containg the "@test" tag
   let g:test#php#phpunit#test_patterns = {
     \ 'test': [
       \ '\v^\s*public function (test\w+)\(',
-      \ '\v^\s*\*\s*(\@test)'
+      \ '\v^\s*\*\s*(\@test)',
+      \ '\v^\s*\/\*\*\s*(\@test)\s*\*\/',
     \],
     \ 'namespace': [],
   \}

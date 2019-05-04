@@ -8,6 +8,7 @@
     <name>sample_maven_project</name>
     <url>http://maven.apache.org</url>
     <dependencies>
+        <!-- Junit5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>

@@ -3,14 +3,15 @@ package org.vimtest.math;
 import org.vimtest.calc.Calculation;
 
 import junit.framework.TestCase;
+import junit.framework.Assert.*;
 
-public class MathTests extends TestCase {
+public class MathTest extends TestCase {
 
 	private int value1;
 
 	private int value2;
 
-	public MathTests(String testName) {
+	public MathTest(String testName) {
 		super(testName);
 	}
 

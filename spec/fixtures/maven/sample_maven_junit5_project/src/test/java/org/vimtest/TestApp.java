@@ -1,6 +1,6 @@
-package com.example.sample_maven_project;
+package org.vimtest;
 
-import com.example.sample_maven_project.App;
+import org.vimtest.App;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Assertions;

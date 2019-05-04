@@ -1,4 +1,4 @@
-package com.example.sample_maven_project;
+package org.vimtest;
 
 
 /**

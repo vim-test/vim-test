@@ -1,5 +1,5 @@
 if !exists('g:test#java#gradletest#file_pattern')
-  let g:test#java#gradletest#file_pattern = '\v^([Tt]est.*|.*[Tt]est(s|Case)?)\.java$'
+  let g:test#java#gradletest#file_pattern = '\v([Tt]est.*|.*[Tt]est(s|Case)?)\.java$'
 endif
 
 function! test#java#gradletest#test_file(file) abort

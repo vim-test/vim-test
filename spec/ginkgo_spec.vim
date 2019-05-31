@@ -19,6 +19,13 @@ describe "Ginkgo"
       Expect g:test#last_command == "ginkgo --focus='should paginate the result' ./."
     end
 
+    it "runs nearest tests identified by 'When'"
+      view +29 normal_test.go
+      TestNearest
+
+      Expect g:test#last_command == "ginkgo --focus='user is not logged in' ./."
+    end
+
     it "runs nearest tests identified by 'Context'"
       view +11 normal_test.go
       TestNearest

@@ -2,7 +2,7 @@ if !exists('g:test#go#ginkgo#file_pattern')
   let g:test#go#ginkgo#file_pattern = '\v[^_].*test\.go$'
 endif
 let test#go#ginkgo#patterns = {
-  \ 'test': ['\v^\s*It\("(.*)",', '\v^\s*Context\("(.*)",', '\v.*Describe\("(.*)",'],
+  \ 'test': ['\v^\s*It\("(.*)",', '\v^\s*When\("(.*)",', '\v^\s*Context\("(.*)",', '\v.*Describe\("(.*)",'],
   \ 'namespace': [],
 \}
 

@@ -322,6 +322,11 @@ the first available will be chosen, but you can force a specific one:
 let test#python#runner = 'pytest'
 " Runners available are 'pytest', 'nose', 'nose2', 'djangotest', 'djangonose' and Python's built-in 'unittest'
 ```
+
+The pytest runner optionally supports [pipenv](https://github.com/pypa/pipenv).
+If you have a `Pipfile`, it will use `pipenv run pytest` instead of just
+`pytest`.
+
 #### Java
 
 For the same reason as Python, runner detection works the same for Java. To

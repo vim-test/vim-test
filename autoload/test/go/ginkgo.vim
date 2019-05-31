@@ -2,7 +2,7 @@ if !exists('g:test#go#ginkgo#file_pattern')
   let g:test#go#ginkgo#file_pattern = '\v[^_].*test\.go$'
 endif
 let test#go#ginkgo#patterns = {
-  \ 'test': ['\v^\s*It\("(.*)",', '\v^\s*Context\("(.*)",', '\v.*Describe\("(.*)",'],
+  \ 'test': ['\v^\s*It\("(.*)",', '\v^\s*When\("(.*)",', '\v^\s*Context\("(.*)",', '\v.*Describe\("(.*)",'],
   \ 'namespace': [],
 \}
 
@@ -11,14 +11,14 @@ function! test#go#ginkgo#test_file(file) abort
 endfunction
 
 function! test#go#ginkgo#build_position(type, position) abort
+  let path = './'.fnamemodify(a:position['file'], ':h')
   if a:type ==# 'suite'
-    return ['./...']
+    return [path]
   else
-    let fileargs = ['--regexScansFilePath=true '.'--focus='.a:position['file']]
+    let fileargs = ['--regexScansFilePath=true '.'--focus='.a:position['file'], path]
     if a:type ==# 'file'
       return fileargs
     elseif a:type ==# 'nearest'
-      let path = './'.fnamemodify(a:position['file'], ':h')
       let name = s:nearest_test(a:position)
       " if no tests matched, run the test file
       return empty(name) ? fileargs : ['--focus='.shellescape(name, 1), path]

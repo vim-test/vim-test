@@ -26,4 +26,11 @@ var _ = Describe("posts API", func() {
 		})
 	})
 
+	When("user is not logged in", func() {
+
+		It("should deny access", func() {
+
+		})
+	})
+
 })

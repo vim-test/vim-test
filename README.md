@@ -2,12 +2,12 @@
 
 A Vim wrapper for running tests on different granularities.
 
-<img alt="usage overview" src="https://github.com/janko-m/vim-test/blob/master/screenshots/granularity.gif" width=770 height=503>
+<img alt="usage overview" src="https://github.com/janko/vim-test/blob/master/screenshots/granularity.gif" width=770 height=503>
 
 ## Features
 
 * Zero dependencies
-* Zero configuration required (it Does the Right Thing™, see [**Philosophy**](https://github.com/janko-m/vim-test/wiki))
+* Zero configuration required (it Does the Right Thing™, see [**Philosophy**](https://github.com/janko/vim-test/wiki))
 * Wide range of test runners which are automagically detected
 * **Polyfills** for nearest tests (by [constructing regexes](#commands))
 * Wide range of execution environments ("[strategies](#strategies)")
@@ -46,7 +46,7 @@ runners are supported:
 
 Using [vim-plug](https://github.com/junegunn/vim-plug), add
 ```vim
-Plug 'janko-m/vim-test'
+Plug 'janko/vim-test'
 ```
 to your `.vimrc` file (see vim-plug documentation for where), and run `:PlugInstall`.
 
@@ -199,7 +199,7 @@ let g:test#transformation = 'vagrant'
 
 ## Commands
 
-<img alt="nearest polyfill" src="https://github.com/janko-m/vim-test/blob/master/screenshots/nearest.gif" width=770 height=323>
+<img alt="nearest polyfill" src="https://github.com/janko/vim-test/blob/master/screenshots/nearest.gif" width=770 height=323>
 
 You can execute test.vim commands directly, and pass them CLI options:
 
@@ -322,6 +322,11 @@ the first available will be chosen, but you can force a specific one:
 let test#python#runner = 'pytest'
 " Runners available are 'pytest', 'nose', 'nose2', 'djangotest', 'djangonose' and Python's built-in 'unittest'
 ```
+
+The pytest runner optionally supports [pipenv](https://github.com/pypa/pipenv).
+If you have a `Pipfile`, it will use `pipenv run pytest` instead of just
+`pytest`.
+
 #### Java
 
 For the same reason as Python, runner detection works the same for Java. To
@@ -469,7 +474,7 @@ and Windows support. And also thanks to [vroom.vim].
 Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. See
 `:help license`.
 
-[minitest]: https://github.com/janko-m/vim-test/wiki/Minitest
+[minitest]: https://github.com/janko/vim-test/wiki/Minitest
 [Neoterm]: https://github.com/kassio/neoterm
 [Neomake]: https://github.com/neomake/neomake
 [Dispatch]: https://github.com/tpope/vim-dispatch

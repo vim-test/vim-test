@@ -38,10 +38,16 @@ function! test#python#pytest#build_args(args) abort
 endfunction
 
 function! test#python#pytest#executable() abort
+  let pipenv_prefix = ""
+
+  if filereadable("Pipfile")
+    let pipenv_prefix = "pipenv run "
+  endif
+
   if executable("py.test") && !executable("pytest")
-    return "py.test"
+    return pipenv_prefix . "py.test"
   else
-    return "pytest"
+    return pipenv_prefix . "pytest"
   endif
 endfunction
 

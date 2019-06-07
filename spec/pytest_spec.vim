@@ -1,6 +1,7 @@
 source spec/support/helpers.vim
 
-describe "PyTest"
+describe "PyTest_xunit"
+  " using xunit as a testing framework (unittest.*)
 
   before
     let g:test#python#runner = 'pytest'
@@ -83,4 +84,49 @@ describe "PyTest"
     Expect g:test#last_command == 'pytest'
   end
 
+end
+
+
+
+describe "Pytest"
+  " using pytest as a testing framework instead of xunit (unittest.*)
+  before
+    let g:test#python#runner = 'pytest'
+    cd spec/fixtures/pytest
+  end
+
+  after
+    call Teardown()
+    cd -
+  end
+
+  it ":TestNearest (class)"
+    view +1 test_class.py
+    TestNearest 
+    Expect g:test#last_command == 'pytest test_class.py::TestClass'
+  end
+
+  it ":TestNearest (nested-class)"
+    view +2 test_class.py
+    TestNearest 
+    Expect g:test#last_command == 'pytest test_class.py::TestClass::TestNestedClass'
+  end
+
+  it ":TestNearest (nested-class-method)"
+    view +3 test_class.py
+    TestNearest 
+    Expect g:test#last_command == 'pytest test_class.py::TestClass::TestNestedClass::test_nestedclass_method'
+  end
+
+  it ":TestNearest (method)"
+    view +6 test_class.py
+    TestNearest 
+    Expect g:test#last_command == 'pytest test_class.py::TestClass::test_method'
+  end
+
+  it ":TestNearest (function)"
+    view +10 test_class.py
+    TestNearest 
+    Expect g:test#last_command == 'pytest test_class.py::test_function'
+  end
 end

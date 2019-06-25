@@ -139,7 +139,7 @@ endif
 
 ### Quickfix Strategies
 
-If you want your test results to appear in the quickfix window, use one of the 
+If you want your test results to appear in the quickfix window, use one of the
 following strategies:
 
  * Make
@@ -148,15 +148,15 @@ following strategies:
  * Dispatch.vim
 
 Regardless of which you pick, it's recommended you have Dispatch.vim installed as the
-strategies will automatically use it to determine the correct compiler, ensuring the 
+strategies will automatically use it to determine the correct compiler, ensuring the
 test output is correctly parsed for the quickfix window.
 
-As Dispatch.vim just determines the compiler, you need to make sure the Vim distribution 
-or a plugin has a corresponding compiler for your test runner, or you may need to write a 
+As Dispatch.vim just determines the compiler, you need to make sure the Vim distribution
+or a plugin has a corresponding compiler for your test runner, or you may need to write a
 compiler plugin.
 
-If the test command prefix doesn't match the compiler's `makeprg` then use the 
-`g:dispatch_compiler` variable. For example if your test command was `./vendor/bin/phpunit` 
+If the test command prefix doesn't match the compiler's `makeprg` then use the
+`g:dispatch_compiler` variable. For example if your test command was `./vendor/bin/phpunit`
 but you wanted to use the phpunit2 compiler:
 
 ```vim
@@ -250,6 +250,16 @@ let test#ruby#rspec#options = {
   \ 'nearest': '--backtrace',
   \ 'file':    '--format documentation',
   \ 'suite':   '--tag ~slow',
+\}
+```
+
+You can also specify a global approach along with the granular options for the
+specified test runner:
+
+```vim
+let test#ruby#rspec#options = {
+  \ 'all':   '--backtrace',
+  \ 'suite': '--tag ~slow',
 \}
 ```
 

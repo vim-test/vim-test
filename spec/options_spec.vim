@@ -78,6 +78,23 @@ describe 'Options'
       TestSuite
       Expect g:test#last_command == 'rspec'
     end
+
+    it "allows a global option to be set along with specific granularities"
+      let g:test#ruby#rspec#options = {
+        \ 'all':  '--foo bar',
+        \ 'file': '--baz',
+      \}
+      new foo_spec.rb
+
+      TestNearest
+      Expect g:test#last_command == 'rspec --foo bar foo_spec.rb:1'
+
+      TestSuite
+      Expect g:test#last_command == 'rspec --foo bar'
+
+      TestFile
+      Expect g:test#last_command == 'rspec --foo bar --baz foo_spec.rb'
+    end
   end
 
 end

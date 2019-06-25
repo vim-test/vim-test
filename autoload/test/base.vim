@@ -11,7 +11,7 @@ function! test#base#options(runner, ...) abort
   if empty(a:000) && type(options) == type('')
     return split(options)
   elseif !empty(a:000) && type(options) == type({})
-    return split(get(options, a:000[0], ''))
+    return split(get(options, 'all', '')) + split(get(options, a:000[0], ''))
   else
     return []
   endif

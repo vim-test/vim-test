@@ -422,6 +422,16 @@ Or, if you prefer more granular approach, you can do
     \ 'suite':   '--tag ~slow',
   \}
 <
+You can also specify a global option for the test runner to work alongside the
+granular options. Here, all rspec tests will run with the --format documentation
+option and any suite granularities will be run with the --tag ~slow option as
+well
+>
+  let g:test#ruby#rspec#options = {
+    \ 'all':   '--format documentation',
+    \ 'suite': '--tag ~slow',
+  \}
+<
 If you want to manually configure a test runner's executable, you can do
 >
   let g:test#ruby#rspec#executable = 'foreman run rspec'

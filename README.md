@@ -97,7 +97,7 @@ let test#strategy = "dispatch"
 | **[AsyncRun]**                  | `asyncrun`                       | Runs test commands asynchronosuly using new APIs in Vim 8 and NeoVim.            |
 | **Terminal.app**                | `terminal`                       | Sends test commands to Terminal (useful in MacVim GUI).                          |
 | **iTerm2.app**                  | `iterm`                          | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                     |
-| **Kitty**                       | `kitty`                          | Sends test commands to Kitty terminal.                                           |
+| **[Kitty]**                     | `kitty`                          | Sends test commands to Kitty terminal.                                           |
 
 You can also set up strategies per granularity:
 
@@ -519,3 +519,4 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 [MakeGreen]: https://github.com/reinh/vim-makegreen
 [M]: http://github.com/qrush/m
 [projectionist.vim]: https://github.com/tpope/vim-projectionist
+[Kitty]: https://github.com/kovidgoyal/kitty

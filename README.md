@@ -146,15 +146,15 @@ please make sure:
 - you start kitty setting up remote control and specifying a socket for kitty
   to listen to, like this:
 
-    ```
-    > kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
-    ```
+  ```
+  $ kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
+  ```
 
 - you export an environment variable `$KITTY_LISTEN_ON` with the same socket, like:
 
-    ```
-    export KITTY_LISTEN_ON=/tmp/mykitty
-    ```
+  ```
+  $ export KITTY_LISTEN_ON=/tmp/mykitty
+  ```
 
 ### Quickfix Strategies
 

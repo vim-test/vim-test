@@ -13,6 +13,7 @@ License: Same terms as Vim itself (see |license|)
 |test-about|                      ABOUT
 |test-credits|                    CREDITS
 
+
 INTRODUCTION                                    *test*
 
 This plugin allows you to:
@@ -33,6 +34,7 @@ Add your preferred mappings to your `.vimrc` file:
   nmap <silent> <leader>l :TestLast<CR>
   nmap <silent> <leader>g :TestVisit<CR>
 <
+
 GENERIC COMMANDS                                *test-generic_commands*
 
 In all commands [args] are forwarded to the underlying test runner.
@@ -58,6 +60,7 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:TestVisit*
 :TestVisit                   Open the last run test in the current buffer.
+
 
 RUNNER COMMANDS                                 *test-runner_commands*
 
@@ -224,6 +227,7 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:SwiftPM*
 :SwiftPM [args]              Uses the `swift test` command.
 
+
 STRATEGIES                                      *test-strategies*
 
 Multiple strategies are supported for running tests.
@@ -343,19 +347,14 @@ Please make sure:
 
 - you start kitty setting up remote control and specifying a socket for kitty
   to listen to, like this:
-
 >
-  > kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
+  $ kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
 <
-
 - you export an environment variable `$KITTY_LISTEN_ON` with the same socket, like:
-
 >
-  export KITTY_LISTEN_ON=/tmp/mykitty
+  $ export KITTY_LISTEN_ON=/tmp/mykitty
 <
-
 You can then use this strategy this way:
-
 >
   let test#strategy = 'kitty'
 <
@@ -381,7 +380,6 @@ or a plugin has a corresponding compiler for your test runner, or you may need t
 If the test command prefix doesn't match the compiler's |makeprg| then use the
 |g:dispatch_compilers| variable. For example if your test command was './vendor/bin/phpunit'
 but you wanted to use the phpunit2 compiler:
-
 >
   let g:dispatch_compilers = {}
   let g:dispatch_compilers['./vendor/bin/'] = ''
@@ -466,13 +464,10 @@ You can instruct test.vim to generate absolute file paths:
   let test#filename_modifier = ':p' " /User/janko/Code/my_project/test/models/user_test.rb
   let test#filename_modifier = ':~' " ~/Code/my_project/test/models/user_test.rb
 <
-
 To select which runners to load, set this option:
-
 >
   let test#enabled_runners = ["mylanguage#myrunner", "ruby#rspec"]
 <
-
 All other runners will not be loaded.
 
 Note that for your own custom runners, you still need to set `test#custom_runners`.
@@ -496,6 +491,7 @@ for vim and
 <
 for neovim
 
+
 PROJECTIONIST INTEGRATION                       *test-projectionist*
 
 If the |projectionist| plug-in is present, you can run a test command from an
@@ -506,11 +502,13 @@ You can disable this integration by doing
 >
   let g:test#no_alternate = 1
 <
+
 ABOUT                                           *test-about*
 
 You can get the latest version, see the changelog, or report a bug on GitHub:
 
 https://github.com/janko-m/vim-test
+
 
 CREDITS                                         *test-credits*
 

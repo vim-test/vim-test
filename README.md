@@ -97,6 +97,7 @@ let test#strategy = "dispatch"
 | **[AsyncRun]**                  | `asyncrun`                       | Runs test commands asynchronosuly using new APIs in Vim 8 and NeoVim.            |
 | **Terminal.app**                | `terminal`                       | Sends test commands to Terminal (useful in MacVim GUI).                          |
 | **iTerm2.app**                  | `iterm`                          | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                     |
+| **Kitty**                       | `kitty`                          | Sends test commands to Kitty terminal.                                           |
 
 You can also set up strategies per granularity:
 
@@ -136,6 +137,24 @@ if has('nvim')
   tmap <C-o> <C-\><C-n>
 endif
 ```
+
+### Kitty strategy setup
+
+Before you can run tests in a kitty terminal window using the kitty strategy,
+please make sure:
+
+- you start kitty setting up remote control and specifying a socket for kitty
+  to listen to, like this:
+
+    ```
+    > kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
+    ```
+
+- you export an environment variable `$KITTY_LISTEN_ON` with the same socket, like:
+
+    ```
+    export KITTY_LISTEN_ON=/tmp/mykitty
+    ```
 
 ### Quickfix Strategies
 

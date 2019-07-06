@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+if [[ `kitty @ ls | grep -c '            "title": "vim-test-output'` -eq 0 ]];
+then
+  kitty @ --to $KITTY_LISTEN_ON new-window --keep-focus --title "vim-test-output" $SHELL
+fi
+
+kitty @ --to $KITTY_LISTEN_ON send-text --match title:"vim-test-output" "$1\x0d"
+

@@ -340,7 +340,7 @@ isn't that nice).
 <
 Kitty ~
 
-If you ewant to run commands in a Kitty terminal window you can use this
+If you want to run commands in a Kitty terminal window you can use this
 strategy.
 
 Please make sure:

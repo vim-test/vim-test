@@ -27,7 +27,7 @@ runners are supported:
 | **Elixir**     | ESpec, ExUnit                                                                               | `espec`, `exunit`                                                                                               |
 | **Elm**        | elm-test                                                                                    | `elmtest`                                                                                                       |
 | **Erlang**     | CommonTest                                                                                  | `commontest`                                                                                                    |
-| **Go**         | Ginkgo, Go, Rich-Go                                                                         | `ginkgo`, `gotest`, `richgo`                                                                                    |
+| **Go**         | Ginkgo, Go, Rich-Go, Delve                                                                  | `ginkgo`, `gotest`, `richgo`, `delve`                                                                           |
 | **Java**       | Maven, Gradle                                                                               | `maventest`, `gradletest`                                                                                       |
 | **JavaScript** | Ava, Cucumber.js, Intern, Jasmine, Jest, ReactScripts, Karma, Lab, Mocha, TAP, WebdriverIO  | `ava`, `cucumberjs`, `intern`, `jasmine`, `jest`, `reactscripts`, `karma`, `lab`, `mocha`, `tap`, `webdriverio` |
 | **Lua**        | Busted                                                                                      | `busted`                                                                                                        |
@@ -372,8 +372,12 @@ force a specific runner:
 
 ``` vim
 let test#go#runner = 'ginkgo'
-" Runners available are 'gotest', 'ginkgo', 'richgo'
+" Runners available are 'gotest', 'ginkgo', 'richgo', 'delve'
 ```
+
+If `delve` is selected and [vim-delve](https://github.com/sebdah/vim-delve) is
+in use, breakpoints and tracepoints that have been marked with vim-delve will
+be included.
 
 #### Ruby
 

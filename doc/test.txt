@@ -160,6 +160,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:RichGo*
 :RichGo [args]               Uses the `richgo` `test` command.
 
+                                                *test-:Delve*
+:Delve [args]                Uses the `dlv` `test` command.
+
                                                 *test-:CargoTest*
 :CargoTest [args]            Uses the `cargo` `test` command.
 

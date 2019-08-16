@@ -16,14 +16,14 @@ describe "Delve"
     view +5 normal_test.go
     TestNearest
 
-    Expect g:test#last_command == 'dlv test ./. -test.run ''TestNumbers$'''
+    Expect g:test#last_command == 'dlv test ./. -- -test.run ''TestNumbers$'''
   end
 
   it "runs nearest tests in subdirectory"
     view +5 mypackage/normal_test.go
     TestNearest
 
-    Expect g:test#last_command == 'dlv test ./mypackage -test.run ''TestNumbers$'''
+    Expect g:test#last_command == 'dlv test ./mypackage -- -test.run ''TestNumbers$'''
   end
 
   it "runs file test if nearest test couldn't be found"
@@ -61,11 +61,17 @@ describe "Delve"
     after
       unlet g:test#go#delve#options
     end
-    it "appends options to the end"
+    it "appends options to the end in a suite test"
       view normal_test.go
       TestSuite
 
-      Expect g:test#last_command == 'dlv test ./... -test.v'
+      Expect g:test#last_command == 'dlv test ./... -- -test.v'
+    end
+    it "appends options to the end in a nearest test"
+      view +5 normal_test.go
+      TestNearest
+
+      Expect g:test#last_command == 'dlv test ./. -- -test.run ''TestNumbers$'' -test.v'
     end
   end
 end

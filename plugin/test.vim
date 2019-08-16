@@ -12,7 +12,7 @@ let g:test#default_runners = {
   \ 'Elixir':     ['ExUnit', 'ESpec'],
   \ 'Elm':        ['ElmTest'],
   \ 'Erlang':     ['CommonTest'],
-  \ 'Go':         ['GoTest', 'Ginkgo', 'RichGo'],
+  \ 'Go':         ['GoTest', 'Ginkgo', 'RichGo', 'Delve'],
   \ 'Rust':       ['CargoTest'],
   \ 'Clojure':    ['FireplaceTest'],
   \ 'CSharp':     ['Xunit', 'DotnetTest'],

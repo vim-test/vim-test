@@ -6,14 +6,19 @@ function! test#base#build_position(runner, type, position) abort
   return test#{a:runner}#build_position(a:type, a:position)
 endfunction
 
-function! test#base#options(runner, ...) abort
+function! test#base#options(runner, args, ...) abort
   let options = get(g:, 'test#'.a:runner.'#options')
   if empty(a:000) && type(options) == type('')
-    return split(options)
+    let options = split(options)
   elseif !empty(a:000) && type(options) == type({})
-    return split(get(options, 'all', '')) + split(get(options, a:000[0], ''))
+    let options = split(get(options, 'all', '')) + split(get(options, a:000[0], ''))
   else
-    return []
+    let options = []
+  endif
+  if exists('*test#'.a:runner.'#build_options')
+    return test#{a:runner}#build_options(a:args, options)
+  else
+    return options + a:args
   endif
 endfunction
 

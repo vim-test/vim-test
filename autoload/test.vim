@@ -18,7 +18,7 @@ function! test#run(type, arguments) abort
 
   let args = test#base#build_position(runner, a:type, position)
   let args = a:arguments + args
-  let args = test#base#options(runner, a:type) + args
+  let args = test#base#options(runner, args, a:type)
 
   if type(get(g:, 'test#strategy')) == type({})
     let strategy = get(g:test#strategy, a:type)
@@ -77,7 +77,7 @@ function! test#execute(runner, args, ...) abort
   endif
 
   let args = a:args
-  let args = test#base#options(a:runner) + args
+  let args = test#base#options(a:runner, args)
   call filter(args, '!empty(v:val)')
 
   let executable = test#base#executable(a:runner)

@@ -27,11 +27,12 @@ describe "Go Runner"
 
   describe "when test#go#runner is set"
     it "should respect test#go#runner"
-      for runner in ["ginkgo", "gotest", "richgo"]
+      for runner in ["ginkgo", "gotest", "richgo", "delve"]
         let g:test#go#runner = runner
         Expect test#determine_runner("ginkgo/normal_test.go") == 'go#'.runner
         Expect test#determine_runner("gotest/normal_test.go") == 'go#'.runner
         Expect test#determine_runner("richgo/normal_test.go") == 'go#'.runner
+        Expect test#determine_runner("delve/normal_test.go") == 'go#'.runner
       endfor
     end
   end

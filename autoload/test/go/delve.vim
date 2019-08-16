@@ -16,13 +16,17 @@ function! test#go#delve#build_position(type, position) abort
       return path ==# './.' ? [] : [path . '/...']
     elseif a:type ==# 'nearest'
       let name = s:nearest_test(a:position)
-      return empty(name) ? [] : [path, '-test.run '.shellescape(name.'$', 1)]
+      return empty(name) ? [] : [path, '--', '-test.run '.shellescape(name.'$', 1)]
     endif
   endif
 endfunction
 
 function! test#go#delve#build_options(args, options) abort
-  return a:args + a:options
+  let args = a:args
+  if len(a:options) > 0 && index(args, '--') == -1
+    let args = args + ['--']
+  endif
+  return args + a:options
 endfunction
 
 function! test#go#delve#build_args(args) abort

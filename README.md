@@ -375,6 +375,19 @@ let test#go#runner = 'ginkgo'
 " Runners available are 'gotest', 'ginkgo', 'richgo', 'delve'
 ```
 
+You can also configure the `delve` runner with a different key mapping
+alongside another:
+
+```vim
+nmap <silent> t<C-n> :TestNearest<CR>
+function! DebugNearest()
+  let g:test#go#runner = 'delve'
+  TestNearest
+  unlet g:test#go#runner
+endfunction
+nmap <silent> t<C-d> :call DebugNearest()<CR>
+```
+
 If `delve` is selected and [vim-delve](https://github.com/sebdah/vim-delve) is
 in use, breakpoints and tracepoints that have been marked with vim-delve will
 be included.

@@ -47,11 +47,16 @@ describe "CommonTest"
     Expect g:test#last_command == 'rebar3 ct'
   end
 
-  it "doesn't recognize files that don't end with '_SUITE.erl'"
+  it "ignores files not ending with _SUITE.erl"
     view test.erl
     TestFile
 
     Expect exists('g:test#last_command') == 0
+
+    view example_tests.erl
+    TestFile
+
+    Expect g:test#last_command !~# 'rebar3 ct'
   end
 
 end

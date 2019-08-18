@@ -145,6 +145,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:CommonTest*
 :CommonTest [args]           Uses the `rebar3` `ct` command.
 
+                                                *test-:EUnit*
+:EUnit [args]                Uses the `rebar3` `eunit` command.
+
                                                 *test-:Xunit*
 :Xunit [args]                Uses the `dotnet` `xunit` command.
 

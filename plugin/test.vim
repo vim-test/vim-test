@@ -11,7 +11,7 @@ let g:test#default_runners = {
   \ 'Python':     ['DjangoTest', 'PyTest', 'PyUnit', 'Nose', 'Nose2'],
   \ 'Elixir':     ['ExUnit', 'ESpec'],
   \ 'Elm':        ['ElmTest'],
-  \ 'Erlang':     ['CommonTest'],
+  \ 'Erlang':     ['CommonTest', 'EUnit'],
   \ 'Go':         ['GoTest', 'Ginkgo', 'RichGo', 'Delve'],
   \ 'Rust':       ['CargoTest'],
   \ 'Clojure':    ['FireplaceTest'],

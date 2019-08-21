@@ -4,8 +4,7 @@ if !exists('g:test#scala#blooptest#file_pattern')
 endif
 
 function! test#scala#blooptest#test_file(file) abort
-  let current_file = fnamemodify(a:file, ':t')
-  return current_file =~? g:test#scala#blooptest#file_pattern
+  return test#scala#test_file('blooptest', g:test#scala#blooptest#file_pattern, a:file)
 endfunction
 
  " Returns test runner's arguments which will run the current file and/or line

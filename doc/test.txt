@@ -227,6 +227,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:SbtTest*
 :SbtTest [args]            Uses the `sbt` `test/testOnly` command.
 
+                                                *test-:BloopTest*
+:BloopTest [args]            Uses the `bloop` `test/test -o` command.
+
                                                 *test-:CrystalSpec*
 :CrystalSpec [args]          Uses the `crystal` `spec` command.
 

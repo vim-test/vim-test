@@ -366,6 +366,29 @@ force a specific runner:
 let test#java#runner = 'gradletest'
 ```
 
+#### Scala
+
+For the same reason as Python, runner detection works the same for Scala. To
+force a specific runner:
+
+``` vim
+let test#scala#runner = 'blooptest'
+```
+
+You may have subprojects inside your main sbt projects. Bloop project detection 
+uses your main project to run tests. If you need to run test inside your subproject,
+you can specify custom projects with:
+
+```vim
+let g:test#scala#blooptest#project_name = 'custom-project'
+```
+
+With this configuration, the test runner will run test for `custom-project`:
+
+```sh
+$ bloop test custom-project
+```
+
 #### Go
 
 For the same reason as Python, runner detection works the same for Go. To

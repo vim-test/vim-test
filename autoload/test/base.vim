@@ -7,7 +7,7 @@ function! test#base#build_position(runner, type, position) abort
 endfunction
 
 function! test#base#options(runner, args, ...) abort
-  let options = get(g:, 'test#'.a:runner.'#options')
+  let options = get(g:, 'test#'.a:runner.'#options', [])
   if empty(a:000) && type(options) == type('')
     let options = split(options)
   elseif !empty(a:000) && type(options) == type({})

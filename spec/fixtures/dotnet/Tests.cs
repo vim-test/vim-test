@@ -13,5 +13,11 @@ namespace Namespace
         {
             Assert.Equal(true, false);
         }
+
+        [Fact]
+        public async Task TestAsyncWithTaskReturn()
+        {
+            Assert.Equal(true, false);
+        }
     }
 }

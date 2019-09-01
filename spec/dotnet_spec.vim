@@ -34,6 +34,12 @@ describe "DotnetTest"
     let actual = s:remove_path(g:test#last_command)
     Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Namespace.Tests.Test'
 
+    view +20 Tests.cs
+    TestNearest
+
+    let actual = s:remove_path(g:test#last_command)
+    Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName\~Namespace.Tests.TestAsyncWithTaskReturn'
+
   end
 
   it "runs file test if nearest test couldn't be found"

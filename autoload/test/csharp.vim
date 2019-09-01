@@ -1,5 +1,5 @@
 let g:test#csharp#patterns = {
-  \ 'test':      ['\v^\s*public void (\w+)', '\v^\s*public async void (\w+)'],
+  \ 'test':      ['\v^\s*public void (\w+)', '\v^\s*public async void (\w+)', '\v^\s*public async Task (\w+)'],
   \ 'namespace': ['\v^\s*public class (\w+)', '\v^\s*namespace ((\w|\.)+)'],
 \}
 

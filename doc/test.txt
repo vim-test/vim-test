@@ -236,6 +236,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:SwiftPM*
 :SwiftPM [args]              Uses the `swift test` command.
 
+                                                *test-:StackTest*
+:StackTest [args]            Uses the `stack test` command.
+
 
 STRATEGIES                                      *test-strategies*
 

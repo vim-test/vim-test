@@ -28,6 +28,7 @@ runners are supported:
 | **Elm**        | elm-test                                                                                    | `elmtest`                                                                                                       |
 | **Erlang**     | CommonTest, EUnit                                                                           | `commontest`, `eunit`                                                                                           |
 | **Go**         | Ginkgo, Go, Rich-Go, Delve                                                                  | `ginkgo`, `gotest`, `richgo`, `delve`                                                                           |
+| **Haskell**    | stack                                                                                       | `stacktest`                                                                                                     | 
 | **Java**       | Maven, Gradle                                                                               | `maventest`, `gradletest`                                                                                       |
 | **JavaScript** | Ava, Cucumber.js, Intern, Jasmine, Jest, ReactScripts, Karma, Lab, Mocha, TAP, WebdriverIO  | `ava`, `cucumberjs`, `intern`, `jasmine`, `jest`, `reactscripts`, `karma`, `lab`, `mocha`, `tap`, `webdriverio` |
 | **Lua**        | Busted                                                                                      | `busted`                                                                                                        |
@@ -441,6 +442,10 @@ let test#ruby#use_spring_binstub = 1
 #### JavaScript
 
 Test runner detection for JavaScript works by checking which runner is listed in the package.json dependencies. If you have globally installed the runner make sure it's also listed in the dependencies.
+
+#### Haskell
+
+The `stackTest` runner currently supports running tests in Stack projects with the (HSpec)[http://hackage.haskell.org/package/hspec] framework.
 
 ## Autocommands
 

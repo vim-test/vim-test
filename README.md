@@ -445,7 +445,7 @@ Test runner detection for JavaScript works by checking which runner is listed in
 
 #### Haskell
 
-The `stackTest` runner currently supports running tests in Stack projects with the (HSpec)[http://hackage.haskell.org/package/hspec] framework.
+The `stackTest` runner currently supports running tests in Stack projects with the [HSpec](http://hackage.haskell.org/package/hspec) framework.
 
 ## Autocommands
 

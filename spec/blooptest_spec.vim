@@ -62,11 +62,32 @@ describe "Bloop"
     Expect g:test#last_command == 'bloop test bloop_project -o "*whatever_suite_smth"'
   end
 
-  it "runs nearest tests"
+  it "runs nearest tests for FunSuite"
     view +32 FixtureTestSuite.scala
     TestNearest
 
     Expect g:test#last_command == 'bloop test bloop_project -o "*FixtureTestSuite" -- -z "Assert ''add'' works for Double and returns Double"'
+  end
+
+  it "runs nearest tests for FlatSpec style"
+    view +14 FixtureSpec.scala
+    TestNearest
+
+    Expect g:test#last_command == 'bloop test bloop_project -o "*FixtureSpec" -- -z "throw NoSuchElementException if an empty stack is popped"'
+  end
+
+  it "runs nearest tests for first test in FlatSpec style"
+    view +6 FixtureSpec.scala
+    TestNearest
+
+    Expect g:test#last_command == 'bloop test bloop_project -o "*FixtureSpec" -- -z "pop values in last-in-first-out order"'
+  end
+
+  it "runs nearest tests for first test in WordSpec style"
+    view +7 WordSpec.scala
+    TestNearest
+
+    Expect g:test#last_command == 'bloop test bloop_project -o "*WordSpec" -- -z "have size 0"'
   end
 
   it "runs a suite"

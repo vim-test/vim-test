@@ -18,6 +18,13 @@ describe "SBT"
     Expect g:test#last_command == 'sbt "testOnly *FixtureTest"'
   end
 
+  it "runs when filename matches *Spec.scala"
+    view FixtureSpec.scala
+    TestFile
+
+    Expect g:test#last_command == 'sbt "testOnly *FixtureSpec"'
+  end
+
   it "runs when filename matches *Suite.scala"
     view FixtureSuite.scala
     TestFile

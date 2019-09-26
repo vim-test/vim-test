@@ -20,6 +20,13 @@ describe "Bloop"
     Expect g:test#last_command == 'bloop test bloop_project -o "*FixtureTest"'
   end
 
+  it "runs when filename matches *Spec.scala"
+    view FixtureSpec.scala
+    TestFile
+
+    Expect g:test#last_command == 'bloop test bloop_project -o "*FixtureSpec"'
+  end
+
   it "runs when filename matches *Suite.scala"
     view FixtureSuite.scala
     TestFile

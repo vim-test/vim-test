@@ -44,7 +44,7 @@ describe "Codeception"
     TestNearest
 
     Expect g:test#last_command ==
-          \ 'codecept run tests/functional/NormalCest.php:tryToTestSomethingElse'
+          \ 'codecept run tests/functional/NormalCest.php::tryToTestSomethingElse$'
   end
 
   it "runs cept nearest tests"
@@ -66,7 +66,7 @@ describe "Codeception"
     TestNearest
 
     Expect g:test#last_command ==
-          \ 'codecept run tests/functional/NormalTest.php:testMe'
+          \ 'codecept run tests/functional/NormalTest.php::testMe$'
   end
 
   it "runs test suites"

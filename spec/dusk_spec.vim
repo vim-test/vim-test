@@ -27,16 +27,16 @@ describe "Dusk"
     view +10 BrowserTest.php
     TestNearest
 
-    Expect g:test#last_command == "php artisan dusk --colors --filter 'testShouldAddTwoNumbers' BrowserTest.php"
+    Expect g:test#last_command == "php artisan dusk --colors --filter '::testShouldAddTwoNumbers$' BrowserTest.php"
 
     view +15 BrowserTest.php
     TestNearest
 
-    Expect g:test#last_command == "php artisan dusk --colors --filter 'testShouldSubtractTwoNumbers' BrowserTest.php"
+    Expect g:test#last_command == "php artisan dusk --colors --filter '::testShouldSubtractTwoNumbers$' BrowserTest.php"
 
     view +31 BrowserTest.php
     TestNearest
 
-    Expect g:test#last_command == "php artisan dusk --colors --filter 'testShouldAddToExpectedValue' BrowserTest.php"
+    Expect g:test#last_command == "php artisan dusk --colors --filter '::testShouldAddToExpectedValue$' BrowserTest.php"
   end
 end

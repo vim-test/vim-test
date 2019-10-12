@@ -371,6 +371,27 @@ You can then use this strategy this way:
   let test#strategy = 'kitty'
 <
 
+Shtuff ~
+
+This strategy lets you run commands in a remote terminal without needing tools
+like tmux or special terminals such as Kitty.
+
+Before you can run tests using this strategy, you will need to have a terminal
+setup as a receiver, and also you'll need to set `g:shtuff_receiver` in your
+vimrc file.
+
+In your terminal of choice:
+
+>
+$ shtuff as devrunner
+<
+
+And in your vimrc:
+
+>
+let g:shtuff_receiver = 'devrunner'
+<
+
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 
 If you want your test results to appear in the |quickfix| window, use one of the

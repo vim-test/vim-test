@@ -109,6 +109,15 @@ function! test#strategy#kitty(cmd) abort
   call s:execute_script('kitty_runner', cmd)
 endfunction
 
+function! test#strategy#shtuff(cmd) abort
+  if !exists('g:shtuff_receiver')
+    echoerr 'You must define g:shtuff_receiver to use this strategy'
+    return
+  endif
+
+  call system("shtuff into " . shellescape(g:shtuff_receiver) . " " . shellescape("clear;" . a:cmd))
+endfunction
+
 function! s:execute_with_compiler(cmd, script) abort
   try
     let default_makeprg = &l:makeprg

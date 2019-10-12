@@ -99,6 +99,7 @@ let test#strategy = "dispatch"
 | **Terminal.app**                | `terminal`                       | Sends test commands to Terminal (useful in MacVim GUI).                          |
 | **iTerm2.app**                  | `iterm`                          | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                     |
 | **[Kitty]**                     | `kitty`                          | Sends test commands to Kitty terminal.                                           |
+| **[Shtuff]**                    | `shtuff`                         | Sends test commands to remote terminal via [shtuff][Shtuff].                     |
 
 You can also set up strategies per granularity:
 
@@ -156,6 +157,27 @@ please make sure:
   ```
   $ export KITTY_LISTEN_ON=/tmp/mykitty
   ```
+
+### Shtuff strategy setup
+
+This strategy lets you run commands in a remote terminal without needing tools
+like `tmux` or special terminals such as Kitty.
+
+Before you can run tests using this strategy, you will need to have a terminal
+setup as a receiver, and also you'll need to set `g:shtuff_receiver` in your
+vimrc file.
+
+In your terminal of choice:
+
+```
+$ shtuff as devrunner
+```
+
+And in your vimrc:
+
+```
+let g:shtuff_receiver = 'devrunner'
+```
 
 ### Quickfix Strategies
 
@@ -566,3 +588,4 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 [M]: http://github.com/qrush/m
 [projectionist.vim]: https://github.com/tpope/vim-projectionist
 [Kitty]: https://github.com/kovidgoyal/kitty
+[Shtuff]: https://github.com/jfly/shtuff

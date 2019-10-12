@@ -99,7 +99,7 @@ let test#strategy = "dispatch"
 | **Terminal.app**                | `terminal`                       | Sends test commands to Terminal (useful in MacVim GUI).                          |
 | **iTerm2.app**                  | `iterm`                          | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                     |
 | **[Kitty]**                     | `kitty`                          | Sends test commands to Kitty terminal.                                           |
-| **[Shtuff]**                    | `shtuff`                         | Sends test commands to remote terminal via [shtuff].                             |
+| **[Shtuff]**                    | `shtuff`                         | Sends test commands to remote terminal via [shtuff][Shtuff].                     |
 
 You can also set up strategies per granularity:
 
@@ -589,4 +589,3 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 [projectionist.vim]: https://github.com/tpope/vim-projectionist
 [Kitty]: https://github.com/kovidgoyal/kitty
 [Shtuff]: https://github.com/jfly/shtuff
-[shtuff]: https://github.com/jfly/shtuff

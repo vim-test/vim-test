@@ -13,7 +13,7 @@ function! test#php#codeception#build_position(type, position) abort
   if a:type ==# 'nearest'
     let testname = s:nearest_test(a:position)
     let filename = a:position['file']
-    if !empty(testname) | let filename .= ':' . testname | endif
+    if !empty(testname) | let filename .= '::' . testname . '$' | endif
     return [filename]
   elseif a:type ==# 'file'
     return [a:position['file']]

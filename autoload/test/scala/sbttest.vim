@@ -1,5 +1,5 @@
 if !exists('g:test#scala#sbttest#file_pattern')
-  let g:test#scala#sbttest#file_pattern = '\v^(.*test.*|.*suite.*)\c\.scala$'
+  let g:test#scala#sbttest#file_pattern = '\v^(.*test.*|.*suite.*|.*spec.*)\c\.scala$'
 endif
 
 " Returns true if the given file belongs to your test runner

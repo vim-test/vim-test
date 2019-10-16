@@ -25,6 +25,7 @@ let g:test#default_runners = {
   \ 'Racket':     ['RackUnit'],
   \ 'Java':       ['MavenTest', 'GradleTest'],
   \ 'Scala':      ['SbtTest', 'BloopTest'],
+  \ 'Haskell':    ['StackTest'],
   \ 'Crystal':    ['CrystalSpec'],
 \}
 

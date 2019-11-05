@@ -106,6 +106,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:ReactScripts*
 :ReactScripts [args]         Uses the `react-scripts test` command.
 
+                                                *test-:Cypress*
+:Cypress [args]              Uses the `cypress` command.
+
                                                 *test-:Mocha*
 :Mocha [args]                Uses the `mocha` command.
 

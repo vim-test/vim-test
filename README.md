@@ -28,9 +28,9 @@ runners are supported:
 | **Elm**        | elm-test                                                                                    | `elmtest`                                                                                                       |
 | **Erlang**     | CommonTest, EUnit                                                                           | `commontest`, `eunit`                                                                                           |
 | **Go**         | Ginkgo, Go, Rich-Go, Delve                                                                  | `ginkgo`, `gotest`, `richgo`, `delve`                                                                           |
-| **Haskell**    | stack                                                                                       | `stacktest`                                                                                                     | 
+| **Haskell**    | stack                                                                                       | `stacktest`                                                                                                     |
 | **Java**       | Maven, Gradle                                                                               | `maventest`, `gradletest`                                                                                       |
-| **JavaScript** | Ava, Cucumber.js, Intern, Jasmine, Jest, ReactScripts, Karma, Lab, Mocha, TAP, WebdriverIO  | `ava`, `cucumberjs`, `intern`, `jasmine`, `jest`, `reactscripts`, `karma`, `lab`, `mocha`, `tap`, `webdriverio` |
+| **JavaScript** | Ava, Cucumber.js, Cypress, Intern, Jasmine, Jest, ReactScripts, Karma, Lab, Mocha, TAP, WebdriverIO  | `ava`, `cucumberjs`, `cypress`, `intern`, `jasmine`, `jest`, `reactscripts`, `karma`, `lab`, `mocha`, `tap`, `webdriverio` |
 | **Lua**        | Busted                                                                                      | `busted`                                                                                                        |
 | **PHP**        | Behat, Codeception, Kahlan, Peridot, PHPUnit, PHPSpec, Dusk                                 | `behat`, `codeception`, `dusk`, `kahlan`, `peridot`, `phpunit`, `phpspec`                                       |
 | **Perl**       | Prove                                                                                       | `prove`                                                                                                         |
@@ -398,7 +398,7 @@ force a specific runner:
 let test#scala#runner = 'blooptest'
 ```
 
-You may have subprojects inside your main sbt projects. Bloop project detection 
+You may have subprojects inside your main sbt projects. Bloop project detection
 uses your main project to run tests. If you need to run test inside your subproject,
 you can specify custom projects with:
 

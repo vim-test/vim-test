@@ -16,68 +16,68 @@ describe "Jest"
       view +1 __tests__/normal-test.js
       TestNearest
 
-      Expect g:test#last_command == 'jest  -t ''^Math'' -- __tests__/normal-test.js'
+      Expect g:test#last_command == 'jest -t ''^Math'' -- __tests__/normal-test.js'
 
       view +2 __tests__/normal-test.js
       TestNearest
 
-      Expect g:test#last_command == 'jest  -t ''^Math Addition'' -- __tests__/normal-test.js'
+      Expect g:test#last_command == 'jest -t ''^Math Addition'' -- __tests__/normal-test.js'
 
       view +3 __tests__/normal-test.js
       TestNearest
 
-      Expect g:test#last_command == 'jest  -t ''^Math Addition adds two numbers$'' -- __tests__/normal-test.js'
+      Expect g:test#last_command == 'jest -t ''^Math Addition adds two numbers$'' -- __tests__/normal-test.js'
     end
 
     it "aliases context to describe"
       view +1 __tests__/context-test.js
       TestNearest
 
-      Expect g:test#last_command == 'jest  -t ''^Math'' -- __tests__/context-test.js'
+      Expect g:test#last_command == 'jest -t ''^Math'' -- __tests__/context-test.js'
 
       view +2 __tests__/context-test.js
       TestNearest
 
-      Expect g:test#last_command == 'jest  -t ''^Math Addition'' -- __tests__/context-test.js'
+      Expect g:test#last_command == 'jest -t ''^Math Addition'' -- __tests__/context-test.js'
 
       view +3 __tests__/context-test.js
       TestNearest
 
-      Expect g:test#last_command == 'jest  -t ''^Math Addition adds two numbers$'' -- __tests__/context-test.js'
+      Expect g:test#last_command == 'jest -t ''^Math Addition adds two numbers$'' -- __tests__/context-test.js'
     end
 
     it "runs CoffeeScript"
       view +1 __tests__/normal-test.coffee
       TestNearest
 
-      Expect g:test#last_command == 'jest  -t ''^Math'' -- __tests__/normal-test.coffee'
+      Expect g:test#last_command == 'jest -t ''^Math'' -- __tests__/normal-test.coffee'
 
       view +2 __tests__/normal-test.coffee
       TestNearest
 
-      Expect g:test#last_command == 'jest  -t ''^Math Addition'' -- __tests__/normal-test.coffee'
+      Expect g:test#last_command == 'jest -t ''^Math Addition'' -- __tests__/normal-test.coffee'
 
       view +3 __tests__/normal-test.coffee
       TestNearest
 
-      Expect g:test#last_command == 'jest  -t ''^Math Addition adds two numbers$'' -- __tests__/normal-test.coffee'
+      Expect g:test#last_command == 'jest -t ''^Math Addition adds two numbers$'' -- __tests__/normal-test.coffee'
     end
 
     it "runs React"
       view +1 __tests__/normal-test.jsx
       TestNearest
 
-      Expect g:test#last_command == 'jest  -t ''^Math'' -- __tests__/normal-test.jsx'
+      Expect g:test#last_command == 'jest -t ''^Math'' -- __tests__/normal-test.jsx'
 
       view +2 __tests__/normal-test.jsx
       TestNearest
 
-      Expect g:test#last_command == 'jest  -t ''^Math Addition'' -- __tests__/normal-test.jsx'
+      Expect g:test#last_command == 'jest -t ''^Math Addition'' -- __tests__/normal-test.jsx'
 
       view +3 __tests__/normal-test.jsx
       TestNearest
 
-      Expect g:test#last_command == 'jest  -t ''^Math Addition adds two numbers$'' -- __tests__/normal-test.jsx'
+      Expect g:test#last_command == 'jest -t ''^Math Addition adds two numbers$'' -- __tests__/normal-test.jsx'
     end
   end
 
@@ -86,14 +86,14 @@ describe "Jest"
     normal O
     TestNearest
 
-    Expect g:test#last_command == 'jest  -- __tests__/normal-test.js'
+    Expect g:test#last_command == 'jest -- __tests__/normal-test.js'
   end
 
   it "runs file tests"
     view __tests__/normal-test.js
     TestFile
 
-    Expect g:test#last_command == 'jest  -- __tests__/normal-test.js'
+    Expect g:test#last_command == 'jest -- __tests__/normal-test.js'
   end
 
   it "runs test suites"
@@ -107,7 +107,7 @@ describe "Jest"
     view outside-test.js
     TestFile
 
-    Expect g:test#last_command == 'jest  -- outside-test.js'
+    Expect g:test#last_command == 'jest -- outside-test.js'
   end
 
   context "with a specified executable"
@@ -120,7 +120,7 @@ describe "Jest"
       view __tests__/normal-test.js
       TestFile
 
-      Expect g:test#last_command == 'npm run jest  -- __tests__/normal-test.js'
+      Expect g:test#last_command == 'npm run jest -- __tests__/normal-test.js'
     end
 
     it "runs tests against yarn executable (without --)"
@@ -128,7 +128,7 @@ describe "Jest"
       view __tests__/normal-test.js
       TestFile
 
-      Expect g:test#last_command == 'yarn jest  __tests__/normal-test.js'
+      Expect g:test#last_command == 'yarn jest __tests__/normal-test.js'
     end
 
     it "runs tests against absolute path yarn executable (without --)"
@@ -136,7 +136,7 @@ describe "Jest"
       view __tests__/normal-test.js
       TestFile
 
-      Expect g:test#last_command == '~/.local/bin/yarn jest  __tests__/normal-test.js'
+      Expect g:test#last_command == '~/.local/bin/yarn jest __tests__/normal-test.js'
     end
   end
 

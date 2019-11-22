@@ -329,6 +329,13 @@ and Tmux.
 >
   let test#strategy = 'tslime'
 <
+Slimux ~
+
+Runs test commands in a Tmux pane you specify. Requires the slimux plugin and
+Tmux.
+>
+  let test#strategy = 'slimux'
+<
 Vim Tmux Runner ~
 
 Runs test commands in a small Tmux pane. Requires the Vim Timux Runner plugin

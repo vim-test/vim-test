@@ -89,6 +89,7 @@ let test#strategy = "dispatch"
 | **[Dispatch]**                  | `dispatch` `dispatch_background` | Runs test commands with `:Dispatch` or `:Dispatch!`.                             |
 | **[Vimux]**                     | `vimux`                          | Runs test commands in a small tmux pane at the bottom of your terminal.          |
 | **[Tslime]**                    | `tslime`                         | Runs test commands in a tmux pane you specify.                                   |
+| **[Slimux]**                    | `slimux`                         | Runs test commands in a tmux pane you specify.                                   |
 | **[Neoterm]**                   | `neoterm`                        | Runs test commands with `:T`, see neoterm docs for display customization.        |
 | **[Neomake]**                   | `neomake`                        | Runs test commands asynchronously with `:NeomakeProject`.                        |
 | **[MakeGreen]**                 | `makegreen`                      | Runs test commands with `:MakeGreen`.                                            |
@@ -577,6 +578,7 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 [Dispatch]: https://github.com/tpope/vim-dispatch
 [Vimux]: https://github.com/benmills/vimux
 [Tslime]: https://github.com/jgdavey/tslime.vim
+[Slimux]: https://github.com/esamattis/slimux
 [Vim&nbsp;Tmux&nbsp;Runner]: https://github.com/christoomey/vim-tmux-runner
 [VimShell]: https://github.com/Shougo/vimshell.vim
 [VimProc]: https://github.com/Shougo/vimproc.vim

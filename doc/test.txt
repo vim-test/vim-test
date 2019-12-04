@@ -136,6 +136,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:PyUnit*
 :PyUnit [args]               Uses the `unittest` `test` command.
 
+                                                *test-:Mamba*
+:Mamba [args]                Uses the `mamba` `test` command.
+
                                                 *test-:ElmTest*
 :ElmTest [args]              Uses the `elm-test` command.
 

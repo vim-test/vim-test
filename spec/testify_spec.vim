@@ -42,13 +42,11 @@ describe "Testify"
       Expect g:test#last_command == ':TestifySuite'
 
       !mv test t
-      view t/normal.vim
       TestSuite
 
       Expect g:test#last_command == ':TestifySuite'
 
       !mv t spec
-      view spec/normal.vim
       TestSuite
 
       Expect g:test#last_command == ':TestifySuite'

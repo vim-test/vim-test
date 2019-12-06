@@ -34,7 +34,7 @@ runners are supported:
 | **Lua**        | Busted                                                                                      | `busted`                                                                                                        |
 | **PHP**        | Behat, Codeception, Kahlan, Peridot, PHPUnit, PHPSpec, Dusk                                 | `behat`, `codeception`, `dusk`, `kahlan`, `peridot`, `phpunit`, `phpspec`                                       |
 | **Perl**       | Prove                                                                                       | `prove`                                                                                                         |
-| **Python**     | Django, Nose, Nose2, PyTest, PyUnit                                                         | `djangotest`, `djangonose` `nose`, `nose2`, `pytest`, `pyunit`                                                  |
+| **Python**     | Django, Mamba, Nose, Nose2, PyTest, PyUnit                                                  | `djangotest`, `djangonose`, `mamba`, `nose`, `nose2`, `pytest`, `pyunit`                                                  |
 | **Racket**     | RackUnit                                                                                    | `rackunit`                                                                                                      |
 | **Ruby**       | Cucumber, [M], [Minitest][minitest], Rails, RSpec                                           | `cucumber`, `m`, `minitest`, `rails`, `rspec`                                                                   |
 | **Rust**       | Cargo                                                                                       | `cargotest`                                                                                                     |
@@ -373,7 +373,7 @@ the first available will be chosen, but you can force a specific one:
 
 ``` vim
 let test#python#runner = 'pytest'
-" Runners available are 'pytest', 'nose', 'nose2', 'djangotest', 'djangonose' and Python's built-in 'unittest'
+" Runners available are 'pytest', 'nose', 'nose2', 'djangotest', 'djangonose', 'mamba', and Python's built-in 'unittest'
 ```
 
 The pytest runner optionally supports [pipenv](https://github.com/pypa/pipenv).

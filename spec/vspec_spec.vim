@@ -3,6 +3,7 @@ source spec/support/helpers.vim
 describe "VSpec"
 
   before
+    let g:test#enabled_runners = ['viml#vspec']
     cd spec/fixtures/vspec
   end
 

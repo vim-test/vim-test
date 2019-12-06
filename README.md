@@ -41,7 +41,7 @@ runners are supported:
 | **Scala**      | SBT, Bloop                                                                                  | `sbttest`, `blooptest`                                                                                          |
 | **Shell**      | Bats                                                                                        | `bats`                                                                                                          |
 | **Swift**      | Swift Package Manager                                                                       | `swiftpm`                                                                                                       |
-| **VimScript**  | Vader.vim, VSpec, Themis                                                                    | `vader`, `vspec`, `themis`                                                                                      |
+| **VimScript**  | Vader.vim, VSpec, Themis, Testify                                                           | `vader`, `vspec`, `themis`, `testify`                                                                           |
 
 ## Setup
 

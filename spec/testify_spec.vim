@@ -13,11 +13,11 @@ describe "Testify"
     cd -
   end
 
-  it "runs file tests instead of nearest tests"
+  it "runs nearest tests"
     view +3 test/normal.vim
     TestNearest
 
-    Expect g:test#last_command == ':TestifyFile'
+    Expect g:test#last_command == ':TestifyNearest'
   end
 
   it "runs file tests"

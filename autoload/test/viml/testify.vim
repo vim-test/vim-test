@@ -7,7 +7,9 @@ function! test#viml#testify#test_file(file) abort
 endfunction
 
 function! test#viml#testify#build_position(type, position) abort
-  if a:type ==# 'nearest' || a:type ==# 'file'
+  if a:type ==# 'nearest'
+    return [':TestifyNearest']
+  elseif a:type ==# 'file'
     return [':TestifyFile']
   endif
   return [':TestifySuite']

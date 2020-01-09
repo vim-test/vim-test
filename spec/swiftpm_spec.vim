@@ -42,6 +42,27 @@ describe "SwiftPM"
     Expect g:test#last_command == 'swift test --filter VimTestTests.VimTestFinalTests'
   end
 
+  it "recognizes public test cases"
+    view Tests/VimTestTests/VimTestPublicTests.swift
+    TestFile
+
+    Expect g:test#last_command == 'swift test --filter VimTestTests.VimTestPublicTests'
+  end
+
+  it "recognizes public final test cases"
+    view Tests/VimTestTests/VimTestPublicFinalTests.swift
+    TestFile
+
+    Expect g:test#last_command == 'swift test --filter VimTestTests.VimTestPublicFinalTests'
+  end
+
+  it "recognizes final public test cases"
+    view Tests/VimTestTests/VimTestFinalPublicTests.swift
+    TestFile
+
+    Expect g:test#last_command == 'swift test --filter VimTestTests.VimTestFinalPublicTests'
+  end
+
   it "recognizes test cases in the root of the test directory"
     view Tests/VimTestRootTests.swift
     TestFile

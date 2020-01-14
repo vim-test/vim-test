@@ -2,11 +2,43 @@ if !exists('g:test#rust#cargotest#file_pattern')
   let g:test#rust#cargotest#file_pattern = '\v\.rs$'
 endif
 
+if !exists('g:test#rust#cargotest#test_patterns')
+  let g:test#rust#cargotest#test_patterns = {
+        \ 'test': ['\v(#\[test\])'],
+        \ 'namespace': []
+    \ }
+endif
+
+if !exists('g:test#rust#cargotest#patterns')
+  let g:test#rust#cargotest#patterns = {
+        \ 'test': ['\v\s+fn\s+(\w+)'],
+        \ 'namespace': []
+    \ }
+endif
+
 function! test#rust#cargotest#test_file(file) abort
   return a:file =~# g:test#rust#cargotest#file_pattern
 endfunction
 
+" This function fits libs unit testing
+" Need to implement integration testing and bechmarks and examples
+" TODO
 function! test#rust#cargotest#build_position(type, position) abort
+  " If running the whole suite, don't need to do anything
+  if a:type !=# 'suite'
+    " Else
+    " We need the test module namespace
+    let l:namespace = s:test_namespace(a:position['file'])
+    if a:type ==# 'nearest'
+      let l:test_name = s:nearest_test(a:position)
+
+      return [shellescape(l:namespace.l:test_name), "--", "--exact"]
+    elseif a:type ==# 'file'
+      " FIXME Should not run submodule tests
+      return [shellescape(l:namespace)]
+    endif
+  endif
+
   return []
 endfunction
 
@@ -16,4 +48,41 @@ endfunction
 
 function! test#rust#cargotest#executable() abort
   return 'cargo test'
+endfunction
+
+function! s:nearest_test(position) abort
+  " Search backward for the first '#[test]'
+  let name = test#base#nearest_test(a:position, g:test#rust#cargotest#test_patterns)
+
+  " If we didn't find the '#[test]' return empty
+  if empty(name['test']) || '#[test]' != name['test'][0]
+    return ''
+  endif
+
+  " Else
+  " Search forward for the first declared method
+  let name = test#base#nearest_test_in_lines(
+    \ a:position['file'],
+    \ name['test_line'],
+    \ a:position['line'],
+    \ g:test#rust#cargotest#patterns
+  \ )
+
+  return join(name['test'])
+endfunction
+
+function! s:test_namespace(filename) abort
+  let l:path = fnamemodify(a:filename, ':r')
+  " On a normal cargo project, the first item is 'src'
+  let l:modules = split(l:path, '/')[1:]
+
+  " 'src/lib.rs' and 'src/some/mod.rs' does not end
+  " with actual module names
+  if l:modules[-1] =~# '\v^(lib|mod)$'
+    let l:modules = l:modules[:-2]
+  endif
+
+  " Build up tests module namespace
+  let l:modules = l:modules + ['tests']
+  return join(l:modules, '::') . '::'
 endfunction

@@ -76,9 +76,9 @@ function! test#ruby#minitest#executable() abort
     endif
   else
     if filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
-      return 'bundle exec ruby -I test'
+      return 'bundle exec ruby -Itest'
     else
-      return 'ruby -I test'
+      return 'ruby -Itest'
     endif
   endif
 endfunction

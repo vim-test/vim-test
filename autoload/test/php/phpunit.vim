@@ -44,6 +44,9 @@ function! test#php#phpunit#build_args(args) abort
 endfunction
 
 function! test#php#phpunit#executable() abort
+  if test#php#paratest#enabled_and_available()
+    return test#php#paratest#enabled_and_available()
+  endif
   if filereadable('./vendor/bin/phpunit')
     return './vendor/bin/phpunit'
   elseif filereadable('./bin/phpunit')

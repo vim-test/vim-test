@@ -1,6 +1,7 @@
 source spec/support/helpers.vim
 
 describe "PHPUnit"
+  let paratest_enabled_and_available = g:test#php#paratest#enabled_and_available()
 
   before
     cd spec/fixtures/phpunit
@@ -11,72 +12,74 @@ describe "PHPUnit"
     cd -
   end
 
-  it "runs file tests"
-    view NormalTest.php
-    TestFile
+  if paratest_enabled_and_available == 0
+    it "runs file tests"
+      view NormalTest.php
+      TestFile
 
-    Expect g:test#last_command == 'phpunit --colors NormalTest.php'
-  end
+      Expect g:test#last_command == 'phpunit --colors NormalTest.php'
+    end
 
-  it "runs nearest tests"
-    view +1 NormalTest.php
-    TestNearest
+    it "runs nearest tests"
+      view +1 NormalTest.php
+      TestNearest
 
-    Expect g:test#last_command == "phpunit --colors NormalTest.php"
+      Expect g:test#last_command == "phpunit --colors NormalTest.php"
 
-    view +9 NormalTest.php
-    TestNearest
+      view +9 NormalTest.php
+      TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter '::testShouldAddTwoNumbers' NormalTest.php"
+      Expect g:test#last_command == "phpunit --colors --filter '::testShouldAddTwoNumbers' NormalTest.php"
 
-    view +14 NormalTest.php
-    TestNearest
+      view +14 NormalTest.php
+      TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter '::testShouldSubtractTwoNumbers' NormalTest.php"
+      Expect g:test#last_command == "phpunit --colors --filter '::testShouldSubtractTwoNumbers' NormalTest.php"
 
-    view +30 NormalTest.php
-    TestNearest
+      view +30 NormalTest.php
+      TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter '::testShouldAddToExpectedValue' NormalTest.php"
-  end
+      Expect g:test#last_command == "phpunit --colors --filter '::testShouldAddToExpectedValue' NormalTest.php"
+    end
 
-  it  "runs nearest test marked with @test annotation"
-    view +40 NormalTest.php
-    TestNearest
+    it  "runs nearest test marked with @test annotation"
+      view +40 NormalTest.php
+      TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAnnotation' NormalTest.php"
+      Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAnnotation' NormalTest.php"
 
-    view +50 NormalTest.php
-    TestNearest
+      view +50 NormalTest.php
+      TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAnnotationAndCrazyDocblock' NormalTest.php"
-  end
+      Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAnnotationAndCrazyDocblock' NormalTest.php"
+    end
 
-  it  "runs nearest test containing an anonymous class"
-    view +61 NormalTest.php
-    TestNearest
+    it  "runs nearest test containing an anonymous class"
+      view +61 NormalTest.php
+      TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter '::testWithAnAnonymousClass' NormalTest.php"
+      Expect g:test#last_command == "phpunit --colors --filter '::testWithAnAnonymousClass' NormalTest.php"
 
-    view +76 NormalTest.php
-    TestNearest
+      view +76 NormalTest.php
+      TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter '::aTestMakedWithTestAnnotationAndWithAnAnonymousClass' NormalTest.php"
-  end
+      Expect g:test#last_command == "phpunit --colors --filter '::aTestMakedWithTestAnnotationAndWithAnAnonymousClass' NormalTest.php"
+    end
 
-  " Fix for: https://github.com/janko/vim-test/issues/361
-  it "runs nearest test with a one line @test annotation"
-    view +83 NormalTest.php
-    TestNearest
+    " Fix for: https://github.com/janko/vim-test/issues/361
+    it "runs nearest test with a one line @test annotation"
+      view +83 NormalTest.php
+      TestNearest
 
-    Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAnnotationOnOneLine' NormalTest.php"
-  end
+      Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAnnotationOnOneLine' NormalTest.php"
+    end
 
-  it "runs test suites"
-    view NormalTest.php
-    TestSuite
+    it "runs test suites"
+      view NormalTest.php
+      TestSuite
 
-    Expect g:test#last_command == 'phpunit --colors'
+      Expect g:test#last_command == 'phpunit --colors'
+    end
   end
 
   it "doesn't recognize files that don't end with 'Test'"

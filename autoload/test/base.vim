@@ -44,7 +44,7 @@ endfunction
 
 function! test#base#no_colors() abort
   let strategy = get(g:, 'test#strategy', 'basic')
-  return has('gui_running') && strategy ==# 'basic'
+  return has('gui_running') && strategy['file'] ==# 'basic'
 endfunction
 
 " Takes a position and a dictionary of patterns, and returns list of strings

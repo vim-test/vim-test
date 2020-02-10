@@ -15,7 +15,7 @@ function! test#viml#themis#build_position(type, position) abort
   endif
 endfunction
 
-function! test#viml#themis#build_args(args) abort
+function! test#viml#themis#build_args(args, strategy) abort
   return a:args
 endfunction
 

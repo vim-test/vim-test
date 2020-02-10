@@ -20,7 +20,7 @@ function! test#ruby#rails#build_position(type, position) abort
   endif
 endfunction
 
-function! test#ruby#rails#build_args(args) abort
+function! test#ruby#rails#build_args(args, strategy) abort
   return a:args
 endfunction
 

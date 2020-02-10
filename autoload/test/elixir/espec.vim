@@ -16,7 +16,7 @@ function! test#elixir#espec#build_position(type, position) abort
   endif
 endfunction
 
-function! test#elixir#espec#build_args(args) abort
+function! test#elixir#espec#build_args(args, strategy) abort
  return a:args
 endfunction
 

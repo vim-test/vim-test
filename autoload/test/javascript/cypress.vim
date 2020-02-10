@@ -16,7 +16,7 @@ function! test#javascript#cypress#build_position(type, position) abort
 endfunction
 
 let s:yarn_command = '\<yarn\>'
-function! test#javascript#cypress#build_args(args) abort
+function! test#javascript#cypress#build_args(args, strategy) abort
   if exists('g:test#javascript#cypress#executable')
     \ && g:test#javascript#cypress#executable =~# s:yarn_command
     return filter(a:args, 'v:val != "--"')

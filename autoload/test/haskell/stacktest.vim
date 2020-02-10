@@ -27,7 +27,7 @@ function! test#haskell#stacktest#build_position(type, position) abort
   endif
 endfunction
 
-function! test#haskell#stacktest#build_args(args) abort
+function! test#haskell#stacktest#build_args(args, strategy) abort
   return a:args
 endfunction
 

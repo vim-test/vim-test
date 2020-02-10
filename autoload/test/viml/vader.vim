@@ -21,7 +21,7 @@ function! test#viml#vader#build_position(type, position) abort
   endif
 endfunction
 
-function! test#viml#vader#build_args(args) abort
+function! test#viml#vader#build_args(args, strategy) abort
   return a:args
 endfunction
 

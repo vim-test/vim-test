@@ -17,7 +17,7 @@ function! test#erlang#eunit#build_position(type, position) abort
   endif
 endfunction
 
-function! test#erlang#eunit#build_args(args) abort
+function! test#erlang#eunit#build_args(args, strategy) abort
   return  ['eunit'] + a:args
 endfunction
 

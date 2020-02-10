@@ -42,7 +42,7 @@ function! test#rust#cargotest#build_position(type, position) abort
   return []
 endfunction
 
-function! test#rust#cargotest#build_args(args) abort
+function! test#rust#cargotest#build_args(args, strategy) abort
   return a:args
 endfunction
 

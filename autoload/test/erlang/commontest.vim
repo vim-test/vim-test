@@ -21,7 +21,7 @@ function! test#erlang#commontest#build_position(type, position) abort
     endif
 endfunction
 
-function! test#erlang#commontest#build_args(args) abort
+function! test#erlang#commontest#build_args(args, strategy) abort
   return  ['ct'] + a:args
 endfunction
 

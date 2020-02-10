@@ -15,7 +15,7 @@ function! test#viml#testify#build_position(type, position) abort
   return [':TestifySuite']
 endfunction
 
-function! test#viml#testify#build_args(args) abort
+function! test#viml#testify#build_args(args, strategy) abort
   return a:args
 endfunction
 

@@ -28,7 +28,7 @@ function! test#javascript#lab#build_position(type, position) abort
   endif
 endfunction
 
-function! test#javascript#lab#build_args(args) abort
+function! test#javascript#lab#build_args(args, strategy) abort
   return a:args
 endfunction
 

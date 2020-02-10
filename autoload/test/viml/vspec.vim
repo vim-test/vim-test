@@ -14,7 +14,7 @@ function! test#viml#vspec#build_position(type, position) abort
   endif
 endfunction
 
-function! test#viml#vspec#build_args(args) abort
+function! test#viml#vspec#build_args(args, strategy) abort
   if empty(filter(copy(a:args), 'test#base#file_exists(v:val)'))
     let test_dir = get(filter(['t/', 'test/', 'spec/'], 'isdirectory(v:val)'), 0)
     call add(a:args, test_dir)

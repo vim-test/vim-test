@@ -38,7 +38,7 @@ function! test#javascript#intern#build_position(type, position) abort
   endif
 endfunction
 
-function! test#javascript#intern#build_args(args) abort
+function! test#javascript#intern#build_args(args, strategy) abort
   let config = 'config=' . g:test#javascript#intern#config_module
   return [config] + a:args
 endfunction

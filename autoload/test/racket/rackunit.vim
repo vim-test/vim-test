@@ -10,7 +10,7 @@ function! test#racket#rackunit#build_position(type, position) abort
   return [a:position['file']]
 endfunction
 
-function! test#racket#rackunit#build_args(args) abort
+function! test#racket#rackunit#build_args(args, strategy) abort
   return a:args
 endfunction
 

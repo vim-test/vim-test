@@ -30,8 +30,8 @@ function! test#base#executable(runner) abort
   endif
 endfunction
 
-function! test#base#build_args(runner, args) abort
-  return test#{a:runner}#build_args(a:args)
+function! test#base#build_args(runner, args, strategy) abort
+  return test#{a:runner}#build_args(a:args, a:strategy)
 endfunction
 
 function! test#base#file_exists(file) abort
@@ -42,9 +42,8 @@ function! test#base#escape_regex(string) abort
   return escape(a:string, '?+*\^$.|{}[]()')
 endfunction
 
-function! test#base#no_colors() abort
-  let strategy = get(g:, 'test#strategy', 'basic')
-  return has('gui_running') && strategy['file'] ==# 'basic'
+function! test#base#no_colors(strategy) abort
+  return has('gui_running') && a:strategy ==# 'basic'
 endfunction
 
 " Takes a position and a dictionary of patterns, and returns list of strings

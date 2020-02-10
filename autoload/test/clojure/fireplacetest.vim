@@ -22,7 +22,7 @@ function! test#clojure#fireplacetest#build_position(type, position) abort
   endif
 endfunction
 
-function! test#clojure#fireplacetest#build_args(args) abort
+function! test#clojure#fireplacetest#build_args(args, strategy) abort
   if get(a:args, 0, '') =~# 'RunTests'
     return a:args
   else

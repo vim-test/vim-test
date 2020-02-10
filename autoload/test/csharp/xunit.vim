@@ -43,7 +43,7 @@ function! test#csharp#xunit#build_position(type, position) abort
   return []
 endfunction
 
-function! test#csharp#xunit#build_args(args) abort
+function! test#csharp#xunit#build_args(args, strategy) abort
   let l:args = a:args
   call insert(l:args, '-nologo')
   return [join(l:args, ' ')]

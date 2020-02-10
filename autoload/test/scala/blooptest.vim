@@ -28,7 +28,7 @@ function! test#scala#blooptest#build_position(type, position) abort
   endif
 endfunction
 
-function! test#scala#blooptest#build_args(args) abort
+function! test#scala#blooptest#build_args(args, strategy) abort
   return a:args
 endfunction
 

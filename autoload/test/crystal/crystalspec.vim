@@ -16,7 +16,7 @@ function! test#crystal#crystalspec#build_position(type, position) abort
   endif
 endfunction
 
-function! test#crystal#crystalspec#build_args(args) abort
+function! test#crystal#crystalspec#build_args(args, strategy) abort
   return a:args
 endfunction
 

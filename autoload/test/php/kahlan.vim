@@ -14,10 +14,10 @@ function! test#php#kahlan#build_position(type, position) abort
   return []
 endfunction
 
-function! test#php#kahlan#build_args(args) abort
+function! test#php#kahlan#build_args(args, strategy) abort
   let args = a:args
 
-  if test#base#no_colors()
+  if test#base#no_colors(a:strategy)
     let args = ['--no-colors=true'] + args
   endif
 

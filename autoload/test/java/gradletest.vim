@@ -25,7 +25,7 @@ function! test#java#gradletest#build_position(type, position) abort
   endif
 endfunction
 
-function! test#java#gradletest#build_args(args) abort
+function! test#java#gradletest#build_args(args, strategy) abort
   return a:args
 endfunction
 

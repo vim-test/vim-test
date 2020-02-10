@@ -21,7 +21,7 @@ function! test#elm#elmtest#build_position(type, position) abort
   endif
 endfunction
 
-function! test#elm#elmtest#build_args(args) abort
+function! test#elm#elmtest#build_args(args, strategy) abort
   return a:args
 endfunction
 

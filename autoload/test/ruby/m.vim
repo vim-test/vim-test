@@ -16,7 +16,7 @@ function! test#ruby#m#build_position(type, position) abort
   endif
 endfunction
 
-function! test#ruby#m#build_args(args) abort
+function! test#ruby#m#build_args(args, strategy) abort
   return a:args
 endfunction
 

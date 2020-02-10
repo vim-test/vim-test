@@ -23,7 +23,7 @@ function! test#javascript#cucumberjs#build_position(type, position) abort
   endif
 endfunction
 
-function! test#javascript#cucumberjs#build_args(args) abort
+function! test#javascript#cucumberjs#build_args(args, strategy) abort
   return a:args
 endfunction
 

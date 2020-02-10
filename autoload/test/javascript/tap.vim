@@ -23,7 +23,7 @@ function! test#javascript#tap#build_position(type, position) abort
   endif
 endfunction
 
-function! test#javascript#tap#build_args(args) abort
+function! test#javascript#tap#build_args(args, strategy) abort
   let args = a:args
   for executable in g:test#javascript#tap#reporters
     if filereadable('node_modules/.bin/' . executable)

@@ -30,7 +30,7 @@ function! test#csharp#dotnettest#build_position(type, position) abort
   endif
 endfunction
 
-function! test#csharp#dotnettest#build_args(args) abort
+function! test#csharp#dotnettest#build_args(args, strategy) abort
   let args = a:args
   return [join(args, ' ')]
 endfunction

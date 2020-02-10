@@ -14,7 +14,7 @@ function! test#lua#busted#build_position(type, position) abort
   endif
 endfunction
 
-function! test#lua#busted#build_args(args) abort
+function! test#lua#busted#build_args(args, strategy) abort
   return a:args
 endfunction
 

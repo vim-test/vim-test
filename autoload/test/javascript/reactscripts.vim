@@ -22,7 +22,7 @@ function! test#javascript#reactscripts#build_position(type, position) abort
 endfunction
 
 let s:yarn_command = '\<yarn\>'
-function! test#javascript#reactscripts#build_args(args) abort
+function! test#javascript#reactscripts#build_args(args, strategy) abort
   if exists('g:test#javascript#reactscripts#executable')
     \ && g:test#javascript#reactscripts#executable =~# s:yarn_command
     return filter(a:args, 'v:val != "--"')

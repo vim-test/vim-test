@@ -25,7 +25,7 @@ function! test#scala#sbttest#build_position(type, position) abort
   endif
 endfunction
 
-function! test#scala#sbttest#build_args(args) abort
+function! test#scala#sbttest#build_args(args, strategy) abort
   return a:args
 endfunction
 

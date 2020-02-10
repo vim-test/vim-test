@@ -27,7 +27,7 @@ function! test#python#nose#build_position(type, position) abort
   endif
 endfunction
 
-function! test#python#nose#build_args(args) abort
+function! test#python#nose#build_args(args, strategy) abort
   return ['--doctest-tests'] + a:args
 endfunction
 

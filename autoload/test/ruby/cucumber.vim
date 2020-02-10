@@ -18,10 +18,10 @@ function! test#ruby#cucumber#build_position(type, position) abort
   endif
 endfunction
 
-function! test#ruby#cucumber#build_args(args) abort
+function! test#ruby#cucumber#build_args(args, strategy) abort
   let args = a:args
 
-  if test#base#no_colors()
+  if test#base#no_colors(a:strategy)
     let args = ['--no-color'] + args
   endif
 

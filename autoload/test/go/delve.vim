@@ -29,7 +29,7 @@ function! test#go#delve#build_options(args, options) abort
   return args + a:options
 endfunction
 
-function! test#go#delve#build_args(args) abort
+function! test#go#delve#build_args(args, strategy) abort
   let args = a:args
 
   " Optionally, if the vim-delve plugin is installed this will also include

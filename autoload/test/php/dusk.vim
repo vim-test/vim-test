@@ -19,10 +19,10 @@ function! test#php#dusk#build_position(type, position) abort
   endif
 endfunction
 
-function! test#php#dusk#build_args(args) abort
+function! test#php#dusk#build_args(args, strategy) abort
   let args = a:args
 
-  if !test#base#no_colors()
+  if !test#base#no_colors(a:strategy)
     let args = ['--colors'] + args
   endif
 

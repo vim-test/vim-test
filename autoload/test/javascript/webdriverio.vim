@@ -16,7 +16,7 @@ function! test#javascript#webdriverio#build_position(type, position) abort
   endif
 endfunction
 
-function! test#javascript#webdriverio#build_args(args) abort
+function! test#javascript#webdriverio#build_args(args, strategy) abort
   return ['wdio.conf.js'] + a:args
 endfunction
 

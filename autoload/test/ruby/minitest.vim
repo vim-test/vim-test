@@ -21,7 +21,7 @@ function! test#ruby#minitest#build_position(type, position) abort
   endif
 endfunction
 
-function! test#ruby#minitest#build_args(args) abort
+function! test#ruby#minitest#build_args(args, strategy) abort
   for idx in range(0, len(a:args) - 1)
     if test#base#file_exists(a:args[idx])
       let path = remove(a:args, idx) | break

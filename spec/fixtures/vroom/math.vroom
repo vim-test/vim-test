@@ -1,0 +1,6 @@
+Here's an example vroom file.
+
+Addition example:
+
+  :echomsg 1 + 1
+  ~ 2

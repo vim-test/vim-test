@@ -18,7 +18,7 @@ let g:test#default_runners = {
   \ 'CSharp':     ['Xunit', 'DotnetTest'],
   \ 'Shell':      ['Bats'],
   \ 'Swift':      ['SwiftPM'],
-  \ 'VimL':       ['Themis', 'VSpec', 'Vader', 'Testify'],
+  \ 'VimL':       ['Themis', 'VSpec', 'Vader', 'Testify', 'Vroom'],
   \ 'Lua':        ['Busted'],
   \ 'PHP':        ['Codeception', 'Dusk', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
   \ 'Perl':       ['Prove'],

@@ -34,14 +34,14 @@ runners are supported:
 | **Lua**        | Busted                                                                                      | `busted`                                                                                                        |
 | **PHP**        | Behat, Codeception, Kahlan, Peridot, PHPUnit, PHPSpec, Dusk                                 | `behat`, `codeception`, `dusk`, `kahlan`, `peridot`, `phpunit`, `phpspec`                                       |
 | **Perl**       | Prove                                                                                       | `prove`                                                                                                         |
-| **Python**     | Django, Mamba, Nose, Nose2, PyTest, PyUnit                                                  | `djangotest`, `djangonose`, `mamba`, `nose`, `nose2`, `pytest`, `pyunit`                                                  |
+| **Python**     | Django, Mamba, Nose, Nose2, PyTest, PyUnit                                                  | `djangotest`, `djangonose`, `mamba`, `nose`, `nose2`, `pytest`, `pyunit`                                        |
 | **Racket**     | RackUnit                                                                                    | `rackunit`                                                                                                      |
 | **Ruby**       | Cucumber, [M], [Minitest][minitest], Rails, RSpec                                           | `cucumber`, `m`, `minitest`, `rails`, `rspec`                                                                   |
 | **Rust**       | Cargo                                                                                       | `cargotest`                                                                                                     |
 | **Scala**      | SBT, Bloop                                                                                  | `sbttest`, `blooptest`                                                                                          |
 | **Shell**      | Bats                                                                                        | `bats`                                                                                                          |
 | **Swift**      | Swift Package Manager                                                                       | `swiftpm`                                                                                                       |
-| **VimScript**  | Vader.vim, VSpec, Themis, Testify                                                           | `vader`, `vspec`, `themis`, `testify`                                                                           |
+| **VimScript**  | Vader.vim, Vroom, VSpec, Themis, Testify                                                    | `vader`, `vroom`, `vspec`, `themis`, `testify`                                                                  |
 
 ## Setup
 

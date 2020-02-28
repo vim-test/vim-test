@@ -11,11 +11,26 @@ describe "Bats"
     cd -
   end
 
-  it "runs file tests instead of nearest tests"
-    view normal.bats
+  it "runs nearest test"
+    view +6 normal.bats
     TestNearest
 
-    Expect g:test#last_command == 'bats normal.bats'
+    Expect g:test#last_command == 'bats normal.bats -f ''^numbers 2$'''
+
+    view +1 normal.bats
+    TestNearest
+
+    Expect g:test#last_command == 'bats normal.bats -f ''^numbers$'''
+
+    view +10 normal.bats
+    TestNearest
+
+    Expect g:test#last_command == 'bats normal.bats -f ''^single quotes$'''
+
+    view +14 normal.bats
+    TestNearest
+
+    Expect g:test#last_command == 'bats normal.bats -f ''^indented$'''
   end
 
   it "runs file tests"

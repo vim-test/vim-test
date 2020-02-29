@@ -258,7 +258,7 @@ AsyncRun ~
 Runs test commands asynchronously using new APIs in Vim 8 and NeoVim.
 Requires AsyncRun plugin.
 >
-  let test#strategy = 'asyncrun'
+  let test#strategy = 'asyncrun' or 'asyncrun_background'
 <
 Basic (default) ~
 

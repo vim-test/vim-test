@@ -9,7 +9,11 @@ endfunction
 function! test#elixir#exunit#build_position(type, position) abort
   if test#elixir#exunit#executable() ==# 'mix test'
     if a:type ==# 'nearest'
-      return [a:position['file'].':'.a:position['line']]
+      if a:position['line'] > 1
+          return [a:position['file'].':'.a:position['line']]
+      else
+          return [a:position['file']]
+      endif
     elseif a:type ==# 'file'
       return [a:position['file']]
     else

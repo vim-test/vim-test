@@ -16,11 +16,18 @@ describe "ExUnit"
       view +1 normal_test.exs
       TestNearest
 
-      Expect g:test#last_command == 'mix test normal_test.exs:1'
+      Expect g:test#last_command == 'mix test normal_test.exs'
+    end
+
+    it "runs specific nearest test"
+      view +6 normal_test.exs
+      TestNearest
+
+      Expect g:test#last_command == 'mix test normal_test.exs:6'
     end
 
     it "runs file tests"
-      view normal_test.exs
+      view +1 normal_test.exs
       TestFile
 
       Expect g:test#last_command == 'mix test normal_test.exs'

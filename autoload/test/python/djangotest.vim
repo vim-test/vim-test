@@ -37,11 +37,24 @@ function! test#python#djangotest#executable() abort
 endfunction
 
 function! s:get_import_path(filepath) abort
+  " Iterate upwards to find the top level module
+  let top_level_module = fnamemodify(a:filepath, ':h')
+  while 1
+    if filereadable(findfile('__init__.py', top_level_module))
+      let top_level_module = fnamemodify(top_level_module, ':h')
+    else
+      break
+    endif
+  endwhile
   " Get path to file from cwd and without extension.
   let path = fnamemodify(a:filepath, ':.:r')
   " Replace the /'s in the file path with .'s
   let path = substitute(path, '\/', '.', 'g')
   let path = substitute(path, '\\', '.', 'g')
+  " Substring the path to exclude top level module
+  let path = substitute(path, top_level_module, '', 'g')
+  " Trim leading period
+  let path = trim(path, '.')
   return path
 endfunction
 

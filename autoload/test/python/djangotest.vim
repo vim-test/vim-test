@@ -39,11 +39,32 @@ endfunction
 function! s:get_import_path(filepath) abort
   " Get path to file from cwd and without extension.
   let path = fnamemodify(a:filepath, ':.:r')
+  " Get the current module
+  let top_level_module = fnamemodify(a:filepath, ':h')
+  " Iterate up directories to find the highest __init__.py
+  while filereadable(findfile('__init__.py', top_level_module))
+    if top_level_module == "."
+      return s:replace_slashes(path)
+    endif
+    let top_level_module = fnamemodify(top_level_module, ':h')
+  endwhile
+  " Substring the path to exclude top level module
+  let path = substitute(path, top_level_module, '', '')
+  return s:replace_slashes(path)
+endfunction
+
+function! s:replace_slashes(path) abort
   " Replace the /'s in the file path with .'s
-  let path = substitute(path, '\/', '.', 'g')
+  let path = substitute(a:path, '\/', '.', 'g')
   let path = substitute(path, '\\', '.', 'g')
+  " Trim leading period
+  let path = s:trim(path)
   return path
 endfunction
+
+func s:trim(str) abort
+  return matchstr(a:str,'^\.*\zs.\{-}\ze\s*$')
+endfunc
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#python#patterns)

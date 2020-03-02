@@ -58,7 +58,7 @@ function! s:replace_slashes(path) abort
   let path = substitute(a:path, '\/', '.', 'g')
   let path = substitute(path, '\\', '.', 'g')
   " Trim leading period
-  let path = trim(path, '.')
+  let path = s:trim(path, '.')
   return path
 endfunction
 

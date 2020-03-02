@@ -50,8 +50,6 @@ function! s:get_import_path(filepath) abort
   endwhile
   " Substring the path to exclude top level module
   let path = substitute(path, top_level_module, '', '')
-  " Trim leading period
-  let path = trim(path, '.')
   return s:replace_slashes(path)
 endfunction
 
@@ -59,6 +57,8 @@ function! s:replace_slashes(path) abort
   " Replace the /'s in the file path with .'s
   let path = substitute(a:path, '\/', '.', 'g')
   let path = substitute(path, '\\', '.', 'g')
+  " Trim leading period
+  let path = trim(path, '.')
   return path
 endfunction
 

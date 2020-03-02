@@ -58,12 +58,12 @@ function! s:replace_slashes(path) abort
   let path = substitute(a:path, '\/', '.', 'g')
   let path = substitute(path, '\\', '.', 'g')
   " Trim leading period
-  let path = s:trim(path, '.')
+  let path = s:trim(path)
   return path
 endfunction
 
 func s:trim(str) abort
-  return matchstr(a:str,'^\s*\zs.\{-}\ze\s*$')
+  return matchstr(a:str,'^\.*\zs.\{-}\ze\s*$')
 endfunc
 
 function! s:nearest_test(position) abort

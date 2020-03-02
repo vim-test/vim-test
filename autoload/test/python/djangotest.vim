@@ -62,6 +62,10 @@ function! s:replace_slashes(path) abort
   return path
 endfunction
 
+func s:trim(str) abort
+  return matchstr(a:str,'^\s*\zs.\{-}\ze\s*$')
+endfunc
+
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#python#patterns)
   return join(name['namespace'] + name['test'], '.')

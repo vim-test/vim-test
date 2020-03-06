@@ -36,24 +36,18 @@ function! test#strategy#asyncrun(cmd) abort
   execute 'AsyncRun '.a:cmd
 endfunction
 
-function! test#strategy#asyncrun_background_status() abort
-  if g:asyncrun_code == 0
-    return "Success"
-  endif
-  return "Failure"
-endfunction
-
-function! test#strategy#asyncrun_background_pretty() abort
-  return substitute(g:test#background_cmd, '\', '', '')
-endfunction
-
-function! test#strategy#asyncrun_background(cmd) abort
-  let g:test#strategy#cmd = a:cmd
+function! test#strategy#asyncrun_setup_unlet_global_autocmd() abort
   augroup asyncrun_background
     autocmd!
     autocmd User AsyncRunStop if exists('g:test#strategy#cmd') | unlet g:test#strategy#cmd | endif
   augroup END
-  execute 'AsyncRun -silent -post=echom\ test\#strategy\#asyncrun_background_status().":"\ test\#strategy\#asyncrun_background_pretty() '.a:cmd
+endfunction
+
+function! test#strategy#asyncrun_background(cmd) abort
+  let g:test#strategy#cmd = a:cmd
+  call test#strategy#asyncrun_setup_unlet_global_autocmd()
+  execute 'AsyncRun -mode=async -silent -post=echom\ eval("g:asyncrun_code\ ?\"Failure\":\"Success\"").":"'
+          \ .'\ substitute(g:test\#strategy\#cmd,\ "\\",\ "",\ "") '.a:cmd
 endfunction
 
 function! test#strategy#dispatch(cmd) abort

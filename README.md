@@ -189,6 +189,7 @@ following strategies:
  * Neomake
  * MakeGreen
  * Dispatch.vim
+ * `asyncrun_background`
 
 Regardless of which you pick, it's recommended you have Dispatch.vim installed as the
 strategies will automatically use it to determine the correct compiler, ensuring the

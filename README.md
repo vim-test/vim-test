@@ -96,7 +96,7 @@ let test#strategy = "dispatch"
 | **[VimShell]**                  | `vimshell`                       | Runs test commands in a shell written in VimScript.                                                        |
 | **[Vim&nbsp;Tmux&nbsp;Runner]** | `vtr`                            | Runs test commands in a small tmux pane.                                                                   |
 | **[VimProc]**                   | `vimproc`                        | Runs test commands asynchronously.                                                                         |
-| **[AsyncRun]**                  | `asyncrun` `asyncrun_background` | Runs test commands asynchronosuly using new APIs in Vim 8 and NeoVim (`:AsyncRun` or `:AsyncRun -open=0`). |
+| **[AsyncRun]**                  | `asyncrun` `asyncrun_background` | Runs test commands asynchronosuly using new APIs in Vim 8 and NeoVim (`:AsyncRun` or `:AsyncRun -silent`). |
 | **Terminal.app**                | `terminal`                       | Sends test commands to Terminal (useful in MacVim GUI).                                                    |
 | **iTerm2.app**                  | `iterm`                          | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                                               |
 | **[Kitty]**                     | `kitty`                          | Sends test commands to Kitty terminal.                                                                     |

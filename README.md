@@ -80,27 +80,27 @@ Test.vim can run tests using different execution environments called
 let test#strategy = "dispatch"
 ```
 
-| Strategy                        | Identifier                       | Description                                                                                                |
-| :-----:                         | :-----:                          | :----------                                                                                                |
-| **Basic**&nbsp;(default)        | `basic`                          | Runs test commands with `:!` on Vim, and with `:terminal` on Neovim.                                       |
-| **Make**                        | `make` `make_bang`               | Runs test commands with `:make` or `:make!`.                                                               |
-| **Neovim**                      | `neovim`                         | Runs test commands with `:terminal` in a split window.                                                     |
-| **Vim8 Terminal**               | `vimterminal`                    | Runs test commands with `term_start()` in a split window.                                                  |
-| **[Dispatch]**                  | `dispatch` `dispatch_background` | Runs test commands with `:Dispatch` or `:Dispatch!`.                                                       |
-| **[Vimux]**                     | `vimux`                          | Runs test commands in a small tmux pane at the bottom of your terminal.                                    |
-| **[Tslime]**                    | `tslime`                         | Runs test commands in a tmux pane you specify.                                                             |
-| **[Slimux]**                    | `slimux`                         | Runs test commands in a tmux pane you specify.                                                             |
-| **[Neoterm]**                   | `neoterm`                        | Runs test commands with `:T`, see neoterm docs for display customization.                                  |
-| **[Neomake]**                   | `neomake`                        | Runs test commands asynchronously with `:NeomakeProject`.                                                  |
-| **[MakeGreen]**                 | `makegreen`                      | Runs test commands with `:MakeGreen`.                                                                      |
-| **[VimShell]**                  | `vimshell`                       | Runs test commands in a shell written in VimScript.                                                        |
-| **[Vim&nbsp;Tmux&nbsp;Runner]** | `vtr`                            | Runs test commands in a small tmux pane.                                                                   |
-| **[VimProc]**                   | `vimproc`                        | Runs test commands asynchronously.                                                                         |
-| **[AsyncRun]**                  | `asyncrun` `asyncrun_background` | Runs test commands asynchronosuly using new APIs in Vim 8 and NeoVim (`:AsyncRun` or `:AsyncRun -silent`). |
-| **Terminal.app**                | `terminal`                       | Sends test commands to Terminal (useful in MacVim GUI).                                                    |
-| **iTerm2.app**                  | `iterm`                          | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                                               |
-| **[Kitty]**                     | `kitty`                          | Sends test commands to Kitty terminal.                                                                     |
-| **[Shtuff]**                    | `shtuff`                         | Sends test commands to remote terminal via [shtuff][Shtuff].                                               |
+| Strategy                        | Identifier                                                  | Description                                                                                                                                                       |
+| :-----:                         | :-----:                                                     | :----------                                                                                                                                                       |
+| **Basic**&nbsp;(default)        | `basic`                                                     | Runs test commands with `:!` on Vim, and with `:terminal` on Neovim.                                                                                              |
+| **Make**                        | `make` `make_bang`                                          | Runs test commands with `:make` or `:make!`.                                                                                                                      |
+| **Neovim**                      | `neovim`                                                    | Runs test commands with `:terminal` in a split window.                                                                                                            |
+| **Vim8 Terminal**               | `vimterminal`                                               | Runs test commands with `term_start()` in a split window.                                                                                                         |
+| **[Dispatch]**                  | `dispatch` `dispatch_background`                            | Runs test commands with `:Dispatch` or `:Dispatch!`.                                                                                                              |
+| **[Vimux]**                     | `vimux`                                                     | Runs test commands in a small tmux pane at the bottom of your terminal.                                                                                           |
+| **[Tslime]**                    | `tslime`                                                    | Runs test commands in a tmux pane you specify.                                                                                                                    |
+| **[Slimux]**                    | `slimux`                                                    | Runs test commands in a tmux pane you specify.                                                                                                                    |
+| **[Neoterm]**                   | `neoterm`                                                   | Runs test commands with `:T`, see neoterm docs for display customization.                                                                                         |
+| **[Neomake]**                   | `neomake`                                                   | Runs test commands asynchronously with `:NeomakeProject`.                                                                                                         |
+| **[MakeGreen]**                 | `makegreen`                                                 | Runs test commands with `:MakeGreen`.                                                                                                                             |
+| **[VimShell]**                  | `vimshell`                                                  | Runs test commands in a shell written in VimScript.                                                                                                               |
+| **[Vim&nbsp;Tmux&nbsp;Runner]** | `vtr`                                                       | Runs test commands in a small tmux pane.                                                                                                                          |
+| **[VimProc]**                   | `vimproc`                                                   | Runs test commands asynchronously.                                                                                                                                |
+| **[AsyncRun]**                  | `asyncrun` `asyncrun_background` `asyncrun_background_term` | Runs test commands asynchronosuly using new APIs in Vim 8 and NeoVim (`:AsyncRun`, `:AsyncRun -mode=async -silent`, or `:AsyncRun -mode=term -pos=tab -focus=0`). |
+| **Terminal.app**                | `terminal`                                                  | Sends test commands to Terminal (useful in MacVim GUI).                                                                                                           |
+| **iTerm2.app**                  | `iterm`                                                     | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                                                                                                      |
+| **[Kitty]**                     | `kitty`                                                     | Sends test commands to Kitty terminal.                                                                                                                            |
+| **[Shtuff]**                    | `shtuff`                                                    | Sends test commands to remote terminal via [shtuff][Shtuff].                                                                                                      |
 
 You can also set up strategies per granularity:
 
@@ -179,6 +179,18 @@ And in your vimrc:
 ```
 let g:shtuff_receiver = 'devrunner'
 ```
+
+### `asyncrun_background` and `asyncrun_background_term` setup
+
+`asyncrun_background` will load test results into the quickfix buffer.
+
+`asyncrun_background_term` will open a terminal in a new tab and run the tests while
+remaining in the current window.
+
+These are hardcoded solutions and will not be affected by your global `AsyncRun` settings.
+If you want to switch between them then change `test#strategy`.
+
+Note: the base `asyncrun` option will be affected by your global asyncrun settings.
 
 ### Quickfix Strategies
 

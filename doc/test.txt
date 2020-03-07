@@ -408,6 +408,14 @@ And in your vimrc:
 let g:shtuff_receiver = 'devrunner'
 <
 
+asyncrun_background | asyncrun_background_term ~
+
+These are hardcoded solutions and will not be affected by your global `AsyncRun`
+settings. If you want to switch between them then change `test#strategy`.
+
+Note: that the base `asyncrun` strategy will be affected by your global asyncrun
+settings.
+
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 
 If you want your test results to appear in the |quickfix| window, use one of the

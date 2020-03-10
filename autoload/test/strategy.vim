@@ -36,24 +36,27 @@ function! test#strategy#asyncrun(cmd) abort
   execute 'AsyncRun '.a:cmd
 endfunction
 
-function! test#strategy#asyncrun_background_status() abort
-  if g:asyncrun_code == 0
-    return "Success"
+function! test#strategy#asyncrun_setup_unlet_global_autocmd() abort
+  if !exists('#asyncrun_background#User#AsynRunStop')
+    augroup asyncrun_background
+      autocmd!
+      autocmd User AsyncRunStop if exists('g:test#strategy#cmd') | unlet g:test#strategy#cmd | endif
+    augroup END
   endif
-  return "Failure"
-endfunction
-
-function! test#strategy#asyncrun_background_pretty() abort
-  return substitute(g:test#background_cmd, '\', '', '')
 endfunction
 
 function! test#strategy#asyncrun_background(cmd) abort
   let g:test#strategy#cmd = a:cmd
-  augroup asyncrun_background
-    autocmd!
-    autocmd User AsyncRunStop if exists('g:test#strategy#cmd') | unlet g:test#strategy#cmd | endif
-  augroup END
-  execute 'AsyncRun -silent -post=echom\ test\#strategy\#asyncrun_background_status().":"\ test\#strategy\#asyncrun_background_pretty() '.a:cmd
+  call test#strategy#asyncrun_setup_unlet_global_autocmd()
+  execute 'AsyncRun -mode=async -silent -post=echo\ eval("g:asyncrun_code\ ?\"Failure\":\"Success\"").":"'
+          \ .'\ substitute(g:test\#strategy\#cmd,\ "\\",\ "",\ "") '.a:cmd
+endfunction
+
+function! test#strategy#asyncrun_background_term(cmd) abort
+  let g:test#strategy#cmd = a:cmd
+  call test#strategy#asyncrun_setup_unlet_global_autocmd()
+  execute 'AsyncRun -mode=term -pos=tab -focus=0 -post=echo\ eval("g:asyncrun_code\ ?\"Failure\":\"Success\"").":"'
+          \ .'\ substitute(g:test\#strategy\#cmd,\ "\\",\ "",\ "") '.a:cmd
 endfunction
 
 function! test#strategy#dispatch(cmd) abort

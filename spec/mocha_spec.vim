@@ -115,11 +115,11 @@ describe "Mocha"
     endtry
   end
 
-  it "doesn't detect JavaScripts which are not in the test/ folder"
-    view outside.js
-    TestSuite
+  it "can handle test file when outside test directory"
+    view src/addition.test.js
+    TestFile
 
-    Expect exists('g:test#last_command') == 0
+    Expect g:test#last_command == 'mocha src/addition.test.js'
   end
 
 end

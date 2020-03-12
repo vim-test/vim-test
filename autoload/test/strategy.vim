@@ -75,8 +75,8 @@ function! test#strategy#neovim(cmd) abort
   let term_position = get(g:, 'test#neovim#term_position', 'botright')
   execute term_position . ' new'
   call termopen(a:cmd)
-  au BufDelete <buffer> wincmd p " switch back to last window
-  startinsert
+  au BufDelete <buffer> wincmd p " switch back to last window on delete
+  execute feedkeys("G\<C-W>\<C-P>") " switch back to last window
 endfunction
 
 function! test#strategy#vimterminal(cmd) abort

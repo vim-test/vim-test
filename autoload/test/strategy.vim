@@ -76,7 +76,13 @@ function! test#strategy#neovim(cmd) abort
   execute term_position . ' new'
   call termopen(a:cmd)
   au BufDelete <buffer> wincmd p " switch back to last window on delete
-  execute feedkeys("G\<C-W>\<C-P>") " switch back to last window
+
+  " Start insert mode only when running a specific test
+  if stridx(a:cmd, '--filter') != -1
+      startinsert
+  else
+    execute feedkeys("G\<C-W>\<C-P>")
+  endif
 endfunction
 
 function! test#strategy#vimterminal(cmd) abort

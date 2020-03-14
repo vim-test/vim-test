@@ -1,5 +1,5 @@
 if !exists('g:test#ruby#minitest#file_pattern')
-  let g:test#ruby#minitest#file_pattern = '\v_test\.rb$'
+  let g:test#ruby#minitest#file_pattern = '\v(((^|/)test_.+)|_test)\.rb$'
 endif
 
 function! test#ruby#minitest#test_file(file) abort
@@ -29,9 +29,9 @@ function! test#ruby#minitest#build_args(args) abort
   endfor
 
   if exists('path') && isdirectory(path)
-    let path = fnamemodify(path, ':p:.') . '**/*_test.rb'
+    let path = fnamemodify(path, ':p:.') . '**/{test_*,*_test}.rb'
   elseif !exists('path')
-    let path = 'test/**/*_test.rb'
+    let path = 'test/**/{test_*,*_test}.rb'
   endif
 
   for option in ['--name', '--seed']

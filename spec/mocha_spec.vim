@@ -122,4 +122,10 @@ describe "Mocha"
     Expect g:test#last_command == 'mocha src/addition.test.js'
   end
 
+  it "can handle test suite when outside test directory"
+    view src/addition.test.js
+    TestSuite
+
+    Expect g:test#last_command == 'mocha "src/**/*.test.js"'
+  end
 end

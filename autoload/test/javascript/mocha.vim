@@ -17,8 +17,13 @@ function! test#javascript#mocha#build_position(type, position) abort
   elseif a:type ==# 'file'
     return [a:position['file']]
   else
-    let test_dir = get(filter(['test/', 'tests/'], 'isdirectory(v:val)'), 0)
-    return ['--recursive', test_dir]
+    let test_directory = (split(fnamemodify(a:position['file'], ':h'), '\/')[0])
+
+    if test_directory =~# '\v^tests?$'
+        return ['--recursive', test_directory . '/']
+    endif
+
+    return ['"' . test_directory . '/**/*.' . fnamemodify(a:position['file'], ':e:e:e') . '"']
   endif
 endfunction
 

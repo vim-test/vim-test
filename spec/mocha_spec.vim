@@ -122,7 +122,7 @@ describe "Mocha"
     Expect g:test#last_command == 'mocha src/addition.test.js'
   end
 
-  it "can handle test suite when outside test directory"
+  it "uses a glob path for test suite when not using the standard test directory"
     view src/addition.test.js
     TestSuite
 

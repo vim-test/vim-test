@@ -21,10 +21,10 @@ function! test#javascript#jasmine#build_position(type, position) abort
   endif
 endfunction
 
-function! test#javascript#jasmine#build_args(args) abort
+function! test#javascript#jasmine#build_args(args, color) abort
   let args = a:args
 
-  if test#base#no_colors()
+  if !a:color
     let args = ['--no-color'] + args
   endif
 

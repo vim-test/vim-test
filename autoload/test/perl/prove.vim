@@ -14,7 +14,7 @@ function! test#perl#prove#build_position(type, position) abort
   endif
 endfunction
 
-function! test#perl#prove#build_args(args) abort
+function! test#perl#prove#build_args(args, color) abort
   let args = []
   let test_args = []
 
@@ -32,7 +32,7 @@ function! test#perl#prove#build_args(args) abort
     let args = ['--recurse'] + args
   endif
 
-  if test#base#no_colors()
+  if !a:color
     let args = ['--nocolor'] + args
   endif
 

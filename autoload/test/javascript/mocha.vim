@@ -27,10 +27,10 @@ function! test#javascript#mocha#build_position(type, position) abort
   endif
 endfunction
 
-function! test#javascript#mocha#build_args(args) abort
+function! test#javascript#mocha#build_args(args, color) abort
   let args = a:args
 
-  if test#base#no_colors()
+  if !a:color
     let args = ['--no-colors'] + args
     let args = args + ['|', 'sed -e "s///g"']
   endif

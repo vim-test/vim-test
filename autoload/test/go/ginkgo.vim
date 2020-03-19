@@ -26,10 +26,10 @@ function! test#go#ginkgo#build_position(type, position) abort
   endif
 endfunction
 
-function! test#go#ginkgo#build_args(args) abort
+function! test#go#ginkgo#build_args(args, color) abort
   let args = a:args
 
-  if test#base#no_colors()
+  if !a:color
     let args = ['--nocolor'] + args
   endif
 

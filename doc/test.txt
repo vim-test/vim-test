@@ -328,6 +328,13 @@ Requires the Vimux plugin and Tmux.
 >
   let test#strategy = 'vimux'
 <
+Tmuxify ~
+
+Runs test commands in a small Tmux pane at the bottom of your Terminal.
+Requires the Tmuxify plugin and Tmux.
+>
+  let test#strategy = 'tmuxify'
+<
 Tslime ~
 
 Runs test commands in a Tmux pane you specify. Requires the Tslime.vim plugin

@@ -123,7 +123,7 @@ endfunction
 
 function! test#strategy#tmuxify(cmd) abort
   call tmuxify#pane_send_raw('C-u', '!')
-  call tmuxify#pane_send_raw('C-q', '!')
+  call tmuxify#pane_send_raw('q', '!')
   call tmuxify#pane_send_raw('C-u', '!')
 
   if exists('g:test#preserve_screen') && !g:test#preserve_screen

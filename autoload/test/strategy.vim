@@ -122,10 +122,14 @@ function! test#strategy#slimux(cmd) abort
 endfunction
 
 function! test#strategy#tmuxify(cmd) abort
-  call tmuxify#pane_send_raw("'C-u q C-u'", '!')
+  call tmuxify#pane_send_raw('C-u', '!')
+  call tmuxify#pane_send_raw('C-q', '!')
+  call tmuxify#pane_send_raw('C-u', '!')
 
   if exists('g:test#preserve_screen') && !g:test#preserve_screen
-    call tmuxify#pane_send_raw("'C-u C-l C-u'", '!')
+    call tmuxify#pane_send_raw('C-u', '!')
+    call tmuxify#pane_send_raw('C-l', '!')
+    call tmuxify#pane_send_raw('C-u', '!')
   endif
 
   call tmuxify#pane_run('!', s:command(a:cmd))

@@ -1,5 +1,5 @@
 if !exists('g:test#javascript#ngtest#file_pattern')
-  let g:test#javascript#ngtest#file_pattern = '\ve2e/.*\.ts$'
+  let g:test#javascript#ngtest#file_pattern = '\v(test|spec)\.(js|jsx|ts|tsx)$'
 endif
 
 function! test#javascript#ngtest#test_file(file) abort

@@ -11,7 +11,7 @@ endif
 
 if !exists('g:test#rust#cargotest#patterns')
   let g:test#rust#cargotest#patterns = {
-        \ 'test': ['\v\s+fn\s+(\w+)'],
+        \ 'test': ['\v\s*fn\s+(\w+)'],
         \ 'namespace': []
     \ }
 endif
@@ -74,7 +74,7 @@ endfunction
 function! s:test_namespace(filename) abort
   let l:path = fnamemodify(a:filename, ':r')
   " On a normal cargo project, the first item is 'src'
-  let l:modules = split(l:path, '/')[1:]
+  let l:modules = split(l:path, '/')
 
   " 'src/lib.rs' and 'src/some/mod.rs' does not end
   " with actual module names
@@ -82,7 +82,12 @@ function! s:test_namespace(filename) abort
     let l:modules = l:modules[:-2]
   endif
 
+
   " Build up tests module namespace
-  let l:modules = l:modules + ['tests']
-  return join(l:modules, '::') . '::'
+  if l:modules[0] == 'tests' && len(l:modules) == 2
+    return ''
+  else
+    let l:modules = l:modules[1:] + ['tests']
+    return join(l:modules, '::') . '::'
+  endif
 endfunction

@@ -5,7 +5,7 @@ endif
 if !exists('g:test#rust#cargotest#test_patterns')
   let g:test#rust#cargotest#test_patterns = {
         \ 'test': ['\v(#\[test\])'],
-        \ 'namespace': []
+        \ 'namespace': ['\vmod (tests?)']
     \ }
 endif
 
@@ -61,14 +61,18 @@ function! s:nearest_test(position) abort
 
   " Else
   " Search forward for the first declared method
-  let name = test#base#nearest_test_in_lines(
+  let name_f = test#base#nearest_test_in_lines(
     \ a:position['file'],
     \ name['test_line'],
     \ a:position['line'],
     \ g:test#rust#cargotest#patterns
   \ )
 
-  return join(name['test'])
+  if len(name['namespace']) > 0
+    return join([name['namespace'][0], name_f['test'][0]], '::')
+  else
+    return name_f['test'][0]
+  endif
 endfunction
 
 function! s:test_namespace(filename) abort
@@ -87,7 +91,11 @@ function! s:test_namespace(filename) abort
   if l:modules[0] == 'tests' && len(l:modules) == 2
     return ''
   else
-    let l:modules = l:modules[1:] + ['tests']
-    return join(l:modules, '::') . '::'
+    let l:modules = l:modules[1:]
+    if len(l:modules) > 0
+      return join(l:modules, '::') . '::'
+    else
+      return ''
+    endif
   endif
 endfunction

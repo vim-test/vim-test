@@ -4,7 +4,7 @@ endif
 
 if !exists('g:test#php#pest#test_patterns')
   " Description for the tests:
-  " https://next.pestphp.com/docs/writing-tests/
+  " https://pestphp.com/docs/writing-tests/
   " Look for a function call that starts with "it" or "test"
   let g:test#php#pest#test_patterns = {
     \ 'test': ['\v^\s*%(it|test)[(]%("|'')(.*)%("|''),'],

@@ -206,6 +206,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:PHPUnit*
 :PHPUnit [args]              Uses the `phpunit` command.
 
+                                                *test-:Pest*
+:Pest [args]              Uses the `pest` command.
+
                                                 *test-:Behat*
 :Behat [args]                Uses the `behat` command.
 

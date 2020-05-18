@@ -7,7 +7,7 @@ let g:test#plugin_path = expand('<sfile>:p:h:h')
 
 let g:test#default_runners = {
   \ 'Ruby':       ['Rails', 'M', 'Minitest', 'RSpec', 'Cucumber'],
-  \ 'JavaScript': ['Ava', 'CucumberJS', 'Intern', 'TAP', 'Karma', 'Lab', 'Mocha', 'Jasmine', 'Jest', 'ReactScripts', 'WebdriverIO', 'Cypress'],
+  \ 'JavaScript': ['Ava', 'CucumberJS', 'Intern', 'TAP', 'Karma', 'Lab', 'Mocha',  'NgTest', 'Jasmine', 'Jest', 'ReactScripts', 'WebdriverIO', 'Cypress'],
   \ 'Python':     ['DjangoTest', 'PyTest', 'PyUnit', 'Nose', 'Nose2', 'Mamba'],
   \ 'Elixir':     ['ExUnit', 'ESpec'],
   \ 'Elm':        ['ElmTest'],
@@ -20,7 +20,7 @@ let g:test#default_runners = {
   \ 'Swift':      ['SwiftPM'],
   \ 'VimL':       ['Themis', 'VSpec', 'Vader', 'Testify', 'Vroom'],
   \ 'Lua':        ['Busted'],
-  \ 'PHP':        ['Codeception', 'Dusk', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
+  \ 'PHP':        ['Codeception', 'Dusk', 'Pest', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
   \ 'Perl':       ['Prove'],
   \ 'Racket':     ['RackUnit'],
   \ 'Java':       ['MavenTest', 'GradleTest'],

@@ -10,7 +10,6 @@ endfunction
 function! test#java#maventest#build_position(type, position) abort
   let filename = fnamemodify(a:position['file'], ':t:r')
   let package = s:get_java_package(a:position['file'])
-  let testfile_import = join([package, filename], '.')
 
   " ex:  mvn test -Dtest com.you.pkg.App$NestedClass#test_method
   " ex:  mvn test -Dtest com.you.pkg.App#test_method

@@ -32,7 +32,9 @@ function! test#javascript#reactscripts#build_args(args) abort
 endfunction
 
 function! test#javascript#reactscripts#executable() abort
-  if filereadable('node_modules/.bin/react-scripts')
+  if filereadable('node_modules/.bin/react-app-rewired')
+    return 'node_modules/.bin/react-app-rewired test'
+  elseif filereadable('node_modules/.bin/react-scripts')
     return 'node_modules/.bin/react-scripts test'
   else
     return 'react-scripts test'

@@ -206,6 +206,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:PHPUnit*
 :PHPUnit [args]              Uses the `phpunit` command.
 
+                                                *test-:Pest*
+:Pest [args]              Uses the `pest` command.
+
                                                 *test-:Behat*
 :Behat [args]                Uses the `behat` command.
 
@@ -247,6 +250,9 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:StackTest*
 :StackTest [args]            Uses the `stack test` command.
+
+                                                *test-:NgTest*
+:NgTest [args]  	         Uses the Angular `ng test` command.
 
 
 STRATEGIES                                      *test-strategies*
@@ -327,6 +333,13 @@ Runs test commands in a small Tmux pane at the bottom of your Terminal.
 Requires the Vimux plugin and Tmux.
 >
   let test#strategy = 'vimux'
+<
+Tmuxify ~
+
+Runs test commands in a small Tmux pane at the bottom of your Terminal.
+Requires the Tmuxify plugin and Tmux.
+>
+  let test#strategy = 'tmuxify'
 <
 Tslime ~
 

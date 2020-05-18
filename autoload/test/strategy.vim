@@ -121,6 +121,20 @@ function! test#strategy#slimux(cmd) abort
   endif
 endfunction
 
+function! test#strategy#tmuxify(cmd) abort
+  call tmuxify#pane_send_raw('C-u', '!')
+  call tmuxify#pane_send_raw('q', '!')
+  call tmuxify#pane_send_raw('C-u', '!')
+
+  if exists('g:test#preserve_screen') && !g:test#preserve_screen
+    call tmuxify#pane_send_raw('C-u', '!')
+    call tmuxify#pane_send_raw('C-l', '!')
+    call tmuxify#pane_send_raw('C-u', '!')
+  endif
+
+  call tmuxify#pane_run('!', s:command(a:cmd))
+endfunction
+
 function! test#strategy#vimshell(cmd) abort
   execute 'VimShellExecute '.a:cmd
 endfunction

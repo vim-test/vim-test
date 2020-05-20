@@ -30,7 +30,7 @@ function! test#base#executable(runner) abort
   endif
 endfunction
 
-function! test#base#build_args(runner, args, strategy) abort
+function! test#base#build_args(runner, args, strategy)
   let no_color = has('gui_running') && a:strategy ==# 'basic'
 
   try

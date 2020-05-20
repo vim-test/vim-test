@@ -14,6 +14,6 @@ before_script:
   - "gem install vim-flavor"
   - "vim-flavor install"
   -
-  - "rvm use 2.5.0 --install --binary --fuzzy"
+  - "rvm use 2.5.8 --install --binary --fuzzy"
 
 script: "vim-flavor test spec/"

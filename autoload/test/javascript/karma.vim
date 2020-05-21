@@ -30,14 +30,14 @@ function! test#javascript#karma#build_position(type, position) abort
   endif
 endfunction
 
-function! test#javascript#karma#build_args(args) abort
+function! test#javascript#karma#build_args(args, color) abort
   let args = a:args
 
   " reduce clutter in the output by only reporting tests and only run once so
   " we take less time & therefore annoy the user less
   call extend(args, ['--single-run', '--no-auto-watch', '--log-level=disable'])
 
-  if test#base#no_colors()
+  if !a:color
     let args = ['--no-color'] + args
   endif
 

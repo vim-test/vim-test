@@ -30,7 +30,7 @@ function! test#shell#bats#build_position(type, position) abort
   endif
 endfunction
 
-function! test#shell#bats#build_args(args) abort
+function! test#shell#bats#build_args(args)
   if empty(filter(copy(a:args), 'test#base#file_exists(v:val)'))
     call add(a:args, 'test/')
   endif

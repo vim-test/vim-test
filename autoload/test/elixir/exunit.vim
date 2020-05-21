@@ -28,10 +28,10 @@ function! test#elixir#exunit#build_position(type, position) abort
   end
 endfunction
 
-function! test#elixir#exunit#build_args(args) abort
+function! test#elixir#exunit#build_args(args, color) abort
   let args = a:args
 
-  if test#base#no_colors()
+  if !a:color
     let args = ['--no-color'] + args
   endif
 

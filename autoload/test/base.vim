@@ -30,8 +30,14 @@ function! test#base#executable(runner) abort
   endif
 endfunction
 
-function! test#base#build_args(runner, args) abort
-  return test#{a:runner}#build_args(a:args)
+function! test#base#build_args(runner, args, strategy)
+  let no_color = has('gui_running') && a:strategy ==# 'basic'
+
+  try
+    return test#{a:runner}#build_args(a:args, !no_color)
+  catch /^Vim\%((\a\+)\)\=:E118/ " too many arguments
+    return test#{a:runner}#build_args(a:args)
+  endtry
 endfunction
 
 function! test#base#file_exists(file) abort
@@ -40,11 +46,6 @@ endfunction
 
 function! test#base#escape_regex(string) abort
   return escape(a:string, '?+*\^$.|{}[]()')
-endfunction
-
-function! test#base#no_colors() abort
-  let strategy = get(g:, 'test#strategy', 'basic')
-  return has('gui_running') && strategy ==# 'basic'
 endfunction
 
 " Takes a position and a dictionary of patterns, and returns list of strings

@@ -81,7 +81,7 @@ function! test#execute(runner, args, ...) abort
   call filter(args, '!empty(v:val)')
 
   let executable = test#base#executable(a:runner)
-  let args = test#base#build_args(a:runner, args)
+  let args = test#base#build_args(a:runner, args, strategy)
   let cmd = [executable] + args
   call filter(cmd, '!empty(v:val)')
 

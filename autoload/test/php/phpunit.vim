@@ -46,6 +46,8 @@ endfunction
 function! test#php#phpunit#executable() abort
   if filereadable('./artisan')
     return 'php artisan test'
+  elseif filereadable('./vendor/bin/paratest')
+    return './vendor/bin/paratest'
   elseif filereadable('./vendor/bin/phpunit')
     return './vendor/bin/phpunit'
   elseif filereadable('./bin/phpunit')

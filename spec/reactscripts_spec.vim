@@ -4,9 +4,12 @@ describe "ReactScripts"
 
   before
     cd spec/fixtures/reactscripts
+	!mkdir node_modules
+	!mkdir node_modules/.bin
   end
 
   after
+    !rm -f node_modules/.bin/*
     call Teardown()
     cd -
   end
@@ -138,6 +141,14 @@ describe "ReactScripts"
 
       Expect g:test#last_command == '~/.local/bin/yarn react-scripts test __tests__/normal-test.js'
     end
+  end
+
+  it "uses react-app-rewired if present"
+    !touch node_modules/.bin/react-app-rewired
+    view __tests__/normal-test.js
+    TestFile
+
+    Expect g:test#last_command == 'node_modules/.bin/react-app-rewired test __tests__/normal-test.js'
   end
 
 end

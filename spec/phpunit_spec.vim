@@ -7,6 +7,7 @@ describe "PHPUnit"
   end
 
   after
+	!rm -f artisan
     call Teardown()
     cd -
   end
@@ -84,6 +85,14 @@ describe "PHPUnit"
     TestFile
 
     Expect exists('g:test#last_command') == 0
+  end
+
+  it "uses Laravel's artisan command if present"
+    !touch artisan
+    view NormalTest.php
+    TestFile
+
+    Expect g:test#last_command == 'php artisan test --colors NormalTest.php'
   end
 
 end

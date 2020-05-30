@@ -8,9 +8,7 @@ endfunction
 
 function! test#erlang#eunit#build_position(type, position) abort
   let module = fnamemodify(a:position['file'],':t:r')
-  if a:type ==# 'nearest'
-    return ['--module='.module]
-  elseif a:type ==# 'file'
+  if a:type ==# 'nearest' || a:type ==# 'file'
     return ['--module='.module]
   else
     return []
@@ -23,9 +21,4 @@ endfunction
 
 function! test#erlang#eunit#executable() abort
   return 'rebar3'
-endfunction
-
-function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#erlang#patterns)
-  return join(name['test'])
 endfunction

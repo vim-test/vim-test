@@ -98,11 +98,11 @@ describe "PHPUnit"
     Expect g:test#last_command == 'php artisan test --colors NormalTest.php'
   end
 
-	describe "when paratest installed in vendor/bin"
+  describe "when paratest installed in vendor/bin"
 
-		before
+    before
       !touch vendor/bin/paratest
-		end
+    end
 
     it "uses paratest for TestFile"
       !touch vendor/bin/paratest
@@ -132,6 +132,6 @@ describe "PHPUnit"
       Expect g:test#last_command == "./vendor/bin/paratest --colors --functional --filter '::testShouldAddTwoNumbers' NormalTest.php"
     end
 
-	end
+  end
 
 end

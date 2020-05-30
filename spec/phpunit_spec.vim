@@ -112,6 +112,26 @@ describe "PHPUnit"
       Expect g:test#last_command == './vendor/bin/paratest --colors NormalTest.php'
     end
 
+
+    it "uses paratest for TestSuite"
+      view NormalTest.php
+      TestSuite
+
+      Expect g:test#last_command == './vendor/bin/paratest --colors'
+    end
+
+    it "runs paratest in functional mode for TestNearest with --filter"
+      view +1 NormalTest.php
+      TestNearest
+
+      Expect g:test#last_command == "./vendor/bin/paratest --colors NormalTest.php"
+
+      view +9 NormalTest.php
+      TestNearest
+
+      Expect g:test#last_command == "./vendor/bin/paratest --colors --functional --filter '::testShouldAddTwoNumbers' NormalTest.php"
+    end
+
 	end
 
 end

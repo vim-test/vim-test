@@ -4,13 +4,13 @@ describe "PHPUnit"
 
   before
     cd spec/fixtures/phpunit
-	!mkdir vendor
-	!mkdir vendor/bin
+    !mkdir vendor
+    !mkdir vendor/bin
   end
 
   after
-	!rm -f artisan
-	!rm -f vendor/bin/*
+    !rm -f artisan
+    !rm -f vendor/bin/*
     call Teardown()
     cd -
   end
@@ -98,12 +98,20 @@ describe "PHPUnit"
     Expect g:test#last_command == 'php artisan test --colors NormalTest.php'
   end
 
-  it "uses paratest if present"
-    !touch vendor/bin/paratest
-    view NormalTest.php
-    TestFile
+	describe "when paratest installed in vendor/bin"
 
-    Expect g:test#last_command == './vendor/bin/paratest --colors NormalTest.php'
-  end
+		before
+      !touch vendor/bin/paratest
+		end
+
+    it "uses paratest for TestFile"
+      !touch vendor/bin/paratest
+      view NormalTest.php
+      TestFile
+
+      Expect g:test#last_command == './vendor/bin/paratest --colors NormalTest.php'
+    end
+
+	end
 
 end

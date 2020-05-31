@@ -98,39 +98,4 @@ describe "PHPUnit"
     Expect g:test#last_command == 'php artisan test --colors NormalTest.php'
   end
 
-  describe "when paratest is installed in vendor/bin"
-
-    before
-      !touch vendor/bin/paratest
-    end
-
-    it "executes paratest for TestFile"
-      !touch vendor/bin/paratest
-      view NormalTest.php
-      TestFile
-
-      Expect g:test#last_command == './vendor/bin/paratest --colors NormalTest.php'
-    end
-
-    it "executes paratest for TestSuite"
-      view NormalTest.php
-      TestSuite
-
-      Expect g:test#last_command == './vendor/bin/paratest --colors'
-    end
-
-    it "executes paratest in functional mode for TestNearest with --filter"
-      view +1 NormalTest.php
-      TestNearest
-
-      Expect g:test#last_command == "./vendor/bin/paratest --colors NormalTest.php"
-
-      view +9 NormalTest.php
-      TestNearest
-
-      Expect g:test#last_command == "./vendor/bin/paratest --colors --functional --filter '::testShouldAddTwoNumbers' NormalTest.php"
-    end
-
-  end
-
 end

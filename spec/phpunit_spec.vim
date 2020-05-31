@@ -4,13 +4,10 @@ describe "PHPUnit"
 
   before
     cd spec/fixtures/phpunit
-    !mkdir vendor
-    !mkdir vendor/bin
   end
 
   after
     !rm -f artisan
-    !rm -f vendor/bin/*
     call Teardown()
     cd -
   end

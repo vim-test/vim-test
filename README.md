@@ -2,12 +2,12 @@
 
 A Vim wrapper for running tests on different granularities.
 
-<img alt="usage overview" src="https://github.com/janko/vim-test/blob/master/screenshots/granularity.gif" width=770 height=503>
+<img alt="usage overview" src="https://github.com/vim-test/vim-test/blob/master/screenshots/granularity.gif" width=770 height=503>
 
 ## Features
 
 * Zero dependencies
-* Zero configuration required (it Does the Right Thing™, see [**Philosophy**](https://github.com/janko/vim-test/wiki))
+* Zero configuration required (it Does the Right Thing™, see [**Philosophy**](https://github.com/vim-test/vim-test/wiki))
 * Wide range of test runners which are automagically detected
 * **Polyfills** for nearest tests (by [constructing regexes](#commands))
 * Wide range of execution environments ("[strategies](#strategies)")
@@ -47,7 +47,7 @@ runners are supported:
 
 Using [vim-plug](https://github.com/junegunn/vim-plug), add
 ```vim
-Plug 'janko/vim-test'
+Plug 'vim-test/vim-test'
 ```
 to your `.vimrc` file (see vim-plug documentation for where), and run `:PlugInstall`.
 
@@ -256,7 +256,7 @@ let g:test#transformation = 'vagrant'
 
 ## Commands
 
-<img alt="nearest polyfill" src="https://github.com/janko/vim-test/blob/master/screenshots/nearest.gif" width=770 height=323>
+<img alt="nearest polyfill" src="https://github.com/vim-test/vim-test/blob/master/screenshots/nearest.gif" width=770 height=323>
 
 You can execute test.vim commands directly, and pass them CLI options:
 
@@ -590,7 +590,7 @@ and Windows support. And also thanks to [vroom.vim].
 Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. See
 `:help license`.
 
-[minitest]: https://github.com/janko/vim-test/wiki/Minitest
+[minitest]: https://github.com/vim-test/vim-test/wiki/Minitest
 [Neoterm]: https://github.com/kassio/neoterm
 [Neomake]: https://github.com/neomake/neomake
 [Dispatch]: https://github.com/tpope/vim-dispatch

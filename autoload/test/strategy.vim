@@ -192,7 +192,7 @@ endfunction
 
 function! s:execute_script(name, cmd) abort
   let script_path = g:test#plugin_path . '/bin/' . a:name
-  let cmd = join([script_path, shellescape(a:cmd)])
+  let cmd = join([shellescape(script_path), shellescape(a:cmd)])
   execute 'silent !'.cmd
 endfunction
 

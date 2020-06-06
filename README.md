@@ -154,11 +154,25 @@ please make sure:
   $ kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
   ```
 
+  or via `kitty.conf`:
+
+  ```
+  allow_remote_control yes
+  listen_on unix:/tmp/mykitty
+  ```
+
 - you export an environment variable `$KITTY_LISTEN_ON` with the same socket, like:
 
   ```
   $ export KITTY_LISTEN_ON=unix:/tmp/mykitty
   ```
+
+  or if via `kitty.conf` (it appends kitty's PID):
+
+  ```
+  $ export KITTY_LISTEN_ON=unix:/tmp/mykitty-$PPID
+  ```
+
 
 ### Shtuff strategy setup
 

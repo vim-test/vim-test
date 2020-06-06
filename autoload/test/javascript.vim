@@ -4,6 +4,10 @@ let test#javascript#patterns = {
 \}
 
 function! test#javascript#has_package(package) abort
+  if !filereadable('package.json')
+    return 0
+  endif
+
   let l:packages = readfile('package.json')
 
   if exists('*json_decode')

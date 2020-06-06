@@ -157,7 +157,7 @@ please make sure:
 - you export an environment variable `$KITTY_LISTEN_ON` with the same socket, like:
 
   ```
-  $ export KITTY_LISTEN_ON=/tmp/mykitty
+  $ export KITTY_LISTEN_ON=unix:/tmp/mykitty
   ```
 
 ### Shtuff strategy setup

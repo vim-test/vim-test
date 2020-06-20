@@ -47,9 +47,7 @@ function! test#php#phpunit#build_args(args, color) abort
 endfunction
 
 function! test#php#phpunit#executable() abort
-  if filereadable('./artisan')
-    return 'php artisan test'
-  elseif filereadable('./vendor/bin/paratest')
+  if filereadable('./vendor/bin/paratest')
     return './vendor/bin/paratest'
   elseif filereadable('./vendor/bin/phpunit')
     return './vendor/bin/phpunit'

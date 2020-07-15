@@ -1,5 +1,5 @@
 if !exists('g:test#javascript#tap#file_pattern')
-  let g:test#javascript#tap#file_pattern = '\vtests?/.*\.js$'
+  let g:test#javascript#tap#file_pattern = '\v(tests?/.*|\.(spec|test))\.js$'
 endif
 
 if !exists('g:test#javascript#tap#runners')

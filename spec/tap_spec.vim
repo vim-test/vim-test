@@ -39,6 +39,23 @@ describe "TAP"
     Expect g:test#last_command == 'node_modules/.bin/tape test/normal.js'
   end
 
+
+  it "runs file tests ending in .test.js"
+    view src/normal.test.js
+    TestFile
+
+    Expect g:test#last_command == 'node_modules/.bin/tape src/normal.test.js'
+  end
+
+  it "runs file tests ending in .spec.js"
+    !cp src/normal.test.js src/normal.spec.js
+    view src/normal.spec.js
+    TestFile
+    !rm src/normal.spec.js
+
+    Expect g:test#last_command == 'node_modules/.bin/tape src/normal.spec.js'
+  end
+
   it "it uses the specified reporter if it exists"
     view tests/normal.js
     let g:test#javascript#tap#reporters = ['tap-spec']

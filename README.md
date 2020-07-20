@@ -387,8 +387,8 @@ let test#filename_modifier = ':~' " ~/Code/my_project/test/models/user_test.rb
 
 Test.vim relies on you being `cd`-ed into the project root. However, sometimes
 you may want to execute tests from a different directory than Vim's current
-working directory. You might have a bigger project with many subprojects, or
-you might be using [`autochdir`]. In any case, you can tell test.vim to use a
+working directory. You might have a bigger project or monorepo with many subprojects,
+or you might be using [`autochdir`]. In any case, you can tell test.vim to use a
 different working directory for running tests:
 
 ```vim

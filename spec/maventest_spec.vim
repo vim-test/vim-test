@@ -11,7 +11,7 @@ describe "Maven Junit3 tests"
     cd -
   end
 
-  it "runs file tests (filename matches Test*.java"
+  it "runs file tests (filename matches Test*.java)"
     view src/test/java/org/vimtest/math/TestMath.java
     TestFile
 
@@ -70,6 +70,74 @@ describe "Maven Junit3 tests"
 
 end
 
+describe "Maven Junit3 multimodule tests"
+
+  before
+    cd spec/fixtures/maven/sample_maven_junit3_multimodule_project
+  end
+
+  after
+    call Teardown()
+    cd -
+  end
+
+  it "runs file tests (filename matches Test*.java)"
+    view sample_module/src/test/java/org/vimtest/math/TestMath.java
+    TestFile
+
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.math.TestMath\* -pl sample_module'
+  end
+
+  it "runs file tests (filename matches *Test.java)"
+    view sample_module/src/test/java/org/vimtest/math/MathTest.java
+    TestFile
+
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.math.MathTest\* -pl sample_module'
+  end
+
+  it "runs file tests (filename matches *Tests.java)"
+    view sample_module/src/test/java/org/vimtest/math/MathTests.java
+    TestFile
+
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.math.MathTests\* -pl sample_module'
+  end
+
+  it "runs file tests (filename matches *TestCase.java)"
+    view sample_module/src/test/java/org/vimtest/math/MathTestCase.java
+    TestFile
+
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.math.MathTestCase\* -pl sample_module'
+  end
+
+  it "runs file tests with user provided options"
+    view sample_module/src/test/java/org/vimtest/math/MathTest.java
+    TestFile -f pom.xml
+
+    Expect g:test#last_command == 'mvn test -f pom.xml -Dtest=org.vimtest.math.MathTest\* -pl sample_module'
+  end
+
+  it "runs nearest tests"
+    view +37 sample_module/src/test/java/org/vimtest/math/MathTest.java
+    TestNearest
+
+    Expect g:test#last_command == "mvn test -Dtest=org.vimtest.math.MathTest\\#testFailedAdd -pl sample_module"
+  end
+
+  it "runs a suite"
+    view sample_module/src/test/java/org/vimtest/math/MathTest.java
+    TestSuite
+
+    Expect g:test#last_command == 'mvn test  -pl sample_module'
+  end
+
+  it "runs a test suite with user provided options"
+    view sample_module/src/test/java/org/vimtest/math/MathTest.java
+    TestSuite -X -f pom.xml -DcustomProperty=5
+
+    Expect g:test#last_command == 'mvn test -X -f pom.xml -DcustomProperty=5  -pl sample_module' 
+  end
+
+end
 
 describe "Maven Junit5 tests"
 

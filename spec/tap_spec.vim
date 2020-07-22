@@ -39,7 +39,7 @@ describe "TAP"
     view tests/normal.js
     TestSuite
 
-    Expect g:test#last_command == 'node_modules/.bin/tape "tests/**/*.js"'
+    Expect g:test#last_command == 'node_modules/.bin/tape'
   end
 
   it "also recognizes test/ directory"

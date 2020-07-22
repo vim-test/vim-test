@@ -234,7 +234,7 @@ In all commands [args] are forwarded to the underlying test runner.
 :Prove [args]                Uses the `prove` command.
 
                                                 *test-:MavenTest*
-:MavenTest [args]            Uses the `mvn` `test` command.
+:MavenTest [args]            Uses the `mvn` `test` command. If the file exists in a multi-module project then appends -pl <modulename> and runs a single module only.
 
                                                 *test-:GradleTest*
 :GradleTest [args]           Uses the `gradle` `test` command.

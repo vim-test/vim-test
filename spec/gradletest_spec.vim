@@ -150,60 +150,60 @@ describe "Gradle multi module"
     cd -
   end
 
-  it "runs file tests (filename matches Test*.java"
+  it "runs file tests (filename matches Test*.java)"
     view  sample_module/src/test/java/TestMath.java
     TestFile
 
-    Expect g:test#last_command == 'gradle test --tests TestMath'
+    Expect g:test#last_command == 'gradle test --tests TestMath -p sample_module'
   end
 
   it "runs file tests (filename matches *Test.java)"
     view sample_module/src/test/java/MathTest.java
     TestFile
 
-    Expect g:test#last_command == 'gradle test --tests MathTest'
+    Expect g:test#last_command == 'gradle test --tests MathTest -p sample_module'
   end
 
   it "runs file tests (filename matches *Tests.java)"
     view sample_module/src/test/java/MathTests.java
     TestFile
 
-    Expect g:test#last_command == 'gradle test --tests MathTests'
+    Expect g:test#last_command == 'gradle test --tests MathTests -p sample_module'
   end
 
   it "runs file tests (filename matches *TestCase.java)"
     view sample_module/src/test/java/MathTestCase.java
     TestFile
 
-    Expect g:test#last_command == 'gradle test --tests MathTestCase'
+    Expect g:test#last_command == 'gradle test --tests MathTestCase -p sample_module'
   end
 
   it "runs file tests with user provided options"
     view sample_module/src/test/java/MathTest.java
     TestFile -b build.gradle
 
-    Expect g:test#last_command == 'gradle test -b build.gradle --tests MathTest'
+    Expect g:test#last_command == 'gradle test -b build.gradle --tests MathTest -p sample_module'
   end
 
   it "runs nearest tests"
     view +37 sample_module/src/test/java/MathTest.java
     TestNearest
 
-    Expect g:test#last_command == "gradle test --tests MathTest.testFailedAdd"
+    Expect g:test#last_command == "gradle test --tests MathTest.testFailedAdd -p sample_module"
   end
 
   it "runs a suite"
     view sample_module/src/test/java/MathTest.java
     TestSuite
 
-    Expect g:test#last_command == 'gradle test'
+    Expect g:test#last_command == 'gradle test  -p sample_module'
   end
 
   it "runs a test suite with user provided options"
     view sample_module/src/test/java/MathTest.java
     TestSuite --info -b build.gradle -DcustomProperty=5
 
-    Expect g:test#last_command == 'gradle test --info -b build.gradle -DcustomProperty=5'
+    Expect g:test#last_command == 'gradle test --info -b build.gradle -DcustomProperty=5  -p sample_module'
   end
 
 end

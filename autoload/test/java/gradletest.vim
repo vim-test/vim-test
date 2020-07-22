@@ -10,23 +10,57 @@ endfunction
 
 function! test#java#gradletest#build_position(type, position) abort
   let filename = fnamemodify(a:position['file'], ':t:r')
-
+  let modulename = s:get_maven_module(a:position['file'])
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return ['--tests ' . name]
+      return ['--tests ' . name. modulename]
     else
-      return ['--tests ' . filename]
+      return ['--tests ' . filename. modulename]
     endif
   elseif a:type ==# 'file'
-    return ['--tests ' . filename]
+    return ['--tests ' . filename. modulename]
   else
-    return []
+    return [modulename]
   endif
 endfunction
 
 function! test#java#gradletest#build_args(args) abort
   return a:args
+endfunction
+
+function! s:get_maven_module(filepath)
+  let project_dir = s:GetJavaProjectDirectory(a:filepath)
+  let l:module_name = fnamemodify(project_dir, ':t')
+  let l:parent = fnamemodify(project_dir, ':p:h:h')
+  if filereadable(l:parent. "/build.gradle") " check if the parent dir has build.gradle
+      return ' -p '. module_name
+  else 
+      return ''
+endfunction
+
+function! s:GetJavaProjectDirectory(filepath)
+    let buildFile = s:GetBuildFile(a:filepath)
+    if strlen(l:buildFile) > 0
+        return fnamemodify(l:buildFile, ':h')
+    else
+        return 0
+    endif
+endfunction
+
+function! s:GetBuildFile(pwd)
+    if a:pwd ==# "\/"
+        return 0
+    else
+        let l:fn = a:pwd . "/build.gradle"
+
+        if filereadable(expand(l:fn))
+            return l:fn
+        else
+            let l:parent = fnamemodify(a:pwd, ':h')
+            return s:GetBuildFile(l:parent)
+        endif
+    endif
 endfunction
 
 function! test#java#gradletest#executable() abort

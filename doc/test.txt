@@ -594,7 +594,7 @@ ABOUT                                           *test-about*
 
 You can get the latest version, see the changelog, or report a bug on GitHub:
 
-https://github.com/janko-m/vim-test
+https://github.com/vim-test/vim-test
 
 
 CREDITS                                         *test-credits*

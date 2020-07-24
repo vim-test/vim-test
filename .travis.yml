@@ -1,4 +1,6 @@
 language: ruby
+rvm:
+  - 2.5.8
 
 sudo: false
 
@@ -11,8 +13,6 @@ before_script:
   - "source ~/.vvm/etc/login"
   - "vvm update_itself"
   - "vvm use vimorg--v8.2.0803 --install --with-features=huge"
-  -
-  - "rvm use 2.5.8 --install --binary --fuzzy"
   - "gem install vim-flavor"
   - "vim-flavor install"
 

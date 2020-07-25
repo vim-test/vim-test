@@ -257,6 +257,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:NgTest*
 :NgTest [args]  	         Uses the Angular `ng test` command.
 
+                                                *test-:TestBench*
+:TestBench [args]  	         Uses the TestBench `bench` command.
+
 
 STRATEGIES                                      *test-strategies*
 

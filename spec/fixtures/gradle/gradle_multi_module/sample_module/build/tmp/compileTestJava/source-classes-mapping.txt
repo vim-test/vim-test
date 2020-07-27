@@ -1,8 +1,0 @@
-TestMath.java
- org.vimtest.math.TestMath
-MathTestCase.java
- org.vimtest.math.MathTestCase
-MathTest.java
- org.vimtest.math.MathTest
-MathTests.java
- org.vimtest.math.MathTests

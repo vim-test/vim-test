@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.vimtest.math.MathTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-07-22T18:17:58" hostname="rucsok-core" time="0.003">
-  <properties/>
-  <testcase name="testAdd" classname="org.vimtest.math.MathTest" time="0.001"/>
-  <testcase name="testSub" classname="org.vimtest.math.MathTest" time="0.0"/>
-  <testcase name="testFailedAdd" classname="org.vimtest.math.MathTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

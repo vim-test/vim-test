@@ -41,4 +41,22 @@ describe "ParaTest"
 
     Expect g:test#last_command == "./vendor/bin/paratest --colors --functional --filter '::testShouldAddTwoNumbers' NormalTest.php"
   end
+
+  it "does run TestNearest in functional mode if executable is overridden as paratest"
+    let g:test#php#phpunit#executable = 'paratest'
+    view +9 NormalTest.php
+    TestNearest
+    unlet g:test#php#phpunit#executable
+
+    Expect g:test#last_command == "paratest --colors --functional --filter '::testShouldAddTwoNumbers' NormalTest.php"
+  end
+
+  it "does not run TestNearest in functional mode if executable is overridden as phpunit"
+    let g:test#php#phpunit#executable = 'phpunit'
+    view +9 NormalTest.php
+    TestNearest
+    unlet g:test#php#phpunit#executable
+
+    Expect g:test#last_command == "phpunit --colors --filter '::testShouldAddTwoNumbers' NormalTest.php"
+  end
 end

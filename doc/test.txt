@@ -237,7 +237,7 @@ In all commands [args] are forwarded to the underlying test runner.
 :MavenTest [args]            Uses the `mvn` `test` command.
 
                                                 *test-:GradleTest*
-:GradleTest [args]           Uses the `gradle` `test` command.
+:GradleTest [args]           Uses the `gradle` `test` command. If the project is multi module then it uses the -p <modulename> flag.
 
                                                 *test-:SbtTest*
 :SbtTest [args]            Uses the `sbt` `test/testOnly` command.

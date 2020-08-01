@@ -25,7 +25,7 @@ function! test#php#phpunit#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name) | let name = '--filter '.shellescape('::'.name, 1) | endif
-    if !empty(name) && filereadable('./vendor/bin/paratest')
+    if !empty(name) && test#php#phpunit#executable() =~ 'paratest'
       let name = '--functional '. name
     endif
     return [name, a:position['file']]
@@ -47,7 +47,9 @@ function! test#php#phpunit#build_args(args, color) abort
 endfunction
 
 function! test#php#phpunit#executable() abort
-  if filereadable('./vendor/bin/paratest')
+  if exists('g:test#php#phpunit#executable')
+    return g:test#php#phpunit#executable
+  elseif filereadable('./vendor/bin/paratest')
     return './vendor/bin/paratest'
   elseif filereadable('./vendor/bin/phpunit')
     return './vendor/bin/phpunit'

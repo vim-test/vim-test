@@ -35,7 +35,7 @@ function! test#base#build_args(runner, args, strategy)
 
   try
     return test#{a:runner}#build_args(a:args, !no_color)
-  catch /^Vim\%((\a\+)\)\=:E118/ " too many arguments
+  catch " too many arguments
     return test#{a:runner}#build_args(a:args)
   endtry
 endfunction

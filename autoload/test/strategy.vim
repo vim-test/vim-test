@@ -93,6 +93,10 @@ function! test#strategy#neoterm(cmd) abort
   call neoterm#do({ 'cmd': a:cmd})
 endfunction
 
+function! test#strategy#floaterm(cmd) abort
+  execute 'FloatermNew '.a:cmd
+endfunction
+
 function! test#strategy#vtr(cmd) abort
   call VtrSendCommand(s:pretty_command(a:cmd), 1)
 endfunction

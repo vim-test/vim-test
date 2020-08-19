@@ -10,25 +10,28 @@ endfunction
 function! test#java#maventest#build_position(type, position) abort
   let filename = fnamemodify(a:position['file'], ':t:r')
   let package = s:get_java_package(a:position['file'])
-
+  let module = s:get_maven_module(a:position['file'])
   " ex:  mvn test -Dtest com.you.pkg.App$NestedClass#test_method
   " ex:  mvn test -Dtest com.you.pkg.App#test_method
   " ex:  mvn test -Dtest com.you.pkg.App\*           (catches nested test-classes)
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return ['-Dtest=' . package . '.' . name]
+      return ['test -Dtest=' . package . '.' . name. module]
     else
-      return ['-Dtest=' . package . '.' . filename . '\*']
+      return ['test -Dtest=' . package . '.' . filename . '\*'. module]
     endif
 
   " ex:  mvn test -Dtest com.you.pkg.App\*  (catches nested test-classes)
   elseif a:type ==# 'file'
-    return ['-Dtest=' . package . '.' . filename . '\*']
+    return ['test -Dtest=' . package . '.' . filename . '\*'. module]
 
+  " ex:  mvn verify -Dit.test=App\*  (runs integration tests)
+  elseif a:type ==# 'integration'
+    return ['verify -Dit.test=' . filename . '\*'. module]
   " ex:  mvn test
   else
-    return []
+    return ['test' . module]
   endif
 
 endfunction
@@ -38,7 +41,7 @@ function! test#java#maventest#build_args(args) abort
 endfunction
 
 function! test#java#maventest#executable() abort
-  return 'mvn test'
+  return 'mvn'
 endfunction
 
 function! s:get_java_package(filepath)
@@ -51,7 +54,41 @@ function! s:get_java_package(filepath)
   let package_path = substitute(relpath, '\/[^/]\+$', "", "g")
   let java_package = substitute(package_path, '/', '.', 'g')
   return java_package
-endfunc
+endfunction
+
+function! s:get_maven_module(filepath)
+  let project_dir = s:GetJavaProjectDirectory(a:filepath)
+  let l:module_name = fnamemodify(project_dir, ':t')
+  let l:parent = fnamemodify(project_dir, ':p:h:h')
+  if filereadable(l:parent. "/pom.xml") " check if the parent dir has pom.xml
+      return ' -pl '. module_name
+  else 
+      return ''
+endfunction
+
+function! s:GetJavaProjectDirectory(filepath)
+    let pomFile = s:GetPomFile(a:filepath)
+    if strlen(l:pomFile) > 0
+        return fnamemodify(l:pomFile, ':h')
+    else
+        return 0
+    endif
+endfunction
+
+function! s:GetPomFile(pwd)
+    if a:pwd ==# "\/"
+        return 0
+    else
+        let l:fn = a:pwd . "/pom.xml"
+
+        if filereadable(expand(l:fn))
+            return l:fn
+        else
+            let l:parent = fnamemodify(a:pwd, ':h')
+            return s:GetPomFile(l:parent)
+        endif
+    endif
+endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#java#patterns)

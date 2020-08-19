@@ -11,11 +11,21 @@ describe "TAP"
     cd -
   end
 
-  it "runs file tests instead of nearest test"
+  it "runs nearest test"
     view +6 tests/normal.js
     TestNearest
 
-    Expect g:test#last_command == 'node_modules/.bin/tape tests/normal.js'
+    Expect g:test#last_command == "node_modules/.bin/tape tests/normal.js --grep='math test'"
+
+    view +3 tests/subtest.js
+    TestNearest
+
+    Expect g:test#last_command == "node_modules/.bin/tape tests/subtest.js --grep='parent'"
+
+    view +4 tests/subtest.js
+    TestNearest
+
+    Expect g:test#last_command == "node_modules/.bin/tape tests/subtest.js --grep='subtest'"
   end
 
   it "runs file tests"
@@ -29,7 +39,7 @@ describe "TAP"
     view tests/normal.js
     TestSuite
 
-    Expect g:test#last_command == 'node_modules/.bin/tape "tests/**/*.js"'
+    Expect g:test#last_command == 'node_modules/.bin/tape'
   end
 
   it "also recognizes test/ directory"

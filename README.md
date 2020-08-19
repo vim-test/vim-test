@@ -36,7 +36,7 @@ runners are supported:
 |       **Perl** | Prove                                                                                                              | `prove`                                                                                                                                      |
 |     **Python** | Django, Mamba, Nose, Nose2, PyTest, PyUnit                                                                         | `djangotest`, `djangonose`, `mamba`, `nose`, `nose2`, `pytest`, `pyunit`                                                                     |
 |     **Racket** | RackUnit                                                                                                           | `rackunit`                                                                                                                                   |
-|       **Ruby** | Cucumber, [M], [Minitest][minitest], Rails, RSpec                                                                  | `cucumber`, `m`, `minitest`, `rails`, `rspec`                                                                                                |
+|       **Ruby** | Cucumber, [M], [Minitest][minitest], Rails, RSpec, TestBench                                                       | `cucumber`, `m`, `minitest`, `rails`, `rspec`, `testbench`                                                                                   |
 |       **Rust** | Cargo                                                                                                              | `cargotest`                                                                                                                                  |
 |      **Scala** | SBT, Bloop                                                                                                         | `sbttest`, `blooptest`                                                                                                                       |
 |      **Shell** | Bats                                                                                                               | `bats`                                                                                                                                       |
@@ -91,6 +91,7 @@ let test#strategy = "dispatch"
 | **[Tslime]**                    | `tslime`                                                    | Runs test commands in a tmux pane you specify.                                                                                                                    |
 | **[Slimux]**                    | `slimux`                                                    | Runs test commands in a tmux pane you specify.                                                                                                                    |
 | **[Neoterm]**                   | `neoterm`                                                   | Runs test commands with `:T`, see neoterm docs for display customization.                                                                                         |
+| **[Floaterm]**                  | `floaterm`                                                  | Runs test commands within floating/popup terminal, see [floaterm docs](https://github.com/voldikss/vim-floaterm/blob/master/README.md) for display customization.                                                                                         |
 | **[Neomake]**                   | `neomake`                                                   | Runs test commands asynchronously with `:NeomakeProject`.                                                                                                         |
 | **[MakeGreen]**                 | `makegreen`                                                 | Runs test commands with `:MakeGreen`.                                                                                                                             |
 | **[VimShell]**                  | `vimshell`                                                  | Runs test commands in a shell written in VimScript.                                                                                                               |
@@ -606,6 +607,7 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 
 [minitest]: https://github.com/vim-test/vim-test/wiki/Minitest
 [Neoterm]: https://github.com/kassio/neoterm
+[Floaterm]: https://github.com/voldikss/vim-floaterm
 [Neomake]: https://github.com/neomake/neomake
 [Dispatch]: https://github.com/tpope/vim-dispatch
 [Vimux]: https://github.com/benmills/vimux

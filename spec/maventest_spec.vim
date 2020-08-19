@@ -11,6 +11,13 @@ describe "Maven Junit3 tests"
     cd -
   end
 
+ it "runs integration tests (filename matches Test*.java)"
+    view src/test/java/org/vimtest/math/TestMath.java
+    IntegrationTest
+
+    Expect g:test#last_command == 'mvn verify -Dit.test=TestMath\*'
+  end
+
   it "runs file tests (filename matches Test*.java)"
     view src/test/java/org/vimtest/math/TestMath.java
     TestFile
@@ -43,7 +50,7 @@ describe "Maven Junit3 tests"
     view src/test/java/org/vimtest/math/MathTest.java
     TestFile -f pom.xml
 
-    Expect g:test#last_command == 'mvn test -f pom.xml -Dtest=org.vimtest.math.MathTest\*'
+    Expect g:test#last_command == 'mvn -f pom.xml test -Dtest=org.vimtest.math.MathTest\*'
   end
 
   it "runs nearest tests"

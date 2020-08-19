@@ -11,13 +11,6 @@ describe "Maven Junit3 tests"
     cd -
   end
 
- it "runs integration tests (filename matches Test*.java)"
-    view src/test/java/org/vimtest/math/TestMath.java
-    IntegrationTest
-
-    Expect g:test#last_command == 'mvn verify -Dit.test=TestMath\*'
-  end
-
   it "runs file tests (filename matches Test*.java)"
     view src/test/java/org/vimtest/math/TestMath.java
     TestFile
@@ -71,7 +64,7 @@ describe "Maven Junit3 tests"
     view src/test/java/org/vimtest/math/MathTest.java
     TestSuite -X -f pom.xml -DcustomProperty=5
 
-    Expect g:test#last_command == 'mvn test -X -f pom.xml -DcustomProperty=5'
+    Expect g:test#last_command == 'mvn -X -f pom.xml -DcustomProperty=5 test'
   end
 
 
@@ -120,7 +113,7 @@ describe "Maven Junit3 multimodule tests"
     view sample_module/src/test/java/org/vimtest/math/MathTest.java
     TestFile -f pom.xml
 
-    Expect g:test#last_command == 'mvn test -f pom.xml -Dtest=org.vimtest.math.MathTest\* -pl sample_module'
+    Expect g:test#last_command == 'mvn -f pom.xml test -Dtest=org.vimtest.math.MathTest\* -pl sample_module'
   end
 
   it "runs nearest tests"
@@ -134,14 +127,14 @@ describe "Maven Junit3 multimodule tests"
     view sample_module/src/test/java/org/vimtest/math/MathTest.java
     TestSuite
 
-    Expect g:test#last_command == 'mvn test  -pl sample_module'
+    Expect g:test#last_command == 'mvn test -pl sample_module'
   end
 
   it "runs a test suite with user provided options"
     view sample_module/src/test/java/org/vimtest/math/MathTest.java
     TestSuite -X -f pom.xml -DcustomProperty=5
 
-    Expect g:test#last_command == 'mvn test -X -f pom.xml -DcustomProperty=5  -pl sample_module' 
+    Expect g:test#last_command == 'mvn -X -f pom.xml -DcustomProperty=5 test -pl sample_module' 
   end
 
 end

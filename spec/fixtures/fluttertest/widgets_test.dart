@@ -13,7 +13,7 @@ void main() {
   });
 
   group('MyWidget', {
-    testWidgets('has no description', (WidgetTester tester) async {
+    testWidgets('doesn\'t have description', (WidgetTester tester) async {
       await tester.pumpWidget(MyWidget(title: 'T', message: 'M'));
 
       final descriptionFinder = find.text('D');

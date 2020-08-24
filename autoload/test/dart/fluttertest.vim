@@ -1,6 +1,6 @@
 let g:test#dart#fluttertest#patterns = {
-  \ 'test':      ['\v^\s*%(test|testWidgets)\(''(.*)'''],
-  \ 'namespace': ['\v^\s*group\(''(.*)'''],
+  \ 'test':      ['\v^\s*%(test|testWidgets)\(%(''|")(.*)%(''|"),'],
+  \ 'namespace': ['\v^\s*group\(%(''|")(.*)%(''|"),'],
 \}
 
 if !exists('g:test#dart#fluttertest#file_pattern')

@@ -27,6 +27,7 @@ let g:test#default_runners = {
   \ 'Scala':      ['SbtTest', 'BloopTest'],
   \ 'Haskell':    ['StackTest'],
   \ 'Crystal':    ['CrystalSpec'],
+  \ 'Dart':       ['FlutterTest'],
 \}
 
 let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})

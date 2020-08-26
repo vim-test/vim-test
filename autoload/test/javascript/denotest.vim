@@ -3,9 +3,14 @@ if !exists('g:test#javascript#denotest#file_pattern')
 endif
 
 function! test#javascript#denotest#test_file(file) abort
-  return a:file =~# g:test#javascript#denotest#file_pattern
-    \ && !filereadable('package.json')
-    \ && !empty(filter(readfile(a:file), 'v:val =~# ''Deno.test('''))
+  if a:file =~# g:test#javascript#denotest#file_pattern
+      if exists('g:test#javascript#runner')
+          return g:test#javascript#runner ==# 'denotest'
+      else
+        return !filereadable('package.json')
+                    \ && !empty(filter(readfile(a:file), 'v:val =~# ''Deno.test('''))
+      endif
+  endif
 endfunction
 
 function! test#javascript#denotest#build_position(type, position) abort

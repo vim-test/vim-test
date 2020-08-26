@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "devDependencies": {
-    "jest": "^20.0.0"
+    "jest": "^20.0.0",
+    "mocha": "^3.3.0"
   }
 }

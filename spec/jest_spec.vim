@@ -4,9 +4,11 @@ describe "Jest"
 
   before
     cd spec/fixtures/jest
+    let g:test#javascript#runner = 'jest'
   end
 
   after
+    unlet g:test#javascript#runner
     call Teardown()
     cd -
   end

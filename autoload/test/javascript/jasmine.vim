@@ -3,8 +3,13 @@ if !exists('g:test#javascript#jasmine#file_pattern')
 endif
 
 function! test#javascript#jasmine#test_file(file) abort
-  return a:file =~? g:test#javascript#jasmine#file_pattern
-    \ && test#javascript#has_package('jasmine')
+  if a:file =~? g:test#javascript#jasmine#file_pattern
+      if exists('g:test#javascript#runner')
+          return g:test#javascript#runner ==# 'jasmine'
+      else
+        return test#javascript#has_package('jasmine')
+      endif
+  endif
 endfunction
 
 function! test#javascript#jasmine#build_position(type, position) abort

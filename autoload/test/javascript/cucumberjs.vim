@@ -3,8 +3,15 @@ if !exists('g:test#javascript#cucumberjs#file_pattern')
 endif
 
 function! test#javascript#cucumberjs#test_file(file) abort
+  "if a:file =~# g:test#javascript#cucumberjs#file_pattern
+    "return test#javascript#has_package('cucumber')
+  "endif
   if a:file =~# g:test#javascript#cucumberjs#file_pattern
-    return test#javascript#has_package('cucumber')
+      if exists('g:test#javascript#runner')
+          return g:test#javascript#runner ==# 'cucumber'
+      else
+        return test#javascript#has_package('cucumber')
+      endif
   endif
 endfunction
 

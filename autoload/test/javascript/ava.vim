@@ -3,8 +3,13 @@ if !exists('g:test#javascript#ava#file_pattern')
 endif
 
 function! test#javascript#ava#test_file(file) abort
-  return a:file =~# g:test#javascript#ava#file_pattern
-    \ && test#javascript#has_package('ava')
+  if a:file =~# g:test#javascript#ava#file_pattern
+      if exists('g:test#javascript#runner')
+          return g:test#javascript#runner ==# 'ava'
+      else
+        return test#javascript#has_package('ava')
+      endif
+  endif
 endfunction
 
 function! test#javascript#ava#build_position(type, position) abort

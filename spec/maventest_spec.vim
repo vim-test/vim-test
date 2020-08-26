@@ -134,7 +134,7 @@ describe "Maven Junit3 multimodule tests"
     view sample_module/src/test/java/org/vimtest/math/MathTest.java
     TestSuite -X -f pom.xml -DcustomProperty=5
 
-    Expect g:test#last_command == 'mvn test -X -f pom.xml -DcustomProperty=5  -pl sample_module' 
+    Expect g:test#last_command == 'mvn test -X -f pom.xml -DcustomProperty=5  -pl sample_module'
   end
 
 end

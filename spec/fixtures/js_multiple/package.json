@@ -1,0 +1,11 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {
+    "jest": "^20.0.0",
+    "mocha": "^3.3.0",
+    "cypress": "^3.4.1",
+    "ava": "^0.24.0"
+  }
+}

@@ -11,9 +11,14 @@ if !exists('g:test#javascript#intern#config_module')
 endif
 
 function! test#javascript#intern#test_file(file) abort
-  return a:file =~# g:test#javascript#intern#file_pattern
-    \ && filereadable(g:test#javascript#intern#config_module . '.js')
-    \ && test#javascript#has_package('intern')
+  if a:file =~# g:test#javascript#intern#file_pattern
+      if exists('g:test#javascript#runner')
+          return g:test#javascript#runner ==# 'intern'
+      else
+        return test#javascript#has_package('intern')
+                    \&& filereadable(g:test#javascript#intern#config_module . '.js')
+      endif
+  endif
 endfunction
 
 function! test#javascript#intern#build_position(type, position) abort

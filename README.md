@@ -504,6 +504,20 @@ Test runner detection for JavaScript works by checking which runner is listed in
 
 The `stackTest` runner currently supports running tests in Stack projects with the [HSpec](http://hackage.haskell.org/package/hspec) framework.
 
+#### PHP
+
+The PHPUnit runner has support for the alternate runner [ParaTest](https://github.com/paratestphp/paratest) and will automatically use it if present in `./vendor/bin`. If you prefer to use PHPUnit then override the executable:
+
+```vim
+let test#php#phpunit#executable = 'phpunit'
+```
+
+Similarly if you'd prefer to use an alternate runner such as the [Laravel artisan runner](https://laravel.com/docs/7.x/testing) then override the executable:
+
+```vim
+let test#php#phpunit#executable = 'php artisan test'
+```
+
 ## Autocommands
 
 In addition to running tests manually, you can also configure autocommands

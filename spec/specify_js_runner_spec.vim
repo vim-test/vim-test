@@ -1,6 +1,6 @@
 source spec/support/helpers.vim
 
-describe "Runner"
+describe "Multiple JavaScript runners"
 
   before
     cd spec/fixtures/js_multiple

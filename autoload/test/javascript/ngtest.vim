@@ -3,8 +3,13 @@ if !exists('g:test#javascript#ngtest#file_pattern')
 endif
 
 function! test#javascript#ngtest#test_file(file) abort
-  return a:file =~# g:test#javascript#ngtest#file_pattern
-    \ && test#javascript#has_package('@angular/cli')
+  if a:file =~# g:test#javascript#ngtest#file_pattern
+      if exists('g:test#javascript#runner')
+          return g:test#javascript#runner ==# 'ngtest'
+      else
+        return test#javascript#has_package('@angular/cli')
+      endif
+  endif
 endfunction
 
 function! test#javascript#ngtest#build_args(args) abort

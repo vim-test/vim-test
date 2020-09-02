@@ -254,6 +254,26 @@ let g:test#custom_strategies = {'echo': function('EchoStrategy')}
 let g:test#strategy = 'echo'
 ```
 
+You can even specify a language runner custom strategy and a test#strategy like this,
+but the language#runner#strategy has higher priority then test#strategy, You can see
+the spec/specify_language_runner_strategy_spec.vim test to see more detail.
+
+```vim
+
+function! EchoStrategy(cmd)
+  echo 'It works! Command for running tests: ' . a:cmd
+endfunction
+
+function! MochaServerStrategy(cmd)
+  let g:channel = sockconnect('tcp', 'localhost:40123')
+  call chansend(g:channel, a:cmd)
+endfunction
+
+let g:test#custom_strategies = {'echo': function('EchoStrategy'), 'MochaServer': function('MochaServerStrategy')}
+let g:test#strategy = 'echo'
+let g:test#javascript#mocha#strategy = 'MochaServer'
+```
+
 ## Transformations
 
 You can automatically apply transformations of your test commands by

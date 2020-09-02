@@ -104,7 +104,12 @@ function! test#shell(cmd, strategy) abort
     let strategy = a:strategy
   endif
 
-  if has_key(g:test#custom_strategies, strategy)
+  let runner = test#determine_runner(expand('%'))
+  let specified_strategy = 'g:test#' . runner . '#strategy'
+
+  if exists('{specified_strategy}')
+    call g:test#custom_strategies[{specified_strategy}](cmd)
+  elseif has_key(g:test#custom_strategies, strategy)
     call g:test#custom_strategies[strategy](cmd)
   else
     call test#strategy#{strategy}(cmd)

@@ -128,5 +128,11 @@ describe "Cargo"
     Expect g:test#last_command == 'cargo test'
   end
 
+  it "supports async tokio tests"
+    view +15 src/lib.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''tests::tokio_async_test'' -- --exact'
+  end
+
 end
 

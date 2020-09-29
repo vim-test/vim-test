@@ -10,4 +10,8 @@ mod tests {
     #[test]
     fn third_test () {
     }
+
+    #[tokio::test]
+    async fn tokio_async_test() {
+    }
 }

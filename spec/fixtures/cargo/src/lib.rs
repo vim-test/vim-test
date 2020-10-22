@@ -14,4 +14,11 @@ mod tests {
     #[tokio::test]
     async fn tokio_async_test() {
     }
+
+    #[rstest(input,
+        case(1),
+        case(2),
+    )]
+    fn rstest_test(_: u8) {
+    }
 }

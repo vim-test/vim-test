@@ -4,7 +4,7 @@ endif
 
 if !exists('g:test#rust#cargotest#test_patterns')
   let g:test#rust#cargotest#test_patterns = {
-        \ 'test': ['\v(#\[%(tokio::)?test\])'],
+        \ 'test': ['\v(#\[%(tokio::|rs)?test)'],
         \ 'namespace': ['\vmod (tests?)']
     \ }
 endif
@@ -55,7 +55,7 @@ function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#rust#cargotest#test_patterns)
 
   " If we didn't find the '#[test]' attribute, return empty
-  if empty(name['test']) || name['test'][0] !~ '#\[.*\]'
+  if empty(name['test']) || name['test'][0] !~ '#\[.*'
     return ''
   endif
 

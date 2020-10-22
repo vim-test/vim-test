@@ -1,5 +1,8 @@
 source spec/support/helpers.vim
 
+" add the integrationtest command for java files
+command! -nargs=* -bar IntegrationTest call test#run('integration', split(<q-args>))
+
 describe "Maven Junit3 tests"
 
   before
@@ -247,4 +250,41 @@ describe "Maven Junit5 multimodule tests"
     Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\$Test_NestedTestClass\#test_nested_test -pl sample_module'
   end
 
+end
+
+describe "Integration tests single module"
+
+  before
+    cd spec/fixtures/maven/sample_maven_junit5_project
+  end
+
+  after
+    call Teardown()
+    cd -
+  end
+
+  it "IntegrationTest runs with verify without fully qualified classname"
+    view +14 src/test/java/org/vimtest/TestApp.java
+    IntegrationTest
+
+    Expect g:test#last_command == 'mvn verify -Dit.test=TestApp\*'
+  end
+end
+describe "Integration tests multi module"
+
+  before
+    cd spec/fixtures/maven/sample_maven_junit5_multimodule_project
+  end
+
+  after
+    call Teardown()
+    cd -
+  end
+
+  it "IntegrationTest runs with verify without fully qualified classname in the module"
+    view +14 sample_module/src/test/java/org/vimtest/TestApp.java
+    IntegrationTest
+
+    Expect g:test#last_command == 'mvn verify -Dit.test=TestApp\* -pl sample_module'
+  end
 end

@@ -423,6 +423,22 @@ force a specific runner:
 let test#java#runner = 'gradletest'
 ```
 
+There is a specific strategy for java with maven which invokes the mvn verify for a file instead of mvn test tailored for integration tests. In this way you can leverage the pre-integration goals, like firing up a database and so on. This strategy is called 'integration' and you can setup a command for it (preferably wihtin the java filetype plugin):
+
+``` vim
+command! -nargs=* -bar IntegrationTest call test#run('integration', split(<q-args>))
+```
+
+With this set up you can run your integration tests with the :IntegrationTest plugin for that single file and module.
+As there migth be some dependencies between the maven modules you might need to pass in other parameters for the tests just like any other commands in vim-test. Here is a mapping with other optional parameters:
+
+
+``` vim
+nnoremap <silent><leader>itf :IntegrationTest -Dtest=foo -DfailIfNoTests=false -am -Dpmd.skip=true -Dcheckstyle.skip=true<CR>
+```
+
+The above command makes sure that no surefire tests will be run (by passing in a dummy test and makes sure that the plugin won't fail), it also makes the dependent modules, skips PMD and checkstyle checks as well.
+
 #### Scala
 
 For the same reason as Python, runner detection works the same for Scala. To

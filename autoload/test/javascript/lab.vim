@@ -4,13 +4,17 @@ endif
 
 function! test#javascript#lab#test_file(file) abort
   if a:file =~# g:test#javascript#lab#file_pattern
-    for line in readfile(a:file)
-      let pattern = '\v[Ll]ab.script\(\)'
-      if line =~# pattern
-        return 1
+      if exists('g:test#javascript#runner')
+          return g:test#javascript#runner ==# 'lab'
+      else
+        for line in readfile(a:file)
+          let pattern = '\v[Ll]ab.script\(\)'
+          if line =~# pattern
+            return 1
+          endif
+        endfor
+        return 0
       endif
-    endfor
-    return 0
   endif
 endfunction
 

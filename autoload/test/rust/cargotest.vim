@@ -4,14 +4,14 @@ endif
 
 if !exists('g:test#rust#cargotest#test_patterns')
   let g:test#rust#cargotest#test_patterns = {
-        \ 'test': ['\v(#\[test\])'],
+        \ 'test': ['\v(#\[%(tokio::|rs)?test)'],
         \ 'namespace': ['\vmod (tests?)']
     \ }
 endif
 
 if !exists('g:test#rust#cargotest#patterns')
   let g:test#rust#cargotest#patterns = {
-        \ 'test': ['\v\s*fn\s+(\w+)'],
+        \ 'test': ['\v\s*%(async )?fn\s+(\w+)'],
         \ 'namespace': []
     \ }
 endif
@@ -51,11 +51,11 @@ function! test#rust#cargotest#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  " Search backward for the first '#[test]'
+  " Search backward for the first test pattern (usually '#[test]')
   let name = test#base#nearest_test(a:position, g:test#rust#cargotest#test_patterns)
 
-  " If we didn't find the '#[test]' return empty
-  if empty(name['test']) || '#[test]' != name['test'][0]
+  " If we didn't find the '#[test]' attribute, return empty
+  if empty(name['test']) || name['test'][0] !~ '#\[.*'
     return ''
   endif
 

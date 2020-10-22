@@ -136,6 +136,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:DjangoTest*
 :DjangoTest [args]           Uses the `django` `test` command.
 
+                                                *test-:Behave*
+:Behave [args]               Uses the `behave` `test` command.
+
                                                 *test-:PyUnit*
 :PyUnit [args]               Uses the `unittest` `test` command.
 
@@ -259,6 +262,9 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:TestBench*
 :TestBench [args]  	         Uses the TestBench `bench` command.
+
+                                                *test-:FlutterTest*
+:FlutterTest [args]  	         Uses the `flutter` `test` command.
 
 
 STRATEGIES                                      *test-strategies*

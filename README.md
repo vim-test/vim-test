@@ -24,6 +24,7 @@ runners are supported:
 |         **C#** | .NET                                                                                                               | `xunit`, `dotnettest`                                                                                                                        |
 |    **Clojure** | Fireplace.vim                                                                                                      | `fireplacetest`                                                                                                                              |
 |    **Crystal** | Crystal                                                                                                            | `crystalspec`                                                                                                                                |
+|       **Dart** | Flutter Test                                                                                                       | `fluttertest`                                                                                                                                |
 |     **Elixir** | ESpec, ExUnit                                                                                                      | `espec`, `exunit`                                                                                                                            |
 |        **Elm** | elm-test                                                                                                           | `elmtest`                                                                                                                                    |
 |     **Erlang** | CommonTest, EUnit                                                                                                  | `commontest`, `eunit`                                                                                                                        |
@@ -34,7 +35,7 @@ runners are supported:
 |        **Lua** | Busted                                                                                                             | `busted`                                                                                                                                     |
 |        **PHP** | Behat, Codeception, Kahlan, Peridot, Pest, PHPUnit, PHPSpec, Dusk                                                  | `behat`, `codeception`, `dusk`, `kahlan`, `peridot`, `phpunit`, `phpspec`, `pest`                                                            |
 |       **Perl** | Prove                                                                                                              | `prove`                                                                                                                                      |
-|     **Python** | Django, Mamba, Nose, Nose2, PyTest, PyUnit                                                                         | `djangotest`, `djangonose`, `mamba`, `nose`, `nose2`, `pytest`, `pyunit`                                                                     |
+|     **Python** | Behave, Django, Mamba, Nose, Nose2, PyTest, PyUnit                                                                 | `behave`, `djangotest`, `djangonose`, `mamba`, `nose`, `nose2`, `pytest`, `pyunit`                                                           |
 |     **Racket** | RackUnit                                                                                                           | `rackunit`                                                                                                                                   |
 |       **Ruby** | Cucumber, [M], [Minitest][minitest], Rails, RSpec, TestBench                                                       | `cucumber`, `m`, `minitest`, `rails`, `rspec`, `testbench`                                                                                   |
 |       **Rust** | Cargo                                                                                                              | `cargotest`                                                                                                                                  |
@@ -513,11 +514,29 @@ let test#ruby#use_spring_binstub = 1
 
 #### JavaScript
 
-Test runner detection for JavaScript works by checking which runner is listed in the package.json dependencies. If you have globally installed the runner make sure it's also listed in the dependencies.
+Test runner detection for JavaScript works by checking which runner is listed in the package.json dependencies. If you have globally installed the runner make sure it's also listed in the dependencies. When you have multiple runners listed in the package.json dependencies you can specify a runner like so:
+
+```vim
+let g:test#javascript#runner = 'jest'
+```
 
 #### Haskell
 
 The `stackTest` runner currently supports running tests in Stack projects with the [HSpec](http://hackage.haskell.org/package/hspec) framework.
+
+#### PHP
+
+The PHPUnit runner has support for the alternate runner [ParaTest](https://github.com/paratestphp/paratest) and will automatically use it if present in `./vendor/bin`. If you prefer to use PHPUnit then override the executable:
+
+```vim
+let test#php#phpunit#executable = 'phpunit'
+```
+
+Similarly if you'd prefer to use an alternate runner such as the [Laravel artisan runner](https://laravel.com/docs/7.x/testing) then override the executable:
+
+```vim
+let test#php#phpunit#executable = 'php artisan test'
+```
 
 ## Autocommands
 

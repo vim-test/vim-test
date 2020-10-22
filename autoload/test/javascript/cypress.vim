@@ -3,8 +3,13 @@ if !exists('g:test#javascript#cypress#file_pattern')
 endif
 
 function! test#javascript#cypress#test_file(file) abort
-  return a:file =~# g:test#javascript#cypress#file_pattern
-    \ && test#javascript#has_package('cypress')
+  if a:file =~# g:test#javascript#cypress#file_pattern
+      if exists('g:test#javascript#runner')
+          return g:test#javascript#runner ==# 'cypress'
+      else
+        return test#javascript#has_package('cypress')
+      endif
+  endif
 endfunction
 
 function! test#javascript#cypress#build_position(type, position) abort

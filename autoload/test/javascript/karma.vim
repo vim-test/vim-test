@@ -3,9 +3,14 @@ if !exists('g:test#javascript#karma#file_pattern')
 endif
 
 function! test#javascript#karma#test_file(file) abort
-  return a:file =~? g:test#javascript#karma#file_pattern
-    \ && test#javascript#has_package('karma')
-    \ && !test#javascript#has_package('@angular/cli')
+  if a:file =~? g:test#javascript#karma#file_pattern
+      if exists('g:test#javascript#runner')
+          return g:test#javascript#runner ==# 'karma'
+      else
+        return test#javascript#has_package('karma')
+                    \&& !test#javascript#has_package('@angular/cli')
+      endif
+  endif
 endfunction
 
 function! test#javascript#karma#build_position(type, position) abort

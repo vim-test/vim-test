@@ -3,9 +3,14 @@ if !exists('g:test#javascript#webdriverio#file_pattern')
 endif
 
 function! test#javascript#webdriverio#test_file(file) abort
-  return a:file =~# g:test#javascript#webdriverio#file_pattern
-    \ && test#javascript#has_package('webdriverio')
-    \ && !empty(glob('wdio.conf.js'))
+  if a:file =~# g:test#javascript#webdriverio#file_pattern
+      if exists('g:test#javascript#runner')
+          return g:test#javascript#runner ==# 'webdriverio'
+      else
+        return test#javascript#has_package('webdriverio')
+                    \ && !empty(glob('wdio.conf.js'))
+      endif
+  endif
 endfunction
 
 function! test#javascript#webdriverio#build_position(type, position) abort

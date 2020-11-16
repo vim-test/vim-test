@@ -1,0 +1,11 @@
+.gradle
+.settings
+.project
+.classpath
+.idea
+.vscode
+.DS_Store
+bin
+build
+target
+ktDebugJsonLog.txt

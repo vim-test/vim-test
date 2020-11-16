@@ -1,10 +1,9 @@
 source spec/support/helpers.vim
 
 describe "Gradle plain"
-
   before
     let g:test#java#runner = 'gradletest'
-    cd spec/fixtures/gradle/gradle_plain
+    cd spec/fixtures/gradle/java/gradle_plain
   end
 
   after
@@ -12,7 +11,7 @@ describe "Gradle plain"
     cd -
   end
 
-  it "runs file tests (filename matches Test*.java"
+  it "runs file tests (filename matches Test*.java)"
     view TestMath.java
     TestFile
 
@@ -67,13 +66,12 @@ describe "Gradle plain"
 
     Expect g:test#last_command == 'gradle test --info -b build.gradle -DcustomProperty=5'
   end
-
 end
-describe "Gradle single module"
 
+describe "Gradle single module"
   before
     let g:test#java#runner = 'gradletest'
-    cd spec/fixtures/gradle/gradle_single_module
+    cd spec/fixtures/gradle/java/gradle_single_module
   end
 
   after
@@ -136,13 +134,12 @@ describe "Gradle single module"
 
     Expect g:test#last_command == 'gradle test --info -b build.gradle -DcustomProperty=5'
   end
-
 end
-describe "Gradle multi module"
 
+describe "Gradle multi module"
   before
     let g:test#java#runner = 'gradletest'
-    cd spec/fixtures/gradle/gradle_multi_module
+    cd spec/fixtures/gradle/java/gradle_multi_module
   end
 
   after
@@ -205,5 +202,4 @@ describe "Gradle multi module"
 
     Expect g:test#last_command == 'gradle test --info -b build.gradle -DcustomProperty=5  -p sample_module'
   end
-
 end

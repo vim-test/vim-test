@@ -9,3 +9,4 @@ bin
 build
 target
 ktDebugJsonLog.txt
+gradle/wrapper/*.jar

@@ -17,18 +17,21 @@ function! test#java#maventest#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return ['-Dtest=' . package . '.' . name. module]
+      return ['test -Dtest=' . package . '.' . name. module]
     else
-      return ['-Dtest=' . package . '.' . filename . '\*'. module]
+      return ['test -Dtest=' . package . '.' . filename . '\*'. module]
     endif
 
   " ex:  mvn test -Dtest com.you.pkg.App\*  (catches nested test-classes)
   elseif a:type ==# 'file'
-    return ['-Dtest=' . package . '.' . filename . '\*'. module]
+    return ['test -Dtest=' . package . '.' . filename . '\*'. module]
 
+  " ex:  mvn verify -Dit.test=App\*  (runs integration tests)
+  elseif a:type ==# 'integration'
+    return ['verify -Dit.test=' . filename . '\*'. module]
   " ex:  mvn test
   else
-    return [module]
+    return ['test' . module]
   endif
 
 endfunction
@@ -38,7 +41,7 @@ function! test#java#maventest#build_args(args) abort
 endfunction
 
 function! test#java#maventest#executable() abort
-  return 'mvn test'
+  return 'mvn'
 endfunction
 
 function! s:get_java_package(filepath)

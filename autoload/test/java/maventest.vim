@@ -64,6 +64,7 @@ function! s:get_maven_module(filepath)
       return ' -pl '. module_name
   else 
       return ''
+  endif
 endfunction
 
 function! s:GetJavaProjectDirectory(filepath)

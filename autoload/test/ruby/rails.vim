@@ -7,6 +7,10 @@ function! test#ruby#rails#test_file(file) abort
     return 0
   end
 
+  if empty(glob('config/application.rb'))
+    return 0
+  end
+
   return a:file =~# g:test#ruby#rails#file_pattern
 endfunction
 

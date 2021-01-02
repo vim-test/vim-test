@@ -3,7 +3,7 @@ source spec/support/helpers.vim
 describe "Cargo"
 
   before
-    cd spec/fixtures/cargo
+    cd spec/fixtures/cargo/crate
   end
 
   after
@@ -140,5 +140,10 @@ describe "Cargo"
     Expect g:test#last_command == 'cargo test ''tests::rstest_test'' -- --exact'
   end
 
+  it "runs file tests in workspaces"
+    cd ..
+    view crate/src/lib.rs
+    TestFile
+    Expect g:test#last_command == 'cargo test --package crate '''''
+    cd -
 end
-

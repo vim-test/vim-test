@@ -16,6 +16,10 @@ describe "Cargo"
     TestFile
     Expect g:test#last_command == 'cargo test '''''
 
+    view src/main.rs
+    TestFile
+    Expect g:test#last_command == 'cargo test '''''
+
     view src/somemod.rs
     TestFile
     Expect g:test#last_command == 'cargo test ''somemod::'''

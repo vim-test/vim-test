@@ -88,9 +88,9 @@ function! s:test_namespace(filename) abort
   " On a normal cargo project, the first item is 'src'
   let l:modules = split(l:path, '/')
 
-  " 'src/lib.rs' and 'src/some/mod.rs' does not end
+  " 'src/main.rs', 'src/lib.rs' and 'src/some/mod.rs' do not end
   " with actual module names
-  if l:modules[-1] =~# '\v^(lib|mod)$'
+  if l:modules[-1] =~# '\v^(main|lib|mod)$'
     let l:modules = l:modules[:-2]
   endif
 

@@ -39,7 +39,7 @@ function! test#base#build_args(runner, args, strategy) abort
     " https://github.com/vim/vim/pull/2483
     let args = test#{a:runner}#build_args(a:args, !no_color)
     return args
-  catch /^Vim\%((\a\+)\)\=:E118/ " too many arguments
+  catch /^Vim\%((\a\+)\)\=:E118:/ " too many arguments
     return test#{a:runner}#build_args(a:args)
   endtry
 endfunction

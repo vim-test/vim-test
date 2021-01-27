@@ -370,7 +370,7 @@ certain testing framework. You can override that pattern by overriding the
 `file_pattern` variable:
 
 ```vim
-let test#ruby#minitest#file_pattern = '_spec\.rb' " the default is '(((^|/)test_.+)|_test)\.rb'
+let test#ruby#minitest#file_pattern = '_spec\.rb' " the default is '\v(((^|/)test_.+)|_test)(spec)@<!\.rb$'
 ```
 
 ### Filename modifier

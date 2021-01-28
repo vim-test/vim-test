@@ -30,12 +30,16 @@ function! test#base#executable(runner) abort
   endif
 endfunction
 
-function! test#base#build_args(runner, args, strategy)
+function! test#base#build_args(runner, args, strategy) abort
   let no_color = has('gui_running') && a:strategy ==# 'basic'
 
   try
-    return test#{a:runner}#build_args(a:args, !no_color)
-  catch /^Vim\%((\a\+)\)\=:E118/ " too many arguments
+    " Before Vim 8.0.1423 exceptions thrown from return statement
+    " cannot be caught.
+    " https://github.com/vim/vim/pull/2483
+    let args = test#{a:runner}#build_args(a:args, !no_color)
+    return args
+  catch /^Vim\%((\a\+)\)\=:E118:/ " too many arguments
     return test#{a:runner}#build_args(a:args)
   endtry
 endfunction

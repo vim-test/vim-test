@@ -1,5 +1,5 @@
 if !exists('g:test#ruby#minitest#file_pattern')
-  let g:test#ruby#minitest#file_pattern = '\v(((^|/)test_.+)|_test)\.rb$'
+  let g:test#ruby#minitest#file_pattern = '\v(((^|/)test_.+)|_test)(spec)@<!\.rb$'
 endif
 
 function! test#ruby#minitest#test_file(file) abort

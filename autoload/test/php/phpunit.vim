@@ -49,6 +49,8 @@ endfunction
 function! test#php#phpunit#executable() abort
   if exists('g:test#php#phpunit#executable')
     return g:test#php#phpunit#executable
+  elseif filereadable('./vendor/bin/sail')
+    return './vendor/bin/sail test'
   elseif filereadable('./vendor/bin/paratest')
     return './vendor/bin/paratest'
   elseif filereadable('./vendor/bin/phpunit')

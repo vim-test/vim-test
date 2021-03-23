@@ -267,6 +267,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:FlutterTest*
 :FlutterTest [args]  	         Uses the `flutter` `test` command.
 
+                                                *test-:PubRunTest*
+:PubRunTest [args]  	         Uses the `pub run test` command.
+
 MAVEN TEST DIFFERENCES                          *test-maven-test-differences*
 
 As there are different approaches to run tests in a maven project (unit vs integration tests) there is a way to run both. Initially the vim-test runs `mvn` `test`. If you want it to run `mvn` `verify` instead, then you can create your own command invoking vim test directly with the 'integration' parameter:

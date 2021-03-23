@@ -9,7 +9,7 @@ endif
 
 " Returns true if the given file belongs to your test runner
 function! test#dart#pubruntest#test_file(file) abort
-  return test#dart#test_file('pub run test', g:test#dart#pubruntest#file_pattern, a:file)
+  return test#dart#test_file('pubruntest', g:test#dart#pubruntest#file_pattern, a:file)
 endfunction
 
 " Returns test runner's arguments which will run the current file and/or line

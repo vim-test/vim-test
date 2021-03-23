@@ -14,7 +14,7 @@ describe "Dart Runner"
       call Teardown()
     end
     it "should use flutter test if 'package:flutter_test/flutter_test.dart' is found"
-      view fluttertest/widget_test.dart
+      view fluttertest/widgets_test.dart
       TestFile
       Expect g:test#last_command =~# '\v^flutter test'
     end
@@ -27,10 +27,10 @@ describe "Dart Runner"
 
   describe "when test#dart#runner is set"
     it "should respect test#dart#runner"
-      for runner in ["flutter test", "pub run test"]
+      for runner in ["fluttertest", "pubruntest"]
         let g:test#dart#runner = runner
         Expect test#determine_runner("pubruntest/basic_test.dart") == 'dart#'.runner
-        Expect test#determine_runner("fluttertest/widget_test.dart") == 'dart#'.runner
+        Expect test#determine_runner("fluttertest/widgets_test.dart") == 'dart#'.runner
       endfor
     end
   end

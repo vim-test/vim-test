@@ -6,7 +6,7 @@ function! test#dart#test_file(runner, file_pattern, file) abort
 
     let contains_flutter_test_import = (search('package:flutter_test/flutter_test.dart', 'n') > 0)
 
-    if a:runner ==# 'flutter test'
+    if a:runner ==# 'fluttertest'
       return contains_flutter_test_import
     else
       return !contains_flutter_test_import

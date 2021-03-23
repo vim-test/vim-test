@@ -9,7 +9,7 @@ endif
 
 " Returns true if the given file belongs to your test runner
 function! test#dart#fluttertest#test_file(file) abort
-  return test#dart#test_file('flutter test', g:test#dart#fluttertest#file_pattern, a:file)
+  return test#dart#test_file('fluttertest', g:test#dart#fluttertest#file_pattern, a:file)
 endfunction
 
 " Returns test runner's arguments which will run the current file and/or line

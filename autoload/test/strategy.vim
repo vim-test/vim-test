@@ -94,7 +94,7 @@ function! test#strategy#neoterm(cmd) abort
 endfunction
 
 function! test#strategy#floaterm(cmd) abort
-  execute 'FloatermNew '.a:cmd
+  execute 'FloatermNew --autoclose=0 '.a:cmd
 endfunction
 
 function! test#strategy#vtr(cmd) abort

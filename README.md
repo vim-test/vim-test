@@ -145,6 +145,13 @@ if has('nvim')
 endif
 ```
 
+By default vim-test will echo the test command before running it. You can
+disable this behavior with:
+
+```vim
+let g:test#echo_command = 0
+```
+
 ### Kitty strategy setup
 
 Before you can run tests in a kitty terminal window using the kitty strategy,

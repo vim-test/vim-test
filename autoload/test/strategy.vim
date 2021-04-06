@@ -201,15 +201,20 @@ function! s:execute_script(name, cmd) abort
 endfunction
 
 function! s:pretty_command(cmd) abort
-  let clear = !s:Windows() ? 'clear' : 'cls'
-  let echo  = !s:Windows() ? 'echo -e '.shellescape(a:cmd) : 'Echo '.shellescape(a:cmd)
+  let cmds = []
   let separator = !s:Windows() ? '; ' : ' & '
 
   if !get(g:, 'test#preserve_screen')
-    return join([l:clear, l:echo, a:cmd], l:separator)
-  else
-    return join([l:echo, a:cmd], l:separator)
+    call add(l:cmds, !s:Windows() ? 'clear' : 'cls')
   endif
+
+  if get(g:, 'test#echo_command', 1)
+    call add(l:cmds, !s:Windows() ? 'echo -e '.shellescape(a:cmd) : 'Echo '.shellescape(a:cmd))
+  endif
+
+  call add(l:cmds, a:cmd)
+
+  return join(l:cmds, l:separator)
 endfunction
 
 function! s:command(cmd) abort

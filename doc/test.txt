@@ -546,6 +546,11 @@ If you want to disable clearing the screen for strategies, you can do
 >
   let g:test#preserve_screen = 1
 <
+By default, vim-test will echo the test command before running it. You can
+disable this behavior with
+>
+  let g:test#echo_command = 0
+<
 You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your preferred options with
 >

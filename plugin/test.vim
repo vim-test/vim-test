@@ -9,7 +9,7 @@ let g:test#default_runners = {
   \ 'CSharp':     ['Xunit', 'DotnetTest'],
   \ 'Clojure':    ['FireplaceTest'],
   \ 'Crystal':    ['CrystalSpec'],
-  \ 'Dart':       ['PubRunTest', 'FlutterTest'],
+  \ 'Dart':       ['DartTest', 'FlutterTest'],
   \ 'Elixir':     ['ExUnit', 'ESpec'],
   \ 'Elm':        ['ElmTest'],
   \ 'Erlang':     ['CommonTest', 'EUnit'],

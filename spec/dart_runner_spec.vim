@@ -18,18 +18,18 @@ describe "Dart Runner"
       TestFile
       Expect g:test#last_command =~# '\v^flutter test'
     end
-    it "should use pub run test otherwise"
-      view pubruntest/basic_test.dart
+    it "should use dart test otherwise"
+      view darttest/basic_test.dart
       TestFile
-      Expect g:test#last_command =~# '\v^pub run test'
+      Expect g:test#last_command =~# '\v^dart test'
     end
   end
 
   describe "when test#dart#runner is set"
     it "should respect test#dart#runner"
-      for runner in ["fluttertest", "pubruntest"]
+      for runner in ["fluttertest", "darttest"]
         let g:test#dart#runner = runner
-        Expect test#determine_runner("pubruntest/basic_test.dart") == 'dart#'.runner
+        Expect test#determine_runner("darttest/basic_test.dart") == 'dart#'.runner
         Expect test#determine_runner("fluttertest/widgets_test.dart") == 'dart#'.runner
       endfor
     end

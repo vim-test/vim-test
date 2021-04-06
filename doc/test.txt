@@ -267,8 +267,8 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:FlutterTest*
 :FlutterTest [args]  	         Uses the `flutter` `test` command.
 
-                                                *test-:PubRunTest*
-:PubRunTest [args]  	         Uses the `pub run test` command.
+                                                *test-:DartTest*
+:DartTest [args]  	         Uses the `dart test` command.
 
 MAVEN TEST DIFFERENCES                          *test-maven-test-differences*
 

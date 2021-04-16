@@ -33,7 +33,7 @@ function! s:get_maven_module(filepath)
   let project_dir = s:GetJavaProjectDirectory(a:filepath)
   let l:module_name = fnamemodify(project_dir, ':t')
   let l:parent = fnamemodify(project_dir, ':p:h:h')
-  if filereadable(l:parent. "/build.gradle") || filereadable(l:parent. "/build.graddle.kts") " check if the parent dir has build.gradle or build.gradle.kts
+  if filereadable(l:parent. "/build.gradle") || filereadable(l:parent. "/build.gradle.kts") " check if the parent dir has build.gradle or build.gradle.kts
       return ' -p '. module_name
   else 
       return ''

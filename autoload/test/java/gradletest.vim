@@ -58,7 +58,7 @@ function! s:GetBuildFile(pwd)
 
         if filereadable(expand(l:fn))
             return l:fn
-        elseif filereadable(expand(1:fnf))
+        elseif filereadable(expand(l:fnf))
             return l:fnf
         else
             let l:parent = fnamemodify(a:pwd, ':h')

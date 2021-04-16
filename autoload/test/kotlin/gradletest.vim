@@ -30,7 +30,7 @@ endfunction
 function! s:get_module(filepath)
   let project_dir = s:GetKotlinProjectDirectory(a:filepath)
   let l:parent = fnamemodify(project_dir, ':p:h:h')
-  if filereadable(l:parent. "/build.gradle") || filereadable(l:parent. "/build.graddle.kts") " check if the parent dir has build.gradle or build.gradle.kts
+  if filereadable(l:parent. "/build.gradle") || filereadable(l:parent. "/build.gradle.kts") " check if the parent dir has build.gradle or build.gradle.kts
       return ' -p ' . project_dir
   else
       return ''

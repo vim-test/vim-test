@@ -106,6 +106,7 @@ function! test#base#nearest_test_in_lines(filename, from_line, to_line, patterns
   let last_indent  = -1
   let current_line = a:from_line + 1
   let test_line    = -1
+  let last_namespace_line = -1
 
   let is_reverse = '$' == a:from_line ? 1 : a:from_line > a:to_line
   let lines = is_reverse
@@ -118,13 +119,25 @@ function! test#base#nearest_test_in_lines(filename, from_line, to_line, patterns
     let namespace_match = s:find_match(line, a:patterns['namespace'])
 
     let indent = len(matchstr(line, '^\s*'))
-    if !empty(test_match) && last_indent == -1
+    if !empty(test_match) 
+      \ && (last_indent == -1 
+          \ || (test_line == -1 
+              \ && last_indent > indent 
+              \ && last_namespace_line > current_line 
+              \ && last_namespace_line != -1
+          \ )
+        \ )
+      if last_namespace_line > current_line 
+        let namespace = []
+        let last_namespace_line = -1
+      endif
       call add(test, filter(test_match[1:], '!empty(v:val)')[0])
       let last_indent = indent
       let test_line   = current_line
     elseif !empty(namespace_match) && (indent < last_indent || last_indent == -1)
       call add(namespace, filter(namespace_match[1:], '!empty(v:val)')[0])
       let last_indent = indent
+      let last_namespace_line = current_line
     endif
   endfor
 

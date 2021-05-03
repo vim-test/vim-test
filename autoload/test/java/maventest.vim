@@ -50,7 +50,7 @@ function! s:get_java_package(filepath)
   let abspath = substitute(a:filepath, '\\', '/', 'g')
 
   " strip path-to-project and maven-boilerplate dir-structure
-  let relpath = substitute(abspath, '^.*src/\(main\|test\)/\(java/\)?', "", "g")
+  let relpath = substitute(abspath, '^.*src/\(main\|test\)/\(java/\)\?', "", "g")
   let package_path = substitute(relpath, '\/[^/]\+$', "", "g")
   let java_package = substitute(package_path, '/', '.', 'g')
   return java_package

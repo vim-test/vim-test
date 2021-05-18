@@ -7,7 +7,7 @@ function! test#ruby#rails#test_file(file) abort
     return 0
   end
 
-  if empty(glob('config/application.rb'))
+  if empty(glob('config/application.rb')) && empty(glob('test/*/config/application.rb'))
     return 0
   end
 

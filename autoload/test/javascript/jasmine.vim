@@ -1,5 +1,5 @@
 if !exists('g:test#javascript#jasmine#file_pattern')
-  let g:test#javascript#jasmine#file_pattern = '\v^spec/.*spec\.(js|jsx|coffee)$'
+  let g:test#javascript#jasmine#file_pattern = '\v^spec[\\/].*spec\.(js|jsx|coffee)$'
 endif
 
 function! test#javascript#jasmine#test_file(file) abort
@@ -38,7 +38,7 @@ endfunction
 
 function! test#javascript#jasmine#executable() abort
   if filereadable('node_modules/.bin/jasmine')
-    return 'node_modules/.bin/jasmine'
+    return expand('node_modules/.bin/jasmine')
   else
     return 'jasmine'
   endif

@@ -38,7 +38,7 @@ endfunction
 
 function! test#javascript#jasmine#executable() abort
   if filereadable('node_modules/.bin/jasmine')
-    return 'node_modules/.bin/jasmine'
+    return expand('node_modules/.bin/jasmine')
   else
     return 'jasmine'
   endif

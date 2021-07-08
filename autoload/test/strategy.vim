@@ -103,10 +103,8 @@ endfunction
 
 function! test#strategy#vimux(cmd) abort
   if exists('g:test#preserve_screen') && !g:test#preserve_screen
-    if exists('g:VimuxRunnerIndex') && _VimuxHasRunner(g:VimuxRunnerIndex) != -1
-      call VimuxRunCommand(!s:Windows() ? 'clear' : 'cls')
-      call VimuxClearRunnerHistory()
-    endif
+    call VimuxClearTerminalScreen()
+    call VimuxClearRunnerHistory()
     call VimuxRunCommand(s:command(a:cmd))
   else
     call VimuxRunCommand(s:pretty_command(a:cmd))

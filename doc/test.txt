@@ -615,6 +615,14 @@ for neovim and
 <
 for vim
 
+By default, the `neovim` and `basic` (when using Neovim) strategies will open a
+terminal in insert mode, so that you can press any key to close the split. If
+you would prefer to open the terminal in normal mode:
+>
+  let test#neovim#start_normal = 1 # if using neovim strategy
+  let test#basic#start_normal = 1 # if using basic strategy
+<
+
 
 PROJECTIONIST INTEGRATION                       *test-projectionist*
 

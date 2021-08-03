@@ -6,7 +6,9 @@ function! test#strategy#basic(cmd) abort
   if has('nvim')
     -tabnew
     call termopen(a:cmd)
-    startinsert
+    if !get(g:, 'test:basic:start_normal', 0)
+      startinsert
+    endif
   else
     if s:restorescreen()
       execute '!'.s:pretty_command(a:cmd)
@@ -76,7 +78,9 @@ function! test#strategy#neovim(cmd) abort
   execute term_position . ' new'
   call termopen(a:cmd)
   au BufDelete <buffer> wincmd p " switch back to last window
-  startinsert
+  if !get(g:, 'test#neovim#start_normal', 0)
+    startinsert
+  endif
 endfunction
 
 function! test#strategy#vimterminal(cmd) abort

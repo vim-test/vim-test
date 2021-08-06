@@ -1,0 +1,17 @@
+apply plugin: "groovy"
+
+version = "1.0"
+description = "Spock Framework - Example Project"
+
+// Spock works with Java 1.8 and above
+sourceCompatibility = 1.8
+
+repositories {
+  // Spock releases are available from Maven Central
+  mavenCentral()
+  // Spock snapshots are available from the Sonatype OSS snapshot repository
+  maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+subprojects {
+}

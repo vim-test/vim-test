@@ -1,0 +1,40 @@
+apply plugin: "groovy"
+
+version = "1.0"
+description = "Spock Framework - Example Project"
+
+// Spock works with Java 1.8 and above
+sourceCompatibility = 1.8
+
+repositories {
+  // Spock releases are available from Maven Central
+  mavenCentral()
+  // Spock snapshots are available from the Sonatype OSS snapshot repository
+  maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+  // mandatory dependencies for using Spock
+  implementation "org.codehaus.groovy:groovy:3.0.8"
+  testImplementation platform("org.spockframework:spock-bom:2.0-groovy-3.0")
+  testImplementation "org.spockframework:spock-core"
+  testImplementation "org.spockframework:spock-junit4"  // you can remove this if your code does not rely on old JUnit 4 rules
+
+  // optional dependencies for using Spock
+  testImplementation "org.hamcrest:hamcrest-core:2.2"   // only necessary if Hamcrest matchers are used
+  testRuntimeOnly "net.bytebuddy:byte-buddy:1.11.0" // allows mocking of classes (in addition to interfaces)
+  testRuntimeOnly "org.objenesis:objenesis:3.2"      // allows mocking of classes without default constructor (together with ByteBuddy or CGLIB)
+
+  // dependencies used by examples in this project
+  testRuntimeOnly "com.h2database:h2:1.4.197"
+  implementation "org.codehaus.groovy:groovy-sql:3.0.8"
+}
+
+test {
+  useJUnitPlatform()
+  testLogging {
+    events "passed", "skipped", "failed"
+  }
+}
+
+

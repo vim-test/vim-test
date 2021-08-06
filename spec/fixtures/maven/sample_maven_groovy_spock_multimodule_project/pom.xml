@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.spockframework</groupId>
+  <artifactId>spock-example</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Spock Framework - Example Project</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <groovy.version>3.0.8</groovy.version>
+  </properties>
+
+  <modules>
+    <module>module_one</module>
+    <module>module_two</module>
+  </modules>
+
+  <repositories>
+    <!-- Only required if a snapshot version of Spock is used -->
+    <repository>
+      <id>spock-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <!-- Only required in spock-example build -->
+  <distributionManagement>
+    <repository>
+      <id>foo</id>
+      <url>file:///fake.repository.to.make.maven.happy</url>
+    </repository>
+    <snapshotRepository>
+      <id>bar</id>
+      <url>file:///fake.repository.to.make.maven.happy</url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>

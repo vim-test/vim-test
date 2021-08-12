@@ -16,8 +16,6 @@ describe "vue-test-utils"
       view +1 __tests__/normal-test.js
       TestNearest
 
-      " vue-cli-service test:unit --no-coverage -t \"renders props.msg when passed" -- tests/unit/example.spec.ts
-
       Expect g:test#last_command == 'vue-cli-service test:unit --no-coverage -t ''^Math'' -- __tests__/normal-test.js'
 
       view +2 __tests__/normal-test.js

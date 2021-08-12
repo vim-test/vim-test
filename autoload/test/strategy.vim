@@ -165,6 +165,17 @@ function! test#strategy#shtuff(cmd) abort
   call system("shtuff into " . shellescape(g:shtuff_receiver) . " " . shellescape("clear;" . a:cmd))
 endfunction
 
+function! test#strategy#harpoon(cmd) abort
+  let g:cmd = a:cmd . "\n"
+  if(exists("g:test#harpoon_term"))
+    lua require("harpoon.term").sendCommand(vim.g["test#harpoon_term"] ,vim.g.cmd)
+    lua require("harpoon.term").gotoTerminal(vim.g["test#harpoon_term"])
+  else
+    lua require("harpoon.term").sendCommand(1 ,vim.g.cmd)
+    lua require("harpoon.term").gotoTerminal(1)
+  endif
+endfunction
+
 function! s:execute_with_compiler(cmd, script) abort
   try
     let default_makeprg = &l:makeprg

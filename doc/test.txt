@@ -473,6 +473,20 @@ settings. If you want to switch between them then change `test#strategy`.
 Note: that the base `asyncrun` strategy will be affected by your global asyncrun
 settings.
 
+Harpoon ~
+
+This strategy lets you run commands in a neovim terminal using harpoon terminals
+
+Before you can use this strategy you are going to need to have the harpoon plugin installed
+
+By default the commands are sent to the terminal 1, to send the command to another terminal you con set in you vimrc g:test#harpoon_term
+
+For example to send the commands to terminal number 2 you can set in your vimrc:
+
+>
+let g:test#harpoon_term = 2
+<
+
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 
 If you want your test results to appear in the |quickfix| window, use one of the

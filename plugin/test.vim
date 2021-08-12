@@ -16,7 +16,7 @@ let g:test#default_runners = {
   \ 'Go':         ['GoTest', 'Ginkgo', 'RichGo', 'Delve'],
   \ 'Haskell':    ['StackTest'],
   \ 'Java':       ['MavenTest', 'GradleTest'],
-  \ 'JavaScript': ['Ava', 'CucumberJS', 'DenoTest', 'Intern', 'TAP', 'Karma', 'Lab', 'Mocha',  'NgTest', 'Jasmine', 'Jest', 'ReactScripts', 'WebdriverIO', 'Cypress'],
+  \ 'JavaScript': ['Ava', 'CucumberJS', 'DenoTest', 'Intern', 'TAP', 'Karma', 'Lab', 'Mocha',  'NgTest', 'Jasmine', 'Jest', 'ReactScripts', 'WebdriverIO', 'Cypress', 'VueTestUtils'],
   \ 'Kotlin':     ['GradleTest'],
   \ 'Lua':        ['Busted'],
   \ 'PHP':        ['Codeception', 'Dusk', 'Pest', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],

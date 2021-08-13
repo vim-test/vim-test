@@ -270,6 +270,10 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:DartTest*
 :DartTest [args]  	         Uses the `dart test` command.
 
+                                                *test-:VueTestUtils*
+:VueTestUtils [args]  	         Uses the `vue-cli-service` command.
+
+
 MAVEN TEST DIFFERENCES                          *test-maven-test-differences*
 
 As there are different approaches to run tests in a maven project (unit vs integration tests) there is a way to run both. Initially the vim-test runs `mvn` `test`. If you want it to run `mvn` `verify` instead, then you can create your own command invoking vim test directly with the 'integration' parameter:

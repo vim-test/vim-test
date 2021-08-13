@@ -1,0 +1,8 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {
+    "@vue/test-utils": "^2.0.0-0"
+  }
+}

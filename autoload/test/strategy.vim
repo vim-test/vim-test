@@ -169,10 +169,14 @@ function! test#strategy#harpoon(cmd) abort
   let g:cmd = a:cmd . "\n"
   if(exists("g:test#harpoon_term"))
     lua require("harpoon.term").sendCommand(vim.g["test#harpoon_term"] ,vim.g.cmd)
-    lua require("harpoon.term").gotoTerminal(vim.g["test#harpoon_term"])
+    if !exists("g:test#harpoon_stay_here")
+      lua require("harpoon.term").gotoTerminal(vim.g["test#harpoon_term"])
+    endif
   else
     lua require("harpoon.term").sendCommand(1 ,vim.g.cmd)
-    lua require("harpoon.term").gotoTerminal(1)
+    if !exists("g:test#harpoon_stay_here")
+      lua require("harpoon.term").gotoTerminal(1)
+    endif
   endif
 endfunction
 

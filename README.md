@@ -150,8 +150,8 @@ If you prefer, you can instead have the terminal open in normal mode, so it does
 not close on key press.
 
 ```vim
-let g:test#neovim#start_normal = 1 # If using neovim strategy
-let g:test#basic#start_normal = 1 # If using basic strategy
+let g:test#neovim#start_normal = 1 " If using neovim strategy
+let g:test#basic#start_normal = 1 " If using basic strategy
 ```
 
 By default vim-test will echo the test command before running it. You can

@@ -252,6 +252,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:CrystalSpec*
 :CrystalSpec [args]          Uses the `crystal` `spec` command.
 
+                                                *test-:MintTest*
+:MintTest [args]             Uses the `mint` `test` command.
+
                                                 *test-:SwiftPM*
 :SwiftPM [args]              Uses the `swift test` command.
 

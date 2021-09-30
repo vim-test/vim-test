@@ -19,6 +19,7 @@ let g:test#default_runners = {
   \ 'JavaScript': ['Ava', 'CucumberJS', 'DenoTest', 'Intern', 'TAP', 'Karma', 'Lab', 'Mocha',  'NgTest', 'Jasmine', 'Jest', 'ReactScripts', 'WebdriverIO', 'Cypress', 'VueTestUtils'],
   \ 'Kotlin':     ['GradleTest'],
   \ 'Lua':        ['Busted'],
+  \ 'Mint':       ['MintTest'],
   \ 'PHP':        ['Codeception', 'Dusk', 'Pest', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
   \ 'Perl':       ['Prove'],
   \ 'Python':     ['Behave', 'DjangoTest', 'PyTest', 'PyUnit', 'Nose', 'Nose2', 'Mamba'],

@@ -34,6 +34,7 @@ runners are supported:
 | **JavaScript** | Ava, Cucumber.js, Cypress, Deno, Intern, Jasmine, Jest, Karma, Lab, Mocha, ng test, ReactScripts, TAP, WebdriverIO | `ava`, `cucumberjs`, `cypress`, `deno`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `ngtest` ,`reactscripts`, `tap`, `webdriverio`, `vue-test-utils`|
 |     **Kotlin** | Gradle (Groovy and Kotlin DSL)                                                                                     | `gradletest`                                                                                                                                 |
 |        **Lua** | Busted                                                                                                             | `busted`                                                                                                                                     |
+|       **Mint** | Mint                                                                                                               | `minttest`                                                                                                                                   |
 |        **PHP** | Behat, Codeception, Kahlan, Peridot, Pest, PHPUnit, Sail, PHPSpec, Dusk                                            | `behat`, `codeception`, `dusk`, `kahlan`, `peridot`, `phpunit`, `sail`, `phpspec`, `pest`                                                    |
 |       **Perl** | Prove                                                                                                              | `prove`                                                                                                                                      |
 |     **Python** | Behave, Django, Mamba, Nose, Nose2, PyTest, PyUnit                                                                 | `behave`, `djangotest`, `djangonose`, `mamba`, `nose`, `nose2`, `pytest`, `pyunit`                                                           |
@@ -144,6 +145,14 @@ which is difficult to press, so I recommend mapping it to `CTRL-o`:
 if has('nvim')
   tmap <C-o> <C-\><C-n>
 endif
+```
+
+If you prefer, you can instead have the terminal open in normal mode, so it does
+not close on key press.
+
+```vim
+let g:test#neovim#start_normal = 1 " If using neovim strategy
+let g:test#basic#start_normal = 1 " If using basic strategy
 ```
 
 By default vim-test will echo the test command before running it. You can

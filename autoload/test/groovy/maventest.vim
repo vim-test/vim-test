@@ -36,7 +36,7 @@ endfunction
 function! test#groovy#maventest#executable() abort
   let project_dir = s:maven_project_directory(expand('%'))
   let maven_wrapper = strlen(project_dir) ? s:maven_wrapper_path(fnamemodify(project_dir, ':p')) : ''
-  return strlen(maven_wrapper) ? ('./' . maven_wrapper) : 'maven'
+  return strlen(maven_wrapper) ? ('./' . maven_wrapper) : 'mvn'
 endfunction
 
 function! s:get_groovy_package(filepath)

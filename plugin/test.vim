@@ -28,7 +28,7 @@ let g:test#default_runners = {
   \ 'Ruby':       ['Rails', 'M', 'Minitest', 'RSpec', 'Cucumber', 'TestBench'],
   \ 'Rust':       ['CargoTest'],
   \ 'Scala':      ['SbtTest', 'BloopTest'],
-  \ 'Shell':      ['Bats'],
+  \ 'Shell':      ['Bats', 'ShellSpec'],
   \ 'Swift':      ['SwiftPM'],
   \ 'VimL':       ['Themis', 'VSpec', 'Vader', 'Testify', 'Vroom'],
 \}

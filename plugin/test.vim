@@ -14,6 +14,7 @@ let g:test#default_runners = {
   \ 'Elm':        ['ElmTest'],
   \ 'Erlang':     ['CommonTest', 'EUnit'],
   \ 'Go':         ['GoTest', 'Ginkgo', 'RichGo', 'Delve'],
+  \ 'Groovy':     ['MavenTest', 'GradleTest'],
   \ 'Haskell':    ['StackTest'],
   \ 'Java':       ['MavenTest', 'GradleTest'],
   \ 'JavaScript': ['Ava', 'CucumberJS', 'DenoTest', 'Intern', 'TAP', 'Karma', 'Lab', 'Mocha',  'NgTest', 'Jasmine', 'Jest', 'ReactScripts', 'WebdriverIO', 'Cypress', 'VueTestUtils'],

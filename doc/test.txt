@@ -193,6 +193,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Bats*
 :Bats [args]                 Uses the `bats` command.
 
+                                                *test-:ShellSpec*
+:ShellSpec [args]                 Uses the `shellspec` command.
+
                                                 *test-:VSpec*
 :VSpec [args]                Uses the `vim-flavor` `test` command.
 

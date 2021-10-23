@@ -11,6 +11,7 @@ function! test#run(type, arguments) abort
   elseif exists('g:test#last_position')
     let position = g:test#last_position
   else
+    call s:after_run()
     call s:echo_failure('Not a test file') | return
   endif
 

@@ -28,6 +28,11 @@ describe "PyUnitTest"
 
     Expect g:test#last_command == 'python -m unittest module.test_class.TestNumbers'
 
+    view +15 module/test_class.py
+    TestNearest
+
+    Expect g:test#last_command == 'python -m unittest module.test_class.TestNestedClass.test_nested'
+
     view +1 module/test_method.py
     TestNearest
 

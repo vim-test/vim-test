@@ -1,6 +1,6 @@
 source spec/support/helpers.vim
 
-describe "GoTest"
+describe "LuaTest"
 
   before
     cd spec/fixtures/busted
@@ -11,11 +11,15 @@ describe "GoTest"
     cd -
   end
 
-  it "runs file tests instead of nearest tests"
+  it "runs nearest tests"
     view normal_spec.lua
     TestNearest
 
-    Expect g:test#last_command == 'busted normal_spec.lua'
+    Expect g:test#last_command == 'busted --filter ''Numbers'' normal_spec.lua'
+    # TODO: describe
+    # TODO: it
+    # TODO: magic characters
+    # TODO: moon
   end
 
   it "runs file tests"

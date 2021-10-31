@@ -33,7 +33,7 @@ function! s:get_maven_module(filepath)
   let project_dir = s:GetJavaProjectDirectory(a:filepath)
   let l:module_name = fnamemodify(project_dir, ':t')
   let l:parent = fnamemodify(project_dir, ':p:h:h')
-  if filereadable(l:parent. "/build.gradle") " check if the parent dir has build.gradle
+  if filereadable(l:parent. "/build.gradle") || filereadable(l:parent. "/build.gradle.kts") " check if the parent dir has build.gradle or build.gradle.kts
       return ' -p '. module_name
   else 
       return ''
@@ -53,10 +53,13 @@ function! s:GetBuildFile(pwd)
     if a:pwd ==# "\/"
         return 0
     else
-        let l:fn = a:pwd . "/build.gradle"
+        let l:fn = a:pwd . "/build.gradle" " Groovy DSL
+        let l:fnf = l:fn . ".kts" " fallback to Kotlin DSL
 
         if filereadable(expand(l:fn))
             return l:fn
+        elseif filereadable(expand(l:fnf))
+            return l:fnf
         else
             let l:parent = fnamemodify(a:pwd, ':h')
             return s:GetBuildFile(l:parent)
@@ -65,7 +68,11 @@ function! s:GetBuildFile(pwd)
 endfunction
 
 function! test#java#gradletest#executable() abort
-  return 'gradle test'
+  if findfile('gradlew') ==# 'gradlew'
+    return './gradlew test'
+  else
+    return 'gradle test'
+  endif
 endfunction
 
 function! s:nearest_test(position) abort

@@ -1,0 +1,3 @@
+rootProject.name = "spock-example"
+include 'module_one'
+include 'module_two'

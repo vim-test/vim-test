@@ -29,13 +29,21 @@ function! test#rust#cargotest#build_position(type, position) abort
     " Else
     " We need the test module namespace
     let l:namespace = s:test_namespace(a:position['file'])
+    let l:package = l:namespace[0]
+    let l:namespace = l:namespace[1]
+
+    if l:package != v:null
+        let l:package = ['--package', l:package]
+    else
+        let l:package = []
+    endif
+
     if a:type ==# 'nearest'
       let l:test_name = s:nearest_test(a:position)
-
-      return [shellescape(l:namespace.l:test_name), "--", "--exact"]
+      return l:package + [shellescape(l:namespace.l:test_name), "--", "--exact"]
     elseif a:type ==# 'file'
       " FIXME Should not run submodule tests
-      return [shellescape(l:namespace)]
+      return l:package + [shellescape(l:namespace)]
     endif
   endif
 
@@ -80,22 +88,33 @@ function! s:test_namespace(filename) abort
   " On a normal cargo project, the first item is 'src'
   let l:modules = split(l:path, '/')
 
-  " 'src/lib.rs' and 'src/some/mod.rs' does not end
+  " 'src/main.rs', 'src/lib.rs' and 'src/some/mod.rs' do not end
   " with actual module names
-  if l:modules[-1] =~# '\v^(lib|mod)$'
+  if l:modules[-1] =~# '\v^(main|lib|mod)$'
     let l:modules = l:modules[:-2]
   endif
 
+  let l:package = v:null
+  " Find package by searching upwards for Cargo.toml
+  for idx in range(len(l:modules) - 2, 0, -1)
+      let l:cargo_toml = join(l:modules[:idx] + ['Cargo.toml'], '/')
+      if !empty(glob(cargo_toml))
+          echo 
+          let l:package = l:modules[idx]
+          let l:modules = l:modules[idx+1:]
+          break
+      endif
+  endfor
 
   " Build up tests module namespace
   if l:modules[0] == 'tests' && len(l:modules) == 2
-    return ''
+    return [l:package, '']
   else
     let l:modules = l:modules[1:]
     if len(l:modules) > 0
-      return join(l:modules, '::') . '::'
+      return [l:package, join(l:modules, '::') . '::']
     else
-      return ''
+      return [l:package, '']
     endif
   endif
 endfunction

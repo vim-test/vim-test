@@ -178,4 +178,11 @@ describe "Minitest"
     Expect g:test#last_command == 'rake test TEST="test/**/{test_*,*_test}.rb" TESTOPTS="--seed=''1234''"'
   end
 
+  it "does not pick up RSpec files that start with 'test'"
+    view test_spec.rb
+    TestFile
+
+    Expect g:test#last_command == 'rspec test_spec.rb'
+  end
+
 end

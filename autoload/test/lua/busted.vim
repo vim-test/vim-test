@@ -10,7 +10,7 @@ function! test#lua#busted#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return [a:position['file'].'::'.name]
+      return ['--filter ''' . name . ''' ' . a:position['file']]
     else
       return [a:position['file']]
     endif
@@ -31,20 +31,14 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#lua#patterns)
-  let namespace_str = join(name['namespace'], '::')
-  let test_id = []
+
+  if !empty(name['test'])
+    return name['test'][0]
+  endif
 
   if !empty(name['namespace'])
-      let test_id = test_id + name['namespace']
-  endif
-  if !empty(name['test'])
-      let test_id = test_id + name['test']
+    return name['namespace'][0]
   endif
 
-  " ex:
-  "   /path/to/file.py::TestClass
-  "   /path/to/file.py::TestClass::method
-  "   /path/to/file.py::TestClass::NestedClass::method
-  let dtest_str = join(test_id, '::')
-  return dtest_str
+  return ""
 endfunction

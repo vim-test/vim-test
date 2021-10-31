@@ -37,7 +37,7 @@ describe "LuaTest"
     view +7 normal_spec.lua
     TestNearest
 
-    Expect g:test#last_command == 'busted --filter ''can add with magic \%('' normal_spec.lua'
+    Expect g:test#last_command == 'busted --filter ''can add with magic \%( \%) \%. \%\% \%+ \%- \%* \%? \%[ \%^ \%$'' normal_spec.lua'
   end
 
   it "runs file tests"

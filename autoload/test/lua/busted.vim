@@ -44,6 +44,8 @@ function! s:nearest_test(position) abort
 endfunction
 
 " Escape Lua pattern magic characters with the Lua pattern escape character (%).
+" The magic characters set are defined in the Lua docs at:
+" https://www.lua.org/pil/20.2.html
 function! s:escape_lua_pattern(pattern) abort
-  return substitute(a:pattern, "\\([(]\\)", "%\\1", "g")
+  return substitute(a:pattern, "\\((\\|)\\|\\.\\|%\\|+\\|-\\|*\\|?\\|[\\|\\^\\|\\$\\)", "%\\1", "g")
 endfunction

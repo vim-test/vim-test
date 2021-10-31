@@ -4,7 +4,7 @@ describe("Numbers", function()
   end)
 
   -- Busted's `--filter` uses Lua patterns so magic characters need to be escaped with %.
-  it("can add with magic (", function()
+  it("can add with magic ( ) . % + - * ? [ ^ $", function()
     assert.True(1 + 1 == 2)
   end)
 end)

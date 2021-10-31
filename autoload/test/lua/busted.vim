@@ -10,7 +10,7 @@ function! test#lua#busted#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return ['--filter ''' . name . ''' ' . a:position['file']]
+      return ['--filter ' . shellescape(name, 1) . ' ' . a:position['file']]
     else
       return [a:position['file']]
     endif
@@ -33,12 +33,17 @@ function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#lua#patterns)
 
   if !empty(name['test'])
-    return name['test'][0]
+    return s:escape_lua_pattern(name['test'][0])
   endif
 
   if !empty(name['namespace'])
-    return name['namespace'][0]
+    return s:escape_lua_pattern(name['namespace'][0])
   endif
 
   return ""
+endfunction
+
+" Escape Lua pattern magic characters with the Lua pattern escape character (%).
+function! s:escape_lua_pattern(pattern) abort
+  return substitute(a:pattern, "\\([(]\\)", "%\\1", "g")
 endfunction

@@ -31,8 +31,13 @@ describe "LuaTest"
     TestNearest
 
     Expect g:test#last_command == 'busted --filter ''can be added'' normal_spec.moon'
+  end
 
-    " TODO: magic characters
+  it "runs nearest tests and escapes Lua pattern magic characters"
+    view +7 normal_spec.lua
+    TestNearest
+
+    Expect g:test#last_command == 'busted --filter ''can add with magic \%('' normal_spec.lua'
   end
 
   it "runs file tests"

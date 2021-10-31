@@ -1,4 +1,4 @@
 let test#lua#patterns = {
-  \ 'test':      ['\v^\s*%(async )?def (test_\w+)'],
-  \ 'namespace': ['\v^\s*class (\w+)'],
+  \ 'test':      ['\v^\s*it\s*\(?\s*[''"]{1}([^''"]+)'],
+  \ 'namespace': ['\v^\s*describe\s*\(?\s*[''"]{1}([^''"]+)'],
 \}

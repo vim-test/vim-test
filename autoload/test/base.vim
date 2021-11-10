@@ -93,7 +93,7 @@ endfunction
 " Instead of taking a "position" argument, this function takes 3:
 "   - "filename" is the equivalent of "position['file']"
 "   - "from_line" the line number from where to start the search, is the
-"   equivalent fo "position['line']"
+"   equivalent of "position['line']"
 "   - "to_line" the line number where to end the search (it would be 1 in
 "   test#base#nearest_test)
 "

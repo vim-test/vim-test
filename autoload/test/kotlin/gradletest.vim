@@ -10,7 +10,7 @@ function! test#kotlin#gradletest#build_position(type, position) abort
   let filename = fnamemodify(a:position['file'], ':t:r')
   let modulename = s:get_module(a:position['file'])
   if a:type ==# 'nearest'
-    let name = s:nearest_test(a:position)
+    let name = substitute(s:nearest_test(a:position), '`', '"', "g")
     if !empty(name)
       return ['--tests ' . name . modulename]
     else

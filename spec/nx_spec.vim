@@ -2,6 +2,10 @@ source spec/support/helpers.vim
 
 describe "Nx"
 
+  before
+    cd spec/fixtures/nx
+  end
+
   after
     call Teardown()
     cd -

@@ -18,7 +18,7 @@ function! test#javascript#nx#build_position(type, position) abort
     if !empty(name)
       let name = '-t '.shellescape(name, 1)
     endif
-    return ['--no-coverage', name, '--test-file', a:position['file']]
+    return [name, '--test-file', a:position['file']]
   elseif a:type ==# 'file'
     return ['--test-file', a:position['file']]
   else

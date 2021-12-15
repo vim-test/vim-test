@@ -1,5 +1,5 @@
 let g:test#dart#fluttertest#patterns = {
-  \ 'test':      ['\v^\s*%(test|testWidgets)\(%(''|")(.*)%(''|"),'],
+  \ 'test':      ['\v^\s*%(test|testWidgets)\(%(''|")(.*)%(''|"),', '\v^\s*%(''|")(.{50,})%(''|"),'],
   \ 'namespace': ['\v^\s*group\(%(''|")(.*)%(''|"),'],
 \}
 

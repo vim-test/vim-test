@@ -8,6 +8,7 @@ function! test#javascript#cucumberjs#test_file(file) abort
           return g:test#javascript#runner ==# 'cucumber'
       else
         return test#javascript#has_package('cucumber')
+                    \|| test#javascript#has_package('@cucumber/cucumber')
       endif
   endif
 endfunction

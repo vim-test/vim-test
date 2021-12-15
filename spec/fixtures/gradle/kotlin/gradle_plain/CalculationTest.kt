@@ -23,6 +23,12 @@ class CalculationTest {
     }
 
     @Test
+    fun `tests calculating a sum of 3 + 5`() {
+        val sum = Calculation.add(3, 5)
+        assertEquals(sum, 8)
+    }
+
+    @Test
     fun testFailedSub() {
         val sum = Calculation.sub(5, 3)
         assertEquals(sum, 3)

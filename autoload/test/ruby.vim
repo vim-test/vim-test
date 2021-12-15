@@ -6,7 +6,7 @@ let test#ruby#patterns = {
   \],
   \ 'namespace': [
     \ '\v^\s*%(class|module) (\S+)',
-    \ '\v^\s*describe%(\(| )%("|'')(.*)%("|'')',
-    \ '\v^\s*describe%(\(| )(\S+)',
+    \ '\v^\s*%(describe|context)%(\(| )%("|'')(.*)%("|'')',
+    \ '\v^\s*%(describe|context)%(\(| )(\S+)',
   \],
 \}

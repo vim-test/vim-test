@@ -52,6 +52,13 @@ describe "Gradle plain module"
     Expect g:test#last_command == "./gradlew test --tests CalculationTest.testFailedSub"
   end
 
+  it "runs nearest tests which has a backtick surrounded name"
+    view +27  CalculationTest.kt
+    TestNearest
+
+    Expect g:test#last_command == "./gradlew test --tests CalculationTest.\"tests calculating a sum of 3 + 5\""
+  end
+
   it "runs a suite"
     view  CalculationTest.kt
     TestSuite

@@ -27,6 +27,16 @@ describe "FlutterTest"
     TestNearest
 
     Expect g:test#last_command == 'flutter test --plain-name "MyWidget doesn''t have description" widgets_test.dart'
+
+    view +30 widgets_test.dart
+    TestNearest
+
+    Expect g:test#last_command == 'flutter test --plain-name "MyWidget has very very very very very very very very very very very long description" widgets_test.dart'
+
+    view +50 widgets_test.dart
+    TestNearest
+
+    Expect g:test#last_command == 'flutter test --plain-name "MyWidget test with string array and very very very very very very very very very very very long description" widgets_test.dart'
   end
 
   it "runs test suites"

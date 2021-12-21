@@ -1,5 +1,5 @@
 let test#go#patterns = {
-  \ 'test':      ['\v^\s*func (\w+)'],
+  \ 'test':      ['\v^\s*func ((Test|Example).*)\('],
   \ 'namespace': [],
 \}
 function! test#go#test_file(runner, file_pattern, file) abort

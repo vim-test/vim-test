@@ -15,12 +15,28 @@ describe "RichGo"
     view +5 normal_test.go
     TestNearest
     Expect g:test#last_command == "richgo test -run 'TestNumbers$' ./."
+
+    view +9 normal_test.go
+    TestNearest
+    Expect g:test#last_command == "richgo test -run 'Testテスト$' ./."
+
+    view +13 normal_test.go
+    TestNearest
+    Expect g:test#last_command == "richgo test -run 'ExampleSomething$' ./."
   end
 
   it "runs nearest tests in subdirectory"
     view +5 mypackage/normal_test.go
     TestNearest
     Expect g:test#last_command == "richgo test -run 'TestNumbers$' ./mypackage"
+
+    view +9 mypackage/normal_test.go
+    TestNearest
+    Expect g:test#last_command == "richgo test -run 'Testテスト$' ./mypackage"
+
+    view +13 mypackage/normal_test.go
+    TestNearest
+    Expect g:test#last_command == "richgo test -run 'ExampleSomething$' ./mypackage"
   end
 
   it "runs file test if nearest test couldn't be found"

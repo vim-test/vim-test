@@ -39,4 +39,31 @@ describe "Deno"
     Expect exists('g:test#last_command') == 0
   end
 
+  it "runs simple test nearest"
+    view +5 nearest_test.ts
+    TestNearest
+
+    Expect g:test#last_command == "deno test --filter '/^Simple nearest$/' nearest_test.ts"
+  end
+
+  it "runs Deno module test nearest"
+    view +10 nearest_test.ts
+    TestNearest
+
+    Expect g:test#last_command == "deno test --filter '/^Deno module nearest$/' nearest_test.ts"
+  end
+
+  it "runs name key test nearest"
+    view +16 nearest_test.ts
+    TestNearest
+
+    Expect g:test#last_command == "deno test --filter '/^name key test nearest$/' nearest_test.ts"
+  end
+
+  it "runs one line name key test nearest"
+    view +28 nearest_test.ts
+    TestNearest
+
+    Expect g:test#last_command == "deno test --filter '/^one line name key test nearest$/' nearest_test.ts"
+  end
 end

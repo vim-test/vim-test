@@ -17,6 +17,16 @@ describe "Delve"
     TestNearest
 
     Expect g:test#last_command == 'dlv test ./. -- -test.run ''TestNumbers$'''
+
+    view +9 normal_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'dlv test ./. -- -test.run ''Testテスト$'''
+
+    view +13 normal_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'dlv test ./. -- -test.run ''ExampleSomething$'''
   end
 
   it "runs nearest tests in subdirectory"
@@ -24,6 +34,16 @@ describe "Delve"
     TestNearest
 
     Expect g:test#last_command == 'dlv test ./mypackage -- -test.run ''TestNumbers$'''
+
+    view +9 mypackage/normal_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'dlv test ./mypackage -- -test.run ''Testテスト$'''
+
+    view +13 mypackage/normal_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'dlv test ./mypackage -- -test.run ''ExampleSomething$'''
   end
 
   it "runs file test if nearest test couldn't be found"

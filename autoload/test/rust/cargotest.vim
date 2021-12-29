@@ -84,7 +84,7 @@ function! s:nearest_test(position) abort
 endfunction
 
 function! s:test_namespace(filename) abort
-  let l:path = fnamemodify(a:filename, ':r')
+  let l:path = fnamemodify(a:filename, ':p:r')
   " On a normal cargo project, the first item is 'src'
   let l:modules = split(l:path, '/')
 
@@ -95,11 +95,13 @@ function! s:test_namespace(filename) abort
   endif
 
   let l:package = v:null
+  let l:prefix_idx = stridx(l:path, l:modules[0])
+  let l:prefix = l:path[:prefix_idx-1]
+
   " Find package by searching upwards for Cargo.toml
   for idx in range(len(l:modules) - 2, 0, -1)
-      let l:cargo_toml = join(l:modules[:idx] + ['Cargo.toml'], '/')
+      let l:cargo_toml = l:prefix . join(l:modules[:idx] + ['Cargo.toml'], '/')
       if !empty(glob(cargo_toml))
-          echo 
           let l:package = l:modules[idx]
           let l:modules = l:modules[idx+1:]
           break

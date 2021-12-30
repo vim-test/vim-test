@@ -2,9 +2,13 @@ if !exists('g:test#php#behat#file_pattern')
   let g:test#php#behat#file_pattern = '\v\.feature$'
 endif
 
+if !exists('g:test#php#behat#bootstrap_directory')
+  let g:test#php#behat#bootstrap_directory = 'features/bootstrap/**/*.php'
+endif
+
 function! test#php#behat#test_file(file) abort
   if a:file =~# g:test#php#behat#file_pattern
-    return !empty(glob('features/bootstrap/**/*.php'))
+    return !empty(glob(g:test#php#behat#bootstrap_directory))
   endif
 endfunction
 

@@ -43,7 +43,7 @@ describe "DotnetTest"
   end
 
   it "runs file test if nearest test couldn't be found"
-    view +1 Tests.cs
+    view +2 Tests.cs
     normal O
     TestNearest
 

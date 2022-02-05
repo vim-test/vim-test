@@ -21,7 +21,7 @@ function! test#csharp#dotnettest#build_position(type, position) abort
   let nearest_test = join([namespace, test_name], '.')
 
   if a:type ==# 'nearest'
-    if !empty(nearest_test)
+    if !empty(test_name)
       return [project_path, '--filter', 'FullyQualifiedName=' . nearest_test]
     else
       if !empty(namespace)
@@ -31,7 +31,7 @@ function! test#csharp#dotnettest#build_position(type, position) abort
       endif
     endif
   elseif a:type ==# 'file'
-    return [project_path,  '--filter', 'FullyQualifiedName~' . namespace]
+    throw 'file tests is not supported for dotnettest'
   elseif a:type ==# 'suite'
     if !empty(project_path)
       return [project_path]

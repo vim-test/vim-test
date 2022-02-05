@@ -48,15 +48,7 @@ describe "DotnetTest"
     TestNearest
 
     let actual = s:remove_path(g:test#last_command)
-    Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName~Namespace.Tests'
-  end
-
-  it "runs file tests"
-    view Tests.cs
-    TestFile
-
-    let actual = s:remove_path(g:test#last_command)
-    Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName~Namespace.Tests'
+    Expect actual == 'dotnet test Tests.csproj --filter FullyQualifiedName~Namespace'
   end
 
   it "runs test suites"

@@ -16,7 +16,14 @@ function! test#go#delve#build_position(type, position) abort
       return path ==# './.' ? [] : [path . '/...']
     elseif a:type ==# 'nearest'
       let name = s:nearest_test(a:position)
-      return empty(name) ? [] : [path, '--', '-test.run '.shellescape(name.'$', 1)]
+
+      let contains_ginkgo_import = (search('github.com/onsi/ginkgo', 'n') > 0)
+      
+      if contains_ginkgo_import
+        return empty(name) ? [] : [path, '--', '--focus='.shellescape(name, 1)]
+      else
+        return empty(name) ? [] : [path, '--', '-test.run '.shellescape(name.'$', 1)]
+      end
     endif
   endif
 endfunction
@@ -52,6 +59,13 @@ function! test#go#delve#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#go#patterns)
-  return join(name['test'])
+  let contains_ginkgo_import = (search('github.com/onsi/ginkgo', 'n') > 0)
+
+  if contains_ginkgo_import
+    let name = test#base#nearest_test(a:position, g:test#go#ginkgo#patterns)
+    return join(name['test'])
+  else
+    let name = test#base#nearest_test(a:position, g:test#go#patterns)
+    return join(name['test'])
+  endif
 endfunction

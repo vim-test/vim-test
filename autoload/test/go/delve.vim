@@ -20,7 +20,7 @@ function! test#go#delve#build_position(type, position) abort
       let contains_ginkgo_import = (search('github.com/onsi/ginkgo', 'n') > 0)
       
       if contains_ginkgo_import
-        return empty(name) ? [] : [path, '--', '--focus='.shellescape(name, 1)]
+        return empty(name) ? [] : [path, '--', '-ginkgo.focus='.shellescape(name, 1)]
       else
         return empty(name) ? [] : [path, '--', '-test.run '.shellescape(name.'$', 1)]
       end

@@ -15,7 +15,7 @@ function! test#csharp#dotnettest#build_position(type, position) abort
   let file = a:position['file']
   let filename = fnamemodify(file, ':t:r')
   let project_path = test#csharp#get_project_path(file)
-  let name = test#base#nearest_test(a:position, g:test#csharp#patterns)
+  let name = test#base#nearest_test(a:position, g:test#csharp#patterns, { 'namespaces_with_same_indent': 1 })
   let namespace = join(name['namespace'], '.')
   let test_name = join(name['test'], '.')
   let nearest_test = join([namespace, test_name], '.')

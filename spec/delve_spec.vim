@@ -27,6 +27,11 @@ describe "Delve"
     TestNearest
 
     Expect g:test#last_command == 'dlv test ./. -- -test.run ''ExampleSomething$'''
+
+    view +17 ginkgo_test.go
+    TestNearest
+
+    Expect g:test#last_command == "dlv test ./. -- -ginkgo.focus='should paginate the result'"
   end
 
   it "runs nearest tests in subdirectory"

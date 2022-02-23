@@ -23,9 +23,13 @@ function! test#javascript#mocha#build_position(type, position) abort
     return [a:position['file']]
   else
     let test_directory = (split(fnamemodify(a:position['file'], ':h'), '\/')[0])
+    let extension = []
+    if test#javascript#has_package('ts-node')
+        let extension = ['--extension', 'ts']
+    endif
 
-    if test_directory =~# '\v^tests?$' && !test#javascript#has_package('ts-node')
-        return ['--recursive', test_directory . '/']
+    if test_directory =~# '\v^tests?$'
+        return ['--recursive', test_directory . '/'] + extension
     endif
 
     return ['"' . test_directory . '/**/*.' . fnamemodify(a:position['file'], ':e:e:e') . '"']

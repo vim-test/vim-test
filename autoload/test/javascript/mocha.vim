@@ -24,7 +24,7 @@ function! test#javascript#mocha#build_position(type, position) abort
   else
     let test_directory = (split(fnamemodify(a:position['file'], ':h'), '\/')[0])
 
-    if test_directory =~# '\v^tests?$'
+    if test_directory =~# '\v^tests?$' && !test#javascript#has_package('ts-node')
         return ['--recursive', test_directory . '/']
     endif
 
@@ -38,6 +38,10 @@ function! test#javascript#mocha#build_args(args, color) abort
   if !a:color
     let args = ['--no-colors'] + args
     let args = args + ['|', 'sed -e "s///g"']
+  endif
+
+  if test#javascript#has_package('ts-node')
+    let args = ['-r', 'ts-node/register'] + args
   endif
 
   return args

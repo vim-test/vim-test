@@ -52,7 +52,7 @@ function! test#base#escape_regex(string) abort
   return escape(a:string, '?+*\^$.|{}[]()')
 endfunction
 
-" Takes a position and a dictionary of patterns, and returns list of strings
+" Takes a position and a dictionary of patterns and a optional configuration, and returns list of strings
 " that were matched in the file by the patterns from the given position
 " upwards. It can be used when a runner doesn't support running nearest tests
 " with line numbers, but supports regexes.
@@ -73,6 +73,14 @@ endfunction
 "     'namespace': ['\v^\s*%(class|module) (\S+)'],
 "   }
 "
+" The optional configuration parameter is a dictionary which can contain next
+" keys:
+"
+"   {
+"      'namespaces_with_same_indent': boolean // put namespace with same indent
+"                                            // in "namespace output.
+"   }
+"
 " If a line is matched, the substring corresponding to the 1st match group will
 " be returned. So for the above patterns this function might return something
 " like this:
@@ -82,8 +90,9 @@ endfunction
 "     'test_line': 54, " Line where 'test_calculates_time' was found
 "     'namespace': ['CalculatorTest'],
 "   }
-function! test#base#nearest_test(position, patterns) abort
-  return test#base#nearest_test_in_lines(a:position['file'], a:position['line'], 1, a:patterns)
+function! test#base#nearest_test(position, patterns, ...) abort
+  let configuration = a:0 > 0 ? a:1 : {}
+  return test#base#nearest_test_in_lines(a:position['file'], a:position['line'], 1, a:patterns, configuration)
 endfunction
 
 " This function is used internally by the test#base#nearest_test function
@@ -100,13 +109,15 @@ endfunction
 " If "from_line" is greater than "to_line" or equals '$' then the search will
 " be backward.
 " Otherwise it will be forward.
-function! test#base#nearest_test_in_lines(filename, from_line, to_line, patterns) abort
+function! test#base#nearest_test_in_lines(filename, from_line, to_line, patterns, ...) abort
+  let configuration = a:0 > 0 ? a:1 : {}
   let test         = []
   let namespace    = []
   let last_indent  = -1
   let current_line = a:from_line + 1
   let test_line    = -1
   let last_namespace_line = -1
+  let is_namespace_with_same_indent_allowed = get(configuration, 'namespaces_with_same_indent', 0)
 
   let is_reverse = '$' == a:from_line ? 1 : a:from_line > a:to_line
   let lines = is_reverse
@@ -134,7 +145,7 @@ function! test#base#nearest_test_in_lines(filename, from_line, to_line, patterns
       call add(test, filter(test_match[1:], '!empty(v:val)')[0])
       let last_indent = indent
       let test_line   = current_line
-    elseif !empty(namespace_match) && (indent < last_indent || last_indent == -1)
+    elseif !empty(namespace_match) && (is_namespace_with_same_indent_allowed || (indent < last_indent || last_indent == -1))
       call add(namespace, filter(namespace_match[1:], '!empty(v:val)')[0])
       let last_indent = indent
       let last_namespace_line = current_line

@@ -15,13 +15,13 @@ function! test#go#ginkgo#build_position(type, position) abort
   if a:type ==# 'suite'
     return [path]
   else
-    let fileargs = ['--regexScansFilePath=true '.'--focus='.a:position['file'], path]
+    let fileargs = ['--focus-file='.a:position['file'], path]
     if a:type ==# 'file'
       return fileargs
     elseif a:type ==# 'nearest'
       let name = s:nearest_test(a:position)
       " if no tests matched, run the test file
-      return empty(name) ? fileargs : ['--focus='.shellescape(name, 1), path]
+      return empty(name) ? fileargs : ['--focus-file='.shellescape(name, 1), path]
     endif
   endif
 endfunction

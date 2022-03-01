@@ -16,28 +16,28 @@ describe "Ginkgo"
       view +17 normal_test.go
       TestNearest
 
-      Expect g:test#last_command == "ginkgo --focus='should paginate the result' ./."
+      Expect g:test#last_command == "ginkgo --focus-file='should paginate the result' ./."
     end
 
     it "runs nearest tests identified by 'When'"
       view +29 normal_test.go
       TestNearest
 
-      Expect g:test#last_command == "ginkgo --focus='user is not logged in' ./."
+      Expect g:test#last_command == "ginkgo --focus-file='user is not logged in' ./."
     end
 
     it "runs nearest tests identified by 'Context'"
       view +11 normal_test.go
       TestNearest
 
-      Expect g:test#last_command == "ginkgo --focus='when the request is authenticated' ./."
+      Expect g:test#last_command == "ginkgo --focus-file='when the request is authenticated' ./."
     end
 
     it "runs nearest tests identified by 'Describe'"
       view +9 normal_test.go
       TestNearest
 
-      Expect g:test#last_command == "ginkgo --focus='posts API' ./."
+      Expect g:test#last_command == "ginkgo --focus-file='posts API' ./."
     end
 
   end
@@ -46,27 +46,27 @@ describe "Ginkgo"
     view +17 mypackage/normal_test.go
     TestNearest
 
-    Expect g:test#last_command == "ginkgo --focus='should paginate the result' ./mypackage"
+    Expect g:test#last_command == "ginkgo --focus-file='should paginate the result' ./mypackage"
   end
 
   it "runs file test if nearest test couldn't be found"
     view +1 mypackage/normal_test.go
     TestNearest
-    Expect g:test#last_command == "ginkgo --regexScansFilePath=true --focus=mypackage/normal_test.go ./mypackage"
+    Expect g:test#last_command == "ginkgo --focus-file=mypackage/normal_test.go ./mypackage"
   end
 
   it "runs file tests"
     view normal_test.go
     TestFile
 
-    Expect g:test#last_command == "ginkgo --regexScansFilePath=true --focus=normal_test.go ./."
+    Expect g:test#last_command == "ginkgo --focus-file=normal_test.go ./."
   end
 
   it "runs tests in subdirectory"
     view mypackage/normal_test.go
     TestFile
 
-    Expect g:test#last_command == "ginkgo --regexScansFilePath=true --focus=mypackage/normal_test.go ./mypackage"
+    Expect g:test#last_command == "ginkgo --focus-file=mypackage/normal_test.go ./mypackage"
   end
 
   it "runs test suites"
@@ -90,7 +90,7 @@ describe "Ginkgo"
       view +17 normal_test.go
       TestNearest
 
-      Expect g:test#last_command == "ginkgo --focus='should paginate the result' ./."
+      Expect g:test#last_command == "ginkgo --focus-file='should paginate the result' ./."
     end
   end
 

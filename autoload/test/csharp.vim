@@ -19,7 +19,7 @@ function! test#csharp#get_project_path(file) abort
   endwhile
 
   if len(l:project_files) == 0
-    throw 'Unable to find .csproj file, a .csproj file is required to make use of the `dotnet test` command.'
+    return []
   endif
 
   return l:project_files[0]

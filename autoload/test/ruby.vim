@@ -3,6 +3,7 @@ let test#ruby#patterns = {
     \ '\v^\s*def (test_\w+)',
     \ '\v^\s*test%(\(| )%("|'')(.*)%("|'')',
     \ '\v^\s*it%(\(| )%("|'')(.*)%("|'')',
+    \ '\v^\s*it\s\{(.*)\s\}',
   \],
   \ 'namespace': [
     \ '\v^\s*%(class|module) (\S+)',

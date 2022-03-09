@@ -10,7 +10,7 @@ function! test#kotlin#gradletest#build_position(type, position) abort
   let filename = fnamemodify(a:position['file'], ':t:r')
   let modulename = s:get_module(a:position['file'])
   if a:type ==# 'nearest'
-    let name = s:nearest_test(a:position)
+    let name = substitute(s:nearest_test(a:position), '`', '"', "g")
     if !empty(name)
       return ['--tests ' . name . modulename]
     else
@@ -30,7 +30,7 @@ endfunction
 function! s:get_module(filepath)
   let project_dir = s:GetKotlinProjectDirectory(a:filepath)
   let l:parent = fnamemodify(project_dir, ':p:h:h')
-  if filereadable(l:parent . '/build.gradle') " check if the parent dir has build.gradle
+  if filereadable(l:parent. "/build.gradle") || filereadable(l:parent. "/build.gradle.kts") " check if the parent dir has build.gradle or build.gradle.kts
       return ' -p ' . project_dir
   else
       return ''
@@ -47,13 +47,16 @@ function! s:GetKotlinProjectDirectory(filepath)
 endfunction
 
 function! s:GetBuildFile(pwd)
-    if a:pwd ==# '\/'
+    if a:pwd ==# "\/"
         return 0
     else
-        let l:fn = a:pwd . '/build.gradle'
+        let l:fn = a:pwd . "/build.gradle" " Groovy DSL
+        let l:fnf = l:fn . ".kts" " fallback to Kotlin DSL
 
         if filereadable(expand(l:fn))
             return l:fn
+        elseif filereadable(expand(l:fnf))
+            return l:fnf
         else
             let l:parent = fnamemodify(a:pwd, ':h')
             return s:GetBuildFile(l:parent)

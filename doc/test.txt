@@ -193,6 +193,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Bats*
 :Bats [args]                 Uses the `bats` command.
 
+                                                *test-:ShellSpec*
+:ShellSpec [args]                 Uses the `shellspec` command.
+
                                                 *test-:VSpec*
 :VSpec [args]                Uses the `vim-flavor` `test` command.
 
@@ -252,6 +255,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:CrystalSpec*
 :CrystalSpec [args]          Uses the `crystal` `spec` command.
 
+                                                *test-:MintTest*
+:MintTest [args]             Uses the `mint` `test` command.
+
                                                 *test-:SwiftPM*
 :SwiftPM [args]              Uses the `swift test` command.
 
@@ -261,11 +267,21 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:NgTest*
 :NgTest [args]  	         Uses the Angular `ng test` command.
 
+                                                *test-:Nx*
+:Nx [args]                 Uses the `nx test` command.
+
                                                 *test-:TestBench*
 :TestBench [args]  	         Uses the TestBench `bench` command.
 
                                                 *test-:FlutterTest*
 :FlutterTest [args]  	         Uses the `flutter` `test` command.
+
+                                                *test-:DartTest*
+:DartTest [args]  	         Uses the `dart test` command.
+
+                                                *test-:VueTestUtils*
+:VueTestUtils [args]  	         Uses the `vue-cli-service` command.
+
 
 MAVEN TEST DIFFERENCES                          *test-maven-test-differences*
 
@@ -470,6 +486,20 @@ settings. If you want to switch between them then change `test#strategy`.
 Note: that the base `asyncrun` strategy will be affected by your global asyncrun
 settings.
 
+Harpoon ~
+
+This strategy lets you run commands in a neovim terminal using harpoon terminals
+
+Before you can use this strategy you are going to need to have the harpoon plugin installed
+
+By default the commands are sent to the terminal 1, to send the command to another terminal you con set in you vimrc g:test#harpoon_term
+
+For example to send the commands to terminal number 2 you can set in your vimrc:
+
+>
+let g:test#harpoon_term = 2
+<
+
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 
 If you want your test results to appear in the |quickfix| window, use one of the
@@ -543,6 +573,11 @@ If you want to disable clearing the screen for strategies, you can do
 >
   let g:test#preserve_screen = 1
 <
+By default, vim-test will echo the test command before running it. You can
+disable this behavior with
+>
+  let g:test#echo_command = 0
+<
 You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your preferred options with
 >
@@ -606,6 +641,14 @@ for neovim and
   let test#vim#term_position = "belowright"
 <
 for vim
+
+By default, the `neovim` and `basic` (when using Neovim) strategies will open a
+terminal in insert mode, so that you can press any key to close the split. If
+you would prefer to open the terminal in normal mode:
+>
+  let test#neovim#start_normal = 1 " if using neovim strategy
+  let test#basic#start_normal = 1 " if using basic strategy
+<
 
 
 PROJECTIONIST INTEGRATION                       *test-projectionist*

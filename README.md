@@ -24,16 +24,18 @@ runners are supported:
 |         **C#** | .NET                                                                                                               | `xunit`, `dotnettest`                                                                                                                        |
 |    **Clojure** | Fireplace.vim                                                                                                      | `fireplacetest`                                                                                                                              |
 |    **Crystal** | Crystal                                                                                                            | `crystalspec`                                                                                                                                |
-|       **Dart** | Flutter Test                                                                                                       | `fluttertest`                                                                                                                                |
+|       **Dart** | Dart Test, Flutter Test                                                                                            | `darttest`, `fluttertest`
 |     **Elixir** | ESpec, ExUnit                                                                                                      | `espec`, `exunit`                                                                                                                            |
 |        **Elm** | elm-test                                                                                                           | `elmtest`                                                                                                                                    |
 |     **Erlang** | CommonTest, EUnit                                                                                                  | `commontest`, `eunit`                                                                                                                        |
 |         **Go** | Ginkgo, Go, Rich-Go, Delve                                                                                         | `ginkgo`, `gotest`, `richgo`, `delve`                                                                                                        |
+|     **Groovy** | Maven, Gradle                                                                                                      | `maventest`, `gradletest`                                                                                                                    |
 |    **Haskell** | stack                                                                                                              | `stacktest`                                                                                                                                  |
-|       **Java** | Maven, Gradle                                                                                                      | `maventest`, `gradletest`                                                                                                                    |
-| **JavaScript** | Ava, Cucumber.js, Cypress, Deno, Intern, Jasmine, Jest, Karma, Lab, Mocha, ng test, ReactScripts, TAP, WebdriverIO | `ava`, `cucumberjs`, `cypress`, `deno`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `ngtest` ,`reactscripts`, `tap`, `webdriverio` |
-|     **Kotlin** | Gradle                                                                                                             | `gradletest`                                                                                                                                 |
+|       **Java** | Maven, Gradle (Groovy and Kotlin DSL)                                                                              | `maventest`, `gradletest`                                                                                                                    |
+| **JavaScript** | Ava, Cucumber.js, Cypress, Deno, Intern, Jasmine, Jest, Karma, Lab, Mocha, ng test, NX, ReactScripts, TAP, WebdriverIO | `ava`, `cucumberjs`, `cypress`, `deno`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `ngtest` , `nx`, `reactscripts`, `tap`, `webdriverio`, `vue-test-utils`|
+|     **Kotlin** | Gradle (Groovy and Kotlin DSL)                                                                                     | `gradletest`                                                                                                                                 |
 |        **Lua** | Busted                                                                                                             | `busted`                                                                                                                                     |
+|       **Mint** | Mint                                                                                                               | `minttest`                                                                                                                                   |
 |        **PHP** | Behat, Codeception, Kahlan, Peridot, Pest, PHPUnit, Sail, PHPSpec, Dusk                                            | `behat`, `codeception`, `dusk`, `kahlan`, `peridot`, `phpunit`, `sail`, `phpspec`, `pest`                                                    |
 |       **Perl** | Prove                                                                                                              | `prove`                                                                                                                                      |
 |     **Python** | Behave, Django, Mamba, Nose, Nose2, PyTest, PyUnit                                                                 | `behave`, `djangotest`, `djangonose`, `mamba`, `nose`, `nose2`, `pytest`, `pyunit`                                                           |
@@ -41,7 +43,7 @@ runners are supported:
 |       **Ruby** | Cucumber, [M], [Minitest][minitest], Rails, RSpec, TestBench                                                       | `cucumber`, `m`, `minitest`, `rails`, `rspec`, `testbench`                                                                                   |
 |       **Rust** | Cargo                                                                                                              | `cargotest`                                                                                                                                  |
 |      **Scala** | SBT, Bloop                                                                                                         | `sbttest`, `blooptest`                                                                                                                       |
-|      **Shell** | Bats                                                                                                               | `bats`                                                                                                                                       |
+|      **Shell** | Bats, ShellSpec                                                                                                    | `bats`, `shellspec`                                                                                                                          |
 |      **Swift** | Swift Package Manager                                                                                              | `swiftpm`                                                                                                                                    |
 |  **VimScript** | Vader.vim, Vroom, VSpec, Themis, Testify                                                                           | `vader`, `vroom`, `vspec`, `themis`, `testify`                                                                                               |
 
@@ -56,12 +58,11 @@ to your `.vimrc` file (see vim-plug documentation for where), and run `:PlugInst
 Add your preferred mappings to your `.vimrc` file:
 
 ```vim
-" these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
-nmap <silent> t<C-n> :TestNearest<CR>
-nmap <silent> t<C-f> :TestFile<CR>
-nmap <silent> t<C-s> :TestSuite<CR>
-nmap <silent> t<C-l> :TestLast<CR>
-nmap <silent> t<C-g> :TestVisit<CR>
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 ```
 
 | Command          | Description                                                                                                                                                                                                                                                                            |
@@ -105,6 +106,7 @@ let test#strategy = "dispatch"
 | **iTerm2.app**                  | `iterm`                                                     | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                                                                                                      |
 | **[Kitty]**                     | `kitty`                                                     | Sends test commands to Kitty terminal.                                                                                                                            |
 | **[Shtuff]**                    | `shtuff`                                                    | Sends test commands to remote terminal via [shtuff][Shtuff].                                                                                                      |
+| **[Harpoon]**                    | `harpoon`                                                    | Sends test commands to neovim terminal using a terminal managed by [harpoon][Harpoon]. By default commands are sent to terminal number 1, you can choose your terminal by setting `g:test#harpoon_term` with the terminal you want                                                                                                     |
 
 You can also set up strategies per granularity:
 
@@ -143,6 +145,21 @@ which is difficult to press, so I recommend mapping it to `CTRL-o`:
 if has('nvim')
   tmap <C-o> <C-\><C-n>
 endif
+```
+
+If you prefer, you can instead have the terminal open in normal mode, so it does
+not close on key press.
+
+```vim
+let g:test#neovim#start_normal = 1 " If using neovim strategy
+let g:test#basic#start_normal = 1 " If using basic strategy
+```
+
+By default vim-test will echo the test command before running it. You can
+disable this behavior with:
+
+```vim
+let g:test#echo_command = 0
 ```
 
 ### Kitty strategy setup
@@ -413,7 +430,7 @@ let test#python#runner = 'pytest'
 
 The pytest runner optionally supports [pipenv](https://github.com/pypa/pipenv).
 If you have a `Pipfile`, it will use `pipenv run pytest` instead of just
-`pytest`. It also supports [poetry](https://github.com/sdispater/poetry)
+`python -m pytest`. It also supports [poetry](https://github.com/sdispater/poetry)
 and will use `poetry run pytest` if it detects a `poetry.lock`. The pyunit
 runner supports [pipenv](https://github.com/pypa/pipenv) as well and will
 use `pipenv run python -m unittest` if there is a `Pipfile`.
@@ -663,3 +680,4 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 [projectionist.vim]: https://github.com/tpope/vim-projectionist
 [Kitty]: https://github.com/kovidgoyal/kitty
 [Shtuff]: https://github.com/jfly/shtuff
+[Harpoon]: https://github.com/ThePrimeagen/harpoon

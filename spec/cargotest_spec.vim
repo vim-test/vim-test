@@ -3,7 +3,7 @@ source spec/support/helpers.vim
 describe "Cargo"
 
   before
-    cd spec/fixtures/cargo
+    cd spec/fixtures/cargo/crate
   end
 
   after
@@ -13,6 +13,10 @@ describe "Cargo"
 
   it "runs file tests"
     view src/lib.rs
+    TestFile
+    Expect g:test#last_command == 'cargo test '''''
+
+    view src/main.rs
     TestFile
     Expect g:test#last_command == 'cargo test '''''
 
@@ -134,11 +138,22 @@ describe "Cargo"
     Expect g:test#last_command == 'cargo test ''tests::tokio_async_test'' -- --exact'
   end
 
+  it "supports async actix rt tests"
+    view +26 src/lib.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''tests::test_actix_rt'' -- --exact'
+  end
+
   it "supports rstest tests"
     view +22 src/lib.rs
     TestNearest
     Expect g:test#last_command == 'cargo test ''tests::rstest_test'' -- --exact'
   end
 
+  it "runs file tests in workspaces"
+    cd ..
+    view crate/src/lib.rs
+    TestFile
+    Expect g:test#last_command == 'cargo test --package crate '''''
+    cd -
 end
-

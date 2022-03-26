@@ -33,7 +33,13 @@ function! test#python#pyunit#build_args(args) abort
 endfunction
 
 function! test#python#pyunit#executable() abort
-  return 'python -m unittest'
+  let pipenv_prefix = ""
+
+  if filereadable("Pipfile")
+    let pipenv_prefix = "pipenv run "
+  endif
+
+  return pipenv_prefix . 'python -m unittest'
 endfunction
 
 function! s:get_import_path(filepath) abort

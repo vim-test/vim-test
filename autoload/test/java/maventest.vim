@@ -17,18 +17,21 @@ function! test#java#maventest#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return ['-Dtest=' . package . '.' . name. module]
+      return ['test -Dtest=' . package . '.' . name. module]
     else
-      return ['-Dtest=' . package . '.' . filename . '\*'. module]
+      return ['test -Dtest=' . package . '.' . filename . '\*'. module]
     endif
 
   " ex:  mvn test -Dtest com.you.pkg.App\*  (catches nested test-classes)
   elseif a:type ==# 'file'
-    return ['-Dtest=' . package . '.' . filename . '\*'. module]
+    return ['test -Dtest=' . package . '.' . filename . '\*'. module]
 
+  " ex:  mvn verify -Dit.test=App\*  (runs integration tests)
+  elseif a:type ==# 'integration'
+    return ['verify -Dit.test=' . filename . '\*'. module]
   " ex:  mvn test
   else
-    return [module]
+    return ['test' . module]
   endif
 
 endfunction
@@ -38,7 +41,7 @@ function! test#java#maventest#build_args(args) abort
 endfunction
 
 function! test#java#maventest#executable() abort
-  return 'mvn test'
+  return 'mvn'
 endfunction
 
 function! s:get_java_package(filepath)
@@ -47,7 +50,7 @@ function! s:get_java_package(filepath)
   let abspath = substitute(a:filepath, '\\', '/', 'g')
 
   " strip path-to-project and maven-boilerplate dir-structure
-  let relpath = substitute(abspath, '^.*src/\(main\|test\)/java/', "", "g")
+  let relpath = substitute(abspath, '^.*src/\(main\|test\)/\(java/\)\?', "", "g")
   let package_path = substitute(relpath, '\/[^/]\+$', "", "g")
   let java_package = substitute(package_path, '/', '.', 'g')
   return java_package
@@ -61,6 +64,7 @@ function! s:get_maven_module(filepath)
       return ' -pl '. module_name
   else 
       return ''
+  endif
 endfunction
 
 function! s:GetJavaProjectDirectory(filepath)

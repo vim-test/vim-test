@@ -20,5 +20,34 @@ void main() {
 
       expect(descriptionFinder, findsNothing);
     });
+
+    testWidgets(
+      'has very very very very very very very very very very very long description',
+      (WidgetTester tester) async {
+      await tester.pumpWidget(MyWidget(title: 'T', message: 'M'));
+
+      final titleFinder = find.text('T');
+      final messageFinder = find.text('M');
+
+      expect(titleFinder, findsOneWidget);
+      expect(messageFinder, findsOneWidget);
+    });
+
+    testWidgets(
+        'test with string array and very very very very very very very very very very very long description',
+        (tester) async {
+      final a = [
+        'a',
+        'b',
+        'c',
+      ];
+
+      await tester.pumpWidget(
+        const Center(),
+      );
+      await tester.pump();
+
+      expect(find.text('Jan 24'), findsOneWidget);
+    });
   });
 }

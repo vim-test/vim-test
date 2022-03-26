@@ -4,7 +4,7 @@ endif
 
 if !exists('g:test#rust#cargotest#test_patterns')
   let g:test#rust#cargotest#test_patterns = {
-        \ 'test': ['\v(#\[%(tokio::|rs)?test)'],
+        \ 'test': ['\v(#\[%(\w+::|rs)?test)'],
         \ 'namespace': ['\vmod (tests?)']
     \ }
 endif

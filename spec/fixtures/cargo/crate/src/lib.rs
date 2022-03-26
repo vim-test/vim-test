@@ -21,4 +21,8 @@ mod tests {
     )]
     fn rstest_test(_: u8) {
     }
+
+    #[actix_rt::test]
+    async fn test_actix_rt() {
+    }
 }

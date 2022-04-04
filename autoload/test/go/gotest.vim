@@ -22,7 +22,31 @@ function! test#go#gotest#build_position(type, position) abort
 endfunction
 
 function! test#go#gotest#build_args(args) abort
-  return a:args
+  if index(a:args, './...') >= 0
+    return a:args
+  endif
+  let tags = []
+  let index = 1
+  let pattern = '^//\s*+build\s\+\(.\+\)'
+  while index <= getbufinfo('%')[0]['linecount']
+    let line = trim(getbufline('%', l:index)[0])
+    if l:line =~# '^package '
+      break
+    endif
+    let tag = substitute(line, l:pattern, '\1', '')
+    if l:tag != l:line
+      " replace OR tags with AND, since we are going to use all the tags anyway
+      let tag = substitute(l:tag, ' \+', ',', 'g')
+      call add(l:tags, l:tag)
+    endif
+    let index += 1
+  endwhile
+  if len(l:tags) == 0
+    return a:args
+  else
+    let args = ['-tags=' . join(l:tags, ',')] + a:args
+    return l:args
+  endif
 endfunction
 
 function! test#go#gotest#executable() abort

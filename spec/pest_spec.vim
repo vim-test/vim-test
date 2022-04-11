@@ -33,6 +33,11 @@ describe "Pest"
     TestNearest
 
     Expect g:test#last_command == "pest --colors --filter 'with a different descriptor' PestTest.php"
+
+    view +12 PestTest.php
+    TestNearest
+
+    Expect g:test#last_command == "pest --colors --filter 'bdd flavour' PestTest.php"
   end
 
   it "runs test suites"

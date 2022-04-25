@@ -47,5 +47,5 @@ function! s:nearest_test(position) abort
 endfunction
 
 function! s:get_bloop_project() abort
-  return system("echo $(bloop projects) | cut -d\" \" -f 1")
+  return trim(system("echo $(bloop projects) | cut -d\" \" -f 1"))
 endfunction

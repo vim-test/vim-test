@@ -72,13 +72,15 @@ function! test#cpp#catch2#executable()
     " Take advantage of the fact this will get called after test#cpp#catch2#build_position
     if s:is_suite
         let s:is_suite = v:false
-        return "cd " . g:test#cpp#catch2#relToProject_build_dir
+        return "cd " . getcwd()
+                    \ . " && cd " . g:test#cpp#catch2#relToProject_build_dir
                     \ . g:test#cpp#catch2#suite_command 
     else
         if !exists('g:test#cpp#catch2#test_target')
             let g:test#cpp#catch2#test_target = expand("%:t:r")
         endif
-        return "cd " . g:test#cpp#catch2#relToProject_build_dir  
+        return "cd " . getcwd()
+                    \ . " && cd " . g:test#cpp#catch2#relToProject_build_dir  
                     \ . " && " . g:test#cpp#catch2#make_command  . " " . g:test#cpp#catch2#test_target
                     \ . " && ./" . g:test#cpp#catch2#test_target
     endif

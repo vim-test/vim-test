@@ -20,6 +20,13 @@ function! test#python#pytest#build_position(type, position) abort
     else
       return [a:position['file']]
     endif
+  elseif a:type ==# 'class'
+    let name = s:nearest_class(a:position)
+    if !empty(name)
+      return [a:position['file'].'::'.name]
+    else
+      return [a:position['file']]
+    endif
   elseif a:type ==# 'file'
     return [a:position['file']]
   else
@@ -53,6 +60,21 @@ function! test#python#pytest#executable() abort
   else
     return pipenv_prefix . "pytest"
   endif
+endfunction
+
+function! s:nearest_class(position) abort
+  let name = test#base#nearest_test(a:position, g:test#python#patterns)
+  let namespace_str = join(name['namespace'], '::')
+  let test_id = []
+
+  if !empty(name['namespace'])
+      let test_id = test_id + name['namespace']
+  endif
+
+  " ex:
+  "   /path/to/file.py::TestClass
+  let dtest_str = join(test_id, '::')
+  return dtest_str
 endfunction
 
 function! s:nearest_test(position) abort

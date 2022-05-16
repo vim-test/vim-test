@@ -14,7 +14,7 @@ function! test#scala#sbttest#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return ['"testOnly *' . filename .' -- -z ' . name . '"']
+      return ['"testOnly *' . filename .' -- -z \"' . name . '\""']
     else
       return ['"testOnly *' . filename . '"']
     endif
@@ -35,5 +35,6 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#scala#patterns)
-  return escape(escape(join(name['test'], ""), '"'), "'")
+  let name_without_doublequotes = substitute(join(name['test'], ""), '"', '', 'g')
+  return escape(name_without_doublequotes, "'")
 endfunction

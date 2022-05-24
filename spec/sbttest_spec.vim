@@ -78,7 +78,7 @@ describe "SBT"
     view +6 FixtureSpec.scala
     TestNearest
 
-    Expect g:test#last_command == 'sbt "testOnly *FixtureSpec -- -z \"pop values in last-in-first-out order\""'
+    Expect g:test#last_command == 'sbt "testOnly *FixtureSpec -- -z \"A Stack should pop values in last-in-first-out order\""'
   end
 
   it "runs nearest tests for first test in WordSpec style"

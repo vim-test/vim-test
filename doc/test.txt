@@ -159,6 +159,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:EUnit*
 :EUnit [args]                Uses the `rebar3` `eunit` command.
 
+                                                *test-:PropEr*
+:PropEr [args]               Uses the `rebar3` `proper` command.
+
                                                 *test-:Xunit*
 :Xunit [args]                Uses the `dotnet` `xunit` command.
 

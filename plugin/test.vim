@@ -12,7 +12,7 @@ let g:test#default_runners = {
   \ 'Dart':       ['DartTest', 'FlutterTest'],
   \ 'Elixir':     ['ExUnit', 'ESpec'],
   \ 'Elm':        ['ElmTest'],
-  \ 'Erlang':     ['CommonTest', 'EUnit'],
+  \ 'Erlang':     ['CommonTest', 'EUnit', 'PropEr'],
   \ 'Go':         ['GoTest', 'Ginkgo', 'RichGo', 'Delve'],
   \ 'Groovy':     ['MavenTest', 'GradleTest'],
   \ 'Haskell':    ['StackTest'],

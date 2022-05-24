@@ -83,4 +83,16 @@ describe "Codeception"
     Expect exists('g:test#last_command') == 0
   end
 
+  it "also recognizes codeception.dist.yml"
+    try
+        !mv fixtures/codeception/codeception.yml fixtures/codeception/codeception.dist.yml
+        view tests/functional/NormalCest.php
+        TestFile
+
+        Expect g:test#last_command == 'codecept run tests/functional/NormalCest.php'
+    finally
+        !mv fixtures/codeception/codeception.dist.yml fixtures/codeception/codeception.yml
+    endtry
+  end
+
 end

@@ -1,16 +1,16 @@
 module Fix.FixtureSpec where
-import           Test.Hspec
-import           Test.QuickCheck
+import qualified Test.Hspec as Hspec
 import           Control.Exception              ( evaluate )
 
 spec :: Spec
-spec = describe "Prelude.head" $ do
-  it "returns the first element of a list" $ head [23 ..] `shouldBe` (24 :: Int)
+spec = Hspec.describe "Prelude.head" $ do
+  Hspec.it "returns the first element of a list" $ head [23 ..] `Hspec.shouldBe` (24 :: Int)
 
-  prop "returns the first element of an *arbitrary* list" $ \x xs ->
-    head (x : xs) == (x :: Int)
+  Hspec.prop "returns the first element of an *arbitrary* list" $ \x xs ->
+    head (x : xs) `Hspec.shouldBe` (x :: Int)
 
-  it "throws an exception if used with an empty list"
-    $             evaluate (head [])
-    `shouldThrow` anyException
+  Hspec.describe "Empty list"
+    Hspec.it "throws an exception if used with an empty list"
+      $             evaluate (head [])
+      `Hspec.shouldThrow` anyException
 

@@ -1,4 +1,7 @@
-module Fix2.FixtureSpec (spec) where
+module Fix3.FixtureSpec
+  ( module Test.Hspec -- Exported to validate that the correct module name is detected
+  , spec
+  ) where
 import           Test.Hspec
 import           Control.Exception              ( evaluate )
 

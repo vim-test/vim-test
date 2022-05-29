@@ -26,6 +26,13 @@ describe "STACK (multi-package)"
     Expect g:test#last_command == "stack test subpackage2"
   end
 
+  it "TestSuite detects correct subpackage in subdirectory"
+    view common/subpackage3/test/Spec.hs
+    TestSuite
+
+    Expect g:test#last_command == "stack test subpackage3"
+  end
+
   it "TestFile detects fully qualified module name and correct subpackage (1)"
     view subpackage1/test/Fix1/FixtureSpec.hs
     TestFile
@@ -38,6 +45,13 @@ describe "STACK (multi-package)"
     TestFile
 
     Expect g:test#last_command == "stack test subpackage2 --test-arguments '-m \"Fix2.Fixture\"'"
+  end
+
+  it "TestFile detects fully qualified module name and correct subpackage (in subdirectory)"
+    view common/subpackage3/test/Fix3/FixtureSpec.hs
+    TestFile
+
+    Expect g:test#last_command == "stack test subpackage3 --test-arguments '-m \"Fix3.Fixture\"'"
   end
 
   it "TestNearest runs nearest 'it' test and detects correct subpackage"

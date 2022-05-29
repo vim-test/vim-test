@@ -25,14 +25,14 @@ function! test#haskell#stacktest#build_position(type, position) abort
 
   if a:type ==# 'nearest'
     let l:name = s:nearest_test(a:position)
-    let l:module_name = substitute(l:filename, "Spec", "", "")
+    let l:module_name = s:get_module_name(a:position)
     if !empty(l:name)
       return s:mk_test_command(l:package_name_arg, l:name)
     elseif !empty(l:module_name)
       return s:mk_test_command(l:package_name_arg, l:module_name)
     endif
   elseif a:type ==# 'file'
-    let l:module_name = substitute(l:filename, "Spec", "", "")
+    let l:module_name = s:get_module_name(a:position)
     if !empty(l:module_name)
       return s:mk_test_command(l:package_name_arg, l:module_name)
     endif
@@ -49,12 +49,11 @@ function! test#haskell#stacktest#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#haskell#patterns)
-  return escape(escape(join(name['test'], ""), '"'), "'")
+  return s:get_nearest(a:position, g:test#haskell#patterns)
 endfunction
 
 " Returns the stack test command with --test-arguments '-m \"<hspec_match>"\.
-function! s:mk_test_command(package_name_arg, hspec_match)
+function! s:mk_test_command(package_name_arg, hspec_match) abort
   let l:test_args = ""
   if !empty(a:hspec_match)
     let l:test_args = "--test-arguments '-m \"" . a:hspec_match . "\"'"
@@ -62,22 +61,39 @@ function! s:mk_test_command(package_name_arg, hspec_match)
   return [g:test#haskell#stacktest#test_command, a:package_name_arg, l:test_args]
 endfunction
 
+" Gets the module name (without "Spec")
+function! s:get_module_name(position) abort
+  let l:first_line_pos = {'col': 1, 'line': 1, 'file': a:position['file']}
+  let l:module_pattern = {'test': ['\v\s*module\s\zs([^ ()]*)'], 'namespace': []}
+  let l:module_name = s:get_nearest(l:first_line_pos, l:module_pattern)
+  return substitute(l:module_name, 'Spec', '', '')
+endfunction
+
+" Wrapper around text#base#nearest_test returns the first match
+" or an empty string if no match is found
+" and escapes parentheses and quotes
+function! s:get_nearest(position, patterns) abort
+  let l:result = test#base#nearest_test(a:position, a:patterns)
+  let l:matches = l:result['test'] + ['']
+  return escape(escape(l:matches[0], '"'), "'")
+endfunction
+
 " Returns the nearest project directory containing stack.yaml.
 " Returns 0 if no directory is found.
-function!s:get_nearest_project_dir(pwd)
+function!s:get_nearest_project_dir(pwd) abort
   return s:get_nearest_parent_dir(a:pwd, "stack.yaml")
 endfunction
 
 " Returns the nearest package directory containing package.yaml.
 " Returns 0 if no directory is found.
-function!s:get_nearest_package_dir(pwd)
+function!s:get_nearest_package_dir(pwd) abort
   return s:get_nearest_parent_dir(a:pwd, "package.yaml")
 endfunction
 
 " Recursively search pwd and its parent directories until file_name is found.
 " Returns the path to the directory containing file_name.
 " Returns 0 if no directory is found.
-function! s:get_nearest_parent_dir(pwd, file_name)
+function! s:get_nearest_parent_dir(pwd, file_name) abort
   if a:pwd ==# "\/"
     return 0
   else

@@ -11,7 +11,7 @@ spec = Hspec.describe "Prelude.head" $ do
     Hspec.prop "returns the first element of an *arbitrary* list" $ \x xs ->
       head (x : xs) `Hspec.shouldBe` (x :: Int)
 
-  Hspec.describe "Empty list"
+  describe "Empty list"
     Hspec.it "throws an exception if used with an empty list"
       $             evaluate (head [])
       `Hspec.shouldThrow` anyException

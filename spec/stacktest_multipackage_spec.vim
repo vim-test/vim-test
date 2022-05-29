@@ -55,21 +55,21 @@ describe "STACK (multi-package)"
   end
 
   it "TestNearest runs nearest 'it' test and detects correct subpackage"
-    view +12 subpackage1/test/Fix/FixtureSpec.hs
+    view +11 subpackage1/test/Fix1/FixtureSpec.hs
     TestNearest
 
     Expect g:test#last_command == "stack test subpackage1 --test-arguments '-m \"Fix1.Fixture/Prelude.head/returns the first element of a list\"'"
   end
 
   it "TestNearest runs nearest 'prop' test and detects correct subpackage"
-    view +15 subpackage1/test/Fix/FixtureSpec.hs
+    view +13 subpackage1/test/Fix1/FixtureSpec.hs
     TestNearest
 
     Expect g:test#last_command == "stack test subpackage1 --test-arguments '-m \"Fix1.Fixture/Prelude.head/returns the first element of an *arbitrary* list\"'"
   end
 
   it "TestNearest detects nested describes"
-    view +18 subpackage1/test/Fix/FixtureSpec.hs
+    view +17 subpackage1/test/Fix1/FixtureSpec.hs
     TestNearest
 
     Expect g:test#last_command == "stack test subpackage1 --test-arguments '-m \"Fix1.Fixture/Prelude.head/Empyt list/throws an exception if used with an empty list\"'"

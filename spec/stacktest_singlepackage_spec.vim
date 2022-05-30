@@ -40,26 +40,27 @@ describe "STACK (single-package)"
     Expect g:test#last_command == "stack test --test-arguments '-m \"Fix.Fixture\"'"
   end
 
-  it "TestNearest runs nearest 'it' test and detects nested describes (qualified imports)"
-    view +13 test/Fix/FixtureSpec.hs
+  it "TestNearest runs nearest 'it' (qualified imports)"
+    view +10 test/Fix/FixtureSpec.hs
     TestNearest
 
-    Expect g:test#last_command == "stack test --test-arguments '-m \"Fix.Fixture/Prelude.head/Non-empty list/returns the first element of a list\"'"
+    Expect g:test#last_command == "stack test --test-arguments '-m \"returns the first element of a list\"'"
   end
 
-  it "TestNearest runs nearest 'prop' test and detects nested describes (qualified imports)"
-    view +15 test/Fix/FixtureSpec.hs
+  it "TestNearest runs nearest 'prop' test (qualified imports)"
+    view +12 test/Fix/FixtureSpec.hs
     TestNearest
 
-    Expect g:test#last_command == "stack test --test-arguments '-m \"Fix.Fixture/Prelude.head/Non-empty list/returns the first element of an *arbitrary* list\"'"
+    Expect g:test#last_command == "stack test --test-arguments '-m \"returns the first element of an *arbitrary* list\"'"
   end
 
-  it "TestNearest correctly traverses the describe tree from node to root (qualfied imports)"
-    view +19 test/Fix/FixtureSpec.hs
-    TestNearest
-
-    Expect g:test#last_command == "stack test --test-arguments '-m \"Fix.Fixture/Prelude.head/Empyt list/throws an exception if used with an empty list\"'"
-  end
+  " TODO
+  " it "TestNearest correctly traverses the describe tree from node to root (qualfied imports)"
+  "   view +19 test/Fix/FixtureSpec.hs
+  "   TestNearest
+  "
+  "   Expect g:test#last_command == "stack test --test-arguments '-m \"/Prelude.head/Empyt list/throws an exception if used with an empty list\"'"
+  " end
   
   it "TestFile detects fully qualified module name (unqualified imports)"
     view test/Fix/Fixture2Spec.hs
@@ -68,25 +69,26 @@ describe "STACK (single-package)"
     Expect g:test#last_command == "stack test --test-arguments '-m \"Fix.Fixture2\"'"
   end
 
-  it "TestNearest runs nearest 'it' test and detects nested describes (unqualified imports)"
+  it "TestNearest runs nearest 'it' test (unqualified imports)"
     view +13 test/Fix/Fixture2Spec.hs
     TestNearest
 
-    Expect g:test#last_command == "stack test --test-arguments '-m \"Fix.Fixture2/Prelude.head/Non-empty list/returns the first element of a list\"'"
+    Expect g:test#last_command == "stack test --test-arguments '-m \"returns the first element of a list\"'"
   end
 
-  it "TestNearest runs nearest 'prop' test and detects nested describes (unqualified imports)"
+  it "TestNearest runs nearest 'prop' test (unqualified imports)"
     view +15 test/Fix/Fixture2Spec.hs
     TestNearest
 
-    Expect g:test#last_command == "stack test --test-arguments '-m \"Fix.Fixture2/Prelude.head/Non-empty list/returns the first element of an *arbitrary* list\"'"
+    Expect g:test#last_command == "stack test --test-arguments '-m \"returns the first element of an *arbitrary* list\"'"
   end
 
-  it "TestNearest correctly traverses the describe tree from node to root (unqualfied imports)"
-    view +19 test/Fix/Fixture2Spec.hs
-    TestNearest
-
-    Expect g:test#last_command == "stack test --test-arguments '-m \"Fix.Fixture2/Prelude.head/Empyt list/throws an exception if used with an empty list\"'"
-  end
+  " TODO
+  " it "TestNearest correctly traverses the describe tree from node to root (unqualfied imports)"
+  "   view +19 test/Fix/Fixture2Spec.hs
+  "   TestNearest
+  "
+  "   Expect g:test#last_command == "stack test --test-arguments '-m \"/Prelude.head/Empyt list/throws an exception if used with an empty list\"'"
+  " end
   
 end

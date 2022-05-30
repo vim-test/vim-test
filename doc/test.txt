@@ -105,6 +105,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Jest*
 :Jest [args]                 Uses the `jest` command.
 
+                                                *test-:Playwright*
+:Playwright [args]           Uses the `playwright test` command.
+
                                                 *test-:ReactScripts*
 :ReactScripts [args]         Uses the `react-scripts test` command.
 

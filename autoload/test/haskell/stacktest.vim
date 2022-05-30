@@ -63,10 +63,20 @@ endfunction
 
 " Gets the module name (without "Spec")
 function! s:get_module_name(position) abort
-  let l:first_line_pos = {'col': 1, 'line': 1, 'file': a:position['file']}
+  let l:first_line_pos = {'col': 1, 'line': 0, 'file': a:position['file']}
+  return s:get_module_name_helper(l:first_line_pos)
+endfunction
+
+" Helper function for get_module_name.
+" Recursively increases the line number until a match is found
+function! s:get_module_name_helper(position) abort
+  let l:next_line_position = {'col': 1, 'line': a:position['line'] + 1, 'file': a:position['file']}
   let l:module_pattern = {'test': ['\v\s*module\s\zs([^ ()]*)'], 'namespace': []}
-  let l:module_name = s:get_nearest(l:first_line_pos, l:module_pattern)
-  return substitute(l:module_name, 'Spec', '', '')
+  let l:module_name = s:get_nearest(l:next_line_position, l:module_pattern)
+  if strlen(l:module_name) > 0
+    return substitute(l:module_name, 'Spec', '', '')
+  endif
+  return s:get_module_name_helper(l:next_line_position)
 endfunction
 
 " Wrapper around text#base#nearest_test returns the first match

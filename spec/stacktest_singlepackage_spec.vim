@@ -54,7 +54,7 @@ describe "STACK (single-package)"
     Expect g:test#last_command == "stack test --test-arguments '-m \"returns the first element of an *arbitrary* list\"'"
   end
 
-  " TODO
+  " TODO ?
   " it "TestNearest correctly traverses the describe tree from node to root (qualfied imports)"
   "   view +19 test/Fix/FixtureSpec.hs
   "   TestNearest
@@ -83,12 +83,20 @@ describe "STACK (single-package)"
     Expect g:test#last_command == "stack test --test-arguments '-m \"returns the first element of an *arbitrary* list\"'"
   end
 
-  " TODO
+  " TODO ?
   " it "TestNearest correctly traverses the describe tree from node to root (unqualfied imports)"
   "   view +19 test/Fix/Fixture2Spec.hs
   "   TestNearest
   "
   "   Expect g:test#last_command == "stack test --test-arguments '-m \"/Prelude.head/Empyt list/throws an exception if used with an empty list\"'"
   " end
+  "
+  it "TestFile detects fully qualified module name (with language pragmas)"
+    view test/Fix/Fixture3Spec.hs
+    TestFile
+
+    Expect g:test#last_command == "stack test --test-arguments '-m \"Fix.Fixture3\"'"
+  end
+
   
 end

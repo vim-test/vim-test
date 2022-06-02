@@ -5,7 +5,7 @@ endif
 
 function! test#php#codeception#test_file(file) abort
   if a:file =~# g:test#php#codeception#file_pattern
-    return filereadable('./codeception.yml')
+    return filereadable('./codeception.yml') || filereadable('./codeception.dist.yml')
   endif
 endfunction
 

@@ -55,5 +55,8 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#go#patterns)
-  return join(name['test'])
+  let name = join(name['namespace'] + name['test'], '/')
+  let without_spaces = substitute(name, '\s', '_', 'g')
+  let escaped_regex = substitute(without_spaces, '\([\[\].*+?|$^]\)', '\\\1', 'g')
+  return escaped_regex
 endfunction

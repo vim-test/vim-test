@@ -9,7 +9,7 @@ func TestNumbers(t *testing.T) {
 		// sub test assertions
 	})
 
-	t.Run("[].*+?|$^", func(t *testing.T) {
+	t.Run("[].*+?|$^()", func(t *testing.T) {
 		// sub test assertions
 	})
 }

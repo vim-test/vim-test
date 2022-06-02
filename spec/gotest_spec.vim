@@ -101,5 +101,4 @@ describe "GoTest"
 
     Expect g:test#last_command == 'go test ./...'
   end
-
 end

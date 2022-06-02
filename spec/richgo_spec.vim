@@ -76,4 +76,22 @@ describe "RichGo"
     TestSuite
     Expect g:test#last_command == 'richgo test ./...'
   end
+
+  it "runs tests in a file with build tags"
+    view +14 build_tags_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'richgo test -tags=foo,hello,world,!bar,red,black -run ''TestNumbers$'' ./.'
+
+    TestFile
+
+    Expect g:test#last_command == 'richgo test -tags=foo,hello,world,!bar,red,black'
+  end
+
+  it "runs test suite without tags"
+    view +14 build_tags_test.go
+    TestSuite
+
+    Expect g:test#last_command == 'richgo test ./...'
+  end
 end

@@ -17,7 +17,7 @@ function! test#scala#blooptest#build_position(type, position) abort
    if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      return ['test ' . s:project_name . ' -o "*' . filename . '" -- -z ' . name]
+      return ['test ' . s:project_name . ' -o "*' . filename . '" -- -z "' . name . '"']
     else
       return ['test ' . s:project_name . ' -o "*' . filename . '"']
     endif
@@ -43,9 +43,10 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#scala#patterns)
-  return join(name['test'], "")
+  let name_without_doublequotes = substitute(join(name['test'], ""), '"', '', 'g')
+  return name_without_doublequotes
 endfunction
 
 function! s:get_bloop_project() abort
-  return system("echo $(bloop projects) | cut -d\" \" -f 1")
+  return trim(system("echo $(bloop projects) | cut -d\" \" -f 1"))
 endfunction

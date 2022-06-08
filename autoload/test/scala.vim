@@ -1,7 +1,9 @@
-let test#scala#patterns = {
-  \ 'test':      ['\v^\s*test\((.*)\)', '\v^\s*("[^"]*") in.*$', '\v^\s*%(it|"[^"]*")\sshould\s("[^"]*")'],
-  \ 'namespace': [],
-\}
+if !exists('g:test#scala#patterns')
+    let test#scala#patterns = {
+      \ 'test':      ['\v^\s*test\((.*)\)', '\v^\s*("[^"]*") in.*$', '\v^\s*it\sshould\s("[^"]*")', '\v^\s*("[^"]*"\sshould\s"[^"]*")'],
+      \ 'namespace': [],
+    \}
+endif
 
 function! test#scala#test_file(runner, file_pattern, file) abort
   let current_file = fnamemodify(a:file, ':t')

@@ -77,5 +77,9 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#java#patterns)
-  return join(name['namespace'] + name['test'], '.')
+  let nested_class_separator = "$"
+  let test_separator = "."
+  let namespace = join(name['namespace'] , nested_class_separator)
+  let test = join(name['test'] , test_separator)
+  return namespace . test_separator . test
 endfunction

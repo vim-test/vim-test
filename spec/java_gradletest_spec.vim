@@ -1,5 +1,26 @@
 source spec/support/helpers.vim
 
+describe "Gradle plain with Junit5 features"
+  before
+    let g:test#java#runner = 'gradletest'
+    cd spec/fixtures/gradle/java/gradle_plain_junit5
+  end
+
+  after
+    call Teardown()
+    cd -
+  end
+
+  it "runs file tests with @Nested classes (filename matches Test$Nested)"
+    view +56 MathJunit5Test.java
+
+    TestNearest
+
+    Expect g:test#last_command == "gradle test --tests MathJUnit5Test$NestedClass.testNested"
+
+  end
+end
+
 describe "Gradle plain"
   before
     let g:test#java#runner = 'gradletest'

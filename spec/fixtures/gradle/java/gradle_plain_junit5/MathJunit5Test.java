@@ -48,8 +48,10 @@ public class MathJunit5Test {
 		assertEquals(sub, total);
 	}
 
+
     @Nested
-    class NestedClass{
+    @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+    class NestedClass {
 
         @Test
         public void testNested() {
@@ -57,5 +59,47 @@ public class MathJunit5Test {
             int sub = Calculation.sub(4, 4);
             assertEquals(sub, total);
         }
+
+        @Test
+        public void testNested2() {
+            int total = 0;
+            int sub = Calculation.sub(4, 4);
+            assertEquals(sub, total);
+        }
+
+        @Nested
+        class NestedNestedClass {
+
+            @Test
+            public void testNestedNested() {
+                int total = 0;
+                int sub = Calculation.sub(4, 4);
+                assertEquals(sub, total);
+            }
+        }
+    }
+
+    @Nested
+    class NestedParameterizedTestClass {
+
+        public static Stream<Arguments> fooBarMethodSource() {
+            return Stream.of(
+                    Arguments.of("foo", "bar"));
+        }
+
+        @ParameterizedTest(name = "foo {0}, bar {1}") @MethodSource("fooBarMethodSource")
+        public void testWithParams(String foo, String bar) {
+            assertNotNull(foo);
+            assertNotNull(bar);
+        }
+
+            @Test
+            public void testNestedNestedNested() {
+                int total = 0;
+                int sub = Calculation.sub(4, 4);
+                assertEquals(sub, total);
+            }
+
+
     }
 }

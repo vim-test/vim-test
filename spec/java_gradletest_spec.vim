@@ -11,12 +11,43 @@ describe "Gradle plain with Junit5 features"
     cd -
   end
 
-  it "runs file tests with @Nested classes (filename matches Test$Nested)"
-    view +56 MathJunit5Test.java
+  it "runs nearest tests with @Nested classes"
+    view +57 MathJunit5Test.java
 
     TestNearest
 
     Expect g:test#last_command == "gradle test --tests MathJunit5Test$NestedClass.testNested"
+
+    view +64 MathJunit5Test.java
+
+    TestNearest
+
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test$NestedClass.testNested2"
+  end
+
+  it "runs nearest tests with more than one level of @Nested classes"
+    view +74 MathJunit5Test.java
+
+    TestNearest
+
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test$NestedClass$NestedNestedClass.testNestedNested"
+  end
+
+  it "runs nearest tests with @Nested classes, @ParameterizedTest and source methods"
+    view +91 MathJunit5Test.java
+
+    TestNearest
+
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test$NestedParameterizedTestClass.testWithParams"
+
+  end
+
+  it "runs nearest tests with @Nested classes and @ParameterizedTest combined"
+    view +91 MathJunit5Test.java
+
+    TestNearest
+
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test$NestedParameterizedTestClass.testWithParams"
 
   end
 end

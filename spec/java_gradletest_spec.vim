@@ -16,7 +16,7 @@ describe "Gradle plain with Junit5 features"
 
     TestNearest
 
-    Expect g:test#last_command == "gradle test --tests MathJUnit5Test$NestedClass.testNested"
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test$NestedClass.testNested"
 
   end
 end

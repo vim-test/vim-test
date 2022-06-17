@@ -81,5 +81,8 @@ function! s:nearest_test(position) abort
   let test_separator = "."
   let namespace = join(name['namespace'] , nested_class_separator)
   let test = join(name['test'] , test_separator)
+  if empty(test)
+      return namespace
+  endif
   return namespace . test_separator . test
 endfunction

@@ -76,13 +76,13 @@ function! test#java#gradletest#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#java#patterns)
-  let nested_class_separator = "$"
-  let test_separator = "."
-  let namespace = join(name['namespace'] , nested_class_separator)
-  let test = join(name['test'] , test_separator)
-  if empty(test)
-      return namespace
+  let l:name = test#base#nearest_test(a:position, g:test#java#patterns)
+  let l:nested_class_separator = "$"
+  let l:test_separator = "."
+  let l:namespace = join(l:name['namespace'] , l:nested_class_separator)
+  let l:test = join(l:name['test'] , l:test_separator)
+  if empty(l:test)
+      return l:namespace
   endif
-  return namespace . test_separator . test
+  return escape(l:namespace . l:test_separator . l:test, '#$')
 endfunction

@@ -16,13 +16,13 @@ describe "Gradle plain with Junit5 features"
 
     TestNearest
 
-    Expect g:test#last_command == "gradle test --tests MathJunit5Test$NestedClass.testNested"
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test\\$NestedClass.testNested"
 
     view +64 MathJunit5Test.java
 
     TestNearest
 
-    Expect g:test#last_command == "gradle test --tests MathJunit5Test$NestedClass.testNested2"
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test\\$NestedClass.testNested2"
   end
 
   it "runs nearest tests with more than one level of @Nested classes"
@@ -30,7 +30,7 @@ describe "Gradle plain with Junit5 features"
 
     TestNearest
 
-    Expect g:test#last_command == "gradle test --tests MathJunit5Test$NestedClass$NestedNestedClass.testNestedNested"
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test\\$NestedClass\\$NestedNestedClass.testNestedNested"
   end
 
   it "runs nearest tests with @Nested classes, @ParameterizedTest and source methods"
@@ -38,7 +38,7 @@ describe "Gradle plain with Junit5 features"
 
     TestNearest
 
-    Expect g:test#last_command == "gradle test --tests MathJunit5Test$NestedParameterizedTestClass.testWithParams"
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test\\$NestedParameterizedTestClass.testWithParams"
 
   end
 
@@ -47,7 +47,7 @@ describe "Gradle plain with Junit5 features"
 
     TestNearest
 
-    Expect g:test#last_command == "gradle test --tests MathJunit5Test$NestedParameterizedTestClass.testWithParams"
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test\\$NestedParameterizedTestClass.testWithParams"
 
   end
 end

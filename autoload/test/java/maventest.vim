@@ -92,8 +92,8 @@ function! s:GetPomFile(pwd)
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#java#patterns)
-  let dtest_str = join(name['namespace'], '$') .'#'. join(name['test'], '$')
+  let l:name = test#base#nearest_test(a:position, g:test#java#patterns)
+  let l:dtest_str = join(l:name['namespace'], '$') .'#'. join(l:name['test'], '$')
 
-  return escape(dtest_str, '#$')
+  return escape(l:dtest_str, '#$')
 endfunction

@@ -3,9 +3,13 @@ if !exists('g:test#java#maventest#file_pattern')
 endif
 
 function! test#java#maventest#test_file(file) abort
+    if exists('g:test#java#runner') && g:test#java#runner ==# 'maventest'
+        return 1
+    elseif exists("g:test#java#runner") && g:test#java#runner != 'maventest'
+        return 0
+    endif
     let l:pomFile = s:GetPomFile(a:file)
     return a:file =~? g:test#java#maventest#file_pattern
-                \ && (!exists('g:test#java#runner') || g:test#java#runner ==# 'maventest')
                 \ && strlen(l:pomFile) > 0
 endfunction
 
@@ -103,8 +107,8 @@ function! s:GetPomFile(pwd)
 
     let l:loops = 0
     let l:parent = s:GetFileParentDir(a:pwd)
-    let l:maxLookAhead = 20
-    while !(strlen(l:pomFile) > 0) && l:loops <= l:maxLookAhead
+    let l:maxFuncDepth = 20
+    while !(strlen(l:pomFile) > 0) && l:loops <= l:maxFuncDepth
         let l:pomFile = s:PomFilename(l:parent)
         let l:parent = s:GetFileParentDir(l:parent)
         let l:loops = l:loops + 1

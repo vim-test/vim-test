@@ -12,7 +12,7 @@ describe "Maven Runner"
 
   describe "when test#java#runner is not set"
     it "should use maventest if 'pom.xml' is found"
-      view sample_maven_junit5_multimodule_project/src/main/java/org/vimtest/App.java
+      view sample_maven_junit5_multimodule_project/sample_module/src/test/java/org/vimtest/TestApp.java
       TestFile
       Expect g:test#last_command =~# '\v^mvn'
     end
@@ -22,7 +22,7 @@ describe "Maven Runner"
     it "should respect test#java#runner"
       for runner in ["maventest", "gradletest"]
         let g:test#java#runner = runner
-        Expect test#determine_runner("sample_maven_junit5_multimodule_project/src/main/java/org/vimtest/App.Java") == 'java#'.runner
+        Expect test#determine_runner("sample_maven_junit5_multimodule_project/sample_module/src/test/java/org/vimtest/TestApp.java") == 'java#'.runner
       endfor
     end
   end

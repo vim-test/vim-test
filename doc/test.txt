@@ -171,6 +171,8 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:DotnetTest*
 :DotnetTest [args]           Uses the `dotnet` `test` command.
 
+                                                *test-:Catch2*
+:Catch2 [args]               Uses the compiled executable(user defined) from within the build directory
                                                 *test-:GoTest*
 :GoTest [args]               Uses the `go` `test` command.
 

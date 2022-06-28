@@ -1,5 +1,8 @@
 let test#haskell#patterns = {
-  \ 'test':      ['\v\s*describe\s"([^"]*)"', '\v^\s*it\s"([^"]*)".*$'],
+  \ 'test':      [ '\v\s*\zsdescribe\s"([^"]*)"'
+                \, '\v\s*\zsit\s"([^"]*)".*$'
+                \, '\v\s*\zsprop\s"([^"]*)".*$'
+                \],
   \ 'namespace': [],
 \}
 

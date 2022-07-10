@@ -41,7 +41,10 @@ function! test#java#maventest#build_args(args) abort
 endfunction
 
 function! test#java#maventest#executable() abort
-  return 'mvn'
+  if findfile('mvnw') ==# 'mvnw'
+    return './mvnw'
+  else
+    return 'mvn'
 endfunction
 
 function! s:get_java_package(filepath)

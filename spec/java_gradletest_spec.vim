@@ -1,5 +1,57 @@
 source spec/support/helpers.vim
 
+describe "Gradle plain with Junit5 features"
+  before
+    let g:test#java#runner = 'gradletest'
+    cd spec/fixtures/gradle/java/gradle_plain_junit5
+  end
+
+  after
+    call Teardown()
+    cd -
+  end
+
+  it "runs nearest tests with @Nested classes"
+    view +57 MathJunit5Test.java
+
+    TestNearest
+
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test\\$NestedClass.testNested"
+
+    view +64 MathJunit5Test.java
+
+    TestNearest
+
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test\\$NestedClass.testNested2"
+  end
+
+  it "runs nearest tests with more than one level of @Nested classes"
+    view +74 MathJunit5Test.java
+
+    TestNearest
+
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test\\$NestedClass\\$NestedNestedClass.testNestedNested"
+  end
+
+  it "runs nearest tests with @Nested classes, @ParameterizedTest and source methods"
+    view +91 MathJunit5Test.java
+
+    TestNearest
+
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test\\$NestedParameterizedTestClass.testWithParams"
+
+  end
+
+  it "runs nearest tests with @Nested classes and @ParameterizedTest combined"
+    view +91 MathJunit5Test.java
+
+    TestNearest
+
+    Expect g:test#last_command == "gradle test --tests MathJunit5Test\\$NestedParameterizedTestClass.testWithParams"
+
+  end
+end
+
 describe "Gradle plain"
   before
     let g:test#java#runner = 'gradletest'

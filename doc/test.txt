@@ -508,6 +508,9 @@ For example to send the commands to terminal number 2 you can set in your vimrc:
 let g:test#harpoon_term = 2
 <
 
+By default this strategy will also open the terminal in the current window.  To disable
+this behavior set `g:test#harpoon#gototerminal = 0`.
+
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 
 If you want your test results to appear in the |quickfix| window, use one of the

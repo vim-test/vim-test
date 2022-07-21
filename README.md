@@ -22,6 +22,7 @@ runners are supported:
 |       Language | Test Runners                                                                                                       | Identifiers                                                                                                                                  |
 | -------------: | :----------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
 |         **C#** | .NET                                                                                                               | `xunit`, `dotnettest`                                                                                                                        |
+|         **C++** | CTest,Make                                                                                                               | `ctest`, `make`                                                                                                                        |
 |    **Clojure** | Fireplace.vim                                                                                                      | `fireplacetest`                                                                                                                              |
 |    **Crystal** | Crystal                                                                                                            | `crystalspec`                                                                                                                                |
 |       **Dart** | Dart Test, Flutter Test                                                                                            | `darttest`, `fluttertest`
@@ -32,7 +33,7 @@ runners are supported:
 |     **Groovy** | Maven, Gradle                                                                                                      | `maventest`, `gradletest`                                                                                                                    |
 |    **Haskell** | stack                                                                                                              | `stacktest`                                                                                                                                  |
 |       **Java** | Maven, Gradle (Groovy and Kotlin DSL)                                                                              | `maventest`, `gradletest`                                                                                                                    |
-| **JavaScript** | Ava, Cucumber.js, Cypress, Deno, Intern, Jasmine, Jest, Karma, Lab, Mocha, ng test, NX, ReactScripts, TAP, WebdriverIO | `ava`, `cucumberjs`, `cypress`, `deno`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `ngtest` , `nx`, `reactscripts`, `tap`, `webdriverio`, `vue-test-utils`|
+| **JavaScript** | Ava, Cucumber.js, Cypress, Deno, Intern, Jasmine, Jest, Karma, Lab, Mocha, ng test, NX, Playwright, ReactScripts, TAP, WebdriverIO | `ava`, `cucumberjs`, `cypress`, `deno`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `ngtest` , `nx`, `playwright`, `reactscripts`, `tap`, `webdriverio`, `vue-test-utils`|
 |     **Kotlin** | Gradle (Groovy and Kotlin DSL)                                                                                     | `gradletest`                                                                                                                                 |
 |        **Lua** | Busted                                                                                                             | `busted`                                                                                                                                     |
 |       **Mint** | Mint                                                                                                               | `minttest`                                                                                                                                   |
@@ -555,6 +556,26 @@ Similarly if you'd prefer to use an alternate runner such as the [Laravel artisa
 
 ```vim
 let test#php#phpunit#executable = 'php artisan test'
+```
+
+#### C++
+Pattern for Test File: We assume all your test files are prefixed with "test_" or "Test". If not, override the following:
+```
+"Default
+let g:test#cpp#catch2#file_pattern = '\v[tT]est.*(\.cpp)$'
+```
+File and Individual Test Case: We assume you are using make to compile your executables, whose names are exactly the same as the test file w/o the extension. If you would like to use change the make command, override the following:
+```
+let g:test#cpp#catch2#make_command = "make"
+```
+Creating Test Executables: We assume that a Makefile is located in a "build" directory directly below the project root. If not, override the following:
+```
+" If Makefile is at top of the project root, do this instead
+let g:test#cpp#catch2#relToProject_build_dir = "."
+```
+Suite: We assume that you are using Cmake as your build system, and are registering each test file to it. If not, override the following command.
+```vim
+let g:test#cpp#catch2#suite_command = "ctest --ouput-on-failure" 
 ```
 
 ## Autocommands

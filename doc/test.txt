@@ -105,6 +105,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Jest*
 :Jest [args]                 Uses the `jest` command.
 
+                                                *test-:Playwright*
+:Playwright [args]           Uses the `playwright test` command.
+
                                                 *test-:ReactScripts*
 :ReactScripts [args]         Uses the `react-scripts test` command.
 
@@ -159,12 +162,17 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:EUnit*
 :EUnit [args]                Uses the `rebar3` `eunit` command.
 
+                                                *test-:PropEr*
+:PropEr [args]               Uses the `rebar3` `proper` command.
+
                                                 *test-:Xunit*
 :Xunit [args]                Uses the `dotnet` `xunit` command.
 
                                                 *test-:DotnetTest*
 :DotnetTest [args]           Uses the `dotnet` `test` command.
 
+                                                *test-:Catch2*
+:Catch2 [args]               Uses the compiled executable(user defined) from within the build directory
                                                 *test-:GoTest*
 :GoTest [args]               Uses the `go` `test` command.
 

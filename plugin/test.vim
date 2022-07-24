@@ -27,7 +27,7 @@ let g:test#default_runners = {
   \ 'Python':     ['Behave', 'DjangoTest', 'PyTest', 'PyUnit', 'Nose', 'Nose2', 'Mamba'],
   \ 'Racket':     ['RackUnit'],
   \ 'Ruby':       ['Rails', 'M', 'Minitest', 'RSpec', 'Cucumber', 'TestBench'],
-  \ 'Rust':       ['CargoTest'],
+  \ 'Rust':       ['CargoNextest', 'CargoTest'],
   \ 'Scala':      ['SbtTest', 'BloopTest'],
   \ 'Shell':      ['Bats', 'ShellSpec'],
   \ 'Swift':      ['SwiftPM'],

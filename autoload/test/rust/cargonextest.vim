@@ -1,27 +1,33 @@
-if !exists('g:test#rust#cargotest#file_pattern')
-  let g:test#rust#cargotest#file_pattern = '\v\.rs$'
+if !exists('g:test#rust#cargonextest#file_pattern')
+  let g:test#rust#cargonextest#file_pattern = '\v\.rs$'
 endif
 
-if !exists('g:test#rust#cargotest#test_patterns')
-  let g:test#rust#cargotest#test_patterns = {
+if !exists('g:test#rust#cargonextest#test_patterns')
+  let g:test#rust#cargonextest#test_patterns = {
         \ 'test': ['\v(#\[%(\w+::|rs)?test)'],
         \ 'namespace': ['\vmod (tests?)']
     \ }
 endif
 
-if !exists('g:test#rust#cargotest#patterns')
-  let g:test#rust#cargotest#patterns = {
+if !exists('g:test#rust#cargonextest#patterns')
+  let g:test#rust#cargonextest#patterns = {
         \ 'test': ['\v\s*%(async )?fn\s+(\w+)'],
         \ 'namespace': []
     \ }
 endif
 
-function! test#rust#cargotest#test_file(file) abort
-  if a:file =~# g:test#rust#cargotest#file_pattern
+function! test#rust#cargonextest#test_file(file) abort
+  if a:file =~# g:test#rust#cargonextest#file_pattern
     if exists('g:test#rust#runner')
-        return g:test#rust#runner == 'cargotest'
+        return g:test#rust#runner == 'cargonextest'
     else
-      return v:true
+      let lst = systemlist('cargo --list')
+      for item in lst
+        if item =~# '.\+\&nextest\&.\+'
+          return v:true
+        endif
+      endfor
+      return v:false
     endif
   endif
 endfunction
@@ -29,7 +35,7 @@ endfunction
 " This function fits libs unit testing
 " Need to implement integration testing and bechmarks and examples
 " TODO
-function! test#rust#cargotest#build_position(type, position) abort
+function! test#rust#cargonextest#build_position(type, position) abort
   " If running the whole suite, don't need to do anything
   if a:type !=# 'suite'
     " Else
@@ -46,7 +52,7 @@ function! test#rust#cargotest#build_position(type, position) abort
 
     if a:type ==# 'nearest'
       let l:test_name = s:nearest_test(a:position)
-      return l:package + [shellescape(l:namespace.l:test_name), "--", "--exact"]
+      return l:package + [shellescape(l:namespace.l:test_name)]
     elseif a:type ==# 'file'
       " FIXME Should not run submodule tests
       return l:package + [shellescape(l:namespace)]
@@ -56,17 +62,17 @@ function! test#rust#cargotest#build_position(type, position) abort
   return []
 endfunction
 
-function! test#rust#cargotest#build_args(args) abort
+function! test#rust#cargonextest#build_args(args) abort
   return a:args
 endfunction
 
-function! test#rust#cargotest#executable() abort
-  return 'cargo test'
+function! test#rust#cargonextest#executable() abort
+  return 'cargo nextest run'
 endfunction
 
 function! s:nearest_test(position) abort
   " Search backward for the first test pattern (usually '#[test]')
-  let name = test#base#nearest_test(a:position, g:test#rust#cargotest#test_patterns)
+  let name = test#base#nearest_test(a:position, g:test#rust#cargonextest#test_patterns)
 
   " If we didn't find the '#[test]' attribute, return empty
   if empty(name['test']) || name['test'][0] !~ '#\[.*'
@@ -79,7 +85,7 @@ function! s:nearest_test(position) abort
     \ a:position['file'],
     \ name['test_line'],
     \ a:position['line'],
-    \ g:test#rust#cargotest#patterns
+    \ g:test#rust#cargonextest#patterns
   \ )
 
   if len(name['namespace']) > 0
@@ -105,7 +111,7 @@ function! s:test_namespace(filename) abort
   for idx in range(len(l:modules) - 2, 0, -1)
       let l:cargo_toml = join(l:modules[:idx] + ['Cargo.toml'], '/')
       if !empty(glob(cargo_toml))
-          echo 
+          echo
           let l:package = l:modules[idx]
           let l:modules = l:modules[idx+1:]
           break

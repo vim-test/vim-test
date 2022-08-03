@@ -610,6 +610,19 @@ You can disable this integration by doing
 let g:test#no_alternate = 1
 ```
 
+### Custom alternate file
+
+If you are using a different library for jumping between implementation and test file
+you can define a custom function that returns the test filename.
+
+```vim
+function! CustomAlternateFile(cmd)
+  return "test_file_spec.rb"
+endfunction
+
+let g:test#custom_alternate_file = function('echo')
+```
+
 ## Extending
 
 If you wish to extend this plugin with your own test runners, first of all,

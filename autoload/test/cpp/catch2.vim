@@ -13,6 +13,10 @@ if !exists('g:test#cpp#catch2#relToProject_build_dir')
     let g:test#cpp#catch2#relToProject_build_dir = "build"
 endif
 
+if !exists('g:test#cpp#catch2#bin_dir')
+    let g:test#cpp#catch2#bin_dir = "./"
+endif
+
 if !exists('g:test#cpp#catch2#make_command')
     let nproc = trim(system("nproc"))
     let g:test#cpp#catch2#make_command = "make -j" . nproc
@@ -82,6 +86,7 @@ function! test#cpp#catch2#executable()
         return "cd " . getcwd()
                     \ . " && cd " . g:test#cpp#catch2#relToProject_build_dir  
                     \ . " && " . g:test#cpp#catch2#make_command  . " " . g:test#cpp#catch2#test_target
+                    \ . " && cd " . g:test#cpp#catch2#bin_dir  
                     \ . " && ./" . g:test#cpp#catch2#test_target
     endif
 endfunction

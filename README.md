@@ -573,6 +573,10 @@ Creating Test Executables: We assume that a Makefile is located in a "build" dir
 " If Makefile is at top of the project root, do this instead
 let g:test#cpp#catch2#relToProject_build_dir = "."
 ```
+We assume that your compiled executables are stored in `build` directory. If not, you can override this with:
+```vim
+let g:test#cpp#catch2#bin_dir = "../path/to/your/binaries/dir" 
+```
 Suite: We assume that you are using Cmake as your build system, and are registering each test file to it. If not, override the following command.
 ```vim
 let g:test#cpp#catch2#suite_command = "ctest --ouput-on-failure" 

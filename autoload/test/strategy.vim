@@ -175,7 +175,7 @@ function! test#strategy#harpoon(cmd) abort
   lua require("harpoon.term").sendCommand(vim.api.nvim_eval("l:harpoon_term"), vim.g.cmd)
   let goToTerminal = exists("g:test#harpoon#gototerminal") ? g:test#harpoon#gototerminal : 1
   if goToTerminal
-    lua require("harpoon.term").gotoTerminal(vim.api.nvim_eval("l:term"))
+    lua require("harpoon.term").gotoTerminal(vim.api.nvim_eval("l:harpoon_term"))
   endif
 endfunction
 

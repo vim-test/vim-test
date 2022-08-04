@@ -197,6 +197,64 @@ describe "Maven Junit5 tests"
 
 end
 
+
+describe "Maven Junit5 tests (mvnw)"
+
+  before
+    cd spec/fixtures/maven/sample_maven_junit5_mvnw_project
+  end
+
+  after
+    call Teardown()
+    cd -
+  end
+
+  it "TestFile runs with package-path, with asterisk to catch nested-test-classes"
+    view +14 src/test/java/org/vimtest/TestApp.java
+    TestFile
+
+    Expect g:test#last_command == './mvnw test -Dtest=org.vimtest.TestApp\*'
+  end
+
+  it "TestNearest - @Test void func()"
+    view +12 src/test/java/org/vimtest/TestApp.java
+    TestNearest
+
+    Expect g:test#last_command == './mvnw test -Dtest=org.vimtest.TestApp\#test_testdecorator_void'
+  end
+
+  it "TestNearest - @Test public void func()"
+    view +17 src/test/java/org/vimtest/TestApp.java
+    TestNearest
+
+    Expect g:test#last_command == './mvnw test -Dtest=org.vimtest.TestApp\#test_testdecorator_public_void'
+  end
+
+  it "TestNearest - void func()"
+    view +22 src/test/java/org/vimtest/TestApp.java
+    TestNearest
+
+    Expect g:test#last_command == './mvnw test -Dtest=org.vimtest.TestApp\#test_void'
+  end
+
+  it "TestNearest - public void func()"
+    view +30 src/test/java/org/vimtest/TestApp.java
+    TestNearest
+
+    Expect g:test#last_command == './mvnw test -Dtest=org.vimtest.TestApp\#test_public_void'
+  end
+
+  it "TestNearest - nested test()"
+    view +39 src/test/java/org/vimtest/TestApp.java
+    TestNearest
+
+    Expect g:test#last_command == './mvnw test -Dtest=org.vimtest.TestApp\$Test_NestedTestClass\#test_nested_test'
+  end
+
+end
+
+
+
 describe "Maven Junit5 multimodule tests"
 
   before

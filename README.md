@@ -573,6 +573,10 @@ Creating Test Executables: We assume that a Makefile is located in a "build" dir
 " If Makefile is at top of the project root, do this instead
 let g:test#cpp#catch2#relToProject_build_dir = "."
 ```
+We assume that your compiled executables are stored in `build` directory. If not, you can override this with:
+```vim
+let g:test#cpp#catch2#bin_dir = "../path/to/your/binaries/dir" 
+```
 Suite: We assume that you are using Cmake as your build system, and are registering each test file to it. If not, override the following command.
 ```vim
 let g:test#cpp#catch2#suite_command = "ctest --ouput-on-failure" 
@@ -604,6 +608,19 @@ command on the "alternate" test file.
 You can disable this integration by doing
 ```vim
 let g:test#no_alternate = 1
+```
+
+### Custom alternate file
+
+If you are using a different library for jumping between implementation and test file
+you can define a custom function that returns the test filename.
+
+```vim
+function! CustomAlternateFile(cmd)
+  return "test_file_spec.rb"
+endfunction
+
+let g:test#custom_alternate_file = function('echo')
 ```
 
 ## Extending

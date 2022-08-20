@@ -77,7 +77,7 @@ function! test#cpp#catch2#executable()
     if s:is_suite
         let s:is_suite = v:false
         return "cd " . getcwd()
-                    \ . " && cd " . g:test#cpp#catch2#relToProject_build_dir
+                    \ . " && cd " . g:test#cpp#catch2#relToProject_build_dir. " && "
                     \ . g:test#cpp#catch2#suite_command 
     else
         if !exists('g:test#cpp#catch2#test_target')

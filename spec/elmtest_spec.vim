@@ -32,18 +32,36 @@ describe "elm-test"
   end
 
   it "runs tests against absolute path of npm executable (elm-test)"
-    let g:test#javascript#elm#executable = 'node_modules/.bin/elm-test'
-    view tests/NormalTest.elm
-    TestFile
+    try
+      !mkdir -p node_modules/.bin
+      !touch node_modules/.bin/elm-test
 
-    Expect g:test#last_command == 'node_modules/.bin/elm-test tests/NormalTest.elm'
+      view tests/NormalTest.elm
+      TestFile
+
+      Expect g:test#last_command == 'node_modules/.bin/elm-test tests/NormalTest.elm'
+    finally
+      !rm node_modules/.bin/elm-test
+      !rmdir node_modules/.bin
+      !rmdir node_modules
+    endtry
   end
 
   it "runs tests against absolute path of npm executable (elm-test and elm-compiler)"
-    let g:test#javascript#elm#executable = 'node_modules/.bin/elm-test --compiler node_modules/.bin/elm'
-    view tests/NormalTest.elm
-    TestFile
+    try
+      !mkdir -p node_modules/.bin
+      !touch node_modules/.bin/elm-test
+      !touch node_modules/.bin/elm
 
-    Expect g:test#last_command == 'node_modules/.bin/elm-test --compiler node_modules/.bin/elm tests/NormalTest.elm'
+      view tests/NormalTest.elm
+      TestFile
+
+      Expect g:test#last_command == 'node_modules/.bin/elm-test --compiler node_modules/.bin/elm tests/NormalTest.elm'
+    finally
+      !rm node_modules/.bin/elm-test
+      !rm node_modules/.bin/elm
+      !rmdir node_modules/.bin
+      !rmdir node_modules
+    endtry
   end
 end

@@ -31,4 +31,19 @@ describe "elm-test"
     Expect g:test#last_command == 'elm-test'
   end
 
+  it "runs tests against absolute path of npm executable (elm-test)"
+    let g:test#javascript#elm#executable = 'node_modules/.bin/elm-test'
+    view tests/NormalTest.elm
+    TestFile
+
+    Expect g:test#last_command == 'node_modules/.bin/elm-test tests/NormalTest.elm'
+  end
+
+  it "runs tests against absolute path of npm executable (elm-test and elm-compiler)"
+    let g:test#javascript#elm#executable = 'node_modules/.bin/elm-test --compiler node_modules/.bin/elm'
+    view tests/NormalTest.elm
+    TestFile
+
+    Expect g:test#last_command == 'node_modules/.bin/elm-test --compiler node_modules/.bin/elm tests/NormalTest.elm'
+  end
 end

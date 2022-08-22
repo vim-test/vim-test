@@ -26,5 +26,9 @@ function! test#elm#elmtest#build_args(args) abort
 endfunction
 
 function! test#elm#elmtest#executable() abort
-  return 'elm-test'
+  if filereadable('node_modules/.bin/elm-test')
+    return 'node_modules/.bin/elm-test'
+  else
+    return 'elm-test'
+  endif
 endfunction

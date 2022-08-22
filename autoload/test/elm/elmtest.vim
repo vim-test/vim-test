@@ -27,7 +27,8 @@ endfunction
 
 function! test#elm#elmtest#executable() abort
   if filereadable('node_modules/.bin/elm-test')
-    return 'node_modules/.bin/elm-test'
+    return 'node_modules/.bin/elm-test' .
+      \ filereadable('node_modules/.bin/elm') ? ' --compiler node_modules/.bin/elm' : ''
   else
     return 'elm-test'
   endif

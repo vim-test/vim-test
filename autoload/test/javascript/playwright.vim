@@ -51,7 +51,5 @@ let test#playwright#patterns = {
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#playwright#patterns)
-  return (len(name['namespace']) ? '^' : '') .
-       \ test#base#escape_regex(join(name['namespace'] + name['test'])) .
-       \ (len(name['test']) ? '$' : '')
+  return test#base#escape_regex(join(name['namespace'] + name['test']))
 endfunction

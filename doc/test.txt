@@ -361,6 +361,12 @@ Runs test commands with `:T`. Requires the Neoterm plugin.
 >
   let test#strategy = 'neoterm'
 <
+Toggleterm ~
+
+Runs test commands with `:TermExec`. Requires the Toggleterm plugin.
+>
+  let test#strategy = 'toggleterm'
+<
 Floaterm ~
 
 Runs test commands within floating/popup terminal. Requires the vim-floaterm plugin.

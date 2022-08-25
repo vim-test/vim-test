@@ -97,6 +97,10 @@ function! test#strategy#neoterm(cmd) abort
   call neoterm#do({ 'cmd': a:cmd})
 endfunction
 
+function! test#strategy#toggleterm(cmd) abort
+  execute 'TermExec cmd="'.a:cmd.'"'
+endfunction
+
 function! test#strategy#floaterm(cmd) abort
   execute 'FloatermNew --autoclose=0 '.a:cmd
 endfunction

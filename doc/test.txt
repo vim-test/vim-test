@@ -105,6 +105,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Jest*
 :Jest [args]                 Uses the `jest` command.
 
+                                                *test-:Vitest*
+:Vitest [args]                 Uses the `vitest` command.
+
                                                 *test-:Playwright*
 :Playwright [args]           Uses the `playwright test` command.
 

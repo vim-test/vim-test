@@ -1,0 +1,8 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {
+    "vitest": "^0.22.0"
+  }
+}

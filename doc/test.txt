@@ -191,6 +191,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:CargoTest*
 :CargoTest [args]            Uses the `cargo` `test` command.
 
+                                                *test-:CargoNextest*
+:CargoNextest [args]         Uses the `cargo` `nextest` command.
+
                                                 *test-:FireplaceTest*
 :FireplaceTest [args]        Uses `Fireplace.vim` to run test commands, and
                              automatically reloads code.

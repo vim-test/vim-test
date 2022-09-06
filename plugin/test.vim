@@ -22,6 +22,7 @@ let g:test#default_runners = {
   \ 'Kotlin':     ['GradleTest'],
   \ 'Lua':        ['Busted'],
   \ 'Mint':       ['MintTest'],
+  \ 'Nim':        ['UnitTest'],
   \ 'PHP':        ['Codeception', 'Dusk', 'Pest', 'PHPUnit', 'Behat', 'PHPSpec', 'Kahlan', 'Peridot'],
   \ 'Perl':       ['Prove'],
   \ 'Python':     ['Behave', 'DjangoTest', 'PyTest', 'PyUnit', 'Nose', 'Nose2', 'Mamba'],

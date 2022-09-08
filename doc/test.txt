@@ -295,6 +295,8 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:VueTestUtils*
 :VueTestUtils [args]  	         Uses the `vue-cli-service` command.
+                                                *test-:UnitTest*
+:UnitTest [args]              Uses the `nim compile --run` command.
 
 
 MAVEN TEST DIFFERENCES                          *test-maven-test-differences*

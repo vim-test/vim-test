@@ -37,12 +37,13 @@ runners are supported:
 |     **Kotlin** | Gradle (Groovy and Kotlin DSL)                                                                                     | `gradletest`                                                                                                                                 |
 |        **Lua** | Busted                                                                                                             | `busted`                                                                                                                                     |
 |       **Mint** | Mint                                                                                                               | `minttest`                                                                                                                                   |
+|        **Nim** | Nim                                                                                                                | `unittest`                                                                                                                                   |
 |        **PHP** | Behat, Codeception, Kahlan, Peridot, Pest, PHPUnit, Sail, PHPSpec, Dusk                                            | `behat`, `codeception`, `dusk`, `kahlan`, `peridot`, `phpunit`, `sail`, `phpspec`, `pest`                                                    |
 |       **Perl** | Prove                                                                                                              | `prove`                                                                                                                                      |
 |     **Python** | Behave, Django, Mamba, Nose, Nose2, PyTest, PyUnit                                                                 | `behave`, `djangotest`, `djangonose`, `mamba`, `nose`, `nose2`, `pytest`, `pyunit`                                                           |
 |     **Racket** | RackUnit                                                                                                           | `rackunit`                                                                                                                                   |
 |       **Ruby** | Cucumber, [M], [Minitest][minitest], Rails, RSpec, TestBench                                                       | `cucumber`, `m`, `minitest`, `rails`, `rspec`, `testbench`                                                                                   |
-|       **Rust** | Cargo                                                                                                              | `cargotest`                                                                                                                                  |
+|       **Rust** | Cargo, cargo-nextest                                                                                               | `cargotest`, `cargonextest`                                                                                                                  |
 |      **Scala** | SBT, Bloop                                                                                                         | `sbttest`, `blooptest`                                                                                                                       |
 |      **Shell** | Bats, ShellSpec                                                                                                    | `bats`, `shellspec`                                                                                                                          |
 |      **Swift** | Swift Package Manager                                                                                              | `swiftpm`                                                                                                                                    |
@@ -581,6 +582,12 @@ let g:test#cpp#catch2#bin_dir = "../path/to/your/binaries/dir"
 Suite: We assume that you are using Cmake as your build system, and are registering each test file to it. If not, override the following command.
 ```vim
 let g:test#cpp#catch2#suite_command = "ctest --ouput-on-failure" 
+```
+
+#### Rust
+If the `nextest` cargo subcommand is available, cargo-nextest is used. `cargo test` is used otherwise. To force a specific runner:
+```vim
+let g:test#rust#runner = 'cargotest'
 ```
 
 ## Autocommands

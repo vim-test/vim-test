@@ -3,6 +3,7 @@ source spec/support/helpers.vim
 describe "Cargo"
 
   before
+    let g:test#rust#runner = 'cargotest'
     cd spec/fixtures/cargo/crate
   end
 

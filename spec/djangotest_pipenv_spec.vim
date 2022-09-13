@@ -5,10 +5,12 @@ describe "DjangoTest with Pipenv"
   before
     let g:test#python#runner = 'djangotest'
     cd spec/fixtures/django
+    !touch Pipfile
   end
 
   after
     call Teardown()
+    !rm Pipfile
     cd -
   end
 

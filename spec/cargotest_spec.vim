@@ -3,6 +3,7 @@ source spec/support/helpers.vim
 describe "Cargo"
 
   before
+    let g:test#rust#runner = 'cargotest'
     cd spec/fixtures/cargo/crate
   end
 
@@ -136,6 +137,12 @@ describe "Cargo"
     view +15 src/lib.rs
     TestNearest
     Expect g:test#last_command == 'cargo test ''tests::tokio_async_test'' -- --exact'
+  end
+
+  it "supports async actix rt tests"
+    view +26 src/lib.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''tests::test_actix_rt'' -- --exact'
   end
 
   it "supports rstest tests"

@@ -52,21 +52,21 @@ describe "Ginkgo"
   it "runs file test if nearest test couldn't be found"
     view +1 mypackage/normal_test.go
     TestNearest
-    Expect g:test#last_command == "ginkgo --regexScansFilePath=true --focus=mypackage/normal_test.go ./mypackage"
+    Expect g:test#last_command == "ginkgo --focus-file=mypackage/normal_test.go ./mypackage"
   end
 
   it "runs file tests"
     view normal_test.go
     TestFile
 
-    Expect g:test#last_command == "ginkgo --regexScansFilePath=true --focus=normal_test.go ./."
+    Expect g:test#last_command == "ginkgo --focus-file=normal_test.go ./."
   end
 
   it "runs tests in subdirectory"
     view mypackage/normal_test.go
     TestFile
 
-    Expect g:test#last_command == "ginkgo --regexScansFilePath=true --focus=mypackage/normal_test.go ./mypackage"
+    Expect g:test#last_command == "ginkgo --focus-file=mypackage/normal_test.go ./mypackage"
   end
 
   it "runs test suites"

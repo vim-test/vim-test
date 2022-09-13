@@ -152,6 +152,10 @@ function! s:alternate_file() abort
     let alternate_file = get(filter(projectionist#query_file('alternate'), 'filereadable(v:val)'), 0, '')
   endif
 
+  if empty(alternate_file) && has_key(g:, 'test#custom_alternate_file')
+    let alternate_file = g:test#custom_alternate_file()
+  endif
+
   if empty(alternate_file) && exists('g:loaded_rails') && !empty(rails#app())
     let alternate_file = rails#buffer().alternate()
   endif

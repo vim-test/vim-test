@@ -1,7 +1,7 @@
 package mypackage_test
 
 import (
-	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
 
@@ -29,7 +29,7 @@ var _ = Describe("posts API", func() {
 	When("user is not logged in", func() {
 
 		It("should deny access", func() {
-
+			Expect(true).To(BeTrue())
 		})
 	})
 

@@ -2,6 +2,10 @@ import 'package:test/test.dart';
 import 'package:counter_app/counter.dart';
 
 void main() {
+  test('no group test', () {
+    expect(Counter().value, 0);
+  });
+
   group('Counter', () {
     test('value should start at 0', () {
       expect(Counter().value, 0);

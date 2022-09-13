@@ -1,0 +1,9 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {
+    "nx": "^13.3.1",
+    "jest": "^20.0.0"
+  }
+}

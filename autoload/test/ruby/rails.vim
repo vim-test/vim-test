@@ -7,7 +7,7 @@ function! test#ruby#rails#test_file(file) abort
     return 0
   end
 
-  if empty(glob('config/application.rb'))
+  if empty(glob('config/application.rb')) && empty(glob('test/*/config/application.rb'))
     return 0
   end
 
@@ -45,7 +45,7 @@ endfunction
 function! s:rails_version() abort
   if filereadable('Gemfile.lock')
     for line in readfile('Gemfile.lock')
-      let version_string = matchstr(line, '\v^ *rails \(\zs\d+\.\d+\..+\ze\)')
+      let version_string = matchstr(line, '\v^ *railties \(\zs\d+\.\d+\..+\ze\)')
       if version_string
         break
       endif

@@ -5,9 +5,9 @@ endif
 if !exists('g:test#php#pest#test_patterns')
   " Description for the tests:
   " https://pestphp.com/docs/writing-tests/
-  " Look for a function call that starts with "it" or "test"
+  " Look for a function call that starts with "it" or "test" or "scenario"
   let g:test#php#pest#test_patterns = {
-    \ 'test': ['\v^\s*%(it|test)[(]%("|'')(.*)%("|''),'],
+    \ 'test': ['\v^\s*%(it|test|scenario)[(]%("|'')(.*)%("|'')'],
     \ 'namespace': [],
   \}
 endif

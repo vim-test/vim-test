@@ -6,7 +6,9 @@ function! test#strategy#basic(cmd) abort
   if has('nvim')
     -tabnew
     call termopen(a:cmd)
-    startinsert
+    if !get(g:, 'test#basic#start_normal', 0)
+      startinsert
+    endif
   else
     if s:restorescreen()
       execute '!'.s:pretty_command(a:cmd)
@@ -76,7 +78,9 @@ function! test#strategy#neovim(cmd) abort
   execute term_position . ' new'
   call termopen(a:cmd)
   au BufDelete <buffer> wincmd p " switch back to last window
-  startinsert
+  if !get(g:, 'test#neovim#start_normal', 0)
+    startinsert
+  endif
 endfunction
 
 function! test#strategy#vimterminal(cmd) abort
@@ -93,8 +97,12 @@ function! test#strategy#neoterm(cmd) abort
   call neoterm#do({ 'cmd': a:cmd})
 endfunction
 
+function! test#strategy#toggleterm(cmd) abort
+  execute 'TermExec cmd="'.a:cmd.'"'
+endfunction
+
 function! test#strategy#floaterm(cmd) abort
-  execute 'FloatermNew '.a:cmd
+  execute 'FloatermNew --autoclose=0 '.a:cmd
 endfunction
 
 function! test#strategy#vtr(cmd) abort
@@ -103,10 +111,8 @@ endfunction
 
 function! test#strategy#vimux(cmd) abort
   if exists('g:test#preserve_screen') && !g:test#preserve_screen
-    if exists('g:VimuxRunnerIndex') && _VimuxHasRunner(g:VimuxRunnerIndex) != -1
-      call VimuxRunCommand(!s:Windows() ? 'clear' : 'cls')
-      call VimuxClearRunnerHistory()
-    endif
+    call VimuxClearTerminalScreen()
+    call VimuxClearRunnerHistory()
     call VimuxRunCommand(s:command(a:cmd))
   else
     call VimuxRunCommand(s:pretty_command(a:cmd))
@@ -167,6 +173,16 @@ function! test#strategy#shtuff(cmd) abort
   call system("shtuff into " . shellescape(g:shtuff_receiver) . " " . shellescape("clear;" . a:cmd))
 endfunction
 
+function! test#strategy#harpoon(cmd) abort
+  let g:cmd = a:cmd . "\n"
+  let l:harpoon_term = exists("g:test#harpoon_term") ? g:test#harpoon_term : 1
+  lua require("harpoon.term").sendCommand(vim.api.nvim_eval("l:harpoon_term"), vim.g.cmd)
+  let goToTerminal = exists("g:test#harpoon#gototerminal") ? g:test#harpoon#gototerminal : 1
+  if goToTerminal
+    lua require("harpoon.term").gotoTerminal(vim.api.nvim_eval("l:harpoon_term"))
+  endif
+endfunction
+
 function! s:execute_with_compiler(cmd, script) abort
   try
     let default_makeprg = &l:makeprg
@@ -201,15 +217,20 @@ function! s:execute_script(name, cmd) abort
 endfunction
 
 function! s:pretty_command(cmd) abort
-  let clear = !s:Windows() ? 'clear' : 'cls'
-  let echo  = !s:Windows() ? 'echo -e '.shellescape(a:cmd) : 'Echo '.shellescape(a:cmd)
+  let cmds = []
   let separator = !s:Windows() ? '; ' : ' & '
 
   if !get(g:, 'test#preserve_screen')
-    return join([l:clear, l:echo, a:cmd], l:separator)
-  else
-    return join([l:echo, a:cmd], l:separator)
+    call add(l:cmds, !s:Windows() ? 'clear' : 'cls')
   endif
+
+  if get(g:, 'test#echo_command', 1)
+    call add(l:cmds, !s:Windows() ? 'echo -e '.shellescape(a:cmd) : 'Echo '.shellescape(a:cmd))
+  endif
+
+  call add(l:cmds, a:cmd)
+
+  return join(l:cmds, l:separator)
 endfunction
 
 function! s:command(cmd) abort

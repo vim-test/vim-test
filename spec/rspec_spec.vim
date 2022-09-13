@@ -31,6 +31,11 @@ describe "RSpec"
     TestNearest
 
     Expect g:test#last_command == 'rspec context_spec.rb:3'
+
+    view +4 subject_spec.rb
+    TestNearest
+
+    Expect g:test#last_command == 'rspec subject_spec.rb:4'
   end
 
   it "runs file tests"

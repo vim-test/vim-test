@@ -23,9 +23,13 @@ function! test#javascript#mocha#build_position(type, position) abort
     return [a:position['file']]
   else
     let test_directory = (split(fnamemodify(a:position['file'], ':h'), '\/')[0])
+    let extension = []
+    if test#javascript#has_package('ts-node')
+        let extension = ['--extension', 'ts']
+    endif
 
     if test_directory =~# '\v^tests?$'
-        return ['--recursive', test_directory . '/']
+        return ['--recursive', test_directory . '/'] + extension
     endif
 
     return ['"' . test_directory . '/**/*.' . fnamemodify(a:position['file'], ':e:e:e') . '"']
@@ -38,6 +42,10 @@ function! test#javascript#mocha#build_args(args, color) abort
   if !a:color
     let args = ['--no-colors'] + args
     let args = args + ['|', 'sed -e "s///g"']
+  endif
+
+  if test#javascript#has_package('ts-node')
+    let args = ['-r', 'ts-node/register'] + args
   endif
 
   return args

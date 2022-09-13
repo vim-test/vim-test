@@ -29,7 +29,16 @@ describe "STACK"
     view FixtureSpec.hs
     TestSuite
 
-    Expect g:test#last_command == 'stack "test"'
+    Expect g:test#last_command == 'stack test'
+  end
+
+  it "allows overriding the test command"
+    let g:test#haskell#stacktest#test_command = 'test .'
+
+    view FixtureSpec.hs
+    TestSuite
+
+    Expect g:test#last_command == 'stack test .'
   end
 
 end

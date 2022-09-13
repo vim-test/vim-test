@@ -1,6 +1,7 @@
 let test#go#patterns = {
   \ 'test': [
     \ '\v^\s*func ((Test|Example).*)\(',
+    \ '\v^\s*func \(.*\) ((Test|Example).*)\(',
     \ '\v^\s*t\.Run\("(.*)"',
   \],
   \ 'namespace': [

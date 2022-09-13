@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.5.8
+  - 3.0.0
 
 sudo: false
 
@@ -13,7 +13,7 @@ before_script:
   - "source ~/.vvm/etc/login"
   - "vvm update_itself"
   - "vvm use vimorg--v8.2.0803 --install --with-features=huge"
-  - "gem install vim-flavor -v 3.0.0"
+  - "gem install vim-flavor -v '~> 4.0.1'"
   - "vim-flavor install"
 
 script: "vim-flavor test spec/"

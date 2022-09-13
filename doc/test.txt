@@ -105,6 +105,12 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Jest*
 :Jest [args]                 Uses the `jest` command.
 
+                                                *test-:Vitest*
+:Vitest [args]                 Uses the `vitest` command.
+
+                                                *test-:Playwright*
+:Playwright [args]           Uses the `playwright test` command.
+
                                                 *test-:ReactScripts*
 :ReactScripts [args]         Uses the `react-scripts test` command.
 
@@ -159,12 +165,17 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:EUnit*
 :EUnit [args]                Uses the `rebar3` `eunit` command.
 
+                                                *test-:PropEr*
+:PropEr [args]               Uses the `rebar3` `proper` command.
+
                                                 *test-:Xunit*
 :Xunit [args]                Uses the `dotnet` `xunit` command.
 
                                                 *test-:DotnetTest*
 :DotnetTest [args]           Uses the `dotnet` `test` command.
 
+                                                *test-:Catch2*
+:Catch2 [args]               Uses the compiled executable(user defined) from within the build directory
                                                 *test-:GoTest*
 :GoTest [args]               Uses the `go` `test` command.
 
@@ -179,6 +190,9 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:CargoTest*
 :CargoTest [args]            Uses the `cargo` `test` command.
+
+                                                *test-:CargoNextest*
+:CargoNextest [args]         Uses the `cargo` `nextest` command.
 
                                                 *test-:FireplaceTest*
 :FireplaceTest [args]        Uses `Fireplace.vim` to run test commands, and
@@ -281,6 +295,8 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:VueTestUtils*
 :VueTestUtils [args]  	         Uses the `vue-cli-service` command.
+                                                *test-:UnitTest*
+:UnitTest [args]              Uses the `nim compile --run` command.
 
 
 MAVEN TEST DIFFERENCES                          *test-maven-test-differences*
@@ -352,6 +368,12 @@ Neoterm ~
 Runs test commands with `:T`. Requires the Neoterm plugin.
 >
   let test#strategy = 'neoterm'
+<
+Toggleterm ~
+
+Runs test commands with `:TermExec`. Requires the Toggleterm plugin.
+>
+  let test#strategy = 'toggleterm'
 <
 Floaterm ~
 
@@ -499,6 +521,9 @@ For example to send the commands to terminal number 2 you can set in your vimrc:
 >
 let g:test#harpoon_term = 2
 <
+
+By default this strategy will also open the terminal in the current window.  To disable
+this behavior set `g:test#harpoon#gototerminal = 0`.
 
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 
@@ -660,6 +685,19 @@ command on the "alternate" test file.
 You can disable this integration by doing
 >
   let g:test#no_alternate = 1
+<
+
+CUSTOM ALTERNATE FILE                           *test-custom-alternate-file*
+
+If you are using a different library for jumping between implementation and test file
+you can define a custom function that returns the test filename.
+
+>
+function! CustomAlternateFile(cmd)
+  return "test_file_spec.rb"
+endfunction
+
+let g:test#custom_alternate_file = function('echo')
 <
 
 ABOUT                                           *test-about*

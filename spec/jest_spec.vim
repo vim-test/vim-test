@@ -29,6 +29,23 @@ describe "Jest"
       Expect g:test#last_command == 'jest --no-coverage -t ''^Math Addition adds two numbers$'' -- __tests__/normal-test.js'
     end
 
+    it "runs loop tests"
+      view +1 __tests__/loop-test.js
+      TestNearest
+
+      Expect g:test#last_command == 'jest --no-coverage -t ''Loop the test with given array$'' -- __tests__/loop-test.js'
+
+      view +2 __tests__/loop-test.js
+      TestNearest
+
+      Expect g:test#last_command == 'jest --no-coverage -t ''loop each tests$'' -- __tests__/loop-test.js'
+
+      view +3 __tests__/loop-test.js
+      TestNearest
+
+      Expect g:test#last_command == 'jest --no-coverage -t ''described loop test$'' -- __tests__/loop-test.js'
+    end
+
     it "aliases context to describe"
       view +1 __tests__/context-test.js
       TestNearest

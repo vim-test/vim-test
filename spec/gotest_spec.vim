@@ -17,12 +17,23 @@ describe "GoTest"
 
     Expect g:test#last_command == 'go test -run ''TestNumbers$'' ./.'
 
-    view +9 normal_test.go
+    view +8 normal_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''TestNumbers/adding_two_numbers$'' ./.'
+
+    view +12 normal_test.go
+    TestNearest
+
+    let test_name = shellescape('\[\]\.\*\+\?\|\$\^\(\)')[1:-2]
+    Expect g:test#last_command == 'go test -run ''TestNumbers/'. test_name .'$'' ./.'
+
+    view +17 normal_test.go
     TestNearest
 
     Expect g:test#last_command == 'go test -run ''Testテスト$'' ./.'
 
-    view +13 normal_test.go
+    view +21 normal_test.go
     TestNearest
 
     Expect g:test#last_command == 'go test -run ''ExampleSomething$'' ./.'
@@ -73,4 +84,21 @@ describe "GoTest"
     Expect g:test#last_command == 'go test ./...'
   end
 
+  it "runs tests in a file with build tags"
+    view +14 build_tags_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -tags=foo,hello,world,!bar,red,black -run ''TestNumbers$'' ./.'
+
+    TestFile
+
+    Expect g:test#last_command == 'go test -tags=foo,hello,world,!bar,red,black'
+  end
+
+  it "runs test suite without tags"
+    view +14 build_tags_test.go
+    TestSuite
+
+    Expect g:test#last_command == 'go test ./...'
+  end
 end

@@ -1,5 +1,5 @@
 let g:test#dart#fluttertest#patterns = {
-  \ 'test':      ['\v^\s*%(test|testWidgets)\(%(''|")(.*)%(''|"),'],
+  \ 'test':      ['\v^\s*%(test|testWidgets)\(%(''|")(.*)%(''|"),', '\v^\s*%(''|")(.{50,})%(''|"),'],
   \ 'namespace': ['\v^\s*group\(%(''|")(.*)%(''|"),'],
 \}
 
@@ -9,15 +9,19 @@ endif
 
 " Returns true if the given file belongs to your test runner
 function! test#dart#fluttertest#test_file(file) abort
-  return a:file =~# g:test#dart#fluttertest#file_pattern
+  return test#dart#test_file('fluttertest', g:test#dart#fluttertest#file_pattern, a:file)
 endfunction
 
 " Returns test runner's arguments which will run the current file and/or line
 function! test#dart#fluttertest#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
+    let quote = ''''
+    if stridx(name, '''') > 0
+         let quote = '"'
+    endif
     if !empty(name)
-      return ['--plain-name' . ' "' . substitute(name, "\\", "", "g") . '" ' . a:position['file']]
+      return ['--plain-name' . ' ' . quote . substitute(name, "\\", "", "g") . quote .' ' . a:position['file']]
     else
       return [a:position['file']]
     endif

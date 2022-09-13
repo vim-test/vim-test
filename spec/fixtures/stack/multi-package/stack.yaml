@@ -1,0 +1,6 @@
+resolver: lts-19.8
+
+packages:
+- ./subpackage1/
+- ./subpackage2/
+- ./common/subpackage3/

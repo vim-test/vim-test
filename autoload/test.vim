@@ -11,6 +11,7 @@ function! test#run(type, arguments) abort
   elseif exists('g:test#last_position')
     let position = g:test#last_position
   else
+    call s:after_run()
     call s:echo_failure('Not a test file') | return
   endif
 
@@ -149,6 +150,10 @@ function! s:alternate_file() abort
 
   if empty(alternate_file) && exists('g:loaded_projectionist')
     let alternate_file = get(filter(projectionist#query_file('alternate'), 'filereadable(v:val)'), 0, '')
+  endif
+
+  if empty(alternate_file) && has_key(g:, 'test#custom_alternate_file')
+    let alternate_file = g:test#custom_alternate_file()
   endif
 
   if empty(alternate_file) && exists('g:loaded_rails') && !empty(rails#app())

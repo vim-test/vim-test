@@ -15,18 +15,29 @@ function! test#csharp#dotnettest#build_position(type, position) abort
   let file = a:position['file']
   let filename = fnamemodify(file, ':t:r')
   let project_path = test#csharp#get_project_path(file)
+  let name = test#base#nearest_test(a:position, g:test#csharp#patterns, { 'namespaces_with_same_indent': 1 })
+  let namespace = join(name['namespace'], '.')
+  let test_name = join(name['test'], '.')
+  let nearest_test = join([namespace, test_name], '.')
 
   if a:type ==# 'nearest'
-    let name = s:nearest_test(a:position)
-    if !empty(name)
-      return [project_path, '--filter', 'FullyQualifiedName=' . name]
+    if !empty(test_name)
+      return [project_path, '--filter', 'FullyQualifiedName=' . nearest_test]
     else
-      return [project_path, '--filter', 'FullyQualifiedName=' . filename]
+      if !empty(namespace)
+        return [project_path, '--filter', 'FullyQualifiedName~' . namespace]
+      else
+        return [project_path]
+      endif
     endif
   elseif a:type ==# 'file'
-    return [project_path,  '--filter', 'FullyQualifiedName=' . filename]
-  else
-    return [project_path]
+    throw 'file tests is not supported for dotnettest'
+  elseif a:type ==# 'suite'
+    if !empty(project_path)
+      return [project_path]
+    else
+      return []
+    endif
   endif
 endfunction
 
@@ -37,9 +48,4 @@ endfunction
 
 function! test#csharp#dotnettest#executable() abort
   return 'dotnet test'
-endfunction
-
-function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#csharp#patterns)
-  return join(name['namespace'] + name['test'], '.')
 endfunction

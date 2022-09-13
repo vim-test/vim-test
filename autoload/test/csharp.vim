@@ -3,7 +3,14 @@ let g:test#csharp#patterns = {
   \ 'namespace': ['\v^\s*public class (\w+)', '\v^\s*namespace ((\w|\.)+)'],
 \}
 
-let s:slash = (has('win32') || has('win64')) && fnamemodify(&shell, ':t') ==? 'cmd.exe' ? '\' : '/'
+if (has('win32') || has('win64'))
+    let shell = fnamemodify(&shell, ':t')
+    if (shell ==? 'cmd.exe' || shell ==? 'powershell')
+        let s:slash = '\'
+    endif
+else
+    let s:slash = '/'
+endif
 
 function! test#csharp#get_project_path(file) abort
   let l:filepath = fnamemodify(a:file, ':p:h')
@@ -19,7 +26,7 @@ function! test#csharp#get_project_path(file) abort
   endwhile
 
   if len(l:project_files) == 0
-    throw 'Unable to find .csproj file, a .csproj file is required to make use of the `dotnet test` command.'
+    return []
   endif
 
   return l:project_files[0]

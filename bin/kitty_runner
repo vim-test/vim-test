@@ -1,8 +1,23 @@
 #!/usr/bin/env sh
+
+version() { echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }'; }
+
+# Starting this Kitty version, use launch command to create a vim-output window
+KITTY_LAUNCH_VERSION="0.26.0"
+
+# Kitty current version
+KITTY_VERSION=$(kitty --version | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+
+# Kitty command to launch a new window
+KITTY_NEW_WINDOW="new-window"
+
+if [ "$(version "$KITTY_VERSION")" -ge "$(version "$KITTY_LAUNCH_VERSION")" ]; then
+  KITTY_NEW_WINDOW="launch"
+fi
+
 if [ "$(kitty @ ls | grep -c '            "title": "vim-test-output')" -eq 0 ];
 then
-  kitty @ --to "$KITTY_LISTEN_ON" new-window --keep-focus --title "vim-test-output" "$SHELL"
+  kitty @ --to "$KITTY_LISTEN_ON" ${KITTY_NEW_WINDOW} --keep-focus --title "vim-test-output" "$SHELL"
 fi
 
 kitty @ --to "$KITTY_LISTEN_ON" send-text --match title:"vim-test-output" "$1\x0d"
-

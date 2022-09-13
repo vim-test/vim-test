@@ -16,6 +16,27 @@ describe "GoTest"
     TestNearest
 
     Expect g:test#last_command == 'go test -run ''TestNumbers$'' ./.'
+
+    view +8 normal_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''TestNumbers/adding_two_numbers$'' ./.'
+
+    view +12 normal_test.go
+    TestNearest
+
+    let test_name = shellescape('\[\]\.\*\+\?\|\$\^\(\)')[1:-2]
+    Expect g:test#last_command == 'go test -run ''TestNumbers/'. test_name .'$'' ./.'
+
+    view +17 normal_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''Testテスト$'' ./.'
+
+    view +21 normal_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''ExampleSomething$'' ./.'
   end
 
   it "runs nearest tests in subdirectory"
@@ -23,6 +44,16 @@ describe "GoTest"
     TestNearest
 
     Expect g:test#last_command == 'go test -run ''TestNumbers$'' ./mypackage'
+
+    view +9 mypackage/normal_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''Testテスト$'' ./mypackage'
+
+    view +13 mypackage/normal_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''ExampleSomething$'' ./mypackage'
   end
 
   it "runs file test if nearest test couldn't be found"
@@ -53,4 +84,21 @@ describe "GoTest"
     Expect g:test#last_command == 'go test ./...'
   end
 
+  it "runs tests in a file with build tags"
+    view +14 build_tags_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -tags=foo,hello,world,!bar,red,black -run ''TestNumbers$'' ./.'
+
+    TestFile
+
+    Expect g:test#last_command == 'go test -tags=foo,hello,world,!bar,red,black'
+  end
+
+  it "runs test suite without tags"
+    view +14 build_tags_test.go
+    TestSuite
+
+    Expect g:test#last_command == 'go test ./...'
+  end
 end

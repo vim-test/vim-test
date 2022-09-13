@@ -3,9 +3,14 @@ if !exists('g:test#java#gradletest#file_pattern')
 endif
 
 function! test#java#gradletest#test_file(file) abort
-  return a:file =~? g:test#java#gradletest#file_pattern
-    \ && exists('g:test#java#runner')
-    \ && g:test#java#runner ==# 'gradletest'
+    if exists("g:test#java#runner") && g:test#java#runner == 'gradletest'
+        return 1
+    elseif exists("g:test#java#runner") && g:test#java#runner != 'gradletest'
+        return 0
+    endif
+    let l:gradleFiles = s:GetBuildFile(a:file)
+    return a:file =~? g:test#java#gradletest#file_pattern
+                \ && strlen(l:gradleFiles) > 0
 endfunction
 
 function! test#java#gradletest#build_position(type, position) abort
@@ -33,7 +38,7 @@ function! s:get_maven_module(filepath)
   let project_dir = s:GetJavaProjectDirectory(a:filepath)
   let l:module_name = fnamemodify(project_dir, ':t')
   let l:parent = fnamemodify(project_dir, ':p:h:h')
-  if filereadable(l:parent. "/build.gradle") " check if the parent dir has build.gradle
+  if filereadable(l:parent. "/build.gradle") || filereadable(l:parent. "/build.gradle.kts") " check if the parent dir has build.gradle or build.gradle.kts
       return ' -p '. module_name
   else 
       return ''
@@ -49,26 +54,65 @@ function! s:GetJavaProjectDirectory(filepath)
     endif
 endfunction
 
+function! s:GetGradleFilename(dir)
+    let l:fn = a:dir . "/build.gradle" " Groovy DSL
+    let l:fnf = l:fn . ".kts" " fallback to Kotlin DSL
+    let l:fns = a:dir . "/settings.gradle"
+
+    if filereadable(expand(l:fn))
+        return l:fn
+    elseif filereadable(expand(l:fnf))
+        return l:fnf
+    elseif filereadable(expand(l:fns))
+        return l:fns
+    endif
+    return ""
+endfunction
+
+function! s:GetFileParentDir(file)
+    return fnamemodify(a:file, ':h')
+endfunction
+
 function! s:GetBuildFile(pwd)
     if a:pwd ==# "\/"
         return 0
-    else
-        let l:fn = a:pwd . "/build.gradle"
-
-        if filereadable(expand(l:fn))
-            return l:fn
-        else
-            let l:parent = fnamemodify(a:pwd, ':h')
-            return s:GetBuildFile(l:parent)
-        endif
     endif
+
+    let l:gradleFiles = s:GetGradleFilename(a:pwd)
+
+    if strlen(l:gradleFiles) > 0
+        return l:gradleFiles
+    endif 
+
+    let l:loops = 0
+    let l:parent = s:GetFileParentDir(a:pwd)
+    let l:maxFuncDepth = 20
+    while !(strlen(l:gradleFiles) > 0) && l:loops <= l:maxFuncDepth
+        let l:gradleFiles = s:GetGradleFilename(l:parent)
+        let l:parent = s:GetFileParentDir(l:parent)
+        let l:loops = l:loops + 1
+    endwhile
+
+    return l:gradleFiles
+
 endfunction
 
 function! test#java#gradletest#executable() abort
-  return 'gradle test'
+  if findfile('gradlew') ==# 'gradlew'
+    return './gradlew test'
+  else
+    return 'gradle test'
+  endif
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#java#patterns)
-  return join(name['namespace'] + name['test'], '.')
+  let l:name = test#base#nearest_test(a:position, g:test#java#patterns)
+  let l:nested_class_separator = "$"
+  let l:test_separator = "."
+  let l:namespace = join(l:name['namespace'] , l:nested_class_separator)
+  let l:test = join(l:name['test'] , l:test_separator)
+  if empty(l:test)
+      return l:namespace
+  endif
+  return escape(l:namespace . l:test_separator . l:test, '#$')
 endfunction

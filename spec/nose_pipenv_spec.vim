@@ -16,7 +16,7 @@ describe "Nose with Pipenv"
     view +1 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'pipenv run nosetests --doctest-tests test_class.py::TestNumbers'
+    Expect g:test#last_command == 'pipenv run nosetests --doctest-tests test_class.py:TestNumbers'
   end
 
   it "runs file tests"

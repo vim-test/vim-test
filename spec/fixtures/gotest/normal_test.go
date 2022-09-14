@@ -24,3 +24,9 @@ func ExampleSomething() {
 
 func Something() {
 }
+
+type TestSomeTestifySuite struct{}
+
+func (suite *TestSomeTestifySuite) TestSomething() {
+	// assertions
+}

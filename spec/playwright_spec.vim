@@ -19,17 +19,17 @@ describe "Playwright"
       view +3 __tests__/normal-test.js
       TestNearest
 
-      Expect g:test#last_command == 'playwright test -g ''^Math'' __tests__/normal-test.js'
+      Expect g:test#last_command == 'playwright test -g ''Math'' __tests__/normal-test.js'
 
       view +4 __tests__/normal-test.js
       TestNearest
 
-      Expect g:test#last_command == 'playwright test -g ''^Math Addition'' __tests__/normal-test.js'
+      Expect g:test#last_command == 'playwright test -g ''Math Addition'' __tests__/normal-test.js'
 
       view +5 __tests__/normal-test.js
       TestNearest
 
-      Expect g:test#last_command == 'playwright test -g ''^Math Addition adds two numbers$'' __tests__/normal-test.js'
+      Expect g:test#last_command == 'playwright test -g ''Math Addition adds two numbers'' __tests__/normal-test.js'
     end
   end
 

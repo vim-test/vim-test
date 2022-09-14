@@ -6,7 +6,7 @@ function! test#strategy#basic(cmd) abort
   if has('nvim')
     -tabnew
     call termopen(a:cmd)
-    if !get(g:, 'test:basic:start_normal', 0)
+    if !get(g:, 'test#basic#start_normal', 0)
       startinsert
     endif
   else
@@ -97,6 +97,10 @@ function! test#strategy#neoterm(cmd) abort
   call neoterm#do({ 'cmd': a:cmd})
 endfunction
 
+function! test#strategy#toggleterm(cmd) abort
+  execute 'TermExec cmd="'.a:cmd.'"'
+endfunction
+
 function! test#strategy#floaterm(cmd) abort
   execute 'FloatermNew --autoclose=0 '.a:cmd
 endfunction
@@ -171,12 +175,11 @@ endfunction
 
 function! test#strategy#harpoon(cmd) abort
   let g:cmd = a:cmd . "\n"
-  if(exists("g:test#harpoon_term"))
-    lua require("harpoon.term").sendCommand(vim.g["test#harpoon_term"] ,vim.g.cmd)
-    lua require("harpoon.term").gotoTerminal(vim.g["test#harpoon_term"])
-  else
-    lua require("harpoon.term").sendCommand(1 ,vim.g.cmd)
-    lua require("harpoon.term").gotoTerminal(1)
+  let l:harpoon_term = exists("g:test#harpoon_term") ? g:test#harpoon_term : 1
+  lua require("harpoon.term").sendCommand(vim.api.nvim_eval("l:harpoon_term"), vim.g.cmd)
+  let goToTerminal = exists("g:test#harpoon#gototerminal") ? g:test#harpoon#gototerminal : 1
+  if goToTerminal
+    lua require("harpoon.term").gotoTerminal(vim.api.nvim_eval("l:harpoon_term"))
   endif
 endfunction
 

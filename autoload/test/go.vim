@@ -1,6 +1,12 @@
 let test#go#patterns = {
-  \ 'test':      ['\v^\s*func ((Test|Example).*)\('],
-  \ 'namespace': [],
+  \ 'test': [
+    \ '\v^\s*func ((Test|Example).*)\(',
+    \ '\v^\s*func \(.*\) ((Test).*)\(',
+    \ '\v^\s*t\.Run\("(.*)"',
+  \],
+  \ 'namespace': [
+    \ '\v^\s*func ((Test).*)\(',
+  \],
 \}
 function! test#go#test_file(runner, file_pattern, file) abort
   if fnamemodify(a:file, ':t') =~# a:file_pattern

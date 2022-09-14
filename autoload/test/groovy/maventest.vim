@@ -45,7 +45,7 @@ function! s:get_groovy_package(filepath)
   let abspath = substitute(a:filepath, '\\', '/', 'g')
 
   " strip path-to-project and maven-boilerplate dir-structure
-  let relpath = substitute(abspath, '^.*src/\(main\|test\)/\(groovy/\)\?', "", "g")
+  let relpath = substitute(abspath, '^.*src/\(main\|test\)/\(groovy\|java\)/\?', "", "g")
   let package_path = substitute(relpath, '\/[^/]\+$', "", "g")
   let groovy_package = substitute(package_path, '/', '.', 'g')
   return groovy_package

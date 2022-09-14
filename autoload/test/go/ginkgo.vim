@@ -21,7 +21,7 @@ function! test#go#ginkgo#build_position(type, position) abort
     elseif a:type ==# 'nearest'
       let name = s:nearest_test(a:position)
       " if no tests matched, run the test file
-      return empty(name) ? fileargs : ['--focus-file='.shellescape(name, 1), path]
+      return empty(name) ? fileargs : ['--focus='.shellescape(name, 1), path]
     endif
   endif
 endfunction

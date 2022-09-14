@@ -3,7 +3,7 @@ source spec/support/helpers.vim
 describe "Nose with Pipenv"
 
   before
-    let g:test#python#runner = 'nosetests'
+    let g:test#python#runner = 'nose'
     cd spec/fixtures/nose_pipenv
   end
 

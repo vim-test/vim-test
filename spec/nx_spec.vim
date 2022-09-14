@@ -79,6 +79,13 @@ describe "Nx"
 
       Expect g:test#last_command == 'nx test -t ''^Math Addition adds two numbers$'' --test-file __tests__/normal-test.jsx'
     end
+
+    it "references the project"
+      view +1 apps/project/normal-test.jsx
+      TestNearest
+
+      Expect g:test#last_command == 'nx test -t ''^Math'' products --test-file __tests__/normal-test.jsx'
+    end
   end
 
   it "runs file test if nearest test couldn't be found"

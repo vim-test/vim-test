@@ -44,6 +44,8 @@ function! test#python#mamba#executable() abort
     let pipenv_prefix = "pipenv run "
   elseif filereadable("poetry.lock")
     let pipenv_prefix = "poetry run "
+  elseif filereadable("pdm.lock")
+    let pipenv_prefix = "pdm run "
   endif
 
   return pipenv_prefix . "mamba"

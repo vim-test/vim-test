@@ -44,6 +44,8 @@ function! test#python#pytest#executable() abort
     let pipenv_prefix = "pipenv run "
   elseif filereadable("poetry.lock")
     let pipenv_prefix = "poetry run "
+  elseif filereadable("pdm.lock")
+    let pipenv_prefix = "pdm run "
   else
     let pipenv_prefix = "python -m "
   endif

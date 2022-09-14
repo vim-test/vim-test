@@ -22,6 +22,7 @@ runners are supported:
 |       Language | Test Runners                                                                                                       | Identifiers                                                                                                                                  |
 | -------------: | :----------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
 |         **C#** | .NET                                                                                                               | `xunit`, `dotnettest`                                                                                                                        |
+|         **C++** | CTest,Make                                                                                                               | `ctest`, `make`                                                                                                                        |
 |    **Clojure** | Fireplace.vim                                                                                                      | `fireplacetest`                                                                                                                              |
 |    **Crystal** | Crystal                                                                                                            | `crystalspec`                                                                                                                                |
 |       **Dart** | Dart Test, Flutter Test                                                                                            | `darttest`, `fluttertest`
@@ -32,16 +33,17 @@ runners are supported:
 |     **Groovy** | Maven, Gradle                                                                                                      | `maventest`, `gradletest`                                                                                                                    |
 |    **Haskell** | stack                                                                                                              | `stacktest`                                                                                                                                  |
 |       **Java** | Maven, Gradle (Groovy and Kotlin DSL)                                                                              | `maventest`, `gradletest`                                                                                                                    |
-| **JavaScript** | Ava, Cucumber.js, Cypress, Deno, Intern, Jasmine, Jest, Karma, Lab, Mocha, ng test, NX, ReactScripts, TAP, WebdriverIO | `ava`, `cucumberjs`, `cypress`, `deno`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `ngtest` , `nx`, `reactscripts`, `tap`, `webdriverio`, `vue-test-utils`|
+| **JavaScript** | Ava, Cucumber.js, Cypress, Deno, Intern, Jasmine, Jest, Karma, Lab, Mocha, ng test, NX, Playwright, ReactScripts, TAP, WebdriverIO | `ava`, `cucumberjs`, `cypress`, `deno`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `ngtest` , `nx`, `playwright`, `reactscripts`, `tap`, `webdriverio`, `vue-test-utils`, `vitest`|
 |     **Kotlin** | Gradle (Groovy and Kotlin DSL)                                                                                     | `gradletest`                                                                                                                                 |
 |        **Lua** | Busted                                                                                                             | `busted`                                                                                                                                     |
 |       **Mint** | Mint                                                                                                               | `minttest`                                                                                                                                   |
+|        **Nim** | Nim                                                                                                                | `unittest`                                                                                                                                   |
 |        **PHP** | Behat, Codeception, Kahlan, Peridot, Pest, PHPUnit, Sail, PHPSpec, Dusk                                            | `behat`, `codeception`, `dusk`, `kahlan`, `peridot`, `phpunit`, `sail`, `phpspec`, `pest`                                                    |
 |       **Perl** | Prove                                                                                                              | `prove`                                                                                                                                      |
 |     **Python** | Behave, Django, Mamba, Nose, Nose2, PyTest, PyUnit                                                                 | `behave`, `djangotest`, `djangonose`, `mamba`, `nose`, `nose2`, `pytest`, `pyunit`                                                           |
 |     **Racket** | RackUnit                                                                                                           | `rackunit`                                                                                                                                   |
 |       **Ruby** | Cucumber, [M], [Minitest][minitest], Rails, RSpec, TestBench                                                       | `cucumber`, `m`, `minitest`, `rails`, `rspec`, `testbench`                                                                                   |
-|       **Rust** | Cargo                                                                                                              | `cargotest`                                                                                                                                  |
+|       **Rust** | Cargo, cargo-nextest                                                                                               | `cargotest`, `cargonextest`                                                                                                                  |
 |      **Scala** | SBT, Bloop                                                                                                         | `sbttest`, `blooptest`                                                                                                                       |
 |      **Shell** | Bats, ShellSpec                                                                                                    | `bats`, `shellspec`                                                                                                                          |
 |      **Swift** | Swift Package Manager                                                                                              | `swiftpm`                                                                                                                                    |
@@ -94,6 +96,7 @@ let test#strategy = "dispatch"
 | **[Tslime]**                    | `tslime`                                                    | Runs test commands in a tmux pane you specify.                                                                                                                    |
 | **[Slimux]**                    | `slimux`                                                    | Runs test commands in a tmux pane you specify.                                                                                                                    |
 | **[Neoterm]**                   | `neoterm`                                                   | Runs test commands with `:T`, see neoterm docs for display customization.                                                                                         |
+| **[Toggleterm]**                | `toggleterm`                                                | Runs test commands with `TermExec`                                                                                                          |
 | **[Floaterm]**                  | `floaterm`                                                  | Runs test commands within floating/popup terminal, see [floaterm docs](https://github.com/voldikss/vim-floaterm/blob/master/README.md) for display customization.                                                                                         |
 | **[Neomake]**                   | `neomake`                                                   | Runs test commands asynchronously with `:NeomakeProject`.                                                                                                         |
 | **[MakeGreen]**                 | `makegreen`                                                 | Runs test commands with `:MakeGreen`.                                                                                                                             |
@@ -428,12 +431,14 @@ let test#python#runner = 'pytest'
 " Runners available are 'pytest', 'nose', 'nose2', 'djangotest', 'djangonose', 'mamba', and Python's built-in unittest as 'pyunit'
 ```
 
-The pytest runner optionally supports [pipenv](https://github.com/pypa/pipenv).
+The `pytest` and `djangotest` runner optionally supports [pipenv](https://github.com/pypa/pipenv).
 If you have a `Pipfile`, it will use `pipenv run pytest` instead of just
-`python -m pytest`. It also supports [poetry](https://github.com/sdispater/poetry)
+`python -m pytest`. They also support [poetry](https://github.com/sdispater/poetry)
 and will use `poetry run pytest` if it detects a `poetry.lock`. The pyunit
 runner supports [pipenv](https://github.com/pypa/pipenv) as well and will
-use `pipenv run python -m unittest` if there is a `Pipfile`.
+use `pipenv run python -m unittest` if there is a `Pipfile`. It also supports
+[pdm](https://pdm.fming.dev/) as well and will use `poetry run pytest` if there
+is a `pdm.lock` file.
 
 #### Java
 
@@ -557,6 +562,36 @@ Similarly if you'd prefer to use an alternate runner such as the [Laravel artisa
 let test#php#phpunit#executable = 'php artisan test'
 ```
 
+#### C++
+Pattern for Test File: We assume all your test files are prefixed with "test_" or "Test". If not, override the following:
+```
+"Default
+let g:test#cpp#catch2#file_pattern = '\v[tT]est.*(\.cpp)$'
+```
+File and Individual Test Case: We assume you are using make to compile your executables, whose names are exactly the same as the test file w/o the extension. If you would like to use change the make command, override the following:
+```
+let g:test#cpp#catch2#make_command = "make"
+```
+Creating Test Executables: We assume that a Makefile is located in a "build" directory directly below the project root. If not, override the following:
+```
+" If Makefile is at top of the project root, do this instead
+let g:test#cpp#catch2#relToProject_build_dir = "."
+```
+We assume that your compiled executables are stored in `build` directory. If not, you can override this with:
+```vim
+let g:test#cpp#catch2#bin_dir = "../path/to/your/binaries/dir" 
+```
+Suite: We assume that you are using Cmake as your build system, and are registering each test file to it. If not, override the following command.
+```vim
+let g:test#cpp#catch2#suite_command = "ctest --ouput-on-failure" 
+```
+
+#### Rust
+If the `nextest` cargo subcommand is available, cargo-nextest is used. `cargo test` is used otherwise. To force a specific runner:
+```vim
+let g:test#rust#runner = 'cargotest'
+```
+
 ## Autocommands
 
 In addition to running tests manually, you can also configure autocommands
@@ -583,6 +618,19 @@ command on the "alternate" test file.
 You can disable this integration by doing
 ```vim
 let g:test#no_alternate = 1
+```
+
+### Custom alternate file
+
+If you are using a different library for jumping between implementation and test file
+you can define a custom function that returns the test filename.
+
+```vim
+function! CustomAlternateFile(cmd)
+  return "test_file_spec.rb"
+endfunction
+
+let g:test#custom_alternate_file = function('echo')
 ```
 
 ## Extending

@@ -19,6 +19,7 @@ INTRODUCTION                                    *test*
 This plugin allows you to:
 
   * run nearest test (to the cursor)
+  * run nearest test class (to the cursor)
   * run (current) test file
   * run test suite
   * run last test
@@ -29,6 +30,7 @@ test runner it has to use for the file you're looking at.
 Add your preferred mappings to your `.vimrc` file:
 >
   nmap <silent> <leader>t :TestNearest<CR>
+  nmap <silent> <leader>C :TestClass<CR>
   nmap <silent> <leader>T :TestFile<CR>
   nmap <silent> <leader>a :TestSuite<CR>
   nmap <silent> <leader>l :TestLast<CR>
@@ -44,6 +46,11 @@ In all commands [args] are forwarded to the underlying test runner.
                              runners may not support this). If the current
                              file is not a test file, it reruns a previous
                              "nearest test" (if present).
+
+                                                *test-:TestClass*
+:TestClass [args]            Run the first test class above or on the same
+                             line as the cursor (some test runners may not
+                             support this).
 
                                                 *test-:TestFile*
 :TestFile [args]             Run tests for the current file. If the current

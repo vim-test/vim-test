@@ -16,8 +16,12 @@ endfunction
 function! test#dart#fluttertest#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
+    let quote = ''''
+    if stridx(name, '''') > 0
+         let quote = '"'
+    endif
     if !empty(name)
-      return ['--plain-name' . ' "' . substitute(name, "\\", "", "g") . '" ' . a:position['file']]
+      return ['--plain-name' . ' ' . quote . substitute(name, "\\", "", "g") . quote .' ' . a:position['file']]
     else
       return [a:position['file']]
     endif

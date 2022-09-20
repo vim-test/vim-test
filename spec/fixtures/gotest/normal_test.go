@@ -2,8 +2,16 @@ package mypackage
 
 import "testing"
 
-func TestNumbers(*testing.T) {
+func TestNumbers(t *testing.T) {
 	// assertions
+
+	t.Run("adding two numbers", func(t *testing.T) {
+		// sub test assertions
+	})
+
+	t.Run("[].*+?|$^()", func(t *testing.T) {
+		// sub test assertions
+	})
 }
 
 func Testテスト(*testing.T) {
@@ -15,4 +23,10 @@ func ExampleSomething() {
 }
 
 func Something() {
+}
+
+type TestSomeTestifySuite struct{}
+
+func (suite *TestSomeTestifySuite) TestSomething() {
+	// assertions
 }

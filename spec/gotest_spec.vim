@@ -42,6 +42,11 @@ describe "GoTest"
     TestNearest
 
     Expect g:test#last_command == 'go test -run ''ExampleSomething$'' ./.'
+
+    view +36 normal_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''TestSomethingInASuite$'' ./.'
   end
 
   it "runs nearest tests in subdirectory"

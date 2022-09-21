@@ -33,6 +33,6 @@ func Something() {
 
 type TestSomeTestifySuite struct{}
 
-func (suite *TestSomeTestifySuite) TestSomething() {
+func (suite *TestSomeTestifySuite) TestSomethingInASuite() {
 	// assertions
 }

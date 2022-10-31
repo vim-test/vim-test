@@ -18,7 +18,23 @@ describe "vitest"
   end
 
   context "on nearest tests"
-    it "runs JavaScript"
+    it "runs Javascript"
+      view +1 __tests__/normal-test.js
+      TestNearest
+
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''^Math'' __tests__/normal-test.js'
+
+      view +2 __tests__/normal-test.js
+      TestNearest
+
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''^Math Addition'' __tests__/normal-test.js'
+
+      view +3 __tests__/normal-test.js
+      TestNearest
+
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''^Math Addition adds two numbers$'' __tests__/normal-test.js'
+    end
+    it "runs JSX"
       view +1 __tests__/normal-test.jsx
       TestNearest
 
@@ -69,7 +85,7 @@ describe "vitest"
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''^Math Addition adds two numbers$'' __tests__/context-test.jsx'
     end
 
-    it "runs React"
+    it "runs TypescriptReact"
       view +1 __tests__/normal-test.tsx
       TestNearest
 

@@ -57,7 +57,7 @@ endfunction
 function! test#strategy#asyncrun_background_term(cmd) abort
   let g:test#strategy#cmd = a:cmd
   call test#strategy#asyncrun_setup_unlet_global_autocmd()
-  execute 'AsyncRun -mode=term -pos=tab -focus=0 -post=echo\ eval("g:asyncrun_code\ ?\"Failure\":\"Success\"").":"'
+  execute 'AsyncRun -mode=term -pos=tab -focus=0 -listed=0 -post=echo\ eval("g:asyncrun_code\ ?\"Failure\":\"Success\"").":"'
           \ .'\ substitute(g:test\#strategy\#cmd,\ "\\",\ "",\ "") '.a:cmd
 endfunction
 

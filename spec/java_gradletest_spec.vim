@@ -255,3 +255,22 @@ describe "Gradle multi module"
     Expect g:test#last_command == 'gradle test --info -b build.gradle -DcustomProperty=5  -p sample_module'
   end
 end
+
+describe "Gradle multi module (deep)"
+  before
+    let g:test#java#runner = 'gradletest'
+    cd spec/fixtures/gradle/java/gradle_multi_module_deep
+  end
+
+  after
+    call Teardown()
+    cd -
+  end
+
+  it "runs tests"
+    view  hello/world/src/test/java/MessageServiceTest.java
+    TestFile
+
+    Expect g:test#last_command == 'gradle test --tests MessageServiceTest -p hello/world'
+  end
+end

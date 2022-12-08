@@ -1,0 +1,2 @@
+rootProject.name = 'test-gradle'
+include ':hello:world'

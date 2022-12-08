@@ -35,13 +35,22 @@ function! test#java#gradletest#build_args(args) abort
 endfunction
 
 function! s:get_maven_module(filepath)
-  let project_dir = s:GetJavaProjectDirectory(a:filepath)
-  let l:module_name = fnamemodify(project_dir, ':t')
-  let l:parent = fnamemodify(project_dir, ':p:h:h')
-  if filereadable(l:parent. "/build.gradle") || filereadable(l:parent. "/build.gradle.kts") " check if the parent dir has build.gradle or build.gradle.kts
-      return ' -p '. module_name
-  else 
-      return ''
+  let l:project_dir = fnamemodify(s:GetJavaProjectDirectory(a:filepath), ':p:h')
+  let l:project_root = l:project_dir
+
+  while !filereadable(l:project_root.'/settings.gradle') && !filereadable(l:project_root.'/settings.gradle.kts')
+    let l:project_root = fnamemodify(l:project_root, ':h')
+    if l:project_root == '/'
+      let l:project_root = l:project_dir
+      break
+    endif
+  endwhile
+
+  let l:module_name = l:project_dir[len(l:project_root)+1:]
+  if !empty(l:module_name)
+    return ' -p '.l:module_name
+  else
+    return ''
   endif
 endfunction
 
@@ -58,6 +67,7 @@ function! s:GetGradleFilename(dir)
     let l:fn = a:dir . "/build.gradle" " Groovy DSL
     let l:fnf = l:fn . ".kts" " fallback to Kotlin DSL
     let l:fns = a:dir . "/settings.gradle"
+    let l:fnsf = l:fns . ".kts"
 
     if filereadable(expand(l:fn))
         return l:fn
@@ -65,6 +75,8 @@ function! s:GetGradleFilename(dir)
         return l:fnf
     elseif filereadable(expand(l:fns))
         return l:fns
+    elseif filereadable(expand(l:fnsf))
+        return l:fnsf
     endif
     return ""
 endfunction

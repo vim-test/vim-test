@@ -106,6 +106,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:TAP*
 :TAP [args]                  Uses the `tap` or `tape` command.
 
+                                                *test-:Teenytest*
+:Teenytest [args]            Uses the `teenytest` command.
+
                                                 *test-:Lab*
 :Lab [args]                  Uses the `lab` command.
 

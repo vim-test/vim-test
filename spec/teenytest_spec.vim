@@ -13,21 +13,21 @@ describe "Teenytest"
   end
 
   it "runs nearest test"
-    view +1 test/normal.js
+    view +1 test/lib/dog-test.js
     TestNearest
 
-    Expect g:test#last_command == 'teenytest test/normal.js:1'
+    Expect g:test#last_command == 'teenytest test/lib/dog-test.js:1'
   end
 
   it "runs file tests"
-    view test/normal.js
+    view test/lib/dog-test.js
     TestFile
 
-    Expect g:test#last_command == 'teenytest test/normal.js'
+    Expect g:test#last_command == 'teenytest test/lib/dog-test.js'
   end
 
   it "runs test suites"
-    view test/normal.js
+    view test/lib/dog-test.js
     TestSuite
 
     Expect g:test#last_command == 'teenytest'
@@ -36,10 +36,10 @@ describe "Teenytest"
   it "also recognizes tests/ directory"
     try
       !mv test tests
-      view tests/normal.js
+      view tests/lib/dog-test.js
       TestFile
 
-      Expect g:test#last_command == 'teenytest tests/normal.js'
+      Expect g:test#last_command == 'teenytest tests/lib/dog-test.js'
     finally
       !mv tests test
     endtry

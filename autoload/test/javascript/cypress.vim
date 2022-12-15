@@ -1,5 +1,5 @@
 if !exists('g:test#javascript#cypress#file_pattern')
-  let g:test#javascript#cypress#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
+  let g:test#javascript#cypress#file_pattern = '\v(__tests__/.*|(spec|test|cy))\.(js|jsx|coffee|ts|tsx)$'
 endif
 
 function! test#javascript#cypress#test_file(file) abort

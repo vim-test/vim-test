@@ -70,6 +70,18 @@ describe "PyTest_xunit"
     Expect g:test#last_command == 'python -m pytest test_method.py'
   end
 
+  it "runs class tests"
+    view +5 test_class.py
+    TestClass
+
+    Expect g:test#last_command == 'python -m pytest test_class.py::TestSubclass'
+
+    view +6 test_class.py
+    TestClass
+
+    Expect g:test#last_command == 'python -m pytest test_class.py::TestSubclass'
+  end
+
   it "runs file tests"
     view test_class.py
     TestFile
@@ -128,5 +140,11 @@ describe "Pytest"
     view +10 test_class.py
     TestNearest 
     Expect g:test#last_command == 'python -m pytest test_class.py::test_function'
+  end
+
+  it ":TestClass (function)"
+    view +15 test_class.py
+    TestClass 
+    Expect g:test#last_command == 'python -m pytest test_class.py::TestClass2'
   end
 end

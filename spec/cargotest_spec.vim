@@ -5,11 +5,10 @@ describe "Cargo"
   before
     let g:test#rust#runner = 'cargotest'
     cd spec/fixtures/cargo/crate
-    !alias cargo='cat cargo-metadata.json'
+    set shellcmdflag=-i
   end
 
   after
-    !unalias cargo
     call Teardown()
     cd -
   end

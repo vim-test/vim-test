@@ -1,6 +1,6 @@
 let test#javascript#patterns = {
-  \ 'test': ['\v^\s*%(it|test|describe.each).*["''`](.*)[''"`]'],
-  \ 'namespace': ['\v^\s*%(describe|suite|context)\s*[( ]\s*%("|''|`)(.*)%("|''|`)'],
+  \ 'test': map(['''', '"', '`'], {_, val -> substitute('\v^\s*%(it|test|describe.each)[^''"`]*__QUOTE__([^__QUOTE__]*)__QUOTE__', '__QUOTE__', val, 'g')}),
+  \ 'namespace': map(['''', '"', '`'], {_, val -> substitute('\v^\s*%(describe|suite|context)\s*[( ][^''"`]*__QUOTE__([^__QUOTE__]*)__QUOTE__', '__QUOTE__', val, 'g')})
 \}
 
 function! test#javascript#has_package(package) abort

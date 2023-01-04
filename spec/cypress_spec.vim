@@ -11,11 +11,25 @@ describe "Cypress"
     cd -
   end
 
-  it "runs file tests"
+  it "runs spec file tests"
     view integration_tests/normal.spec.js
     TestFile
 
     Expect g:test#last_command == 'cypress run --spec integration_tests/normal.spec.js'
+  end
+
+  it "runs cy file tests"
+    view integration_tests/normal.cy.js
+    TestFile
+
+    Expect g:test#last_command == 'cypress run --spec integration_tests/normal.cy.js'
+  end
+
+  it "runs test file tests"
+    view integration_tests/normal.test.js
+    TestFile
+
+    Expect g:test#last_command == 'cypress run --spec integration_tests/normal.test.js'
   end
 
   it "runs test suites"

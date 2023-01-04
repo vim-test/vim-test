@@ -6,6 +6,7 @@ let test#go#patterns = {
   \],
   \ 'namespace': [
     \ '\v^\s*func ((Test).*)\(',
+    \ '\v^\s*t\.Run\("(.*)"',
   \],
 \}
 function! test#go#test_file(runner, file_pattern, file) abort

@@ -31,9 +31,14 @@ describe "RichGo"
     view +17 normal_test.go
     TestNearest
 
+    Expect g:test#last_command == 'richgo test -run ''TestNumbers/this_is/nested$'' ./.'
+
+    view +23 normal_test.go
+    TestNearest
+
     Expect g:test#last_command == 'richgo test -run ''Testテスト$'' ./.'
 
-    view +21 normal_test.go
+    view +27 normal_test.go
     TestNearest
 
     Expect g:test#last_command == 'richgo test -run ''ExampleSomething$'' ./.'

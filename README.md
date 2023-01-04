@@ -33,7 +33,7 @@ runners are supported:
 |     **Groovy** | Maven, Gradle                                                                                                      | `maventest`, `gradletest`                                                                                                                    |
 |    **Haskell** | stack                                                                                                              | `stacktest`                                                                                                                                  |
 |       **Java** | Maven, Gradle (Groovy and Kotlin DSL)                                                                              | `maventest`, `gradletest`                                                                                                                    |
-| **JavaScript** | Ava, Cucumber.js, Cypress, Deno, Intern, Jasmine, Jest, Karma, Lab, Mocha, ng test, NX, Playwright, ReactScripts, TAP, WebdriverIO | `ava`, `cucumberjs`, `cypress`, `deno`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `ngtest` , `nx`, `playwright`, `reactscripts`, `tap`, `webdriverio`, `vue-test-utils`, `vitest`|
+| **JavaScript** | Ava, Cucumber.js, Cypress, Deno, Intern, Jasmine, Jest, Karma, Lab, Mocha, ng test, NX, Playwright, ReactScripts, TAP, Teenytest, WebdriverIO | `ava`, `cucumberjs`, `cypress`, `deno`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `ngtest` , `nx`, `playwright`, `reactscripts`, `tap`, `teenytest`, `webdriverio`, `vue-test-utils`, `vitest`|
 |     **Kotlin** | Gradle (Groovy and Kotlin DSL)                                                                                     | `gradletest`                                                                                                                                 |
 |        **Lua** | Busted                                                                                                             | `busted`                                                                                                                                     |
 |       **Mint** | Mint                                                                                                               | `minttest`                                                                                                                                   |
@@ -70,6 +70,7 @@ nmap <silent> <leader>g :TestVisit<CR>
 | Command          | Description                                                                                                                                                                                                                                                                            |
 | :--------------  | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  |
 | `:TestNearest`   | In a test file runs the test nearest to the cursor, otherwise runs the last nearest test. In test frameworks that don't support line numbers it will **polyfill** this functionality with [regexes](#commands).                                                                        |
+| `:TestClass`     | In a test file runs the first test class found on the same line as or above the cursor. (Currently only supported by Pytest)                                                                                                                                                           |
 | `:TestFile`      | In a test file runs all tests in the current file, otherwise runs the last file tests.                                                                                                                                                                                                 |
 | `:TestSuite`     | Runs the whole test suite (if the current file is a test file, runs that framework's test suite, otherwise determines the test framework from the last run test).                                                                                                                      |
 | `:TestLast`      | Runs the last test.                                                                                                                                                                                                                                                                    |
@@ -104,12 +105,12 @@ let test#strategy = "dispatch"
 | **[Vim&nbsp;Tmux&nbsp;Runner]** | `vtr`                                                       | Runs test commands in a small tmux pane.                                                                                                                          |
 | **[Tmuxify]**                   | `tmuxify`                                                   | Runs test commands in a small tmux pane at the bottom of your terminal.                                                                                                                    |
 | **[VimProc]**                   | `vimproc`                                                   | Runs test commands asynchronously.                                                                                                                                |
-| **[AsyncRun]**                  | `asyncrun` `asyncrun_background` `asyncrun_background_term` | Runs test commands asynchronosuly using new APIs in Vim 8 and NeoVim (`:AsyncRun`, `:AsyncRun -mode=async -silent`, or `:AsyncRun -mode=term -pos=tab -focus=0`). |
+| **[AsyncRun]**                  | `asyncrun` `asyncrun_background` `asyncrun_background_term` | Runs test commands asynchronosuly using new APIs in Vim 8 and NeoVim (`:AsyncRun`, `:AsyncRun -mode=async -silent`, or `:AsyncRun -mode=term -pos=tab -focus=0 -listed=0`). |
 | **Terminal.app**                | `terminal`                                                  | Sends test commands to Terminal (useful in MacVim GUI).                                                                                                           |
 | **iTerm2.app**                  | `iterm`                                                     | Sends test commands to iTerm2 >= 2.9 (useful in MacVim GUI).                                                                                                      |
 | **[Kitty]**                     | `kitty`                                                     | Sends test commands to Kitty terminal.                                                                                                                            |
 | **[Shtuff]**                    | `shtuff`                                                    | Sends test commands to remote terminal via [shtuff][Shtuff].                                                                                                      |
-| **[Harpoon]**                    | `harpoon`                                                    | Sends test commands to neovim terminal using a terminal managed by [harpoon][Harpoon]. By default commands are sent to terminal number 1, you can choose your terminal by setting `g:test#harpoon_term` with the terminal you want                                                                                                     |
+| **[Harpoon]**                    | `harpoon`                                                  | Sends test commands to neovim terminal using a terminal managed by [harpoon][Harpoon]. By default commands are sent to terminal number 1, you can choose your terminal by setting `g:test#harpoon_term` with the terminal you want                                                                                                     |
 
 You can also set up strategies per granularity:
 
@@ -305,6 +306,16 @@ You can execute test.vim commands directly, and pass them CLI options:
 ```
 
 If you want some options to stick around, see [Configuring](#configuring).
+
+### Environment variables
+
+Environment variables are automatically detected from the arguments based on
+`<VARIABLE>=value` format, and prepended to the test command:
+
+```vim
+TestFile COVERAGE=1
+" COVERAGE=1 bundle exec rspec something_spec.rb
+```
 
 ### Runner commands
 

@@ -307,6 +307,16 @@ You can execute test.vim commands directly, and pass them CLI options:
 
 If you want some options to stick around, see [Configuring](#configuring).
 
+### Environment variables
+
+Environment variables are automatically detected from the arguments based on
+`<VARIABLE>=value` format, and prepended to the test command:
+
+```vim
+TestFile COVERAGE=1
+" COVERAGE=1 bundle exec rspec something_spec.rb
+```
+
 ### Runner commands
 
 Aside from the main commands, you get a corresponding Vim command for each

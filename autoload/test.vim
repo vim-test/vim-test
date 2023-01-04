@@ -35,14 +35,15 @@ function! test#run_last(arguments) abort
   if exists('g:test#last_command')
     call s:before_run()
 
+    let env = s:extract_env_from_command(a:arguments)
     let strategy = s:extract_strategy_from_command(a:arguments)
 
     if empty(strategy)
       let strategy = g:test#last_strategy
     endif
 
-    let cmd = [g:test#last_command]
-    let cmd = cmd + a:arguments
+    let cmd = [env, g:test#last_command] + a:arguments
+    call filter(cmd, '!empty(v:val)')
 
     call test#shell(join(cmd), strategy)
 
@@ -65,6 +66,7 @@ function! test#visit() abort
 endfunction
 
 function! test#execute(runner, args, ...) abort
+  let env = s:extract_env_from_command(a:args)
   let strategy = s:extract_strategy_from_command(a:args)
   if empty(strategy)
     if !empty(a:000)
@@ -83,7 +85,7 @@ function! test#execute(runner, args, ...) abort
 
   let executable = test#base#executable(a:runner)
   let args = test#base#build_args(a:runner, args, strategy)
-  let cmd = [executable] + args
+  let cmd = [env, executable] + args
   call filter(cmd, '!empty(v:val)')
 
   call test#shell(join(cmd), strategy)
@@ -196,6 +198,12 @@ function! s:extract_strategy_from_command(arguments) abort
       return substitute(remove(a:arguments, idx), '-strategy=', '', '')
     endif
   endfor
+endfunction
+
+function! s:extract_env_from_command(arguments) abort
+  let env = filter(copy(a:arguments), 'v:val =~# ''^[A-Z_]\+=.\+''')
+  call filter(a:arguments, 'v:val !~# ''^[A-Z_]\+=.\+''')
+  return join(env)
 endfunction
 
 function! s:echo_failure(message) abort

@@ -1,5 +1,5 @@
 if !exists('g:test#javascript#vitest#file_pattern')
-  let g:test#javascript#vitest#file_pattern = '\v(__tests__/.*|(spec|test))\.(jsx|ts|tsx)$'
+  let g:test#javascript#vitest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|ts|tsx)$'
 endif
 
 function! test#javascript#vitest#test_file(file) abort
@@ -48,7 +48,5 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
-  return (len(name['namespace']) ? '^' : '') .
-       \ test#base#escape_regex(join(name['namespace'] + name['test'])) .
-       \ (len(name['test']) ? '$' : '')
+  return test#base#escape_regex(join(name['namespace'] + name['test']))
 endfunction

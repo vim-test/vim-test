@@ -46,6 +46,18 @@ describe "Mocha"
       Expect g:test#last_command == 'mocha test/context.js --grep ''^Math Addition adds two numbers$'''
     end
 
+    it "supports quotes in test descriptions"
+      view +1 test/quotes.js
+      TestNearest
+
+      Expect g:test#last_command == 'mocha test/quotes.js --grep ''^"Math"'''
+
+      view +2 test/quotes.js
+      TestNearest
+
+      Expect g:test#last_command == 'mocha test/quotes.js --grep ''^"Math" adds 2 \("two"\) numbers$'''
+    end
+
     it "runs CoffeeScript"
       view +1 test/normal.coffee
       TestNearest

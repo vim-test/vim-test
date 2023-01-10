@@ -43,6 +43,16 @@ describe 'Options'
     Expect g:test#last_command == 'rspec --foo bar --baz'
   end
 
+  it "supports passing environment variables"
+    edit foo_spec.rb
+
+    TestFile -foo VARIABLE=value --bar baz
+    Expect g:test#last_command == 'VARIABLE=value rspec -foo --bar baz foo_spec.rb'
+
+    TestLast SETTING=value
+    Expect g:test#last_command == 'SETTING=value VARIABLE=value rspec -foo --bar baz foo_spec.rb'
+  end
+
   describe "g:test#{runner}#options"
     after
       unlet g:test#ruby#rspec#options

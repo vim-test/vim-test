@@ -28,6 +28,23 @@ describe "Lab"
 
       Expect g:test#last_command == 'lab test/normal.js --grep ''^Math Addition adds two numbers$'''
     end
+
+    it "runs Typescript"
+      view +6 test/normal.ts
+      TestNearest
+
+      Expect g:test#last_command == 'lab test/normal.ts --grep ''^Math'''
+
+      view +7 test/normal.ts
+      TestNearest
+
+      Expect g:test#last_command == 'lab test/normal.ts --grep ''^Math Addition'''
+
+      view +8 test/normal.ts
+      TestNearest
+
+      Expect g:test#last_command == 'lab test/normal.ts --grep ''^Math Addition adds two numbers$'''
+    end
   end
 
   it "runs file test if nearest test couldn't be found"

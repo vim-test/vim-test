@@ -5,7 +5,7 @@ describe "Cargo"
   before
     let g:test#rust#runner = 'cargotest'
     cd spec/fixtures/cargo/crate
-    set shellcmdflag=-i
+    let $BASH_ENV = ".vim_bash_env"
   end
 
   after

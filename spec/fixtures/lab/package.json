@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "devDependencies": {
-    "lab": "^13.0.4"
+    "@hapi/lab": "^25.1.0"
   }
 }

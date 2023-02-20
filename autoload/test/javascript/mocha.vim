@@ -2,6 +2,10 @@ if !exists('g:test#javascript#mocha#file_pattern')
   let g:test#javascript#mocha#file_pattern = '\v(tests?/.*|(test))\.(js|jsx|coffee|ts|tsx)$'
 endif
 
+if !exists('g:test#javascript#mocha#use_ts_node')
+  let g:test#javascript#mocha#use_ts_node = 0
+endif
+
 function! test#javascript#mocha#test_file(file) abort
   if a:file =~# g:test#javascript#mocha#file_pattern
       if exists('g:test#javascript#runner')
@@ -41,10 +45,11 @@ function! test#javascript#mocha#build_args(args, color) abort
 
   if !a:color
     let args = ['--no-colors'] + args
-    let args = args + ['|', 'sed -e "s///g"']
+    let args = args + ['|', 'sed -e "s/
+//g"']
   endif
 
-  if test#javascript#has_package('ts-node')
+  if g:test#javascript#mocha#use_ts_node == 1
     let args = ['-r', 'ts-node/register'] + args
   endif
 

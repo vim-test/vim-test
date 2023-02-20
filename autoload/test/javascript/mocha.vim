@@ -3,7 +3,7 @@ if !exists('g:test#javascript#mocha#file_pattern')
 endif
 
 if !exists('g:test#javascript#mocha#use_ts_node')
-  let g:test#javascript#mocha#use_ts_node = 0
+  let g:test#javascript#mocha#use_ts_node = 1
 endif
 
 function! test#javascript#mocha#test_file(file) abort

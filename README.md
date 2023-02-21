@@ -555,6 +555,12 @@ Test runner detection for JavaScript works by checking which runner is listed in
 let g:test#javascript#runner = 'jest'
 ```
 
+When using Mocha test runner, the option `-r ts-node/register` is automatically added to the test command if `ts-node` is installed in the current project. You can disable this by setting:
+
+```vim
+let g:test#javascript#mocha#use_ts_node = 0
+```
+
 #### Haskell
 
 The `stackTest` runner currently supports running tests in Stack projects with the [HSpec](http://hackage.haskell.org/package/hspec) framework.

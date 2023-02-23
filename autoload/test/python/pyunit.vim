@@ -39,7 +39,11 @@ function! test#python#pyunit#executable() abort
     let pipenv_prefix = "pipenv run "
   endif
 
-  return pipenv_prefix . 'python3 -m unittest'
+  if strlen(system('command -v python3'))
+    return pipenv_prefix . 'python3 -m unittest'
+  else
+    return pipenv_prefix . 'python -m unittest'
+  endif
 endfunction
 
 function! s:get_import_path(filepath) abort

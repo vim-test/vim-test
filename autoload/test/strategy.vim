@@ -98,7 +98,7 @@ function! test#strategy#neoterm(cmd) abort
 endfunction
 
 function! test#strategy#toggleterm(cmd) abort
-  execute 'TermExec cmd="'.a:cmd.'"'
+  execute "TermExec cmd='".a:cmd."'"
 endfunction
 
 function! test#strategy#floaterm(cmd) abort

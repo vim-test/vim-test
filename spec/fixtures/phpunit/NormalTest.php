@@ -82,4 +82,25 @@ class NormalTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(2, 4-21);
     }
+
+    #[Test]
+    public function aTestMarkedWithTestAttributeOnOneLine()
+    {
+        $this->assertEquals(2, 4-21);
+    }
+
+    #[Test,TestWith([2, 4-21])]
+    public function aTestMarkedWithTestAttributeInGroupOnOneLine(int $expected, int $value)
+    {
+        $this->assertEquals($expected, $value);
+    }
+
+    #[
+        Test,
+        TestWith([2, 4-21]),
+    ]
+    public function aTestMarkedWithTestAttributeInGroupOnMultipleLines(int $expected, int $value)
+    {
+        $this->assertEquals($expected, $value);
+    }
 }

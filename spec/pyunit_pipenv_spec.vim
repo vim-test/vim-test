@@ -16,21 +16,21 @@ describe "PyUnit with Pipenv"
     view +1 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'pipenv run python -m unittest test_class.TestNumbers'
+    Expect g:test#last_command == 'pipenv run python3 -m unittest test_class.TestNumbers'
   end
 
   it "runs file tests"
     view test_class.py
     TestFile
 
-    Expect g:test#last_command == 'pipenv run python -m unittest test_class'
+    Expect g:test#last_command == 'pipenv run python3 -m unittest test_class'
   end
 
   it "runs test suites"
     view test_class.py
     TestSuite
 
-    Expect g:test#last_command == 'pipenv run python -m unittest'
+    Expect g:test#last_command == 'pipenv run python3 -m unittest'
   end
 
 end

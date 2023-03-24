@@ -72,6 +72,28 @@ describe "PHPUnit"
     Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAnnotationOnOneLine' NormalTest.php"
   end
 
+  it "runs nearest test with a one line #[Test] attribute"
+    view +87 NormalTest.php
+    TestNearest
+
+    Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAttributeOnOneLine' NormalTest.php"
+  end
+
+  it "runs nearest test with a one line #[Test] attribute in a group"
+    view +93 NormalTest.php
+    TestNearest
+
+    Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAttributeInGroupOnOneLine' NormalTest.php"
+  end
+
+  " Skipped because I didn't managed to find a way to make it work without allowing false positive
+  " it "runs nearest test with a multi lines #[Test] attribute in a group"
+  "   view +102 NormalTest.php
+  "   TestNearest
+
+  "   Expect g:test#last_command == "phpunit --colors --filter '::aTestMarkedWithTestAttributeInGroupOnMultipleLines' NormalTest.php"
+  " end
+
   it "runs test suites"
     view NormalTest.php
     TestSuite

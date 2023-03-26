@@ -159,7 +159,7 @@ describe "Cargo"
     cd -
   end
 
-  it "run with cargotest#test_options"
+  it "run with cargotest test_options"
     let g:test#rust#cargotest#test_options = '-- --nocapture'
 
     view src/main.rs
@@ -218,9 +218,11 @@ describe "Cargo"
 
     let g:test#rust#cargotest#test_options = {'nearest': '-- --nocapture --exact', 'file': ['-- --nocapture']}
 
+    cd ..
     view crate/src/lib.rs
     TestFile
     Expect g:test#last_command == 'cargo test --package crate '''' -- --nocapture'
+		cd -
 
     unlet g:test#rust#cargotest#test_options
   end

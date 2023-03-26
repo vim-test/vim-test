@@ -222,7 +222,7 @@ describe "Cargo"
     view crate/src/lib.rs
     TestFile
     Expect g:test#last_command == 'cargo test --package crate '''' -- --nocapture'
-		cd -
+    cd -
 
     unlet g:test#rust#cargotest#test_options
   end

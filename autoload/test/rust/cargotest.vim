@@ -51,20 +51,28 @@ function! test#rust#cargotest#build_position(type, position) abort
         let l:package = []
     endif
 
-		let l:test_options = g:test#rust#cargotest#test_options
-		if type(g:test#rust#cargotest#test_options) == 1 " string
-			let l:test_options = [g:test#rust#cargotest#test_options]
-		endif
+    let l:test_options = g:test#rust#cargotest#test_options
+    if type(g:test#rust#cargotest#test_options) == 1 " string
+      let l:test_options = [g:test#rust#cargotest#test_options]
+    endif
     if a:type ==# 'nearest'
       let l:test_name = s:nearest_test(a:position)
-			if type(g:test#rust#cargotest#test_options) == 4 " dict
-				let l:test_options = g:test#rust#cargotest#test_options.nearest
-			endif
+      if type(g:test#rust#cargotest#test_options) == 4 " dict
+        let l:test_options = has_key(g:test#rust#cargotest#test_options, 'nearest') ?
+                              \ g:test#rust#cargotest#test_options.nearest : ['--', '--exact']
+        if type(l:test_options) == 1 " string
+          let l:test_options = [l:test_options]
+        endif
+      endif
       return l:package + [shellescape(l:namespace.l:test_name)] + l:test_options
     elseif a:type ==# 'file'
-			if type(g:test#rust#cargotest#test_options) == 4 " dict
-				let l:test_options = g:test#rust#cargotest#test_options.file
-			endif
+      if type(g:test#rust#cargotest#test_options) == 4 " dict
+        let l:test_options = has_key(g:test#rust#cargotest#test_options, 'file') ?
+                             \ g:test#rust#cargotest#test_options.file : []
+        if type(l:test_options) == 1 " string
+          let l:test_options = [l:test_options]
+        endif
+      endif
       " FIXME Should not run submodule tests
       return l:package + [shellescape(l:namespace)] + l:test_options
     endif

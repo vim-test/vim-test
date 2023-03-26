@@ -212,6 +212,7 @@ describe "Cargo"
   end
 
   it "runs file tests in workspaces"
+    let g:test#rust#cargotest#test_options = {'nearest': '-- --nocapture --exact', 'file': ''}
     cd ..
     view crate/src/lib.rs
     TestFile

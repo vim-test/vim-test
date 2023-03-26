@@ -617,6 +617,7 @@ You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your preferred options with
 >
   let g:test#ruby#minitest#options = '--verbose'
+  let g:test#rust#cargotest#test_options = '-- --nocapture'
 <
 Or, if you prefer more granular approach, you can do
 >
@@ -624,6 +625,10 @@ Or, if you prefer more granular approach, you can do
     \ 'nearest': '--format documentation',
     \ 'file':    '--format documentation',
     \ 'suite':   '--tag ~slow',
+  \}
+  let test#rust#cargotest#test_options = {
+    \ 'nearest': ['--', '--nocapture', '--exact'],
+    \ 'file':    [],
   \}
 <
 You can also specify a global option for the test runner to work alongside the

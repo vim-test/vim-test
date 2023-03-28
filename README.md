@@ -641,7 +641,7 @@ function! CustomAlternateFile(cmd)
   return "test_file_spec.rb"
 endfunction
 
-let g:test#custom_alternate_file = function('echo')
+let g:test#custom_alternate_file = function('CustomAlternateFile')
 ```
 
 ## Extending

@@ -594,7 +594,7 @@ let g:test#cpp#catch2#bin_dir = "../path/to/your/binaries/dir"
 ```
 Suite: We assume that you are using Cmake as your build system, and are registering each test file to it. If not, override the following command.
 ```vim
-let g:test#cpp#catch2#suite_command = "ctest --ouput-on-failure" 
+let g:test#cpp#catch2#suite_command = "ctest --output-on-failure"
 ```
 
 #### Rust
@@ -641,7 +641,7 @@ function! CustomAlternateFile(cmd)
   return "test_file_spec.rb"
 endfunction
 
-let g:test#custom_alternate_file = function('echo')
+let g:test#custom_alternate_file = function('CustomAlternateFile')
 ```
 
 ## Extending

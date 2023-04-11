@@ -151,10 +151,79 @@ describe "Cargo"
     Expect g:test#last_command == 'cargo test ''tests::rstest_test'' -- --exact'
   end
 
+  it "run with cargotest test_options"
+    let g:test#rust#cargotest#test_options = '-- --nocapture'
+
+    view src/main.rs
+    TestFile
+    Expect g:test#last_command == 'cargo test '''' -- --nocapture'
+
+    view src/too/nested.rs
+    TestFile
+    Expect g:test#last_command == 'cargo test ''too::nested::'' -- --nocapture'
+
+    let g:test#rust#cargotest#test_options = ['--', '--nocapture --exact']
+
+    view +7 src/lib.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''tests::second_test'' -- --nocapture --exact'
+
+    view +5 src/lib.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''tests::first_test'' -- --nocapture --exact'
+
+    let g:test#rust#cargotest#test_options = {'nearest': ['--', '--nocapture --exact']}
+
+    view +7 src/somemod_test.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''somemod_test::test::second_test'' -- --nocapture --exact'
+
+    view +13 src/somemod_test.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''somemod_test::test::third_test'' -- --nocapture --exact'
+
+    let g:test#rust#cargotest#test_options = {'nearest': '-- --nocapture --exact'}
+
+    view +6 src/nomod.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''nomod::second_test'' -- --nocapture --exact'
+
+    view +2 src/nomod.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''nomod::first_test'' -- --nocapture --exact'
+
+    let g:test#rust#cargotest#test_options = {'nearest': '-- --nocapture --exact', 'file': []}
+
+    view +7 src/too/nested.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''too::nested::tests::second_test'' -- --nocapture --exact'
+
+    let g:test#rust#cargotest#test_options = {'nearest': '-- --nocapture --exact', 'file': ['-- --nocapture']}
+
+    view src/too/nested.rs
+    TestSuite
+    Expect g:test#last_command == 'cargo test'
+    let g:test#rust#cargotest#test_options = {'nearest': '-- --nocapture --exact', 'file': ['-- --nocapture']}
+    view +15 src/lib.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''tests::tokio_async_test'' -- --nocapture --exact'
+
+    unlet g:test#rust#cargotest#test_options
+  end
+
   it "runs file tests in workspaces"
+    let g:test#rust#cargotest#test_options = {'nearest': '-- --nocapture --exact', 'file': ''}
     cd ..
     view crate/src/lib.rs
     TestFile
     Expect g:test#last_command == 'cargo test --package crate '''''
+
+    let g:test#rust#cargotest#test_options = {'nearest': '-- --nocapture --exact', 'file': ['-- --nocapture']}
+    view crate/src/lib.rs
+    TestFile
+    Expect g:test#last_command == 'cargo test --package crate '''' -- --nocapture'
+    unlet g:test#rust#cargotest#test_options
     cd -
+  end
+
 end

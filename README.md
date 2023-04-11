@@ -346,6 +346,7 @@ If you want some CLI options to stick around, you can configure them in your
 
 ```vim
 let test#ruby#minitest#options = '--verbose'
+let test#rust#cargotest#test_options = '-- --nocapture'
 ```
 
 You can also choose a more granular approach:
@@ -355,6 +356,10 @@ let test#ruby#rspec#options = {
   \ 'nearest': '--backtrace',
   \ 'file':    '--format documentation',
   \ 'suite':   '--tag ~slow',
+\}
+let test#rust#cargotest#test_options = {
+  \ 'nearest': ['--', '--nocapture'],
+  \ 'file':    '',
 \}
 ```
 

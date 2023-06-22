@@ -220,6 +220,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Bats*
 :Bats [args]                 Uses the `bats` command.
 
+                                                *test-:ZigTest*
+:ZigTest [args]              Uses the `zig` `test` command.
+
                                                 *test-:ShellSpec*
 :ShellSpec [args]                 Uses the `shellspec` command.
 

@@ -33,6 +33,7 @@ let g:test#default_runners = {
   \ 'Shell':      ['Bats', 'ShellSpec'],
   \ 'Swift':      ['SwiftPM'],
   \ 'VimL':       ['Themis', 'VSpec', 'Vader', 'Testify', 'Vroom'],
+  \ 'Zig':        ['ZigTest'],
 \}
 
 let g:test#custom_strategies = get(g:, 'test#custom_strategies', {})

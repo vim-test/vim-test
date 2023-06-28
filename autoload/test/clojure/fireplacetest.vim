@@ -3,6 +3,11 @@ if !exists('g:test#clojure#fireplacetest#file_pattern')
 end
 
 function! test#clojure#fireplacetest#test_file(file) abort
+  if exists('g:test#clojure#runner') && g:test#clojure#runner ==# 'fireplacetest'
+    return 1
+  elseif exists("g:test#clojure#runner") && g:test#clojure#runner != 'fireplacetest'
+    return 0
+  endif
   return a:file =~# g:test#clojure#fireplacetest#file_pattern
 endfunction
 
@@ -35,6 +40,6 @@ endfunction
 
 function! s:require_fireplace() abort
   if !exists('g:loaded_fireplace')
-    throw 'Test.vim requires Fireplace.vim to run Clojure tests'
+    throw 'The fireplacetest runner requires Fireplace.vim to run Clojure tests'
   endif
 endfunction

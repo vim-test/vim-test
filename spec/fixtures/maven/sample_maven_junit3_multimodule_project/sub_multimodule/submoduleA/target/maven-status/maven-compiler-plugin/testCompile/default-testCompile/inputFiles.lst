@@ -1,4 +1,0 @@
-/Users/giuseppemp/Workspace/oss/vim-test/spec/fixtures/maven/sample_maven_junit3_multimodule_project/sub_multimodule/submoduleA/src/test/java/org/vimtest/math/TestMath.java
-/Users/giuseppemp/Workspace/oss/vim-test/spec/fixtures/maven/sample_maven_junit3_multimodule_project/sub_multimodule/submoduleA/src/test/java/org/vimtest/math/MathTest.java
-/Users/giuseppemp/Workspace/oss/vim-test/spec/fixtures/maven/sample_maven_junit3_multimodule_project/sub_multimodule/submoduleA/src/test/java/org/vimtest/math/MathTests.java
-/Users/giuseppemp/Workspace/oss/vim-test/spec/fixtures/maven/sample_maven_junit3_multimodule_project/sub_multimodule/submoduleA/src/test/java/org/vimtest/math/MathTestCase.java

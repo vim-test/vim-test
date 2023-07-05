@@ -4,13 +4,11 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.vimtest.calc</groupId>
-    <artifactId>sample_maven_junit3_project</artifactId>
+    <artifactId>sub_multimodule</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>sample_module</module>
-        <module>sample_module2</module>
-        <module>sub_multimodule</module>
+        <module>submoduleA</module>
     </modules>
     <name>sample_maven_junit3_project</name>
     <url>http://maven.apache.org</url>

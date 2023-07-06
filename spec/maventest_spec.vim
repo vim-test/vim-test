@@ -335,6 +335,8 @@ describe "Integration tests single module"
 
     Expect g:test#last_command == 'mvn verify -Dit.test=TestApp\*'
   end
+
+
 end
 describe "Integration tests multi module"
 
@@ -352,5 +354,19 @@ describe "Integration tests multi module"
     IntegrationTest
 
     Expect g:test#last_command == 'mvn verify -Dit.test=TestApp\* -pl sample_module'
+  end
+
+  it "TestNearest runs with verify fully qualified classname, based on filename sufix *IT|Integration|ITCase.java"
+    view +13 sample_module/src/test/java/org/vimtest/AppIT.java
+
+    TestNearest
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppIT'
+  end
+
+  it "TestFile runs with verify fully qualified classname, based on filename sufix *IT|Integration|ITCase.java"
+    view +13 sample_module/src/test/java/org/vimtest/AppIT.java
+
+    TestFile
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppIT\* -pl sample_module'
   end
 end

@@ -8,7 +8,8 @@ function! test#clojure#leintest#test_file(file) abort
   elseif exists("g:test#clojure#runner") && g:test#clojure#runner != 'leintest'
     return 0
   endif
-  return a:file =~# g:test#clojure#leintest#file_pattern
+  let l:project_clj = findfile('project.clj', fnamemodify(a:file, ':p').';')
+  return !empty(l:project_clj) && a:file =~# g:test#clojure#leintest#file_pattern
 endfunction
 
 function! test#clojure#leintest#build_position(type, position) abort

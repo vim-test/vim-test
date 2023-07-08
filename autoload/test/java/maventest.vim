@@ -67,8 +67,8 @@ endfunction
 
 function! s:get_maven_module(filepath)
   let project_dir = s:GetJavaProjectDirectory(a:filepath)
-  " let l:module_name = fnamemodify(project_dir, ':t')
   let l:parent = fnamemodify(project_dir, ':p:h:h')
+
   if filereadable(l:parent. "/pom.xml") " check if the parent dir has pom.xml
       return ' -pl '. project_dir
   else 

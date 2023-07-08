@@ -3,7 +3,7 @@ Flavorfile.lock
 /doc/tags
 Session.vim
 
-/spec/fixtures/maven/**/target/
-/spec/fixtures/maven/**/.project
-/spec/fixtures/maven/**/.classpath
-/spec/fixtures/maven/**/.settings/
+/spec/fixtures/maven/**/target/*
+/spec/fixtures/maven/**/.project*
+/spec/fixtures/maven/**/.classpath*
+/spec/fixtures/maven/**/.settings/*

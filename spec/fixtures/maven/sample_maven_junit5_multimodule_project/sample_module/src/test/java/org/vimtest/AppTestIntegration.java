@@ -10,7 +10,17 @@ import org.junit.jupiter.api.Assertions;
 public class AppTestIntegration {
 
     @Test
-    public void test_integration_it_case() {
+    public void test_integration() {
+        Assertions.assertEquals(true, true);
+    }
+
+    @Test
+    public void test_integration2() {
+        Assertions.assertEquals(true, true);
+    }
+
+    @Test
+    public void test_integration3() {
         Assertions.assertEquals(true, true);
     }
 }

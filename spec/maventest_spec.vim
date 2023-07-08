@@ -361,31 +361,51 @@ describe "Integration tests multi module"
     view +13 sample_module/src/test/java/org/vimtest/AppIT.java
 
     TestNearest
-    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppIT#test_integration_it -pl sample_module'
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppIT\#test_integration_it -pl sample_module'
 
     view +18 sample_module/src/test/java/org/vimtest/AppIT.java
 
     TestNearest
-    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppIT#test_integration_it2 -pl sample_module'
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppIT\#test_integration_it2 -pl sample_module'
 
     view +23 sample_module/src/test/java/org/vimtest/AppIT.java
 
     TestNearest
-    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppIT#test_integration_it3 -pl sample_module'
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppIT\#test_integration_it3 -pl sample_module'
   end
 
-  it "TestNearest runs with verify fully qualified classname, based on filename sufix *ITCase.java"
+  it "TestNearest runs with verify fully qualified classname and method name, based on filename sufix *ITCase.java"
     view +13 sample_module/src/test/java/org/vimtest/AppITCase.java
 
     TestNearest
-    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppITCase\* -pl sample_module'
-  end
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppITCase\#test_integration_it_case -pl sample_module'
 
-  it "TestFile runs with verify fully qualified classname, based on filename sufix *Integration.java"
-    view +13 sample_module/src/test/java/org/vimtest/AppIntegration.java
+    view +18 sample_module/src/test/java/org/vimtest/AppITCase.java
 
     TestNearest
-    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppIntegration\* -pl sample_module'
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppITCase\#test_integration_it_case2 -pl sample_module'
+
+    view +23 sample_module/src/test/java/org/vimtest/AppITCase.java
+
+    TestNearest
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppITCase\#test_integration_it_case3 -pl sample_module'
+  end
+
+  it "TestNearest runs with verify fully qualified classname and method name, based on filename sufix *Integration.java"
+    view +13 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
+
+    TestNearest
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppTestIntegration\#test_integration -pl sample_module'
+
+    view +18 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
+
+    TestNearest
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppTestIntegration\#test_integration2 -pl sample_module'
+
+    view +23 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
+
+    TestNearest
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppTestIntegration\#test_integration3 -pl sample_module'
   end
 
   it "TestFile runs with verify fully qualified classname, based on filename sufix *IT|Integration|ITCase.java"
@@ -393,5 +413,16 @@ describe "Integration tests multi module"
 
     TestFile
     Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppIT\* -pl sample_module'
+
+    view +13 sample_module/src/test/java/org/vimtest/AppITCase.java
+
+    TestFile
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppITCase\* -pl sample_module'
+
+    view +13 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
+
+    TestFile
+    Expect g:test#last_command == 'mvn verify -Dit.test=org.vimtest.AppTestIntegration\* -pl sample_module'
+
   end
 end

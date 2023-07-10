@@ -20,17 +20,27 @@ function! test#java#maventest#build_position(type, position) abort
   " ex:  mvn test -Dtest com.you.pkg.App$NestedClass#test_method
   " ex:  mvn test -Dtest com.you.pkg.App#test_method
   " ex:  mvn test -Dtest com.you.pkg.App\*           (catches nested test-classes)
+  " ex:  mvn test -Dtest com.you.pkg.App\* -pl module_name
+  " ex:  mvn test -Dtest com.you.pkg.App#test_method -pl module_name
+  
+  let test_cmd = 'test -Dtest='
+
+  if filename =~# 'IT\|ITCase\|Integration$'
+      let test_cmd  = 'verify -Dit.test='
+  endif
+
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
+
     if !empty(name)
-      return ['test -Dtest=' . package . '.' . name. module]
+      return [test_cmd . package . '.' . name. module]
     else
-      return ['test -Dtest=' . package . '.' . filename . '\*'. module]
+      return [test_cmd . package . '.' . filename . '\*'. module]
     endif
 
   " ex:  mvn test -Dtest com.you.pkg.App\*  (catches nested test-classes)
   elseif a:type ==# 'file'
-    return ['test -Dtest=' . package . '.' . filename . '\*'. module]
+    return [test_cmd . package . '.' . filename . '\*'. module]
 
   " ex:  mvn verify -Dit.test=App\*  (runs integration tests)
   elseif a:type ==# 'integration'

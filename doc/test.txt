@@ -217,6 +217,9 @@ In all commands [args] are forwarded to the underlying test runner.
                              * Otherwise accepts a list of filenames (which it
                                translates to namespaces).
 
+                                                *test-:LeinTest*
+:LeinTest [args]             Uses the `lein` `test` command.
+
                                                 *test-:Bats*
 :Bats [args]                 Uses the `bats` command.
 

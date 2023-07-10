@@ -7,7 +7,7 @@ let g:test#plugin_path = expand('<sfile>:p:h:h')
 
 let g:test#default_runners = {
   \ 'CSharp':     ['Xunit', 'DotnetTest'],
-  \ 'Clojure':    ['FireplaceTest'],
+  \ 'Clojure':    ['FireplaceTest', 'LeinTest'],
   \ 'Crystal':    ['CrystalSpec'],
   \ 'Cpp':        ['Catch2'],
   \ 'Dart':       ['DartTest', 'FlutterTest'],

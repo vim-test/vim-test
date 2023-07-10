@@ -2,3 +2,4 @@ Flavorfile.lock
 .vim-flavor/
 /doc/tags
 Session.vim
+/spec/fixtures/maven/**/target

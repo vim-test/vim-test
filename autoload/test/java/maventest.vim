@@ -26,7 +26,7 @@ function! test#java#maventest#build_position(type, position) abort
   let test_cmd = 'test -Dtest='
 
   if filename =~# 'IT\|ITCase\|Integration$'
-      let test_cmd  = 'verify -Dit.test='
+      let test_cmd  = 'failsafe:integration-test -Dit.test='
   endif
 
   if a:type ==# 'nearest'

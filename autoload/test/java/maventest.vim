@@ -25,9 +25,10 @@ function! test#java#maventest#build_position(type, position) abort
   
   let test_cmd = 'test -Dtest='
 
-  if filename =~# 'IT\|ITCase\|Integration$'
-      let test_cmd  = 'failsafe:integration-test -Dit.test='
+  if filename =~# 'IT\|ITCase\|Integration$' && a:type =~# '^nearest\|file$'
+    let test_cmd  = 'verify -Dit.test='
   endif
+
 
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)

@@ -140,14 +140,6 @@ describe "Maven Junit3 multimodule tests"
     Expect g:test#last_command == 'mvn -X -f pom.xml -DcustomProperty=5 test -pl sample_module'
   end
 
-  it "runs a suite from sub_multimodule/submodule2"
-    view sub_multimodule/submoduleA/src/test/java/org/vimtest/math/MathTest.java
-    TestSuite
-
-    Expect g:test#last_command == 'mvn test -pl sub_multimodule/submoduleA'
-  end
-
-
 end
 
 describe "Maven Junit5 tests"

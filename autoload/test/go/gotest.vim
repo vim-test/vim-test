@@ -50,6 +50,11 @@ function! test#go#gotest#build_args(args) abort
 endfunction
 
 function! test#go#gotest#executable() abort
+  " Get the value of the global option g:test#go#gotest#test_verbose, default to 0 (false) if not set
+  let test_verbose = get(g:, 'test#go#gotest#test_verbose', 0)
+  if test_verbose
+    return 'go test -v'
+  endif
   return 'go test'
 endfunction
 

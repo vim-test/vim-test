@@ -626,7 +626,7 @@ You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your preferred options with
 >
   let g:test#ruby#minitest#options = '--verbose'
-  let g:test#go#gotest#test_verbose = 1
+  let g:test#go#gotest#options = '-v'
   let g:test#rust#cargotest#test_options = '-- --nocapture'
 <
 Or, if you prefer more granular approach, you can do

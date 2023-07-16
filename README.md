@@ -481,7 +481,7 @@ nnoremap <silent><leader>itf :IntegrationTest -Dtest=foo -DfailIfNoTests=false -
 
 The above command makes sure that no surefire tests will be run (by passing in a dummy test and makes sure that the plugin won't fail), it also makes the dependent modules, skips PMD and checkstyle checks as well.
 
-The commands `:TestFile` and `:TestNearest` use the same strategy and you can use them to run the integration tests from file or method.
+Only for maven, the commands `:TestFile` and `:TestNearest` use the same strategy and you can use them to run the integration tests from file or method.
 
 They use `mvn verify` if the filename ends with *IT, *ITCase or *Integration. The most common plugins are skipped in this strategy to improve the test time.
 

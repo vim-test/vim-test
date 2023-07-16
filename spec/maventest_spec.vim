@@ -351,7 +351,7 @@ describe "Integration tests in multimodule"
 
     " When using TestNearest and TestFile on IntegrationTest, must skip the
     " verify plugins that not are failsafe.
-    let t:skip_it_plugins = " -Dsonar.skip=true -Dpit.report.skip=true -Dpmd.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true"
+    let t:skip_it_plugins = " -Dsonar.skip=true -Dpit.report.skip=true -Dpit.skip=true -Dpmd.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true"
     let t:expected_it_nearest_file_prefix = "mvn verify" . t:skip_it_plugins
 
   it "IntegrationTest runs with verify without fully qualified classname in the module"

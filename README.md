@@ -481,6 +481,44 @@ nnoremap <silent><leader>itf :IntegrationTest -Dtest=foo -DfailIfNoTests=false -
 
 The above command makes sure that no surefire tests will be run (by passing in a dummy test and makes sure that the plugin won't fail), it also makes the dependent modules, skips PMD and checkstyle checks as well.
 
+Only for maven, the commands `:TestFile` and `:TestNearest` use the same strategy and you can use them to run the integration tests from file or method.
+
+They use `mvn verify` if the filename ends with *IT, *ITCase or *Integration. The most common plugins are skipped in this strategy to improve the test time.
+
+* Sonar
+* PIT
+* Jacoco
+* Checkstyle
+* PMD
+* DependencyCheck
+
+```sh
+mvn verify -Dsonar.skip=true -Dpit.report.skip=true -Dpit.skip=true -Dpmd.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true -Dfailsafe.only=true
+```
+
+Also, the parameter `-Dfailsafe.only` is added to the command by vim-test, so you can use it to configure other things in the pom.xml, for example to avoid surefire tests:
+
+```xml
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <skipTests>${failsafe.only}</skipTests>
+                ....
+                </configuration>
+                ...
+            </plugin>
+```
+
+And keep the parameter `-DskipTests` working as expected:
+
+```xml
+    <properties>
+        <failsafe.only>${skipTests}</failsafe.only>
+    </properties>
+```
+
 #### Scala
 
 For the same reason as Python, runner detection works the same for Scala. To

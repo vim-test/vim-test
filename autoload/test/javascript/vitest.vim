@@ -27,12 +27,18 @@ function! test#javascript#vitest#build_position(type, position) abort
 endfunction
 
 let s:yarn_command = '\<yarn\>'
-function! test#javascript#vitest#build_args(args) abort
+function! test#javascript#vitest#build_args(args, color) abort
+  let args = a:args
+
+  if !a:color
+    let args = ['--no-color'] + args
+  endif
+
   if exists('g:test#javascript#vitest#executable')
     \ && g:test#javascript#vitest#executable =~# s:yarn_command
-    return filter(a:args, 'v:val != "--"')
+    return filter(args, 'v:val != "--"')
   else
-    return a:args
+    return args
   endif
 endfunction
 

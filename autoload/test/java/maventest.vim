@@ -13,6 +13,8 @@ function! test#java#maventest#test_file(file) abort
                 \ && strlen(l:pomFile) > 0
 endfunction
 
+
+
 function! test#java#maventest#build_position(type, position) abort
   let filename = fnamemodify(a:position['file'], ':t:r')
   let package = s:get_java_package(a:position['file'])
@@ -30,27 +32,34 @@ function! test#java#maventest#build_position(type, position) abort
     let test_cmd = "verify" . skip_it_plugins . " -Dit.test="
   endif
 
+  let mvn_cmd = []
 
-  if a:type ==# 'nearest'
+  if a:type =~# 'nearest'
     let name = s:nearest_test(a:position)
 
     if !empty(name)
-      return [test_cmd . package . '.' . name. module]
+        let mvn_cmd = [test_cmd . package . '.' . name. module]
     else
-      return [test_cmd . package . '.' . filename . '\*'. module]
+        let mvn_cmd = [test_cmd . package . '.' . filename . '\*'. module]
     endif
 
   " ex:  mvn test -Dtest com.you.pkg.App\*  (catches nested test-classes)
-  elseif a:type ==# 'file'
-    return [test_cmd . package . '.' . filename . '\*'. module]
+  elseif a:type =~# 'file'
+    let mvn_cmd = [test_cmd . package . '.' . filename . '\*'. module]
 
   " ex:  mvn verify -Dit.test=App\*  (runs integration tests)
   elseif a:type ==# 'integration'
-    return ['verify -Dit.test=' . filename . '\*'. module]
+    let mvn_cmd = ['verify -Dit.test=' . filename . '\*'. module]
   " ex:  mvn test
   else
-    return ['test' . module]
+    let mvn_cmd = ['test' . module]
   endif
+
+  if a:type =~# 'debug'
+    let mvn_cmd = mvn_cmd  + [ "-Dmaven.surefire.debug=true" ]
+  endif
+
+  return mvn_cmd
 
 endfunction
 

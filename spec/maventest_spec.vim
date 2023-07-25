@@ -3,6 +3,14 @@ source spec/support/helpers.vim
 " add the integrationtest command for java files
 command! -nargs=* -bar IntegrationTest call test#run('integration', split(<q-args>))
 
+" add the DebugTestNearest command for java files
+command! -nargs=* -bar DebugTestNearest call test#run('debug_nearest', split(<q-args>))
+
+" add the DebugTestFile command for java files
+command! -nargs=* -bar DebugTestFile call test#run('debug_file', split(<q-args>))
+
+
+
 describe "Maven Junit3 tests"
 
   before
@@ -281,6 +289,13 @@ describe "Maven Junit5 multimodule tests"
     Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\* -pl sample_module'
   end
 
+  it "DebugTestFile runs with package-path, with asterisk to catch nested-test-classes"
+    view +14 sample_module/src/test/java/org/vimtest/TestApp.java
+    DebugTestFile
+
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\* -pl sample_module -Dmaven.surefire.debug=true'
+  end
+
   it "TestNearest - @Test void func()"
     view +12 sample_module/src/test/java/org/vimtest/TestApp.java
     TestNearest
@@ -315,6 +330,14 @@ describe "Maven Junit5 multimodule tests"
 
     Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\$Test_NestedTestClass\#test_nested_test -pl sample_module'
   end
+
+  it "DebugTestNearest - nested test()"
+    view +39 sample_module/src/test/java/org/vimtest/TestApp.java
+    DebugTestNearest
+
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\$Test_NestedTestClass\#test_nested_test -pl sample_module -Dmaven.surefire.debug=true'
+  end
+
 
 end
 

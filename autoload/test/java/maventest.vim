@@ -26,10 +26,12 @@ function! test#java#maventest#build_position(type, position) abort
   " ex:  mvn test -Dtest com.you.pkg.App#test_method -pl module_name
   
   let test_cmd = 'test -Dtest='
+  let it_test = 0
 
-  if filename =~# 'IT\|ITCase\|Integration$' && a:type =~# '^nearest\|file$'
+  if filename =~# 'IT\|ITCase\|Integration$' && a:type =~# 'nearest\|file$'
     let skip_it_plugins = " -Dsonar.skip=true -Dpit.report.skip=true -Dpit.skip=true -Dpmd.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true -Dfailsafe.only=true"
     let test_cmd = "verify" . skip_it_plugins . " -Dit.test="
+    let it_test = 1
   endif
 
   let mvn_cmd = []
@@ -55,7 +57,7 @@ function! test#java#maventest#build_position(type, position) abort
     let mvn_cmd = ['test' . module]
   endif
 
-  if a:type =~# 'debug'
+  if a:type =~# 'debug' && !it_test
     let mvn_cmd = mvn_cmd  + [ "-Dmaven.surefire.debug=true" ]
   endif
 

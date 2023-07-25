@@ -434,6 +434,10 @@ describe "Integration tests in multimodule"
 
     TestNearest
     Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\#test_integration3 -pl sample_module'
+
+    DebugTestNearest
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\#test_integration3 -pl sample_module'
+
   end
 
   it "TestFile runs with verify fully qualified classname, based on filename sufix *IT|Integration|ITCase.java"
@@ -450,6 +454,10 @@ describe "Integration tests in multimodule"
     view +13 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
 
     TestFile
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\* -pl sample_module'
+
+    view +13 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
+    DebugTestFile
     Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\* -pl sample_module'
 
   end

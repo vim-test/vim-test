@@ -28,7 +28,7 @@ function! test#java#maventest#build_position(type, position) abort
   let test_cmd = 'test -Dtest='
   let integration_test = 0
 
-  if filename =~# 'IT\|ITCase\|Integration$' && a:type =~# 'nearest\|file$'
+  if filename =~# 'IT\|ITCase\|Integration$' && a:type =~# 'nearest$\|file$'
     let skip_it_plugins = " -Dsonar.skip=true -Dpit.report.skip=true -Dpit.skip=true -Dpmd.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true -Dfailsafe.only=true"
 
     let test_cmd = "verify" . skip_it_plugins . " -Dit.test="
@@ -56,7 +56,7 @@ function! test#java#maventest#build_position(type, position) abort
     let test_cmd = 'test' . module
   endif
 
-  if a:type =~# 'debug' && !integration_test
+  if a:type =~# '^debug' && !integration_test
     let test_cmd = test_cmd  . " -Dmaven.surefire.debug=true"
   endif
 

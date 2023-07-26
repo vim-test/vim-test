@@ -26,42 +26,41 @@ function! test#java#maventest#build_position(type, position) abort
   " ex:  mvn test -Dtest com.you.pkg.App#test_method -pl module_name
   
   let test_cmd = 'test -Dtest='
-  let it_test = 0
+  let integration_test = 0
 
   if filename =~# 'IT\|ITCase\|Integration$' && a:type =~# 'nearest\|file$'
     let skip_it_plugins = " -Dsonar.skip=true -Dpit.report.skip=true -Dpit.skip=true -Dpmd.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true -Dfailsafe.only=true"
-    let test_cmd = "verify" . skip_it_plugins . " -Dit.test="
-    let it_test = 1
-  endif
 
-  let mvn_cmd = []
+    let test_cmd = "verify" . skip_it_plugins . " -Dit.test="
+    let integration_test = 1
+  endif
 
   if a:type =~# 'nearest'
     let name = s:nearest_test(a:position)
 
     if !empty(name)
-        let mvn_cmd = [test_cmd . package . '.' . name. module]
+        let test_cmd = test_cmd . package . '.' . name. module
     else
-        let mvn_cmd = [test_cmd . package . '.' . filename . '\*'. module]
+        let test_cmd = test_cmd . package . '.' . filename . '\*'. module
     endif
 
   " ex:  mvn test -Dtest com.you.pkg.App\*  (catches nested test-classes)
   elseif a:type =~# 'file'
-    let mvn_cmd = [test_cmd . package . '.' . filename . '\*'. module]
+    let test_cmd = test_cmd . package . '.' . filename . '\*'. module
 
   " ex:  mvn verify -Dit.test=App\*  (runs integration tests)
   elseif a:type ==# 'integration'
-    let mvn_cmd = ['verify -Dit.test=' . filename . '\*'. module]
+    let test_cmd = 'verify -Dit.test=' . filename . '\*'. module
   " ex:  mvn test
   else
-    let mvn_cmd = ['test' . module]
+    let test_cmd = 'test' . module
   endif
 
-  if a:type =~# 'debug' && !it_test
-    let mvn_cmd = mvn_cmd  + [ "-Dmaven.surefire.debug=true" ]
+  if a:type =~# 'debug' && !integration_test
+    let test_cmd = test_cmd  . " -Dmaven.surefire.debug=true"
   endif
 
-  return mvn_cmd
+  return [ test_cmd ]
 
 endfunction
 

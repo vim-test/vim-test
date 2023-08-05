@@ -22,68 +22,68 @@ describe "vitest"
       view +1 __tests__/normal-test.jsx
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''Math'' __tests__/normal-test.jsx'
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math'' __tests__/normal-test.jsx'
 
       view +2 __tests__/normal-test.jsx
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''Math Addition'' __tests__/normal-test.jsx'
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition'' __tests__/normal-test.jsx'
 
       view +3 __tests__/normal-test.jsx
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''Math Addition adds two numbers'' __tests__/normal-test.jsx'
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' __tests__/normal-test.jsx'
     end
 
     it "runs loop tests"
       view +1 __tests__/loop-test.jsx
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''Loop the test with given array'' __tests__/loop-test.jsx'
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Loop the test with given array'' __tests__/loop-test.jsx'
 
       view +2 __tests__/loop-test.jsx
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''loop each tests'' __tests__/loop-test.jsx'
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''loop each tests'' __tests__/loop-test.jsx'
 
       view +3 __tests__/loop-test.jsx
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''described loop test'' __tests__/loop-test.jsx'
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''described loop test'' __tests__/loop-test.jsx'
     end
 
     it "aliases context to describe"
       view +1 __tests__/context-test.jsx
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''Math'' __tests__/context-test.jsx'
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math'' __tests__/context-test.jsx'
 
       view +2 __tests__/context-test.jsx
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''Math Addition'' __tests__/context-test.jsx'
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition'' __tests__/context-test.jsx'
 
       view +3 __tests__/context-test.jsx
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''Math Addition adds two numbers'' __tests__/context-test.jsx'
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' __tests__/context-test.jsx'
     end
 
     it "runs TypescriptReact"
       view +1 __tests__/normal-test.tsx
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''Math'' __tests__/normal-test.tsx'
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math'' __tests__/normal-test.tsx'
 
       view +2 __tests__/normal-test.tsx
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''Math Addition'' __tests__/normal-test.tsx'
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition'' __tests__/normal-test.tsx'
 
       view +3 __tests__/normal-test.tsx
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage -t ''Math Addition adds two numbers'' __tests__/normal-test.tsx'
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' __tests__/normal-test.tsx'
     end
   end
 
@@ -92,14 +92,14 @@ describe "vitest"
     normal O
     TestNearest
 
-    Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage __tests__/normal-test.jsx'
+    Expect g:test#last_command == g:expectedExecutable .. 'vitest run __tests__/normal-test.jsx'
   end
 
   it "runs file tests"
     view __tests__/normal-test.jsx
     TestFile
 
-    Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage __tests__/normal-test.jsx'
+    Expect g:test#last_command == g:expectedExecutable .. 'vitest run __tests__/normal-test.jsx'
   end
 
   it "runs test suites"
@@ -113,7 +113,7 @@ describe "vitest"
     view outside-test.jsx
     TestFile
 
-    Expect g:test#last_command == g:expectedExecutable .. 'vitest run --no-coverage outside-test.jsx'
+    Expect g:test#last_command == g:expectedExecutable .. 'vitest run outside-test.jsx'
   end
 
   context "with a specified executable"
@@ -126,7 +126,7 @@ describe "vitest"
       view __tests__/normal-test.jsx
       TestFile
 
-      Expect g:test#last_command == 'npm run vitest run --no-coverage __tests__/normal-test.jsx'
+      Expect g:test#last_command == 'npm run vitest run __tests__/normal-test.jsx'
     end
 
     it "runs tests against yarn executable (without --)"
@@ -134,7 +134,7 @@ describe "vitest"
       view __tests__/normal-test.jsx
       TestFile
 
-      Expect g:test#last_command == 'yarn vitest run --no-coverage __tests__/normal-test.jsx'
+      Expect g:test#last_command == 'yarn vitest run __tests__/normal-test.jsx'
     end
 
     it "runs tests against absolute path yarn executable (without --)"
@@ -142,7 +142,7 @@ describe "vitest"
       view __tests__/normal-test.jsx
       TestFile
 
-      Expect g:test#last_command == '~/.local/bin/yarn vitest run --no-coverage __tests__/normal-test.jsx'
+      Expect g:test#last_command == '~/.local/bin/yarn vitest run __tests__/normal-test.jsx'
     end
   end
 

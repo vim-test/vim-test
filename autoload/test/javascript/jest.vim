@@ -18,9 +18,9 @@ function! test#javascript#jest#build_position(type, position) abort
     if !empty(name)
       let name = '-t '.shellescape(name, 1)
     endif
-    return ['--no-coverage', '--runTestsByPath', name, '--', a:position['file']]
+    return ['--runTestsByPath', name, '--', a:position['file']]
   elseif a:type ==# 'file'
-    return ['--no-coverage', '--runTestsByPath', '--', a:position['file']]
+    return ['--runTestsByPath', '--', a:position['file']]
   else
     return []
   endif

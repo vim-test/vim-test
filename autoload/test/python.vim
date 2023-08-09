@@ -4,7 +4,7 @@ let test#python#patterns = {
 \}
 
 function! test#python#executable() abort
-  if strlen(system('command -v python3'))
+  if executable('python3')
     return 'python3'
   else
     return 'python'

@@ -12,52 +12,107 @@ describe "Ava"
     cd -
   end
 
-  it "runs nearest test"
-    view +1 test/normal.js
-    TestNearest
+  describe "Javascript"
 
-    Expect g:test#last_command == 'ava test/normal.js --match=''Adds two numbers'''
-  end
+    it "runs nearest test"
+      view +1 test/normal.js
+      TestNearest
 
-  it "runs file test if nearest test couldn't be found"
-    view +1 test/normal.js
-    normal O
-    TestNearest
+      Expect g:test#last_command == 'ava test/normal.js --match=''Adds two numbers'''
+    end
 
-    Expect g:test#last_command == 'ava test/normal.js'
-  end
+    it "runs file test if nearest test couldn't be found"
+      view +1 test/normal.js
+      normal O
+      TestNearest
 
-  it "runs file tests"
-    view test/normal.js
-    TestFile
+      Expect g:test#last_command == 'ava test/normal.js'
+    end
 
-    Expect g:test#last_command == 'ava test/normal.js'
-  end
-
-  it "runs test suites"
-    view test/normal.js
-    TestSuite
-
-    Expect g:test#last_command == 'ava'
-  end
-
-  it "also recognizes tests/ directory"
-    try
-      !mv test tests
-      view tests/normal.js
+    it "runs file tests"
+      view test/normal.js
       TestFile
 
-      Expect g:test#last_command == 'ava tests/normal.js'
-    finally
-      !mv tests test
-    endtry
+      Expect g:test#last_command == 'ava test/normal.js'
+    end
+
+    it "runs test suites"
+      view test/normal.js
+      TestSuite
+
+      Expect g:test#last_command == 'ava'
+    end
+
+    it "also recognizes tests/ directory"
+      try
+        !mv test tests
+        view tests/normal.js
+        TestFile
+
+        Expect g:test#last_command == 'ava tests/normal.js'
+      finally
+        !mv tests test
+      endtry
+    end
+
+    it "doesn't detect JavaScripts which are not in the test/ folder"
+      view outside.js
+      TestSuite
+
+      Expect exists('g:test#last_command') == 0
+    end
+
   end
 
-  it "doesn't detect JavaScripts which are not in the test/ folder"
-    view outside.js
-    TestSuite
+  describe "Typescript"
 
-    Expect exists('g:test#last_command') == 0
+    it "runs nearest test"
+      view +1 test/normal.ts
+      TestNearest
+
+      Expect g:test#last_command == 'ava test/normal.ts --match=''Adds two numbers: TS'''
+    end
+
+    it "runs file test if nearest test couldn't be found"
+      view +1 test/normal.ts
+      normal O
+      TestNearest
+
+      Expect g:test#last_command == 'ava test/normal.ts'
+    end
+
+    it "runs file tests"
+      view test/normal.ts
+      TestFile
+
+      Expect g:test#last_command == 'ava test/normal.ts'
+    end
+
+    it "runs test suites"
+      view test/normal.ts
+      TestSuite
+
+      Expect g:test#last_command == 'ava'
+    end
+
+    it "also recognizes tests/ directory"
+      try
+        !mv test tests
+        view tests/normal.ts
+        TestFile
+
+        Expect g:test#last_command == 'ava tests/normal.ts'
+      finally
+        !mv tests test
+      endtry
+    end
+
+    it "doesn't detect JavaScripts which are not in the test/ folder"
+      view outside.js
+      TestSuite
+
+      Expect exists('g:test#last_command') == 0
+    end
   end
 
 end

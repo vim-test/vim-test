@@ -9,12 +9,11 @@ endfunction
 function! test#zig#zigtest#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
-    if !empty(name)
-      let filter = '--test-filter '.shellescape(name, 1)
-      return ['test', a:position['file'], filter]
+    if empty(name)
+      return ['test', a:position['file']]
     endif
 
-    return ['test', a:position['file']]
+    return ['test', a:position['file'],  '--test-filter '.shellescape(name, 1)]
   elseif a:type ==# 'file'
     return ['test', a:position['file']]
   else

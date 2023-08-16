@@ -19,10 +19,10 @@ describe "Zig"
   end
 
   it "runs nearest test"
-    view +5 normal.zig
+    view +9 normal.zig
     TestNearest
 
-    Expect g:test#last_command == 'zig test normal.zig'
+    Expect g:test#last_command == 'zig test normal.zig --test-filter ''numbers 2'''
   end
 
   it "runs all tests"

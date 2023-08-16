@@ -8,9 +8,12 @@ endfunction
 
 function! test#zig#zigtest#build_position(type, position) abort
   if a:type ==# 'nearest'
-    " --test-filter currently only supports filtering string inclusion, so
-    "  multiple tests could match, so instead we run the whole file.
-    return ['test', a:position['file']]
+    let name = s:nearest_test(a:position)
+    if empty(name)
+      return ['test', a:position['file']]
+    endif
+
+    return ['test', a:position['file'],  '--test-filter '.shellescape(name, 1)]
   elseif a:type ==# 'file'
     return ['test', a:position['file']]
   else
@@ -28,4 +31,9 @@ endfunction
 
 function! test#zig#zigtest#executable() abort
   return 'zig'
+endfunction
+
+function! s:nearest_test(position) abort
+  let name = test#base#nearest_test(a:position, g:test#zig#patterns)
+  return test#base#escape_regex(join(name['test']))
 endfunction

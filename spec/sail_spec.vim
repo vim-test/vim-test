@@ -6,6 +6,7 @@ describe "Laravel Sail"
     cd spec/fixtures/phpunit
     !mkdir -p vendor/bin
     !touch vendor/bin/sail
+    !touch docker-compose.yml
   end
 
   after
@@ -87,6 +88,14 @@ describe "Laravel Sail"
     TestFile
 
     Expect exists('g:test#last_command') == 0
+  end
+
+  it "doesn't use sail when the docker compose config is missing"
+    !rm docker-compose.yml
+    view NormalTest.php
+    TestFile
+
+    Expect g:test#last_command == 'phpunit --colors NormalTest.php'
   end
 
 end

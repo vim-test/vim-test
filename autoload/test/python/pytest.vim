@@ -54,7 +54,7 @@ function! test#python#pytest#executable() abort
   elseif filereadable("pdm.lock")
     let pipenv_prefix = "pdm run "
   else
-    let pipenv_prefix = "python -m "
+    let pipenv_prefix = test#python#executable() . " -m "
   endif
 
   if executable("py.test") && !executable("pytest")

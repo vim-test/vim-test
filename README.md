@@ -23,7 +23,7 @@ runners are supported:
 | -------------: | :----------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
 |         **C#** | .NET                                                                                                               | `xunit`, `dotnettest`                                                                                                                        |
 |         **C++** | CTest,Make                                                                                                               | `ctest`, `make`                                                                                                                        |
-|    **Clojure** | Fireplace.vim                                                                                                      | `fireplacetest`                                                                                                                              |
+|    **Clojure** | Fireplace.vim, Leiningen                                                                                           | `fireplacetest`, `leintest`                                                                                                                  |
 |    **Crystal** | Crystal                                                                                                            | `crystalspec`                                                                                                                                |
 |       **Dart** | Dart Test, Flutter Test                                                                                            | `darttest`, `fluttertest`
 |     **Elixir** | ESpec, ExUnit                                                                                                      | `espec`, `exunit`                                                                                                                            |
@@ -33,7 +33,7 @@ runners are supported:
 |     **Groovy** | Maven, Gradle                                                                                                      | `maventest`, `gradletest`                                                                                                                    |
 |    **Haskell** | stack                                                                                                              | `stacktest`                                                                                                                                  |
 |       **Java** | Maven, Gradle (Groovy and Kotlin DSL)                                                                              | `maventest`, `gradletest`                                                                                                                    |
-| **JavaScript** | Ava, Cucumber.js, Cypress, Deno, Intern, Jasmine, Jest, Karma, Lab, Mocha, ng test, NX, Playwright, ReactScripts, TAP, Teenytest, WebdriverIO | `ava`, `cucumberjs`, `cypress`, `deno`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `ngtest` , `nx`, `playwright`, `reactscripts`, `tap`, `teenytest`, `webdriverio`, `vue-test-utils`, `vitest`|
+| **JavaScript** | Ava, Cucumber.js, Cypress, Deno, Ember, Intern, Jasmine, Jest, Karma, Lab, Mocha, ng test, NX, Playwright, ReactScripts, TAP, Teenytest, WebdriverIO | `ava`, `cucumberjs`, `cypress`, `deno`, `ember exam`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `ngtest` , `nx`, `playwright`, `reactscripts`, `tap`, `teenytest`, `webdriverio`, `vue-test-utils`, `vitest`|
 |     **Kotlin** | Gradle (Groovy and Kotlin DSL)                                                                                     | `gradletest`                                                                                                                                 |
 |        **Lua** | Busted                                                                                                             | `busted`                                                                                                                                     |
 |       **Mint** | Mint                                                                                                               | `minttest`                                                                                                                                   |
@@ -48,6 +48,7 @@ runners are supported:
 |      **Shell** | Bats, ShellSpec                                                                                                    | `bats`, `shellspec`                                                                                                                          |
 |      **Swift** | Swift Package Manager                                                                                              | `swiftpm`                                                                                                                                    |
 |  **VimScript** | Vader.vim, Vroom, VSpec, Themis, Testify                                                                           | `vader`, `vroom`, `vspec`, `themis`, `testify`                                                                                               |
+|        **Zig** | ZigTest                                                                                                            | `zigtest`                                                                                                                                    |
 
 ## Setup
 
@@ -346,6 +347,7 @@ If you want some CLI options to stick around, you can configure them in your
 
 ```vim
 let test#ruby#minitest#options = '--verbose'
+let test#rust#cargotest#test_options = '-- --nocapture'
 ```
 
 You can also choose a more granular approach:
@@ -355,6 +357,10 @@ let test#ruby#rspec#options = {
   \ 'nearest': '--backtrace',
   \ 'file':    '--format documentation',
   \ 'suite':   '--tag ~slow',
+\}
+let test#rust#cargotest#test_options = {
+  \ 'nearest': ['--', '--nocapture'],
+  \ 'file':    '',
 \}
 ```
 
@@ -474,6 +480,44 @@ nnoremap <silent><leader>itf :IntegrationTest -Dtest=foo -DfailIfNoTests=false -
 ```
 
 The above command makes sure that no surefire tests will be run (by passing in a dummy test and makes sure that the plugin won't fail), it also makes the dependent modules, skips PMD and checkstyle checks as well.
+
+Only for maven, the commands `:TestFile` and `:TestNearest` use the same strategy and you can use them to run the integration tests from file or method.
+
+They use `mvn verify` if the filename ends with *IT, *ITCase or *Integration. The most common plugins are skipped in this strategy to improve the test time.
+
+* Sonar
+* PIT
+* Jacoco
+* Checkstyle
+* PMD
+* DependencyCheck
+
+```sh
+mvn verify -Dsonar.skip=true -Dpit.report.skip=true -Dpit.skip=true -Dpmd.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true -Dfailsafe.only=true
+```
+
+Also, the parameter `-Dfailsafe.only` is added to the command by vim-test, so you can use it to configure other things in the pom.xml, for example to avoid surefire tests:
+
+```xml
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <skipTests>${failsafe.only}</skipTests>
+                ....
+                </configuration>
+                ...
+            </plugin>
+```
+
+And keep the parameter `-DskipTests` working as expected:
+
+```xml
+    <properties>
+        <failsafe.only>${skipTests}</failsafe.only>
+    </properties>
+```
 
 #### Scala
 
@@ -740,3 +784,4 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 [Kitty]: https://github.com/kovidgoyal/kitty
 [Shtuff]: https://github.com/jfly/shtuff
 [Harpoon]: https://github.com/ThePrimeagen/harpoon
+[Ember.js]: https://github.com/emberjs/ember.js

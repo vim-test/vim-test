@@ -130,6 +130,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:Mocha*
 :Mocha [args]                Uses the `mocha` command.
 
+                                                *test-:Ember*
+:Ember [args]                Uses the `ember exam` command.
+
                                                 *test-:Jasmine*
 :Jasmine [args]              Uses the `jasmine` command.
 
@@ -214,8 +217,14 @@ In all commands [args] are forwarded to the underlying test runner.
                              * Otherwise accepts a list of filenames (which it
                                translates to namespaces).
 
+                                                *test-:LeinTest*
+:LeinTest [args]             Uses the `lein` `test` command.
+
                                                 *test-:Bats*
 :Bats [args]                 Uses the `bats` command.
+
+                                                *test-:ZigTest*
+:ZigTest [args]              Uses the `zig` `test` command.
 
                                                 *test-:ShellSpec*
 :ShellSpec [args]                 Uses the `shellspec` command.
@@ -617,6 +626,7 @@ You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your preferred options with
 >
   let g:test#ruby#minitest#options = '--verbose'
+  let g:test#rust#cargotest#test_options = '-- --nocapture'
 <
 Or, if you prefer more granular approach, you can do
 >
@@ -624,6 +634,10 @@ Or, if you prefer more granular approach, you can do
     \ 'nearest': '--format documentation',
     \ 'file':    '--format documentation',
     \ 'suite':   '--tag ~slow',
+  \}
+  let test#rust#cargotest#test_options = {
+    \ 'nearest': ['--', '--nocapture', '--exact'],
+    \ 'file':    [],
   \}
 <
 You can also specify a global option for the test runner to work alongside the

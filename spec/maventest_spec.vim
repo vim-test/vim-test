@@ -140,6 +140,14 @@ describe "Maven Junit3 multimodule tests"
     Expect g:test#last_command == 'mvn -X -f pom.xml -DcustomProperty=5 test -pl sample_module'
   end
 
+  it "runs a suite from sub_multimodule/submodule2"
+    view sub_multimodule/submoduleA/src/test/java/org/vimtest/math/MathTest.java
+    TestSuite
+
+    Expect g:test#last_command == 'mvn test -pl sub_multimodule/submoduleA'
+  end
+
+
 end
 
 describe "Maven Junit5 tests"
@@ -327,8 +335,10 @@ describe "Integration tests single module"
 
     Expect g:test#last_command == 'mvn verify -Dit.test=TestApp\*'
   end
+
+
 end
-describe "Integration tests multi module"
+describe "Integration tests in multimodule"
 
   before
     cd spec/fixtures/maven/sample_maven_junit5_multimodule_project
@@ -339,10 +349,85 @@ describe "Integration tests multi module"
     cd -
   end
 
+    " When using TestNearest and TestFile on IntegrationTest, must skip the
+    " verify plugins that not are failsafe.
+    let t:skip_it_plugins = " -Dsonar.skip=true -Dpit.report.skip=true -Dpit.skip=true -Dpmd.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true -Dfailsafe.only=true"
+    let t:expected_it_nearest_file_prefix = "mvn verify" . t:skip_it_plugins
+
   it "IntegrationTest runs with verify without fully qualified classname in the module"
     view +14 sample_module/src/test/java/org/vimtest/TestApp.java
     IntegrationTest
 
     Expect g:test#last_command == 'mvn verify -Dit.test=TestApp\* -pl sample_module'
+  end
+
+  it "TestNearest runs with verify fully qualified classname and method name, based on filename sufix *IT"
+
+    view +13 sample_module/src/test/java/org/vimtest/AppIT.java
+
+    TestNearest
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . " -Dit.test=org.vimtest.AppIT\\#test_integration_it -pl sample_module"
+
+    view +18 sample_module/src/test/java/org/vimtest/AppIT.java
+
+    TestNearest
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppIT\#test_integration_it2 -pl sample_module'
+
+    view +23 sample_module/src/test/java/org/vimtest/AppIT.java
+
+    TestNearest
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppIT\#test_integration_it3 -pl sample_module'
+  end
+
+  it "TestNearest runs with verify fully qualified classname and method name, based on filename sufix *ITCase.java"
+    view +13 sample_module/src/test/java/org/vimtest/AppITCase.java
+
+    TestNearest
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppITCase\#test_integration_it_case -pl sample_module'
+
+    view +18 sample_module/src/test/java/org/vimtest/AppITCase.java
+
+    TestNearest
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppITCase\#test_integration_it_case2 -pl sample_module'
+
+    view +23 sample_module/src/test/java/org/vimtest/AppITCase.java
+
+    TestNearest
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppITCase\#test_integration_it_case3 -pl sample_module'
+  end
+
+  it "TestNearest runs with verify fully qualified classname and method name, based on filename sufix *Integration.java"
+    view +13 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
+
+    TestNearest
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\#test_integration -pl sample_module'
+
+    view +18 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
+
+    TestNearest
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\#test_integration2 -pl sample_module'
+
+    view +23 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
+
+    TestNearest
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\#test_integration3 -pl sample_module'
+  end
+
+  it "TestFile runs with verify fully qualified classname, based on filename sufix *IT|Integration|ITCase.java"
+    view +13 sample_module/src/test/java/org/vimtest/AppIT.java
+
+    TestFile
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppIT\* -pl sample_module'
+
+    view +13 sample_module/src/test/java/org/vimtest/AppITCase.java
+
+    TestFile
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppITCase\* -pl sample_module'
+
+    view +13 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
+
+    TestFile
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\* -pl sample_module'
+
   end
 end

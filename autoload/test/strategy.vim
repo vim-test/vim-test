@@ -170,7 +170,11 @@ function! test#strategy#shtuff(cmd) abort
     return
   endif
 
-  call system("shtuff into " . shellescape(g:shtuff_receiver) . " " . shellescape("clear;" . a:cmd))
+  if exists('g:test#preserve_screen') && !g:test#preserve_screen
+      call system("shtuff into " . shellescape(g:shtuff_receiver) . " " . shellescape("clear;" . a:cmd))
+  else
+      call system("shtuff into " . shellescape(g:shtuff_receiver) . " " . shellescape(a:cmd))
+  endif
 endfunction
 
 function! test#strategy#harpoon(cmd) abort

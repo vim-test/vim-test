@@ -1,0 +1,6 @@
+with-compiler: ghc-9.2.8
+
+packages:
+  ./subpackage1/
+  ./subpackage2/
+  ./common/subpackage3/

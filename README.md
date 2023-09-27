@@ -31,7 +31,7 @@ runners are supported:
 |     **Erlang** | CommonTest, EUnit, PropEr                                                                                          | `commontest`, `eunit`, `proper`                                                                                                              |
 |         **Go** | Ginkgo, Go, Rich-Go, Delve                                                                                         | `ginkgo`, `gotest`, `richgo`, `delve`                                                                                                        |
 |     **Groovy** | Maven, Gradle                                                                                                      | `maventest`, `gradletest`                                                                                                                    |
-|    **Haskell** | stack                                                                                                              | `stacktest`                                                                                                                                  |
+|    **Haskell** | stack, cabal                                                                                                       | `stacktest`, `cabaltest`                                                                                                                     |
 |       **Java** | Maven, Gradle (Groovy and Kotlin DSL)                                                                              | `maventest`, `gradletest`                                                                                                                    |
 | **JavaScript** | Ava, Cucumber.js, Cypress, Deno, Ember, Intern, Jasmine, Jest, Karma, Lab, Mocha, ng test, NX, Playwright, ReactScripts, TAP, Teenytest, WebdriverIO | `ava`, `cucumberjs`, `cypress`, `deno`, `ember exam`, `intern`, `jasmine`, `jest`, `karma`, `lab`, `mocha`, `ngtest` , `nx`, `playwright`, `reactscripts`, `tap`, `teenytest`, `webdriverio`, `vue-test-utils`, `vitest`|
 |     **Kotlin** | Gradle (Groovy and Kotlin DSL)                                                                                     | `gradletest`                                                                                                                                 |
@@ -601,7 +601,20 @@ let g:test#javascript#runner = 'jest'
 
 #### Haskell
 
-The `stackTest` runner currently supports running tests in Stack projects with the [HSpec](http://hackage.haskell.org/package/hspec) framework.
+The `stacktest` runner is used by default. You can switch to `cabaltest` like so:
+
+```vim
+let g:test#haskell#runner = 'cabaltest'
+```
+
+You can pass additional arguments to the test runner by setting its `test_command`. Here's an example for cabal:
+
+```vim
+let g:test#haskell#cabaltest#test_command = 'test --test-show-details=direct'
+```
+
+The runners currently supports running tests with the [HSpec](http://hackage.haskell.org/package/hspec) framework.
+
 
 #### PHP
 

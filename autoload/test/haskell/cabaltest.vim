@@ -81,11 +81,10 @@ endfunction
 
 " Wrapper around text#base#nearest_test returns the first match
 " or an empty string if no match is found
-" and escapes parentheses and quotes
 function! s:get_nearest(position, patterns) abort
   let l:result = test#base#nearest_test(a:position, a:patterns)
   let l:matches = l:result['test'] + ['']
-  return escape(escape(l:matches[0], '"'), "'")
+  return l:matches[0]
 endfunction
 
 " Returns the nearest project directory containing cabal.project.

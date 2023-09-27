@@ -1,5 +1,4 @@
 .stack-work/
 dist-newstyle
 stack.yaml.lock
-*.cabal
 *~

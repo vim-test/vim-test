@@ -88,7 +88,7 @@ function! test#strategy#vimterminal(cmd) abort
   execute term_position . ' new'
   call term_start(!s:Windows() ? ['/bin/sh', '-c', a:cmd] : ['cmd.exe', '/c', a:cmd], {'curwin': 1, 'term_name': a:cmd})
   au BufLeave <buffer> wincmd p
-  nnoremap <buffer> <Enter> :q<CR>
+  nnoremap <buffer> <Enter> :bd<CR>
   redraw
   echo "Press <Enter> to exit test runner terminal (<Ctrl-C> first if command is still running)"
 endfunction

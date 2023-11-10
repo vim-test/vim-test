@@ -96,9 +96,13 @@ function! test#strategy#neovim_sticky(cmd) abort
     let b:[l:tag] = 1
     let l:buffers = getbufinfo(bufnr())
     call win_gotoid(l:current_window)
+    let l:cmd = a:cmd .. "\n"
+  else
+    " Can be `"^C\nclear\n"` to abort previous run and clear terminal
+    let l:cmd = get(g:, 'test#neovim#sticky_prefix', '') .. a:cmd .. "\n"
   endif
 
-  call chansend(l:buffers[0].variables.terminal_job_id, a:cmd .. "\n")
+  call chansend(l:buffers[0].variables.terminal_job_id, l:cmd)
   let l:win = win_findbuf(l:buffers[0].bufnr)
   if len(l:win) > 0
     call win_execute(l:win[0], 'normal G', 1)

@@ -379,6 +379,12 @@ Runs test commands with `:terminal`, which spawns a terminal inside Neovim.
 >
   let test#strategy = 'neovim'
 <
+Neovim sticky~
+
+Runs test commands with `:terminal`, but keeps it open for subsequent runs.
+>
+  let test#strategy = 'neovim_sticky'
+<
 Vim8 Terminal ~
 
 Runs test commands with `term_start()`, which spawns a terminal inside Vim.
@@ -624,6 +630,11 @@ By default, vim-test will echo the test command before running it. You can
 disable this behavior with
 >
   let g:test#echo_command = 0
+<
+To have Neovim sticky strategy abort any currently running tests before
+scheduling new one, use
+>
+  let g:test#neovim_sticky#kill_previous = 1
 <
 You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your preferred options with

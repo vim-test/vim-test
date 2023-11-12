@@ -88,18 +88,24 @@ function! test#strategy#neovim(cmd) abort
 endfunction
 
 function! test#strategy#neovim_sticky(cmd) abort
+  let l:cmd = [a:cmd, '']
   let l:tag = '_test_vim_neovim_sticky'
-  let l:buffers = getbufinfo({ 'buflisted': 1 })->filter({i, v -> has_key(v.variables, l:tag)})
+  let l:buffers = getbufinfo({ 'buflisted': 1 })
+    \ ->filter({i, v -> has_key(v.variables, l:tag)})
+
   if len(l:buffers) == 0
     let l:current_window = win_getid()
-    call s:neovim_new_term(get(g:, 'test#neovim#shell', &shell))
+    call s:neovim_new_term(&shell)
     let b:[l:tag] = 1
     let l:buffers = getbufinfo(bufnr())
     call win_gotoid(l:current_window)
-    let l:cmd = a:cmd .. "\n"
   else
-    " Can be `"^C\nclear\n"` to abort previous run and clear terminal
-    let l:cmd = get(g:, 'test#neovim#sticky_prefix', '') .. a:cmd .. "\n"
+    if !get(g:, 'test#preserve_screen', 1)
+      let l:cmd = [&shell == 'cmd.exe' ? 'cls': 'clear'] + l:cmd
+    endif
+    if get(g:, 'test#neovim_sticky#kill_previous', 0)
+      let l:cmd = [""] + l:cmd
+    endif
   endif
 
   call chansend(l:buffers[0].variables.terminal_job_id, l:cmd)

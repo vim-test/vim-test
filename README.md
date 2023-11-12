@@ -92,6 +92,7 @@ let test#strategy = "dispatch"
 | **Basic**&nbsp;(default)        | `basic`                                                     | Runs test commands with `:!` on Vim, and with `:terminal` on Neovim.                                                                                              |
 | **Make**                        | `make` `make_bang`                                          | Runs test commands with `:make` or `:make!`.                                                                                                                      |
 | **Neovim**                      | `neovim`                                                    | Runs test commands with `:terminal` in a split window.                                                                                                            |
+| **Neovim sticky**               | `neovim_sticky`                                             | Runs test commands with `:terminal` in a split window, but keeps it open for subsequent runs.                                                                     |
 | **Vim8 Terminal**               | `vimterminal`                                               | Runs test commands with `term_start()` in a split window.                                                                                                         |
 | **[Dispatch]**                  | `dispatch` `dispatch_background`                            | Runs test commands with `:Dispatch` or `:Dispatch!`.                                                                                                              |
 | **[Vimux]**                     | `vimux`                                                     | Runs test commands in a small tmux pane at the bottom of your terminal.                                                                                           |
@@ -165,6 +166,15 @@ disable this behavior with:
 
 ```vim
 let g:test#echo_command = 0
+```
+
+With Neovim sticky strategy, if additional test run is requested before
+the previous one has finished, it will either wait or fail to run at all.
+You can customize this behavior with following options:
+
+```vim
+let g:test#neovim_sticky#kill_previous = 1  " Try to abort previous run
+let g:test#preserve_screen = 0  " Clear screen from previous run
 ```
 
 ### Kitty strategy setup

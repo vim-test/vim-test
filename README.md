@@ -168,7 +168,7 @@ disable this behavior with:
 let g:test#echo_command = 0
 ```
 
-With Neovim sticky strategy, if additional test run is requested before
+With the Neovim sticky strategy, if an additional test run is requested before
 the previous one has finished, it will either wait or fail to run at all.
 You can customize this behavior with following options:
 

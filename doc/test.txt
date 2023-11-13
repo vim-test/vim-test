@@ -632,7 +632,7 @@ disable this behavior with
   let g:test#echo_command = 0
 <
 To have the Neovim sticky strategy abort any currently running tests before
-scheduling new one, use
+scheduling a new one, use:
 >
   let g:test#neovim_sticky#kill_previous = 1
 <

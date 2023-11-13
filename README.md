@@ -170,7 +170,7 @@ let g:test#echo_command = 0
 
 With the Neovim sticky strategy, if an additional test run is requested before
 the previous one has finished, it will either wait or fail to run at all.
-You can customize this behavior with following options:
+You can customize this behavior with the following options:
 
 ```vim
 let g:test#neovim_sticky#kill_previous = 1  " Try to abort previous run

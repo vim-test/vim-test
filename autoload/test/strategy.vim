@@ -79,6 +79,13 @@ function! s:neovim_new_term(cmd) abort
   call termopen(a:cmd)
 endfunction
 
+function! s:neovim_reopen_term(bufnr) abort
+  if !len(win_findbuf(a:bufnr))
+    let term_position = get(g:, 'test#neovim#term_position', 'botright')
+    execute term_position . ' sbuffer ' . a:bufnr
+  endif
+endfunction
+
 function! test#strategy#neovim(cmd) abort
   call s:neovim_new_term(a:cmd)
   au BufDelete <buffer> wincmd p " switch back to last window
@@ -105,6 +112,9 @@ function! test#strategy#neovim_sticky(cmd) abort
     endif
     if get(g:, 'test#neovim_sticky#kill_previous', 0)
       let l:cmd = [""] + l:cmd
+    endif
+    if get(g:, 'test#neovim_sticky#reopen_window', 0)
+      call s:neovim_reopen_term(l:buffers[0].bufnr)
     endif
   endif
 

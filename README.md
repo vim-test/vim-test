@@ -808,3 +808,4 @@ Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. Se
 [Shtuff]: https://github.com/jfly/shtuff
 [Harpoon]: https://github.com/ThePrimeagen/harpoon
 [Ember.js]: https://github.com/emberjs/ember.js
+[Toggleterm]: https://github.com/akinsho/toggleterm.nvim

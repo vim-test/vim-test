@@ -115,12 +115,14 @@ function! test#strategy#neovim_sticky(cmd) abort
     endif
   endif
 
-  call chansend(l:buffers[0].variables.terminal_job_id, l:cmd)
   let l:win = win_findbuf(l:buffers[0].bufnr)
   if !len(l:win) && get(g:, 'test#neovim_sticky#reopen_window', 0)
     call s:neovim_reopen_term(l:buffers[0].bufnr)
   endif
 
+  call chansend(l:buffers[0].variables.terminal_job_id, l:cmd)
+
+  let l:win = win_findbuf(l:buffers[0].bufnr)
   if len(l:win) > 0
     call win_execute(l:win[0], 'normal G', 1)
   endif

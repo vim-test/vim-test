@@ -83,7 +83,10 @@ function! s:neovim_reopen_term(bufnr) abort
   let l:current_window = win_getid()
   let term_position = get(g:, 'test#neovim#term_position', 'botright')
   execute term_position . ' sbuffer ' . a:bufnr
+
+  let l:new_window = win_getid()
   call win_gotoid(l:current_window)
+  return l:new_window
 endfunction
 
 function! test#strategy#neovim(cmd) abort
@@ -117,12 +120,10 @@ function! test#strategy#neovim_sticky(cmd) abort
 
   let l:win = win_findbuf(l:buffers[0].bufnr)
   if !len(l:win) && get(g:, 'test#neovim_sticky#reopen_window', 0)
-    call s:neovim_reopen_term(l:buffers[0].bufnr)
+    let l:win = [s:neovim_reopen_term(l:buffers[0].bufnr)]
   endif
 
   call chansend(l:buffers[0].variables.terminal_job_id, l:cmd)
-
-  let l:win = win_findbuf(l:buffers[0].bufnr)
   if len(l:win) > 0
     call win_execute(l:win[0], 'normal G', 1)
   endif

@@ -71,7 +71,8 @@ In all commands [args] are forwarded to the underlying test runner.
 RUNNER COMMANDS                                 *test-runner_commands*
 
 In all commands [args] are forwarded to the underlying test runner. To avoid
-pollution they are not defined by default, instead you can choose the ones you want:
+pollution they are not defined by default, instead you can choose the ones you want,
+for example:
 
 >
   let g:test#runner_commands = ['Minitest', 'Mocha']

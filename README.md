@@ -175,6 +175,7 @@ You can customize this behavior with the following options:
 ```vim
 let g:test#neovim_sticky#kill_previous = 1  " Try to abort previous run
 let g:test#preserve_screen = 0  " Clear screen from previous run
+let test#neovim_sticky#reopen_window = 1 " Reopen terminal split if not visible
 ```
 
 ### Kitty strategy setup

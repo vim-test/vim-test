@@ -641,6 +641,11 @@ scheduling a new one, use:
 >
   let g:test#neovim_sticky#kill_previous = 1
 <
+To have the Neovim sticky strategy open an existing terminal in a new split
+when it is not currently visible, use:
+>
+    let test#neovim_sticky#reopen_window = 1
+<
 You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your preferred options with
 >

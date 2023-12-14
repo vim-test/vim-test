@@ -14,47 +14,47 @@ describe "LeinTest"
 
   it "recognizes test files"
     view math_test.clj | TestSuite
-    Expect g:test#last_position['file'] == 'math_test.clj'
+    Expect g:test#last_position['file'] ==# 'math_test.clj'
 
     view math_test.cljs | TestSuite
-    Expect g:test#last_position['file'] == 'math_test.cljs'
+    Expect g:test#last_position['file'] ==# 'math_test.cljs'
 
     view test/math.clj | TestSuite
-    Expect g:test#last_position['file'] == 'test/math.clj'
+    Expect g:test#last_position['file'] ==# 'test/math.clj'
 
     view test/math.cljs | TestSuite
-    Expect g:test#last_position['file'] == 'test/math.cljs'
+    Expect g:test#last_position['file'] ==# 'test/math.cljs'
   end
 
   it "runs nearest tests"
     view +7 math_test.clj
     TestNearest
-    Expect g:test#last_command =~# "lein test :only 'math-test/+-works'"
+    Expect g:test#last_command ==# "lein test :only 'math-test/+-works'"
 
     view +10 math_test.clj
     TestNearest
-    Expect g:test#last_command =~# "lein test :only 'math-test/*-works'"
+    Expect g:test#last_command ==# "lein test :only 'math-test/*-works'"
 
     view +13 math_test.clj
     TestNearest
-    Expect g:test#last_command =~# "lein test :only 'math-test/+-is-commutative'"
+    Expect g:test#last_command ==# "lein test :only 'math-test/+-is-commutative'"
 
     view +18 math_test.clj
     TestNearest
-    Expect g:test#last_command =~# "lein test :only 'math-test/*-is-commutative'"
+    Expect g:test#last_command ==# "lein test :only 'math-test/*-is-commutative'"
   end
 
   it "runs file tests"
     view math_test.clj
     TestFile
 
-    Expect g:test#last_command =~# "lein test :only 'math-test'"
+    Expect g:test#last_command ==# "lein test :only 'math-test'"
   end
 
   it "runs test suites"
     view math_test.clj
     TestSuite
 
-    Expect g:test#last_command =~# 'lein test :all'
+    Expect g:test#last_command ==# 'lein test :all'
   end
 end

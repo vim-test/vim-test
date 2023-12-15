@@ -1,4 +1,5 @@
 # test.vim
+![CI workflow](https://github.com/vim-test/vim-test/actions/workflows/ci.yml/badge.svg)
 
 A Vim wrapper for running tests on different granularities.
 

@@ -233,6 +233,28 @@ function! test#strategy#harpoon(cmd) abort
   endif
 endfunction
 
+function! test#strategy#wezterm(cmd) abort
+  let l:wezterm = get(g:, "test#wezterm#executable", "wezterm")
+
+  if !exists("g:test#wezterm#pane_id")
+    let l:output = systemlist([l:wezterm, "cli", "get-pane-direction", "next"])
+
+    " wezterm outputs the current pane ID if only one pane is open
+    if l:output[0] == $WEZTERM_PANE
+      let l:prev = $WEZTERM_PANE
+      let l:dir = get(g:, "test#wezterm#split_direction", "right")
+      let l:output = systemlist([l:wezterm, "cli", "split-pane", "--" . l:dir])
+
+      " return to original pane
+      call system([l:wezterm, "cli", "activate-pane", "--pane-id", l:prev])
+    endif
+
+    let g:test#wezterm#pane_id = l:output[0]
+  endif
+
+  call system([l:wezterm, "cli", "send-text", "--no-paste", "--pane-id", g:test#wezterm#pane_id, a:cmd . ""])
+endfunction
+
 function! s:execute_with_compiler(cmd, script) abort
   try
     let default_makeprg = &l:makeprg

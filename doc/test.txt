@@ -558,6 +558,25 @@ let g:test#harpoon_term = 2
 By default this strategy will also open the terminal in the current window.  To disable
 this behavior set `g:test#harpoon#gototerminal = 0`.
 
+WezTerm ~
+
+This strategy lets you send commands to an adjacent WezTerm pane. You must have
+the `wezterm` CLI available. You can override its location with
+`g:test#wezterm#executable`.
+
+>
+  let test#strategy = 'wezterm'
+<
+
+This strategy will send the command to the pane determined by the output of
+`wezterm cli get-pane-direction next`, or if only one pane exists, it will
+create a new one with `wezterm cli split-pane --right`. The latter can be
+overriden with `g:test#wezterm#split_direction`.
+
+>
+  let g:test#wezterm#split_direction = 'bottom'
+<
+
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 
 If you want your test results to appear in the |quickfix| window, use one of the

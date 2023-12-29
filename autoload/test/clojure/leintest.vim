@@ -16,13 +16,13 @@ function! test#clojure#leintest#build_position(type, position) abort
   let l:info = test#base#nearest_test(a:position, g:test#clojure#patterns, {'namespaces_with_same_indent': v:true})
   if a:type ==# 'nearest'
     if !empty(l:info['namespace']) && !empty(l:info['test'])
-      return [':only', l:info['namespace'][0].'/'.l:info['test'][0]]
+      return [':only', shellescape(l:info['namespace'][0].'/'.l:info['test'][0])]
     else
       throw 'No test found'
     endif
   elseif a:type ==# 'file'
     if !empty(l:info['namespace'])
-      return [':only', l:info['namespace'][0]]
+      return [':only', shellescape(l:info['namespace'][0])]
     else
       throw 'No namespace found'
     endif

@@ -73,6 +73,6 @@ function! test#kotlin#gradletest#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#kotlin#patterns)
-  return join(name['namespace'] + name['test'], '.')
+  let l:name = test#base#nearest_test(a:position, g:test#kotlin#patterns)
+  return escape(join([join(l:name.namespace , '$')] + l:name.test, '.'), '#$')
 endfunction

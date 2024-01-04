@@ -110,6 +110,17 @@ describe "GoTest"
     Expect g:test#last_command == 'go test -tags=foo,hello,world,!bar,red,black'
   end
 
+  it "runs tests in a file with only Go 1.17 build tags"
+    view +10 build_tags_117_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -tags=foo,hello,world,!bar,red,black -run ''TestNumbers$'' ./.'
+
+    TestFile
+
+    Expect g:test#last_command == 'go test -tags=foo,hello,world,!bar,red,black'
+  end
+
   it "runs test suite without tags"
     view +14 build_tags_test.go
     TestSuite

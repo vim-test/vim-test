@@ -27,7 +27,7 @@ function! test#go#gotest#build_args(args) abort
   endif
   let tags = []
   let index = 1
-  let pattern = '^//\s*+build\s\+\(.\+\)'
+  let pattern = '^//\s*\%(go:build\|+build\)\s\+\(.\+\)'
   while index <= getbufinfo('%')[0]['linecount']
     let line = trim(getbufline('%', l:index)[0])
     if l:line =~# '^package '
@@ -36,8 +36,12 @@ function! test#go#gotest#build_args(args) abort
     let tag = substitute(line, l:pattern, '\1', '')
     if l:tag != l:line
       " replace OR tags with AND, since we are going to use all the tags anyway
-      let tag = substitute(l:tag, ' \+', ',', 'g')
-      call add(l:tags, l:tag)
+      let tag = substitute(l:tag, '\v\&\&|\|\||\(|\)', '', 'g')
+      for val in split(l:tag, '[, ]\+')
+        if index(l:tags, l:val) == -1
+          call add(l:tags, l:val)
+        endif
+      endfor
     endif
     let index += 1
   endwhile

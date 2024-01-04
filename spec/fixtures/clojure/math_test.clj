@@ -1,9 +1,21 @@
-(ns math-test)
+(ns math-test
+  (:require [clojure.test :refer [deftest is]]
+            [clojure.test.check.clojure-test :refer [defspec]]
+            [clojure.test.check.generators :as gen]
+            [clojure.test.check.properties :as prop]))
 
-(deftest a-test
-  (testing "Test 1"
-    (is (= 1 1))))
+(deftest +-works
+  (is (= 4 (+ 2 2))))
 
-(deftest another-test
-  (testing "Test 2"
-    (is (= 1 1))))
+(clojure.test/deftest *-works
+  (is (= 4 (* 2 2))))
+
+(defspec +-is-commutative
+  (prop/for-all [a gen/large-integer
+                 b gen/large-integer]
+                (= (+ a b) (+ b a))))
+
+(clojure.test.check.clojure-test/defspec *-is-commutative
+  (prop/for-all [a gen/small-integer
+                 b gen/small-integer]
+                (= (* a b) (* b a))))

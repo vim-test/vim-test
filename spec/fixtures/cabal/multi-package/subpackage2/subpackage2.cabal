@@ -1,0 +1,18 @@
+cabal-version: 3.8
+
+name:                subpackage2
+version:             0.1.0.0
+
+library
+  hs-source-dirs: src
+  build-depends:
+    base >= 4.7 && < 5
+
+test-suite single-project-test
+  main-is: Spec.hs
+  type: exitcode-stdio-1.0
+  hs-source-dirs:
+    test
+  build-depends:
+    base >= 4.7 && < 5,
+    hspec

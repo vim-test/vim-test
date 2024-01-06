@@ -92,7 +92,6 @@ function! s:nearest_test(position) abort
   let name = join(name['namespace'] + name['test'], '/')
   let without_spaces = substitute(name, '\s', '_', 'g')
   let escaped_regex = substitute(without_spaces, '\([\[\].*+?|$^()]\)', '\\\1', 'g')
-  echo escaped_regex
   return escaped_regex
 endfunction
 

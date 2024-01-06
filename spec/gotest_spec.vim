@@ -71,6 +71,14 @@ describe "GoTest"
     Expect g:test#last_command == 'go test -run ''TestSomething$'' ./mypackage'
   end
 
+  it "runs nearest testify case"
+    let g:test#go#gotest#testify#enabled = 1
+    view +14 testify_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test ./. -run ''TestExampleTestSuite$'' -testify.m ''TestList'''
+  end
+
   it "runs file test if nearest test couldn't be found"
     view +1 normal_test.go
     TestNearest

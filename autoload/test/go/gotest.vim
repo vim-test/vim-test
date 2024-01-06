@@ -15,6 +15,12 @@ function! test#go#gotest#build_position(type, position) abort
     if a:type ==# 'file'
       return path ==# './.' ? [] : [path . '/...']
     elseif a:type ==# 'nearest'
+      let matched_testify = s:is_testify()
+      if matched_testify == 1
+          let suite_name = s:get_suite_name()
+          let name = s:nearest_test(a:position)
+          return empty(name) ? [] : [path, '-run '.shellescape(suite_name.'$') . ' -testify.m ' .shellescape(name, 1)]
+      endif
       let name = s:nearest_test(a:position)
       return empty(name) ? [] : ['-run '.shellescape(name.'$', 1), path]
     endif
@@ -57,10 +63,31 @@ function! test#go#gotest#executable() abort
   return 'go test'
 endfunction
 
+function! s:is_testify() abort
+  for line in getline(1, "$")
+      let testify_matched = matchlist(line, ".*testify\/suite.*")
+      if len(testify_matched) > 0
+          return 1
+      endif
+  endfor
+  return 0
+endfunction
+
+function! s:get_suite_name() abort
+  for line in getline(1, "$")
+      let suite_matched = matchlist(line, '\v^\s*func ((Test|Example).*)\(.*testing\.T')
+      if len(suite_matched) > 1
+          return filter(suite_matched, '!empty(v:val)')[1]
+      endif
+  endfor
+  return ""
+endfunction
+
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#go#patterns)
   let name = join(name['namespace'] + name['test'], '/')
   let without_spaces = substitute(name, '\s', '_', 'g')
   let escaped_regex = substitute(without_spaces, '\([\[\].*+?|$^()]\)', '\\\1', 'g')
+  echo escaped_regex
   return escaped_regex
 endfunction

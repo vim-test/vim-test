@@ -582,16 +582,6 @@ If `delve` is selected and [vim-delve](https://github.com/sebdah/vim-delve) is
 in use, breakpoints and tracepoints that have been marked with vim-delve will
 be included.
 
-If you use stretchr/testify run your nearest testcase
-To let your testify case work
-
-```vim
-let g:test#go#gotest#testify#enabled = 1
-```
-
-This setting modifies the Go test arguments to `-testify.m {NearestFunction} -run {TestSuiteName}`
-Here, TestSuiteName refers to the first testcase that uses `testing.T`
-
 #### Ruby
 
 Unless binstubs are detected (e.g. `bin/rspec`), test commands will

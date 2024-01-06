@@ -72,7 +72,6 @@ describe "GoTest"
   end
 
   it "runs nearest testify case"
-    let g:test#go#gotest#testify#enabled = 1
     view +14 testify_test.go
     TestNearest
 

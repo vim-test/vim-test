@@ -2,10 +2,6 @@ if !exists('g:test#go#gotest#file_pattern')
   let g:test#go#gotest#file_pattern = '\v[^_].*_test\.go$'
 endif
 
-if !exists('g:test#go#gotest#testify#enabled')
-  let g:test#go#gotest#testify#enabled = 0
-endif
-
 function! test#go#gotest#test_file(file) abort
   return test#go#test_file('gotest', g:test#go#gotest#file_pattern, a:file)
 endfunction
@@ -20,7 +16,7 @@ function! test#go#gotest#build_position(type, position) abort
       return path ==# './.' ? [] : [path . '/...']
     elseif a:type ==# 'nearest'
        
-      if g:test#go#gotest#testify#enabled == 1 && s:is_testify() == 1
+      if s:is_testify() == 1
           let suite_name = s:get_suite_name()
           let name = s:nearest_test(a:position)
           return empty(name) ? [] : [path, '-run '.shellescape(suite_name.'$') . ' -testify.m ' .shellescape(name, 1)]

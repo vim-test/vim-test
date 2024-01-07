@@ -72,10 +72,25 @@ describe "GoTest"
   end
 
   it "runs nearest testify case"
-    view +14 testify_test.go
+    view +18 testify_test.go
     TestNearest
 
     Expect g:test#last_command == 'go test ./. -run ''TestExampleTestSuite$'' -testify.m ''TestList'''
+
+    view +18 testify_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test ./. -run ''TestExampleTestSuite$'' -testify.m ''TestList'''
+
+    view +23 testify_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test ./. -run ''TestAnotherTestSuite$'' -testify.m ''TestAnother'''
+
+    view +30 testify_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''TestOriginalTestcase$'' ./.'
   end
 
   it "runs file test if nearest test couldn't be found"

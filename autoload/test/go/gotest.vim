@@ -6,6 +6,8 @@ function! test#go#gotest#test_file(file) abort
   return test#go#test_file('gotest', g:test#go#gotest#file_pattern, a:file)
 endfunction
 
+let s:original_testcase_pattern = '\v^\s*func ((Test|Example).*)\(.*testing\.T'
+
 function! test#go#gotest#build_position(type, position) abort
   if a:type ==# 'suite'
     return ['./...']
@@ -15,11 +17,13 @@ function! test#go#gotest#build_position(type, position) abort
     if a:type ==# 'file'
       return path ==# './.' ? [] : [path . '/...']
     elseif a:type ==# 'nearest'
-       
       if s:is_testify() == 1
-          let suite_name = s:get_suite_name()
+        let suite_name = s:nearest_suite_name(a:position)
+        if !empty(suite_name) 
+          let suite_testcase_name = s:get_suite_testcase_name(suite_name)
           let name = s:nearest_test(a:position)
-          return empty(name) ? [] : [path, '-run '.shellescape(suite_name.'$') . ' -testify.m ' .shellescape(name, 1)]
+          return empty(name) ? [] : [path, '-run '.shellescape(suite_testcase_name.'$') . ' -testify.m ' .shellescape(name, 1)]
+        endif
       endif
       let name = s:nearest_test(a:position)
       return empty(name) ? [] : ['-run '.shellescape(name.'$', 1), path]
@@ -73,14 +77,48 @@ function! s:is_testify() abort
   return 0
 endfunction
 
-function! s:get_suite_name() abort
+function! s:get_suite_testcase_name(suite_name) abort
+  let current_line = 1
+  let current_testcase_name = ""
+  let s:original_testcase_pattern = '\v^\s*func ((Test|Example).*)\(.*testing\.T'
   for line in getline(1, "$")
-      let suite_matched = matchlist(line, '\v^\s*func ((Test|Example).*)\(.*testing\.T')
+      let testcase_matched = matchlist(line, s:original_testcase_pattern)
+      if len(testcase_matched) > 1
+          let current_testcase_name = filter(testcase_matched, '!empty(v:val)')[1]
+          " check if suite is in this testcase
+          for line in getline(current_line + 1, "$")
+              let current_testcase_run_suite_matched = matchlist(line, '.*'. a:suite_name.'.*')
+              let another_testcase_matched = matchlist(line, s:original_testcase_pattern)
+
+              if len(another_testcase_matched) > 1
+                  break
+              endif 
+
+              if (len(current_testcase_run_suite_matched) > 0)
+                  return current_testcase_name
+              endif
+          endfor
+      endif
+      let current_line += 1
+  endfor
+  return ""
+endfunction
+
+function! s:nearest_suite_name(position) abort
+  for line in reverse(getline(1, a:position['line']))
+      " find suite name from receiver
+      let suite_matched = matchlist(line, '\v^\s*func\s*\(\s*\S*\s*\*?(\w+)\)\s*Test.*\(')
+      let original_testcase_matched = matchlist(line, s:original_testcase_pattern)
+
+      if len(original_testcase_matched) > 1
+          return ''
+      endif 
+
       if len(suite_matched) > 1
           return filter(suite_matched, '!empty(v:val)')[1]
       endif
   endfor
-  return ""
+  return ''
 endfunction
 
 function! s:nearest_test(position) abort
@@ -90,4 +128,3 @@ function! s:nearest_test(position) abort
   let escaped_regex = substitute(without_spaces, '\([\[\].*+?|$^()]\)', '\\\1', 'g')
   return escaped_regex
 endfunction
-

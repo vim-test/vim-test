@@ -7,3 +7,4 @@ Session.vim
 /spec/fixtures/maven/**/.project*
 /spec/fixtures/maven/**/.classpath*
 /spec/fixtures/maven/**/.settings/*
+/spec/fixtures/**/__pycache__/

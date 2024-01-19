@@ -9,6 +9,7 @@ describe "PyTest_xunit"
   end
 
   after
+    unlet g:test#python#runner
     call Teardown()
     cd -
   end
@@ -108,6 +109,7 @@ describe "Pytest"
   end
 
   after
+    unlet g:test#python#runner
     call Teardown()
     cd -
   end
@@ -146,5 +148,22 @@ describe "Pytest"
     view +15 test_class.py
     TestClass 
     Expect g:test#last_command == 'python3 -m pytest test_class.py::TestClass2'
+  end
+end
+
+describe "Pytest"
+  before
+    cd spec/fixtures/pytest
+  end
+
+  after
+    call Teardown()
+    cd -
+  end
+
+  it "TestFile with import pytest"
+    view +1 test_expectation.py
+    TestFile
+    Expect g:test#last_command == 'python3 -m pytest test_expectation.py'
   end
 end

@@ -3,6 +3,10 @@ let test#python#patterns = {
   \ 'namespace': ['\v^\s*class (\w+)'],
 \}
 
+function! test#python#has_import(file, module) abort
+  return match(readfile(expand(a:file)), "import " . a:module) != -1
+endfunction
+
 function! test#python#executable() abort
   if executable('python3')
     return 'python3'

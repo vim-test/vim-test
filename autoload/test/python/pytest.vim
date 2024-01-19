@@ -7,7 +7,7 @@ function! test#python#pytest#test_file(file) abort
     if exists('g:test#python#runner')
       return g:test#python#runner ==# 'pytest'
     else
-      return match(readfile(expand(a:file)),"import unittest") == -1 && (executable("pytest") || executable("py.test"))
+      return test#python#has_import(a:file, 'pytest')
     endif
   endif
 endfunction

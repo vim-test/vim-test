@@ -51,6 +51,11 @@ describe "PyUnitTest"
     TestFile
 
     Expect g:test#last_command == 'python3 -m unittest normal_test'
+
+    view test_import_testcase.py
+    TestFile
+
+    Expect g:test#last_command == 'python3 -m unittest test_import_testcase'
   end
 
   it "runs test suites"

@@ -4,7 +4,7 @@ let test#python#patterns = {
 \}
 
 function! test#python#has_import(file, module) abort
-  return match(readfile(expand(a:file)), "import " . a:module) != -1
+  return match(readfile(expand(a:file)), '^\(import ' . a:module . '\)\|\(from ' . a:module . ' import\)') != -1
 endfunction
 
 function! test#python#executable() abort

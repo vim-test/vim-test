@@ -7,7 +7,7 @@ function! test#python#pytest#test_file(file) abort
     if exists('g:test#python#runner')
       return g:test#python#runner ==# 'pytest'
     else
-      return test#python#has_import(a:file, 'pytest')
+      return filereadable('pytest.ini') || test#python#has_import(a:file, 'pytest')
     endif
   endif
 endfunction

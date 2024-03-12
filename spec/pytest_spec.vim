@@ -167,3 +167,37 @@ describe "Pytest"
     Expect g:test#last_command == 'python3 -m pytest test_expectation.py'
   end
 end
+
+describe "Pytest running Nose tests when pytest.ini present"
+  before
+    cd spec/fixtures/nose
+    !touch pytest.ini
+  end
+
+  after
+    !rm pytest.ini
+    call Teardown()
+    cd -
+  end
+
+  it "runs nearest tests"
+    view +1 test_class.py
+    TestNearest
+
+    Expect g:test#last_command == 'python3 -m pytest test_class.py::TestNumbers'
+  end
+
+  it "runs file tests"
+    view test_class.py
+    TestFile
+
+    Expect g:test#last_command == 'python3 -m pytest test_class.py'
+  end
+
+  it "runs test suites"
+    view test_class.py
+    TestSuite
+
+    Expect g:test#last_command == 'python3 -m pytest'
+  end
+end

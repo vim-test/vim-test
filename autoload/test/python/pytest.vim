@@ -7,7 +7,7 @@ function! test#python#pytest#test_file(file) abort
     if exists('g:test#python#runner')
       return g:test#python#runner ==# 'pytest'
     else
-      return filereadable('pytest.ini') || (filereadable("pyproject.toml") && match(readfile("pyproject.toml"),"[tool.pytest.ini_options]") != -1) || test#python#has_import(a:file, 'pytest')
+      return filereadable('pytest.ini') || (filereadable("pyproject.toml") && match(readfile("pyproject.toml"),"[tool.pytest.ini_options]") != -1) || test#python#has_import(a:file, 'pytest') || executable("pytest") || executable("py.test")
     endif
   endif
 endfunction

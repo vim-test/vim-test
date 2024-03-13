@@ -9,6 +9,7 @@ License: Same terms as Vim itself (see |license|)
 |test-quickfix-strategies|        QUICKFIX STRATEGIES
 |test-custom-strategies|          CUSTOM STRATEGIES
 |test-configuration|              CONFIGURATION
+|test-python|                     PYTHON SPECIFIC CONFIG
 |test-projectionist|              PROJECTIONIST INTEGRATION
 |test-about|                      ABOUT
 |test-credits|                    CREDITS
@@ -742,6 +743,24 @@ you would prefer to open the terminal in normal mode:
   let test#basic#start_normal = 1 " if using basic strategy
 <
 
+
+PYTHON SPECIFIC CONFIG                         *test-python*
+
+If your project has a pytest configuration file, then pytest will automatically be detected.
+For other Python test runners, test.vim has no way of detecting which one did you intend
+to use. By default, the first available will be chosen, but you can force a specific one:
+>
+  let test#python#runner = "pytest"
+<
+Runners available are 'pytest', 'nose', 'nose2', 'djangotest', 'djangonose', 'mamba',
+and Python's built-in unittest as 'pyunit'
+
+The `pytest` and `djangotest` runner optionally supports pipenv. If you have a `Pipfile`,
+it will use `pipenv run pytest` instead of just `python -m pytest`. They also support poetry
+and will use `poetry run pytest` if it detects a `poetry.lock`. The pyunit and nose runner
+supports pipenv as well and will respectively use `pipenv run python -m unittest` or
+`pipenv run python -m nosetests` if there is a `Pipfile`. It also supports pdm as well and will
+use `poetry run pytest` if there is a `pdm.lock` file.
 
 PROJECTIONIST INTEGRATION                       *test-projectionist*
 

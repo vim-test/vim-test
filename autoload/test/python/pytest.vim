@@ -2,12 +2,16 @@ if !exists('g:test#python#pytest#file_pattern')
   let g:test#python#pytest#file_pattern = '\v(test_[^/]+|[^/]+_test)\.py$'
 endif
 
+function! test#python#pytest#has_config() abort
+  return filereadable('pytest.ini') || (filereadable("pyproject.toml") && match(readfile("pyproject.toml"),"[tool.pytest.ini_options]") != -1) || (filereadable("tox.ini") && match(readfile("tox.ini"),"[pytest]") != -1) || (filereadable("setup.cfg") && match(readfile("setup.cfg"),"[tool:pytest]") != -1)
+endfunction
+
 function! test#python#pytest#test_file(file) abort
   if fnamemodify(a:file, ':t') =~# g:test#python#pytest#file_pattern
     if exists('g:test#python#runner')
       return g:test#python#runner ==# 'pytest'
     else
-      return filereadable('pytest.ini') || (filereadable("pyproject.toml") && match(readfile("pyproject.toml"),"[tool.pytest.ini_options]") != -1) || test#python#has_import(a:file, 'pytest') || executable("pytest") || executable("py.test")
+      return filereadable('pytest.ini') || test#python#pytest#has_config() || test#python#has_import(a:file, 'pytest') || executable("pytest") || executable("py.test")
     endif
   endif
 endfunction

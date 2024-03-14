@@ -452,9 +452,10 @@ let test#project_root = "/path/to/your/project"
 
 #### Python
 
-Since there are multiple Python test runners for the same type of tests,
-test.vim has no way of detecting which one did you intend to use. By default
-the first available will be chosen, but you can force a specific one:
+If your project has a [pytest configuration file](https://docs.pytest.org/en/7.1.x/reference/customize.html),
+then pytest will automatically be detected. For other Python test runners, test.vim
+has no way of detecting which one did you intend to use. By default, the first
+available will be chosen, but you can force a specific one:
 
 ``` vim
 let test#python#runner = 'pytest'

@@ -62,11 +62,11 @@ function! test#strategy#asyncrun_background_term(cmd) abort
 endfunction
 
 function! test#strategy#dispatch(cmd) abort
-  execute 'Dispatch NO_COLOR=1 '.a:cmd
+  execute 'Dispatch '.a:cmd
 endfunction
 
 function! test#strategy#dispatch_background(cmd) abort
-  execute 'Dispatch! NO_COLOR=1 '.a:cmd
+  execute 'Dispatch! '.a:cmd
 endfunction
 
 function! test#strategy#vimproc(cmd) abort

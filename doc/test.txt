@@ -720,6 +720,14 @@ working directory for running tests:
 >
   let test#project_root = "/path/to/your/project"
 <
+Alternatively you can pass in a function that'll be evaluated before each test run:
+>
+  function! CustomPath()
+    return "~/Project"
+  endfunction
+
+  let test#project_root = function('CustomPath')
+<
 Both the `neovim` and `Vim8 Terminal` strategy will open a split window on the
 bottom by default, but you can configure a different position or orientation.
 Whatever you put here is passed to `new` - so, you may also specify size (see

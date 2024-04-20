@@ -171,7 +171,11 @@ function! s:before_run() abort
   endif
 
   if exists('g:test#project_root')
-    execute 'cd' g:test#project_root
+    if type(g:test#project_root) == v:t_func
+      execute 'cd' g:test#project_root()
+    else
+      execute 'cd' g:test#project_root
+    endif
   endif
 endfunction
 

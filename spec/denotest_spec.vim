@@ -66,4 +66,12 @@ describe "Deno"
 
     Expect g:test#last_command == "deno test --filter '/^one line name key test nearest$/' nearest_test.ts"
   end
+
+  it "runs tests test_options"
+    let g:test#javaScript#denotest#test_options = '--quiet'
+
+    view test.js
+    TestFile
+    Expect g:test#last_command == 'deno test '''' --quiet'
+
 end

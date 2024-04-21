@@ -2,6 +2,13 @@ if !exists('g:test#javascript#denotest#file_pattern')
   let g:test#javascript#denotest#file_pattern = '\v(.*)test\.(js|mjs|ts|jsx|tsx)$'
 endif
 
+if !exists('g:test#javascript#denotest#test_options')
+  let g:test#javascript#denotest#test_options = {
+        \ 'nearest': [],
+        \ 'file': []
+    \ }
+endif
+
 function! test#javascript#denotest#test_file(file) abort
   if a:file =~# g:test#javascript#denotest#file_pattern
       if exists('g:test#javascript#runner')
@@ -14,6 +21,12 @@ function! test#javascript#denotest#test_file(file) abort
 endfunction
 
 function! test#javascript#denotest#build_position(type, position) abort
+
+  let l:test_options = g:test#javascript#denotest#test_options
+  if type(g:test#javascript#denotest#test_options) == 1 " string
+    let l:test_options = [g:test#javascript#denotest#test_options]
+  endif
+
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
@@ -21,7 +34,7 @@ function! test#javascript#denotest#build_position(type, position) abort
     endif
     return ['--filter', name, a:position['file']]
   elseif a:type ==# 'file'
-    return [a:position['file']]
+    return [a:position['file']] + l:test_options
   else
     return []
   endif

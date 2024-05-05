@@ -50,6 +50,8 @@ runners are supported:
 |      **Swift** | Swift Package Manager                                                                                              | `swiftpm`                                                                                                                                    |
 |  **VimScript** | Vader.vim, Vroom, VSpec, Themis, Testify                                                                           | `vader`, `vroom`, `vspec`, `themis`, `testify`                                                                                               |
 |        **Zig** | ZigTest                                                                                                            | `zigtest`                                                                                                                                    |
+|        **Gleam** | GleamTest                                                                                                            | `gleamtest`                                                                                                                                    |
+
 
 ## Setup
 

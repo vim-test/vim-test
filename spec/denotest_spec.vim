@@ -72,6 +72,6 @@ describe "Deno"
 
     view test.js
     TestFile
-    Expect g:test#last_command == 'deno test test.ts '''' --quiet'
+    Expect g:test#last_command == 'deno test test.ts --quiet'
 
 end

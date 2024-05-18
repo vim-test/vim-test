@@ -25,6 +25,14 @@ describe "Deno"
     Expect g:test#last_command == 'deno test test.ts'
   end
 
+  it "runs test file with options"
+    let g:test#javascript#denotest#options = '--quiet'
+
+    view test.js
+    TestFile
+    Expect g:test#last_command == 'deno test --quiet test.js'
+  end
+
   it "runs test suites"
     view test.js
     TestSuite

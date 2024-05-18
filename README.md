@@ -360,7 +360,7 @@ If you want some CLI options to stick around, you can configure them in your
 
 ```vim
 let test#ruby#minitest#options = '--verbose'
-let test#rust#cargotest#test_options = '-- --nocapture'
+let test#javascript#denotest#options = '--quiet'
 ```
 
 You can also choose a more granular approach:
@@ -371,10 +371,6 @@ let test#ruby#rspec#options = {
   \ 'file':    '--format documentation',
   \ 'suite':   '--tag ~slow',
 \}
-let test#rust#cargotest#test_options = {
-  \ 'nearest': ['--', '--nocapture'],
-  \ 'file':    '',
-\}
 ```
 
 You can also specify a global approach along with the granular options for the
@@ -384,6 +380,21 @@ specified test runner:
 let test#ruby#rspec#options = {
   \ 'all':   '--backtrace',
   \ 'suite': '--tag ~slow',
+\}
+```
+
+The cargotest runner lets you specify the test-options argument as follows:
+
+```vim
+let test#rust#cargotest#test_options = '-- --nocapture'
+```
+
+Or using a more granular approach:
+
+```vim
+let test#rust#cargotest#test_options = {
+  \ 'nearest': ['--', '--nocapture'],
+  \ 'file':    '',
 \}
 ```
 

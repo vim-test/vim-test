@@ -578,6 +578,15 @@ overriden with `g:test#wezterm#split_direction`.
   let g:test#wezterm#split_direction = 'bottom'
 <
 
+The wezterm cli split-pane accepts a --percent option to customize the number
+of cells that the new split will have, expressed as a percentage. The percent
+defaults to 50 unless set to a different value.
+
+>
+  let test#wezterm#split_percent = 30
+<
+
+
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 
 If you want your test results to appear in the |quickfix| window, use one of the

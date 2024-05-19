@@ -709,6 +709,10 @@ Or using a more granular approach:
     \ 'nearest': ['--', '--nocapture', '--exact'],
     \ 'file':    [],
   \}
+
+The gotest runner let you specify the -args argument as follows:
+>
+  let g:test#go#gotest#args = 'a=b'
 <
 If you want to manually configure a test runner's executable, you can do
 >

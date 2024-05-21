@@ -398,6 +398,11 @@ let test#rust#cargotest#test_options = {
 \}
 ```
 
+The gotest runner let you specify the -args argument as follows:
+```vim
+let test#go#gotest#args = 'a=b'
+```
+
 ### Vim8 / Neovim terminal position
 
 Both the `neovim` and `Vim8 Terminal` strategy will open a split window on the

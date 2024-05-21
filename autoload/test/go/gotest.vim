@@ -9,8 +9,13 @@ endfunction
 let s:original_testcase_pattern = '\v^\s*func ((Test|Example).*)\(.*testing\.T'
 
 function! test#go#gotest#build_position(type, position) abort
+  let l:gotest_args = ''
+  if exists('g:test#go#gotest#args')
+    let l:gotest_args = '-args ' . g:test#go#gotest#args
+  endif
+
   if a:type ==# 'suite'
-    return ['./...']
+    return ['./...', l:gotest_args]
   else
     let path = './'.fnamemodify(a:position['file'], ':h')
 
@@ -26,7 +31,8 @@ function! test#go#gotest#build_position(type, position) abort
         endif
       endif
       let name = s:nearest_test(a:position)
-      return empty(name) ? [] : ['-run '.shellescape(name.'$', 1), path]
+      let command = empty(name) ? [] : ['-run '.shellescape(name.'$', 1), path]
+      return add(command, l:gotest_args)
     endif
   endif
 endfunction

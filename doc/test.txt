@@ -373,6 +373,13 @@ plugin.
 >
   let test#strategy = 'dispatch' " or 'dispatch_background'
 <
+Spawn ~
+
+Runs test commands with `:Spawn` or `:Spawn!`. Requires the Dispatch.vim
+plugin.
+>
+  let test#strategy = 'spawn' " or 'spawn_background'
+<
 VimProc ~
 
 Runs test commands with `:VimProcBang`. Requires the Vimproc.vim plugin.

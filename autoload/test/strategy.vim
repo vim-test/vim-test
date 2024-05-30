@@ -69,6 +69,14 @@ function! test#strategy#dispatch_background(cmd) abort
   execute 'Dispatch! '.a:cmd
 endfunction
 
+function! test#strategy#spawn(cmd) abort
+  execute 'Spawn '.a:cmd
+endfunction
+
+function! test#strategy#spawn_background(cmd) abort
+  execute 'Spawn! '.a:cmd
+endfunction
+
 function! test#strategy#vimproc(cmd) abort
   execute 'VimProcBang '.a:cmd
 endfunction

@@ -16,7 +16,7 @@ function! test#javascript#vitest#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      let name = '-t '.shellescape(name, 1)
+      let name = '-t '.shellescape(escape(name, '()[]'), 1)
     endif
     return ['run', name, a:position['file']]
   elseif a:type ==# 'file'

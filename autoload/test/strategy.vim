@@ -69,6 +69,14 @@ function! test#strategy#dispatch_background(cmd) abort
   execute 'Dispatch! '.a:cmd
 endfunction
 
+function! test#strategy#spawn(cmd) abort
+  execute 'Spawn '.a:cmd
+endfunction
+
+function! test#strategy#spawn_background(cmd) abort
+  execute 'Spawn! '.a:cmd
+endfunction
+
 function! test#strategy#vimproc(cmd) abort
   execute 'VimProcBang '.a:cmd
 endfunction
@@ -243,7 +251,8 @@ function! test#strategy#wezterm(cmd) abort
     if l:output[0] == $WEZTERM_PANE
       let l:prev = $WEZTERM_PANE
       let l:dir = get(g:, "test#wezterm#split_direction", "right")
-      let l:output = systemlist([l:wezterm, "cli", "split-pane", "--" . l:dir])
+      let l:width = get(g:, "test#wezterm#split_percent", 50)
+      let l:output = systemlist([l:wezterm, "cli", "split-pane", "--percent", l:width, "--" . l:dir])
 
       " return to original pane
       call system([l:wezterm, "cli", "activate-pane", "--pane-id", l:prev])

@@ -33,6 +33,16 @@ describe "vitest"
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' __tests__/normal-test.jsx'
+
+      view +2 __tests__/escaping-test.ts
+      TestNearest
+
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Escaping parentheses \\('' __tests__/escaping-test.ts'
+
+      view +5 __tests__/escaping-test.ts
+      TestNearest
+
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Escaping brackets \\['' __tests__/escaping-test.ts'
     end
 
     it "runs loop tests"

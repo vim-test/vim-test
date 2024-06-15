@@ -98,6 +98,7 @@ let test#strategy = "dispatch"
 | **Neovim sticky**               | `neovim_sticky`                                             | Runs test commands with `:terminal` in a split window, but keeps it open for subsequent runs.                                                                     |
 | **Vim8 Terminal**               | `vimterminal`                                               | Runs test commands with `term_start()` in a split window.                                                                                                         |
 | **[Dispatch]**                  | `dispatch` `dispatch_background`                            | Runs test commands with `:Dispatch` or `:Dispatch!`.                                                                                                              |
+| **[Spawn]**                     | `spawn` `spawn_background`                                  | Runs test commands using dispatch.vim `:Spawn` or `:Spawn!`.                                                                                                      |
 | **[Vimux]**                     | `vimux`                                                     | Runs test commands in a small tmux pane at the bottom of your terminal.                                                                                           |
 | **[Tslime]**                    | `tslime`                                                    | Runs test commands in a tmux pane you specify.                                                                                                                    |
 | **[Slimux]**                    | `slimux`                                                    | Runs test commands in a tmux pane you specify.                                                                                                                    |
@@ -362,7 +363,7 @@ If you want some CLI options to stick around, you can configure them in your
 
 ```vim
 let test#ruby#minitest#options = '--verbose'
-let test#rust#cargotest#test_options = '-- --nocapture'
+let test#javascript#denotest#options = '--quiet'
 ```
 
 You can also choose a more granular approach:
@@ -372,10 +373,6 @@ let test#ruby#rspec#options = {
   \ 'nearest': '--backtrace',
   \ 'file':    '--format documentation',
   \ 'suite':   '--tag ~slow',
-\}
-let test#rust#cargotest#test_options = {
-  \ 'nearest': ['--', '--nocapture'],
-  \ 'file':    '',
 \}
 ```
 
@@ -387,6 +384,26 @@ let test#ruby#rspec#options = {
   \ 'all':   '--backtrace',
   \ 'suite': '--tag ~slow',
 \}
+```
+
+The cargotest runner lets you specify the test-options argument as follows:
+
+```vim
+let test#rust#cargotest#test_options = '-- --nocapture'
+```
+
+Or using a more granular approach:
+
+```vim
+let test#rust#cargotest#test_options = {
+  \ 'nearest': ['--', '--nocapture'],
+  \ 'file':    '',
+\}
+```
+
+The gotest runner let you specify the -args argument as follows:
+```vim
+let test#go#gotest#args = 'a=b'
 ```
 
 ### Vim8 / Neovim terminal position

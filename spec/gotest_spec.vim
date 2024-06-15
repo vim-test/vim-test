@@ -149,4 +149,20 @@ describe "GoTest"
 
     Expect g:test#last_command == 'go test ./...'
   end
+
+  it "runs test with args"
+    view +5 normal_test.go
+    let g:test#go#gotest#args = "a=b"
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''TestNumbers$'' ./. -args a=b'
+  end
+
+  it "runs test suite with args"
+    view +14 build_tags_test.go
+    let g:test#go#gotest#args = "a=b"
+    TestSuite
+
+    Expect g:test#last_command == 'go test ./... -args a=b'
+  end
 end

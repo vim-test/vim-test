@@ -376,6 +376,13 @@ plugin.
 >
   let test#strategy = 'dispatch' " or 'dispatch_background'
 <
+Spawn ~
+
+Runs test commands with `:Spawn` or `:Spawn!`. Requires the Dispatch.vim
+plugin.
+>
+  let test#strategy = 'spawn' " or 'spawn_background'
+<
 VimProc ~
 
 Runs test commands with `:VimProcBang`. Requires the Vimproc.vim plugin.
@@ -581,6 +588,15 @@ overriden with `g:test#wezterm#split_direction`.
   let g:test#wezterm#split_direction = 'bottom'
 <
 
+The wezterm cli split-pane accepts a --percent option to customize the number
+of cells that the new split will have, expressed as a percentage. The percent
+defaults to 50 unless set to a different value.
+
+>
+  let test#wezterm#split_percent = 30
+<
+
+
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 
 If you want your test results to appear in the |quickfix| window, use one of the
@@ -673,7 +689,7 @@ You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your preferred options with
 >
   let g:test#ruby#minitest#options = '--verbose'
-  let g:test#rust#cargotest#test_options = '-- --nocapture'
+  let g:test#javascript#denotest#options = '--quiet'
 <
 Or, if you prefer more granular approach, you can do
 >
@@ -681,10 +697,6 @@ Or, if you prefer more granular approach, you can do
     \ 'nearest': '--format documentation',
     \ 'file':    '--format documentation',
     \ 'suite':   '--tag ~slow',
-  \}
-  let test#rust#cargotest#test_options = {
-    \ 'nearest': ['--', '--nocapture', '--exact'],
-    \ 'file':    [],
   \}
 <
 You can also specify a global option for the test runner to work alongside the
@@ -696,6 +708,21 @@ well
     \ 'all':   '--format documentation',
     \ 'suite': '--tag ~slow',
   \}
+<
+The cargotest runner lets you specify the test-options argument as follows:
+>
+  let g:test#rust#cargotest#test_options = '-- --nocapture'
+<
+Or using a more granular approach:
+>
+  let test#rust#cargotest#test_options = {
+    \ 'nearest': ['--', '--nocapture', '--exact'],
+    \ 'file':    [],
+  \}
+
+The gotest runner let you specify the -args argument as follows:
+>
+  let g:test#go#gotest#args = 'a=b'
 <
 If you want to manually configure a test runner's executable, you can do
 >

@@ -61,6 +61,16 @@ describe "Jest"
       TestNearest
 
       Expect g:test#last_command == 'jest --runTestsByPath -t ''^Math Addition adds two numbers$'' -- __tests__/context-test.js'
+
+      view +2 __tests__/escaping-test.js
+      TestNearest
+
+      Expect g:test#last_command == 'jest --runTestsByPath -t ''^Escaping parentheses \\($'' -- __tests__/escaping-test.js'
+
+      view +5 __tests__/escaping-test.js
+      TestNearest
+
+      Expect g:test#last_command == 'jest --runTestsByPath -t ''^Escaping brackets \\[$'' -- __tests__/escaping-test.js'
     end
 
     it "runs CoffeeScript"

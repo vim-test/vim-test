@@ -25,4 +25,10 @@ describe "Gleam"
     Expect g:test#last_command == "gleam test normal.gleam"
   end
 
+  it "runs test suite"
+    view normal.gleam
+    TestSuite
+
+    Expect g:test#last_command == "gleam test"
+  end
 end

@@ -232,6 +232,9 @@ for example:
                                                 *test-:ZigTest*
 :ZigTest [args]              Uses the `zig` `test` command.
 
+                                                *test-:GleamTest*
+:GleamTest [args]              Uses the `gleam` `test` command.
+
                                                 *test-:ShellSpec*
 :ShellSpec [args]                 Uses the `shellspec` command.
 

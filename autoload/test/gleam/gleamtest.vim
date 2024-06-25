@@ -18,7 +18,7 @@ endfunction
 
 function! test#gleam#gleamtest#build_args(args)
   if empty(filter(copy(a:args), 'test#base#file_exists(v:val)'))
-    call add(a:args, 'build test')
+    call add(a:args, 'test')
   endif
 
   return a:args

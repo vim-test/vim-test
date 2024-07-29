@@ -702,6 +702,10 @@ If the `nextest` cargo subcommand is available, cargo-nextest is used. `cargo te
 let g:test#rust#runner = 'cargotest'
 ```
 
+In workspaces, reads the [package name field] from `Cargo.toml'.
+
+[package name field]: https://doc.rust-lang.org/cargo/reference/manifest.html#the-name-field
+
 ## Autocommands
 
 In addition to running tests manually, you can also configure autocommands

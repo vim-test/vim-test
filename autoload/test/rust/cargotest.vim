@@ -133,6 +133,17 @@ function! s:test_namespace(filename) abort
           echo 
           let l:package = l:modules[idx]
           let l:modules = l:modules[idx+1:]
+          " use package name, if present
+          let l:section = ''
+          for line in readfile(l:cargo_toml)
+            if line =~ '\[.\+\]' | let l:section = line | endif
+              if l:section == '[package]' && line =~ 'name'
+              let l:package = matchstr(line, '"\zs[^"]*\ze"')
+
+              break
+            endif
+          endfor
+
           break
       endif
   endfor

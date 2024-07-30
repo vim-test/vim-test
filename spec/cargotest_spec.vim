@@ -216,12 +216,12 @@ describe "Cargo"
     cd ..
     view crate/src/lib.rs
     TestFile
-    Expect g:test#last_command == 'cargo test --package crate '''''
+    Expect g:test#last_command == 'cargo test --package vim-test '''''
 
     let g:test#rust#cargotest#test_options = {'nearest': '-- --nocapture --exact', 'file': ['-- --nocapture']}
     view crate/src/lib.rs
     TestFile
-    Expect g:test#last_command == 'cargo test --package crate '''' -- --nocapture'
+    Expect g:test#last_command == 'cargo test --package vim-test '''' -- --nocapture'
     unlet g:test#rust#cargotest#test_options
     cd -
   end

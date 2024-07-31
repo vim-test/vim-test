@@ -56,6 +56,15 @@ describe "Maven Junit3 tests"
     Expect g:test#last_command == "mvn test -Dtest=org.vimtest.math.MathTest\\#testFailedAdd"
   end
 
+  it "runs nearest tests with custom test cmd"
+    let g:test#java#maventest#test_cmd = 'surefire:test -Dtest='
+    view +37 src/test/java/org/vimtest/math/MathTest.java
+    TestNearest
+
+    Expect g:test#last_command == "mvn surefire:test -Dtest=org.vimtest.math.MathTest\\#testFailedAdd"
+    unlet g:test#java#maventest#test_cmd
+  end
+
   it "runs a suite"
     view src/test/java/org/vimtest/math/MathTest.java
     TestSuite

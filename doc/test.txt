@@ -344,6 +344,13 @@ As there might be some dependencies between the maven modules you might need to 
   nnoremap <silent><leader>itf :IntegrationTest -Dtest=foo -DfailIfNoTests=false -am -Dpmd.skip=true -Dcheckstyle.skip=true<CR>
 <
 
+If you want to customize maven test command, you can set
+`g:test#java#maventest#test_cmd` in your vimrc file.
+
+>
+  let g:test#java#maventest#test_cmd = 'surefire:test -Dtest'
+<
+
 STRATEGIES                                      *test-strategies*
 
 Multiple strategies are supported for running tests.
@@ -558,7 +565,7 @@ This strategy lets you run commands in a neovim terminal using harpoon terminals
 
 Before you can use this strategy you are going to need to have the harpoon plugin installed
 
-By default the commands are sent to the terminal 1, to send the command to another terminal you con set in you vimrc g:test#harpoon_term
+By default the commands are sent to the terminal 1, to send the command to another terminal you can set in you vimrc g:test#harpoon_term
 
 For example to send the commands to terminal number 2 you can set in your vimrc:
 

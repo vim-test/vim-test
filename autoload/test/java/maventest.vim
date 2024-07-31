@@ -22,14 +22,17 @@ function! test#java#maventest#build_position(type, position) abort
   " ex:  mvn test -Dtest com.you.pkg.App\*           (catches nested test-classes)
   " ex:  mvn test -Dtest com.you.pkg.App\* -pl module_name
   " ex:  mvn test -Dtest com.you.pkg.App#test_method -pl module_name
-  
-  let test_cmd = 'test -Dtest='
 
-  if filename =~# 'IT\|ITCase\|Integration$' && a:type =~# '^nearest\|file$'
-    let skip_it_plugins = " -Dsonar.skip=true -Dpit.report.skip=true -Dpit.skip=true -Dpmd.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true -Dfailsafe.only=true"
-    let test_cmd = "verify" . skip_it_plugins . " -Dit.test="
+  if exists('g:test#java#maventest#test_cmd')
+    let test_cmd = g:test#java#maventest#test_cmd
+  else
+    let test_cmd = 'test -Dtest='
+
+    if filename =~# 'IT\|ITCase\|Integration$' && a:type =~# '^nearest\|file$'
+      let skip_it_plugins = " -Dsonar.skip=true -Dpit.report.skip=true -Dpit.skip=true -Dpmd.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true -Dfailsafe.only=true"
+      let test_cmd = "verify" . skip_it_plugins . " -Dit.test="
+    endif
   endif
-
 
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)

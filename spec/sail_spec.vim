@@ -11,7 +11,7 @@ describe "Laravel Sail"
 
   after
     call Teardown()
-    !rm -rf vendor
+    !rm -rf vendor docker-compose.yml
     cd -
   end
 
@@ -96,6 +96,20 @@ describe "Laravel Sail"
     TestFile
 
     Expect g:test#last_command == 'phpunit --colors NormalTest.php'
+  end
+
+  it "runs Pest via sail when configured"
+    cd ../pest
+    !mkdir -p vendor/bin
+    !touch vendor/bin/sail
+    !touch docker-compose.yml
+    view PestTest.php
+    TestFile
+
+    Expect g:test#last_command == './vendor/bin/sail pest --colors PestTest.php'
+
+    !rm -rf vendor docker-compose.yml
+    cd ../phpunit
   end
 
 end

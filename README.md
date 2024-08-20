@@ -810,6 +810,20 @@ $ vim-flavor test spec/
 
 Or if you're inside of Vim, you can simply run `:VSpec` provided by test.vim.
 
+## Unsaved changes
+
+If `autowrite` or `autowriteall` are set then unsaved changes will be
+written to disk with `:wall` before each test execution.
+
+### Prompt for unsaved changes
+
+You can enable a user prompt asking whether to write unsaved changes
+prior to executing a test by
+
+```vim
+  let g:test#prompt_for_unsaved_changes = 1
+```
+
 ## Credits
 
 This plugin was strongly influenced by Gary Bernhardt's Destroy All Software.

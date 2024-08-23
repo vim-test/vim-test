@@ -166,8 +166,20 @@ function! s:alternate_file() abort
 endfunction
 
 function! s:before_run() abort
+  let modified_buffers = len(getbufinfo({'bufmodified': 1}))
   if &autowrite || &autowriteall
     silent! wall
+
+  elseif exists('g:test#prompt_for_unsaved_changes') && l:modified_buffers
+    let answer = confirm(
+        \ "Warning: you have unsaved changes",
+        \ "&write\nwrite &all\n&continue", 3)
+
+    if l:answer == 1
+      write
+    elseif l:answer == 2
+      wall
+    endif
   endif
 
   if exists('g:test#project_root')

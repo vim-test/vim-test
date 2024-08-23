@@ -11,6 +11,8 @@ License: Same terms as Vim itself (see |license|)
 |test-configuration|              CONFIGURATION
 |test-python|                     PYTHON SPECIFIC CONFIG
 |test-projectionist|              PROJECTIONIST INTEGRATION
+|test-custom-alternate-file|      CUSTOM ALTERNATE FILE
+|test-unsaved-changes|            UNSAVED CHANGES
 |test-about|                      ABOUT
 |test-credits|                    CREDITS
 
@@ -822,6 +824,19 @@ function! CustomAlternateFile(cmd)
 endfunction
 
 let g:test#custom_alternate_file = function('CustomAlternateFile')
+<
+
+UNSAVED CHANGES                                 *test-unsaved-changes*
+
+If |'autowrite'| or |'autowriteall'| are set then unsaved changes will be
+written to disk with |:wall| before each test execution.
+
+Prompt for unsaved changes ~
+
+You can enable a user prompt asking whether to write unsaved changes
+prior to executing a test by
+>
+  let g:test#prompt_for_unsaved_changes = 1
 <
 
 ABOUT                                           *test-about*

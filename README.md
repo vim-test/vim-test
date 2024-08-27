@@ -521,7 +521,7 @@ With this set up you can run your integration tests with the :IntegrationTest pl
 nnoremap <silent><leader>itf :IntegrationTest -Dtest=foo -DfailIfNoTests=false -am -Dpmd.skip=true -Dcheckstyle.skip=true<CR>
 ```
 
-If you want to customize maven test command, you can set `g:test#java#maventest#test_cmd` in your vimrc file.
+If you want to customize the Maven test command, you can set `g:test#java#maventest#test_cmd` in your vimrc file.
 
 ```vim
   let g:test#java#maventest#test_cmd = 'surefire:test -Dtest'

@@ -344,7 +344,7 @@ As there might be some dependencies between the maven modules you might need to 
   nnoremap <silent><leader>itf :IntegrationTest -Dtest=foo -DfailIfNoTests=false -am -Dpmd.skip=true -Dcheckstyle.skip=true<CR>
 <
 
-If you want to customize maven test command, you can set
+If you want to customize the Maven test command, you can set
 `g:test#java#maventest#test_cmd` in your vimrc file.
 
 >

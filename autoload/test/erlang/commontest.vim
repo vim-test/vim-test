@@ -1,9 +1,9 @@
 if !exists('g:test#erlang#commontest#file_pattern')
-  let g:test#erlang#commontest#file_pattern = '\v_SUITE\.erl$'
+  let g:test#erlang#commontest#file_pattern = '\v\C_SUITE\.erl$'
 endif
 
 if !exists('g:test#erlang#commontest#test_pattern')
-  let g:test#erlang#commontest#test_pattern = '\v^\s*(test_\w*)\('
+  let g:test#erlang#commontest#test_pattern = '\v\C^\s*(test_\w+)\s*\('
 endif
 
 function! test#erlang#commontest#test_file(file) abort
@@ -11,26 +11,21 @@ function! test#erlang#commontest#test_file(file) abort
 endfunction
 
 function! test#erlang#commontest#build_position(type, position) abort
-    if a:type ==# 'nearest'
-        let name = s:nearest_test(a:position)
-        if !empty(name)
-            return ['--suite='.a:position['file'], '--case='.name]
-        else
-            return ['--suite='.a:position['file']]
-        endif
-    elseif a:type ==# 'file'
-        return ['--suite='.a:position['file']]
-    else
-        return []
+  let l:args = []
+
+  if a:type isnot# 'suite'
+    let l:args += ['--suite=' . a:position.file]
+  endif
+
+  if a:type is# 'nearest'
+    let l:case = s:nearest_test(a:position)
+
+    if !empty(l:case)
+      let l:args += ['--case=' . l:case]
     endif
-endfunction
+  endif
 
-function! test#erlang#commontest#build_args(args) abort
-  return  ['ct'] + a:args
-endfunction
-
-function! test#erlang#commontest#executable() abort
-  return 'rebar3'
+  return l:args
 endfunction
 
 function! s:nearest_test(position) abort
@@ -40,4 +35,12 @@ function! s:nearest_test(position) abort
       \})
 
   return get(l:nearest.test, 0, '')
+endfunction
+
+function! test#erlang#commontest#build_args(args) abort
+  return  ['ct'] + a:args
+endfunction
+
+function! test#erlang#commontest#executable() abort
+  return 'rebar3'
 endfunction

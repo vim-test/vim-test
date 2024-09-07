@@ -2,6 +2,10 @@ if !exists('g:test#erlang#commontest#file_pattern')
   let g:test#erlang#commontest#file_pattern = '\v_SUITE\.erl$'
 endif
 
+if !exists('g:test#erlang#commontest#test_pattern')
+  let g:test#erlang#commontest#test_pattern = '\v^\s*(test_\w*)\('
+endif
+
 function! test#erlang#commontest#test_file(file) abort
   return a:file =~# g:test#erlang#commontest#file_pattern
 endfunction
@@ -30,6 +34,10 @@ function! test#erlang#commontest#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#erlang#patterns)
-  return join(name['test'])
+  let l:nearest = test#base#nearest_test(a:position, {
+      \ 'test': [g:test#erlang#commontest#test_pattern],
+      \ 'namespace': [],
+      \})
+
+  return get(l:nearest.test, 0, '')
 endfunction

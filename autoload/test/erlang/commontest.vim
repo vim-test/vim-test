@@ -3,7 +3,7 @@ if !exists('g:test#erlang#commontest#file_pattern')
 endif
 
 if !exists('g:test#erlang#commontest#test_pattern')
-  let g:test#erlang#commontest#test_pattern = '\v\C^\s*(test_\w+)\s*\('
+  let g:test#erlang#commontest#test_pattern = '\v\C^\s*(%(t|test)_\w+)\s*\('
 endif
 
 function! test#erlang#commontest#test_file(file) abort

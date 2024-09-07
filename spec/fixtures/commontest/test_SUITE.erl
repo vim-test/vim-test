@@ -2,7 +2,10 @@
 -compile([export_all, nowarn_export_all]).
 
 all() ->
-    [test_foo].
+    [t_foo, test_foo].
+
+t_foo(_Config) ->
+    ok.
 
 test_foo(_Config) ->
     ok.

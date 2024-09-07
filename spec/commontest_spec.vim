@@ -20,6 +20,13 @@ describe 'CommonTest'
   end
 
   context 'when executed with :TestNearest'
+    it 'runs the function prefixed with t_ under the cursor as a test case'
+      view +/^t_foo/+1 test_SUITE.erl
+      TestNearest
+
+      Expect g:test#last_command is# 'rebar3 ct --suite=test_SUITE.erl --case=t_foo'
+    end
+
     it 'runs the function prefixed with test_ under the cursor as a test case'
       view +/^test_foo/+1 test_SUITE.erl
       TestNearest

@@ -37,7 +37,7 @@ endfunction
 function! test#php#behat#executable() abort
   if exists('g:test#php#behat#executable')
     return g:test#php#behat#executable
-  if filereadable('./vendor/bin/behat')
+  elseif filereadable('./vendor/bin/behat')
     return './vendor/bin/behat'
   elseif filereadable('./bin/behat')
     return './bin/behat'
@@ -50,4 +50,4 @@ function! s:nearest_test(position) abort
   let patterns = {'test': ['\vScenario%(\s*Outline)?: (.*)'], 'namespace': []}
   let name = test#base#nearest_test(a:position, patterns)
   return join(name['test'])
-endfunction
+endfunction:

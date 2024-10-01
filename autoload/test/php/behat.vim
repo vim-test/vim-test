@@ -35,6 +35,8 @@ function! test#php#behat#build_args(args, color) abort
 endfunction
 
 function! test#php#behat#executable() abort
+  if exists('g:test#php#behat#executable')
+    return g:test#php#behat#executable
   if filereadable('./vendor/bin/behat')
     return './vendor/bin/behat'
   elseif filereadable('./bin/behat')

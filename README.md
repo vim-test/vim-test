@@ -678,6 +678,12 @@ Similarly if you'd prefer to use an alternate runner such as the [Laravel artisa
 let test#php#phpunit#executable = 'php artisan test'
 ```
 
+The Behat executable location can be overriden. Here's an example of running it from within a docker container:
+
+```vim
+let test#php#behat#executable = 'docker exec -it container-name vendor/bin/behat'
+```
+
 #### C++
 Pattern for Test File: We assume all your test files are prefixed with "test_" or "Test". If not, override the following:
 ```

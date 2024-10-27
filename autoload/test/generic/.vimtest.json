@@ -1,0 +1,10 @@
+{
+  "suite": {
+    "command": "echo 'Hello generic command!'",
+    "workdir": "."
+  },
+"file": {
+    "command": "echo 'Hello generic command testing a file!'"
+ }
+}
+

@@ -14,6 +14,7 @@ let g:test#default_runners = {
   \ 'Elixir':     ['ExUnit', 'ESpec'],
   \ 'Elm':        ['ElmTest'],
   \ 'Erlang':     ['CommonTest', 'EUnit', 'PropEr'],
+  \ 'Generic':    ['Generic'],
   \ 'Go':         ['GoTest', 'Ginkgo', 'RichGo', 'Delve'],
   \ 'Groovy':     ['MavenTest', 'GradleTest'],
   \ 'Haskell':    ['StackTest', 'CabalTest'],

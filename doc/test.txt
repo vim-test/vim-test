@@ -410,6 +410,13 @@ Runs test commands with `:terminal`, but keeps it open for subsequent runs.
 >
   let test#strategy = 'neovim_sticky'
 <
+Neovim VS Code~
+
+Runs test commands in with VS Code terminal, keeps the focus to EditorGroup.
+>
+  let test#strategy = 'neovim_vscode'
+<
+
 Vim8 Terminal ~
 
 Runs test commands with `term_start()`, which spawns a terminal inside Vim.

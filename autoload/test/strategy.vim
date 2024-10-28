@@ -137,6 +137,16 @@ function! test#strategy#neovim_sticky(cmd) abort
   endif
 endfunction
 
+function! test#strategy#neovim_vscode(cmd) abort
+  " Remove any WSL distribution
+  let l:clean_cmd = substitute(a:cmd, 'vscode-remote://wsl%2B[^/]*', '', 'g')
+  " Focus terminal, run command and take the focus back to EditorGroup (buffer)
+  call VSCodeNotify('workbench.action.terminal.focus')
+  call VSCodeNotify('workbench.action.terminal.sendSequence', {'text': "clear\n"})
+  call VSCodeNotify('workbench.action.terminal.sendSequence', {'text': l:clean_cmd . "\n"})
+  call VSCodeNotify('workbench.action.focusActiveEditorGroup')
+endfunction
+
 function! test#strategy#vimterminal(cmd) abort
   let term_position = get(g:, 'test#vim#term_position', 'botright')
   execute term_position . ' new'

@@ -6,6 +6,7 @@ let g:loaded_test = 1
 let g:test#plugin_path = expand('<sfile>:p:h:h')
 
 let g:test#default_runners = {
+  \ '_':          ['VimTestJson'],
   \ 'CSharp':     ['Xunit', 'DotnetTest'],
   \ 'Clojure':    ['FireplaceTest', 'LeinTest'],
   \ 'Crystal':    ['CrystalSpec'],
@@ -14,7 +15,6 @@ let g:test#default_runners = {
   \ 'Elixir':     ['ExUnit', 'ESpec'],
   \ 'Elm':        ['ElmTest'],
   \ 'Erlang':     ['CommonTest', 'EUnit', 'PropEr'],
-  \ 'Generic':    ['Generic'],
   \ 'Go':         ['GoTest', 'Ginkgo', 'RichGo', 'Delve'],
   \ 'Groovy':     ['MavenTest', 'GradleTest'],
   \ 'Haskell':    ['StackTest', 'CabalTest'],

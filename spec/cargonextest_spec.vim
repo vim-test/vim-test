@@ -115,6 +115,20 @@ describe "CargoNextest"
     Expect g:test#last_command == 'cargo nextest run ''too::nested::tests::second_test'''
   end
 
+  it "runs nearest test in nested test modules"
+    view +3 src/nested_tests.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo nextest run ''nested_tests::tests::first_test'''
+
+    view +8 src/nested_tests.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo nextest run ''nested_tests::tests::nested_once::second_test'''
+
+    view +13 src/nested_tests.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo nextest run ''nested_tests::tests::nested_once::nested_twice::third_test'''
+  end
+
   it "runs test suites"
     view src/lib.rs
     TestSuite

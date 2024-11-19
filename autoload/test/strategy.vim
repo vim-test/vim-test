@@ -131,7 +131,8 @@ function! test#strategy#neovim_sticky(cmd) abort
     let l:win = [s:neovim_reopen_term(l:buffers[0].bufnr)]
   endif
 
-  call chansend(l:buffers[0].variables.terminal_job_id, l:cmd)
+  " Needs explicit join to work in all shells
+  call chansend(l:buffers[0].variables.terminal_job_id, join(l:cmd, "\r"))
   if len(l:win) > 0
     call win_execute(l:win[0], 'normal G', 1)
   endif

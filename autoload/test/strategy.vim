@@ -90,7 +90,7 @@ endfunction
 function! s:neovim_reopen_term(bufnr) abort
   let l:current_window = win_getid()
   let term_position = get(g:, 'test#neovim#term_position', 'botright')
-  execute term_position . ' sbuffer ' . a:bufnr
+  execute term_position . ' new | buffer ' . a:bufnr
 
   let l:new_window = win_getid()
   call win_gotoid(l:current_window)

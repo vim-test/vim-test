@@ -286,7 +286,7 @@ for example:
 :Prove [args]                Uses the `prove` command.
 
                                                 *test-:MavenTest*
-:MavenTest [args]            Uses the `mvn` `test` command. If the file exists in a multi-module project then appends -pl <modulename> and runs a single module only. There is a different strategy for running tests with the failsafe plugin instead of surefire. It is described in detail in the test-maven-test-differences section.
+:MavenTest [args]            Uses the `mvn` `test` command. If the file exists in a multi-module project then appends -am -pl <modulename> and disables `failIfNoSpecifiedTests`, and runs a single module only. There is a different strategy for running tests with the failsafe plugin instead of surefire. It is described in detail in the test-maven-test-differences section.
                                                 *test-:GradleTest*
 :GradleTest [args]           Uses the `gradle` `test` command. If the project is multi module then it uses the -p <modulename> flag.
 

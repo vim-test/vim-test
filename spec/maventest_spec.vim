@@ -97,63 +97,63 @@ describe "Maven Junit3 multimodule tests"
     view sample_module/src/test/java/org/vimtest/math/TestMath.java
     TestFile
 
-    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.math.TestMath\* -pl sample_module'
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.math.TestMath\* -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "runs file tests (filename matches *Test.java)"
     view sample_module/src/test/java/org/vimtest/math/MathTest.java
     TestFile
 
-    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.math.MathTest\* -pl sample_module'
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.math.MathTest\* -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "runs file tests (filename matches *Tests.java)"
     view sample_module/src/test/java/org/vimtest/math/MathTests.java
     TestFile
 
-    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.math.MathTests\* -pl sample_module'
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.math.MathTests\* -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "runs file tests (filename matches *TestCase.java)"
     view sample_module/src/test/java/org/vimtest/math/MathTestCase.java
     TestFile
 
-    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.math.MathTestCase\* -pl sample_module'
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.math.MathTestCase\* -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "runs file tests with user provided options"
     view sample_module/src/test/java/org/vimtest/math/MathTest.java
     TestFile -f pom.xml
 
-    Expect g:test#last_command == 'mvn -f pom.xml test -Dtest=org.vimtest.math.MathTest\* -pl sample_module'
+    Expect g:test#last_command == 'mvn -f pom.xml test -Dtest=org.vimtest.math.MathTest\* -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "runs nearest tests"
     view +37 sample_module/src/test/java/org/vimtest/math/MathTest.java
     TestNearest
 
-    Expect g:test#last_command == "mvn test -Dtest=org.vimtest.math.MathTest\\#testFailedAdd -pl sample_module"
+    Expect g:test#last_command == "mvn test -Dtest=org.vimtest.math.MathTest\\#testFailedAdd -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module"
   end
 
   it "runs a suite"
     view sample_module/src/test/java/org/vimtest/math/MathTest.java
     TestSuite
 
-    Expect g:test#last_command == 'mvn test -pl sample_module'
+    Expect g:test#last_command == 'mvn test -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "runs a test suite with user provided options"
     view sample_module/src/test/java/org/vimtest/math/MathTest.java
     TestSuite -X -f pom.xml -DcustomProperty=5
 
-    Expect g:test#last_command == 'mvn -X -f pom.xml -DcustomProperty=5 test -pl sample_module'
+    Expect g:test#last_command == 'mvn -X -f pom.xml -DcustomProperty=5 test -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "runs a suite from sub_multimodule/submodule2"
     view sub_multimodule/submoduleA/src/test/java/org/vimtest/math/MathTest.java
     TestSuite
 
-    Expect g:test#last_command == 'mvn test -pl sub_multimodule/submoduleA'
+    Expect g:test#last_command == 'mvn test -Dsurefire.failIfNoSpecifiedTests=false -am -pl sub_multimodule/submoduleA'
   end
 
 
@@ -287,42 +287,42 @@ describe "Maven Junit5 multimodule tests"
     view +14 sample_module/src/test/java/org/vimtest/TestApp.java
     TestFile
 
-    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\* -pl sample_module'
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\* -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "TestNearest - @Test void func()"
     view +12 sample_module/src/test/java/org/vimtest/TestApp.java
     TestNearest
 
-    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\#test_testdecorator_void -pl sample_module'
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\#test_testdecorator_void -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "TestNearest - @Test public void func()"
     view +17 sample_module/src/test/java/org/vimtest/TestApp.java
     TestNearest
 
-    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\#test_testdecorator_public_void -pl sample_module'
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\#test_testdecorator_public_void -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "TestNearest - void func()"
     view +22 sample_module/src/test/java/org/vimtest/TestApp.java
     TestNearest
 
-    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\#test_void -pl sample_module'
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\#test_void -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "TestNearest - public void func()"
     view +30 sample_module/src/test/java/org/vimtest/TestApp.java
     TestNearest
 
-    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\#test_public_void -pl sample_module'
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\#test_public_void -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "TestNearest - nested test()"
     view +39 sample_module/src/test/java/org/vimtest/TestApp.java
     TestNearest
 
-    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\$Test_NestedTestClass\#test_nested_test -pl sample_module'
+    Expect g:test#last_command == 'mvn test -Dtest=org.vimtest.TestApp\$Test_NestedTestClass\#test_nested_test -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
 end
@@ -367,7 +367,7 @@ describe "Integration tests in multimodule"
     view +14 sample_module/src/test/java/org/vimtest/TestApp.java
     IntegrationTest
 
-    Expect g:test#last_command == 'mvn verify -Dit.test=TestApp\* -pl sample_module'
+    Expect g:test#last_command == 'mvn verify -Dit.test=TestApp\* -Dsurefire.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "TestNearest runs with verify fully qualified classname and method name, based on filename sufix *IT"
@@ -375,68 +375,68 @@ describe "Integration tests in multimodule"
     view +13 sample_module/src/test/java/org/vimtest/AppIT.java
 
     TestNearest
-    Expect g:test#last_command == t:expected_it_nearest_file_prefix . " -Dit.test=org.vimtest.AppIT\\#test_integration_it -pl sample_module"
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . " -Dit.test=org.vimtest.AppIT\\#test_integration_it -Dfailsafe.failIfNoSpecifiedTests=false -am -pl sample_module"
 
     view +18 sample_module/src/test/java/org/vimtest/AppIT.java
 
     TestNearest
-    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppIT\#test_integration_it2 -pl sample_module'
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppIT\#test_integration_it2 -Dfailsafe.failIfNoSpecifiedTests=false -am -pl sample_module'
 
     view +23 sample_module/src/test/java/org/vimtest/AppIT.java
 
     TestNearest
-    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppIT\#test_integration_it3 -pl sample_module'
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppIT\#test_integration_it3 -Dfailsafe.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "TestNearest runs with verify fully qualified classname and method name, based on filename sufix *ITCase.java"
     view +13 sample_module/src/test/java/org/vimtest/AppITCase.java
 
     TestNearest
-    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppITCase\#test_integration_it_case -pl sample_module'
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppITCase\#test_integration_it_case -Dfailsafe.failIfNoSpecifiedTests=false -am -pl sample_module'
 
     view +18 sample_module/src/test/java/org/vimtest/AppITCase.java
 
     TestNearest
-    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppITCase\#test_integration_it_case2 -pl sample_module'
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppITCase\#test_integration_it_case2 -Dfailsafe.failIfNoSpecifiedTests=false -am -pl sample_module'
 
     view +23 sample_module/src/test/java/org/vimtest/AppITCase.java
 
     TestNearest
-    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppITCase\#test_integration_it_case3 -pl sample_module'
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppITCase\#test_integration_it_case3 -Dfailsafe.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "TestNearest runs with verify fully qualified classname and method name, based on filename sufix *Integration.java"
     view +13 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
 
     TestNearest
-    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\#test_integration -pl sample_module'
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\#test_integration -Dfailsafe.failIfNoSpecifiedTests=false -am -pl sample_module'
 
     view +18 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
 
     TestNearest
-    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\#test_integration2 -pl sample_module'
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\#test_integration2 -Dfailsafe.failIfNoSpecifiedTests=false -am -pl sample_module'
 
     view +23 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
 
     TestNearest
-    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\#test_integration3 -pl sample_module'
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\#test_integration3 -Dfailsafe.failIfNoSpecifiedTests=false -am -pl sample_module'
   end
 
   it "TestFile runs with verify fully qualified classname, based on filename sufix *IT|Integration|ITCase.java"
     view +13 sample_module/src/test/java/org/vimtest/AppIT.java
 
     TestFile
-    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppIT\* -pl sample_module'
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppIT\* -Dfailsafe.failIfNoSpecifiedTests=false -am -pl sample_module'
 
     view +13 sample_module/src/test/java/org/vimtest/AppITCase.java
 
     TestFile
-    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppITCase\* -pl sample_module'
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppITCase\* -Dfailsafe.failIfNoSpecifiedTests=false -am -pl sample_module'
 
     view +13 sample_module/src/test/java/org/vimtest/AppTestIntegration.java
 
     TestFile
-    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\* -pl sample_module'
+    Expect g:test#last_command == t:expected_it_nearest_file_prefix . ' -Dit.test=org.vimtest.AppTestIntegration\* -Dfailsafe.failIfNoSpecifiedTests=false -am -pl sample_module'
 
   end
 end

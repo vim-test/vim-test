@@ -20,17 +20,23 @@ function! test#java#maventest#build_position(type, position) abort
   " ex:  mvn test -Dtest com.you.pkg.App$NestedClass#test_method
   " ex:  mvn test -Dtest com.you.pkg.App#test_method
   " ex:  mvn test -Dtest com.you.pkg.App\*           (catches nested test-classes)
-  " ex:  mvn test -Dtest com.you.pkg.App\* -pl module_name
-  " ex:  mvn test -Dtest com.you.pkg.App#test_method -pl module_name
+  " ex:  mvn test -Dtest com.you.pkg.App\* -Dsurefire.failIfNoSpecifiedTests=false -am -pl module_name
+  " ex:  mvn test -Dtest com.you.pkg.App#test_method -Dsurefire.failIfNoSpecifiedTests=false -am -pl module_name
 
   if exists('g:test#java#maventest#test_cmd')
     let test_cmd = g:test#java#maventest#test_cmd
   else
-    let test_cmd = 'test -Dtest='
-
     if filename =~# 'IT\|ITCase\|Integration$' && a:type =~# '^nearest\|file$'
       let skip_it_plugins = " -Dsonar.skip=true -Dpit.report.skip=true -Dpit.skip=true -Dpmd.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true -Dfailsafe.only=true"
       let test_cmd = "verify" . skip_it_plugins . " -Dit.test="
+      if module !=# ''
+        let module = ' -Dfailsafe.failIfNoSpecifiedTests=false' . module
+      endif
+    else
+      let test_cmd = 'test -Dtest='
+      if module !=# ''
+        let module = ' -Dsurefire.failIfNoSpecifiedTests=false' . module
+      endif
     endif
   endif
 
@@ -66,6 +72,7 @@ function! test#java#maventest#executable() abort
     return './mvnw'
   else
     return 'mvn'
+  endif
 endfunction
 
 function! s:get_java_package(filepath)
@@ -85,8 +92,8 @@ function! s:get_maven_module(filepath)
   let l:parent = fnamemodify(project_dir, ':p:h:h')
 
   if filereadable(l:parent. "/pom.xml") " check if the parent dir has pom.xml
-      return ' -pl '. project_dir
-  else 
+      return ' -am -pl '. project_dir
+  else
       return ''
   endif
 endfunction

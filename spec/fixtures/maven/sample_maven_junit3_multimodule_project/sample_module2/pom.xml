@@ -20,4 +20,12 @@
         </plugins>
     </build>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.vimtest.calc</groupId>
+            <artifactId>sample_module</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>

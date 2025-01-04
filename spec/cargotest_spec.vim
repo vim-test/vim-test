@@ -12,7 +12,7 @@ describe "Cargo"
     cd -
   end
 
-  it "runs file tests"
+  it "runs lib file tests"
     view src/lib.rs
     TestFile
     Expect g:test#last_command == 'cargo test '''''
@@ -32,6 +32,20 @@ describe "Cargo"
     view src/too/nested.rs
     TestFile
     Expect g:test#last_command == 'cargo test ''too::nested::'''
+  end
+
+  it "runs bin file tests"
+    view src/bin/somebin.rs
+    TestFile
+    Expect g:test#last_command == 'cargo test --bin somebin '''''
+
+    view src/bin/nestedbin/main.rs
+    TestFile
+    Expect g:test#last_command == 'cargo test --bin nestedbin '''''
+
+    view src/bin/nestedbin/somemod.rs
+    TestFile
+    Expect g:test#last_command == 'cargo test --bin nestedbin ''somemod::'''
   end
 
   it "runs nearest test on lib.rs"
@@ -115,6 +129,32 @@ describe "Cargo"
     Expect g:test#last_command == 'cargo test ''too::nested::tests::second_test'' -- --exact'
   end
 
+  it "runs nearest test on bins"
+    view +7 src/bin/somebin.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test --bin somebin ''tests::first_test'' -- --exact'
+
+    view +11 src/bin/somebin.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test --bin somebin ''tests::second_test'' -- --exact'
+
+    view +9 src/bin/nestedbin/main.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test --bin nestedbin ''tests::first_test'' -- --exact'
+
+    view +13 src/bin/nestedbin/main.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test --bin nestedbin ''tests::second_test'' -- --exact'
+
+    view +4 src/bin/nestedbin/somemod.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test --bin nestedbin ''somemod::tests::first_test'' -- --exact'
+
+    view +8 src/bin/nestedbin/somemod.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test --bin nestedbin ''somemod::tests::second_test'' -- --exact'
+  end
+
   it "runs test suites"
     view src/lib.rs
     TestSuite
@@ -129,6 +169,18 @@ describe "Cargo"
     Expect g:test#last_command == 'cargo test'
 
     view src/too/nested.rs
+    TestSuite
+    Expect g:test#last_command == 'cargo test'
+
+    view src/bin/somebin.rs
+    TestSuite
+    Expect g:test#last_command == 'cargo test'
+
+    view src/bin/nestedbin/main.rs
+    TestSuite
+    Expect g:test#last_command == 'cargo test'
+
+    view src/bin/nestedbin/somemod.rs
     TestSuite
     Expect g:test#last_command == 'cargo test'
   end

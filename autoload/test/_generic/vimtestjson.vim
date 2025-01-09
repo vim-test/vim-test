@@ -27,7 +27,7 @@ function! test#_generic#vimtestjson#build_args(args) abort
 endfunction
 
 function! test#_generic#vimtestjson#executable() abort
-  let l:json = json_decode(readfile(s:vimtest_json))
+  let l:json = readfile(s:vimtest_json)->join()->json_decode()
   return l:json['command']
 endfunction
 

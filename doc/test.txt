@@ -12,6 +12,7 @@ License: Same terms as Vim itself (see |license|)
 |test-python|                     PYTHON SPECIFIC CONFIG
 |test-projectionist|              PROJECTIONIST INTEGRATION
 |test-custom-alternate-file|      CUSTOM ALTERNATE FILE
+|test-overriding-test-commands|   OVERRIDING TEST COMMANDS
 |test-unsaved-changes|            UNSAVED CHANGES
 |test-about|                      ABOUT
 |test-credits|                    CREDITS
@@ -839,6 +840,27 @@ endfunction
 
 let g:test#custom_alternate_file = function('CustomAlternateFile')
 <
+
+OVERRIDING TEST COMMANDS                        *test-overriding-test-commands*
+
+This is considered an advanced feature, subject to active development and further changes.
+It overrides the zero configuration approach, and requires you to manually configure the test runners.
+
+To provide middle ground between well-known test runners working out of the box,
+and per-user configuration, test command can also be specifying by adding a `.vimtest.json`
+file:
+
+>
+{
+  "command": "echo 'Hello vim-test!'"
+}
+<
+
+This will override the command run by all of `:TestNearest`,
+`:TestClass`, `:TestFile` and `:TestSuite` in all files in the `.vimtest.json`'s directory
+and subdirectories, recursively. As such, it can be used to quickly bridge the gap
+for non-standard projects and share it with other developers.
+
 
 UNSAVED CHANGES                                 *test-unsaved-changes*
 

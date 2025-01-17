@@ -709,7 +709,7 @@ If the `nextest` cargo subcommand is available, cargo-nextest is used. `cargo te
 let g:test#rust#runner = 'cargotest'
 ```
 
-In workspaces, reads the [package name field] from `Cargo.toml'.
+In workspaces, reads the [package name field] from `Cargo.toml`.
 
 [package name field]: https://doc.rust-lang.org/cargo/reference/manifest.html#the-name-field
 
@@ -753,6 +753,25 @@ endfunction
 
 let g:test#custom_alternate_file = function('CustomAlternateFile')
 ```
+
+## Overriding test commands
+
+This is considered an advanced feature, subject to active development and further changes. It overrides the zero configuration approach, and requires you to manually configure the test runners.
+
+To provide middle ground between well-known test runners working out of the box,
+and per-user configuration, test command can also be specifying by adding a `.vimtest.json`
+file:
+
+```json
+{
+  "command": "echo 'Hello vim-test!'"
+}
+```
+
+This will override the command run by all of `:TestNearest`,
+`:TestClass`, `:TestFile` and `:TestSuite` in all files in the `.vimtest.json`'s directory
+and subdirectories, recursively. As such, it can be used to quickly bridge the gap
+for non-standard projects and share it with other developers.
 
 ## Extending
 

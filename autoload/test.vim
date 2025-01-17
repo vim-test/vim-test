@@ -115,7 +115,7 @@ function! test#shell(cmd, strategy) abort
 endfunction
 
 function! test#determine_runner(file) abort
-  for [language, runners] in items(test#get_runners())
+  for [language, runners] in sort(items(test#get_runners()), 'i')
     for runner in runners
       let runner = tolower(language).'#'.tolower(runner)
       if exists("g:test#enabled_runners")

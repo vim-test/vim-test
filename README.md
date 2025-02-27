@@ -858,8 +858,7 @@ and Windows support. And also thanks to [vroom.vim].
 
 ## License
 
-Copyright © Janko Marohnić. Distributed under the same terms as Vim itself. See
-`:help license`.
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/license/MIT).
 
 [minitest]: https://github.com/vim-test/vim-test/wiki/Minitest
 [Neoterm]: https://github.com/kassio/neoterm

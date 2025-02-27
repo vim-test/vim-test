@@ -1,7 +1,7 @@
 *test.txt*  A test wrapper which enables you to run tests at speed of thought
 
 Author: Janko Marohnić <https://github.com/janko-m>
-License: Same terms as Vim itself (see |license|)
+License: MIT
 
 |test|                            INTRODUCTION
 |test-generic_commands|           GENERIC COMMANDS

@@ -111,10 +111,14 @@ function! test#strategy#neovim_sticky(cmd) abort
   let l:buffers = getbufinfo({ 'buflisted': 1 })
     \ ->filter({i, v -> has_key(v.variables, l:tag)})
 
+  if !len(l:buffers) && get(g:, 'test#neovim_sticky#use_existing', 0)
+    let l:buffers = getbufinfo({ 'buflisted': 1 })
+      \ ->filter({i, v -> has_key(v.variables, 'terminal_job_id')})
+  end
+
   if len(l:buffers) == 0
     let l:current_window = win_getid()
     call s:neovim_new_term(&shell)
-    let b:[l:tag] = 1
     let l:buffers = getbufinfo(bufnr())
     call win_gotoid(l:current_window)
   else
@@ -125,6 +129,7 @@ function! test#strategy#neovim_sticky(cmd) abort
       let l:cmd = [""] + l:cmd
     endif
   endif
+  call setbufvar(l:buffers[0].bufnr, l:tag, 1)
 
   let l:win = win_findbuf(l:buffers[0].bufnr)
   if !len(l:win) && get(g:, 'test#neovim_sticky#reopen_window', 0)

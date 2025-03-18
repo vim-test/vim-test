@@ -179,9 +179,10 @@ the previous one has finished, it will either wait or fail to run at all.
 You can customize this behavior with the following options:
 
 ```vim
-let g:test#neovim_sticky#kill_previous = 1  " Try to abort previous run
 let g:test#preserve_screen = 0  " Clear screen from previous run
-let test#neovim_sticky#reopen_window = 1 " Reopen terminal split if not visible
+let g:test#neovim_sticky#kill_previous = 1  " Try to abort previous run
+let g:test#neovim_sticky#reopen_window = 1  " Reopen terminal split if not visible
+let g:test#neovim_sticky#use_existing = 1  " Use manually opened terminal, if exists
 ```
 
 ### Kitty strategy setup

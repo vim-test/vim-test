@@ -37,6 +37,8 @@ function! test#python#pyunit#executable() abort
 
   if filereadable("Pipfile")
     let pipenv_prefix = "pipenv run "
+  elseif filereadable("uv.lock")
+    let pipenv_prefix = "uv run "
   endif
 
   return pipenv_prefix . test#python#executable() . ' -m unittest'

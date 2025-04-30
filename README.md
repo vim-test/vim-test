@@ -499,8 +499,9 @@ and will use `poetry run pytest` if it detects a `poetry.lock`. The pyunit and n
 runner supports [pipenv](https://github.com/pypa/pipenv) as well and will
 respectively use `pipenv run python -m unittest` or `pipenv run python -m nosetests`
 if there is a `Pipfile`. It also supports [pdm](https://pdm.fming.dev/) as well and
-will use `poetry run pytest` if there is a `pdm.lock` file.
-
+will use `poetry run pytest` if there is a `pdm.lock` file. As well as [uv](https://github.com/astral-sh/uv) and will use `uv run pytest` if there is `uv.lock` file.
+All runners except `djangotest` support uv and will use `uv run` if there's a
+`uv.lock` file.
 #### Java
 
 For the same reason as Python, runner detection works the same for Java. To

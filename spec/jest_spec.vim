@@ -117,10 +117,15 @@ describe "Jest"
   end
 
   it "runs file tests"
-    view __tests__/normal-test.js
+    view +1 __tests__/normal-test.js
     TestFile
 
     Expect g:test#last_command == 'jest --runTestsByPath -- __tests__/normal-test.js'
+
+    view +2 __tests__/(folder)/normal-test.js
+    TestFile
+
+    Expect g:test#last_command == 'jest --runTestsByPath -- __tests__/\(folder\)/normal-test.js'
   end
 
   it "runs test suites"

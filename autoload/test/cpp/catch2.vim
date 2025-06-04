@@ -24,7 +24,7 @@ endif
 
 if !exists('g:test#cpp#catch2#suite_command')
     let nproc = trim(system("nproc"))
-    let g:test#cpp#catch2#suite_command = "ctest --ouput-on-failure -j" . nproc
+    let g:test#cpp#catch2#suite_command = "ctest --output-on-failure -j" . nproc
 endif
 
 

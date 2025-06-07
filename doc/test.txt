@@ -820,7 +820,8 @@ it will use `pipenv run pytest` instead of just `python -m pytest`. They also su
 and will use `poetry run pytest` if it detects a `poetry.lock`. The pyunit and nose runner
 supports pipenv as well and will respectively use `pipenv run python -m unittest` or
 `pipenv run python -m nosetests` if there is a `Pipfile`. It also supports pdm as well and will
-use `poetry run pytest` if there is a `pdm.lock` file.
+use `poetry run pytest` if there is a `pdm.lock` file. All runners except
+`djangotest` support uv and will use `uv run` if there is a `uv.lock` file.
 
 PROJECTIONIST INTEGRATION                       *test-projectionist*
 

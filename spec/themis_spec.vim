@@ -41,4 +41,37 @@ describe "Themis"
     Expect g:test#last_command == 'themis --foo bar math.vim'
   end
 
+  context "vimspec style tests"
+
+    it "runs file test for nearest"
+      view +2 math.vimspec
+      TestNearest
+      messages
+
+      Expect g:test#last_command == 'themis math.vimspec'
+    end
+
+    it "runs file tests"
+      view +2 math.vimspec
+      TestFile
+
+      Expect g:test#last_command == 'themis math.vimspec'
+    end
+
+    it "runs test suite"
+      view math.vimspec
+      TestSuite
+
+      Expect g:test#last_command == 'themis'
+    end
+
+    it "passes arguments before the file"
+      view +2 math.vimspec
+      TestFile --foo bar
+
+      Expect g:test#last_command == 'themis --foo bar math.vimspec'
+    end
+
+  end
+
 end

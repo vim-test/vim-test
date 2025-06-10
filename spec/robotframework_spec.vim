@@ -3,12 +3,11 @@ source spec/support/helpers.vim
 describe "robotframework"
 
   before
-    let g:test#robotframework#runner = 'robotframework'
+    au BufNewFile,BufRead *.robot setlocal filetype=robot
     cd spec/fixtures/robotframework
   end
 
   after
-    unlet g:test#robotframework#runner
     call Teardown()
     cd -
   end

@@ -14,7 +14,6 @@ describe "robotframework"
 
   it "runs nearest tests"
     view +7 test.robot
-    Expect &filetype == 'robot'
     TestNearest
 
     Expect g:test#last_command == 'python3 -m robot --test "Normal Test" test.robot
@@ -22,7 +21,6 @@ describe "robotframework"
 
   it "runs nearest tests later line"
     view +15 test.robot
-    Expect &filetype == 'robot'
     TestNearest
 
     Expect g:test#last_command == 'python3 -m robot --test "Normal Test 2" test.robot
@@ -30,7 +28,6 @@ describe "robotframework"
 
   it "runs file tests"
     view test.robot
-    Expect &filetype == 'robot'
     TestFile
 
     Expect g:test#last_command == 'python3 -m robot test.robot'

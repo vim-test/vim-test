@@ -1,5 +1,5 @@
 if !exists('g:test#robot#robotframework#file_pattern')
-  let g:test#robot#robotframework = '\v^.*\.robot$'
+  let g:test#robot#robotframework#file_pattern = '\v^.*\.robot$'
 endif
 
 function! test#robot#robotframework#test_file(file) abort

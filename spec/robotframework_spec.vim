@@ -16,14 +16,14 @@ describe "robotframework"
     view +7 test.robot
     TestNearest
 
-    Expect g:test#last_command == 'python3 -m robot --test "Normal Test" test.robot
+    Expect g:test#last_command == 'python3 -m robot --test "Normal Test" test.robot'
   end
 
   it "runs nearest tests later line"
     view +15 test.robot
     TestNearest
 
-    Expect g:test#last_command == 'python3 -m robot --test "Normal Test 2" test.robot
+    Expect g:test#last_command == 'python3 -m robot --test "Normal Test 2" test.robot'
   end
 
   it "runs file tests"

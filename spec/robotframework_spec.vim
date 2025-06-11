@@ -14,23 +14,23 @@ describe "robotframework"
 
   it "runs nearest tests"
     view +7 test.robot
-    Expect set ft == 'robot'
+    AssertEqual 'robot', &filetype
     TestNearest
 
     Expect g:test#last_command == 'python3 -m robot --test "Normal Test" test.robot
   end
 
   it "runs nearest tests later line"
-    Expect set ft == 'robot'
     view +15 test.robot
+    AssertEqual 'robot', &filetype
     TestNearest
 
     Expect g:test#last_command == 'python3 -m robot --test "Normal Test 2" test.robot
   end
 
   it "runs file tests"
-    Expect set ft == 'robot'
     view test.robot
+    AssertEqual 'robot', &filetype
     TestFile
 
     Expect g:test#last_command == 'python3 -m robot test.robot'

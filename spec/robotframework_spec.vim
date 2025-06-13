@@ -1,9 +1,8 @@
 source spec/support/helpers.vim
 
-describe "robotframework"
+describe "RobotFramework"
 
   before
-    " au BufNewFile,BufRead *.robot setlocal filetype=robot
     cd spec/fixtures/robotframework
   end
 

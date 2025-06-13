@@ -329,8 +329,12 @@ for example:
 
                                                 *test-:VueTestUtils*
 :VueTestUtils [args]  	         Uses the `vue-cli-service` command.
+
                                                 *test-:UnitTest*
 :UnitTest [args]              Uses the `nim compile --run` command.
+
+                                                *test-:RobotFramework*
+:RobotFramework [args]        Uses the `robot` command.
 
 
 MAVEN TEST DIFFERENCES                          *test-maven-test-differences*

@@ -69,7 +69,6 @@ function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#php#phpunit#test_patterns)
 
   " If we found the '@test' docblock
-  echomsg name
   if !empty(name['test']) && ('@test' == name['test'][0] || '#' == name['test'][0][0])
     " Search forward for the first declared public method
     let name = test#base#nearest_test_in_lines(

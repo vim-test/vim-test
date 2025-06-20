@@ -4,7 +4,7 @@ endif
 
 function! test#javascript#nodetest#test_file(file) abort
   if a:file =~# g:test#javascript#nodetest#file_pattern
-    return match(readfile(expand(a:file)), 'node:test') != -1
+    return match(readfile(expand(a:file)), "from ['\"]node:test") != -1
   endif
 endfunction
 

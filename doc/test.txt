@@ -336,6 +336,9 @@ for example:
                                                 *test-:RobotFramework*
 :RobotFramework [args]        Uses the `robot` command.
 
+                                                *test-:NodeTest*
+:NodeTest [args]              Uses the `node` command.
+
 
 MAVEN TEST DIFFERENCES                          *test-maven-test-differences*
 

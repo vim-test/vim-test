@@ -15,6 +15,6 @@ describe "Node Test"
     view normal.test.js
     TestFile
 
-    Expect g:test#last_command == 'node --test hello.test.js '
+    Expect g:test#last_command == 'node --test normal.test.js'
   end
 end

@@ -81,6 +81,20 @@ describe "Nx"
     end
   end
 
+  it "references the project when project.json is used"
+    view +1 apps/backend/normal-test.js
+    TestNearest
+
+    Expect g:test#last_command == 'nx test backend -t ''^Math'' --test-file apps/backend/normal-test.js'
+  end
+
+  it "references the project when workspace.json is used"
+    view +1 apps/products/normal-test.jsx
+    TestNearest
+
+    Expect g:test#last_command == 'nx test products -t ''^Math'' --test-file apps/products/normal-test.jsx'
+  end
+
   it "runs file test if nearest test couldn't be found"
     view +1 __tests__/normal-test.js
     normal O

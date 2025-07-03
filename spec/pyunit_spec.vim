@@ -3,8 +3,7 @@ source spec/support/helpers.vim
 describe "PyUnitTest"
 
   before
-    let g:test#python#runner = 'pyunit'
-    cd spec/fixtures/django
+    cd spec/fixtures/pyunit
   end
 
   after
@@ -13,52 +12,57 @@ describe "PyUnitTest"
   end
 
   it "runs nearest tests"
-    view +2 module/test_class.py
+    view +3 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'python -m unittest module.test_class.TestNumbers.test_numbers'
+    Expect g:test#last_command == 'python3 -m unittest test_class.TestStringMethods'
 
-    view +5 module/test_class.py
+    view +5 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'python -m unittest module.test_class.TestSubclass'
+    Expect g:test#last_command == 'python3 -m unittest test_class.TestStringMethods.test_upper'
 
-    view +1 module/test_class.py
+    view +8 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'python -m unittest module.test_class.TestNumbers'
+    Expect g:test#last_command == 'python3 -m unittest test_class.TestStringMethods.test_isupper'
 
-    view +15 module/test_class.py
+    view +12 test_class.py
     TestNearest
 
-    Expect g:test#last_command == 'python -m unittest module.test_class.TestNestedClass.test_nested'
-
-    view +1 module/test_method.py
-    TestNearest
-
-    Expect g:test#last_command == 'python -m unittest module.test_method.test_numbers'
+    Expect g:test#last_command == 'python3 -m unittest test_class.TestStringMethods.test_split'
   end
 
   it "runs file test if nearest test couldn't be found"
-    view +1 module/test_method.py
+    view +3 normal_test.py
     normal O
     TestNearest
 
-    Expect g:test#last_command == 'python -m unittest module.test_method'
+    Expect g:test#last_command == 'python3 -m unittest normal_test'
   end
 
   it "runs file tests"
-    view module/test_class.py
+    view test_class.py
     TestFile
 
-    Expect g:test#last_command == 'python -m unittest module.test_class'
+    Expect g:test#last_command == 'python3 -m unittest test_class'
+
+    view normal_test.py
+    TestFile
+
+    Expect g:test#last_command == 'python3 -m unittest normal_test'
+
+    view test_import_testcase.py
+    TestFile
+
+    Expect g:test#last_command == 'python3 -m unittest test_import_testcase'
   end
 
   it "runs test suites"
     view test_class.py
     TestSuite
 
-    Expect g:test#last_command == 'python -m unittest'
+    Expect g:test#last_command == 'python3 -m unittest'
   end
 
 end

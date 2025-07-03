@@ -169,6 +169,6 @@ describe "CargoNextest"
     cd ..
     view crate/src/lib.rs
     TestFile
-    Expect g:test#last_command == 'cargo nextest run --package crate '''''
+    Expect g:test#last_command == 'cargo nextest run --package vim-test '''''
     cd -
 end

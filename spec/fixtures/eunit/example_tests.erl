@@ -2,8 +2,8 @@
 
 -include_lib("eunit/include/eunit.hrl").
 
-example1_test() ->
-  ?assert(ok =:= ok).
+simple_test() ->
+    ?assert(true).
 
-example2_test() ->
-  ?assert(ok =:= ok).
+generator_test_() ->
+    [?_assert(true)].

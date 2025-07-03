@@ -7,11 +7,13 @@ if !exists('g:test#php#phpunit#test_patterns')
   " 1: Look for a public method which name starts with "test"
   " 2: Look for a phpdoc tag "@test" (on a line by itself)
   " 3: Look for a phpdoc block on one line containg the "@test" tag
+  " 4: Look for an attribute "#[Test]" or "#[Test," (on a line by itself)
   let g:test#php#phpunit#test_patterns = {
     \ 'test': [
       \ '\v^\s*public function (test\w+)\(',
       \ '\v^\s*\*\s*(\@test)',
       \ '\v^\s*\/\*\*\s*(\@test)\s*\*\/',
+      \ '\v^\s*(#\[\s*Test\s*[,\]])',
     \],
     \ 'namespace': [],
   \}
@@ -49,7 +51,7 @@ endfunction
 function! test#php#phpunit#executable() abort
   if exists('g:test#php#phpunit#executable')
     return g:test#php#phpunit#executable
-  elseif filereadable('./vendor/bin/sail')
+  elseif filereadable('./vendor/bin/sail') && (filereadable('./docker-compose.yml') || filereadable('./docker-compose.yaml'))
     return './vendor/bin/sail test'
   elseif filereadable('./vendor/bin/paratest')
     return './vendor/bin/paratest'
@@ -67,7 +69,7 @@ function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#php#phpunit#test_patterns)
 
   " If we found the '@test' docblock
-  if !empty(name['test']) && '@test' == name['test'][0]
+  if !empty(name['test']) && ('@test' == name['test'][0] || '#' == name['test'][0][0])
     " Search forward for the first declared public method
     let name = test#base#nearest_test_in_lines(
       \ a:position['file'],

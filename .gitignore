@@ -2,3 +2,9 @@ Flavorfile.lock
 .vim-flavor/
 /doc/tags
 Session.vim
+
+/spec/fixtures/maven/**/target/*
+/spec/fixtures/maven/**/.project*
+/spec/fixtures/maven/**/.classpath*
+/spec/fixtures/maven/**/.settings/*
+/spec/fixtures/**/__pycache__/

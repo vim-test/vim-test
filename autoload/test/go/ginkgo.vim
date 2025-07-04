@@ -10,12 +10,17 @@ function! test#go#ginkgo#test_file(file) abort
   return test#go#test_file('ginkgo', g:test#go#ginkgo#file_pattern, a:file)
 endfunction
 
+function! test#go#ginkgo#is_v2(file) abort
+  return match(readfile(expand(a:file)), 'github.com/onsi/ginkgo/v2') != -1
+endfunction
+
 function! test#go#ginkgo#build_position(type, position) abort
   let path = './'.fnamemodify(a:position['file'], ':h')
   if a:type ==# 'suite'
     return [path]
   else
-    let fileargs = ['--focus-file='.a:position['file'], path]
+    let isv2 = test#go#ginkgo#is_v2(a:position['file'])
+    let fileargs = isv2 ? ['--focus-file='.a:position['file'], path] : ['--regexScansFilePath=true '.'--focus='.a:position['file'], path]
     if a:type ==# 'file'
       return fileargs
     elseif a:type ==# 'nearest'

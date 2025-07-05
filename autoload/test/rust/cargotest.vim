@@ -108,7 +108,7 @@ function! s:nearest_test(position) abort
     \ a:position['file'],
     \ name['test_line'],
     \ a:position['line'],
-    \ g:test#rust#cargotest#patterns
+    \ g:test#rust#patterns
   \ )
 
   if len(name['namespace']) > 0

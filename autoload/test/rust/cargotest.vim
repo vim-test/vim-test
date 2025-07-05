@@ -114,39 +114,12 @@ function! s:nearest_test(position) abort
     \ g:test#rust#cargotest#patterns
   \ )
 
-  let l:module_path = s:rust_module_path_at_line(a:position['file'], name['test_line'])
+  let l:module_path = test#rust#module_path_at_line(a:position['file'], name['test_line'])
   if !empty(l:module_path)
     return l:module_path . '::' . name_f['test'][0]
   else
     return name_f['test'][0]
   endif
-endfunction
-
-function! s:rust_module_path_at_line(filename, line) abort
-  let lines = readfile(a:filename)
-  let stack = []
-  let brace_stack = []
-  let lnum = 1
-  while lnum <= a:line && lnum <= len(lines)
-    let line = lines[lnum - 1]
-    if line =~# '\v^\s*mod\s+\w+\s*\{'
-      let m = matchlist(line, '\v^\s*mod\s+(\w+)')
-      if len(m) > 1
-        call add(stack, m[1])
-        call add(brace_stack, '{')
-      endif
-    endif
-    let open_count = len(split(line, '{')) - 1
-    let close_count = len(split(line, '}')) - 1
-    let net = open_count - close_count
-    while net < 0 && !empty(brace_stack)
-      call remove(stack, -1)
-      call remove(brace_stack, -1)
-      let net += 1
-    endwhile
-    let lnum += 1
-  endwhile
-  return join(stack, '::')
 endfunction
 
 function! s:test_namespace(filename) abort

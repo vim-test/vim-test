@@ -10,10 +10,7 @@ if !exists('g:test#rust#cargotest#test_patterns')
 endif
 
 if !exists('g:test#rust#cargotest#patterns')
-  let g:test#rust#cargotest#patterns = {
-        \ 'test': ['\v\s*%(async )?fn\s+(\w+)'],
-        \ 'namespace': []
-    \ }
+  let g:test#rust#cargotest#patterns = g:test#rust#patterns
 endif
 
 if !exists('g:test#rust#cargotest#test_options')

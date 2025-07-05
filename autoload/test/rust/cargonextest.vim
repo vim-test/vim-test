@@ -10,10 +10,7 @@ if !exists('g:test#rust#cargonextest#test_patterns')
 endif
 
 if !exists('g:test#rust#cargonextest#patterns')
-  let g:test#rust#cargonextest#patterns = {
-        \ 'test': ['\v\s*%(async )?fn\s+(\w+)'],
-        \ 'namespace': []
-    \ }
+  let g:test#rust#cargonextest#patterns = g:test#rust#patterns
 endif
 
 function! test#rust#cargonextest#test_file(file) abort

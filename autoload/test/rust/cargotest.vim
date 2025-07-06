@@ -10,10 +10,7 @@ if !exists('g:test#rust#cargotest#test_patterns')
 endif
 
 if !exists('g:test#rust#cargotest#patterns')
-  let g:test#rust#cargotest#patterns = {
-        \ 'test': ['\v\s*%(async )?fn\s+(\w+)'],
-        \ 'namespace': []
-    \ }
+  let g:test#rust#cargotest#patterns = g:test#rust#patterns
 endif
 
 if !exists('g:test#rust#cargotest#test_options')
@@ -111,7 +108,7 @@ function! s:nearest_test(position) abort
     \ a:position['file'],
     \ name['test_line'],
     \ a:position['line'],
-    \ g:test#rust#cargotest#patterns
+    \ g:test#rust#patterns
   \ )
 
   let l:module_path = test#rust#module_path_at_line(a:position['file'], name['test_line'])

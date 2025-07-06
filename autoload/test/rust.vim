@@ -1,3 +1,8 @@
+let test#rust#patterns = {
+  \ 'test': ['\v\s*%(async )?fn\s+(\w+)'],
+  \ 'namespace': []
+\ }
+
 function! test#rust#module_path_at_line(filename, line) abort
   let lines = readfile(a:filename)
   let stack = []
@@ -24,4 +29,3 @@ function! test#rust#module_path_at_line(filename, line) abort
   endwhile
   return join(stack, '::')
 endfunction
-

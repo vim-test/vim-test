@@ -9,13 +9,6 @@ if !exists('g:test#rust#cargonextest#test_patterns')
     \ }
 endif
 
-if !exists('g:test#rust#cargonextest#patterns')
-  let g:test#rust#cargonextest#patterns = {
-        \ 'test': ['\v\s*%(async )?fn\s+(\w+)'],
-        \ 'namespace': []
-    \ }
-endif
-
 function! test#rust#cargonextest#test_file(file) abort
   if a:file =~# g:test#rust#cargonextest#file_pattern
     if exists('g:test#rust#runner')
@@ -85,7 +78,7 @@ function! s:nearest_test(position) abort
     \ a:position['file'],
     \ name['test_line'],
     \ a:position['line'],
-    \ g:test#rust#cargonextest#patterns
+    \ g:test#rust#patterns
   \ )
 
   if len(name['namespace']) > 0

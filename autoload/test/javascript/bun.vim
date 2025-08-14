@@ -1,9 +1,9 @@
-if !exists('g:test#javascript#jest#file_pattern')
-  let g:test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
+if !exists('g:test#javascript#bun#file_pattern')
+  let g:test#javascript#bun#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
 endif
 
-function! test#javascript#jest#test_file(file) abort
-  if a:file =~# g:test#javascript#jest#file_pattern
+function! test#javascript#bun#test_file(file) abort
+  if a:file =~# g:test#javascript#bun#file_pattern
       if exists('g:test#javascript#runner')
           return g:test#javascript#runner ==# 'bun'
       else
@@ -12,7 +12,7 @@ function! test#javascript#jest#test_file(file) abort
   endif
 endfunction
 
-function! test#javascript#jest#build_position(type, position) abort
+function! test#javascript#bun#build_position(type, position) abort
   let file = escape(a:position['file'], '()[]')
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
@@ -28,16 +28,16 @@ function! test#javascript#jest#build_position(type, position) abort
 endfunction
 
 let s:yarn_command = '\<yarn\>'
-function! test#javascript#jest#build_args(args) abort
-  if exists('g:test#javascript#jest#executable')
-    \ && g:test#javascript#jest#executable =~# s:yarn_command
+function! test#javascript#bun#build_args(args) abort
+  if exists('g:test#javascript#bun#executable')
+    \ && g:test#javascript#bun#executable =~# s:yarn_command
     return filter(a:args, 'v:val != "--"')
   else
     return a:args
   endif
 endfunction
 
-function! test#javascript#jest#executable() abort
+function! test#javascript#bun#executable() abort
   if filereadable('~/.bun/bin/bun test')
     return '~/.bun/bin/bun test'
   else

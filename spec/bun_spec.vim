@@ -3,6 +3,7 @@ source spec/support/helpers.vim
 describe "Bun"
 
   before
+    let g:test#javascript#runner = 'bun'
     cd spec/fixtures/bun
   end
 

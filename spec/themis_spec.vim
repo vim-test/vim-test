@@ -49,6 +49,18 @@ describe "Themis"
       messages
 
       Expect g:test#last_command == 'themis math.vimspec'
+
+      view +7 math.vimspec
+      TestNearest
+      messages
+
+      Expect g:test#last_command == "themis math.vimspec --target 'asserts 1 plus 1 equals 2'"
+
+      view +11 math.vimspec
+      TestNearest
+      messages
+
+      Expect g:test#last_command == "themis math.vimspec --target " . shellescape("doesn't \"break\" on ➕`?")
     end
 
     it "runs file tests"

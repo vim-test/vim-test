@@ -6,6 +6,10 @@ Describe math
     It asserts 1 plus 1 equals 2
       Assert Equals(1 + 1, 2)
     end
+
+    it doesn't "break" on ➕`?
+      Skip line
+    end
   end
 
   Context subtraction

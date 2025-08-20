@@ -24,3 +24,7 @@ function! test#javascript#has_package(package) abort
 
   return 0
 endfunction
+
+function! test#javascript#has_import(file, import) abort
+  return match(readfile(expand(a:file)), a:import) != -1
+endfunction

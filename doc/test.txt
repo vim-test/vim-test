@@ -107,7 +107,7 @@ for example:
 :Ava [args]                  Uses the `ava` command.
 
                                                 *test-:BunTest*
-:BunTest [args]                Uses the `bun test` command.
+:BunTest [args]              Uses the `bun test` command.
 
                                                 *test-:DenoTest*
 :DenoTest [args]             Uses the `deno test` command.

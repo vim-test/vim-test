@@ -27,22 +27,12 @@ function! test#javascript#bun#build_position(type, position) abort
   endif
 endfunction
 
-let s:yarn_command = '\<yarn\>'
 function! test#javascript#bun#build_args(args) abort
-  if exists('g:test#javascript#bun#executable')
-    \ && g:test#javascript#bun#executable =~# s:yarn_command
-    return filter(a:args, 'v:val != "--"')
-  else
-    return a:args
-  endif
+  return a:args
 endfunction
 
 function! test#javascript#bun#executable() abort
-  if filereadable('~/.bun/bin/bun test')
-    return '~/.bun/bin/bun test'
-  else
-    return 'bun test'
-  endif
+  return 'bun test'
 endfunction
 
 function! s:nearest_test(position) abort

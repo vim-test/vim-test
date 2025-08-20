@@ -171,4 +171,5 @@ describe "Jest"
       Expect g:test#last_command == '~/.local/bin/yarn jest --runTestsByPath __tests__/normal-test.js'
     end
   end
+
 end

@@ -1,5 +1,5 @@
 if !exists('g:test#javascript#buntest#file_pattern')
-  let g:test#javascript#buntest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
+  let g:test#javascript#buntest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|ts)$'
 endif
 
 function! test#javascript#buntest#test_file(file) abort
@@ -7,7 +7,7 @@ function! test#javascript#buntest#test_file(file) abort
       if exists('g:test#javascript#runner')
           return g:test#javascript#runner ==# 'buntest'
       else
-        return test#javascript#has_package('buntest')
+          return match(readfile(expand(a:file)), 'bun:test') != -1
       endif
   endif
 endfunction

@@ -1,9 +1,9 @@
 source spec/support/helpers.vim
 
-describe "Bun"
+describe "BunTest"
 
   before
-    let g:test#javascript#runner = 'bun'
+    let g:test#javascript#runner = 'buntest'
     cd spec/fixtures/bun
   end
 

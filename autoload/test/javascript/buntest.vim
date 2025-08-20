@@ -1,18 +1,18 @@
-if !exists('g:test#javascript#bun#file_pattern')
-  let g:test#javascript#bun#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
+if !exists('g:test#javascript#buntest#file_pattern')
+  let g:test#javascript#buntest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
 endif
 
-function! test#javascript#bun#test_file(file) abort
-  if a:file =~# g:test#javascript#bun#file_pattern
+function! test#javascript#buntest#test_file(file) abort
+  if a:file =~# g:test#javascript#buntest#file_pattern
       if exists('g:test#javascript#runner')
-          return g:test#javascript#runner ==# 'bun'
+          return g:test#javascript#runner ==# 'buntest'
       else
-        return test#javascript#has_package('bun')
+        return test#javascript#has_package('buntest')
       endif
   endif
 endfunction
 
-function! test#javascript#bun#build_position(type, position) abort
+function! test#javascript#buntest#build_position(type, position) abort
   let file = escape(a:position['file'], '()[]')
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
@@ -27,11 +27,11 @@ function! test#javascript#bun#build_position(type, position) abort
   endif
 endfunction
 
-function! test#javascript#bun#build_args(args) abort
+function! test#javascript#buntest#build_args(args) abort
   return a:args
 endfunction
 
-function! test#javascript#bun#executable() abort
+function! test#javascript#buntest#executable() abort
   return 'bun test'
 endfunction
 

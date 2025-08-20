@@ -19,7 +19,7 @@ function! test#javascript#bun#build_position(type, position) abort
     if !empty(name)
       let name = '-t '.shellescape(escape(name, '()[]'), 1)
     endif
-    return [name, file]
+    return [file]
   elseif a:type ==# 'file'
     return [file]
   else

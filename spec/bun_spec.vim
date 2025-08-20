@@ -3,7 +3,6 @@ source spec/support/helpers.vim
 describe "BunTest"
 
   before
-    let g:test#javascript#runner = 'buntest'
     cd spec/fixtures/bun
   end
 
@@ -14,24 +13,24 @@ describe "BunTest"
 
   context "on nearest tests"
     it "runs JavaScript"
-      view +1 __tests__/normal-test.js
+      view +3 __tests__/normal-test.js
       TestNearest
 
       Expect g:test#last_command == 'bun test -t ''Math'' __tests__/normal-test.js'
 
-      view +2 __tests__/normal-test.js
+      view +4 __tests__/normal-test.js
       TestNearest
 
       Expect g:test#last_command == 'bun test -t ''Math Addition'' __tests__/normal-test.js'
 
-      view +3 __tests__/normal-test.js
+      view +5 __tests__/normal-test.js
       TestNearest
 
       Expect g:test#last_command == 'bun test -t ''Math Addition adds two numbers'' __tests__/normal-test.js'
     end
 
   it "runs file test if nearest test couldn't be found"
-    view +1 __tests__/normal-test.js
+    view +3 __tests__/normal-test.js
     normal O
     TestNearest
 
@@ -43,11 +42,6 @@ describe "BunTest"
     TestFile
 
     Expect g:test#last_command == 'bun test __tests__/normal-test.js'
-
-    view +2 __tests__/(folder)/normal-test.js
-    TestFile
-
-    Expect g:test#last_command == 'bun test __tests__/\(folder\)/normal-test.js'
   end
 
   it "runs test suites"

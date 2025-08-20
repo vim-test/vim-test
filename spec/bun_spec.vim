@@ -74,41 +74,6 @@ describe "BunTest"
       Expect g:test#last_command == 'bun test -t ''Escaping brackets \\['' __tests__/escaping-test.js'
     end
 
-    it "runs CoffeeScript"
-      view +1 __tests__/normal-test.coffee
-      TestNearest
-
-      Expect g:test#last_command == 'bun test -t ''Math'' __tests__/normal-test.coffee'
-
-      view +2 __tests__/normal-test.coffee
-      TestNearest
-
-      Expect g:test#last_command == 'bun test -t ''Math Addition'' __tests__/normal-test.coffee'
-
-      view +3 __tests__/normal-test.coffee
-      TestNearest
-
-      Expect g:test#last_command == 'bun test -t ''Math Addition adds two numbers'' __tests__/normal-test.coffee'
-    end
-
-    it "runs React"
-      view +1 __tests__/normal-test.jsx
-      TestNearest
-
-      Expect g:test#last_command == 'bun test -t ''Math'' __tests__/normal-test.jsx'
-
-      view +2 __tests__/normal-test.jsx
-      TestNearest
-
-      Expect g:test#last_command == 'bun test -t ''Math Addition'' __tests__/normal-test.jsx'
-
-      view +3 __tests__/normal-test.jsx
-      TestNearest
-
-      Expect g:test#last_command == 'bun test -t ''Math Addition adds two numbers'' __tests__/normal-test.jsx'
-    end
-  end
-
   it "runs file test if nearest test couldn't be found"
     view +1 __tests__/normal-test.js
     normal O

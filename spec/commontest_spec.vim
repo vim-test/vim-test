@@ -1,7 +1,6 @@
 source spec/support/helpers.vim
 
-describe "CommonTest"
-
+describe 'CommonTest'
   before
     cd spec/fixtures/commontest
   end
@@ -11,43 +10,50 @@ describe "CommonTest"
     cd -
   end
 
-  it "runs file tests"
-    view test_SUITE.erl
-    TestFile
+  context 'when executed with :TestFile'
+    it 'runs test cases for corresponding test suite module'
+      view test_SUITE.erl
+      TestFile
 
-    Expect g:test#last_command == 'rebar3 ct --suite=test_SUITE.erl'
+      Expect g:test#last_command is# 'rebar3 ct --suite=test_SUITE.erl'
+    end
   end
 
-  it "runs nearest tests"
-    view +1 test_SUITE.erl
-    TestNearest
+  context 'when executed with :TestNearest'
+    it 'runs the function prefixed with t_ under the cursor as a test case'
+      view +/^t_foo/+1 test_SUITE.erl
+      TestNearest
 
-    Expect g:test#last_command == "rebar3 ct --suite=test_SUITE.erl"
+      Expect g:test#last_command is# 'rebar3 ct --suite=test_SUITE.erl --case=t_foo'
+    end
 
-    view +54 test_SUITE.erl
-    TestNearest
+    it 'runs the function prefixed with test_ under the cursor as a test case'
+      view +/^test_foo/+1 test_SUITE.erl
+      TestNearest
 
-    Expect g:test#last_command == "rebar3 ct --suite=test_SUITE.erl --case=test_1"
+      Expect g:test#last_command is# 'rebar3 ct --suite=test_SUITE.erl --case=test_foo'
+    end
 
-    view +57 test_SUITE.erl
-    TestNearest
+    context 'when there is no test case under the cursor'
+      it 'runs test cases for corresponding test suite module'
+        view +1 test_SUITE.erl
+        TestNearest
 
-    Expect g:test#last_command == "rebar3 ct --suite=test_SUITE.erl --case=test_2"
-
-    view +60 test_SUITE.erl
-    TestNearest
-
-    Expect g:test#last_command == "rebar3 ct --suite=test_SUITE.erl --case=test_3"
+        Expect g:test#last_command is# 'rebar3 ct --suite=test_SUITE.erl'
+      end
+    end
   end
 
-  it "runs test suites"
-    view test_SUITE.erl
-    TestSuite
+  context 'when executed with :TestSuite'
+    it 'runs test cases for all test suite modules'
+      view test_SUITE.erl
+      TestSuite
 
-    Expect g:test#last_command == 'rebar3 ct'
+      Expect g:test#last_command is# 'rebar3 ct'
+    end
   end
 
-  it "ignores files not ending with _SUITE.erl"
+  it 'ignores files not ending with _SUITE.erl'
     view test.erl
     TestFile
 
@@ -58,5 +64,4 @@ describe "CommonTest"
 
     Expect g:test#last_command !~# 'rebar3 ct'
   end
-
 end

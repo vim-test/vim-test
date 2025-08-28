@@ -9,13 +9,6 @@ if !exists('g:test#rust#cargonextest#test_patterns')
     \ }
 endif
 
-if !exists('g:test#rust#cargonextest#patterns')
-  let g:test#rust#cargonextest#patterns = {
-        \ 'test': ['\v\s*%(async )?fn\s+(\w+)'],
-        \ 'namespace': []
-    \ }
-endif
-
 function! test#rust#cargonextest#test_file(file) abort
   if a:file =~# g:test#rust#cargonextest#file_pattern
     if exists('g:test#rust#runner')
@@ -85,7 +78,7 @@ function! s:nearest_test(position) abort
     \ a:position['file'],
     \ name['test_line'],
     \ a:position['line'],
-    \ g:test#rust#cargonextest#patterns
+    \ g:test#rust#patterns
   \ )
 
   if len(name['namespace']) > 0
@@ -114,6 +107,17 @@ function! s:test_namespace(filename) abort
           echo
           let l:package = l:modules[idx]
           let l:modules = l:modules[idx+1:]
+          " use package name, if present
+          let l:section = ''
+          for line in readfile(l:cargo_toml)
+            if line =~ '\[.\+\]' | let l:section = line | endif
+              if l:section == '[package]' && line =~ 'name'
+              let l:package = matchstr(line, '"\zs[^"]*\ze"')
+
+              break
+            endif
+          endfor
+
           break
       endif
   endfor

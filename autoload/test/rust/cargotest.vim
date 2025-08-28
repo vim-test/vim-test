@@ -10,9 +10,13 @@ if !exists('g:test#rust#cargotest#test_patterns')
 endif
 
 if !exists('g:test#rust#cargotest#patterns')
-  let g:test#rust#cargotest#patterns = {
-        \ 'test': ['\v\s*%(async )?fn\s+(\w+)'],
-        \ 'namespace': []
+  let g:test#rust#cargotest#patterns = g:test#rust#patterns
+endif
+
+if !exists('g:test#rust#cargotest#test_options')
+  let g:test#rust#cargotest#test_options = {
+        \ 'nearest': ['--', '--exact'],
+        \ 'file': []
     \ }
 endif
 
@@ -36,20 +40,45 @@ function! test#rust#cargotest#build_position(type, position) abort
     " We need the test module namespace
     let l:namespace = s:test_namespace(a:position['file'])
     let l:package = l:namespace[0]
-    let l:namespace = l:namespace[1]
+    let l:bin = l:namespace[1]
+    let l:namespace = l:namespace[2]
 
     if l:package != v:null
-        let l:package = ['--package', l:package]
+      let l:package = ['--package', l:package]
     else
-        let l:package = []
+      let l:package = []
     endif
 
+    if l:bin != v:null
+      let l:bin = ['--bin', l:bin]
+    else
+      let l:bin = []
+    endif
+
+    let l:test_options = g:test#rust#cargotest#test_options
+    if type(g:test#rust#cargotest#test_options) == 1 " string
+      let l:test_options = [g:test#rust#cargotest#test_options]
+    endif
     if a:type ==# 'nearest'
       let l:test_name = s:nearest_test(a:position)
-      return l:package + [shellescape(l:namespace.l:test_name), "--", "--exact"]
+      if type(g:test#rust#cargotest#test_options) == 4 " dict
+        let l:test_options = has_key(g:test#rust#cargotest#test_options, 'nearest') ?
+                              \ g:test#rust#cargotest#test_options.nearest : ['--', '--exact']
+        if type(l:test_options) == 1 " string
+          let l:test_options = [l:test_options]
+        endif
+      endif
+      return l:package + l:bin + [shellescape(l:namespace.l:test_name)] + l:test_options
     elseif a:type ==# 'file'
+      if type(g:test#rust#cargotest#test_options) == 4 " dict
+        let l:test_options = has_key(g:test#rust#cargotest#test_options, 'file') ?
+                             \ g:test#rust#cargotest#test_options.file : []
+        if type(l:test_options) == 1 " string
+          let l:test_options = [l:test_options]
+        endif
+      endif
       " FIXME Should not run submodule tests
-      return l:package + [shellescape(l:namespace)]
+      return l:package + l:bin + [shellescape(l:namespace)] + l:test_options
     endif
   endif
 
@@ -79,7 +108,7 @@ function! s:nearest_test(position) abort
     \ a:position['file'],
     \ name['test_line'],
     \ a:position['line'],
-    \ g:test#rust#cargotest#patterns
+    \ g:test#rust#patterns
   \ )
 
   if len(name['namespace']) > 0
@@ -93,6 +122,13 @@ function! s:test_namespace(filename) abort
   let l:path = fnamemodify(a:filename, ':r')
   " On a normal cargo project, the first item is 'src'
   let l:modules = split(l:path, '/')
+  let l:is_bin = v:false
+
+  " 'src/bin' is a special dir for executables, not a module
+  if get(l:modules, 1, '') == 'bin'
+    call remove(l:modules, 1)
+    let l:is_bin = v:true
+  endif
 
   " 'src/main.rs', 'src/lib.rs' and 'src/some/mod.rs' do not end
   " with actual module names
@@ -114,21 +150,38 @@ function! s:test_namespace(filename) abort
   for idx in range(len(l:modules) - 2, 0, -1)
       let l:cargo_toml = join(l:modules[:idx] + ['Cargo.toml'], '/')
       if !empty(glob(cargo_toml))
-          echo 
+          let l:package = l:modules[idx]
           let l:modules = l:modules[idx+1:]
+          " use package name, if present
+          let l:section = ''
+          for line in readfile(l:cargo_toml)
+            if line =~ '\[.\+\]' | let l:section = line | endif
+              if l:section == '[package]' && line =~ 'name'
+              let l:package = matchstr(line, '"\zs[^"]*\ze"')
+
+              break
+            endif
+          endfor
+
           break
       endif
   endfor
 
+  let l:bin = v:null
+
+  if l:is_bin
+    let l:bin = remove(l:modules, 1)
+  endif
+
   " Build up tests module namespace
   if l:modules[0] == 'tests' && len(l:modules) == 2
-    return [l:package, '']
+    return [l:package, l:bin, '']
   else
     let l:modules = l:modules[1:]
     if len(l:modules) > 0
-      return [l:package, join(l:modules, '::') . '::']
+      return [l:package, l:bin, join(l:modules, '::') . '::']
     else
-      return [l:package, '']
+      return [l:package, l:bin, '']
     endif
   endif
 endfunction

@@ -1,7 +1,7 @@
 *test.txt*  A test wrapper which enables you to run tests at speed of thought
 
 Author: Janko Marohnić <https://github.com/janko-m>
-License: Same terms as Vim itself (see |license|)
+License: MIT
 
 |test|                            INTRODUCTION
 |test-generic_commands|           GENERIC COMMANDS
@@ -9,7 +9,11 @@ License: Same terms as Vim itself (see |license|)
 |test-quickfix-strategies|        QUICKFIX STRATEGIES
 |test-custom-strategies|          CUSTOM STRATEGIES
 |test-configuration|              CONFIGURATION
+|test-python|                     PYTHON SPECIFIC CONFIG
 |test-projectionist|              PROJECTIONIST INTEGRATION
+|test-custom-alternate-file|      CUSTOM ALTERNATE FILE
+|test-overriding-test-commands|   OVERRIDING TEST COMMANDS
+|test-unsaved-changes|            UNSAVED CHANGES
 |test-about|                      ABOUT
 |test-credits|                    CREDITS
 
@@ -70,8 +74,13 @@ In all commands [args] are forwarded to the underlying test runner.
 
 RUNNER COMMANDS                                 *test-runner_commands*
 
-In all commands [args] are forwarded to the underlying test runner.
+In all commands [args] are forwarded to the underlying test runner. To avoid
+pollution they are not defined by default, instead you can choose the ones you want,
+for example:
 
+>
+  let g:test#runner_commands = ['Minitest', 'Mocha']
+<
                                                 *test-:RSpec*
 :RSpec [args]                Uses the `rspec` command.
 
@@ -96,6 +105,9 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:Ava*
 :Ava [args]                  Uses the `ava` command.
+
+                                                *test-:BunTest*
+:BunTest [args]              Uses the `bun test` command.
 
                                                 *test-:DenoTest*
 :DenoTest [args]             Uses the `deno test` command.
@@ -129,6 +141,9 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:Mocha*
 :Mocha [args]                Uses the `mocha` command.
+
+                                                *test-:Ember*
+:Ember [args]                Uses the `ember exam` command.
 
                                                 *test-:Jasmine*
 :Jasmine [args]              Uses the `jasmine` command.
@@ -214,8 +229,17 @@ In all commands [args] are forwarded to the underlying test runner.
                              * Otherwise accepts a list of filenames (which it
                                translates to namespaces).
 
+                                                *test-:LeinTest*
+:LeinTest [args]             Uses the `lein` `test` command.
+
                                                 *test-:Bats*
 :Bats [args]                 Uses the `bats` command.
+
+                                                *test-:ZigTest*
+:ZigTest [args]              Uses the `zig` `test` command.
+
+                                                *test-:GleamTest*
+:GleamTest [args]              Uses the `gleam` `test` command.
 
                                                 *test-:ShellSpec*
 :ShellSpec [args]                 Uses the `shellspec` command.
@@ -266,7 +290,7 @@ In all commands [args] are forwarded to the underlying test runner.
 :Prove [args]                Uses the `prove` command.
 
                                                 *test-:MavenTest*
-:MavenTest [args]            Uses the `mvn` `test` command. If the file exists in a multi-module project then appends -pl <modulename> and runs a single module only. There is a different strategy for running tests with the failsafe plugin instead of surefire. It is described in detail in the test-maven-test-differences section.
+:MavenTest [args]            Uses the `mvn` `test` command. If the file exists in a multi-module project then appends -am -pl <modulename> and disables `failIfNoSpecifiedTests`, and runs a single module only. There is a different strategy for running tests with the failsafe plugin instead of surefire. It is described in detail in the test-maven-test-differences section.
                                                 *test-:GradleTest*
 :GradleTest [args]           Uses the `gradle` `test` command. If the project is multi module then it uses the -p <modulename> flag.
 
@@ -288,6 +312,9 @@ In all commands [args] are forwarded to the underlying test runner.
                                                 *test-:StackTest*
 :StackTest [args]            Uses the `stack test` command.
 
+                                                *test-:CabalTest*
+:CabalTest [args]            Uses the `cabal test` command.
+
                                                 *test-:NgTest*
 :NgTest [args]  	         Uses the Angular `ng test` command.
 
@@ -305,8 +332,15 @@ In all commands [args] are forwarded to the underlying test runner.
 
                                                 *test-:VueTestUtils*
 :VueTestUtils [args]  	         Uses the `vue-cli-service` command.
+
                                                 *test-:UnitTest*
 :UnitTest [args]              Uses the `nim compile --run` command.
+
+                                                *test-:RobotFramework*
+:RobotFramework [args]        Uses the `robot` command.
+
+                                                *test-:NodeTest*
+:NodeTest [args]              Uses the `node` command.
 
 
 MAVEN TEST DIFFERENCES                          *test-maven-test-differences*
@@ -321,6 +355,13 @@ As there might be some dependencies between the maven modules you might need to 
 
 >
   nnoremap <silent><leader>itf :IntegrationTest -Dtest=foo -DfailIfNoTests=false -am -Dpmd.skip=true -Dcheckstyle.skip=true<CR>
+<
+
+If you want to customize the Maven test command, you can set
+`g:test#java#maventest#test_cmd` in your vimrc file.
+
+>
+  let g:test#java#maventest#test_cmd = 'surefire:test -Dtest'
 <
 
 STRATEGIES                                      *test-strategies*
@@ -355,6 +396,13 @@ plugin.
 >
   let test#strategy = 'dispatch' " or 'dispatch_background'
 <
+Spawn ~
+
+Runs test commands with `:Spawn` or `:Spawn!`. Requires the Dispatch.vim
+plugin.
+>
+  let test#strategy = 'spawn' " or 'spawn_background'
+<
 VimProc ~
 
 Runs test commands with `:VimProcBang`. Requires the Vimproc.vim plugin.
@@ -367,6 +415,19 @@ Runs test commands with `:terminal`, which spawns a terminal inside Neovim.
 >
   let test#strategy = 'neovim'
 <
+Neovim sticky~
+
+Runs test commands with `:terminal`, but keeps it open for subsequent runs.
+>
+  let test#strategy = 'neovim_sticky'
+<
+Neovim VS Code~
+
+Runs test commands in with VS Code terminal, keeps the focus to EditorGroup.
+>
+  let test#strategy = 'neovim_vscode'
+<
+
 Vim8 Terminal ~
 
 Runs test commands with `term_start()`, which spawns a terminal inside Vim.
@@ -524,7 +585,7 @@ This strategy lets you run commands in a neovim terminal using harpoon terminals
 
 Before you can use this strategy you are going to need to have the harpoon plugin installed
 
-By default the commands are sent to the terminal 1, to send the command to another terminal you con set in you vimrc g:test#harpoon_term
+By default the commands are sent to the terminal 1, to send the command to another terminal you can set in you vimrc g:test#harpoon_term
 
 For example to send the commands to terminal number 2 you can set in your vimrc:
 
@@ -534,6 +595,34 @@ let g:test#harpoon_term = 2
 
 By default this strategy will also open the terminal in the current window.  To disable
 this behavior set `g:test#harpoon#gototerminal = 0`.
+
+WezTerm ~
+
+This strategy lets you send commands to an adjacent WezTerm pane. You must have
+the `wezterm` CLI available. You can override its location with
+`g:test#wezterm#executable`.
+
+>
+  let test#strategy = 'wezterm'
+<
+
+This strategy will send the command to the pane determined by the output of
+`wezterm cli get-pane-direction next`, or if only one pane exists, it will
+create a new one with `wezterm cli split-pane --right`. The latter can be
+overriden with `g:test#wezterm#split_direction`.
+
+>
+  let g:test#wezterm#split_direction = 'bottom'
+<
+
+The wezterm cli split-pane accepts a --percent option to customize the number
+of cells that the new split will have, expressed as a percentage. The percent
+defaults to 50 unless set to a different value.
+
+>
+  let test#wezterm#split_percent = 30
+<
+
 
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 
@@ -613,10 +702,26 @@ disable this behavior with
 >
   let g:test#echo_command = 0
 <
+To have the Neovim sticky strategy abort any currently running tests before
+scheduling a new one, use:
+>
+  let g:test#neovim_sticky#kill_previous = 1
+<
+To have the Neovim sticky strategy open an existing terminal in a new split
+when it is not currently visible, use:
+>
+  let g:test#neovim_sticky#reopen_window = 1
+
+To have the Neovim sticky strategy use an existing terminal it did not open
+on its own, if such exists, use:
+
+  let g:test#neovim_sticky#use_existing = 1
+<
 You may find yourself specifying certain options for your test runners in
 certain situations. You can configure your preferred options with
 >
   let g:test#ruby#minitest#options = '--verbose'
+  let g:test#javascript#denotest#options = '--quiet'
 <
 Or, if you prefer more granular approach, you can do
 >
@@ -635,6 +740,21 @@ well
     \ 'all':   '--format documentation',
     \ 'suite': '--tag ~slow',
   \}
+<
+The cargotest runner lets you specify the test-options argument as follows:
+>
+  let g:test#rust#cargotest#test_options = '-- --nocapture'
+<
+Or using a more granular approach:
+>
+  let test#rust#cargotest#test_options = {
+    \ 'nearest': ['--', '--nocapture', '--exact'],
+    \ 'file':    [],
+  \}
+
+The gotest runner let you specify the -args argument as follows:
+>
+  let g:test#go#gotest#args = 'a=b'
 <
 If you want to manually configure a test runner's executable, you can do
 >
@@ -662,6 +782,14 @@ working directory for running tests:
 >
   let test#project_root = "/path/to/your/project"
 <
+Alternatively you can pass in a function that'll be evaluated before each test run:
+>
+  function! CustomPath()
+    return "~/Project"
+  endfunction
+
+  let test#project_root = function('CustomPath')
+<
 Both the `neovim` and `Vim8 Terminal` strategy will open a split window on the
 bottom by default, but you can configure a different position or orientation.
 Whatever you put here is passed to `new` - so, you may also specify size (see
@@ -686,6 +814,25 @@ you would prefer to open the terminal in normal mode:
 <
 
 
+PYTHON SPECIFIC CONFIG                         *test-python*
+
+If your project has a pytest configuration file, then pytest will automatically be detected.
+For other Python test runners, test.vim has no way of detecting which one did you intend
+to use. By default, the first available will be chosen, but you can force a specific one:
+>
+  let test#python#runner = "pytest"
+<
+Runners available are 'pytest', 'nose', 'nose2', 'djangotest', 'djangonose', 'mamba',
+and Python's built-in unittest as 'pyunit'
+
+The `pytest` and `djangotest` runner optionally supports pipenv. If you have a `Pipfile`,
+it will use `pipenv run pytest` instead of just `python -m pytest`. They also support poetry
+and will use `poetry run pytest` if it detects a `poetry.lock`. The pyunit and nose runner
+supports pipenv as well and will respectively use `pipenv run python -m unittest` or
+`pipenv run python -m nosetests` if there is a `Pipfile`. It also supports pdm as well and will
+use `poetry run pytest` if there is a `pdm.lock` file. All runners except
+`djangotest` support uv and will use `uv run` if there is a `uv.lock` file.
+
 PROJECTIONIST INTEGRATION                       *test-projectionist*
 
 If the |projectionist| plug-in is present, you can run a test command from an
@@ -707,7 +854,41 @@ function! CustomAlternateFile(cmd)
   return "test_file_spec.rb"
 endfunction
 
-let g:test#custom_alternate_file = function('echo')
+let g:test#custom_alternate_file = function('CustomAlternateFile')
+<
+
+OVERRIDING TEST COMMANDS                        *test-overriding-test-commands*
+
+This is considered an advanced feature, subject to active development and further changes.
+It overrides the zero configuration approach, and requires you to manually configure the test runners.
+
+To provide middle ground between well-known test runners working out of the box,
+and per-user configuration, test command can also be specifying by adding a `.vimtest.json`
+file:
+
+>
+{
+  "command": "echo 'Hello vim-test!'"
+}
+<
+
+This will override the command run by all of `:TestNearest`,
+`:TestClass`, `:TestFile` and `:TestSuite` in all files in the `.vimtest.json`'s directory
+and subdirectories, recursively. As such, it can be used to quickly bridge the gap
+for non-standard projects and share it with other developers.
+
+
+UNSAVED CHANGES                                 *test-unsaved-changes*
+
+If |'autowrite'| or |'autowriteall'| are set then unsaved changes will be
+written to disk with |:wall| before each test execution.
+
+Prompt for unsaved changes ~
+
+You can enable a user prompt asking whether to write unsaved changes
+prior to executing a test by
+>
+  let g:test#prompt_for_unsaved_changes = 1
 <
 
 ABOUT                                           *test-about*
@@ -723,3 +904,6 @@ Thanks to Gary Bernhardt, the person who invented this kind of testing.
 I also want to thank vim-rspec (https://github.com/thoughtbot/vim-rspec), from
 which I borrowed GUI support for OS X, and Windows support. Also thanks to
 vim-vroom (https://github.com/skalnik/vim-vroom).
+
+===============================================================================
+vim:tw=78:ts=2:sts=2:sw=2:ft=help:norl:

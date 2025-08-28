@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>sample_maven_junit3_project</artifactId>
+        <groupId>org.vimtest.calc</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>sample_module2</artifactId>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.surefire</groupId>
+                <artifactId>surefire-junit3</artifactId>
+                <version>3.0.0-M3</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.vimtest.calc</groupId>
+            <artifactId>sample_module</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+</project>

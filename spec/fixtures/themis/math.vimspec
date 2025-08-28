@@ -1,0 +1,20 @@
+" vim: set ft=vim:
+call themis#helper('command').with(themis#helper('assert'))
+
+Describe math
+  Context addition
+    It asserts 1 plus 1 equals 2
+      Assert Equals(1 + 1, 2)
+    end
+
+    it doesn't "break" on ➕`?
+      Skip line
+    end
+  end
+
+  Context subtraction
+    It asserts 1 minus 1 equals 0
+      Assert Equals(1 - 1, 0)
+    end
+  end
+end

@@ -1,7 +1,7 @@
 let test#javascript#patterns = {
   \ 'whole_match': 1,
   \ 'test': ['\v^\s*%(it|test|describe.each)[^''"`]*([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1'],
-  \ 'namespace': ['\v^\s*%(describe|suite|context)\s*[^''"`]*([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1']
+  \ 'namespace': ['\v^\s*%(describe|suite|context|module)\s*[^''"`]*([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1']
 \}
 
 function! test#javascript#has_package(package) abort
@@ -23,4 +23,8 @@ function! test#javascript#has_package(package) abort
   endfor
 
   return 0
+endfunction
+
+function! test#javascript#has_import(file, import) abort
+  return match(readfile(expand(a:file)), a:import) != -1
 endfunction

@@ -3,13 +3,13 @@ let g:test#csharp#patterns = {
   \ 'namespace': ['\v^\s*public class (\w+)', '\v^\s*namespace ((\w|\.)+)'],
 \}
 
+" Set the default slash to the forward slash
+let s:slash = '/'
 if (has('win32') || has('win64'))
     let shell = fnamemodify(&shell, ':t')
     if (shell ==? 'cmd.exe' || shell ==? 'powershell')
         let s:slash = '\'
     endif
-else
-    let s:slash = '/'
 endif
 
 function! test#csharp#get_project_path(file) abort

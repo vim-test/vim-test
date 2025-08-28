@@ -13,14 +13,15 @@ function! test#javascript#jest#test_file(file) abort
 endfunction
 
 function! test#javascript#jest#build_position(type, position) abort
+  let file = escape(a:position['file'], '()[]')
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      let name = '-t '.shellescape(name, 1)
+      let name = '-t '.shellescape(escape(name, '()[]'), 1)
     endif
-    return ['--no-coverage', '--runTestsByPath', name, '--', a:position['file']]
+    return ['--runTestsByPath', name, '--', file]
   elseif a:type ==# 'file'
-    return ['--no-coverage', '--runTestsByPath', '--', a:position['file']]
+    return ['--runTestsByPath', '--', file]
   else
     return []
   endif

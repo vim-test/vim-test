@@ -60,4 +60,18 @@ describe "Ava"
     Expect exists('g:test#last_command') == 0
   end
 
+  it "runs nearest tests in typescript test files"
+    view +1 test/normal.ts
+    TestNearest
+
+    Expect g:test#last_command == 'ava test/normal.ts --match=''Adds two numbers: TS'''
+  end
+
+  it "runs file tests in typescript test files"
+    view test/normal.ts
+    TestFile
+
+    Expect g:test#last_command == 'ava test/normal.ts'
+  end
+
 end

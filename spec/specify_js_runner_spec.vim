@@ -20,7 +20,7 @@ describe "Multiple JavaScript runners"
     normal O
     TestNearest
 
-    Expect g:test#last_command == 'jest --no-coverage --runTestsByPath -- __tests__/normal-test.js'
+    Expect g:test#last_command == 'jest --runTestsByPath -- __tests__/normal-test.js'
     unlet g:test#javascript#runner
   end
 

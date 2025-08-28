@@ -38,6 +38,8 @@ function! test#python#nose#executable() abort
     let pipenv_prefix = "pipenv run "
   elseif filereadable("poetry.lock")
     let pipenv_prefix = "poetry run "
+  elseif filereadable("uv.lock")
+    let pipenv_prefix = "uv run "
   endif
 
   return pipenv_prefix . "nosetests"

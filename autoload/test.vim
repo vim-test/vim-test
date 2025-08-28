@@ -115,7 +115,7 @@ function! test#shell(cmd, strategy) abort
 endfunction
 
 function! test#determine_runner(file) abort
-  for [language, runners] in items(test#get_runners())
+  for [language, runners] in sort(items(test#get_runners()), 'i')
     for runner in runners
       let runner = tolower(language).'#'.tolower(runner)
       if exists("g:test#enabled_runners")
@@ -168,10 +168,26 @@ endfunction
 function! s:before_run() abort
   if &autowrite || &autowriteall
     silent! wall
+  elseif get(g:, 'test#prompt_for_unsaved_changes', 0)
+    let modified_buffers = len(getbufinfo({'bufmodified': 1}))
+    if l:modified_buffers
+      let answer = confirm(
+            \ "Warning: you have unsaved changes",
+            \ "&write\nwrite &all\n&continue", 3)
+      if l:answer == 1
+        write
+      elseif l:answer == 2
+        wall
+      endif
+    endif
   endif
 
   if exists('g:test#project_root')
-    execute 'cd' g:test#project_root
+    if type(g:test#project_root) == v:t_func
+      execute 'cd' g:test#project_root()
+    else
+      execute 'cd' g:test#project_root
+    endif
   endif
 endfunction
 

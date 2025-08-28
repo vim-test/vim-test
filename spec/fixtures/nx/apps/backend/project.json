@@ -1,0 +1,6 @@
+{
+  "name": "backend",
+  "sourceRoot": "apps/backend/src",
+  "projectType": "application",
+  "generators": {}
+}

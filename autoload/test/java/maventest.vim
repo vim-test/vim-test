@@ -20,17 +20,38 @@ function! test#java#maventest#build_position(type, position) abort
   " ex:  mvn test -Dtest com.you.pkg.App$NestedClass#test_method
   " ex:  mvn test -Dtest com.you.pkg.App#test_method
   " ex:  mvn test -Dtest com.you.pkg.App\*           (catches nested test-classes)
+  " ex:  mvn test -Dtest com.you.pkg.App\* -Dsurefire.failIfNoSpecifiedTests=false -am -pl module_name
+  " ex:  mvn test -Dtest com.you.pkg.App#test_method -Dsurefire.failIfNoSpecifiedTests=false -am -pl module_name
+
+  if exists('g:test#java#maventest#test_cmd')
+    let test_cmd = g:test#java#maventest#test_cmd
+  else
+    if filename =~# 'IT\|ITCase\|Integration$' && a:type =~# '^nearest\|file$'
+      let skip_it_plugins = " -Dsonar.skip=true -Dpit.report.skip=true -Dpit.skip=true -Dpmd.skip=true -Dcheckstyle.skip=true -Ddependency-check.skip=true -Djacoco.skip=true -Dfailsafe.only=true"
+      let test_cmd = "verify" . skip_it_plugins . " -Dit.test="
+      if module !=# ''
+        let module = ' -Dfailsafe.failIfNoSpecifiedTests=false' . module
+      endif
+    else
+      let test_cmd = 'test -Dtest='
+      if module !=# ''
+        let module = ' -Dsurefire.failIfNoSpecifiedTests=false' . module
+      endif
+    endif
+  endif
+
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
+
     if !empty(name)
-      return ['test -Dtest=' . package . '.' . name. module]
+      return [test_cmd . package . '.' . name. module]
     else
-      return ['test -Dtest=' . package . '.' . filename . '\*'. module]
+      return [test_cmd . package . '.' . filename . '\*'. module]
     endif
 
   " ex:  mvn test -Dtest com.you.pkg.App\*  (catches nested test-classes)
   elseif a:type ==# 'file'
-    return ['test -Dtest=' . package . '.' . filename . '\*'. module]
+    return [test_cmd . package . '.' . filename . '\*'. module]
 
   " ex:  mvn verify -Dit.test=App\*  (runs integration tests)
   elseif a:type ==# 'integration'
@@ -51,6 +72,7 @@ function! test#java#maventest#executable() abort
     return './mvnw'
   else
     return 'mvn'
+  endif
 endfunction
 
 function! s:get_java_package(filepath)
@@ -67,11 +89,11 @@ endfunction
 
 function! s:get_maven_module(filepath)
   let project_dir = s:GetJavaProjectDirectory(a:filepath)
-  let l:module_name = fnamemodify(project_dir, ':t')
   let l:parent = fnamemodify(project_dir, ':p:h:h')
+
   if filereadable(l:parent. "/pom.xml") " check if the parent dir has pom.xml
-      return ' -pl '. module_name
-  else 
+      return ' -am -pl '. project_dir
+  else
       return ''
   endif
 endfunction

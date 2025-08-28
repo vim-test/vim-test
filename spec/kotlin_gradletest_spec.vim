@@ -73,6 +73,52 @@ describe "Gradle plain module"
     Expect g:test#last_command == './gradlew test --info -b build.gradle -DcustomProperty=5'
   end
 end
+
+describe "with Junit5"
+  describe "with TestNearest and @Nested anotation"
+    before
+      cd spec/fixtures/gradle/kotlin/junit5
+    end
+
+    after
+      call Teardown()
+      cd -
+    end
+
+    it "runs with multi line class annotation and multi line test annotation"
+      view +15 NestedTest.kt
+
+      TestNearest
+
+      Expect g:test#last_command == "./gradlew test --tests NestedTest\\$MultiLineNestedContext.\"sum of values (multi line annotation)\""
+    end
+
+    it "runs with multi line class annotation and one line test annotation"
+      view +19 NestedTest.kt
+
+      TestNearest
+
+      Expect g:test#last_command == "./gradlew test --tests NestedTest\\$MultiLineNestedContext.\"sum of values (single line annotation)\""
+    end
+
+    it "runs with single line class annotation and multi line test annotation"
+      view +26 NestedTest.kt
+
+      TestNearest
+
+      Expect g:test#last_command == "./gradlew test --tests NestedTest\\$OneLineNestedContext.\"sum of values (multi line annotation)\""
+    end
+
+    it "runs with single line class annotation and one line test annotation"
+      view +30 NestedTest.kt
+
+      TestNearest
+
+      Expect g:test#last_command == "./gradlew test --tests NestedTest\\$OneLineNestedContext.\"sum of values (single line annotation)\""
+    end
+  end
+end
+
 describe "Gradle single module"
   before
     cd spec/fixtures/gradle/kotlin/gradle_single_module

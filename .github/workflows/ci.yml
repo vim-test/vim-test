@@ -1,0 +1,31 @@
+name: CI
+on:
+  pull_request:
+  push:
+     branches:
+      - 'master'
+
+jobs:
+  unit-tests:
+    name: Unit tests
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        neovim: [false, true]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Vim or Neovim
+        uses: rhysd/action-setup-vim@v1
+        id: vim
+        with:
+          neovim: ${{ matrix.neovim }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+      - name: Install dependencies
+        run: |
+          gem install vim-flavor -v '~> 4.0.1'
+          vim-flavor install
+      - name: Run unit tests
+        run: vim-flavor test spec/

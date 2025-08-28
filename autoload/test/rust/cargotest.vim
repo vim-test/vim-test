@@ -142,8 +142,12 @@ function! s:test_namespace(filename) abort
   let l:save_dir = chdir(fnamemodify(a:filename, ':p:h'))
   if l:save_dir != ""
     let l:json = system("cargo read-manifest")
-    let l:package = json_decode(l:json)['name']
-    call chdir(l:save_dir)
+    if v:shell_error == 0
+      let l:package = json_decode(l:json)['name']
+      call chdir(l:save_dir)
+    else
+      echo l:json
+    endif
   endif
 
   " Cut modules to be relative to Cargo.toml

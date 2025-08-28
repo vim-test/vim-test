@@ -1,14 +1,83 @@
 {
-	"packages": [{
-		"name": "sim2",
-		"version": "0.1.0",
-		"id": "sim2 0.1.0 (path+file:///project-root/pack1)",
-		"manifest_path": "/project-root/pack1/Cargo.toml"
-	}],
-	"workspace_members": [
-		"sim2 0.1.0 (path+file:///project-root/pack1)"
-	],
-	"target_directory": "/project-root/target",
-	"version": 1,
-	"workspace_root": "/project-root"
+  "name": "vim-test",
+  "version": "0.0.0",
+  "id": "path+file:///documents#vim-test@0.0.0",
+  "license": null,
+  "license_file": null,
+  "description": null,
+  "source": null,
+  "dependencies": [],
+  "targets": [
+    {
+      "kind": [
+        "lib"
+      ],
+      "crate_types": [
+        "lib"
+      ],
+      "name": "vim_test",
+      "src_path": "/documents/src/lib.rs",
+      "edition": "2015",
+      "doc": true,
+      "doctest": true,
+      "test": true
+    },
+    {
+      "kind": [
+        "bin"
+      ],
+      "crate_types": [
+        "bin"
+      ],
+      "name": "nestedbin",
+      "src_path": "/documents/src/bin/nestedbin/main.rs",
+      "edition": "2015",
+      "doc": true,
+      "doctest": false,
+      "test": true
+    },
+    {
+      "kind": [
+        "bin"
+      ],
+      "crate_types": [
+        "bin"
+      ],
+      "name": "somebin",
+      "src_path": "/documents/src/bin/somebin.rs",
+      "edition": "2015",
+      "doc": true,
+      "doctest": false,
+      "test": true
+    },
+    {
+      "kind": [
+        "bin"
+      ],
+      "crate_types": [
+        "bin"
+      ],
+      "name": "vim-test",
+      "src_path": "/documents/src/main.rs",
+      "edition": "2015",
+      "doc": true,
+      "doctest": false,
+      "test": true
+    }
+  ],
+  "features": {},
+  "manifest_path": "/documents/Cargo.toml",
+  "metadata": null,
+  "publish": [],
+  "authors": [],
+  "categories": [],
+  "keywords": [],
+  "readme": null,
+  "repository": null,
+  "homepage": null,
+  "documentation": null,
+  "edition": "2015",
+  "links": null,
+  "default_run": null,
+  "rust_version": null
 }

@@ -10,6 +10,10 @@ Describe math
     it doesn't "break" on ➕`?
       Skip line
     end
+
+    it contains vim pattern e.g., (\@<=) or .*~\[^$
+      Skip line
+    end
   end
 
   Context subtraction

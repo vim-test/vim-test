@@ -61,6 +61,12 @@ describe "Themis"
       messages
 
       Expect g:test#last_command == "themis math.vimspec --target " . shellescape("doesn't \"break\" on ➕`?")
+
+      view +15 math.vimspec
+      TestNearest
+      messages
+
+      Expect g:test#last_command == "themis math.vimspec --target " . shellescape('addition contains vim pattern ' . escape('e.g., (\@<=) or .*~\[^$', '.*~\[^$'))
     end
 
     it "runs file tests"

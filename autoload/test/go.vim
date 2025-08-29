@@ -8,6 +8,13 @@ let test#go#patterns = {
     \ '\v^\s*func ((Test).*)\(',
     \ '\v^\s*t\.Run\("(.*)"',
   \],
+  \ 'subtest': [
+    \ '\v^\s*\w*\.Run\("(\zs.*\ze)"',
+    \ '\v^\s*\w*\.T\(\)\.Run\("(\zs.*\ze)"',
+  \],
+  \ 'test_suite': [
+    \ '\vfunc \((suite|s) \*\zs\w*\ze\)',
+  \],
 \}
 function! test#go#test_file(runner, file_pattern, file) abort
   if fnamemodify(a:file, ':t') =~# a:file_pattern

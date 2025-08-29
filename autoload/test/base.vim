@@ -110,12 +110,14 @@ endfunction
 " be backward.
 " Otherwise it will be forward.
 function! test#base#nearest_test_in_lines(filename, from_line, to_line, patterns, ...) abort
-  let configuration = a:0 > 0 ? a:1 : {}
-  let test         = []
-  let namespace    = []
-  let last_indent  = -1
-  let current_line = a:from_line + 1
-  let test_line    = -1
+  let configuration  = a:0 > 0 ? a:1 : {}
+  let test_suite     = []
+  let subtest        = []
+  let test           = []
+  let namespace      = []
+  let last_indent    = -1
+  let current_line   = a:from_line + 1
+  let test_line      = -1
   let last_namespace_line = -1
   let is_namespace_with_same_indent_allowed = get(configuration, 'namespaces_with_same_indent', 0)
   let match_index = a:patterns->get('whole_match', 0) ? 0 : 1
@@ -126,9 +128,11 @@ function! test#base#nearest_test_in_lines(filename, from_line, to_line, patterns
     \ : getbufline(a:filename, a:from_line, a:to_line)
 
   for line in lines
-    let current_line    = current_line + (is_reverse ? -1 : 1)
-    let test_match      = s:find_match(line, a:patterns['test'])
-    let namespace_match = s:find_match(line, a:patterns['namespace'])
+    let current_line       = current_line + (is_reverse ? -1 : 1)
+    let test_match         = s:find_match(line, a:patterns['test'])
+    let namespace_match    = s:find_match(line, a:patterns['namespace'])
+    let subtest_match      = s:find_match(line, a:patterns['subtest'])
+    let test_suite_match   = s:find_match(line, a:patterns['test_suite'])
 
     let indent = len(matchstr(line, '^\s*'))
     if !empty(test_match) 
@@ -146,14 +150,23 @@ function! test#base#nearest_test_in_lines(filename, from_line, to_line, patterns
       call add(test, filter(test_match[match_index:], '!empty(v:val)')[0])
       let last_indent = indent
       let test_line   = current_line
+    elseif !empty(subtest_match)
+      let subtest_value = filter(subtest_match, '!empty(v:val)')[0]
+      let without_spaces = substitute(subtest_value, '\s', '_', 'g')
+      call add(subtest, without_spaces)
+    elseif !empty(test_suite_match)
+      if empty(test_suite)
+        let test_suite_value = 'Test' .. filter(test_suite_match, '!empty(v:val)')[0]
+        call add(test_suite, test_suite_value)
+      endif
     elseif !empty(namespace_match) && (is_namespace_with_same_indent_allowed || (indent < last_indent || last_indent == -1))
       call add(namespace, filter(namespace_match[match_index:], '!empty(v:val)')[0])
       let last_indent = indent
       let last_namespace_line = current_line
     endif
   endfor
-
-  return {'test': test, 'test_line': test_line, 'namespace': reverse(namespace)}
+  echom {'test': test, 'test_line': test_line, 'namespace': reverse(namespace), 'subtest': subtest, 'test_suite': test_suite}
+  return {'test': test, 'test_line': test_line, 'namespace': reverse(namespace), 'subtest': subtest, 'test_suite': test_suite}
 endfunction
 
 function! s:find_match(line, patterns) abort

@@ -93,6 +93,27 @@ describe "GoTest"
     Expect g:test#last_command == 'go test -run ''TestOriginalTestcase$'' ./.'
   end
 
+  it "runs nearest tests in subtest"
+    view +7 sub_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''TestAdd$'' ./'
+    view +14 sub_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''TestAdd/positive numbers'' ./'
+
+    view +20 sub_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''TestAdd/negative numbers'' ./'
+
+    view +20 sub_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'go test -run ''TestAdd/zero'' ./'
+  end
+
   it "runs file test if nearest test couldn't be found"
     view +1 normal_test.go
     TestNearest

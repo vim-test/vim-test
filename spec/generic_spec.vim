@@ -18,32 +18,34 @@ describe 'Generic runner'
     cd -
   end
 
-  it 'runs command from opened vimtest.json'
-    view .vimtest.json
-    for l:command in [ 'TestFile', 'TestSuite', 'TestClass', 'TestNearest' ]
-      execute l:command
+  describe 'TODO: Disabled by default'
+    it 'runs command from opened vimtest.json'
+      view .vimtest.json
+      for l:command in [ 'TestFile', 'TestSuite', 'TestClass', 'TestNearest' ]
+        execute l:command
+        call s:expect_root()
+      endfor
+    end
+
+    it 'runs command from vimtest.json in same directory'
+      view readme.md
+      for l:command in [ 'TestFile', 'TestSuite', 'TestClass', 'TestNearest' ]
+        execute l:command
+        call s:expect_root()
+      endfor
+    end
+
+    it 'runs command from vimtest.json in parent directory'
+      view nooverride/readme.md
+      TestFile
       call s:expect_root()
-    endfor
-  end
+    end
 
-  it 'runs command from vimtest.json in same directory'
-    view readme.md
-    for l:command in [ 'TestFile', 'TestSuite', 'TestClass', 'TestNearest' ]
-      execute l:command
-      call s:expect_root()
-    endfor
-  end
-
-  it 'runs command from vimtest.json in parent directory'
-    view nooverride/readme.md
-    TestFile
-    call s:expect_root()
-  end
-
-  it 'runs command from closest vimtest.json'
-    view override/readme.md
-    TestFile
-    call s:expect_override()
+    it 'runs command from closest vimtest.json'
+      view override/readme.md
+      TestFile
+      call s:expect_override()
+    end
   end
 end
 

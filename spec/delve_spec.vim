@@ -28,6 +28,11 @@ describe "Delve"
 
     Expect g:test#last_command == 'dlv test ./. -- -test.run ''ExampleSomething$'''
 
+    view +15 testify_test.go
+    TestNearest
+
+    Expect g:test#last_command == 'dlv test ./. -- -test.run ''TestCalculatorTestSuite$'' -testify.m ''TestSum'''
+
     view +17 ginkgo_test.go
     TestNearest
 

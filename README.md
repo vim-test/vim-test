@@ -760,6 +760,12 @@ let g:test#custom_alternate_file = function('CustomAlternateFile')
 
 This is considered an advanced feature, subject to active development and further changes. It overrides the zero configuration approach, and requires you to manually configure the test runners.
 
+Enable the feature by adding this custom runner:
+
+```vim
+  let g:test#custom_runners = {'_Generic': ['VimTestJson']}
+```
+
 To provide middle ground between well-known test runners working out of the box,
 and per-user configuration, test command can also be specifying by adding a `.vimtest.json`
 file:

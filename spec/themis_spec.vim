@@ -54,13 +54,25 @@ describe "Themis"
       TestNearest
       messages
 
-      Expect g:test#last_command == "themis math.vimspec --target 'asserts 1 plus 1 equals 2'"
+      Expect g:test#last_command == "themis math.vimspec --target 'addition asserts 1 plus 1 equals 2'"
 
       view +11 math.vimspec
       TestNearest
       messages
 
-      Expect g:test#last_command == "themis math.vimspec --target " . shellescape("doesn't \"break\" on ➕`?")
+      Expect g:test#last_command == "themis math.vimspec --target " . shellescape("addition doesn't \"break\" on ➕`?")
+
+      view +15 math.vimspec
+      TestNearest
+      messages
+
+      Expect g:test#last_command == "themis math.vimspec --target " . shellescape('addition contains vim pattern ' . escape('e.g., (\@<=) or .*~\[^$', '.*~\[^$'))
+
+      view +27 math.vimspec
+      TestNearest
+      messages
+
+      Expect g:test#last_command == "themis math.vimspec --target " . shellescape('math out of context')
     end
 
     it "runs file tests"

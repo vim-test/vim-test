@@ -10,6 +10,10 @@ Describe math
     it doesn't "break" on ➕`?
       Skip line
     end
+
+    it contains vim pattern e.g., (\@<=) or .*~\[^$
+      Skip line
+    end
   end
 
   Context subtraction
@@ -17,4 +21,8 @@ Describe math
       Assert Equals(1 - 1, 0)
     end
   end
+
+  It out of context
+    Assert Equals(1 - 1, 0)
+  End
 end

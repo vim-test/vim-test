@@ -61,7 +61,11 @@ function! s:nearest_test(position) abort
     let name = test#base#nearest_test(a:position, s:spec_patterns)
 
     if !empty(name['test'])
-      let target = shellescape(name['test'][0])
+      let test = name['test'][0]
+      let ns = empty(name['namespace']) ? '' : (name['namespace'][-1] . ' ')
+      let target = ns . test
+      let target = escape(target, '.*~\[^$') " escape vim patterns
+      let target = shellescape(target)
     endif
   endif
 

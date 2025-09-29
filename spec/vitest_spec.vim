@@ -19,78 +19,78 @@ describe "vitest"
 
   context "on nearest tests"
     it "runs JSX"
-      view +1 __tests__/normal-test.jsx
+      view +3 __tests__/normal-test.jsx
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math'' __tests__/normal-test.jsx'
 
-      view +2 __tests__/normal-test.jsx
+      view +4 __tests__/normal-test.jsx
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition'' __tests__/normal-test.jsx'
 
-      view +3 __tests__/normal-test.jsx
+      view +5 __tests__/normal-test.jsx
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' __tests__/normal-test.jsx'
 
-      view +2 __tests__/escaping-test.ts
+      view +4 __tests__/escaping-test.ts
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Escaping parentheses \\('' __tests__/escaping-test.ts'
 
-      view +5 __tests__/escaping-test.ts
+      view +7 __tests__/escaping-test.ts
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Escaping brackets \\['' __tests__/escaping-test.ts'
     end
 
     it "runs loop tests"
-      view +1 __tests__/loop-test.jsx
+      view +3 __tests__/loop-test.jsx
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Loop the test with given array'' __tests__/loop-test.jsx'
 
-      view +2 __tests__/loop-test.jsx
+      view +4 __tests__/loop-test.jsx
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''loop each tests'' __tests__/loop-test.jsx'
 
-      view +3 __tests__/loop-test.jsx
+      view +5 __tests__/loop-test.jsx
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''described loop test'' __tests__/loop-test.jsx'
     end
 
     it "aliases context to describe"
-      view +1 __tests__/context-test.jsx
+      view +3 __tests__/context-test.jsx
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math'' __tests__/context-test.jsx'
 
-      view +2 __tests__/context-test.jsx
+      view +4 __tests__/context-test.jsx
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition'' __tests__/context-test.jsx'
 
-      view +3 __tests__/context-test.jsx
+      view +5 __tests__/context-test.jsx
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' __tests__/context-test.jsx'
     end
 
     it "runs TypescriptReact"
-      view +1 __tests__/normal-test.tsx
+      view +3 __tests__/normal-test.tsx
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math'' __tests__/normal-test.tsx'
 
-      view +2 __tests__/normal-test.tsx
+      view +4 __tests__/normal-test.tsx
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition'' __tests__/normal-test.tsx'
 
-      view +3 __tests__/normal-test.tsx
+      view +5 __tests__/normal-test.tsx
       TestNearest
 
       Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' __tests__/normal-test.tsx'
@@ -98,7 +98,7 @@ describe "vitest"
   end
 
   it "runs file test if nearest test couldn't be found"
-    view +1 __tests__/normal-test.jsx
+    view +3 __tests__/normal-test.jsx
     normal O
     TestNearest
 

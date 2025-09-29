@@ -7,7 +7,7 @@ function! test#javascript#vitest#test_file(file) abort
       if exists('g:test#javascript#runner')
           return g:test#javascript#runner ==# 'vitest'
       else
-        return test#javascript#has_package('vitest')
+        return test#javascript#has_import(a:file, 'vitest') || test#javascript#has_package('vitest')
       endif
   endif
 endfunction

@@ -7,7 +7,10 @@ function! test#javascript#playwright#test_file(file) abort
       if exists('g:test#javascript#runner')
           return g:test#javascript#runner ==# 'playwright'
       else
-        return test#javascript#has_package('@playwright/test') && test#javascript#has_import(a:file, '@playwright/test')
+        return test#javascript#has_import(a:file, '@playwright/test')
+            \ || test#javascript#has_package('@playwright/test')
+            \ || filereadable('playwright.config.ts')
+            \ || filereadable('playwright.config.js')
       endif
   endif
 endfunction

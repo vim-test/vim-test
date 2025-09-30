@@ -172,4 +172,23 @@ describe "Jest"
     end
   end
 
+  context "using jest.config for detection"
+    before
+      !mv package.json package.temp
+      !touch jest.config.js
+    end
+
+    after
+      !mv package.temp package.json
+      !rm jest.config.js
+    end
+
+    it "runs file tests"
+      view +1 __tests__/normal-test.js
+      TestFile
+
+      Expect g:test#last_command == 'jest --runTestsByPath -- __tests__/normal-test.js'
+    end
+  end
+
 end

@@ -8,6 +8,7 @@ function! test#javascript#jest#test_file(file) abort
           return g:test#javascript#runner ==# 'jest'
       else
         return test#javascript#has_package('jest')
+            \ || !empty(glob('jest.config.*'))
       endif
   endif
 endfunction

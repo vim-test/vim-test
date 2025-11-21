@@ -1,6 +1,6 @@
 let test#javascript#patterns = {
   \ 'whole_match': 1,
-  \ 'test': ['\v^\s*%(it|test|describe.each)[^''"`]*([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1'],
+  \ 'test': ['\v^\s*%(%(it|test)%(\.[a-z]+)?|describe\.[a-z]+)%(\(.{-}\))?\s*\(?([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1'],
   \ 'namespace': ['\v^\s*%(describe|suite|context|module)\s*[^''"`]*([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1']
 \}
 

@@ -12,7 +12,7 @@ describe "Laravel Sail"
   after
     call Teardown()
     !rm -rf vendor docker-compose.yml compose.yaml
-    cd -
+    cd ../../..
   end
 
   it "runs file tests"

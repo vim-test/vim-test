@@ -11,7 +11,7 @@ describe "Laravel Sail"
 
   after
     call Teardown()
-    !rm -rf vendor docker-compose.yml
+    !rm -rf vendor docker-compose.yml compose.yaml
     cd -
   end
 
@@ -112,4 +112,28 @@ describe "Laravel Sail"
     cd ../phpunit
   end
 
+  it "runs with new compose.yaml filename"
+    !rm -rf docker-compose.yml
+    !touch compose.yaml
+
+    view NormalTest.php
+    TestFile
+
+    Expect g:test#last_command == './vendor/bin/sail test --colors NormalTest.php'
+  end
+
+  it "runs Pest via sail when configured with new file"
+    cd ../pest
+    !mkdir -p vendor/bin
+    !touch vendor/bin/sail
+    !rm -rf docker-compose.yml
+    !touch compose.yaml
+    view PestTest.php
+    TestFile
+
+    Expect g:test#last_command == './vendor/bin/sail pest --colors PestTest.php'
+
+    !rm -rf vendor compose.yaml
+    cd ../phpunit
+  end
 end

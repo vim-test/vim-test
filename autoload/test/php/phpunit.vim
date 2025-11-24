@@ -51,7 +51,7 @@ endfunction
 function! test#php#phpunit#executable() abort
   if exists('g:test#php#phpunit#executable')
     return g:test#php#phpunit#executable
-  elseif filereadable('./vendor/bin/sail') && (filereadable('./docker-compose.yml') || filereadable('./docker-compose.yaml'))
+  elseif filereadable('./vendor/bin/sail') && (filereadable('./docker-compose.yml') || filereadable('./docker-compose.yaml') || filereadable('./compose.yml') || filereadable('./compose.yaml'))
     return './vendor/bin/sail test'
   elseif filereadable('./vendor/bin/paratest')
     return './vendor/bin/paratest'

@@ -116,7 +116,7 @@ function! test#strategy#neovim_sticky(cmd) abort
 
   if !len(l:buffers) && get(g:, 'test#neovim_sticky#use_existing', 0)
     let l:buffers = getbufinfo({ 'buflisted': 1 })
-      \ ->filter({i, v -> has_key(v.variables, 'terminal_job_id')})
+      \ ->filter({i, v -> match(bufname(v.bufnr), 'term://') == 0})
   end
 
   if len(l:buffers) == 0
@@ -139,8 +139,9 @@ function! test#strategy#neovim_sticky(cmd) abort
     let l:win = [s:neovim_reopen_term(l:buffers[0].bufnr)]
   endif
 
+  let l:channel = getbufvar(l:buffers[0].bufnr, '&channel')
   " Needs explicit join to work in all shells
-  call chansend(l:buffers[0].variables.terminal_job_id, join(l:cmd, "\r"))
+  call chansend(l:channel, join(l:cmd, "\r"))
   if len(l:win) > 0
     call win_execute(l:win[0], 'normal G', 1)
   endif

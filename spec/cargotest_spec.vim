@@ -129,6 +129,20 @@ describe "Cargo"
     Expect g:test#last_command == 'cargo test ''too::nested::tests::second_test'' -- --exact'
   end
 
+  it "runs nearest test in nested test modules"
+    view +3 src/nested_tests.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''nested_tests::tests::first_test'' -- --exact'
+
+    view +8 src/nested_tests.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''nested_tests::tests::nested_once::second_test'' -- --exact'
+
+    view +13 src/nested_tests.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''nested_tests::tests::nested_once::nested_twice::third_test'' -- --exact'
+  end
+  
   it "runs nearest test on bins"
     view +7 src/bin/somebin.rs
     TestNearest

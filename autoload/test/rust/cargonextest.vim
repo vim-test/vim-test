@@ -81,8 +81,9 @@ function! s:nearest_test(position) abort
     \ g:test#rust#patterns
   \ )
 
-  if len(name['namespace']) > 0
-    return join([name['namespace'][0], name_f['test'][0]], '::')
+  let l:module_path = test#rust#module_path_at_line(a:position['file'], name['test_line'])
+  if !empty(l:module_path)
+    return l:module_path . '::' . name_f['test'][0]
   else
     return name_f['test'][0]
   endif

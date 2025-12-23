@@ -7,7 +7,7 @@ let g:test#csharp#patterns = {
 let s:slash = '/'
 if (has('win32') || has('win64'))
     let shell = fnamemodify(&shell, ':t')
-    if (shell ==? 'cmd.exe' || shell ==? 'powershell')
+    if (shell ==? 'cmd.exe' || shell ==? 'powershell' || shell ==? 'pwsh')
         let s:slash = '\'
     endif
 endif

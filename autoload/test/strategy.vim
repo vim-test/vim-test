@@ -185,6 +185,7 @@ endfunction
 
 function! test#strategy#vimux(cmd) abort
   if exists('g:test#preserve_screen') && !g:test#preserve_screen
+    call VimuxOpenRunner()
     call VimuxClearTerminalScreen()
     call VimuxClearRunnerHistory()
     call VimuxRunCommand(s:command(a:cmd))

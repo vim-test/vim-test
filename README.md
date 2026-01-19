@@ -873,7 +873,7 @@ The gem is available as open source under the terms of the [MIT License](https:/
 [Floaterm]: https://github.com/voldikss/vim-floaterm
 [Neomake]: https://github.com/neomake/neomake
 [Dispatch]: https://github.com/tpope/vim-dispatch
-[Vimux]: https://github.com/benmills/vimux
+[Vimux]: https://github.com/preservim/vimux
 [Tslime]: https://github.com/jgdavey/tslime.vim
 [Slimux]: https://github.com/esamattis/slimux
 [Vim&nbsp;Tmux&nbsp;Runner]: https://github.com/christoomey/vim-tmux-runner

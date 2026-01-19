@@ -111,11 +111,11 @@ endfunction
 function! test#strategy#neovim_sticky(cmd) abort
   let l:cmd = [a:cmd, '']
   let l:tag = '_test_vim_neovim_sticky'
-  let l:buffers = getbufinfo({ 'buflisted': 1 })
+  let l:buffers = getbufinfo({ 'bufloaded': 1 })
     \ ->filter({i, v -> has_key(v.variables, l:tag)})
 
   if !len(l:buffers) && get(g:, 'test#neovim_sticky#use_existing', 0)
-    let l:buffers = getbufinfo({ 'buflisted': 1 })
+    let l:buffers = getbufinfo({ 'bufloaded': 1 })
       \ ->filter({i, v -> match(bufname(v.bufnr), 'term://') == 0})
   end
 

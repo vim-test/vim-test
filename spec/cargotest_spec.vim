@@ -142,7 +142,17 @@ describe "Cargo"
     TestNearest
     Expect g:test#last_command == 'cargo test ''nested_tests::tests::nested_once::nested_twice::third_test'' -- --exact'
   end
-  
+
+  it "runs nearest test in modules with structs and impls"
+    view +28 src/tests_with_helpers.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''tests_with_helpers::tests::test_with_helper'' -- --exact'
+
+    view +34 src/tests_with_helpers.rs
+    TestNearest
+    Expect g:test#last_command == 'cargo test ''tests_with_helpers::tests::another_test'' -- --exact'
+  end
+
   it "runs nearest test on bins"
     view +7 src/bin/somebin.rs
     TestNearest

@@ -1,5 +1,5 @@
 let test#python#patterns = {
-  \ 'test':      ['\v^\s*%(async )?def (test_\w+)'],
+  \ 'test':      ['\v^\s*%(async )?def (test\w+)'],
   \ 'namespace': ['\v^\s*class (\w+)'],
 \}
 

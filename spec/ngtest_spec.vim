@@ -15,14 +15,14 @@ describe "Angular ng-test"
     view e2e/src/app.e2e-spec.ts
     TestNearest
 
-    Expect g:test#last_command == 'ng test'
+    Expect g:test#last_command == "ng test --include='e2e/src/app.e2e-spec.ts'"
   end
 
   it "runs file tests"
     view e2e/src/app.e2e-spec.ts
     TestFile
 
-    Expect g:test#last_command == 'ng test'
+    Expect g:test#last_command == "ng test --include='e2e/src/app.e2e-spec.ts'"
   end
 
   it "runs test suites"

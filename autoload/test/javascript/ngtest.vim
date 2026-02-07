@@ -17,7 +17,12 @@ function! test#javascript#ngtest#build_args(args) abort
 endfunction
 
 function! test#javascript#ngtest#build_position(type, position) abort
-  return []
+  if a:type ==# 'nearest' || a:type ==# 'file'
+    let file = a:position['file']
+    return ['--include=' . shellescape(file, 1)]
+  else
+    return []
+  endif
 endfunction
 
 function! test#javascript#ngtest#executable() abort

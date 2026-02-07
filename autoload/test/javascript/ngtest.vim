@@ -17,7 +17,15 @@ function! test#javascript#ngtest#build_args(args) abort
 endfunction
 
 function! test#javascript#ngtest#build_position(type, position) abort
-  if a:type ==# 'nearest' || a:type ==# 'file'
+  if a:type ==# 'nearest'
+    let name = s:nearest_test(a:position)
+    let file = a:position['file']
+    if !empty(name)
+      return ['--include=' . shellescape(file, 1), '--filter=' . shellescape(name, 1)]
+    else
+      return ['--include=' . shellescape(file, 1)]
+    endif
+  elseif a:type ==# 'file'
     let file = a:position['file']
     return ['--include=' . shellescape(file, 1)]
   else
@@ -27,4 +35,9 @@ endfunction
 
 function! test#javascript#ngtest#executable() abort
   return 'ng test'
+endfunction
+
+function! s:nearest_test(position) abort
+  let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
+  return join(name['namespace'] + name['test'])
 endfunction

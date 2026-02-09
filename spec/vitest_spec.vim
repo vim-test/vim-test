@@ -8,6 +8,8 @@ describe "vitest"
     cd spec/fixtures/vitest
     if executable('npx')
         let g:expectedExecutable = 'npx '
+    else
+        let g:expectedExecutable = ''
     endif
   end
 

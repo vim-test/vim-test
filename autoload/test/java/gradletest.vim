@@ -110,10 +110,11 @@ function! s:GetBuildFile(pwd)
 endfunction
 
 function! test#java#gradletest#executable() abort
+  let test_cmd = get(g:, 'test#java#gradletest#test_cmd', 'test')
   if findfile('gradlew') ==# 'gradlew'
-    return './gradlew test'
+    return './gradlew ' . test_cmd
   else
-    return 'gradle test'
+    return 'gradle ' . test_cmd
   endif
 endfunction
 

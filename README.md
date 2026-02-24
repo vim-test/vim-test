@@ -511,6 +511,12 @@ force a specific runner:
 let test#java#runner = 'gradletest'
 ```
 
+If you want to customize the Gradle test command, you can set `g:test#java#gradletest#test_cmd` in your vimrc file.
+
+``` vim
+let g:test#java#gradletest#test_cmd = 'integrationTest'
+```
+
 There is a specific strategy for Java with maven which invokes the mvn verify for a file instead of mvn test tailored for integration tests. In this way you can leverage the pre-integration goals, like firing up a database and so on. This strategy is called 'integration' and you can setup a command for it (preferably within the Java filetype plugin):
 
 ``` vim
@@ -526,8 +532,8 @@ nnoremap <silent><leader>itf :IntegrationTest -Dtest=foo -DfailIfNoTests=false -
 
 If you want to customize the Maven test command, you can set `g:test#java#maventest#test_cmd` in your vimrc file.
 
-```vim
-  let g:test#java#maventest#test_cmd = 'surefire:test -Dtest'
+``` vim
+let g:test#java#maventest#test_cmd = 'surefire:test -Dtest'
 ```
 
 The above command makes sure that no surefire tests will be run (by passing in a dummy test and makes sure that the plugin won't fail), it also makes the dependent modules, skips PMD and checkstyle checks as well.

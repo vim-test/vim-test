@@ -105,6 +105,15 @@ describe "Gradle plain"
     Expect g:test#last_command == "gradle test --tests MathTest.testFailedAdd"
   end
 
+  it "runs nearest tests with custom test cmd"
+    let g:test#java#gradletest#test_cmd = 'integrationTest'
+    view +37 MathTest.java
+    TestNearest
+
+    Expect g:test#last_command == "gradle integrationTest --tests MathTest.testFailedAdd"
+    unlet g:test#java#gradletest#test_cmd
+  end
+
   it "runs a suite"
     view MathTest.java
     TestSuite

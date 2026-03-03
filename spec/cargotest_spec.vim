@@ -5,6 +5,7 @@ describe "Cargo"
   before
     let g:test#rust#runner = 'cargotest'
     cd spec/fixtures/cargo/crate
+    let $BASH_ENV = getcwd() . "/.vim_bash_env"
   end
 
   after

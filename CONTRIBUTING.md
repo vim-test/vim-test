@@ -37,4 +37,10 @@ Create a spec file at `spec/[runner]_spec.vim` to test your runner implementatio
 - Add your test runner to the `README.md` table with language, runner name, and identifier
 - Update `doc/test.txt` with relevant documentation
 
+### 5. Testing instructions
+- Install dependencies: `gem install vim-flavor`
+- Run all tests: `vim-flavor test spec/`
+- Run specific test file: `vim-flavor test spec/[filename]_spec.vim`
+- Test fixtures in `spec/fixtures/` provide examples for each supported test runner
+
 By contributing to vim-test, you agree that your contributions will be licensed under the [MIT License](https://opensource.org/license/MIT).

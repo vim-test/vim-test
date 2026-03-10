@@ -835,7 +835,7 @@ Note that for your own custom runners, you still need to set `test#custom_runner
 
 ## Running tests
 
-Tests are run using a Ruby test runner, so you'll have to have Ruby installed.
+Tests are run using a Ruby test runner, so you'll need Ruby version 3 installed.
 Then run
 
 ```sh

@@ -46,6 +46,18 @@ describe "Jest"
       Expect g:test#last_command == 'jest --runTestsByPath -t ''described loop test$'' -- __tests__/loop-test.js'
     end
 
+    it "runs loop tests with printf syntax"
+      view +4 __tests__/loop-test.js
+      TestNearest
+
+      Expect g:test#last_command == 'jest --runTestsByPath -t ''add\('' -- __tests__/loop-test.js'
+
+      view +5 __tests__/loop-test.js
+      TestNearest
+
+      Expect g:test#last_command == 'jest --runTestsByPath -t ''string\('' -- __tests__/loop-test.js'
+    end
+
     it "aliases context to describe"
       view +1 __tests__/context-test.js
       TestNearest

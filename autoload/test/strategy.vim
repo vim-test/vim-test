@@ -234,6 +234,11 @@ function! test#strategy#iterm(cmd) abort
   call s:execute_script('osx_iterm', cmd)
 endfunction
 
+function! test#strategy#ghostty(cmd) abort
+  let cmd = join(['cd ' . shellescape(getcwd()), s:pretty_command(a:cmd)], '; ')
+  call s:execute_script('osx_ghostty', cmd)
+endfunction
+
 function! test#strategy#kitty(cmd) abort
   let cmd = join(['cd ' . shellescape(getcwd()), s:pretty_command(a:cmd)], '; ')
   call s:execute_script('kitty_runner', cmd)

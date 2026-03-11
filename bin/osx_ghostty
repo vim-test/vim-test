@@ -1,0 +1,17 @@
+#!/usr/bin/osascript
+
+on run argv
+  tell application "Ghostty"
+    set _window to front window
+    if _window is equal to missing value then
+      new window
+    end if
+    set term to focused terminal of selected tab of front window
+    input text (item 1 of argv) to term
+    send key "enter" to term
+  end tell
+
+  tell application "MacVim"
+    activate
+  end tell
+end run

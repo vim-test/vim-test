@@ -3,6 +3,7 @@ let test#go#patterns = {
     \ '\v^\s*func ((Test|Example).*)\(',
     \ '\v^\s*func \(.*\) ((Test).*)\(',
     \ '\v^\s*t\.Run\("(.*)"',
+    \ '\v^\s*name:\s*"(.*)"',
   \],
   \ 'namespace': [
     \ '\v^\s*func ((Test).*)\(',

@@ -24,12 +24,18 @@ function! test#go#gotest#build_position(type, position) abort
         let suite_name = test#go#nearest_suite_name(a:position)
         if !empty(suite_name) 
           let suite_testcase_name = test#go#get_suite_testcase_name(suite_name)
-          let name = s:nearest_test(a:position)
+          let [name, _] = s:nearest_test(a:position)
           return empty(name) ? [] : [path, '-run '.shellescape(suite_testcase_name.'$') . ' -testify.m ' .shellescape(name, 1)]
         endif
       endif
-      let name = s:nearest_test(a:position)
-      let command = empty(name) ? [] : ['-run '.shellescape(name.'$', 1), path]
+      let [name, is_table_subtest] = s:nearest_test(a:position)
+      if empty(name)
+        let command = []
+      elseif is_table_subtest
+        let command = ['-run '.shellescape(name, 1), path]
+      else
+        let command = ['-run '.shellescape(name.'$', 1), path]
+      endif
       return add(command, l:gotest_args)
     endif
   endif
@@ -73,8 +79,14 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#go#patterns)
-  let name = join(name['namespace'] + name['test'], '/')
-  let without_spaces = substitute(name, '\s', '_', 'g')
+  let joined = join(name['namespace'] + name['test'], '/')
+
+  " Table-driven subtest (matched by name: "..." pattern): preserve spaces, no escaping
+  if name['test_line'] > 0 && getline(name['test_line']) =~# '\v^\s*name:\s*"'
+    return [joined, 1]
+  endif
+
+  let without_spaces = substitute(joined, '\s', '_', 'g')
   let escaped_regex = substitute(without_spaces, '\([\[\].*+?|$^()]\)', '\\\1', 'g')
-  return escaped_regex
+  return [escaped_regex, 0]
 endfunction

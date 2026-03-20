@@ -30,7 +30,7 @@ function! test#go#gotest#build_position(type, position) abort
         endif
       endif
       let nearest = s:nearest_test(name)
-      let table_name = s:is_table_subtest(name)
+      let table_name = s:table_subtest(name)
       if empty(nearest)
         let command = []
       elseif !empty(table_name)
@@ -86,9 +86,8 @@ function! s:nearest_test(name) abort
   return escaped_regex
 endfunction
 
-function! s:is_table_subtest(name) abort
+function! s:table_subtest(name) abort
   if a:name['test_line'] > 0 && getline(a:name['test_line']) =~# '\v^\s*name:\s*"'
     return join(a:name['namespace'] + a:name['test'], '/')
   endif
-  return ''
 endfunction

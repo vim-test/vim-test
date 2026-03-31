@@ -33,13 +33,7 @@ function! test#python#pyunit#build_args(args) abort
 endfunction
 
 function! test#python#pyunit#executable() abort
-  let pipenv_prefix = ""
-
-  if filereadable("Pipfile")
-    let pipenv_prefix = "pipenv run "
-  elseif filereadable("uv.lock")
-    let pipenv_prefix = "uv run "
-  endif
+  let pipenv_prefix = test#python#pipenv_prefix()
 
   return pipenv_prefix . test#python#executable() . ' -m unittest'
 endfunction

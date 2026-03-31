@@ -38,17 +38,7 @@ function! test#python#mamba#build_args(args, color) abort
 endfunction
 
 function! test#python#mamba#executable() abort
-  let pipenv_prefix = ""
-
-  if filereadable("Pipfile")
-    let pipenv_prefix = "pipenv run "
-  elseif filereadable("poetry.lock")
-    let pipenv_prefix = "poetry run "
-  elseif filereadable("pdm.lock")
-    let pipenv_prefix = "pdm run "
-  elseif filereadable("uv.lock")
-    let pipenv_prefix = "uv run "
-  endif
+  let pipenv_prefix = test#python#pipenv_prefix()
 
   return pipenv_prefix . "mamba"
 endfunction

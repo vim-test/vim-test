@@ -49,17 +49,9 @@ function! test#python#pytest#build_args(args, color) abort
 endfunction
 
 function! test#python#pytest#executable() abort
-  let pipenv_prefix = ""
+  let pipenv_prefix = test#python#pipenv_prefix()
 
-  if filereadable("Pipfile")
-    let pipenv_prefix = "pipenv run "
-  elseif filereadable("poetry.lock")
-    let pipenv_prefix = "poetry run "
-  elseif filereadable("pdm.lock")
-    let pipenv_prefix = "pdm run "
-  elseif filereadable("uv.lock")
-    let pipenv_prefix = "uv run "
-  else
+  if pipenv_prefix ==? ""
     let pipenv_prefix = test#python#executable() . " -m "
   endif
 

@@ -24,6 +24,15 @@ describe "Multiple JavaScript runners"
     unlet g:test#javascript#runner
   end
 
+  it "detects packages from parent directories"
+    cd __tests__
+
+    Expect test#javascript#has_package('mocha') == 1
+    Expect test#javascript#has_package('definitely-not-a-real-package') == 0
+
+    cd ..
+  end
+
   after
     call Teardown()
     cd -

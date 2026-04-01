@@ -26,7 +26,10 @@ function! test#javascript#has_package(package) abort
 endfunction
 
 function! test#javascript#has_import(file, import) abort
-  return match(readfile(a:file), "^import.*" . a:import) != -1
+  let l:source = substitute(join(readfile(expand(a:file)), "\n"), '\v\_s+', ' ', 'g')
+  let l:regex_safe_import = escape(a:import, '\.*$^~[]')
+
+  return l:source =~ '\v\<import\>\s*(.{-}\<from\>\s*)?[''"]' . l:regex_safe_import . '[''"]'
 endfunction
 
 function! test#javascript#determine_executable(cmd) abort

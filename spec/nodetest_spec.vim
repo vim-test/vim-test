@@ -24,4 +24,11 @@ describe "Node Test"
 
     Expect g:test#last_command == 'node --test normal.test.ts'
   end
+
+  it "runs file tests with multiline imports"
+    view multiline-import.test.js
+    TestFile
+
+    Expect g:test#last_command == 'node --test multiline-import.test.js'
+  end
 end

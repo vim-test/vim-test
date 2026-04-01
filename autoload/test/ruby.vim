@@ -11,3 +11,11 @@ let test#ruby#patterns = {
     \ '\v^\s*%(describe|context)%(\(| )(\S+)',
   \],
 \}
+
+function! test#ruby#use_zeus() abort
+  return !empty(glob('.zeus.sock'))
+endfunction
+
+function! test#ruby#use_bundle_exec() abort
+  return filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
+endfunction

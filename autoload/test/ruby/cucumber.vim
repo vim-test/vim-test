@@ -29,11 +29,11 @@ function! test#ruby#cucumber#build_args(args, color) abort
 endfunction
 
 function! test#ruby#cucumber#executable() abort
-  if !empty(glob('.zeus.sock'))
+  if test#ruby#use_zeus()
     return 'zeus cucumber'
   elseif filereadable('./bin/cucumber') && get(g:, 'test#ruby#use_binstubs', 1)
     return './bin/cucumber'
-  elseif filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
+  elseif test#ruby#use_bundle_exec()
     return 'bundle exec cucumber'
   else
     return 'cucumber'

@@ -22,7 +22,7 @@ function! test#ruby#testbench#build_args(args) abort
 endfunction
 
 function! test#ruby#testbench#executable() abort
-  if filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
+  if test#ruby#use_bundle_exec()
     return 'bundle exec bench'
   else
     return 'bench'

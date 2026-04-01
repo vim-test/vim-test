@@ -31,7 +31,7 @@ endfunction
 function! test#ruby#rails#executable() abort
   if test#ruby#use_zeus()
     return 'zeus test'
-  elseif filereadable('./bin/spring') && get(g:, 'test#ruby#use_spring_binstub', 0)
+  elseif test#ruby#use_spring()
     return './bin/spring rails test'
   elseif filereadable('./bin/rails') && get(g:, 'test#ruby#use_binstubs', 1)
     return './bin/rails test'

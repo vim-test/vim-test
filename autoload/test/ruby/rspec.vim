@@ -29,7 +29,7 @@ endfunction
 function! test#ruby#rspec#executable() abort
   if test#ruby#use_zeus()
     return 'zeus rspec'
-  elseif filereadable('./bin/spring') && get(g:, 'test#ruby#use_spring_binstub', 0)
+  elseif test#ruby#use_spring()
     return './bin/spring rspec'
   elseif filereadable('./bin/rspec') && get(g:, 'test#ruby#use_binstubs', 1)
     return './bin/rspec'

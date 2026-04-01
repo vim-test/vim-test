@@ -152,6 +152,29 @@ describe "vitest"
     Expect g:test#last_command == g:expectedExecutable .. 'vitest run ''__tests__/dollar-sign-in-filename-$test.js'''
   end
 
+  context "using vite.config for detection"
+    before
+      call rename('package.json', 'package.temp')
+      call writefile([
+          \ 'export default {',
+          \ '  test: {}',
+          \ '}',
+          \ ], 'vite.config.ts')
+    end
+
+    after
+      call delete('vite.config.ts')
+      call rename('package.temp', 'package.json')
+    end
+
+    it "runs file tests"
+      view +1 __tests__/normal-test.jsx
+      TestFile
+
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run ''__tests__/normal-test.jsx'''
+    end
+  end
+
   context "with a specified executable"
     after
       unlet g:test#javascript#vitest#executable

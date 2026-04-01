@@ -186,13 +186,42 @@ describe "Jest"
 
   context "using jest.config for detection"
     before
-      !mv package.json package.temp
-      !touch jest.config.js
+      call rename('package.json', 'package.temp')
+      call writefile(['module.exports = {}'], 'jest.config.js')
     end
 
     after
-      !mv package.temp package.json
-      !rm jest.config.js
+      call delete('jest.config.js')
+      call rename('package.temp', 'package.json')
+    end
+
+    it "runs file tests from nested directories"
+      cd __tests__
+      view +1 normal-test.js
+      TestFile
+
+      Expect g:test#last_command == 'jest --runTestsByPath -- normal-test.js'
+
+      cd ..
+    end
+  end
+
+  context "using package.json jest config for detection"
+    before
+      call rename('package.json', 'package.temp')
+      call writefile([
+            \ '{',
+            \ '  "name": "jest-config-only",',
+            \ '  "jest": {',
+            \ '    "verbose": true',
+            \ '  }',
+            \ '}',
+            \ ], 'package.json')
+    end
+
+    after
+      call delete('package.json')
+      call rename('package.temp', 'package.json')
     end
 
     it "runs file tests"

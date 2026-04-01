@@ -7,7 +7,9 @@ function! test#javascript#vitest#test_file(file) abort
       if exists('g:test#javascript#runner')
           return g:test#javascript#runner ==# 'vitest'
       else
-        return test#javascript#has_import(a:file, 'vitest') || test#javascript#has_package('vitest')
+        return test#javascript#has_import(a:file, 'vitest')
+            \ || s:has_vitest_config()
+            \ || test#javascript#has_package('vitest')
       endif
   endif
 endfunction
@@ -55,4 +57,36 @@ endfunction
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
   return test#base#escape_regex(join(name['namespace'] + name['test']))
+endfunction
+
+function! s:has_vitest_config() abort
+  return s:find_config('vitest.config.*')
+      \ || s:find_config('vite.config.*', 
+        \ {path -> join(readfile(path), "\n") =~# '\v\<test\>\s*:'})
+endfunction
+
+function! s:find_config(pattern, ...) abort
+  let l:callback = get(a:000, 0, {path -> 1})
+  let l:search_dir = getcwd()
+
+  while 1
+    let l:paths = split(globpath(l:search_dir, a:pattern), "\n")
+    for l:path in l:paths
+      if empty(l:path)
+        continue
+      endif
+
+      let l:found_config = call(l:callback, [l:path])
+      if l:found_config
+        return 1
+      endif
+    endfor
+
+    let l:parent_dir = fnamemodify(l:search_dir, ':h')
+    if l:parent_dir ==# l:search_dir
+      return 0
+    endif
+
+    let l:search_dir = l:parent_dir
+  endwhile
 endfunction

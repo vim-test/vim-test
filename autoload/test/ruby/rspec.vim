@@ -27,15 +27,5 @@ function! test#ruby#rspec#build_args(args, color) abort
 endfunction
 
 function! test#ruby#rspec#executable() abort
-  if !empty(glob('.zeus.sock'))
-    return 'zeus rspec'
-  elseif filereadable('./bin/spring') && get(g:, 'test#ruby#use_spring_binstub', 0)
-    return './bin/spring rspec'
-  elseif filereadable('./bin/rspec') && get(g:, 'test#ruby#use_binstubs', 1)
-    return './bin/rspec'
-  elseif filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
-    return 'bundle exec rspec'
-  else
-    return 'rspec'
-  endif
+  return test#ruby#determine_executable('rspec')
 endfunction

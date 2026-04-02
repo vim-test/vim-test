@@ -40,11 +40,7 @@ function! test#javascript#playwright#build_args(args) abort
 endfunction
 
 function! test#javascript#playwright#executable() abort
-  if filereadable('node_modules/.bin/playwright')
-    return 'node_modules/.bin/playwright test'
-  else
-    return 'playwright test'
-  endif
+  return test#javascript#determine_executable('playwright') . ' test'
 endfunction
 
 let test#playwright#patterns = {

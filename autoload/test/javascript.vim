@@ -28,3 +28,11 @@ endfunction
 function! test#javascript#has_import(file, import) abort
   return match(readfile(a:file), "^import.*" . a:import) != -1
 endfunction
+
+function! test#javascript#determine_executable(cmd) abort
+  if filereadable('node_modules/.bin/' . a:cmd)
+    return 'node_modules/.bin/' . a:cmd
+  else
+    return a:cmd
+  endif
+endfunction

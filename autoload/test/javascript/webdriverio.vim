@@ -35,9 +35,5 @@ function! test#javascript#webdriverio#build_args(args) abort
 endfunction
 
 function! test#javascript#webdriverio#executable() abort
-  if filereadable('node_modules/.bin/wdio')
-    return 'node_modules/.bin/wdio'
-  else
-    return 'wdio'
-  endif
+  return test#javascript#determine_executable('wdio')
 endfunction

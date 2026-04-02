@@ -46,11 +46,7 @@ function! test#javascript#ember#build_args(args, _) abort
 endfunction
 
 function! test#javascript#ember#executable() abort
-  if filereadable('node_modules/.bin/ember')
-    return 'node_modules/.bin/ember exam'
-  else
-    return 'ember exam'
-  endif
+  return test#javascript#determine_executable('ember') . ' exam'
 endfunction
 
 function! s:nearest_test(position) abort

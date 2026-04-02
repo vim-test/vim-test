@@ -65,11 +65,7 @@ function! test#javascript#nx#executable() abort
       return 'nx test ' . g:test#javascript#nx#project
     endif
   endif
-  if filereadable('node_modules/.bin/nx')
-    return 'node_modules/.bin/nx test'
-  else
-    return 'nx test'
-  endif
+  return test#javascript#determine_executable('nx') . ' test'
 endfunction
 
 function! s:nearest_test(position) abort

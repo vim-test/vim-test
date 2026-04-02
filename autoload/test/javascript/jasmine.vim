@@ -37,11 +37,7 @@ function! test#javascript#jasmine#build_args(args, color) abort
 endfunction
 
 function! test#javascript#jasmine#executable() abort
-  if filereadable('node_modules/.bin/jasmine')
-    return expand('node_modules/.bin/jasmine')
-  else
-    return 'jasmine'
-  endif
+  return test#javascript#determine_executable('jasmine')
 endfunction
 
 function! s:nearest_test(position) abort

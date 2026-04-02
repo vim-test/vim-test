@@ -37,11 +37,7 @@ function! test#javascript#lab#build_args(args) abort
 endfunction
 
 function! test#javascript#lab#executable() abort
-  if filereadable('node_modules/.bin/lab')
-    return 'node_modules/.bin/lab'
-  else
-    return 'lab'
-  endif
+  return test#javascript#determine_executable('lab')
 endfunction
 
 function! s:nearest_test(position) abort

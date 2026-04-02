@@ -53,17 +53,9 @@ endfunction
 
 function! test#javascript#mocha#executable() abort
   if test#javascript#has_package('mocha-webpack')
-    if filereadable('node_modules/.bin/mocha-webpack')
-      return 'node_modules/.bin/mocha-webpack'
-    else
-      return 'mocha-webpack'
-    endif
+    return test#javascript#determine_executable('mocha-webpack')
   else
-    if filereadable('node_modules/.bin/mocha')
-      return 'node_modules/.bin/mocha'
-    else
-      return 'mocha'
-    endif
+    return test#javascript#determine_executable('mocha')
   endif
 endfunction
 

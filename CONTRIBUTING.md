@@ -24,6 +24,8 @@ function! test#[language]#[runner]#build_args(args)
 function! test#[language]#[runner]#executable()
 ```
 
+Any logic that is common to runners for that language should be added to `autoload/test/[language].vim`.
+
 ### 2. Add Test Fixtures
 
 Create appropriate test fixtures in `spec/fixtures/[runner]/` that demonstrate the test runner's file patterns and structure.

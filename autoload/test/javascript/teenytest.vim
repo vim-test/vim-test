@@ -27,9 +27,5 @@ function! test#javascript#teenytest#build_args(args, color) abort
 endfunction
 
 function! test#javascript#teenytest#executable() abort
-  if filereadable('node_modules/.bin/teenytest')
-    return 'node_modules/.bin/teenytest'
-  else
-    return 'teenytest'
-  endif
+  return test#javascript#determine_executable('teenytest')
 endfunction

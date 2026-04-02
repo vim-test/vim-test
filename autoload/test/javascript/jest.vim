@@ -39,11 +39,7 @@ function! test#javascript#jest#build_args(args) abort
 endfunction
 
 function! test#javascript#jest#executable() abort
-  if filereadable('node_modules/.bin/jest')
-    return 'node_modules/.bin/jest'
-  else
-    return 'jest'
-  endif
+  return test#javascript#determine_executable('jest')
 endfunction
 
 function! s:nearest_test(position) abort

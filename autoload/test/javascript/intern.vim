@@ -49,11 +49,7 @@ function! test#javascript#intern#build_args(args) abort
 endfunction
 
 function! test#javascript#intern#executable() abort
-  if filereadable('node_modules/.bin/' . g:test#javascript#intern#test_runner)
-    return 'node_modules/.bin/'. g:test#javascript#intern#test_runner
-  else
-    return g:test#javascript#intern#test_runner
-  endif
+  return test#javascript#determine_executable(g:test#javascript#intern#test_runner)
 endfunction
 
 function! s:nearest_test(position) abort

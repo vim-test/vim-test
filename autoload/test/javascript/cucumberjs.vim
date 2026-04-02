@@ -33,11 +33,7 @@ function! test#javascript#cucumberjs#build_args(args) abort
 endfunction
 
 function! test#javascript#cucumberjs#executable() abort
-  if filereadable('node_modules/.bin/cucumber-js')
-    return 'node_modules/.bin/cucumber-js'
-  else
-    return 'cucumber-js'
-  endif
+  return test#javascript#determine_executable('cucumber-js')
 endfunction
 
 function! s:nearest_test(position) abort

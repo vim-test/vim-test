@@ -31,11 +31,7 @@ function! test#javascript#cypress#build_args(args) abort
 endfunction
 
 function! test#javascript#cypress#executable() abort
-  if filereadable('node_modules/.bin/cypress')
-    return 'node_modules/.bin/cypress'
-  else
-    return 'cypress'
-  endif
+  return test#javascript#determine_executable('cypress')
 endfunction
 
 function! s:nearest_test(position) abort

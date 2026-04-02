@@ -20,14 +20,14 @@ function! test#ruby#use_bundle_exec() abort
   return filereadable('Gemfile') && get(g:, 'test#ruby#bundle_exec', 1)
 endfunction
 
-function! test#ruby#use_spring() abort
+function! s:use_spring() abort
   return filereadable('./bin/spring') && get(g:, 'test#ruby#use_spring_binstub', 0)
 endfunction
 
 function! test#ruby#determine_executable(cmd) abort
   if test#ruby#use_zeus()
     return 'zeus ' . a:cmd
-  elseif test#ruby#use_spring()
+  elseif s:use_spring()
     return './bin/spring ' . a:cmd
   elseif filereadable('./bin/' . a:cmd) && get(g:, 'test#ruby#use_binstubs', 1)
     return './bin/' . a:cmd

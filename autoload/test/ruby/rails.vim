@@ -31,14 +31,8 @@ endfunction
 function! test#ruby#rails#executable() abort
   if test#ruby#use_zeus()
     return 'zeus test'
-  elseif test#ruby#use_spring()
-    return './bin/spring rails test'
-  elseif filereadable('./bin/rails') && get(g:, 'test#ruby#use_binstubs', 1)
-    return './bin/rails test'
-  elseif test#ruby#use_bundle_exec()
-    return 'bundle exec rails test'
   else
-    return 'rails test'
+    return test#ruby#determine_executable('rails') . ' test'
   endif
 endfunction
 

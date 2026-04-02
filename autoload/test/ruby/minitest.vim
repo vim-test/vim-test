@@ -66,15 +66,7 @@ endfunction
 function! test#ruby#minitest#executable() abort
   if filereadable('Rakefile') && system('cat Rakefile') =~# 'Rake::TestTask' ||
    \ (exists('b:rails_root') || filereadable('./bin/rails'))
-    if test#ruby#use_zeus()
-      return 'zeus rake test'
-    elseif filereadable('./bin/rake') && get(g:, 'test#ruby#use_binstubs', 1)
-      return './bin/rake test'
-    elseif test#ruby#use_bundle_exec()
-      return 'bundle exec rake test'
-    else
-      return 'rake test'
-    endif
+    return test#ruby#determine_executable('rake') . ' test'
   else
     if test#ruby#use_bundle_exec()
       return 'bundle exec ruby -Itest'

@@ -21,13 +21,5 @@ function! test#ruby#m#build_args(args) abort
 endfunction
 
 function! test#ruby#m#executable() abort
-  if test#ruby#use_zeus()
-    return 'zeus m'
-  elseif filereadable('./bin/m') && get(g:, 'test#ruby#use_binstubs', 1)
-    return './bin/m'
-  elseif test#ruby#use_bundle_exec()
-    return 'bundle exec m'
-  else
-    return 'm'
-  endif
+  return test#ruby#determine_executable('m')
 endfunction

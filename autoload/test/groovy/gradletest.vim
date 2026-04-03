@@ -65,7 +65,3 @@ function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#groovy#patterns)
   return join(name['namespace'] + name['test'], '.')
 endfunction
-
-function! s:os_slash() abort
-  return exists('+shellslash') ? '\' : '/'
-endfunction

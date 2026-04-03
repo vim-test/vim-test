@@ -64,7 +64,7 @@ function! s:build_ruby_args(path, args) abort
 endfunction
 
 function! test#ruby#minitest#executable() abort
-  if filereadable('Rakefile') && join(readfile('Rakefile'), "\n") =~# 'Rake::TestTask' ||
+  if filereadable('Rakefile') && match(readfile('Rakefile'), 'Rake::TestTask') != -1 ||
    \ (exists('b:rails_root') || filereadable('./bin/rails'))
     return test#ruby#determine_executable('rake') . ' test'
   else

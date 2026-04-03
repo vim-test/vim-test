@@ -119,6 +119,8 @@ function! test#base#nearest_test_in_lines(filename, from_line, to_line, patterns
   let last_namespace_line = -1
   let is_namespace_with_same_indent_allowed = get(configuration, 'namespaces_with_same_indent', 0)
   let match_index = a:patterns->get('whole_match', 0) ? 0 : 1
+  let multiline_tests = get(a:patterns, 'multiline_test', [])
+  let pending_name = ''
 
   let is_reverse = '$' == a:from_line ? 1 : a:from_line > a:to_line
   let lines = is_reverse
@@ -131,15 +133,43 @@ function! test#base#nearest_test_in_lines(filename, from_line, to_line, patterns
     let namespace_match = s:find_match(line, a:patterns['namespace'])
 
     let indent = len(matchstr(line, '^\s*'))
-    if !empty(test_match) 
-      \ && (last_indent == -1 
-          \ || (test_line == -1 
-              \ && last_indent > indent 
-              \ && last_namespace_line > current_line 
+
+    " Multiline test: pending_name holds a name captured from the previous line.
+    " It is consumed only if this line matches the paired opener pattern, and
+    " only when the two lines are immediately adjacent (pending_name is cleared
+    " at the start of every iteration and reset below if this line is a name line).
+    let prev_pending = pending_name
+    let pending_name = ''
+    if !empty(prev_pending) && test_line == -1
+      for ml in multiline_tests
+        if line =~# ml[1]
+          call add(test, prev_pending)
+          let last_indent = indent
+          let test_line = current_line
+          break
+        endif
+      endfor
+    endif
+
+    if test_line == -1
+      for ml in multiline_tests
+        let ml_match = matchlist(line, ml[0])
+        if !empty(ml_match)
+          let pending_name = filter(ml_match[1:], '!empty(v:val)')[0]
+          break
+        endif
+      endfor
+    endif
+
+    if !empty(test_match)
+      \ && (last_indent == -1
+          \ || (test_line == -1
+              \ && last_indent > indent
+              \ && last_namespace_line > current_line
               \ && last_namespace_line != -1
           \ )
         \ )
-      if last_namespace_line > current_line 
+      if last_namespace_line > current_line
         let namespace = []
         let last_namespace_line = -1
       endif

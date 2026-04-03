@@ -64,7 +64,7 @@ function! s:build_ruby_args(path, args) abort
 endfunction
 
 function! test#ruby#minitest#executable() abort
-  if filereadable('Rakefile') && system('cat Rakefile') =~# 'Rake::TestTask' ||
+  if filereadable('Rakefile') && match(readfile('Rakefile'), 'Rake::TestTask') != -1 ||
    \ (exists('b:rails_root') || filereadable('./bin/rails'))
     return test#ruby#determine_executable('rake') . ' test'
   else
@@ -99,7 +99,7 @@ function! s:nearest_test(position) abort
 endfunction
 
 function! s:syntax(file) abort
-  let lines = split(system('cat '.a:file), '\n')
+  let lines = filereadable(a:file) ? readfile(a:file) : []
 
   if !empty(filter(copy(lines), "v:val =~# g:test#ruby#patterns['test'][1]"))
     return 'rails'

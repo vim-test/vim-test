@@ -60,6 +60,14 @@ function! test#base#is_windows() abort
   return 0
 endfunction
 
+function! test#base#escape_path(file) abort
+  if test#base#is_windows()
+    let file = substitute(a:file, '/', '\\', 'g')
+    return substitute(file, '\\', '\\\\', 'g')
+  endif
+  return a:file
+endfunction
+
 " Takes a position and a dictionary of patterns and a optional configuration, and returns list of strings
 " that were matched in the file by the patterns from the given position
 " upwards. It can be used when a runner doesn't support running nearest tests

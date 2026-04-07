@@ -34,11 +34,11 @@ function! test#javascript#has_import(file, import) abort
 endfunction
 
 function! test#javascript#determine_executable(cmd) abort
-  if filereadable('node_modules/.bin/' . a:cmd)
-    return 'node_modules/.bin/' . a:cmd
-  else
-    return a:cmd
+  let l:bin = s:find_file_upward('node_modules/.bin/' . a:cmd)
+  if !empty(l:bin)
+    return l:bin
   endif
+  return a:cmd
 endfunction
 
 function! test#javascript#search_in_package_config(json_callback, lines_callback) abort

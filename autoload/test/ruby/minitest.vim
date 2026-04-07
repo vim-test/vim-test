@@ -49,8 +49,8 @@ endfunction
 
 function! s:build_rake_args(path, args) abort
   let cmd = []
-  if !empty(a:path) | call add(cmd, 'TEST="'.escape(a:path, '"').'"') | endif
-  if !empty(a:args) | call add(cmd, 'TESTOPTS="'.escape(join(a:args), '"`').'"') | endif
+  if !empty(a:path) | call add(cmd, 'TEST='.shellescape(a:path)) | endif
+  if !empty(a:args) | call add(cmd, 'TESTOPTS='.shellescape(join(a:args))) | endif
 
   return cmd
 endfunction

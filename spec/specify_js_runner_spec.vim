@@ -1,9 +1,11 @@
 source spec/support/helpers.vim
 
+let s:repo_root = fnamemodify(split(globpath(&runtimepath, 'plugin/test.vim'), "\n")[0], ':h:h')
+
 describe "Multiple JavaScript runners"
 
   before
-    cd spec/fixtures/js_multiple
+    execute 'cd ' . fnameescape(s:repo_root . '/spec/fixtures/js_multiple')
   end
 
   it "if not be specified it will return first matched runner"
@@ -11,7 +13,7 @@ describe "Multiple JavaScript runners"
     normal O
     TestNearest
 
-    Expect g:test#last_command == 'mocha __tests__/normal-test.js'
+    Expect TestNormalizeCommand(g:test#last_command) == 'mocha __tests__/normal-test.js'
   end
 
   it "can be specified when js has multiple runners"
@@ -20,7 +22,7 @@ describe "Multiple JavaScript runners"
     normal O
     TestNearest
 
-    Expect g:test#last_command == 'jest --runTestsByPath -- __tests__/normal-test.js'
+    Expect TestNormalizeCommand(g:test#last_command) == 'jest --runTestsByPath -- __tests__/normal-test.js'
     unlet g:test#javascript#runner
   end
 
@@ -39,3 +41,4 @@ describe "Multiple JavaScript runners"
   end
 
 end
+

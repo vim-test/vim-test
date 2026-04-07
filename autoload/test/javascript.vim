@@ -4,8 +4,17 @@ let test#javascript#patterns = {
   \ 'namespace': ['\v^\s*%(describe)\.each\(.*\)\s*\(([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1', '\v^\s*%(describe|suite|context|module)\s*[^''"`]*([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1']
 \}
 
+function! test#javascript#find_config_file(pattern, Callback = {path -> 1}) abort
+  return !empty(s:resolve_file_path(a:pattern, a:Callback))
+endfunction
+
 function! test#javascript#has_package(package) abort
-  let l:cached_result = s:check_cached_package(a:package)
+  let l:package_file = s:resolve_file_path('package.json')
+  if empty(l:package_file)
+    return 0
+  endif
+
+  let l:cached_result = s:check_cached_package(l:package_file, a:package)
   if l:cached_result > -1
     return l:cached_result
   endif
@@ -14,15 +23,10 @@ function! test#javascript#has_package(package) abort
     \ {pkg -> has_key(get(pkg, 'dependencies', {}), a:package) ||
       \ has_key(get(pkg, 'devDependencies', {}), a:package)},
     \ {pkg_line -> pkg_line =~# '"'.a:package.'"'})
-    return s:add_cached_package(a:package, 1)
+    return s:add_cached_package(l:package_file, a:package, 1)
   endif
 
-  if executable('node')
-    let l:result = system('node -e "try { require.resolve(process.argv[1]); process.exit(0); } catch (e) { process.exit(1); }" ' . shellescape(a:package))
-    return s:add_cached_package(a:package, v:shell_error == 0)
-  endif
-
-  return s:add_cached_package(a:package, 0)
+  return s:add_cached_package(l:package_file, a:package, 0)
 endfunction
 
 function! test#javascript#has_import(file, import) abort
@@ -37,22 +41,22 @@ function! test#javascript#determine_executable(cmd) abort
   endif
 endfunction
 
-function! test#javascript#search_in_package_config(json_callback, lines_callback, ...) abort
-  let l:package_file = findfile('package.json', '.;')
-  if empty(l:package_file)
+function! test#javascript#search_in_package_config(json_callback, lines_callback) abort
+  " Search for package.json starting from the currently open file's directory
+  let l:result = test#javascript#find_file_lines('package.json')
+  if empty(l:result.lines)
     return 0
   endif
-  s:ensure_package_cache()
-  let l:package_lines = s:get_cached_package_lines(l:package_file)
+  call s:ensure_package_cache()
   if exists('*json_decode')
     try
-      return call(a:json_callback, [json_decode(join(l:package_lines, ''))] + a:000)
+      return call(a:json_callback, [json_decode(join(l:result.lines, ''))])
     catch
     endtry
   endif
 
-  for l:line in l:package_lines
-    if call(a:lines_callback, [l:line] + a:000)
+  for l:line in l:result.lines
+    if call(a:lines_callback, [l:line])
       return 1
     endif
   endfor
@@ -60,9 +64,30 @@ function! test#javascript#search_in_package_config(json_callback, lines_callback
   return 0
 endfunction
 
-function s:ensure_package_config_cache() abort
-  if !exists('s:package_config_cache')
-    let s:package_config_cache = {}
+function! test#javascript#find_file_lines(path_or_pattern) abort
+  let l:path = s:resolve_file_path(a:path_or_pattern)
+  if empty(l:path)
+    return {'path': '', 'lines': []}
+  endif
+
+  call s:ensure_upward_file_cache()
+  let l:file_path = fnamemodify(l:path, ':p')
+  let l:file_mtime = getftime(l:path)
+  if has_key(s:upward_file_cache, l:file_path) && get(s:upward_file_cache[l:file_path], 'mtime', -1) == l:file_mtime
+    return {'path': l:file_path, 'lines': s:upward_file_cache[l:file_path]['lines']}
+  endif
+
+  let l:lines = readfile(l:path)
+  let s:upward_file_cache[l:file_path] = {
+    \ 'mtime': l:file_mtime,
+    \ 'lines': l:lines,
+    \ }
+  return {'path': l:file_path, 'lines': l:lines}
+endfunction
+
+function! s:ensure_upward_file_cache() abort
+  if !exists('s:upward_file_cache')
+    let s:upward_file_cache = {}
   endif
 endfunction
 
@@ -72,25 +97,53 @@ function! s:ensure_package_cache() abort
   endif
 endfunction
 
-function! s:get_cached_package_lines(package_file) abort
-  s:ensure_package_config_cache()
-  let l:package_path = fnamemodify(a:package_file, ':p')
-  let l:package_mtime = getftime(a:package_file)
-  if has_key(s:package_config_cache, l:package_path) && get(s:package_config_cache[l:package_path], 'mtime', -1) == l:package_mtime
-    return s:package_config_cache[l:package_path]['lines']
-  endif
-
-  let l:lines = readfile(a:package_file)
-  let s:package_config_cache[l:package_path] = {
-    \ 'mtime': l:package_mtime,
-    \ 'lines': l:lines,
-    \ }
-  return l:lines
+function! s:get_current_file_search_dir() abort
+  let l:current_file = expand('%:p')
+  return empty(l:current_file) ? getcwd() : fnamemodify(l:current_file, ':h')
 endfunction
 
-function! s:check_cached_package(package) abort
-  s:ensure_package_cache()
-  let l:cache_key = getcwd() . '::' . a:package
+function! s:find_file_upward(pattern, Callback = {path -> 1}) abort
+  let l:search_dir = s:get_current_file_search_dir()
+
+  while 1
+    let l:paths = split(globpath(l:search_dir, a:pattern), "\n")
+    for l:path in l:paths
+      if empty(l:path)
+        continue
+      endif
+
+      if call(a:Callback, [l:path])
+        return l:path
+      endif
+    endfor
+
+    let l:parent_dir = fnamemodify(l:search_dir, ':h')
+    if l:parent_dir ==# l:search_dir
+      return ''
+    endif
+
+    let l:search_dir = l:parent_dir
+  endwhile
+endfunction
+
+function! s:resolve_file_path(path_or_pattern, Callback = {path -> 1}) abort
+  let l:path = expand(a:path_or_pattern)
+  if filereadable(l:path) && call(a:Callback, [l:path])
+    return l:path
+  endif
+
+  return s:find_file_upward(a:path_or_pattern, a:Callback)
+endfunction
+
+function! s:package_cache_key(package_file, package) abort
+  let l:package_path = fnamemodify(a:package_file, ':p')
+  let l:package_mtime = getftime(a:package_file)
+  return l:package_path . '::' . l:package_mtime . '::' . a:package
+endfunction
+
+function! s:check_cached_package(package_file, package) abort
+  call s:ensure_package_cache()
+  let l:cache_key = s:package_cache_key(a:package_file, a:package)
   if has_key(g:test#javascript#package_cache, l:cache_key)
     return g:test#javascript#package_cache[l:cache_key]
   else
@@ -98,9 +151,9 @@ function! s:check_cached_package(package) abort
   endif
 endfunction
 
-function! s:add_cached_package(package, has_package) abort
-  s:ensure_package_cache()
-  let l:cache_key = getcwd() . '::' . a:package
+function! s:add_cached_package(package_file, package, has_package) abort
+  call s:ensure_package_cache()
+  let l:cache_key = s:package_cache_key(a:package_file, a:package)
   let g:test#javascript#package_cache[l:cache_key] = a:has_package
   return a:has_package
 endfunction

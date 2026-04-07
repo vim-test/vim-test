@@ -60,33 +60,7 @@ function! s:nearest_test(position) abort
 endfunction
 
 function! s:has_vitest_config() abort
-  return s:find_config('vitest.config.*')
-      \ || s:find_config('vite.config.*', 
-        \ {path -> join(readfile(path), "\n") =~# '\v\<test\>\s*:'})
-endfunction
-
-function! s:find_config(pattern, ...) abort
-  let l:callback = get(a:000, 0, {path -> 1})
-  let l:search_dir = getcwd()
-
-  while 1
-    let l:paths = split(globpath(l:search_dir, a:pattern), "\n")
-    for l:path in l:paths
-      if empty(l:path)
-        continue
-      endif
-
-      let l:found_config = call(l:callback, [l:path])
-      if l:found_config
-        return 1
-      endif
-    endfor
-
-    let l:parent_dir = fnamemodify(l:search_dir, ':h')
-    if l:parent_dir ==# l:search_dir
-      return 0
-    endif
-
-    let l:search_dir = l:parent_dir
-  endwhile
+  return test#javascript#find_config_file('vitest.config.*')
+      \ || test#javascript#find_config_file('vite.config.*', 
+  \ {path -> join(test#javascript#find_file_lines(path).lines, "\n") =~# '\v\<test\>\s*:'})
 endfunction

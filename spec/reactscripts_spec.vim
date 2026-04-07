@@ -4,12 +4,11 @@ describe "ReactScripts"
 
   before
     cd spec/fixtures/reactscripts
-	!mkdir node_modules
-	!mkdir node_modules/.bin
+    call mkdir('node_modules/.bin', 'p')
   end
 
   after
-    !rm -f node_modules/.bin/*
+    call TeardownNodeBinDir()
     call Teardown()
     cd -
   end
@@ -19,68 +18,68 @@ describe "ReactScripts"
       view +1 __tests__/normal-test.js
       TestNearest
 
-      Expect g:test#last_command == 'react-scripts test -t ''^Math'' __tests__/normal-test.js'
+      Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test -t ''^Math'' __tests__/normal-test.js'
 
       view +2 __tests__/normal-test.js
       TestNearest
 
-      Expect g:test#last_command == 'react-scripts test -t ''^Math Addition'' __tests__/normal-test.js'
+      Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test -t ''^Math Addition'' __tests__/normal-test.js'
 
       view +3 __tests__/normal-test.js
       TestNearest
 
-      Expect g:test#last_command == 'react-scripts test -t ''^Math Addition adds two numbers$'' __tests__/normal-test.js'
+      Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test -t ''^Math Addition adds two numbers$'' __tests__/normal-test.js'
     end
 
     it "aliases context to describe"
       view +1 __tests__/context-test.js
       TestNearest
 
-      Expect g:test#last_command == 'react-scripts test -t ''^Math'' __tests__/context-test.js'
+      Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test -t ''^Math'' __tests__/context-test.js'
 
       view +2 __tests__/context-test.js
       TestNearest
 
-      Expect g:test#last_command == 'react-scripts test -t ''^Math Addition'' __tests__/context-test.js'
+      Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test -t ''^Math Addition'' __tests__/context-test.js'
 
       view +3 __tests__/context-test.js
       TestNearest
 
-      Expect g:test#last_command == 'react-scripts test -t ''^Math Addition adds two numbers$'' __tests__/context-test.js'
+      Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test -t ''^Math Addition adds two numbers$'' __tests__/context-test.js'
     end
 
     it "runs CoffeeScript"
       view +1 __tests__/normal-test.coffee
       TestNearest
 
-      Expect g:test#last_command == 'react-scripts test -t ''^Math'' __tests__/normal-test.coffee'
+      Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test -t ''^Math'' __tests__/normal-test.coffee'
 
       view +2 __tests__/normal-test.coffee
       TestNearest
 
-      Expect g:test#last_command == 'react-scripts test -t ''^Math Addition'' __tests__/normal-test.coffee'
+      Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test -t ''^Math Addition'' __tests__/normal-test.coffee'
 
       view +3 __tests__/normal-test.coffee
       TestNearest
 
-      Expect g:test#last_command == 'react-scripts test -t ''^Math Addition adds two numbers$'' __tests__/normal-test.coffee'
+      Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test -t ''^Math Addition adds two numbers$'' __tests__/normal-test.coffee'
     end
 
     it "runs React"
       view +1 __tests__/normal-test.jsx
       TestNearest
 
-      Expect g:test#last_command == 'react-scripts test -t ''^Math'' __tests__/normal-test.jsx'
+      Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test -t ''^Math'' __tests__/normal-test.jsx'
 
       view +2 __tests__/normal-test.jsx
       TestNearest
 
-      Expect g:test#last_command == 'react-scripts test -t ''^Math Addition'' __tests__/normal-test.jsx'
+      Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test -t ''^Math Addition'' __tests__/normal-test.jsx'
 
       view +3 __tests__/normal-test.jsx
       TestNearest
 
-      Expect g:test#last_command == 'react-scripts test -t ''^Math Addition adds two numbers$'' __tests__/normal-test.jsx'
+      Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test -t ''^Math Addition adds two numbers$'' __tests__/normal-test.jsx'
     end
   end
 
@@ -89,28 +88,28 @@ describe "ReactScripts"
     normal O
     TestNearest
 
-    Expect g:test#last_command == 'react-scripts test __tests__/normal-test.js'
+    Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test __tests__/normal-test.js'
   end
 
   it "runs file tests"
     view __tests__/normal-test.js
     TestFile
 
-    Expect g:test#last_command == 'react-scripts test __tests__/normal-test.js'
+    Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test __tests__/normal-test.js'
   end
 
   it "runs test suites"
     view __tests__/normal-test.js
     TestSuite
 
-    Expect g:test#last_command == 'react-scripts test'
+    Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test'
   end
 
   it "runs tests outside of __tests__"
     view outside-test.js
     TestFile
 
-    Expect g:test#last_command == 'react-scripts test outside-test.js'
+    Expect TestNormalizeCommand(g:test#last_command) == 'react-scripts test outside-test.js'
   end
 
   context "with a specified executable"
@@ -123,7 +122,7 @@ describe "ReactScripts"
       view __tests__/normal-test.js
       TestFile
 
-      Expect g:test#last_command == 'npm run react-scripts test __tests__/normal-test.js'
+      Expect TestNormalizeCommand(g:test#last_command) == 'npm run react-scripts test __tests__/normal-test.js'
     end
 
     it "runs tests against yarn executable (without)"
@@ -131,7 +130,7 @@ describe "ReactScripts"
       view __tests__/normal-test.js
       TestFile
 
-      Expect g:test#last_command == 'yarn react-scripts test __tests__/normal-test.js'
+      Expect TestNormalizeCommand(g:test#last_command) == 'yarn react-scripts test __tests__/normal-test.js'
     end
 
     it "runs tests against absolute path yarn executable (without)"
@@ -139,16 +138,16 @@ describe "ReactScripts"
       view __tests__/normal-test.js
       TestFile
 
-      Expect g:test#last_command == '~/.local/bin/yarn react-scripts test __tests__/normal-test.js'
+      Expect TestNormalizeCommand(g:test#last_command) == '~/.local/bin/yarn react-scripts test __tests__/normal-test.js'
     end
   end
 
   it "uses react-app-rewired if present"
-    !touch node_modules/.bin/react-app-rewired
+    call CreateNodeBin('react-app-rewired')
     view __tests__/normal-test.js
     TestFile
 
-    Expect g:test#last_command == 'node_modules/.bin/react-app-rewired test __tests__/normal-test.js'
+    Expect TestNormalizeCommand(g:test#last_command) == 'node_modules/.bin/react-app-rewired test __tests__/normal-test.js'
   end
 
 end

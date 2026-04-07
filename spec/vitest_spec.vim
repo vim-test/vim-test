@@ -113,7 +113,7 @@ describe "vitest"
 
       Expect TestNormalizeCommand(g:test#last_command) == TestExpectedCommand(
         \ g:expectedExecutable .. 'vitest run{{name_arg}} ''__tests__/dollar-sign-in-filename-$test.js''',
-        \ {'nonwin': {'name_arg': ' -t ''Dollar sign filename with \$'''}}
+        \ {'nonwin': {'name_arg': ' -t ''Dollar sign filename with \\$'''}}
         \ )
 
       view +8 __tests__/dollar-sign-in-filename-\$test.js
@@ -121,7 +121,7 @@ describe "vitest"
 
       Expect TestNormalizeCommand(g:test#last_command) == TestExpectedCommand(
         \ g:expectedExecutable .. 'vitest run{{name_arg}} ''__tests__/dollar-sign-in-filename-$test.js''',
-        \ {'nonwin': {'name_arg': ' -t ''Dollar sign another test with \$'''}}
+        \ {'nonwin': {'name_arg': ' -t ''Dollar sign another test with \\$'''}}
         \ )
     end
   end

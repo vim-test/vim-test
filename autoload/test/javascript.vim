@@ -34,10 +34,17 @@ function! test#javascript#has_import(file, import) abort
 endfunction
 
 function! test#javascript#determine_executable(cmd) abort
-  let l:bin = s:find_file_upward('node_modules/.bin/' . a:cmd)
-  if !empty(l:bin)
-    return l:bin
+  let l:candidates = ['node_modules/.bin/' . a:cmd]
+  if (has('win32') || has('win64'))
+    let l:candidates += ['node_modules/.bin/' . a:cmd . '.cmd']
   endif
+
+  for l:candidate in l:candidates
+    let l:bin = s:find_file_upward(l:candidate)
+    if !empty(l:bin)
+      return substitute(fnamemodify(l:bin, ':.'), '\\', '/', 'g')
+    endif
+  endfor
   return a:cmd
 endfunction
 
@@ -103,10 +110,17 @@ function! s:get_current_file_search_dir() abort
 endfunction
 
 function! s:find_file_upward(pattern, Callback = {path -> 1}) abort
-  let l:search_dir = s:get_current_file_search_dir()
+  let l:search_dir = substitute(s:get_current_file_search_dir(), '\\', '/', 'g')
+  let l:is_glob = a:pattern =~# '[*?{\[]'
 
   while 1
-    let l:paths = split(globpath(l:search_dir, a:pattern), "\n")
+    if l:is_glob
+      let l:glob_dir = escape(l:search_dir, ' []?*{},+')
+      let l:paths = glob(l:glob_dir . '/' . a:pattern, 0, 1)
+    else
+      let l:candidate = l:search_dir . '/' . a:pattern
+      let l:paths = filereadable(l:candidate) ? [l:candidate] : []
+    endif
     for l:path in l:paths
       if empty(l:path)
         continue

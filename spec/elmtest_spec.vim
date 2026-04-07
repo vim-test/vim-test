@@ -14,14 +14,14 @@ describe "elm-test"
     view tests/NormalTest.elm
     TestNearest
 
-    Expect g:test#last_command == 'elm-test tests/NormalTest.elm'
+    Expect TestNormalizeCommand(g:test#last_command) == 'elm-test tests/NormalTest.elm'
   end
 
   it "runs file tests"
     view tests/NormalTest.elm
     TestFile
 
-    Expect g:test#last_command == 'elm-test tests/NormalTest.elm'
+    Expect TestNormalizeCommand(g:test#last_command) == 'elm-test tests/NormalTest.elm'
   end
 
   it "runs test suites"
@@ -33,35 +33,28 @@ describe "elm-test"
 
   it "runs tests against absolute path of npm executable (elm-test)"
     try
-      !mkdir -p node_modules/.bin
-      !touch node_modules/.bin/elm-test
+      call CreateNodeBin('elm-test')
 
       view tests/NormalTest.elm
       TestFile
 
-      Expect g:test#last_command == 'node_modules/.bin/elm-test tests/NormalTest.elm'
+      Expect TestNormalizeCommand(g:test#last_command) == 'node_modules/.bin/elm-test tests/NormalTest.elm'
     finally
-      !rm node_modules/.bin/elm-test
-      !rmdir node_modules/.bin
-      !rmdir node_modules
+      call TeardownNodeBinDir()
     endtry
   end
 
   it "runs tests against absolute path of npm executable (elm-test and elm-compiler)"
     try
-      !mkdir -p node_modules/.bin
-      !touch node_modules/.bin/elm-test
-      !touch node_modules/.bin/elm
+      call CreateNodeBin('elm-test')
+      call CreateNodeBin('elm')
 
       view tests/NormalTest.elm
       TestFile
 
-      Expect g:test#last_command == 'node_modules/.bin/elm-test --compiler node_modules/.bin/elm tests/NormalTest.elm'
+      Expect TestNormalizeCommand(g:test#last_command) == 'node_modules/.bin/elm-test --compiler node_modules/.bin/elm tests/NormalTest.elm'
     finally
-      !rm node_modules/.bin/elm-test
-      !rm node_modules/.bin/elm
-      !rmdir node_modules/.bin
-      !rmdir node_modules
+      call TeardownNodeBinDir()
     endtry
   end
 end

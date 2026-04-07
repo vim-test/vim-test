@@ -22,7 +22,7 @@ function! test#javascript#jest#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      let name = '-t '.shellescape(escape(name, '()[]'), 1)
+      let name = '-t '.shellescape(name, 1)
     endif
     return ['--runTestsByPath', name, '--', file]
   elseif a:type ==# 'file'
@@ -52,7 +52,7 @@ function! s:nearest_test(position) abort
   let has_printf = test_name =~# '\v\%[sdifojp#]'
   if has_printf
     let test_name = substitute(test_name, '\v\%[sdifojp#].*', '', '')
-    return (len(name['namespace']) ? '^' : '') . test_name
+    return (len(name['namespace']) ? '^' : '') . test#base#escape_regex(test_name)
   endif
   return (len(name['namespace']) ? '^' : '') .
        \ test#base#escape_regex(test_name) .

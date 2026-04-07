@@ -650,7 +650,7 @@ let test#ruby#use_spring_binstub = 1
 
 #### JavaScript
 
-Test runner detection for JavaScript works by checking which runner is listed in the package.json dependencies. If you have globally installed the runner make sure it's also listed in the dependencies. When you have multiple runners listed in the package.json dependencies you can specify a runner like so:
+Test runner detection for JavaScript works by checking multiple project signals, including imports in test files, some runner config files (for example `jest.config.` and `vitest.config.`), and `package.json` dependencies. Globally installed runners should be indicated by one of these signals. When multiple runners can match, specify the runner via config like so:`
 
 ```vim
 let g:test#javascript#runner = 'jest'

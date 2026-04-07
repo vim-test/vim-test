@@ -31,4 +31,15 @@ describe "Node Test"
 
     Expect g:test#last_command == 'node --test multiline-import.test.js'
   end
+
+  it "runs file tests with CommonJS require"
+    view commonjs-require.test.js
+    TestFile
+
+    Expect g:test#last_command == 'node --test commonjs-require.test.js'
+  end
+
+  it "does not treat from(...) calls as imports"
+    Expect test#javascript#has_import('false-positive.test.js', 'node:test') == 0
+  end
 end

@@ -8,7 +8,7 @@ function! test#javascript#jest#test_file(file) abort
           return g:test#javascript#runner ==# 'jest'
       else
         return test#javascript#has_import(a:file, 'jest')
-            \ || s:has_jest_config_file()
+            \ || test#javascript#find_config_file('jest.config.*')
             \ || test#javascript#search_in_package_config(
               \ {pkg -> has_key(pkg, 'jest')},
               \ {pkg_line -> pkg_line =~# '"jest"\s*:' && pkg_line =~# '{'})
@@ -30,23 +30,6 @@ function! test#javascript#jest#build_position(type, position) abort
   else
     return []
   endif
-endfunction
-
-function! s:has_jest_config_file() abort
-  let l:search_dir = getcwd()
-
-  while 1
-    if !empty(globpath(l:search_dir, 'jest.config.*'))
-      return 1
-    endif
-
-    let l:parent_dir = fnamemodify(l:search_dir, ':h')
-    if l:parent_dir ==# l:search_dir
-      return 0
-    endif
-
-    let l:search_dir = l:parent_dir
-  endwhile
 endfunction
 
 let s:yarn_command = '\<yarn\>'

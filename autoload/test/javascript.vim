@@ -49,11 +49,11 @@ function! test#javascript#determine_executable(cmd) abort
 endfunction
 
 function! test#javascript#search_in_package_config(json_callback, lines_callback) abort
-  " Search for package.json starting from the currently open file's directory
   let l:result = test#javascript#find_file_lines('package.json')
   if empty(l:result.lines)
     return 0
   endif
+
   call s:ensure_package_cache()
   if exists('*json_decode')
     try
@@ -121,6 +121,7 @@ function! s:find_file_upward(pattern, Callback = {path -> 1}) abort
       let l:candidate = l:search_dir . '/' . a:pattern
       let l:paths = filereadable(l:candidate) ? [l:candidate] : []
     endif
+
     for l:path in l:paths
       if empty(l:path)
         continue

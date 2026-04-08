@@ -7,9 +7,7 @@ function! test#javascript#vitest#test_file(file) abort
       if exists('g:test#javascript#runner')
           return g:test#javascript#runner ==# 'vitest'
       else
-        return test#javascript#has_import(a:file, 'vitest')
-            \ || s:has_vitest_config()
-            \ || test#javascript#has_package('vitest')
+        return s:has_vitest_config() || test#javascript#has_package('vitest')
       endif
   endif
 endfunction
@@ -18,7 +16,7 @@ function! test#javascript#vitest#build_position(type, position) abort
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)
-      let name = '-t '.shellescape(name, 1)
+      let name = '-t '.shellescape(escape(name, '()[]'), 1)
     endif
     return ['run', name, shellescape(a:position['file'])]
   elseif a:type ==# 'file'
@@ -61,6 +59,6 @@ endfunction
 
 function! s:has_vitest_config() abort
   return test#javascript#find_config_file('vitest.config.*')
-      \ || test#javascript#find_config_file('vite.config.*', 
-  \ {path -> join(test#javascript#find_file_lines(path).lines, "\n") =~# '\v\<test\>\s*:'})
+      \ || test#javascript#find_config_file('vite.config.*',
+      \ {path -> join(test#javascript#find_file_lines(path).lines, "\n") =~# '\v\<test\>\s*:'})
 endfunction

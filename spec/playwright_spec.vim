@@ -4,11 +4,12 @@ describe "Playwright"
 
   before
     cd spec/fixtures/playwright
-    call mkdir('node_modules/.bin', 'p')
+	!mkdir node_modules
+	!mkdir node_modules/.bin
   end
 
   after
-    call TeardownNodeBinDir()
+    !rm -f node_modules/.bin/*
     call Teardown()
     cd -
   end
@@ -18,17 +19,17 @@ describe "Playwright"
       view +3 __tests__/normal-test.js
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == 'playwright test -g ''Math'' __tests__/normal-test.js'
+      Expect g:test#last_command == 'playwright test -g ''Math'' __tests__/normal-test.js'
 
       view +4 __tests__/normal-test.js
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == 'playwright test -g ''Math Addition'' __tests__/normal-test.js'
+      Expect g:test#last_command == 'playwright test -g ''Math Addition'' __tests__/normal-test.js'
 
       view +5 __tests__/normal-test.js
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == 'playwright test -g ''Math Addition adds two numbers'' __tests__/normal-test.js'
+      Expect g:test#last_command == 'playwright test -g ''Math Addition adds two numbers'' __tests__/normal-test.js'
     end
   end
 
@@ -37,28 +38,28 @@ describe "Playwright"
     normal O
     TestNearest
 
-    Expect TestNormalizeCommand(g:test#last_command) == 'playwright test __tests__/normal-test.js'
+    Expect g:test#last_command == 'playwright test __tests__/normal-test.js'
   end
 
   it "runs file tests"
     view __tests__/normal-test.js
     TestFile
 
-    Expect TestNormalizeCommand(g:test#last_command) == 'playwright test __tests__/normal-test.js'
+    Expect g:test#last_command == 'playwright test __tests__/normal-test.js'
   end
 
   it "runs test suites"
     view __tests__/normal-test.js
     TestSuite
 
-    Expect TestNormalizeCommand(g:test#last_command) == 'playwright test'
+    Expect g:test#last_command == 'playwright test'
   end
 
   it "runs tests outside of __tests__"
     view outside-test.js
     TestFile
 
-    Expect TestNormalizeCommand(g:test#last_command) == 'playwright test outside-test.js'
+    Expect g:test#last_command == 'playwright test outside-test.js'
   end
 
   context "with a specified executable"
@@ -71,7 +72,7 @@ describe "Playwright"
       view __tests__/normal-test.js
       TestFile
 
-      Expect TestNormalizeCommand(g:test#last_command) == 'npm run playwright test __tests__/normal-test.js'
+      Expect g:test#last_command == 'npm run playwright test __tests__/normal-test.js'
     end
 
     it "runs tests against yarn executable (without)"
@@ -79,7 +80,7 @@ describe "Playwright"
       view __tests__/normal-test.js
       TestFile
 
-      Expect TestNormalizeCommand(g:test#last_command) == 'yarn playwright test __tests__/normal-test.js'
+      Expect g:test#last_command == 'yarn playwright test __tests__/normal-test.js'
     end
 
     it "runs tests against absolute path yarn executable (without)"
@@ -87,7 +88,7 @@ describe "Playwright"
       view __tests__/normal-test.js
       TestFile
 
-      Expect TestNormalizeCommand(g:test#last_command) == '~/.local/bin/yarn playwright test __tests__/normal-test.js'
+      Expect g:test#last_command == '~/.local/bin/yarn playwright test __tests__/normal-test.js'
     end
   end
 

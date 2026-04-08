@@ -1,6 +1,6 @@
 
 if !exists('g:test#elm#elmtest#file_pattern')
-  let g:test#elm#elmtest#file_pattern = '\vtests?[\\/].*\.elm$'
+  let g:test#elm#elmtest#file_pattern = '\vtests?\/.*\.elm$'
 endif
 
 function! test#elm#elmtest#test_file(file) abort

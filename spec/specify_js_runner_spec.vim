@@ -1,11 +1,12 @@
 source spec/support/helpers.vim
 
-let s:repo_root = fnamemodify(split(globpath(&runtimepath, 'plugin/test.vim'), "\n")[0], ':h:h')
+let s:repo_dir = getcwd()
+let s:fixture_dir = s:repo_dir . '/spec/fixtures/js_multiple'
 
 describe "Multiple JavaScript runners"
 
   before
-    execute 'cd ' . fnameescape(s:repo_root . '/spec/fixtures/js_multiple')
+    execute 'cd ' . fnameescape(s:fixture_dir)
   end
 
   it "if not be specified it will return first matched runner"
@@ -13,7 +14,7 @@ describe "Multiple JavaScript runners"
     normal O
     TestNearest
 
-    Expect TestNormalizeCommand(g:test#last_command) == 'mocha __tests__/normal-test.js'
+    Expect g:test#last_command == 'mocha __tests__/normal-test.js'
   end
 
   it "can be specified when js has multiple runners"
@@ -22,7 +23,7 @@ describe "Multiple JavaScript runners"
     normal O
     TestNearest
 
-    Expect TestNormalizeCommand(g:test#last_command) == 'jest --runTestsByPath -- __tests__/normal-test.js'
+    Expect g:test#last_command == 'jest --runTestsByPath -- __tests__/normal-test.js'
     unlet g:test#javascript#runner
   end
 
@@ -32,12 +33,12 @@ describe "Multiple JavaScript runners"
     Expect test#javascript#has_package('mocha') == 1
     Expect test#javascript#has_package('definitely-not-a-real-package') == 0
 
-    cd ..
+    execute 'cd ' . fnameescape(s:fixture_dir)
   end
 
   after
     call Teardown()
-    cd -
+    execute 'cd ' . fnameescape(s:repo_dir)
   end
 
 end

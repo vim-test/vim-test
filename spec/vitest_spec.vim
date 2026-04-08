@@ -1,11 +1,9 @@
 source spec/support/helpers.vim
 
-let s:repo_root = fnamemodify(split(globpath(&runtimepath, 'plugin/test.vim'), "\n")[0], ':h:h')
-
 describe "vitest"
 
   before
-    execute 'cd ' . fnameescape(s:repo_root . '/spec/fixtures/vitest')
+    cd spec/fixtures/vitest
     let g:expectedExecutable = ''
     if executable('npx')
         let g:expectedExecutable = 'npx '
@@ -25,104 +23,95 @@ describe "vitest"
       view +3 __tests__/normal-test.jsx
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''Math'' ''__tests__/normal-test.jsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math'' ''__tests__/normal-test.jsx'''
 
       view +4 __tests__/normal-test.jsx
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''Math Addition'' ''__tests__/normal-test.jsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition'' ''__tests__/normal-test.jsx'''
 
       view +5 __tests__/normal-test.jsx
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' ''__tests__/normal-test.jsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' ''__tests__/normal-test.jsx'''
 
       view +4 __tests__/escaping-test.ts
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''Escaping parentheses \('' ''__tests__/escaping-test.ts'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Escaping parentheses \('' ''__tests__/escaping-test.ts'''
 
       view +7 __tests__/escaping-test.ts
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''Escaping brackets \['' ''__tests__/escaping-test.ts'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Escaping brackets \['' ''__tests__/escaping-test.ts'''
     end
 
     it "runs loop tests"
       view +3 __tests__/loop-test.jsx
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''Loop the test with given array'' ''__tests__/loop-test.jsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Loop the test with given array'' ''__tests__/loop-test.jsx'''
 
       view +4 __tests__/loop-test.jsx
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''loop each tests'' ''__tests__/loop-test.jsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''loop each tests'' ''__tests__/loop-test.jsx'''
 
       view +5 __tests__/loop-test.jsx
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''described loop test'' ''__tests__/loop-test.jsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''described loop test'' ''__tests__/loop-test.jsx'''
     end
 
     it "aliases context to describe"
       view +3 __tests__/context-test.jsx
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''Math'' ''__tests__/context-test.jsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math'' ''__tests__/context-test.jsx'''
 
       view +4 __tests__/context-test.jsx
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''Math Addition'' ''__tests__/context-test.jsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition'' ''__tests__/context-test.jsx'''
 
       view +5 __tests__/context-test.jsx
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' ''__tests__/context-test.jsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' ''__tests__/context-test.jsx'''
     end
 
     it "runs TypescriptReact"
       view +3 __tests__/normal-test.tsx
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''Math'' ''__tests__/normal-test.tsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math'' ''__tests__/normal-test.tsx'''
 
       view +4 __tests__/normal-test.tsx
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''Math Addition'' ''__tests__/normal-test.tsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition'' ''__tests__/normal-test.tsx'''
 
       view +5 __tests__/normal-test.tsx
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' ''__tests__/normal-test.tsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Math Addition adds two numbers'' ''__tests__/normal-test.tsx'''
     end
 
     it "runs tests with $ in filename"
       view +3 __tests__/dollar-sign-in-filename-\$test.js
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == TestExpectedCommand(
-        \ g:expectedExecutable .. 'vitest run{{name_arg}} ''__tests__/dollar-sign-in-filename-$test.js''',
-        \ {'nonwin': {'name_arg': ' -t ''Dollar sign'''}}
-        \ )
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Dollar sign'' ''__tests__/dollar-sign-in-filename-$test.js'''
 
       view +4 __tests__/dollar-sign-in-filename-\$test.js
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == TestExpectedCommand(
-        \ g:expectedExecutable .. 'vitest run{{name_arg}} ''__tests__/dollar-sign-in-filename-$test.js''',
-        \ {'nonwin': {'name_arg': ' -t ''Dollar sign filename with \$'''}}
-        \ )
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Dollar sign filename with \$'' ''__tests__/dollar-sign-in-filename-$test.js'''
 
       view +8 __tests__/dollar-sign-in-filename-\$test.js
       TestNearest
 
-      Expect TestNormalizeCommand(g:test#last_command) == TestExpectedCommand(
-        \ g:expectedExecutable .. 'vitest run{{name_arg}} ''__tests__/dollar-sign-in-filename-$test.js''',
-        \ {'nonwin': {'name_arg': ' -t ''Dollar sign another test with \$'''}}
-        \ )
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Dollar sign another test with \$'' ''__tests__/dollar-sign-in-filename-$test.js'''
     end
   end
 
@@ -131,35 +120,35 @@ describe "vitest"
     normal O
     TestNearest
 
-    Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run ''__tests__/normal-test.jsx'''
+    Expect g:test#last_command == g:expectedExecutable .. 'vitest run ''__tests__/normal-test.jsx'''
   end
 
   it "runs file tests"
     view __tests__/normal-test.jsx
     TestFile
 
-    Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run ''__tests__/normal-test.jsx'''
+    Expect g:test#last_command == g:expectedExecutable .. 'vitest run ''__tests__/normal-test.jsx'''
   end
 
   it "runs test suites"
     view __tests__/normal-test.jsx
     TestSuite
 
-    Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run'
+    Expect g:test#last_command == g:expectedExecutable .. 'vitest run'
   end
 
   it "runs tests outside of __tests__"
     view outside-test.jsx
     TestFile
 
-    Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run ''outside-test.jsx'''
+    Expect g:test#last_command == g:expectedExecutable .. 'vitest run ''outside-test.jsx'''
   end
 
   it "runs file tests with $ in filename"
     view __tests__/dollar-sign-in-filename-\$test.js
     TestFile
 
-    Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run ''__tests__/dollar-sign-in-filename-$test.js'''
+    Expect g:test#last_command == g:expectedExecutable .. 'vitest run ''__tests__/dollar-sign-in-filename-$test.js'''
   end
 
   context "using vite.config for detection"
@@ -181,7 +170,7 @@ describe "vitest"
       view +1 __tests__/normal-test.jsx
       TestFile
 
-      Expect TestNormalizeCommand(g:test#last_command) == g:expectedExecutable .. 'vitest run ''__tests__/normal-test.jsx'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run ''__tests__/normal-test.jsx'''
     end
   end
 
@@ -195,7 +184,7 @@ describe "vitest"
       view __tests__/normal-test.jsx
       TestFile
 
-      Expect TestNormalizeCommand(g:test#last_command) == 'npm run vitest run ''__tests__/normal-test.jsx'''
+      Expect g:test#last_command == 'npm run vitest run ''__tests__/normal-test.jsx'''
     end
 
     it "runs tests against yarn executable (without --)"
@@ -203,7 +192,7 @@ describe "vitest"
       view __tests__/normal-test.jsx
       TestFile
 
-      Expect TestNormalizeCommand(g:test#last_command) == 'yarn vitest run ''__tests__/normal-test.jsx'''
+      Expect g:test#last_command == 'yarn vitest run ''__tests__/normal-test.jsx'''
     end
 
     it "runs tests against absolute path yarn executable (without --)"
@@ -211,9 +200,8 @@ describe "vitest"
       view __tests__/normal-test.jsx
       TestFile
 
-      Expect TestNormalizeCommand(g:test#last_command) == '~/.local/bin/yarn vitest run ''__tests__/normal-test.jsx'''
+      Expect g:test#last_command == '~/.local/bin/yarn vitest run ''__tests__/normal-test.jsx'''
     end
   end
 
 end
-

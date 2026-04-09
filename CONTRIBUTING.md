@@ -2,6 +2,10 @@
 
 Thank you for your interest in contributing to vim-test! This document provides guidelines and information for contributors.
 
+## Commit Messages
+
+Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
+
 ## Adding a New Test Runner
 
 When adding support for a new test runner, follow these steps:

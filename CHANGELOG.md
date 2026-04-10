@@ -5,4 +5,4 @@
 
 ### Bug Fixes
 
-* detect PHP Behat to use behat.yml or behat.yml.dist ([#896](https://github.com/vim-test/vim-test/issues/896)) ([316be18](https://github.com/vim-test/vim-test/commit/316be18a2dec1f235efa29e46e3b7698f033bf85))
+* detect PHP Behat using behat.yml or behat.yml.dist ([#896](https://github.com/vim-test/vim-test/issues/896)) ([316be18](https://github.com/vim-test/vim-test/commit/316be18a2dec1f235efa29e46e3b7698f033bf85))

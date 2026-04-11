@@ -17,4 +17,11 @@ describe "Node Test"
 
     Expect g:test#last_command == 'node --test normal.test.js'
   end
+
+  it "runs TypeScript file tests"
+    view normal.test.ts
+    TestFile
+
+    Expect g:test#last_command == 'node --test normal.test.ts'
+  end
 end

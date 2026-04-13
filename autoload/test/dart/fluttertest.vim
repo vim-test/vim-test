@@ -44,5 +44,5 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#dart#fluttertest#patterns)
-  return join(name['namespace'] + name['test'], ' ')
+  return escape(join(name['namespace'] + name['test'], ' '), '#')
 endfunction

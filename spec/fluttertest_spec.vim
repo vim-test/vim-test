@@ -47,6 +47,11 @@ describe "FlutterTest"
     TestNearest
 
     Expect g:test#last_command == 'flutter test --plain-name "MyWidget a ''b''" widgets_test.dart'
+
+    view +6 escape_test.dart
+    TestNearest
+
+    Expect g:test#last_command == 'flutter test --plain-name ''Myclass #myMethod assert true'' escape_test.dart'
   end
 
   it "runs test suites"

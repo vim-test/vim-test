@@ -14,7 +14,7 @@ function! test#javascript#jest#test_file(file) abort
 endfunction
 
 function! test#javascript#jest#build_position(type, position) abort
-  let file = escape(a:position['file'], '()[]')
+  let file = test#base#escape_path(escape(a:position['file'], '()[]'))
   if a:type ==# 'nearest'
     let name = s:nearest_test(a:position)
     if !empty(name)

@@ -15,7 +15,7 @@ describe "vitest"
   after
     call Teardown()
     cd -
-    unlet g:expectedExecutable
+    unlet! g:expectedExecutable
   end
 
   context "on nearest tests"

@@ -30,7 +30,15 @@ function! test#javascript#has_package(package) abort
 endfunction
 
 function! test#javascript#has_import(file, import) abort
-  return match(readfile(a:file), "^import.*" . a:import) != -1
+  let l:file = substitute(a:file, '\v\\([()$ ])', '\1', 'g')
+  if !filereadable(l:file)
+    let l:file = expand(l:file)
+  endif
+  if !filereadable(l:file)
+    return 0
+  endif
+
+  return match(readfile(l:file), "^import.*" . a:import) != -1
 endfunction
 
 function! test#javascript#determine_executable(cmd) abort

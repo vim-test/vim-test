@@ -1,11 +1,10 @@
 source spec/support/helpers.vim
 
-let g:expectedExecutable = ''
-
 describe "vitest"
 
   before
     cd spec/fixtures/vitest
+    let g:expectedExecutable = ''
     if executable('npx')
         let g:expectedExecutable = 'npx '
     else
@@ -16,7 +15,7 @@ describe "vitest"
   after
     call Teardown()
     cd -
-    unlet g:expectedExecutable
+    unlet! g:expectedExecutable
   end
 
   context "on nearest tests"
@@ -150,6 +149,29 @@ describe "vitest"
     TestFile
 
     Expect g:test#last_command == g:expectedExecutable .. 'vitest run ''__tests__/dollar-sign-in-filename-$test.js'''
+  end
+
+  context "using vite.config for detection"
+    before
+      call rename('package.json', 'package.temp')
+      call writefile([
+          \ 'export default {',
+          \ '  test: {}',
+          \ '}',
+          \ ], 'vite.config.ts')
+    end
+
+    after
+      call delete('vite.config.ts')
+      call rename('package.temp', 'package.json')
+    end
+
+    it "runs file tests"
+      view +1 __tests__/normal-test.jsx
+      TestFile
+
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run ''__tests__/normal-test.jsx'''
+    end
   end
 
   context "with a specified executable"

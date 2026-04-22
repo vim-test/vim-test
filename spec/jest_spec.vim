@@ -1,14 +1,17 @@
 source spec/support/helpers.vim
 
+let s:repo_dir = getcwd()
+let s:fixture_dir = s:repo_dir . '/spec/fixtures/jest'
+
 describe "Jest"
 
   before
-    cd spec/fixtures/jest
+    execute 'cd ' . fnameescape(s:fixture_dir)
   end
 
   after
     call Teardown()
-    cd -
+    execute 'cd ' . fnameescape(s:repo_dir)
   end
 
   context "on nearest tests"
@@ -186,13 +189,42 @@ describe "Jest"
 
   context "using jest.config for detection"
     before
-      !mv package.json package.temp
-      !touch jest.config.js
+      call rename('package.json', 'package.temp')
+      call writefile(['module.exports = {}'], 'jest.config.js')
     end
 
     after
-      !mv package.temp package.json
-      !rm jest.config.js
+      call delete('jest.config.js')
+      call rename('package.temp', 'package.json')
+    end
+
+    it "runs file tests from nested directories"
+      cd __tests__
+      view +1 normal-test.js
+      TestFile
+
+      Expect g:test#last_command == 'jest --runTestsByPath -- normal-test.js'
+
+      execute 'cd ' . fnameescape(s:fixture_dir)
+    end
+  end
+
+  context "using package.json jest config for detection"
+    before
+      call rename('package.json', 'package.temp')
+      call writefile([
+            \ '{',
+            \ '  "name": "jest-config-only",',
+            \ '  "jest": {',
+            \ '    "verbose": true',
+            \ '  }',
+            \ '}',
+            \ ], 'package.json')
+    end
+
+    after
+      call delete('package.json')
+      call rename('package.temp', 'package.json')
     end
 
     it "runs file tests"

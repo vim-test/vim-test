@@ -8,7 +8,6 @@ function! test#javascript#vitest#test_file(file) abort
           return g:test#javascript#runner ==# 'vitest'
       else
         return test#javascript#has_import(a:file, 'vitest')
-            \ || s:has_vitest_config()
             \ || test#javascript#has_package('vitest')
       endif
   endif
@@ -57,10 +56,4 @@ endfunction
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#javascript#patterns)
   return test#base#escape_regex(join(name['namespace'] + name['test']))
-endfunction
-
-function! s:has_vitest_config() abort
-  return test#javascript#find_config_file('vitest.config.*')
-      \ || test#javascript#find_config_file('vite.config.*', 
-  \ {path -> join(test#javascript#find_file_lines(path).lines, "\n") =~# '\v\<test\>\s*:'})
 endfunction

@@ -8,10 +8,6 @@ function! test#javascript#jest#test_file(file) abort
           return g:test#javascript#runner ==# 'jest'
       else
         return test#javascript#has_import(a:file, 'jest')
-            \ || test#javascript#find_config_file('jest.config.*')
-            \ || test#javascript#search_in_package_config(
-              \ {pkg -> has_key(pkg, 'jest')},
-              \ {pkg_line -> pkg_line =~# '"jest"\s*:' && pkg_line =~# '{'})
             \ || test#javascript#has_package('jest')
       endif
   endif

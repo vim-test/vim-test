@@ -189,8 +189,8 @@ describe "Jest"
 
   context "using jest.config for detection"
     before
-      call rename('package.json', 'package.temp')
-      call writefile(['module.exports = {}'], 'jest.config.js')
+      !mv package.json package.temp
+      !touch jest.config.js
     end
 
     after
@@ -236,5 +236,3 @@ describe "Jest"
   end
 
 end
-
-

@@ -1,11 +1,10 @@
 source spec/support/helpers.vim
 
-let g:expectedExecutable = ''
-
 describe "vitest"
 
   before
     cd spec/fixtures/vitest
+    let g:expectedExecutable = ''
     if executable('npx')
         let g:expectedExecutable = 'npx '
     else
@@ -16,7 +15,7 @@ describe "vitest"
   after
     call Teardown()
     cd -
-    unlet g:expectedExecutable
+    unlet! g:expectedExecutable
   end
 
   context "on nearest tests"

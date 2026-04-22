@@ -1,9 +1,12 @@
 source spec/support/helpers.vim
 
+let s:repo_dir = getcwd()
+let s:fixture_dir = s:repo_dir . '/spec/fixtures/js_multiple'
+
 describe "Multiple JavaScript runners"
 
   before
-    cd spec/fixtures/js_multiple
+    execute 'cd ' . fnameescape(s:fixture_dir)
   end
 
   it "if not be specified it will return first matched runner"
@@ -26,7 +29,7 @@ describe "Multiple JavaScript runners"
 
   after
     call Teardown()
-    cd -
+    execute 'cd ' . fnameescape(s:repo_dir)
   end
 
 end

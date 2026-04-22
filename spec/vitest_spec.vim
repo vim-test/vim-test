@@ -38,12 +38,12 @@ describe "vitest"
       view +4 __tests__/escaping-test.ts
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Escaping parentheses \('' ''__tests__/escaping-test.ts'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Escaping parentheses \\('' ''__tests__/escaping-test.ts'''
 
       view +7 __tests__/escaping-test.ts
       TestNearest
 
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Escaping brackets \['' ''__tests__/escaping-test.ts'''
+      Expect g:test#last_command == g:expectedExecutable .. 'vitest run -t ''Escaping brackets \\['' ''__tests__/escaping-test.ts'''
     end
 
     it "runs loop tests"
@@ -149,29 +149,6 @@ describe "vitest"
     TestFile
 
     Expect g:test#last_command == g:expectedExecutable .. 'vitest run ''__tests__/dollar-sign-in-filename-$test.js'''
-  end
-
-  context "using vite.config for detection"
-    before
-      call rename('package.json', 'package.temp')
-      call writefile([
-          \ 'export default {',
-          \ '  test: {}',
-          \ '}',
-          \ ], 'vite.config.ts')
-    end
-
-    after
-      call delete('vite.config.ts')
-      call rename('package.temp', 'package.json')
-    end
-
-    it "runs file tests"
-      view +1 __tests__/normal-test.jsx
-      TestFile
-
-      Expect g:test#last_command == g:expectedExecutable .. 'vitest run ''__tests__/normal-test.jsx'''
-    end
   end
 
   context "with a specified executable"

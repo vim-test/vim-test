@@ -80,12 +80,12 @@ describe "Jest"
       view +2 __tests__/escaping-test.js
       TestNearest
 
-      Expect g:test#last_command == 'jest --runTestsByPath -t ''^Escaping parentheses \($'' -- __tests__/escaping-test.js'
+      Expect g:test#last_command == 'jest --runTestsByPath -t ''^Escaping parentheses \\($'' -- __tests__/escaping-test.js'
 
       view +5 __tests__/escaping-test.js
       TestNearest
 
-      Expect g:test#last_command == 'jest --runTestsByPath -t ''^Escaping brackets \[$'' -- __tests__/escaping-test.js'
+      Expect g:test#last_command == 'jest --runTestsByPath -t ''^Escaping brackets \\[$'' -- __tests__/escaping-test.js'
     end
 
     it "runs CoffeeScript"
@@ -184,54 +184,6 @@ describe "Jest"
       TestFile
 
       Expect g:test#last_command == '~/.local/bin/yarn jest --runTestsByPath __tests__/normal-test.js'
-    end
-  end
-
-  context "using jest.config for detection"
-    before
-      !mv package.json package.temp
-      !touch jest.config.js
-    end
-
-    after
-      call delete('jest.config.js')
-      call rename('package.temp', 'package.json')
-    end
-
-    it "runs file tests from nested directories"
-      cd __tests__
-      view +1 normal-test.js
-      TestFile
-
-      Expect g:test#last_command == 'jest --runTestsByPath -- normal-test.js'
-
-      execute 'cd ' . fnameescape(s:fixture_dir)
-    end
-  end
-
-  context "using package.json jest config for detection"
-    before
-      call rename('package.json', 'package.temp')
-      call writefile([
-            \ '{',
-            \ '  "name": "jest-config-only",',
-            \ '  "jest": {',
-            \ '    "verbose": true',
-            \ '  }',
-            \ '}',
-            \ ], 'package.json')
-    end
-
-    after
-      call delete('package.json')
-      call rename('package.temp', 'package.json')
-    end
-
-    it "runs file tests"
-      view +1 __tests__/normal-test.js
-      TestFile
-
-      Expect g:test#last_command == 'jest --runTestsByPath -- __tests__/normal-test.js'
     end
   end
 

@@ -26,9 +26,12 @@ function! test#javascript#has_package(package) abort
 endfunction
 
 function! test#javascript#has_import(file, import) abort
-  let l:file = expand(a:file)
+  let l:file = substitute(a:file, '\v\\([()$ ])', '\1', 'g')
   if !filereadable(l:file)
-    let l:file = substitute(l:file, '\v\\([()$ ])', '\1', 'g')
+    let l:file = expand(l:file)
+  endif
+  if !filereadable(l:file)
+    return 0
   endif
 
   let l:source = substitute(join(readfile(l:file), "\n"), '\v\_s+', ' ', 'g')

@@ -60,5 +60,5 @@ endfunction
 function! s:has_vitest_config() abort
   return test#javascript#find_config_file('vitest.config.*')
       \ || test#javascript#find_config_file('vite.config.*',
-      \ {path -> join(test#javascript#find_file_lines(path).lines, "\n") =~# '\v\<test\>\s*:'})
+      \ {path -> join(readfile(path), "\n") =~# '\v["''`]?<test>["''`]?\_s*:'})
 endfunction

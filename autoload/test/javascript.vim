@@ -12,8 +12,8 @@ function! test#javascript#has_package(package) abort
   let l:packages = readfile('package.json')
 
   if exists('*json_decode')
-	let l:dict = json_decode(join(packages, ''))
-	return has_key(get(dict, 'dependencies', {}), a:package) || has_key(get(dict, 'devDependencies', {}),  a:package)
+    let l:dict = json_decode(join(packages, ''))
+    return has_key(get(dict, 'dependencies', {}), a:package) || has_key(get(dict, 'devDependencies', {}),  a:package)
   endif
 
   for line in packages
@@ -33,12 +33,10 @@ function! test#javascript#has_import(file, import) abort
 
   let l:source = substitute(join(readfile(l:file), "\n"), '\v\_s+', ' ', 'g')
 
-  if s:has_import_style(l:source, 'from ', a:import)
-    \ || s:has_import_style(l:source, 'import ', a:import)
-    \ || s:has_import_style(l:source, 'import(', a:import, ')')
-    \ || s:has_import_style(l:source, 'import (', a:import, ')')
-    \ || s:has_import_style(l:source, 'require(', a:import, ')')
-    \ || s:has_import_style(l:source, 'require (', a:import, ')')
+  if s:has_import_style(l:source, '\<from\>\s*', a:import)
+    \ || s:has_import_style(l:source, '\<import\>\s*', a:import)
+    \ || s:has_import_style(l:source, '\<import\>\s*(\s*', a:import, '\s*)')
+    \ || s:has_import_style(l:source, '\<require\>\s*(\s*', a:import, '\s*)')
     return 1
   endif
 
@@ -54,11 +52,8 @@ function! test#javascript#determine_executable(cmd) abort
 endfunction
 
 function! s:has_import_style(source, before, target, after = '') abort
-  for l:quote in ["'", '"', '`']
-    if stridx(a:source, a:before . l:quote . a:target . l:quote . a:after) >= 0
-      return 1
-    endif
-  endfor
-
-  return 0
+  let l:target = escape(a:target, '\.^$~[]')
+  let l:quote_styles = '[''"`]'
+  let l:pattern = a:before . l:quote_styles . l:target . l:quote_styles . a:after
+  return a:source =~# l:pattern
 endfunction

@@ -1,17 +1,14 @@
 source spec/support/helpers.vim
 
-let s:repo_dir = getcwd()
-let s:fixture_dir = s:repo_dir . '/spec/fixtures/jest'
-
 describe "Jest"
 
   before
-    execute 'cd ' . fnameescape(s:fixture_dir)
+    cd spec/fixtures/jest
   end
 
   after
     call Teardown()
-    execute 'cd ' . fnameescape(s:repo_dir)
+    cd -
   end
 
   context "on nearest tests"
@@ -205,4 +202,5 @@ describe "Jest"
       Expect g:test#last_command == 'jest --runTestsByPath -- __tests__/normal-test.js'
     end
   end
+
 end

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/vim-test/vim-test/compare/v3.1.0...v3.2.0) (2026-05-06)
+
+
+### Features
+
+* Checking for multiline import statements in js/ts files ([#893](https://github.com/vim-test/vim-test/issues/893)) ([af35d53](https://github.com/vim-test/vim-test/commit/af35d532c649b47579e79852e5eca2945d85c837))
+
 ## [3.1.0](https://github.com/vim-test/vim-test/compare/v3.0.1...v3.1.0) (2026-04-13)
 
 

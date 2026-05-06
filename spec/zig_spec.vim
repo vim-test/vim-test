@@ -38,4 +38,15 @@ describe "Zig"
 
     Expect g:test#last_command == "zig build test"
   end
+
+  it "update g:test#last_position with exact line of the test"
+    view +1 normal.zig
+    TestNearest
+
+    Expect g:test#last_position['line'] == 4
+
+    view +9 normal.zig
+    TestNearest
+
+    Expect g:test#last_position['line'] == 8
 end

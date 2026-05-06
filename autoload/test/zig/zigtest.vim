@@ -8,11 +8,14 @@ endfunction
 
 function! test#zig#zigtest#build_position(type, position) abort
   if a:type ==# 'nearest'
-    let name = s:nearest_test(a:position)
-    if empty(name)
+    let test = s:nearest_test(a:position)
+    if test['test_line'] == -1
       return ['test', a:position['file']]
     endif
 
+    let name = test#base#escape_regex(join(test['test']))
+
+    let g:test#last_position['line'] = test['test_line']
     return ['test', a:position['file'],  '--test-filter '.shellescape(name, 1)]
   elseif a:type ==# 'file'
     return ['test', a:position['file']]
@@ -34,9 +37,9 @@ function! test#zig#zigtest#executable() abort
 endfunction
 
 function! s:nearest_test(position) abort
-  let name = test#base#nearest_test(a:position, g:test#zig#patterns)
-  if name.test_line == -1
-      let name = test#base#nearest_test_in_lines(a:position['file'], a:position['line'], line('$'), g:test#zig#patterns)
+  let test = test#base#nearest_test(a:position, g:test#zig#patterns)
+  if test.test_line == -1
+      let test = test#base#nearest_test_in_lines(a:position['file'], a:position['line'], line('$'), g:test#zig#patterns)
   endif
-  return test#base#escape_regex(join(name['test']))
+  return test
 endfunction

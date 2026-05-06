@@ -18,11 +18,18 @@ describe "Zig"
     Expect g:test#last_command == "zig test normal.zig"
   end
 
-  it "runs nearest test"
+  it "runs nearest test above"
     view +9 normal.zig
     TestNearest
 
     Expect g:test#last_command == 'zig test normal.zig --test-filter ''numbers 2'''
+  end
+
+  it "runs nearest test below"
+    view +1 normal.zig
+    TestNearest
+
+    Expect g:test#last_command == 'zig test normal.zig --test-filter ''numbers'''
   end
 
   it "runs all tests"

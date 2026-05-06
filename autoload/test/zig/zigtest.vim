@@ -35,5 +35,8 @@ endfunction
 
 function! s:nearest_test(position) abort
   let name = test#base#nearest_test(a:position, g:test#zig#patterns)
+  if name.test_line == -1
+      let name = test#base#nearest_test_in_lines(a:position['file'], a:position['line'], line('$'), g:test#zig#patterns)
+  endif
   return test#base#escape_regex(join(name['test']))
 endfunction

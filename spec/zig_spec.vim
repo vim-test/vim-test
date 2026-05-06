@@ -32,6 +32,13 @@ describe "Zig"
     Expect g:test#last_command == 'zig test normal.zig --test-filter ''numbers'''
   end
 
+  it "runs test with an identifier as a name"
+    view +13 normal.zig
+    TestNearest
+
+    Expect g:test#last_command == 'zig test normal.zig --test-filter ''addOne'''
+  end
+
   it "runs all tests"
     view normal.zig
     TestSuite

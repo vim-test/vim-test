@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.3.0](https://github.com/vim-test/vim-test/compare/v3.2.0...v3.3.0) (2026-05-07)
+
+
+### Features
+
+* add support for zig test having an identifier as a name ([#907](https://github.com/vim-test/vim-test/issues/907)) ([e0836df](https://github.com/vim-test/vim-test/commit/e0836dfbff601155d44af933cc1465e173f2dd8d))
+
+
+### Bug Fixes
+
+* calculation of last_position['line'] ([#905](https://github.com/vim-test/vim-test/issues/905)) ([b7ef5aa](https://github.com/vim-test/vim-test/commit/b7ef5aaae75bed49c10953f953ab07a5cdfb4c8d))
+* make TestNearest search both directions for zig ([#903](https://github.com/vim-test/vim-test/issues/903)) ([e312c0e](https://github.com/vim-test/vim-test/commit/e312c0ef80c514cb0d516e2646d609bb920d8c02))
+
 ## [3.2.0](https://github.com/vim-test/vim-test/compare/v3.1.0...v3.2.0) (2026-05-06)
 
 

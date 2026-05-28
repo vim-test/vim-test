@@ -50,5 +50,5 @@ endfunction
 function! s:escape_lua_pattern(pattern) abort
   let magic_characters = ["(", ")", "\\.", "%", "+", "-", "*", "?", "[", "\\^", "\\$"]
   let magic_str = join(magic_characters, "\\|")
-  return substitute(a:pattern, "\\(" . magic_str . "\\)", "%\\1", "g")
+  return substitute(substitute(a:pattern, "\\(" . magic_str . "\\)", "%\\1", "g"), ' ', '\\ ', 'g')
 endfunction

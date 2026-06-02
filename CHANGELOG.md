@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.1](https://github.com/vim-test/vim-test/compare/v3.3.0...v3.3.1) (2026-05-29)
+
+
+### Bug Fixes
+
+* escape spaces for busted --filter ([#909](https://github.com/vim-test/vim-test/issues/909)) ([d29ec99](https://github.com/vim-test/vim-test/commit/d29ec9976fd6b684488c908e6c7c72a3a7a0cb7f))
+
 ## [3.3.0](https://github.com/vim-test/vim-test/compare/v3.2.0...v3.3.0) (2026-05-07)
 
 

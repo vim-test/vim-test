@@ -336,13 +336,9 @@ function! s:pretty_command(cmd) abort
 endfunction
 
 function! s:command(cmd) abort
-  let separator = !s:Windows() ? '; ' : ' & '
+  let separator = !test#base#is_windows() ? '; ' : ' & '
 
   return join([a:cmd], l:separator)
-endfunction
-
-function! s:Windows() abort
-  return has('win32') && fnamemodify(&shell, ':t') ==? 'cmd.exe'
 endfunction
 
 function! s:restorescreen() abort

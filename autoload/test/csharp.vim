@@ -4,13 +4,7 @@ let g:test#csharp#patterns = {
 \}
 
 " Set the default slash to the forward slash
-let s:slash = '/'
-if (has('win32') || has('win64'))
-    let shell = fnamemodify(&shell, ':t')
-    if (shell ==? 'cmd.exe' || shell ==? 'powershell' || shell ==? 'pwsh')
-        let s:slash = '\'
-    endif
-endif
+let s:slash = test#base#is_windows() ? '\'  : '/'
 
 function! test#csharp#get_project_path(file) abort
   let l:filepath = fnamemodify(a:file, ':p:h')

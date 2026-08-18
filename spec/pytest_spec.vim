@@ -303,3 +303,13 @@ describe "Pytest running Nose tests when setup.cfg present with [tool:pytest]"
     Expect g:test#last_command == 'python3 -m pytest'
   end
 end
+
+  it "shell-escapes filenames with special characters"
+    " This test requires a file with special characters in its name
+    " to verify that build_position shell-escapes the file path
+    view test_weir\[d\].py
+    TestFile
+
+    " The file path should be shell-escaped to prevent glob expansion
+    Expect g:test#last_command =~# 'test_weir\[d\].py'
+  end

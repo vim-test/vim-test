@@ -12,6 +12,8 @@ let test#ruby#patterns = {
   \],
 \}
 
+let test#ruby#root_marker = ['Gemfile']
+
 function! test#ruby#use_zeus() abort
   return !empty(glob('.zeus.sock'))
 endfunction

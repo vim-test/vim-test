@@ -4,6 +4,8 @@ let test#javascript#patterns = {
   \ 'namespace': ['\v^\s*%(describe)\.each\(.*\)\s*\(([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1', '\v^\s*%(describe|suite|context|module)\s*[^''"`]*([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1']
 \}
 
+let test#javascript#root_marker = ['package.json']
+
 function! test#javascript#has_package(package) abort
   if !filereadable('package.json')
     return 0

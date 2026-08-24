@@ -5,3 +5,5 @@ let test#gleam#patterns = {
   \],
   \ 'namespace': []
 \}
+
+let test#gleam#root_marker = ['gleam.toml']

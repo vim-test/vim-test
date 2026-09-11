@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.4.0](https://github.com/vim-test/vim-test/compare/v3.3.1...v3.4.0) (2026-09-11)
+
+
+### Features
+
+* add vim-test-herdr strategy ([#916](https://github.com/vim-test/vim-test/issues/916)) ([032a68c](https://github.com/vim-test/vim-test/commit/032a68c71053f6f99c768ab0b5a119d97d6e1f9b))
+
+
+### Bug Fixes
+
+* correct endif in Ember runner ([#913](https://github.com/vim-test/vim-test/issues/913)) ([2831d66](https://github.com/vim-test/vim-test/commit/2831d66ccfa98293e99c8b5228344591ae117679))
+* remove duplicate for test#scala#blooptest#test_file ([#915](https://github.com/vim-test/vim-test/issues/915)) ([619cf09](https://github.com/vim-test/vim-test/commit/619cf091565d05e5b16042ef9ba4dd13eda9b023))
+
 ## [3.3.1](https://github.com/vim-test/vim-test/compare/v3.3.0...v3.3.1) (2026-05-29)
 
 

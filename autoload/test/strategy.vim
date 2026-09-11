@@ -262,6 +262,10 @@ function! test#strategy#harpoon(cmd) abort
   endif
 endfunction
 
+function! test#strategy#herdr(cmd) abort
+  call HerdrStrategy(a:cmd)
+endfunction
+
 function! test#strategy#wezterm(cmd) abort
   let l:wezterm = get(g:, "test#wezterm#executable", "wezterm")
 

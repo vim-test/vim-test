@@ -623,6 +623,16 @@ defaults to 50 unless set to a different value.
   let test#wezterm#split_percent = 30
 <
 
+Herdr ~
+
+This strategy runs commands in a Herdr pane using the vim-test-herdr plugin.
+It requires that plugin, the `herdr` CLI, and a Herdr session (`HERDR_ENV=1`).
+The pane is reused for later test runs.
+
+>
+  let test#strategy = 'herdr'
+<
+
 
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 

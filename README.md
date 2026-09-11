@@ -119,6 +119,7 @@ let test#strategy = "dispatch"
 | **[Shtuff]**                    | `shtuff`                                                    | Sends test commands to remote terminal via [shtuff][Shtuff].                                                                                                      |
 | **[Harpoon]**                    | `harpoon`                                                  | Sends test commands to neovim terminal using a terminal managed by [harpoon][Harpoon]. By default commands are sent to terminal number 1, you can choose your terminal by setting `g:test#harpoon_term` with the terminal you want                                                                                                     |
 | **[WezTerm]**                   | `wezterm`                                                 | Sends test commands to an adjacent [WezTerm][WezTerm] pane.                                                                                                         |
+| **[vim-test-herdr]**            | `herdr`                                                   | Runs test commands in a Herdr pane.                                                                                                                                |
 
 You can also set up strategies per granularity:
 
@@ -899,3 +900,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 [Ember.js]: https://github.com/emberjs/ember.js
 [Toggleterm]: https://github.com/akinsho/toggleterm.nvim
 [WezTerm]: https://github.com/wez/wezterm
+[vim-test-herdr]: https://github.com/willian/vim-test-herdr

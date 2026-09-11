@@ -3,10 +3,6 @@ if !exists('g:test#scala#blooptest#file_pattern')
   let g:test#scala#blooptest#file_pattern = '\v^(.*spec.*|.*test.*|.*suite.*)\c\.scala$'
 endif
 
-function! test#scala#blooptest#test_file(file) abort
-  return test#scala#test_file('blooptest', g:test#scala#blooptest#file_pattern, a:file)
-endfunction
-
  " Returns test runner's arguments which will run the current file and/or line
 function! test#scala#blooptest#build_position(type, position) abort
   let filename = fnamemodify(a:position['file'], ':t:r')

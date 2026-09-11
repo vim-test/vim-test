@@ -1,6 +1,6 @@
 if !exists('g:test#javascript#ember#file_pattern')
   let g:test#javascript#ember#file_pattern = '\v(tests?/.*|(test))\.(js|jsx|ts|tsx|coffee)$'
-endi
+endif
 
 function! test#javascript#ember#test_file(file) abort
   if a:file =~# g:test#javascript#ember#file_pattern

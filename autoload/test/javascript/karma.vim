@@ -17,14 +17,14 @@ function! test#javascript#karma#build_position(type, position) abort
   if test#javascript#karma#executable() =~# 'karma-cli-runner'
     if a:type ==# 'nearest'
       let specname = s:nearest_test(a:position)
-      let filename = '--files ' . expand(a:position['file'])
+      let filename = '--files ' . test#base#escape_path(expand(a:position['file']))
       if empty(specname)
         return [filename]
       endif
       let specname = '--filter ' . shellescape(specname, 1)
       return [filename, specname]
     elseif a:type ==# 'file'
-      return ['--files ' . expand(a:position['file'])]
+      return ['--files ' . test#base#escape_path(expand(a:position['file']))]
     else
       return []
     endif

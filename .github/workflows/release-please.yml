@@ -17,3 +17,4 @@ jobs:
       - uses: googleapis/release-please-action@v4
         with:
           release-type: simple
+          skip-github-release: true

@@ -56,4 +56,27 @@ describe "Node Test"
   it "does not treat from(...) calls as imports"
     Expect test#javascript#has_import('false-positive.test.js', 'node:test') == 0
   end
+
+  it "supports nearest"
+    view +5 normal.test.ts
+    TestNearest
+
+    Expect g:test#last_command == 'node --test --test-name-pattern=''synchronous passing test'' normal.test.ts'
+  end
+
+  it "uses --import=tsx when available"
+    cd tsx_support
+    view tsx.test.tsx
+    TestFile
+
+    Expect g:test#last_command == 'node --import=tsx --test tsx.test.tsx'
+
+    " Nearest also works still:
+    view +4 tsx.test.tsx
+    TestNearest
+
+    Expect g:test#last_command == 'node --import=tsx --test --test-name-pattern=''this is a test'' tsx.test.tsx'
+    cd -
+  end
+
 end

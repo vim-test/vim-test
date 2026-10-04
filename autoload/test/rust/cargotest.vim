@@ -120,7 +120,9 @@ function! s:nearest_test(position) abort
 endfunction
 
 function! s:test_namespace(filename) abort
-  let l:path = fnamemodify(a:filename, ':r')
+  " Get the file's *full* path
+  let l:path = fnamemodify(a:filename, ':p:r')
+
   " On a normal cargo project, the first item is 'src'
   let l:modules = split(l:path, '/')
   let l:is_bin = v:false
@@ -137,26 +139,26 @@ function! s:test_namespace(filename) abort
     let l:modules = l:modules[:-2]
   endif
 
+  " The prefix is, eg `/` on *nix systems---everything
+  " before the first file path
+  let l:prefix_idx = stridx(l:path, l:modules[0])
+  let l:prefix = l:path[:prefix_idx-1]
   let l:package = v:null
+
   " Find package by searching upwards for Cargo.toml
   for idx in range(len(l:modules) - 2, 0, -1)
-      let l:cargo_toml = join(l:modules[:idx] + ['Cargo.toml'], '/')
-      if !empty(glob(cargo_toml))
-          let l:package = l:modules[idx]
-          let l:modules = l:modules[idx+1:]
-          " use package name, if present
-          let l:section = ''
-          for line in readfile(l:cargo_toml)
-            if line =~ '\[.\+\]' | let l:section = line | endif
-              if l:section == '[package]' && line =~ 'name'
-              let l:package = matchstr(line, '"\zs[^"]*\ze"')
-
-              break
-            endif
-          endfor
-
-          break
-      endif
+    let l:cargo_toml = l:prefix . join(l:modules[:idx] + ['Cargo.toml'], '/')
+    if filereadable(cargo_toml)
+      " If we found a Cargo.toml file in the path up to and
+      " including the idx'th entry, the idx'th directory is the
+      " name of the package, and everything else is the modules
+      " path. Note that when combined with the absolute path
+      " above, we will always be very explicit about selecting
+      " the package (when not doing the Suite), but that's okay.
+      let l:package = l:modules[idx]
+      let l:modules = l:modules[idx+1:]
+      break
+    endif
   endfor
 
   let l:bin = v:null

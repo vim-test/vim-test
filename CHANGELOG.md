@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/vim-test/vim-test/compare/v3.4.0...v3.5.0) (2026-10-05)
+
+
+### Features
+
+* Add tsx and `TestNearest` support to node:test runner ([#918](https://github.com/vim-test/vim-test/issues/918)) ([79e9550](https://github.com/vim-test/vim-test/commit/79e9550c2337001a470bd8c87378dc8d4e8b9f4c))
+
 ## [3.4.0](https://github.com/vim-test/vim-test/compare/v3.3.1...v3.4.0) (2026-09-11)
 
 

@@ -510,15 +510,17 @@ plugin.
 >
   let test#strategy = 'vimshell'
 <
-Terminal.app / iTerm.app ~
+Terminal.app / iTerm.app / Ghostty.app
 
 If you're in MacVim GUI, you can use this strategy to send the test commands
-to your Terminal.app/iTerm.app (since executing shell commands inside Vim GUIs
-isn't that nice).
+to your Terminal.app/iTerm.app/Ghostty.app (since executing shell commands
+inside Vim GUIs isn't that nice).
 >
   let test#strategy = 'terminal'
   " or
   let test#strategy = 'iterm'
+  " or
+  let test#strategy = 'ghostty'
 <
 Kitty ~
 

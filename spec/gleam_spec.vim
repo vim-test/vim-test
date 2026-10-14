@@ -31,4 +31,17 @@ describe "Gleam"
 
     Expect g:test#last_command == "gleam test"
   end
+
+  context "when project root is in subdirectory"
+    before
+      cd ..
+    end
+
+    it "runs file tests"
+      view normal.gleam
+      TestFile
+
+      Expect g:test#last_command == "gleam test normal.gleam"
+    end
+  end
 end

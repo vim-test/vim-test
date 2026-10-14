@@ -208,10 +208,6 @@ describe "Jest"
       cd ..
     end
 
-    after
-      cd jest
-    end
-
     it "runs file tests"
       view +1 jest/__tests__/normal-test.js
       TestFile

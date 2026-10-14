@@ -203,4 +203,20 @@ describe "Jest"
     end
   end
 
+  context "when project root is in subdirectory"
+    before
+      cd ..
+    end
+
+    after
+      cd jest
+    end
+
+    it "runs file tests"
+      view +1 jest/__tests__/normal-test.js
+      TestFile
+
+      Expect g:test#last_command == 'jest --runTestsByPath -- __tests__/normal-test.js'
+    end
+  end
 end

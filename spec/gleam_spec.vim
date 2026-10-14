@@ -38,7 +38,7 @@ describe "Gleam"
     end
 
     it "runs file tests"
-      view normal.gleam
+      view gleam/normal.gleam
       TestFile
 
       Expect g:test#last_command == "gleam test normal.gleam"

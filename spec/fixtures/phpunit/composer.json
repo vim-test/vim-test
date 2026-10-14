@@ -1,0 +1,5 @@
+{
+  "name": "vim-test/phpunit-fixture",
+  "description": "Test fixture for vim-test phpunit runner",
+  "require": {}
+}

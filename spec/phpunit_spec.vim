@@ -108,4 +108,16 @@ describe "PHPUnit"
     Expect exists('g:test#last_command') == 0
   end
 
+  context "when project root is in subdirectory"
+    before
+      cd ..
+    end
+
+    it "runs file tests"
+      view phpunit/NormalTest.php
+      TestFile
+
+      Expect g:test#last_command == 'phpunit --colors NormalTest.php'
+    end
+  end
 end

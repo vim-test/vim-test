@@ -289,16 +289,12 @@ function! s:detect_project_root(file) abort
     let markers += get(g:, 'test#' . language . '#root_marker', [])
   endfor
 
-  let prev_dir = ''
-  while dir !=# prev_dir
-    for marker in markers
-      if filereadable(dir . '/' . marker) || isdirectory(dir . '/' . marker)
-        return dir
-      endif
-    endfor
-    let prev_dir = dir
-    let dir = fnamemodify(dir, ':h')
-  endwhile
+  for marker in markers
+    let l:file = findfile(marker, fnamemodify(a:file, ':p:h') . ';' . getcwd())
+    if !empty(l:file)
+      return fnamemodify(l:file, ':p:h')
+    endif
+  endfor
 
   return ''
 endfunction

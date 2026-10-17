@@ -33,4 +33,16 @@ describe "Nose with Pipenv"
     Expect g:test#last_command == 'pipenv run nosetests --doctest-tests'
   end
 
+  context "when project root is in subdirectory"
+    before
+      cd ..
+    end
+
+    it "runs file tests"
+      view nose_pipenv/test_class.py
+      TestFile
+
+      Expect g:test#last_command == 'pipenv run nosetests --doctest-tests test_class.py'
+    end
+  end
 end

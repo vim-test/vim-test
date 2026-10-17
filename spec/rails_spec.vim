@@ -32,4 +32,16 @@ describe "Rails"
     Expect g:test#last_command == 'rails test'
   end
 
+  context "when project root is in subdirectory"
+    before
+      cd ..
+    end
+
+    it "runs file tests"
+      view rails/normal_test.rb
+      TestFile
+
+      Expect g:test#last_command == 'rails test normal_test.rb'
+    end
+  end
 end

@@ -12,7 +12,7 @@ let test#ruby#patterns = {
   \],
 \}
 
-let test#ruby#root_marker = ['Gemfile']
+let test#ruby#root_marker = ['Gemfile', 'Gemfile.lock']
 
 function! test#ruby#use_zeus() abort
   return !empty(glob('.zeus.sock'))

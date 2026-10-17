@@ -289,7 +289,11 @@ function! s:detect_project_root(file) abort
     let markers += get(g:, 'test#' . language . '#root_marker', [])
   endfor
 
-  for marker in markers
+  return s:find_project_root(markers, a:file)
+endfunction
+
+function! s:find_project_root(markers, file) abort
+  for marker in a:markers
     let l:file = findfile(marker, fnamemodify(a:file, ':p:h') . ';' . getcwd())
     if !empty(l:file)
       return fnamemodify(l:file, ':p:h')

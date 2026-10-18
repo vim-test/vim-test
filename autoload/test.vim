@@ -294,6 +294,10 @@ endfunction
 
 function! s:find_project_root(markers, file) abort
   for marker in a:markers
+    if filereadable(marker)
+      return ''
+    endif
+
     let l:file = findfile(marker, fnamemodify(a:file, ':p:h') . ';' . getcwd())
     if !empty(l:file)
       return fnamemodify(l:file, ':p:h')

@@ -128,7 +128,9 @@ function! test#determine_runner(file) abort
         endif
       endif
 
-      let l:markers = get(g:, 'test#' . tolower(language) . '#root_marker', [])
+      let language = tolower(language)
+      execute 'runtime! autoload/test/' . language . '.vim'
+      let l:markers = get(g:, 'test#' . language . '#root_marker', [])
 
       let l:project_root = s:find_project_root(l:markers, a:file)
 

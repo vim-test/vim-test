@@ -12,7 +12,6 @@ function! test#run(type, arguments) abort
     let position = g:test#last_position
   else
     call s:after_run()
-    call s:restore_project_root(saved_project_root, had_project_root)
     call s:echo_failure('Not a test file') | return
   endif
 

@@ -36,6 +36,10 @@ function! test#run_last(arguments) abort
   if exists('g:test#last_command')
     call s:before_run()
 
+    if !empty(s:last_project_root)
+      execute 'cd' s:last_project_root
+    endif
+
     let env = s:extract_env_from_command(a:arguments)
     let strategy = s:extract_strategy_from_command(a:arguments)
 
@@ -130,6 +134,7 @@ function! test#determine_runner(file) abort
       let l:project_root = s:find_project_root(l:markers, a:file)
 
       if !empty(l:project_root) && l:project_root !=# getcwd()
+        let s:last_project_root = l:project_root
         execute 'cd' l:project_root
       endif
 
@@ -203,6 +208,10 @@ endfunction
 
 function! s:after_run() abort
   if exists('g:test#project_root')
+    execute 'cd -'
+  endif
+
+  if !empty(get(s:, 'last_project_root'))
     execute 'cd -'
   endif
 endfunction

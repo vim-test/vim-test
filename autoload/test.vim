@@ -1,24 +1,10 @@
 function! test#run(type, arguments) abort
-  let saved_project_root = get(g:, 'test#project_root', '')
-  let had_project_root = exists('g:test#project_root')
-
-  let current_file = fnamemodify(expand('%'), ':p')
   let alternate_file = s:alternate_file()
-  if !empty(alternate_file)
-    let alternate_file = fnamemodify(alternate_file, ':p')
-  endif
-
-  if !had_project_root
-    let root = s:detect_project_root(current_file)
-    if !empty(root) && root !=# getcwd()
-      let g:test#project_root = root
-    endif
-  endif
 
   call s:before_run()
 
-  if test#test_file(current_file)
-    let position = s:get_position(current_file)
+  if test#test_file(expand('%'))
+    let position = s:get_position(expand('%'))
     let g:test#last_position = position
   elseif !empty(alternate_file) && test#test_file(alternate_file) && (!exists('g:test#last_position') || alternate_file !=# g:test#last_position['file'])
     let position = s:get_position(alternate_file)
@@ -44,7 +30,6 @@ function! test#run(type, arguments) abort
   endif
 
   call s:after_run()
-  call s:restore_project_root(saved_project_root, had_project_root)
 endfunction
 
 function! test#run_last(arguments) abort
@@ -139,6 +124,15 @@ function! test#determine_runner(file) abort
           continue
         endif
       endif
+
+      let l:markers = get(g:, 'test#' . tolower(language) . '#root_marker', [])
+
+      let l:project_root = s:find_project_root(l:markers, a:file)
+
+      if !empty(l:project_root) && l:project_root !=# getcwd()
+        execute 'cd' l:project_root
+      endif
+
       if test#base#test_file(runner, fnamemodify(a:file, ':.'))
         return runner
       endif
@@ -218,8 +212,8 @@ function! s:get_position(path) abort
 
   let position = {}
   let position['file'] = fnamemodify(a:path, filename_modifier)
-  let position['line'] = fnamemodify(a:path, ':p') ==# fnamemodify(expand('%'), ':p') ? line('.') : 1
-  let position['col']  = fnamemodify(a:path, ':p') ==# fnamemodify(expand('%'), ':p') ? col('.') : 1
+  let position['line'] = a:path == expand('%') ? line('.') : 1
+  let position['col']  = a:path == expand('%') ? col('.') : 1
 
   return position
 endfunction
@@ -255,43 +249,6 @@ function! s:extend(source, dict) abort
   return result
 endfunction
 
-function! s:determine_languages(file) abort
-  let languages = []
-
-  for [language, runners] in items(test#get_runners())
-    let language_key = tolower(language)
-    for runner in runners
-      let runner_key = tolower(runner)
-      let runner_id = language_key . '#' . runner_key
-      " Load the runner file so its file_pattern variable is available.
-      call test#base#test_file(runner_id, '')
-      let pattern_var = 'g:test#' . runner_id . '#file_pattern'
-      if exists(pattern_var)
-        let pattern = eval(pattern_var)
-        if a:file =~# pattern
-          call add(languages, language_key)
-          break
-        endif
-      endif
-    endfor
-  endfor
-
-  return languages
-endfunction
-
-function! s:detect_project_root(file) abort
-  let dir = fnamemodify(a:file, ':p:h')
-  let languages = s:determine_languages(a:file)
-  let markers = []
-
-  for language in languages
-    execute 'runtime! autoload/test/' . language . '.vim'
-    let markers += get(g:, 'test#' . language . '#root_marker', [])
-  endfor
-
-  return s:find_project_root(markers, a:file)
-endfunction
-
 function! s:find_project_root(markers, file) abort
   for marker in a:markers
     if filereadable(marker)
@@ -305,12 +262,4 @@ function! s:find_project_root(markers, file) abort
   endfor
 
   return ''
-endfunction
-
-function! s:restore_project_root(saved_project_root, had_project_root) abort
-  if a:had_project_root
-    let g:test#project_root = a:saved_project_root
-  else
-    unlet! g:test#project_root
-  endif
 endfunction

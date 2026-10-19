@@ -1,7 +1,7 @@
 function! test#run(type, arguments) abort
-  let alternate_file = s:alternate_file()
-
   call s:before_run()
+
+  let alternate_file = s:alternate_file()
 
   if test#test_file(expand('%'))
     let position = s:get_position(expand('%'))

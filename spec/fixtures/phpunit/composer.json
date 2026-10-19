@@ -1,2 +1,7 @@
 {
+    "name": "vimtest/phpunit-fixture",
+    "require-dev": {
+        "phpunit/phpunit": "^13.4"
+    },
+    "require": {}
 }

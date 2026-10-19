@@ -3,4 +3,6 @@ let test#php#patterns = {
   \ 'namespace': [],
 \}
 
-let test#php#root_marker = ['composer.json']
+function! test#php#list_root_markers() abort
+  return ['composer.json']
+endfunction

@@ -35,7 +35,7 @@ function! test#run_last(arguments) abort
   if exists('g:test#last_command')
     call s:before_run()
 
-    if !empty(s:last_project_root)
+    if !empty(get(s:, 'last_project_root', ''))
       execute 'cd' s:last_project_root
     endif
 
@@ -124,19 +124,16 @@ function! test#determine_runner(file) abort
   let l:file = fnamemodify(a:file, ':p')
 
   for [language, runners] in sort(items(test#get_runners()), 'i')
+    let language = tolower(language)
+    let l:markers = s:root_markers(language)
+
     for runner in runners
-      let runner = tolower(language).'#'.tolower(runner)
+      let runner = language.'#'.tolower(runner)
       if exists("g:test#enabled_runners")
         if index(g:test#enabled_runners, runner) < 0
           continue
         endif
       endif
-
-      let language = tolower(language)
-      if !exists('g:test#' . language . '#root_marker')
-        execute 'runtime! autoload/test/' . language . '.vim'
-      endif
-      let l:markers = get(g:, 'test#' . language . '#root_marker', [])
 
       let l:project_root = s:find_project_root(l:markers, a:file)
 
@@ -263,6 +260,14 @@ function! s:extend(source, dict) abort
     let result[key] = get(result, key, []) + value
   endfor
   return result
+endfunction
+
+function! s:root_markers(language) abort
+  try
+    return call('test#' . a:language . '#list_root_markers', [])
+  catch /^Vim\%((\a\+)\)\=:E117/  " unknown function: language has no markers
+    return []
+  endtry
 endfunction
 
 function! s:find_project_root(markers, file) abort

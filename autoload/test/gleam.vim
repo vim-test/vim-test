@@ -6,4 +6,6 @@ let test#gleam#patterns = {
   \ 'namespace': []
 \}
 
-let test#gleam#root_marker = ['gleam.toml']
+function! test#gleam#list_root_markers() abort
+  return ['gleam.toml']
+endfunction

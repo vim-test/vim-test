@@ -126,6 +126,12 @@ function! test#determine_runner(file) abort
   for [language, runners] in sort(items(test#get_runners()), 'i')
     let language = tolower(language)
     let l:markers = s:root_markers(language)
+    let l:project_root = s:find_project_root(l:markers, a:file)
+
+    if !empty(l:project_root) && l:project_root !=# getcwd()
+      let s:last_project_root = l:project_root
+      execute 'cd' l:project_root
+    endif
 
     for runner in runners
       let runner = language.'#'.tolower(runner)
@@ -133,13 +139,6 @@ function! test#determine_runner(file) abort
         if index(g:test#enabled_runners, runner) < 0
           continue
         endif
-      endif
-
-      let l:project_root = s:find_project_root(l:markers, a:file)
-
-      if !empty(l:project_root) && l:project_root !=# getcwd()
-        let s:last_project_root = l:project_root
-        execute 'cd' l:project_root
       endif
 
       if test#base#test_file(runner, fnamemodify(l:file, ':.'))

@@ -189,7 +189,6 @@ function! s:alternate_file() abort
 endfunction
 
 function! s:before_run() abort
-  let s:cwd_origin = getcwd()
   if &autowrite || &autowriteall
     silent! wall
   elseif get(g:, 'test#prompt_for_unsaved_changes', 0)
@@ -216,14 +215,8 @@ function! s:before_run() abort
 endfunction
 
 function! s:after_run() abort
-  if exists('s:cwd_origin')
-    " Only `cd` when the run actually moved us: a redundant `cd` to the same
-    " directory still pushes onto Vim's `cd -` history, which callers (and the
-    " test suite's before/after hooks) rely on toggling correctly.
-    if getcwd() !=# s:cwd_origin
-      execute 'cd' s:cwd_origin
-    endif
-    unlet s:cwd_origin
+  if exists('g:test#project_root') || empty('s:last_project_root')
+    cd -
   endif
 endfunction
 

@@ -127,8 +127,7 @@ function! test#determine_runner(file) abort
   for [language, runners] in sort(items(test#get_runners()), 'i')
     let language = tolower(language)
     if !exists('g:test#project_root')
-      let l:markers = s:root_markers(language)
-      let l:project_root = s:find_project_root(l:markers, a:file)
+      let l:project_root = s:find_project_root(language, a:file)
 
       if !empty(l:project_root) && l:project_root !=# getcwd()
         execute 'cd' l:project_root
@@ -262,20 +261,18 @@ function! s:extend(source, dict) abort
   return result
 endfunction
 
-function! s:root_markers(language) abort
-  try
-    return call('test#' . a:language . '#list_root_markers', [])
-  catch /^Vim\%((\a\+)\)\=:E117/  " unknown function: language has no markers
-    return []
-  endtry
-endfunction
-
-function! s:find_project_root(markers, file) abort
+function! s:find_project_root(language, file) abort
   if exists('g:test#project_root')
     return v:null
   endif
 
-  for marker in a:markers
+  try
+    let markers = call('test#' . a:language . '#list_root_markers', [])
+  catch /^Vim\%((\a\+)\)\=:E117/  " unknown function: language has no markers
+    return v:null
+  endtry
+
+  for marker in markers
     if filereadable(marker)
       return v:null
     endif

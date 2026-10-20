@@ -120,8 +120,6 @@ function! test#shell(cmd, strategy) abort
 endfunction
 
 function! test#determine_runner(file) abort
-  " Resolve once against the original cwd; iterations below may cd into
-  " project roots, which would corrupt any path recomputed mid-loop.
   let l:file = fnamemodify(a:file, ':p')
 
   for [language, runners] in sort(items(test#get_runners()), 'i')
@@ -214,7 +212,7 @@ function! s:before_run() abort
 endfunction
 
 function! s:after_run() abort
-  if exists('g:test#project_root') || empty('s:last_project_root')
+  if exists('g:test#project_root') || !empty('s:last_project_root')
     cd -
   endif
 endfunction

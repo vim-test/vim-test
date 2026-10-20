@@ -213,7 +213,7 @@ function! s:before_run() abort
 endfunction
 
 function! s:after_run() abort
-  if exists('g:test#project_root') || !empty(get(s:, 'last_project_root', ''))
+  if exists('g:test#project_root') || !empty(get(s:, 'last_project_root'))
     execute 'cd -'
   endif
 endfunction

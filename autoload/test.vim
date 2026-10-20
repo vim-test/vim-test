@@ -1,4 +1,5 @@
 function! test#run(type, arguments) abort
+  let s:last_project_root = v:null
   call s:before_run()
 
   let alternate_file = s:alternate_file()
@@ -35,7 +36,7 @@ function! test#run_last(arguments) abort
   if exists('g:test#last_command')
     call s:before_run()
 
-    if !empty(get(s:, 'last_project_root', ''))
+    if !empty(get(s:, 'last_project_root', '')) && !exists('g:test#project_root')
       execute 'cd' s:last_project_root
     endif
 
@@ -125,12 +126,13 @@ function! test#determine_runner(file) abort
 
   for [language, runners] in sort(items(test#get_runners()), 'i')
     let language = tolower(language)
-    let l:markers = s:root_markers(language)
-    let l:project_root = s:find_project_root(l:markers, a:file)
+    if !exists('g:test#project_root')
+      let l:markers = s:root_markers(language)
+      let l:project_root = s:find_project_root(l:markers, a:file)
 
-    if !empty(l:project_root) && l:project_root !=# getcwd()
-      let s:last_project_root = l:project_root
-      execute 'cd' l:project_root
+      if !empty(l:project_root) && l:project_root !=# getcwd()
+        execute 'cd' l:project_root
+      endif
     endif
 
     for runner in runners
@@ -142,6 +144,9 @@ function! test#determine_runner(file) abort
       endif
 
       if test#base#test_file(runner, fnamemodify(l:file, ':.'))
+        if !empty(l:project_root)
+          let s:last_project_root = l:project_root
+        endif
         return runner
       endif
     endfor
@@ -184,6 +189,7 @@ function! s:alternate_file() abort
 endfunction
 
 function! s:before_run() abort
+  let s:cwd_origin = getcwd()
   if &autowrite || &autowriteall
     silent! wall
   elseif get(g:, 'test#prompt_for_unsaved_changes', 0)
@@ -210,12 +216,14 @@ function! s:before_run() abort
 endfunction
 
 function! s:after_run() abort
-  if exists('g:test#project_root')
-    execute 'cd -'
-  endif
-
-  if !empty(get(s:, 'last_project_root'))
-    execute 'cd -'
+  if exists('s:cwd_origin')
+    " Only `cd` when the run actually moved us: a redundant `cd` to the same
+    " directory still pushes onto Vim's `cd -` history, which callers (and the
+    " test suite's before/after hooks) rely on toggling correctly.
+    if getcwd() !=# s:cwd_origin
+      execute 'cd' s:cwd_origin
+    endif
+    unlet s:cwd_origin
   endif
 endfunction
 
@@ -270,9 +278,13 @@ function! s:root_markers(language) abort
 endfunction
 
 function! s:find_project_root(markers, file) abort
+  if exists('g:test#project_root')
+    return v:null
+  endif
+
   for marker in a:markers
     if filereadable(marker)
-      return ''
+      return v:null
     endif
 
     let l:file = findfile(marker, fnamemodify(a:file, ':p:h') . ';' . getcwd())
@@ -281,5 +293,5 @@ function! s:find_project_root(markers, file) abort
     endif
   endfor
 
-  return ''
+  return v:null
 endfunction

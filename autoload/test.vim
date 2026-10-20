@@ -125,7 +125,8 @@ function! test#determine_runner(file) abort
   for [language, runners] in sort(items(test#get_runners()), 'i')
     let language = tolower(language)
     if !exists('g:test#project_root')
-      let l:project_root = s:find_project_root(language, a:file)
+      let l:markers = s:root_markers(language)
+      let l:project_root = s:find_project_root(l:markers, a:file)
 
       if !empty(l:project_root) && l:project_root !=# getcwd()
         execute 'cd' l:project_root
@@ -186,6 +187,7 @@ function! s:alternate_file() abort
 endfunction
 
 function! s:before_run() abort
+  let s:cwd_origin = getcwd()
   if &autowrite || &autowriteall
     silent! wall
   elseif get(g:, 'test#prompt_for_unsaved_changes', 0)
@@ -212,8 +214,11 @@ function! s:before_run() abort
 endfunction
 
 function! s:after_run() abort
-  if exists('g:test#project_root') || !empty('s:last_project_root')
-    cd -
+  if exists('s:cwd_origin')
+    if getcwd() !=# s:cwd_origin
+      execute 'cd' s:cwd_origin
+    endif
+    unlet s:cwd_origin
   endif
 endfunction
 
@@ -259,18 +264,20 @@ function! s:extend(source, dict) abort
   return result
 endfunction
 
-function! s:find_project_root(language, file) abort
+function! s:root_markers(language) abort
+  try
+    return call('test#' . a:language . '#list_root_markers', [])
+  catch /^Vim\%((\a\+)\)\=:E117/  " unknown function: language has no markers
+    return []
+  endtry
+endfunction
+
+function! s:find_project_root(markers, file) abort
   if exists('g:test#project_root')
     return v:null
   endif
 
-  try
-    let markers = call('test#' . a:language . '#list_root_markers', [])
-  catch /^Vim\%((\a\+)\)\=:E117/  " unknown function: language has no markers
-    return v:null
-  endtry
-
-  for marker in markers
+  for marker in a:markers
     if filereadable(marker)
       return v:null
     endif

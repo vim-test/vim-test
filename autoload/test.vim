@@ -187,7 +187,6 @@ function! s:alternate_file() abort
 endfunction
 
 function! s:before_run() abort
-  let s:cwd_origin = getcwd()
   if &autowrite || &autowriteall
     silent! wall
   elseif get(g:, 'test#prompt_for_unsaved_changes', 0)
@@ -214,11 +213,8 @@ function! s:before_run() abort
 endfunction
 
 function! s:after_run() abort
-  if exists('s:cwd_origin')
-    if getcwd() !=# s:cwd_origin
-      execute 'cd' s:cwd_origin
-    endif
-    unlet s:cwd_origin
+  if exists('g:test#project_root') || !empty(get(s:, 'last_project_root', ''))
+    execute 'cd -'
   endif
 endfunction
 

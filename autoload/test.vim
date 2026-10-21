@@ -1,5 +1,6 @@
 function! test#run(type, arguments) abort
   let s:last_project_root = v:null
+  let s:detection_cd = 0
   call s:before_run()
 
   let alternate_file = s:alternate_file()
@@ -33,6 +34,7 @@ function! test#run(type, arguments) abort
 endfunction
 
 function! test#run_last(arguments) abort
+  let s:detection_cd = 0
   if exists('g:test#last_command')
     call s:before_run()
 
@@ -121,6 +123,7 @@ endfunction
 
 function! test#determine_runner(file) abort
   let l:file = fnamemodify(a:file, ':p')
+  let l:project_root = v:null
 
   for [language, runners] in sort(items(test#get_runners()), 'i')
     let language = tolower(language)
@@ -130,6 +133,7 @@ function! test#determine_runner(file) abort
 
       if !empty(l:project_root) && l:project_root !=# getcwd()
         execute 'cd' l:project_root
+        let s:detection_cd = 1
       endif
     endif
 
@@ -142,8 +146,8 @@ function! test#determine_runner(file) abort
       endif
 
       if test#base#test_file(runner, fnamemodify(l:file, ':.'))
-        if !empty(l:project_root)
-          let s:last_project_root = l:project_root
+        if get(s:, 'detection_cd', 0)
+          let s:last_project_root = getcwd()
         endif
         return runner
       endif
@@ -213,7 +217,7 @@ function! s:before_run() abort
 endfunction
 
 function! s:after_run() abort
-  if exists('g:test#project_root') || !empty(get(s:, 'last_project_root'))
+  if exists('g:test#project_root') || get(s:, 'detection_cd', 0) || !empty(get(s:, 'last_project_root'))
     execute 'cd -'
   endif
 endfunction

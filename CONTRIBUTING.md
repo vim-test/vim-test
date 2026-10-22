@@ -6,6 +6,10 @@ Thank you for your interest in contributing to vim-test! This document provides 
 
 Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## Code Conventions
+ - Only use Vimscript, this plugin needs to work with both Vim and Neovim
+ - Neovim specific functions can be used there is fallback functionality for Vim
+
 ## Adding a New Test Runner
 
 When adding support for a new test runner, follow these steps:

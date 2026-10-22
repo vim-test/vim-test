@@ -203,7 +203,7 @@ describe "Jest"
     end
   end
 
-  context "when project root is in subdirectory"
+  context "when project root is in a subdirectory"
     before
       cd ..
     end

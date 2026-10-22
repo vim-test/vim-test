@@ -784,11 +784,18 @@ All other runners will not be loaded.
 
 Note that for your own custom runners, you still need to set `test#custom_runners`.
 
-Test.vim relies on you being cd-ed into the project root. However, sometimes
-you may want to execute tests from a different directory than the current
-working directory. You might have a bigger project with many sub-projects,
-or you might be using |autochdir|. In any case, you can use a different
-working directory for running tests:
+Test.vim relies on you being cd-ed into the project root. Before running a
+test it tries to detect the project root of the file being tested: it searches
+upward from the file's directory for the nearest directory containing one of
+the language's root markers (for example "package.json" for JavaScript or
+"Gemfile" for Ruby), bounded by Vim's current working directory. When such a
+directory sits above the current working directory, test.vim cd-s into it for
+the test run, then returns to your original directory when the run finishes.
+
+However, sometimes you may want to execute tests from a different directory
+than the current working directory. You might have a bigger project with many
+sub-projects, or you might be using |autochdir|. In any case, you can use a
+different working directory for running tests:
 >
   let test#project_root = "/path/to/your/project"
 <
@@ -800,6 +807,10 @@ Alternatively you can pass in a function that'll be evaluated before each test r
 
   let test#project_root = function('CustomPath')
 <
+An explicit g:test#project_root always takes precedence: when it is set,
+root-marker detection is disabled entirely, and the directory you specify is
+used as-is.
+
 Both the `neovim` and `Vim8 Terminal` strategy will open a split window on the
 bottom by default, but you can configure a different position or orientation.
 Whatever you put here is passed to `new` - so, you may also specify size (see

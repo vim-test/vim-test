@@ -108,16 +108,18 @@ describe "PHPUnit"
     Expect exists('g:test#last_command') == 0
   end
 
-  context "when project root is in subdirectory"
+  context "when project root is in a subdirectory"
     before
       cd ..
     end
 
-    it "runs file tests"
+    it "runs file tests from directory with root marker"
+      let cwd_initial = getcwd()
       view phpunit/NormalTest.php
       TestFile
 
       Expect g:test#last_command == 'phpunit --colors NormalTest.php'
+      Expect getcwd() == cwd_initial
     end
   end
 end

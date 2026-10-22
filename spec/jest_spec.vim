@@ -208,11 +208,13 @@ describe "Jest"
       cd ..
     end
 
-    it "runs file tests"
+    it "runs file tests from directory with root marker"
+      let cwd_initial = getcwd()
       view +1 jest/__tests__/normal-test.js
       TestFile
 
       Expect g:test#last_command == 'jest --runTestsByPath -- __tests__/normal-test.js'
+      Expect getcwd() == cwd_initial
     end
   end
 end

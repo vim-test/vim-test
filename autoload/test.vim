@@ -44,7 +44,7 @@ function! test#run_last(arguments) abort
   if exists('g:test#last_command')
     call s:before_run()
 
-    if !empty(get(s:, 'last_project_root', '')) && !exists('g:test#project_root')
+    if !empty(get(s:, 'last_project_root')) && !exists('g:test#project_root')
       if isdirectory(s:last_project_root)
         execute 'cd' s:last_project_root
       else

@@ -460,18 +460,19 @@ let test#filename_modifier = ':~' " ~/Code/my_project/test/models/user_test.rb
 
 ### Working directory
 
-Test.vim relies on you being `cd`-ed into the project root. Before running a
-test, it tries to detect the project root of the file being tested: it searches
-upward from the file's directory for the nearest directory containing one of
-the language's root markers (for example `package.json` for JavaScript or
-`Gemfile` for Ruby), bounded by Vim's current working directory. When such a
-directory sits above the current working directory, test.vim runs the test
-from there and returns to your original directory when the run finishes.
+When running a test, test.vim tries to detect the project root of the file
+being tested using language specific root markers (for example `package.json`
+for JavaScript or `Gemfile` for Ruby). It first looks for a root marker in the
+current working directory; otherwise it traverses upwards from the test file
+until it finds one, bounded by the current working directory. When a marker is
+found, test.vim runs the tests from that directory, then restores your
+original working directory.
 
-However, sometimes you may want to execute tests from a different directory than Vim's current
-working directory. You might have a bigger project or monorepo with many subprojects,
-or you might be using [`autochdir`]. In any case, you can tell test.vim to use a
-different working directory for running tests:
+Sometimes you may want to override this behaviour and execute tests from a
+different directory than Vim's current working directory. You might have a
+bigger project or monorepo with many subprojects, or you might be using
+[`autochdir`]. In any case, you can tell test.vim to use a different working
+directory for running tests:
 
 ```vim
 let test#project_root = "/path/to/your/project"

@@ -37,9 +37,8 @@ Any logic that is common to runners for that language should be added to `autolo
 If possible add any root markers files for the language, as follows:
 
 ```vim
-" Returns a list of project root markers eg ['package.json']
+" Returns a list of language specific root markers eg ['package.json']
 function! test#[language]#list_root_markers()
-
 ```
 
 ### 2. Add Test Fixtures

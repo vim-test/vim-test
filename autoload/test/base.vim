@@ -17,8 +17,6 @@ function! test#base#test_file(runner, file, project_root) abort
       execute 'cd' l:cwd_previous
     endif
   endtry
-
-  return res
 endfunction
 
 function! test#base#build_position(runner, type, position) abort

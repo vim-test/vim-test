@@ -1,6 +1,6 @@
 function! test#run(type, arguments) abort
   let s:last_project_root = v:null
-  let s:detection_cd = 0
+  let s:detected_project_root = v:null
   call s:before_run()
 
   let alternate_file = s:alternate_file()
@@ -19,6 +19,13 @@ function! test#run(type, arguments) abort
 
   let runner = test#determine_runner(position['file'])
 
+  if !empty(runner) && !empty(s:detected_project_root) && s:detected_project_root !=# getcwd()
+    let l:file = fnamemodify(position['file'], ':p')
+    execute 'cd' s:detected_project_root
+    let s:last_project_root = s:detected_project_root
+    let position['file'] = fnamemodify(l:file, get(g:, 'test#filename_modifier', ':.'))
+  endif
+
   let args = test#base#build_position(runner, a:type, position)
   let args = a:arguments + args
   let args = test#base#options(runner, args, a:type)
@@ -34,7 +41,6 @@ function! test#run(type, arguments) abort
 endfunction
 
 function! test#run_last(arguments) abort
-  let s:detection_cd = 0
   if exists('g:test#last_command')
     call s:before_run()
 
@@ -123,17 +129,12 @@ endfunction
 
 function! test#determine_runner(file) abort
   let l:file = fnamemodify(a:file, ':p')
-  let l:project_root = v:null
+  let s:detected_project_root = v:null
 
   for [language, runners] in sort(items(test#get_runners()), 'i')
     let language = tolower(language)
     if !exists('g:test#project_root')
-      let l:project_root = s:find_project_root(language, a:file)
-
-      if !empty(l:project_root) && l:project_root !=# getcwd()
-        execute 'cd' l:project_root
-        let s:detection_cd = 1
-      endif
+      let s:detected_project_root = s:find_project_root(language, a:file)
     endif
 
     for runner in runners
@@ -144,10 +145,7 @@ function! test#determine_runner(file) abort
         endif
       endif
 
-      if test#base#test_file(runner, fnamemodify(l:file, ':.'))
-        if get(s:, 'detection_cd', 0)
-          let s:last_project_root = getcwd()
-        endif
+      if test#base#test_file(runner, fnamemodify(l:file, ':.'), s:detected_project_root)
         return runner
       endif
     endfor
@@ -216,7 +214,7 @@ function! s:before_run() abort
 endfunction
 
 function! s:after_run() abort
-  if exists('g:test#project_root') || get(s:, 'detection_cd', 0) || !empty(get(s:, 'last_project_root'))
+  if exists('g:test#project_root') || !empty(get(s:, 'last_project_root'))
     execute 'cd -'
   endif
 endfunction

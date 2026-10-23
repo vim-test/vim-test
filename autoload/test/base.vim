@@ -1,5 +1,24 @@
-function! test#base#test_file(runner, file) abort
-  return test#{a:runner}#test_file(a:file)
+function! test#base#test_file(runner, file, project_root) abort
+  let l:cwd_previous = getcwd()
+  let l:cwd_changed = 0
+  let l:file = a:file
+
+  if !empty(a:project_root) && a:project_root !=# l:cwd_previous
+    let l:file = fnamemodify(l:file, ':p')
+    execute 'cd' a:project_root
+    let l:cwd_changed = 1
+    let l:file = fnamemodify(l:file, ':.')
+  endif
+
+  try
+    return test#{a:runner}#test_file(l:file)
+  finally
+    if l:cwd_changed
+      execute 'cd' l:cwd_previous
+    endif
+  endtry
+
+  return res
 endfunction
 
 function! test#base#build_position(runner, type, position) abort

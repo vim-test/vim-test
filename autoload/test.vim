@@ -45,7 +45,11 @@ function! test#run_last(arguments) abort
     call s:before_run()
 
     if !empty(get(s:, 'last_project_root', '')) && !exists('g:test#project_root')
-      execute 'cd' s:last_project_root
+      if isdirectory(s:last_project_root)
+        execute 'cd' s:last_project_root
+      else
+        let s:last_project_root = v:null
+      endif
     endif
 
     let env = s:extract_env_from_command(a:arguments)

@@ -3,7 +3,7 @@ function! test#base#test_file(runner, file, project_root) abort
   let l:cwd_changed = 0
   let l:file = a:file
 
-  if !empty(a:project_root) && a:project_root !=# l:cwd_previous
+  if !empty(a:project_root) && isdirectory(a:project_root) && a:project_root !=# l:cwd_previous
     let l:file = fnamemodify(l:file, ':p')
     execute 'cd' a:project_root
     let l:cwd_changed = 1

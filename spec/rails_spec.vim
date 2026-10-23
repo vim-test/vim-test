@@ -32,4 +32,18 @@ describe "Rails"
     Expect g:test#last_command == 'rails test'
   end
 
+  context "when project root is in a subdirectory"
+    before
+      cd ..
+    end
+
+    it "runs file tests from directory with root marker"
+      let cwd_initial = getcwd()
+      view rails/normal_test.rb
+      TestFile
+
+      Expect g:test#last_command == 'rails test normal_test.rb'
+      Expect getcwd() == cwd_initial
+    end
+  end
 end

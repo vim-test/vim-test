@@ -6,6 +6,11 @@ Thank you for your interest in contributing to vim-test! This document provides 
 
 Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
+## Code Conventions
+
+ - Only use Vimscript
+ - Neovim specific functions can be used there is fallback functionality for Vim
+
 ## Adding a New Test Runner
 
 When adding support for a new test runner, follow these steps:
@@ -29,6 +34,12 @@ function! test#[language]#[runner]#executable()
 ```
 
 Any logic that is common to runners for that language should be added to `autoload/test/[language].vim`.
+Add any root markers files for the language, as follows:
+
+```vim
+" Returns a list of language specific root markers eg ['package.json']
+function! test#[language]#list_root_markers()
+```
 
 ### 2. Add Test Fixtures
 

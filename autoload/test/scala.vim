@@ -16,3 +16,7 @@ function! test#scala#test_file(runner, file_pattern, file) abort
     endif
   endif
 endfunction
+
+function! test#scala#list_root_markers() abort
+  return ['build.sbt', 'build.sc']
+endfunction

@@ -4,6 +4,10 @@ let test#javascript#patterns = {
   \ 'namespace': ['\v^\s*%(describe)\.each\(.*\)\s*\(([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1', '\v^\s*%(describe|suite|context|module)\s*[^''"`]*([''"`])\zs%(.{-}%(\\\1)?){-}\ze\1']
 \}
 
+function! test#javascript#list_root_markers() abort
+  return ['package.json', 'deno.json', 'deno.jsonc']
+endfunction
+
 function! test#javascript#has_package(package) abort
   if !filereadable('package.json')
     return 0

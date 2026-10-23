@@ -5,3 +5,7 @@ let test#gleam#patterns = {
   \],
   \ 'namespace': []
 \}
+
+function! test#gleam#list_root_markers() abort
+  return ['gleam.toml']
+endfunction

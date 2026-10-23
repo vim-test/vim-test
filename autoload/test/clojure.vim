@@ -21,3 +21,7 @@ let test#clojure#patterns = {
   \ 'test':      s:patterns('deftest') + s:patterns('defspec'),
   \ 'namespace': [s:line_start.'\(ns\s+('.s:ns_word.')'],
   \}
+
+function! test#clojure#list_root_markers() abort
+  return ['deps.edn', 'project.clj', 'build.boot']
+endfunction

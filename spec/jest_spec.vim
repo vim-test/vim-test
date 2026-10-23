@@ -203,4 +203,18 @@ describe "Jest"
     end
   end
 
+  context "when project root is in a subdirectory"
+    before
+      cd ..
+    end
+
+    it "runs file tests from directory with root marker"
+      let cwd_initial = getcwd()
+      view +1 jest/__tests__/normal-test.js
+      TestFile
+
+      Expect g:test#last_command == 'jest --runTestsByPath -- __tests__/normal-test.js'
+      Expect getcwd() == cwd_initial
+    end
+  end
 end

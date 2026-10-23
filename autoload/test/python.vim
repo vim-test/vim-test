@@ -3,6 +3,10 @@ let test#python#patterns = {
   \ 'namespace': ['\v^\s*class (\w+)'],
 \}
 
+function! test#python#list_root_markers() abort
+  return ['pyproject.toml', 'Pipfile', 'setup.py', 'setup.cfg', 'tox.ini', 'requirements.txt']
+endfunction
+
 function! test#python#has_import(file, module) abort
   return match(readfile(expand(a:file)), '^\(import ' . a:module . '\)\|\(from ' . a:module . ' import\)') != -1
 endfunction

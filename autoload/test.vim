@@ -1,4 +1,6 @@
 function! test#run(type, arguments) abort
+  let s:last_project_root = v:null
+  let s:detected_project_root = v:null
   call s:before_run()
 
   let alternate_file = s:alternate_file()
@@ -17,6 +19,13 @@ function! test#run(type, arguments) abort
 
   let runner = test#determine_runner(position['file'])
 
+  if !empty(runner) && !empty(s:detected_project_root) && s:detected_project_root !=# getcwd()
+    let l:file = fnamemodify(position['file'], ':p')
+    execute 'cd' s:detected_project_root
+    let s:last_project_root = s:detected_project_root
+    let position['file'] = fnamemodify(l:file, get(g:, 'test#filename_modifier', ':.'))
+  endif
+
   let args = test#base#build_position(runner, a:type, position)
   let args = a:arguments + args
   let args = test#base#options(runner, args, a:type)
@@ -34,6 +43,14 @@ endfunction
 function! test#run_last(arguments) abort
   if exists('g:test#last_command')
     call s:before_run()
+
+    if !empty(get(s:, 'last_project_root')) && !exists('g:test#project_root')
+      if isdirectory(s:last_project_root)
+        execute 'cd' s:last_project_root
+      else
+        let s:last_project_root = v:null
+      endif
+    endif
 
     let env = s:extract_env_from_command(a:arguments)
     let strategy = s:extract_strategy_from_command(a:arguments)
@@ -115,15 +132,24 @@ function! test#shell(cmd, strategy) abort
 endfunction
 
 function! test#determine_runner(file) abort
+  let l:file = fnamemodify(a:file, ':p')
+  let s:detected_project_root = v:null
+
   for [language, runners] in sort(items(test#get_runners()), 'i')
+    let language = tolower(language)
+    if !exists('g:test#project_root')
+      let s:detected_project_root = s:find_project_root(language, a:file)
+    endif
+
     for runner in runners
-      let runner = tolower(language).'#'.tolower(runner)
+      let runner = language.'#'.tolower(runner)
       if exists("g:test#enabled_runners")
         if index(g:test#enabled_runners, runner) < 0
           continue
         endif
       endif
-      if test#base#test_file(runner, fnamemodify(a:file, ':.'))
+
+      if test#base#test_file(runner, fnamemodify(l:file, ':.'), s:detected_project_root)
         return runner
       endif
     endfor
@@ -192,7 +218,7 @@ function! s:before_run() abort
 endfunction
 
 function! s:after_run() abort
-  if exists('g:test#project_root')
+  if exists('g:test#project_root') || !empty(get(s:, 'last_project_root'))
     execute 'cd -'
   endif
 endfunction
@@ -237,4 +263,29 @@ function! s:extend(source, dict) abort
     let result[key] = get(result, key, []) + value
   endfor
   return result
+endfunction
+
+function! s:find_project_root(language, file) abort
+  if exists('g:test#project_root')
+    return v:null
+  endif
+
+  try
+    let markers = call('test#' . a:language . '#list_root_markers', [])
+  catch /^Vim\%((\a\+)\)\=:E117/  " unknown function: language has no markers
+    return v:null
+  endtry
+
+  for marker in markers
+    if filereadable(marker)
+      return v:null
+    endif
+
+    let l:file = findfile(marker, fnamemodify(a:file, ':p:h') . ';' . getcwd())
+    if !empty(l:file)
+      return fnamemodify(l:file, ':p:h')
+    endif
+  endfor
+
+  return v:null
 endfunction

@@ -12,6 +12,10 @@ let test#ruby#patterns = {
   \],
 \}
 
+function! test#ruby#list_root_markers() abort
+  return ['Gemfile', 'Gemfile.lock']
+endfunction
+
 function! test#ruby#use_zeus() abort
   return !empty(glob('.zeus.sock'))
 endfunction

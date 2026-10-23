@@ -3,3 +3,7 @@ let g:test#swift#patterns = {
   \ 'namespace': ['\v^%(%(public )?%(final )?|%(final )?%(public )?)class ([-_a-zA-Z0-9]+): XCTestCase'],
   \ 'module':    ['\v^Tests\/([-_ a-zA-Z0-9]+)%(\/|\.swift)']
 \}
+
+function! test#swift#list_root_markers() abort
+  return ['Package.swift']
+endfunction

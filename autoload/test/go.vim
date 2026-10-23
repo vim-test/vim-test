@@ -81,3 +81,7 @@ function! test#go#nearest_suite_name(position) abort
   endfor
   return ''
 endfunction
+
+function! test#go#list_root_markers() abort
+  return ['go.mod']
+endfunction

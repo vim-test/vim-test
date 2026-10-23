@@ -4,7 +4,7 @@ let test#python#patterns = {
 \}
 
 function! test#python#list_root_markers() abort
-  return ['pyproject.toml', 'Pipfile']
+  return ['pyproject.toml', 'Pipfile', 'setup.py', 'setup.cfg', 'tox.ini', 'requirements.txt']
 endfunction
 
 function! test#python#has_import(file, module) abort

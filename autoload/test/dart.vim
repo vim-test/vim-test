@@ -13,3 +13,7 @@ function! test#dart#test_file(runner, file_pattern, file) abort
     endif
   endif
 endfunction
+
+function! test#dart#list_root_markers() abort
+  return ['pubspec.yaml']
+endfunction

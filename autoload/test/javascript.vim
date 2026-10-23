@@ -5,7 +5,7 @@ let test#javascript#patterns = {
 \}
 
 function! test#javascript#list_root_markers() abort
-  return ['package.json']
+  return ['package.json', 'deno.json', 'deno.jsonc']
 endfunction
 
 function! test#javascript#has_package(package) abort

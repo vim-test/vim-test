@@ -16,3 +16,7 @@ function! test#haskell#test_file(runner, file_pattern, file) abort
     endif
   endif
 endfunction
+
+function! test#haskell#list_root_markers() abort
+  return ['stack.yaml', 'cabal.project', 'package.yaml']
+endfunction

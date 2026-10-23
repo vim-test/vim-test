@@ -1,6 +1,5 @@
 function! test#base#test_file(runner, file, project_root) abort
   let l:cwd_previous = getcwd()
-  let l:cwd_changed = 0
   let l:file = a:file
 
   if !empty(a:project_root) && isdirectory(a:project_root) && a:project_root !=# l:cwd_previous
@@ -13,7 +12,7 @@ function! test#base#test_file(runner, file, project_root) abort
   try
     return test#{a:runner}#test_file(l:file)
   finally
-    if l:cwd_changed
+    if get(l:, 'cwd_changed', 0)
       execute 'cd' l:cwd_previous
     endif
   endtry

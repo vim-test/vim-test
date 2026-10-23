@@ -15,3 +15,4 @@ let test#java#patterns = {
                     \.s:class_def
                     \],
   \}
+

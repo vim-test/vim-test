@@ -36,5 +36,9 @@ jobs:
         run: |
           gem install vim-flavor -v '~> 4.0.1'
           vim-flavor install
+        env:
+          VIM_FLAVOR_HOME: ${{ github.workspace }}\.vim-flavor
       - name: Run unit tests
         run: vim-flavor test spec/
+        env:
+          VIM_FLAVOR_HOME: ${{ github.workspace }}\.vim-flavor

@@ -18,8 +18,9 @@ jobs:
   unit-tests:
     name: Unit tests
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         neovim: [false, true]
     runs-on: ${{ matrix.os }}
     steps:
@@ -36,5 +37,9 @@ jobs:
         run: |
           gem install vim-flavor -v '~> 4.0.1'
           vim-flavor install
+        env:
+          VIM_FLAVOR_HOME: ${{ github.workspace }}\.vim-flavor
       - name: Run unit tests
         run: vim-flavor test spec/
+        env:
+          VIM_FLAVOR_HOME: ${{ github.workspace }}\.vim-flavor

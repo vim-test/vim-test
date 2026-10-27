@@ -1,5 +1,9 @@
 let g:test#runner_commands = ['RSpec', 'Minitest', 'FireplaceTest', 'Prove']
 
+if has('win32') || has('win64')
+  set shellslash
+endif
+
 source plugin/test.vim
 source spec/support/test/strategy.vim
 

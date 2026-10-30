@@ -30,8 +30,6 @@ jobs:
         with:
           neovim: ${{ matrix.neovim }}
       - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.4'
       - name: Install dependencies
         run: |
           gem install vim-flavor -v '~> 4.0.1'

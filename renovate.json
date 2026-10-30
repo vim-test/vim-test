@@ -4,10 +4,22 @@
    "config:recommended"
  ],
  "enabledManagers": [
-   "github-actions"
+   "github-actions",
+   "ruby-version"
  ],
  "ignorePaths": [
-   "spec/**",
-   ".ruby-version"
+   "spec/**"
+ ],
+ "packageRules": [
+   {
+     "description": "Block Ruby major updates until vim-flavor's gemspec (required_ruby_version ~> 3.0) lifts the cap",
+     "matchDepNames": [
+       "ruby"
+     ],
+     "matchUpdateTypes": [
+       "major"
+     ],
+     "enabled": false
+   }
  ]
 }

@@ -15,6 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: googleapis/release-please-action@v5
+        id: release
         with:
           release-type: simple
-          skip-github-release: true
+      - name: Remove release object, keep the tag
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete "${{ steps.release.outputs.tag_name }}" \
+            --repo "${{ github.repository }}" --yes

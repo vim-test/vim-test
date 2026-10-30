@@ -18,10 +18,6 @@ jobs:
         id: release
         with:
           release-type: simple
-      # Tags only: delete the GitHub release object that release-please
-      # creates on merge, keeping the version tag. skip-github-release
-      # cannot be used for this: it prevents tag creation entirely and
-      # deadlocks release-please on merged, untagged release PRs.
       - name: Remove release object, keep the tag
         if: ${{ steps.release.outputs.release_created }}
         env:

@@ -15,6 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: googleapis/release-please-action@v5
+        id: release
         with:
           release-type: simple
-          skip-github-release: true
+      # Tags only: delete the GitHub release object that release-please
+      # creates on merge, keeping the version tag. skip-github-release
+      # cannot be used for this: it prevents tag creation entirely and
+      # deadlocks release-please on merged, untagged release PRs.
+      - name: Remove release object, keep the tag
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete "${{ steps.release.outputs.tag_name }}" \
+            --repo "${{ github.repository }}" --yes

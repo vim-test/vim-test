@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/vim-test/vim-test/compare/v3.5.0...v3.6.0) (2026-10-30)
+
+
+### Features
+
+* language root marker detection ([#912](https://github.com/vim-test/vim-test/issues/912)) ([5bf1a7f](https://github.com/vim-test/vim-test/commit/5bf1a7f512e6f5d58497b52bae667c67d538a7a3))
+
 ## [3.5.0](https://github.com/vim-test/vim-test/compare/v3.4.0...v3.5.0) (2026-10-05)
 
 

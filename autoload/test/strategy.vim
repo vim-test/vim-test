@@ -234,6 +234,16 @@ function! test#strategy#iterm(cmd) abort
   call s:execute_script('osx_iterm', cmd)
 endfunction
 
+function! test#strategy#ghostty(cmd) abort
+  if !has('mac')
+    echoerr 'This strategy only works on macOS'
+    return
+  endif
+
+  let cmd = join(['cd ' . shellescape(getcwd()), s:pretty_command(a:cmd)], '; ')
+  call s:execute_script('macos_ghostty', cmd)
+endfunction
+
 function! test#strategy#kitty(cmd) abort
   let cmd = join(['cd ' . shellescape(getcwd()), s:pretty_command(a:cmd)], '; ')
   call s:execute_script('kitty_runner', cmd)

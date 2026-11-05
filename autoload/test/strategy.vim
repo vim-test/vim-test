@@ -172,7 +172,12 @@ function! test#strategy#neoterm(cmd) abort
 endfunction
 
 function! test#strategy#toggleterm(cmd) abort
-  execute "TermExec cmd='".substitute(a:cmd, "'", '"', "g")."'"
+  if !has('nvim')
+    echoerr 'ToggleTerm strategy requires Neovim'
+    return
+  endif
+
+  call luaeval('require("toggleterm").exec(_A)', a:cmd)
 endfunction
 
 function! test#strategy#floaterm(cmd) abort

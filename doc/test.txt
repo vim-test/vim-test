@@ -635,6 +635,16 @@ The pane is reused for later test runs.
   let test#strategy = 'herdr'
 <
 
+Rex ~
+
+This strategy runs commands in a Rex pane using the vim-test-rex plugin.
+It requires that plugin, the `rex` CLI, and an editor running inside Rex
+(`REX_SESSION` and `REX_BLOCK` set). The pane is reused for later test runs.
+
+>
+  let test#strategy = 'rex'
+<
+
 
 QUICKFIX STRATEGIES                               *test-quickfix-strategies*
 

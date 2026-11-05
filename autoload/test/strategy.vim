@@ -281,6 +281,15 @@ function! test#strategy#herdr(cmd) abort
   call HerdrStrategy(a:cmd)
 endfunction
 
+function! test#strategy#rex(cmd) abort
+  if !exists('*RexStrategy')
+    echoerr 'You must install vim-test-rex to use this strategy'
+    return
+  endif
+
+  call RexStrategy(a:cmd)
+endfunction
+
 function! test#strategy#wezterm(cmd) abort
   let l:wezterm = get(g:, "test#wezterm#executable", "wezterm")
 

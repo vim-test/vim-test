@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.8.0](https://github.com/vim-test/vim-test/compare/v3.7.0...v3.8.0) (2026-11-05)
+
+
+### Features
+
+* Add vim-test-rex strategy ([#934](https://github.com/vim-test/vim-test/issues/934)) ([cb0efa3](https://github.com/vim-test/vim-test/commit/cb0efa3d0477bd4a754e4727e122a81a8360bd6a))
+
+
+### Bug Fixes
+
+* double escaping in Jest nearest test names ([#935](https://github.com/vim-test/vim-test/issues/935)) ([c7380e6](https://github.com/vim-test/vim-test/commit/c7380e6df9fc99db541affeb53293be5bb003206))
+* preserve quoting when sending commands to ToggleTerm ([#936](https://github.com/vim-test/vim-test/issues/936)) ([6b93d68](https://github.com/vim-test/vim-test/commit/6b93d68c960608c73e26ea3582112c221838b881))
+
 ## [3.7.0](https://github.com/vim-test/vim-test/compare/v3.6.0...v3.7.0) (2026-11-04)
 
 

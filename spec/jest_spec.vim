@@ -77,12 +77,12 @@ describe "Jest"
       view +2 __tests__/escaping-test.js
       TestNearest
 
-      Expect g:test#last_command == 'jest --runTestsByPath -t ''^Escaping parentheses \\($'' -- __tests__/escaping-test.js'
+      Expect g:test#last_command == 'jest --runTestsByPath -t ''^Escaping parentheses \($'' -- __tests__/escaping-test.js'
 
       view +5 __tests__/escaping-test.js
       TestNearest
 
-      Expect g:test#last_command == 'jest --runTestsByPath -t ''^Escaping brackets \\[$'' -- __tests__/escaping-test.js'
+      Expect g:test#last_command == 'jest --runTestsByPath -t ''^Escaping brackets \[$'' -- __tests__/escaping-test.js'
     end
 
     it "runs CoffeeScript"

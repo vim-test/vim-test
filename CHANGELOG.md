@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.7.0](https://github.com/vim-test/vim-test/compare/v3.6.0...v3.7.0) (2026-11-04)
+
+
+### Features
+
+* add ghostty strategy ([#885](https://github.com/vim-test/vim-test/issues/885)) ([45f0450](https://github.com/vim-test/vim-test/commit/45f0450005d57cd0cb3bf5560534b59437ba71a8))
+* add pytest.ini as a Python root marker ([#933](https://github.com/vim-test/vim-test/issues/933)) ([fe5de45](https://github.com/vim-test/vim-test/commit/fe5de45f059f30b18df9990ad99169f3cd2d2a70))
+
 ## [3.6.0](https://github.com/vim-test/vim-test/compare/v3.5.0...v3.6.0) (2026-10-30)
 
 

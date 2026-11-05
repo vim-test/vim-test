@@ -172,8 +172,8 @@ function! test#strategy#neoterm(cmd) abort
 endfunction
 
 function! test#strategy#toggleterm(cmd) abort
-  if !exists(':ToggleTerm') || !has('nvim')
-    echoerr 'Strategy requires Neovim and ToggleTerm'
+  if !has('nvim')
+    echoerr 'ToggleTerm strategy requires Neovim'
     return
   endif
 

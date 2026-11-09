@@ -68,7 +68,7 @@ describe "tape"
 
   it "it uses the specified reporter if it exists"
     view tests/normal.js
-    let g:test#javascript#tap#reporters = ['tap-spec']
+    let g:test#javascript#tape#reporters = ['tap-spec']
     TestFile
 
       Expect g:test#last_command == 'node_modules/.bin/tape tests/normal.js | node_modules/.bin/tap-spec'
@@ -76,7 +76,7 @@ describe "tape"
 
   it "it doesn't use the specified reporter if it doesn't exist"
     view tests/normal.js
-    let g:test#javascript#tap#reporters = ['tap-min']
+    let g:test#javascript#tape#reporters = ['tap-min']
     TestFile
 
       Expect g:test#last_command == 'node_modules/.bin/tape tests/normal.js'
@@ -84,7 +84,7 @@ describe "tape"
 
   it "it uses multiple specified reporters if they exists"
     view tests/normal.js
-    let g:test#javascript#tap#reporters = ['tap-notify', 'tap-spec']
+    let g:test#javascript#tape#reporters = ['tap-notify', 'tap-spec']
     TestFile
 
       Expect g:test#last_command == 'node_modules/.bin/tape tests/normal.js | node_modules/.bin/tap-notify | node_modules/.bin/tap-spec'

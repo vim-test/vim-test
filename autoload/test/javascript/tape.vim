@@ -3,7 +3,7 @@ if !exists('g:test#javascript#tape#file_pattern')
 endif
 
 if !exists('g:test#javascript#tape#runners')
-  let g:test#javascript#tape#runners = ['tape', 'tap']
+  let g:test#javascript#tape#runners = ['tape']
 endif
 
 if !exists('g:test#javascript#tape#reporters')
@@ -13,7 +13,7 @@ endif
 function! test#javascript#tape#test_file(file) abort
   if a:file =~# g:test#javascript#tape#file_pattern
       if exists('g:test#javascript#runner')
-          return g:test#javascript#runner ==# 'tap'
+          return g:test#javascript#runner ==# 'tape'
       else
         return test#javascript#has_package('tape')
       endif

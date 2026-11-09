@@ -11,7 +11,8 @@ function! test#javascript#tape#test_file(file) abort
     if exists('g:test#javascript#runner')
       return g:test#javascript#runner ==# 'tape'
     else
-      return test#javascript#has_package('tape')
+      return test#javascript#has_import(a:file, 'tape')
+        \ || test#javascript#has_package('tape')
     endif
   endif
 endfunction

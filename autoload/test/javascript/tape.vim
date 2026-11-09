@@ -41,12 +41,3 @@ endfunction
 function! test#javascript#tape#executable() abort
   return test#javascript#determine_executable('tape')
 endfunction
-
-function! s:nearest_test(position) abort
-  let patterns = {
-        \ 'test': ['\v^\s*%(%(%(tap|t)\.)?test)\s*[( ]\s*%("|''|`)(.*)%("|''|`)'],
-        \ 'namespace': [],
-        \}
-  let name = test#base#nearest_test(a:position, patterns)
-  return join(name['test'])
-endfunction

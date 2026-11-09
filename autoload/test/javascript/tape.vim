@@ -2,21 +2,13 @@ if !exists('g:test#javascript#tape#file_pattern')
   let g:test#javascript#tape#file_pattern = '\v(tests?/.*|\.(spec|test))\.js$'
 endif
 
-if !exists('g:test#javascript#tape#runners')
-  let g:test#javascript#tape#runners = ['tape']
-endif
-
 if !exists('g:test#javascript#tape#reporters')
   let g:test#javascript#tape#reporters = []
 endif
 
 function! test#javascript#tape#test_file(file) abort
   if a:file =~# g:test#javascript#tape#file_pattern
-      if exists('g:test#javascript#runner')
-          return g:test#javascript#runner ==# 'tape'
-      else
-        return test#javascript#has_package('tape')
-      endif
+    return test#javascript#has_package('tape')
   endif
 endfunction
 
@@ -46,13 +38,7 @@ function! test#javascript#tape#build_args(args) abort
 endfunction
 
 function! test#javascript#tape#executable() abort
-  for executable in g:test#javascript#tape#runners
-    if filereadable('node_modules/.bin/' . executable)
-      return 'node_modules/.bin/' . executable
-    endif
-  endfor
-
-  return ''
+  return test#javascript#determine_executable('tape')
 endfunction
 
 function! s:nearest_test(position) abort

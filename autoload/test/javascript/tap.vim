@@ -2,17 +2,9 @@ if !exists('g:test#javascript#tap#file_pattern')
   let g:test#javascript#tap#file_pattern = '\v(tests?/.*|\.(spec|test))\.js$'
 endif
 
-if !exists('g:test#javascript#tap#runners')
-  let g:test#javascript#tap#runners = ['tap']
-endif
-
 function! test#javascript#tap#test_file(file) abort
   if a:file =~# g:test#javascript#tap#file_pattern
-      if exists('g:test#javascript#runner')
-          return g:test#javascript#runner ==# 'tap'
-      else
-        return test#javascript#has_package('tap')
-      endif
+    return test#javascript#has_package('tap')
   endif
 endfunction
 

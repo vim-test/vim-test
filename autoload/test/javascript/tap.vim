@@ -4,7 +4,11 @@ endif
 
 function! test#javascript#tap#test_file(file) abort
   if a:file =~# g:test#javascript#tap#file_pattern
-    return test#javascript#has_package('tap')
+    if exists('g:test#javascript#runner')
+      return g:test#javascript#runner ==# 'tap'
+    else
+      return test#javascript#has_package('tap')
+    endif
   endif
 endfunction
 

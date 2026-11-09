@@ -8,7 +8,11 @@ endif
 
 function! test#javascript#tape#test_file(file) abort
   if a:file =~# g:test#javascript#tape#file_pattern
-    return test#javascript#has_package('tape')
+    if exists('g:test#javascript#runner')
+      return g:test#javascript#runner ==# 'tape'
+    else
+      return test#javascript#has_package('tape')
+    endif
   endif
 endfunction
 

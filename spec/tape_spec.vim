@@ -15,17 +15,17 @@ describe "tape"
     view +6 tests/normal.js
     TestNearest
 
-    Expect g:test#last_command == "node_modules/.bin/tape tests/normal.js --grep='math test'"
+    Expect g:test#last_command == "node_modules/.bin/tape tests/normal.js"
 
     view +3 tests/subtest.js
     TestNearest
 
-    Expect g:test#last_command == "node_modules/.bin/tape tests/subtest.js --grep='parent'"
+    Expect g:test#last_command == "node_modules/.bin/tape tests/subtest.js"
 
     view +4 tests/subtest.js
     TestNearest
 
-    Expect g:test#last_command == "node_modules/.bin/tape tests/subtest.js --grep='subtest'"
+    Expect g:test#last_command == "node_modules/.bin/tape tests/subtest.js"
   end
 
   it "runs file tests"

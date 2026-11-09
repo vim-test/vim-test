@@ -1,6 +1,6 @@
 source spec/support/helpers.vim
 
-describe "TAP"
+describe "tape"
 
   before
     cd spec/fixtures/tape

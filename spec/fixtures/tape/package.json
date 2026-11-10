@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "devDependencies": {
-    "tap": "^21.8.1"
+    "tape": "^5.10.3"
   }
 }

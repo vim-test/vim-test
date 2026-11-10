@@ -3,7 +3,7 @@ source spec/support/helpers.vim
 describe "TAP"
 
   before
-    cd spec/fixtures/tap
+    cd spec/fixtures/tape
   end
 
   after

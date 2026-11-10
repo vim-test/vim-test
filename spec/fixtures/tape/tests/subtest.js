@@ -1,4 +1,4 @@
-const test = require('tap');
+const tap = require('tape')
 
 tap.test("parent", function(t) {
     t.test("subtest", function(t) {

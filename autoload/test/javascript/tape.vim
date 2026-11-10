@@ -3,8 +3,8 @@ if !exists('g:test#javascript#tape#file_pattern')
 endif
 
 if !exists('g:test#javascript#tape#reporters')
-  " NOTE fallback to using TAP reporters to avoid a breaking change
-  let g:test#javascript#tape#reporters = get(g:, 'g:test#javascript#tap#reporters', [])
+  " NOTE fallback to using g:test#javascript#tap#reporters to avoid a breaking change
+  let g:test#javascript#tape#reporters = get(g:, 'test#javascript#tap#reporters', [])
 endif
 
 function! test#javascript#tape#test_file(file) abort

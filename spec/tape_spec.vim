@@ -11,7 +11,7 @@ describe "tape"
     cd -
   end
 
-  it "runs the whole file for nearest test due to lack of pattern matching"
+  it "runs the whole file for nearest test due to a lack of test-name filtering"
     view +6 tests/normal.js
     TestNearest
 

@@ -74,6 +74,7 @@ Create a spec file at `spec/[runner]_spec.vim` to test your runner implementatio
 When updating an existing test runner, keep the same checklist as for new runners:
 
 - Update the spec in `spec/[runner]_spec.vim` and add or adjust fixtures in `spec/fixtures/[runner]/`
+- Update the `README.md` table if runner names, identifiers, or file patterns change
 - Update `doc/test.txt` if the behaviour or options change
 
 ## Testing Instructions

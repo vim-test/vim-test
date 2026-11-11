@@ -4,7 +4,8 @@ Thank you for your interest in contributing to vim-test! This document provides 
 
 ## Commit Messages
 
-Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
+ - Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
+ - The commit description should capture why the change was made
 
 ## Code Conventions
 

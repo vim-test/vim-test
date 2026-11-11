@@ -68,7 +68,15 @@ Create a spec file at `spec/[runner]_spec.vim` to test your runner implementatio
 - Add your test runner to the `README.md` table with language, runner name, and identifier
 - Update `doc/test.txt` with relevant documentation
 
-### 5. Testing instructions
+## Updating an Existing Test Runner
+
+When implementing or updating a test runner, keep the same checklist as for new runners:
+
+- Update the spec in `spec/[runner]_spec.vim` and add or adjust fixtures in `spec/fixtures/[runner]/`
+- Update `doc/test.txt` if the behaviour or options change
+
+## Testing Instructions
+
 - Install dependencies: `gem install vim-flavor`
 - Install project dependencies: `vim-flavor install`
 - Run all tests: `vim-flavor test spec/`

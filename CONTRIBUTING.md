@@ -13,7 +13,7 @@ Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
 ## Design Principles
 
- - Zero configuration philosophy. Use detection instead of relying on configuration options.
+ - Zero configuration philosophy. Runners should be detected automatically with no configuration; avoid adding new configuration options when adding functionality.
 
 ## Project Layout
 

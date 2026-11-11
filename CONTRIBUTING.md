@@ -22,7 +22,7 @@ Thank you for your interest in contributing to vim-test! This document provides 
 - `autoload/test.vim` — core plugin logic
 - `autoload/test/[language]/[runner].vim` — test runner implementations
 - `autoload/test/[language].vim` — logic shared between runners for a language
-- `spec/` — test specs (vim-flavor)
+- `spec/` — vim-flavor test specs
 - `spec/fixtures/[runner]/` — sample projects used by the specs
 - `doc/test.txt` — Vim user documentation
 

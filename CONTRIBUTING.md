@@ -15,6 +15,16 @@ Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
  - Zero configuration philosophy. Use detection instead of relying on configuration options.
 
+## Project Layout
+
+- `plugin/test.vim` — plugin entry point, defines commands and mappings
+- `autoload/test.vim` — core plugin logic
+- `autoload/test/[language]/[runner].vim` — test runner implementations
+- `autoload/test/[language].vim` — logic shared between runners for a language
+- `spec/` — test specs (vim-flavor)
+- `spec/fixtures/[runner]/` — sample projects used by the specs
+- `doc/test.txt` — Vim user documentation
+
 ## Adding a New Test Runner
 
 When adding support for a new test runner, follow these steps:

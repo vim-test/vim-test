@@ -11,6 +11,10 @@ Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
  - Only use Vimscript
  - Neovim specific functions can be used there is fallback functionality for Vim
 
+## Design Principles
+
+ - Zero configuration philosophy. Use detection instead of relying on configuration options.
+
 ## Adding a New Test Runner
 
 When adding support for a new test runner, follow these steps:

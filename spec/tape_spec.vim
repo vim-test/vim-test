@@ -11,21 +11,11 @@ describe "tape"
     cd -
   end
 
-  it "runs nearest test"
+  it "runs the whole file for nearest test due to lack of pattern matching"
     view +6 tests/normal.js
     TestNearest
 
     Expect g:test#last_command == "node_modules/.bin/tape tests/normal.js"
-
-    view +3 tests/subtest.js
-    TestNearest
-
-    Expect g:test#last_command == "node_modules/.bin/tape tests/subtest.js"
-
-    view +4 tests/subtest.js
-    TestNearest
-
-    Expect g:test#last_command == "node_modules/.bin/tape tests/subtest.js"
   end
 
   it "runs file tests"

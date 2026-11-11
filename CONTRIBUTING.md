@@ -4,12 +4,28 @@ Thank you for your interest in contributing to vim-test! This document provides 
 
 ## Commit Messages
 
-Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
+- Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
+- The commit description should capture why the change was made
 
 ## Code Conventions
 
- - Only use Vimscript
- - Neovim specific functions can be used there is fallback functionality for Vim
+- Only use Vimscript
+- Neovim specific functions can be used if there is fallback functionality for Vim
+
+## Design Principles
+
+- Zero configuration philosophy. Runners should be detected automatically without configuration options.
+
+## Project Layout
+
+- `plugin/test.vim` — plugin entry point, defines commands and mappings
+- `autoload/test.vim` — core plugin logic
+- `autoload/test/[language].vim` — logic shared between runners for a language
+- `autoload/test/[language]/[runner].vim` — test runner implementations
+- `spec/` — vim-flavor test specs
+- `spec/[runner]_spec.vim` — tests for the runner
+- `spec/fixtures/[runner]/` — fixtures to test the runner
+- `doc/test.txt` — Vim user documentation
 
 ## Adding a New Test Runner
 
@@ -34,7 +50,7 @@ function! test#[language]#[runner]#executable()
 ```
 
 Any logic that is common to runners for that language should be added to `autoload/test/[language].vim`.
-Add any root markers files for the language, as follows:
+If the language has files that indicate the root of the project, e.g. `package.json`, then declare them as follows:
 
 ```vim
 " Returns a list of language specific root markers eg ['package.json']
@@ -54,8 +70,18 @@ Create a spec file at `spec/[runner]_spec.vim` to test your runner implementatio
 - Add your test runner to the `README.md` table with language, runner name, and identifier
 - Update `doc/test.txt` with relevant documentation
 
-### 5. Testing instructions
+## Updating an Existing Test Runner
+
+When updating an existing test runner, keep the same checklist as for new runners:
+
+- Update the spec in `spec/[runner]_spec.vim` and add or adjust fixtures in `spec/fixtures/[runner]/`
+- Update the `README.md` table if runner names, identifiers, or file patterns change
+- Update `doc/test.txt` if the behaviour or options change
+
+## Testing Instructions
+
 - Install dependencies: `gem install vim-flavor`
+- Install project dependencies: `vim-flavor install`
 - Run all tests: `vim-flavor test spec/`
 - Run specific test file: `vim-flavor test spec/[filename]_spec.vim`
 - Test fixtures in `spec/fixtures/` provide examples for each supported test runner

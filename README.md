@@ -879,6 +879,10 @@ prior to executing a test by
   let g:test#prompt_for_unsaved_changes = 1
 ```
 
+## Contributing
+
+Contributions are very welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
 ## Credits
 
 This plugin was strongly influenced by Gary Bernhardt's Destroy All Software.

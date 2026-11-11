@@ -9,7 +9,7 @@ Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
 ## Code Conventions
 
  - Only use Vimscript
- - Neovim specific functions can be used there is fallback functionality for Vim
+ - Neovim specific functions can be used if there is fallback functionality for Vim
 
 ## Design Principles
 
@@ -60,6 +60,7 @@ Create a spec file at `spec/[runner]_spec.vim` to test your runner implementatio
 
 ### 5. Testing instructions
 - Install dependencies: `gem install vim-flavor`
+- Install project dependencies: `vim-flavor install`
 - Run all tests: `vim-flavor test spec/`
 - Run specific test file: `vim-flavor test spec/[filename]_spec.vim`
 - Test fixtures in `spec/fixtures/` provide examples for each supported test runner

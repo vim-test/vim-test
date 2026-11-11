@@ -49,7 +49,7 @@ function! test#[language]#[runner]#executable()
 ```
 
 Any logic that is common to runners for that language should be added to `autoload/test/[language].vim`.
-If the language has files that indicate the root of the project eg package.json, then configure them as follows:
+If the language has files that indicate the root of the project, e.g. `package.json`, then declare them as follows:
 
 ```vim
 " Returns a list of language specific root markers eg ['package.json']

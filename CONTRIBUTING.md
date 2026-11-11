@@ -23,7 +23,7 @@ Thank you for your interest in contributing to vim-test! This document provides 
 - `autoload/test/[language].vim` — logic shared between runners for a language
 - `autoload/test/[language]/[runner].vim` — test runner implementations
 - `spec/` — vim-flavor test specs
-- `spec/[runner]_spec.vim/` — tests for the runner
+- `spec/[runner]_spec.vim` — tests for the runner
 - `spec/fixtures/[runner]/` — fixtures to test the runner
 - `doc/test.txt` — Vim user documentation
 

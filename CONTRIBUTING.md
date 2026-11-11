@@ -4,17 +4,17 @@ Thank you for your interest in contributing to vim-test! This document provides 
 
 ## Commit Messages
 
- - Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
- - The commit description should capture why the change was made
+- Use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
+- The commit description should capture why the change was made
 
 ## Code Conventions
 
- - Only use Vimscript
- - Neovim specific functions can be used if there is fallback functionality for Vim
+- Only use Vimscript
+- Neovim specific functions can be used if there is fallback functionality for Vim
 
 ## Design Principles
 
- - Zero configuration philosophy. Runners should be detected automatically with no configuration; avoid adding new configuration options when adding functionality.
+- Zero configuration philosophy. Runners should be detected automatically with no configuration; avoid adding new configuration options when adding functionality.
 
 ## Project Layout
 
@@ -71,7 +71,7 @@ Create a spec file at `spec/[runner]_spec.vim` to test your runner implementatio
 
 ## Updating an Existing Test Runner
 
-When implementing or updating a test runner, keep the same checklist as for new runners:
+When updating an existing test runner, keep the same checklist as for new runners:
 
 - Update the spec in `spec/[runner]_spec.vim` and add or adjust fixtures in `spec/fixtures/[runner]/`
 - Update `doc/test.txt` if the behaviour or options change

@@ -14,7 +14,7 @@ Thank you for your interest in contributing to vim-test! This document provides 
 
 ## Design Principles
 
-- Zero configuration philosophy. Runners should be detected automatically with no configuration; avoid adding new configuration options when adding functionality.
+- Zero configuration philosophy. Runners should be detected automatically without configuration options.
 
 ## Project Layout
 

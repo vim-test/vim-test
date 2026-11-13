@@ -1,12 +1,9 @@
 import t from 'tap'
 
-const myObject = { a: 1, b: 2 }
-
-t.test('test myObject', t => {
-  t.test('nested child test', async t => {
-    t.equal(myObject.a, 1)
-    t.matchOnly(myObject, { a: Number, b: Number })
+t.test("parent", function(t) {
+    t.test("subtest", function(t) {
+        t.ok(1)
+        t.end()
+    })
     t.end()
-  })
-  t.end()
 })

@@ -15,17 +15,17 @@ describe "TAP"
     view +6 tests/normal.js
     TestNearest
 
-    Expect g:test#last_command == "tap tests/normal.js --grep='this is a child test'"
+    Expect g:test#last_command == "tap tests/normal.js --grep='math test'"
 
-    view +5 tests/subtest.js
+    view +3 tests/subtest.js
     TestNearest
 
-    Expect g:test#last_command == "tap tests/subtest.js --grep='test myObject'"
+    Expect g:test#last_command == "tap tests/subtest.js --grep='parent'"
 
-    view +6 tests/subtest.js
+    view +4 tests/subtest.js
     TestNearest
 
-    Expect g:test#last_command == "tap tests/subtest.js --grep='nested child test'"
+    Expect g:test#last_command == "tap tests/subtest.js --grep='subtest'"
   end
 
   it "runs file tests"
@@ -40,5 +40,29 @@ describe "TAP"
     TestSuite
 
     Expect g:test#last_command == 'tap'
+  end
+
+  it "also recognizes test/ directory"
+    view test/normal.js
+    TestFile
+
+    Expect g:test#last_command == 'tap test/normal.js'
+  end
+
+
+  it "runs file tests ending in .test.js"
+    view src/normal.test.js
+    TestFile
+
+    Expect g:test#last_command == 'tap src/normal.test.js'
+  end
+
+  it "runs file tests ending in .spec.js"
+    !cp src/normal.test.js src/normal.spec.js
+    view src/normal.spec.js
+    TestFile
+    !rm src/normal.spec.js
+
+    Expect g:test#last_command == 'tap src/normal.spec.js'
   end
 end

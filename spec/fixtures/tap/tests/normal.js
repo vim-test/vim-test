@@ -1,14 +1,9 @@
 import t from 'tap'
-import { myThing } from '../src/whatever.js'
 
-t.test('this is a child test', t => {
-  t.pass('this passes')
-  t.fail('this fails')
-  t.ok(myThing, 'this passes if truthy')
-  t.equal(myThing, 5, 'this passes if the values are equal')
-  t.match(myThing, {
-    property: String,
-  }, 'this passes if myThing.property is a string')
-  // call this when you're done
-  t.end()
-})
+t.test('math test', function (t) {
+  t.plan(4);
+  t.equal(4 + 2, 6, '4 + 2 should be 6');
+  t.equal(4 - 2, 2, '4 - 2 should be 2');
+  t.equal(4 * 2, 8, '4 * 2 should be 8');
+  t.equal(4 / 2, 2, '4 / 2 should be 2');
+});

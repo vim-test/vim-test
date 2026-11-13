@@ -18,7 +18,7 @@ let g:test#default_runners = {
   \ 'Groovy':     ['MavenTest', 'GradleTest'],
   \ 'Haskell':    ['StackTest', 'CabalTest'],
   \ 'Java':       ['MavenTest', 'GradleTest'],
-  \ 'JavaScript': ['Ava', 'CucumberJS', 'DenoTest', 'Intern', 'TAP', 'Teenytest', 'Karma', 'Lab', 'Mocha',  'NgTest', 'Nx', 'Jasmine', 'Jest', 'ReactScripts', 'WebdriverIO', 'Cypress', 'VueTestUtils', 'Playwright', 'Vitest', 'Ember', 'NodeTest', 'BunTest'],
+  \ 'JavaScript': ['Ava', 'CucumberJS', 'DenoTest', 'Intern', 'TAP', 'Tape', 'Teenytest', 'Karma', 'Lab', 'Mocha',  'NgTest', 'Nx', 'Jasmine', 'Jest', 'ReactScripts', 'WebdriverIO', 'Cypress', 'VueTestUtils', 'Playwright', 'Vitest', 'Ember', 'NodeTest', 'BunTest'],
   \ 'Kotlin':     ['GradleTest'],
   \ 'Lua':        ['Busted'],
   \ 'Mint':       ['MintTest'],

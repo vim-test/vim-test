@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "devDependencies": {
-    "tap": "^10.3.2",
     "tape": "^5.10.3"
   }
 }

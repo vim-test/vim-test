@@ -116,7 +116,10 @@ for example:
 :Intern [args]               Uses the `intern-client` or `intern-runner` command.
 
                                                 *test-:TAP*
-:TAP [args]                  Uses the `tap` or `tape` command.
+:TAP [args]                  Uses the `tap` command.
+
+                                                *test-:Tape*
+:Tape [args]                 Uses the `tape` command.
 
                                                 *test-:Teenytest*
 :Teenytest [args]            Uses the `teenytest` command.

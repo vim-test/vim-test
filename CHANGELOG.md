@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.9.0](https://github.com/vim-test/vim-test/compare/v3.8.0...v3.9.0) (2026-11-14)
+
+
+### Features
+
+* disable color for TAP runner when strategy can't display it ([#942](https://github.com/vim-test/vim-test/issues/942)) ([d33babd](https://github.com/vim-test/vim-test/commit/d33babd18faa8c6fd73a47ce4db328da18f8d178))
+
 ## [3.8.0](https://github.com/vim-test/vim-test/compare/v3.7.0...v3.8.0) (2026-11-05)
 
 

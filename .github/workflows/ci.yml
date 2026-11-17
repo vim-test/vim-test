@@ -16,6 +16,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   github-actions-lock-verify:
+    name: Verify GitHub Actions lockfile
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}

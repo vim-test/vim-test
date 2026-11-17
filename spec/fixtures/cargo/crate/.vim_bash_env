@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cargo() {
+	cat mock-manifest.json
+}

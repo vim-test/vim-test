@@ -6,7 +6,7 @@ workflows:
     '.github/workflows/ci.yml':
         - 'actions/checkout@v7.0.1'
         - 'rhysd/action-setup-vim@v1.6.1'
-        - 'ruby/setup-ruby@v1.341.0'
+        - 'ruby/setup-ruby@v1.342.0'
         - 'webiny/action-conventional-commits@v1.4.2'
     '.github/workflows/release-please.yml':
         - 'googleapis/release-please-action@v5.0.0'
@@ -26,9 +26,9 @@ dependencies:
         commit: 'sha1-febef33995d6649302e9d88dda81e071b68f16a7'
         owner_id: 823277
         repo_id: 235934613
-    'ruby/setup-ruby@v1.341.0':
-        ref: 'v1.341.0'
-        commit: 'sha1-20eb24b0d509e2b9ed9b6d42ddfeb992915e0564'
+    'ruby/setup-ruby@v1.342.0':
+        ref: 'v1.342.0'
+        commit: 'sha1-f9c4492e86def3e644ab32a0ef185eda5b0c20d0'
         owner_id: 210414
         repo_id: 231208785
     'webiny/action-conventional-commits@v1.4.2':
